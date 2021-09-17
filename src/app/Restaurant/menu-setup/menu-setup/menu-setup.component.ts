@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataserviceService } from '../../service/dataservice.service';
 
 @Component({
   selector: 'app-menu-setup',
@@ -42,7 +43,7 @@ export class MenuSetupComponent implements OnInit {
   launchmenuimage: any;
 
 
-  constructor() { }
+  constructor(private _data: DataserviceService) { }
 
   ngOnInit(): void {
     this.PACK = document.getElementById('London');
@@ -192,6 +193,7 @@ export class MenuSetupComponent implements OnInit {
       "coverimg": this.breakfastcoverimage, "topimg": this.breakfasttopimage, "menuimg": this.breakfastmenuimage, "coverurl": COVERPAGEURL,
       "topurl": TOPIMAGEURL, "menuurl": MENUURL
     });
+    this._data.submit_breakfast_menu_setup(this.storevalue).subscribe((data) => { console.log(data) })
     console.log(this.storevalue);
     // console.log(this.breakfastcoverimage);
     // console.log(this.breakfasttopimage);
@@ -226,6 +228,7 @@ export class MenuSetupComponent implements OnInit {
   }
   opennextab1(e: any, v1: any, v2: any, v3: any) {
     if (e == 'Paris') {
+      this.storevalue.length = 0;
       this.storevalue.push({
         "coverimg": this.launchcoverimage, "topimg": this.launchtopimage, "menuimg": this.launchmenuimage, "coverurl": v1,
         "topurl": v2, "menuurl": v3

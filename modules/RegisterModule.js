@@ -46,26 +46,26 @@ const EmailCheck = (data) => {
 }
 
 const OrderSave = (data) => {
-    var table_top = [{
-        id: '6',
-        qty: data.tabletop
-    }, {
-        id: '7',
-        qty: data.wall_mount1
-    }, {
-        id: '8',
-        qty: data.wall_mount2
-    }];
-    var window_cling = [{
-        id: '9',
-        qty: data.window
-    }];
+    // var table_top = [{
+    //     id: '6',
+    //     qty: data.tabletop
+    // }, {
+    //     id: '7',
+    //     qty: data.wall_mount1
+    // }, {
+    //     id: '8',
+    //     qty: data.wall_mount2
+    // }];
+    // var window_cling = [{
+    //     id: '9',
+    //     qty: data.window
+    // }];
     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
     var str = Buffer.from(data.res_id, 'base64').toString('ascii');
     var de_id = str.split('/');
     // console.log({ table_top, window_cling, st: str.split('/')[0] });
-    var sql = `INSERT INTO td_order_items (restaurant_id, package_id, birth_calendar_flag, event_calendar, table_top, window_cling, created_by, created_dt) VALUES 
-    ("${de_id[0]}", "${data.package}", "${data.birthday}", "${data.event}", '${JSON.stringify(table_top)}', '${JSON.stringify(window_cling)}', "${de_id[1]}", "${datetime}")`;
+    var sql = `INSERT INTO td_order_items (restaurant_id, package_id, birth_calendar_flag, event_calendar, table_top_6, table_top_7, table_top_8, window_cling_9, created_by, created_dt) VALUES
+    ("${de_id[0]}", "${data.package}", "${data.birthday}", "${data.event}", '${data.tabletop}', '${data.wall_mount1}', "${data.wall_mount2}", "${data.window}", "${de_id[1]}", "${datetime}")`;
     return new Promise((resolve, reject) => {
         db.query(sql, (err, result) => {
             if (err) {
