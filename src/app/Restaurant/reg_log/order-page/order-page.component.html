@@ -1,0 +1,293 @@
+<app-header></app-header>
+<app-side-bar></app-side-bar>
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+    title="close side menu" id="myOverlay">fgbdfg</div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+
+    <!-- Header -->
+    <header class="w3-container" style="padding-top:22px"><br>
+
+        <h5><b><i class="fa fa-wpforms"></i> Restaurant - PLACE YOUR ORDER</b></h5>
+
+        <!--
+	  <p><strong>Thank You for your payment and participation!</strong><br>
+You can now begin to set-up your platform. Please follow the simple steps below. If you have any problems, please do not hesitate to email us: <a href="mailto:Support@shoplocallaguna.com">Support@ShopLocalLaguna.com</a></p>
+-->
+    </header>
+
+
+    <div class="w3-container w3-white w3-padding-24">
+        <div class="w3-container">
+
+            <div class="w3-cell-row">
+                <div class="w3-container w3-full w3-cell w3-mobile">
+
+                    <label for="vehicle1"><strong>Menu Platform - THREE packages to select from!</strong></label><br>
+                    <strong>ALL packages include:</strong><br>
+                    A custom designed Menu QR Code, displaying your editable menus.
+                    Custom designed tabletop sign (front and back printouts per table included - you can order the
+                    number of tabletop or wall sign acrylic holders below.)
+                    A custom designed Birthday/Anniversary QR Code (placed onto your Menu sign.)
+                    An editable Event/Entertainment Calendar.
+                    A Contact Information QR Code sign for your FRONT COUNTER (your contact information and all menus
+                    are saved to the user's phone)
+                    A 6" x 10" Window Cling with your Contact Information QR Code for your FRONT WINDOW/FRONT GLASS
+                    DOOR.<br><br>
+                    <div class="tab">
+                        <button class="tablinks" (click)="openCity('packages')"
+                            id="defaultOpen" >Packages</button>
+                        <button id="defaultOpen1" class="tablinks" (click)="openCity('birthday')">Birthday/Anniversary</button>
+                        <button  id="defaultOpen2" class="tablinks" (click)="openCity('entertainment')">Entertainment / Event
+                            Calendar</button>
+                        <button id="defaultOpen3" class="tablinks" (click)="openCity('wallSignHolder')">Wall Sign Holder & Window Cling</button>
+                        <!-- <button class="tablinks" (click)="openCity('windowCling')">Window Cling</button> -->
+                    </div>
+            
+                    <div id="packages" class="tabcontent" [hidden]="mode1!='packages'">
+                        <br>
+
+                        <div class="packageMainBox">
+                            <div class="packageBox">
+                                <h3>Standard</h3>
+                                <div class="priceSecBox">
+                                    <p class="priceSec"><span class="priceUnite">$</span>{{sp_monthly}}<span
+                                            class="month">/month</span></p>
+                                    <p class="setup">(Additional ${{sp_setup}} Set-Up)</p>
+                                </div>
+                                <div class="menuSec">
+                                    1 <span>menu</span>
+                                </div>
+
+                                <div class="description">
+                                    <ul>
+                                        <li>Special Menu</li>
+                                        <li>Calendar <span>(which is an option as you Register)</span></li>
+                                        <li>Birthday/Anniversary Promotion</li>
+                                    </ul>
+                                </div>
+                                <button type="button" (click)="enable_package_next(1)" [hidden]="standard">Select</button>
+                              <div [hidden]="!standard" style="margin-top: -23px;">
+                                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+                              </div>  
+
+                            </div>
+
+                            <div class="packageBox">
+                                <h3>Standard+</h3>
+                                <div class="priceSecBox">
+                                    <p class="priceSec"><span class="priceUnite">$</span>{{spp_monthly}}<span
+                                            class="month">/month</span></p>
+                                    <p class="setup">(Additional ${{spp_setup}} Set-Up)</p>
+                                </div>
+                                <div class="menuSec">
+                                    2 <span>menus</span>
+                                </div>
+
+                                <div class="description">
+                                    <ul>
+                                        <li>Special Menu</li>
+                                        <li>Calendar <span>(which is an option as you Register)</span></li>
+                                        <li>Birthday/Anniversary Promotion</li>
+                                    </ul>
+                                </div>
+                                <button type="button" (click)="enable_package_next(2)" [hidden]="standardplus">Select</button>
+                              <div style="margin-top: -23px;" [hidden]="!standardplus">
+                                <svg class="checkmark"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+                              </div>  
+                            </div>
+
+                            <div class="packageBox">
+                                <h3>Premium </h3>
+                                <div class="priceSecBox">
+                                    <p class="priceSec"><span class="priceUnite">$</span>{{p_monthly}}<span
+                                            class="month">/month</span></p>
+                                    <p class="setup">(Additional ${{p_setup}} Set-Up)</p>
+                                </div>
+                                <div class="menuSec">
+                                    Unlimited <span></span>
+                                </div>
+
+                                <div class="description">
+                                    <ul>
+                                        <li>Special Menu </li>
+                                        <li>Calendar <span>(which is an option as you Register)</span></li>
+                                        <li>Birthday/Anniversary Promotion</li>
+                                    </ul>
+                                </div>
+                                <button type="button" (click)="enable_package_next(3)" [hidden]="premium">Select</button>
+                             <div style="margin-top: -23px;" [hidden]="!premium">
+                                <svg class="checkmark"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+                             </div>   
+
+                            </div>
+
+
+                        </div>
+                        <br>
+
+                        <button class="w3-button w3-green" type="submit" [disabled]="enable_next" (click)="enable_birthday()">Next</button>
+
+
+
+                    </div>
+
+                    <div id="birthday" class="tabcontent" [hidden]="mode1!='birthday'">
+                        <label class="titleCustom" for="option1a"><input checked type="checkbox" id="option1a" name="option1a"
+                             #option1a   value="Calendar">
+                            <strong>Birthday/Anniversary - {{price_b}}</strong></label>
+                        Your diners ( while awaiting their meal ) can tap the Birthday/Anniversary tab, read the details
+                        and then fill out the form (agreeing to the Privacy Policy and T&amp;Cs for using their data),
+                        click Submit, and FOUR things happen...<br>
+
+
+                        <p>Your diners ( while awaiting their meal ) can tap the Birthday/Anniversary tab, read the
+                            details and then fill out the form (agreeing to the Privacy Policy and T&amp;Cs for using
+                            their data), click Submit, and FOUR things happen...<br><br>
+                            <strong>1.</strong> They receive an automatic 'Thank You' email from You as shown
+                            below...<br>
+                        <blockquote>Thank you for participating in our Birthday/Anniversary program. Two weeks prior to
+                            your birthday/anniversary date, we will email a reminder to you that we have a GIFT for you
+                            when you dine with us on your special day. </blockquote>
+
+                        This 'Thank You' email also includes your Menu platform link that includes your entertainment
+                        calendar, all contact information, menu, local shopping, etc., and a request to "add us to your
+                        CONTACTS LIST", placing your information on the user's phone for easy access.<br>
+
+                        <br><strong>2.</strong> They are redirected to your Menu Platform where they can access your
+                        Entertainment Calendar and About Us information, local shopping, and the Laguna Beach FUN
+                        Directory!<br>
+
+                        <br><strong>3.</strong> The data that is collected falls into your Restaurant Platform's
+                        back-office where you can download it to your computer, or to a third party email service for
+                        marketing (you can also hire us to assist you with your email marketing.)<br>
+
+                        <br><strong>4.</strong> Two weeks prior to their birthday/anniversary date they will receive the
+                        promised emailed message (Your birthday/anniversary is coming up! Dine with us on your special
+                        day to receive your surprise GIFT. Just show the waiter this email upon arrival to receive your
+                        gift.)<br><br>
+
+
+                        <button class="w3-button w3-green" type="submit" (click)="enable_event(option1a.checked)">Next</button>
+                    </div>
+
+                    <div id="entertainment" class="tabcontent" [hidden]="mode1!='entertainment'">
+                        <label class="titleCustom" for="option2a"><input checked type="checkbox" id="option2a" name="option2a"
+                            #option2a    value="Calendar">
+                            <strong>Entertainment / Event Calendar - {{price_e}}</strong></label>
+                        Check the box to include it onto your platform.<br><br>
+
+                        <button class="w3-button w3-green" type="submit"(click)="enable_wall(option2a.checked)">Next</button>
+
+
+                    </div>
+
+                    <div id="wallSignHolder" class="tabcontent" [hidden]="mode1!='wallSignHolder'">
+                        <label class="titleCustom" for="option3"> 
+                            
+                            <strong>Acrylic Two-Sided Tabletop or Wall Sign Holder</strong></label>
+                        Includes your printed, Menu + Birthday/Anniversary QR Code signage, placed on both sides of the
+                        tabletop holder, or a single printed Menu + Birthday/Anniversary QR Code sign for the wall
+                        mounted holder.<br>
+                        Please add the number of sign holders that you would like:<br><br>
+
+                        <input type="text" id="tblsign" name="tblsign" value="" size="4" #tblsign>
+                        <label for="tblsign">5" x 7" Tabletop Sign Holder - {{cling_data1}} </label>
+                        <br><br>
+                        <input type="text" id="wallsign1" name="wallsign1" value="" size="4" #wallsign1>
+                        <label for="wallsign1">5" x 7" Wall Mount Sign Holder - {{cling_data2}}</label>
+                        <br><br>
+                        <input type="text" id="wallsign2" name="wallsign2" value="" size="4" #wallsign2>
+                        <label for="wallsign2">8.5" x 11" Wall Mount Sign Holder - {{cling_data3}}</label>
+                        <br><br>
+
+                       
+
+                       
+                            <label class="titleCustom" for="option4">
+                        
+                                <strong>Self-adhering 6" x 10" Window Cling</strong></label>
+                            Includes your custom Contact Information QR Code and the Laguna Beach FUN Directory QR Code.
+                            One is included in your Menu Platform package, order here for additional pieces.<br><br>
+    
+                            <input type="text" id="selfcling" name="selfcling" value="" size="4" #selfcling>
+                            <label for="selfcling">6" x 10" Window Clings - {{cling_data4}}</label><br>
+                            <br>
+    
+                            <button class="w3-button w3-green" type="submit" (click)="submit_text_data(tblsign.value,wallsign1.value,wallsign2.value,selfcling.value)">Submit</button>
+                        
+                    </div>
+
+                    
+                    <br>
+                    <br>
+
+                    <div class="helpSec"><strong>HELP</strong><br>
+                        Use the tabs below to get more information:<br><br>
+
+                        <div class="w3-bar w3-highway-blue">
+                            <button class="w3-bar-item w3-button" (click)="openCityHelp('London')">Menu</button>
+                            <button class="w3-bar-item w3-button" (click)="openCityHelp('Paris')">Calendar</button>
+                            <button class="w3-bar-item w3-button" (click)="openCityHelp('Tokyo')">QR Code
+                                Signage</button>
+                            <button class="w3-bar-item w3-button"
+                                (click)="openCityHelp('Lyon')">Birthday/Anniversary</button>
+                            <button class="w3-bar-item w3-button" (click)="openCityHelp('Dublin')">Contact Information
+                                QR Code</button>
+                        </div>
+
+                        <div id="London" class="w3-container city" [hidden]="mode!='London'">
+                            <p>The Coronavirus Pandemic has brought QR Codes into the spotlight as a way for consumers
+                                to avoid touching documents, such as a restaurant menu, thereby minimizing the
+                                transmission of the virus.</p>
+                        </div>
+
+                        <div id="Paris" class="w3-container city" [hidden]="mode!='Paris'">
+                            <p>What better way to promote your live events .</p>
+                        </div>
+
+                        <div id="Tokyo" class="w3-container city" [hidden]="mode!='Tokyo'">
+                            <p>Our QR Codes are designed to be visually appealing which enhances the visibility of our
+                                signs.</p>
+                        </div>
+
+                        <div id="Lyon" class="w3-container city" [hidden]="mode!='Lyon'">
+                            <p>A great way to build customer loyalty and future business by making sure you don't forget
+                                these important dates by connecting with them nearer the time.</p>
+                        </div>
+
+                        <div id="Dublin" class="w3-container city" [hidden]="mode!='Dublin'">
+                            <p>Always make sure your customers have your contact details close to hand through your
+                                online Business Page which contains all that information.</p>
+                        </div>
+                    </div>
+
+                   
+                    <br><br><br>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div id="snackbar">Error while inserting...</div>

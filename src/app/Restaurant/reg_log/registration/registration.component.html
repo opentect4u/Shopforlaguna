@@ -1,0 +1,111 @@
+
+<div class="header">
+    <strong>REGISTER YOUR BUSINESS</strong>
+  </div>
+  
+  <div class="mainContainer">
+  <div class="menUlogoSec">
+  <!--<div class="w3-container w3-center"><br>-->
+      <section class="logo"><img src="/assets/images/sll-logo.png" height="auto"><br></section>
+      
+  <!--		<div class="w3-container w3-display-middle">-->
+       <section class="menuSec">
+      <p align="center"><button onclick="document.getElementById('restaurant').style.display='block'" class="w3-button w3-highway-blue"><strong>Restaurant</strong></button></p>
+      <p align="center"><button onclick="document.getElementById('artist').style.display='block'" class="w3-button w3-highway-blue"><strong>Artist</strong></button></p>
+      <p align="center"><button onclick="document.getElementById('merchant').style.display='block'" class="w3-button w3-highway-blue"><strong>Merchant</strong></button></p>
+  <!--	<p align="center"><button onclick="document.getElementById('packages').style.display='block'" class="w3-button w3-highway-red"><strong>Packages</strong></button></p> -->
+       </section>
+  <!--  </div>-->
+      
+      <!--</div>-->
+  </div>	
+  </div>	
+  <div class="footer">
+  <p class="w3-large">Restaurants | Artists | Merchants</p>
+  
+  </div>
+      
+      
+  
+  
+  <!-- Restaurants Modal -->
+  <div id="restaurant" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-highway-blue">
+        <span onclick="document.getElementById('restaurant').style.display='none'" class="w3-button w3-display-topright w3-font-size small">x</span>
+        <h3>Restaurant Registration Form</h3>
+      </div>
+      <!-- form starts here (template driven form) -->
+      <div class="w3-container">
+        <!-- <p>Please complete and submit to register your restaurant:</p> -->
+        <form #regForm="ngForm" (ngSubmit)="regSubmit(regForm.value)">
+          <div class="rowCustom">
+          <div class="fieldHalf"><input  class="w3-input w3-padding-16 w3-border" type="text" placeholder="Restaurant Name" required name="Name" #Name="ngModel" ngModel>
+          <div *ngIf="Name.errors?.required && (Name.dirty || Name.touched)" class="text-danger">Name is required</div>
+          </div>
+          <div class="fieldHalf"><input class="w3-input w3-padding-16 w3-border"  type="text" placeholder="Contact Name" required name="Contact" #Contact="ngModel" ngModel>
+            <div *ngIf="Contact.errors?.required && (Contact.dirty || Contact.touched)" class="text-danger">Contact is required</div>
+          </div>
+          </div>
+          <div class="rowCustom">
+          <div class="fieldHalf"><input  class="w3-input w3-padding-16 w3-border" type="text" pattern="[0-9]+$" placeholder="Telephone" required name="Telephone" #Telephone="ngModel" ngModel>
+            <div *ngIf="Telephone.errors?.required && (Telephone.dirty || Telephone.touched)" class="text-danger">Telephone is required</div>
+          
+          </div>
+          <div class="fieldHalf"><input class="w3-input w3-padding-16 w3-border" id="em" type="text" placeholder="Email" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" required name="Email" #Email="ngModel" ngModel (keyup)="check_mail($event)"> 
+            <div *ngIf="Email.errors?.required  && (Email.dirty || Email.touched)" class="text-danger"><div class="text-danger" [hidden]="!Email.errors?.required">
+              Email is required
+            </div>
+           <div class="text-danger" [hidden]="!Email.errors?.pattern">
+              Not a valid email
+           </div></div>
+          <div *ngIf="show_msg==true" class="text-danger">Email already exists</div>
+          </div>
+          </div>
+          <div class="rowCustom">
+          <div class="fieldHalf"><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Address 1" required name="Address1" #Address1="ngModel" ngModel>
+          
+            <div *ngIf="Address1.errors?.required && (Address1.dirty || Address1.touched)" class="text-danger">Address is required</div>
+          </div>
+          <div class="fieldHalf"><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Address 2" name="Address2" #Address2="ngModel" ngModel ></div>
+          </div>
+          <div class="rowCustom">
+          <div class="fieldHalf"><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="City/State" required name="cityState" #cityState="ngModel" ngModel>
+            <div *ngIf="cityState.errors?.required && (cityState.dirty || cityState.touched)" class="text-danger">City/State is required</div>
+          
+          </div>
+          <div class="fieldHalf"><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="zip/Postal code*" pattern="[0-9]+$" required name="zip" #zip="ngModel" ngModel>
+            <div *ngIf="zip.errors?.required && (zip.dirty || zip.touched)" class="text-danger">Zip code is required</div>
+          
+          </div>
+          </div>
+            
+          <div class="rowCustom">
+          <div class="fieldHalf">
+          <select class="w3-input w3-padding-16 w3-border" name="country"  #country="ngModel" ngModel required>
+            <option value="">Select Country</option>
+            <option *ngFor="let c of countryData" value="{{c.name}}">{{c.name}}</option>
+            <!-- <option value="select2">Select 2</option>
+            <option value="select3">Select 3</option> -->
+          </select>
+          <div *ngIf="country.errors?.required && (country.dirty || country.touched)" class="text-danger">Country is required</div>
+
+          </div>
+          
+          <div class="fieldHalf"><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Website"  name="Website" #Website="ngModel" ngModel>
+            <!-- <div *ngIf="Website.errors?.required && (Website.dirty || Website.touched)" class="text-danger">Website is required</div> -->
+          
+          </div>
+          </div>
+         
+          <div class="rowCustom">
+          <div class="fieldFull"><button class="w3-button w3-highway-blue" [disabled]="regForm.invalid || invalid_data">SUBMIT</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- snackbar to show failure message -->
+  <div id="snackbar">Error while inserting...</div>
+
+ 

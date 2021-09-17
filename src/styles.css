@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,body,h1,h2,h3,h4,h5{font-family:"Raleway",sans-serif}
+
+html {
+    height: 100%;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+display: flex;
+min-height: 100%;
+flex-direction: column;
+margin: 0; padding:0;
+}
+
+.globalMain{display: grid; flex: 1 0 auto;} 
