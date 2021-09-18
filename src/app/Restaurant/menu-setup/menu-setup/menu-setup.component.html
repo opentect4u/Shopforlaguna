@@ -84,15 +84,15 @@
                                 contact you</p>
                         </div>
 
-                        <div class="secDifer">
+                        <!-- <div class="secDifer">
                          
                             <label class="titleCustom"><strong>MENU:</strong></label>
                             Upload a PDF file of your Breakfast menu.<br>
                             Please be sure to include your Kids, Desert and Beverage menus, if you have one.<br>
-                            <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg" (change)="changemenu($event)"> -->
+                          
                             <label for="menuImg"> <strong>File (you can add multiple files)</strong></label><br>
                             <input type="file" id="myfile" name="myfile" multiple (change)="changeBreakmenubreak($event)"><br><br>
-                            <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg" (change)="checkMENU($event)"> -->
+                         
                             <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
                              Or, please provide a web site address/url where we can collect your menu content:
                              <form>
@@ -102,14 +102,14 @@
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
                                 contact you</p>
-                        </div>
+                        </div> -->
 
 
 
-                        <button class="w3-button w3-green" type="submit">Previous</button>
+                        <!-- <button class="w3-button w3-green" type="submit">Previous</button> -->
                          <button
                             class="w3-button w3-green m-1" type="submit" 
-                            (click)="opennextab(COVERPAGEURL.value,TOPIMAGEURL.value,MENUURL.value)"
+                            (click)="opennextab(COVERPAGEURL.value,TOPIMAGEURL.value)"
                             >Next & Continue</button>
                     </div>
 
@@ -172,15 +172,15 @@
 
 
 
-                        <div class="secDifer">
+                        <!-- <div class="secDifer">
                             <form>
                             <label class="titleCustom"><strong>MENU:</strong></label>
                             Upload a PDF file of your Lunch menu.<br>
                             Please be sure to include your Kids, Desert and Beverage menus, if you have one.<br>
-                            <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
+                            
                             <label for="menuImg"> <strong>File (you can add multiple files)</strong></label><br>
                             <input type="file" id="myfile" name="myfile" multiple (change)="changelaunchtmenuimage($event)"><br><br>
-                            <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
+                           
                             <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
                             </form>Or, please provide a web site address/url where we can collect your menu content:
                             <form>
@@ -190,20 +190,22 @@
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
                                 contact you</p>
-                        </div>
+                        </div> -->
 
 
 
 
-                        <button class="w3-button w3-green" type="submit">Previous</button> <button
-                            class="w3-button w3-green" type="submit"  
+                        <button class="w3-button w3-green" type="submit">Previous</button> 
+                        <button
+                            class="w3-button w3-green m-1" type="submit"  
                             
-                            (click)="opennextab1('Paris',launchcoverurl.value,launchtopimageurl.value,launchmenuurl.value)">Next & Continue</button>
+                            (click)="opennextab1('Paris',launchcoverurl.value,launchtopimageurl.value)">Next & Continue</button>
                     </div>
 
                     <div id="Tokyo" class="tabcontent"  [hidden]="tab3">
-                        <label class="titleCustom" for="bkmenu"><input type="checkbox" id="bkmenu" name="bkmenu"
-                                value="bkMenu">
+                        <label class="titleCustom" for="bkmenu">
+                            <!-- <input type="checkbox" id="bkmenu" name="bkmenu" -->
+                                <!-- value="bkMenu"> -->
                             <strong>Dinner Menu</strong></label>
                         With the content that you provide to us below, we will design your menu platform. If you offer a
                         different menu for Breakfast, Lunch, Dinner, Brunch, etc., you can provide us with that
@@ -237,12 +239,12 @@
                         <div class="secDifer">
                             <label class="titleCustom"><strong>TOP IMAGE</strong></label>
                             This image will be added to the top of your Dinner menu.<br>
-                            <input type="checkbox" id="menuImg" name="menuImg" value="menuImg">
+                            <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                             <label for="menuImg"> <strong>Photo File</strong></label><br>
                             <form>
                                 <label for="myfile">Upload 1 Dinner JPG or PNG images:</label><br>
                                 <input type="file" id="myfile" name="myfile" multiple><br><br>
-                                <input type="checkbox" id="menuImg" name="menuImg" value="menuImg">
+                                <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                                 <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
                             </form>Or, we can collect a photo found on your web site and add it to the top of your
                             Dinner menu:
@@ -256,7 +258,7 @@
 
 
 
-                        <div class="secDifer">
+                        <!-- <div class="secDifer">
                             <form>
                             <label class="titleCustom"><strong>MENU:</strong></label>
                             Upload a PDF file of your Dinner menu.<br>
@@ -273,18 +275,19 @@
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
                                 contact you</p>
-                        </div>
+                        </div> -->
 
 
 
                         <button class="w3-button w3-green" type="submit">Previous</button> <button
-                            class="w3-button w3-green" type="submit"
+                            class="w3-button w3-green m-1" type="submit"
                             (click)="opennextab2('Tokyo')">Next & Continue</button>
                     </div>
 
                     <div id="Laguna" class="tabcontent"  [hidden]="tab4">
-                        <label class="titleCustom" for="bkmenu"> <input type="checkbox" id="bkmenu" name="bkmenu"
-                                value="bkMenu">
+                        <label class="titleCustom" for="bkmenu"> 
+                            <!-- <input type="checkbox" id="bkmenu" name="bkmenu"
+                                value="bkMenu"> -->
                             <strong>Brunch Menu</strong></label>
                         With the content that you provide to us below, we will design your menu platform. If you offer a
                         different menu for Breakfast, Lunch, Dinner, Brunch, etc., you can provide us with that
@@ -319,12 +322,12 @@
                         <div class="secDifer">
                             <label class="titleCustom"><strong>TOP IMAGE</strong></label>
                             This image will be added to the top of your Brunch menu.<br>
-                            <input type="checkbox" id="menuImg" name="menuImg" value="menuImg">
+                            <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                             <label for="menuImg"> <strong>Photo File</strong></label><br>
                             <form>
                                 <label for="myfile">Upload 1 Brunch JPG or PNG images:</label><br>
                                 <input type="file" id="myfile" name="myfile" multiple><br><br>
-                                <input type="checkbox" id="menuImg" name="menuImg" value="menuImg">
+                                <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                                 <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
                             </form>Or, we can collect a photo found on your web site and add it to the top of your
                             Brunch menu:
@@ -339,7 +342,7 @@
 
 
 
-                        <div class="secDifer">
+                        <!-- <div class="secDifer">
                             <form>
                             <label class="titleCustom"><strong>MENU:</strong></label><br>
                             Upload a PDF file of your Brunch menu
@@ -356,16 +359,17 @@
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
                                 contact you</p>
-                        </div>
+                        </div> -->
 
 
 
                         <button class="w3-button w3-green" type="submit">Previous</button> <button
-                            class="w3-button w3-green" type="submit" (click)="opennextab3('laguna')">Next & Continue</button>
+                            class="w3-button w3-green m-1" type="submit" (click)="opennextab3('laguna')">Next & Continue</button>
                     </div>
 
                     <div id="Shrewsbury" class="tabcontent"  [hidden]="tab5">
-                        <label class="titleCustom" for="bkmenu"><input type="checkbox" id="bkmenu" name="bkmenu"
+                        <label class="titleCustom" for="bkmenu">
+                            <input type="checkbox" id="bkmenu" name="bkmenu"
                                 value="bkMenu">
                             <strong>Specials Menu</strong></label>
                         After we set-up your platform the first time, you can then browse and change photos and edit
@@ -576,8 +580,9 @@
                                 <label for="vehicle2"> Brunch</label><br>
                             </form><br>
                         </div>
-                        <button class="w3-button w3-green" type="submit">Previous</button> <button
-                            class="w3-button w3-green" type="submit"
+                        <button class="w3-button w3-green" type="submit">Previous</button> 
+                        <button
+                            class="w3-button w3-green m-1" type="submit"
                             >Next & Continue</button>
                     </div>
 

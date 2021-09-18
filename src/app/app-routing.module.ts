@@ -16,6 +16,9 @@ import { LoginComponent } from './Restaurant/reg_log/login/login.component';
 import { OrderPageComponent } from './Restaurant/reg_log/order-page/order-page.component';
 import { PaymentPageComponent } from './Restaurant/reg_log/payment-page/payment-page.component';
 import { RegistrationComponent } from './Restaurant/reg_log/registration/registration.component';
+import { MenuComponent } from './Restaurant/menu/menu.component';
+import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
+import { SectionimagesComponent } from './Restaurant/sectionimages/sectionimages.component';
 
 
 const routes: Routes = [
@@ -68,6 +71,18 @@ const routes: Routes = [
   {
     path:'changepass',
     component:ChangepassComponent
+  },
+  {
+    path:'menu',
+    component:MenuComponent
+  },
+  {
+    path:'logo-setup',
+    component:LogosetupComponent
+  },
+  {
+    path:'sectionimage',
+    component:SectionimagesComponent
   }
 
 ];
@@ -77,3 +92,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+

@@ -102,6 +102,7 @@ export class MenuSetupComponent implements OnInit {
         this.tab2 = true;
         this.tab3 = true;
         this.tab4 = false;
+        this.tab5 = true;
         this.paris = document.getElementById('Laguna');
         this.paris.className = 'active';
       }
@@ -187,11 +188,11 @@ export class MenuSetupComponent implements OnInit {
   }
   Finish() {
   }
-  opennextab(COVERPAGEURL: any, TOPIMAGEURL: any, MENUURL: any) {
+  opennextab(COVERPAGEURL: any, TOPIMAGEURL: any) {
 
     this.storevalue.push({
       "coverimg": this.breakfastcoverimage, "topimg": this.breakfasttopimage, "menuimg": this.breakfastmenuimage, "coverurl": COVERPAGEURL,
-      "topurl": TOPIMAGEURL, "menuurl": MENUURL
+      "topurl": TOPIMAGEURL
     });
     this._data.submit_breakfast_menu_setup(this.storevalue).subscribe((data) => { console.log(data) })
     console.log(this.storevalue);
@@ -199,7 +200,7 @@ export class MenuSetupComponent implements OnInit {
     // console.log(this.breakfasttopimage);
     // console.log(this.breakfastmenuimage);
 
-    console.log(COVERPAGEURL + TOPIMAGEURL + "" + MENUURL);
+    console.log(COVERPAGEURL + TOPIMAGEURL);
     this.t1 = 'London';
     this.t2 = 'Paris';
     this.tab2 = false;
@@ -226,12 +227,12 @@ export class MenuSetupComponent implements OnInit {
       this.paris.className = 'active';
     }
   }
-  opennextab1(e: any, v1: any, v2: any, v3: any) {
+  opennextab1(e: any, v1: any, v2: any) {
     if (e == 'Paris') {
       this.storevalue.length = 0;
       this.storevalue.push({
         "coverimg": this.launchcoverimage, "topimg": this.launchtopimage, "menuimg": this.launchmenuimage, "coverurl": v1,
-        "topurl": v2, "menuurl": v3
+        "topurl": v2
       });
       console.log(this.storevalue);
       this.t1 = 'London';

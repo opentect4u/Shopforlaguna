@@ -1,6 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,10 @@ import { MenuSetupComponent } from './Restaurant/menu-setup/menu-setup/menu-setu
 import { DashboardComponent } from './Restaurant/after_login/dashboard/dashboard.component';
 import { ChangepassComponent } from './Restaurant/reg_log/changepass/changepass.component';
 import { MenuSetupSidebarComponent } from './common/menu-setup-sidebar/menu-setup-sidebar.component';
+import { MenuComponent } from './Restaurant/menu/menu.component';
+import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
+import { SectionimagesComponent } from './Restaurant/sectionimages/sectionimages.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +63,10 @@ import { MenuSetupSidebarComponent } from './common/menu-setup-sidebar/menu-setu
     MenuSetupComponent,
     DashboardComponent,
     ChangepassComponent,
-    MenuSetupSidebarComponent
+    MenuSetupSidebarComponent,
+    MenuComponent,
+    LogosetupComponent,
+    SectionimagesComponent
   ],
 
 
@@ -70,7 +78,8 @@ import { MenuSetupSidebarComponent } from './common/menu-setup-sidebar/menu-setu
 
     FormsModule,
 
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

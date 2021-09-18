@@ -52,4 +52,10 @@ export class DataserviceService {
   submit_breakfast_menu_setup(dt:any) {
     return this.http.post(url_set.api_url+'/breakfast',dt)
   }
+  //For Menu Images in Restaurant
+  submit_menu_setup(dt:any) {
+    const formdata=new FormData;
+    formdata.append('File',dt);
+    return this.http.post(url_set.api_url+'/upload',dt);
+  }
 }

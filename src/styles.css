@@ -15,3 +15,65 @@ margin: 0; padding:0;
 }
 
 .globalMain{display: grid; flex: 1 0 auto;} 
+
+
+/* body{font-family: "Raleway", sans-serif;} */
+
+
+
+
+.formTable{max-width: 600px; width: 100%;}
+
+.rowCustomFour{width: 100%; margin-bottom: 15px; display: inline-block;}
+.rowCustomFour .fieldSecHalf{width: 50%; float: left; padding-right: 15px;}
+.rowCustomFour .fieldSecHalf:last-child{padding-right: 0;}
+.rowCustomFour .fieldSecHalf label{width: 100%; font-size: 14px; display: block; margin: 5px 0 5px 0;}
+
+.rowCustomFour .fieldSecFull{width:100%; float: none; padding-right: 0;}
+.rowCustomFour .fieldSecFull label{width: 100%; font-size: 14px; display: block; margin: 5px 0 5px 0;}
+
+.formCss{display: block;
+width: 100%;
+height: calc(1.5em + .75rem + 2px);
+padding: .375rem .75rem;
+font-size: 1rem;
+font-weight: 400;
+line-height: 1.5;
+color: #495057;
+background-color: #fff;
+background-clip: padding-box;
+border: 1px solid #ced4da;
+border-radius: .25rem;
+transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; margin: 0 !important;}
+
+.formCssTextArea{display: block;
+width: 100%;
+height: calc(1.5em + .75rem + 2px);
+padding: .375rem .75rem;
+font-size: 1rem;
+font-weight: 400;
+line-height: 1.5;
+color: #495057;
+background-color: #fff;
+background-clip: padding-box;
+border: 1px solid #ced4da;
+border-radius: .25rem;
+transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; margin: 0 !important; height:160px;}
+
+
+.aboutTextarea{margin-top: 10px; display: block;
+width: 100%;
+height: calc(1.5em + .75rem + 2px);
+padding: .375rem .75rem;
+font-size: 1rem;
+font-weight: 400;
+line-height: 1.5;
+color: #495057;
+background-color: #fff;
+background-clip: padding-box;
+border: 1px solid #ced4da;
+border-radius: .25rem;
+transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; margin: 0 !important; height: 406px;}
+
+
+
