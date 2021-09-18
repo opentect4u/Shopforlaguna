@@ -36,6 +36,8 @@ import { MenuSetupSidebarComponent } from './common/menu-setup-sidebar/menu-setu
 import { MenuComponent } from './Restaurant/menu/menu.component';
 import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
 import { SectionimagesComponent } from './Restaurant/sectionimages/sectionimages.component';
+import { DisplaydaytimeComponent } from './Restaurant/displaydaytime/displaydaytime.component';
+import { MenudataComponent } from './Restaurant/menudata/menudata.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import { SectionimagesComponent } from './Restaurant/sectionimages/sectionimages
     MenuSetupSidebarComponent,
     MenuComponent,
     LogosetupComponent,
-    SectionimagesComponent
+    SectionimagesComponent,
+    DisplaydaytimeComponent,
+    MenudataComponent
   ],
 
 

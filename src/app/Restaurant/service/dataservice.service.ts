@@ -50,12 +50,54 @@ export class DataserviceService {
     return this.http.post(url_set.api_url + '', v)
   }
   submit_breakfast_menu_setup(dt:any) {
-    return this.http.post(url_set.api_url+'/breakfast',dt)
+    // const formdata=new FormData();
+    // formdata.append('img',dt);
+    // console.log(formdata.get('img'))
+    // return this.http.post(url_set.api_url+'/upload',formdata)
+    // const formdata = new FormData();
+    // formdata.append('file', dt);
+    // formdata.append('cov_img',dt1);
+    // formdata.append('mul_img',dt2)
+    // console.log(formdata.getAll);
+    
+    // return this.http.post(url_set.api_url + '/upload', formdata
+    return this.http.post(url_set.api_url + '/menu_setup', dt
+
+    )
   }
   //For Menu Images in Restaurant
   submit_menu_setup(dt:any) {
-    const formdata=new FormData;
+    const formdata=new FormData();
     formdata.append('File',dt);
     return this.http.post(url_set.api_url+'/upload',dt);
   }
+
+  logosubmit(dt:any,dt1:any,dt2:any){
+    var data = {logo: dt, restaurant_id: dt2};
+    const formdata=new FormData();
+    formdata.append('logo',dt);
+    formdata.append('File',dt1);
+    formdata.append('restaurant_id',dt2);
+    console.log(formdata.getAll)
+    return this.http.post(url_set.api_url+'/logo',data);
+  }
+  Aboutus(dt:any,dt1:any){
+    var data = {aboutus: dt, restaurant_id: dt1};
+    // const formdata=new FormData();
+    // formdata.append('logo',dt);
+    // formdata.append('File',dt1);
+    // formdata.append('restaurant_id',dt2);
+    // console.log(formdata.getAll)
+    return this.http.post(url_set.api_url+'/aboutus',data);
+  }
+  Notice(v1:any,v2:any,v3:any,v4:any,v5:any,v6:any,v7:any,v8:any){
+    var data = {menu:v1,notice_flag: v8, position: v2,headertitle:v3,fontcolor:v4,back_color:v5,notice:v6,restaurant_id:v7};
+    // const formdata=new FormData();
+    // formdata.append('logo',dt);
+    // formdata.append('File',dt1);
+    // formdata.append('restaurant_id',dt2);
+    // console.log(formdata.getAll)
+    return this.http.post(url_set.api_url+'/notice',data);
+  }
+
 }

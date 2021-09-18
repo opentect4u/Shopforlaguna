@@ -31,22 +31,22 @@
             <div class="secDifer">
                 <label class="titleCustom"><strong>LOGO</strong></label>
 
-                <input type="checkbox" id="logo" name="logo" value="Logo">
+                <!-- <input type="checkbox" id="logo" name="logo" value="Logo"> -->
                 <label for="logo"><strong>Logo File</strong></label><br>
                 <p>Upload your logo which needs to be in JPG or PNG format :</p>
                 <!-- <form > -->
                     <label for="myfile">Select files:</label>
-                    <input type="file" id="myfile" name="myfile" multiple><br>
+                    <input type="file" id="myfile" name="myfile" (change)="selectimage($event)"><br>
 
 
                     <strong><u>OR</u></strong><br>
 
-                    <input type="checkbox" id="logo2" name="logo2" value="Logo Link">
+                    <!-- <input type="checkbox" id="logo2" name="logo2" value="Logo Link"> -->
                     <label for="logo2"> <strong>Logo Url</strong></label>
                     <p>Please provide a url/website address where we can collect your logo.</p>
                     <form>
                         <label for="url">Enter the url:</label>
-                        <input type="text" id="url" name="url" value="" size="28"><br>
+                        <input type="text" id="url" name="url" value="" size="28" #logo><br>
                     </form>
                     <p style="font-style: italic">If we cannot collect the logo from your web site, we will contact you
                     </p>
@@ -55,7 +55,7 @@
             </div>
 
 
-            <button class="w3-button w3-green" type="submit">Submit</button>
+            <button class="w3-button w3-green" type="submit" (click)="goto_MenuDatapage(logo.value)">Submit</button>
 
 
         </div>

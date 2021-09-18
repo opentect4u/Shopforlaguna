@@ -19,6 +19,8 @@ import { RegistrationComponent } from './Restaurant/reg_log/registration/registr
 import { MenuComponent } from './Restaurant/menu/menu.component';
 import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
 import { SectionimagesComponent } from './Restaurant/sectionimages/sectionimages.component';
+import { DisplaydaytimeComponent } from './Restaurant/displaydaytime/displaydaytime.component';
+import { MenudataComponent } from './Restaurant/menudata/menudata.component';
 
 
 const routes: Routes = [
@@ -83,6 +85,14 @@ const routes: Routes = [
   {
     path:'sectionimage',
     component:SectionimagesComponent
+  },
+  {
+    path:'displaydayandtime',
+    component:DisplaydaytimeComponent
+  },
+  {
+    path:'menudata',
+    component:MenudataComponent
   }
 
 ];
