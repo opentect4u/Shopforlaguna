@@ -159,11 +159,13 @@ changecolor(event:any,e:any){
      if(e=='back'){
      this.back=document.getElementById('box');
      this.back.value=event.target.value;
+     this.value_font=false;
      }
      else if(e=='font'
      ){
       this.back=document.getElementById('box2');
       this.back.value=event.target.value;
+      this.value_background=false;
      }
      console.log(event.target.value);
 }
