@@ -7,6 +7,43 @@ import { DataserviceService } from '../../service/dataservice.service';
   styleUrls: ['./menu-setup.component.css']
 })
 export class MenuSetupComponent implements OnInit {
+  //For checking null in breakfast
+  b_url:boolean=true;
+  bc_url:boolean=true;
+  bt_url:boolean=true;
+  bm_url:boolean=true;
+  bs_url:boolean=true;
+  bstart_url:boolean=true;
+  bend_url:boolean=true;
+  //For checking null in breakfast
+  lcc_url:boolean=true;
+  lc_url:boolean=true;
+  lt_url:boolean=true;
+  lm_url:boolean=true;
+  ls_url:boolean=true;
+  lstart_url:boolean=true;
+  lend_url:boolean=true;
+  //For checking null in breakfast
+  d_url:boolean=true;
+  dc_url:boolean=true;
+  dt_url:boolean=true;
+  dm_url:boolean=true;
+  ds_url:boolean=true;
+  dstart_url:boolean=true;
+  dend_url:boolean=true;
+  //For checking null in breakfast
+  br_url:boolean=true;
+  brc_url:boolean=true;
+  brt_url:boolean=true;
+  brm_url:boolean=true;
+  brs_url:boolean=true;
+  brstart_url:boolean=true;
+  brend_url:boolean=true;
+
+
+
+  l_url:boolean=true;
+
   PACK: any;
   BIRTH: any;
   ENTER: any;
@@ -621,9 +658,11 @@ export class MenuSetupComponent implements OnInit {
   checkbreakfast(event:any){
     if(event.target.checked){
               this.break_check='Y';
+              this.b_url=false;
     }
     else{
       this.break_check='N';
+      this.b_url=true;
     }
   }
   opennextab(COVERPAGEURL: any, TOPIMAGEURL: any,MENUURL:any,SECTIONURL:any,hidevalue:any,v1:any,v2:any) {
@@ -1207,9 +1246,13 @@ export class MenuSetupComponent implements OnInit {
   launchchaked(event:any){
        if(event.target.checked){
          this.launch_check='Y';
+         this.lcc_url=false;
+        
        }
        else{
         this.launch_check='N';
+        this.lcc_url=true;
+
 
        }
   }
@@ -1503,19 +1546,24 @@ export class MenuSetupComponent implements OnInit {
   checkbrunch(event:any){
     if(event.target.checked){
       this.brunch_check='Y';
+      this.d_url=false;
     }
     else{
      this.brunch_check='N';
-
+     this.d_url=true;
+     
     }
   }
   checkdinner(event:any){
      
     if(event.target.checked){
       this.dinner_check='Y';
+      this.br_url=false;
     }
     else{
      this.dinner_check='N';
+     this.br_url=true;
+
 
     }
   }
@@ -2714,51 +2762,265 @@ else if(e ==='tuesday'){
   }
 
   // For Checking null
-  checkvalidity(event:any){
+  checkvalidity(event:any,e:any){
+    //For Checking null in breakfast  Tab
     if(event.target.id=="url"){
         if(event.target.value==''){
           this.launch_url=true;
+          this.bc_url=true;
         }
         else{
           this.launch_url=false;
+          this.bc_url=false;
+
         }
     }
     else if(event.target.id=="url_top"){
+             
+      if(event.target.value==''){
+        this.launch_url=true;
+        this.bt_url=true;
+      }
+      else{
+        this.launch_url=false;
+        this.bt_url=false;
 
+      }
     }
     else if(event.target.id=="url_menu"){
-      
+      if(event.target.value==''){
+        this.launch_url=true;
+        this.bm_url=true;
+      }
+      else{
+        this.launch_url=false;
+        this.bm_url=false;
+
+      }
     }
     else if(event.target.id=="Url_section"){
+      if(event.target.value==''){
+        this.launch_url=true;
+        this.bs_url=true;
+      }
+      else{
+        this.launch_url=false;
+        this.bs_url=false;
+
+      }
+    }
+      //For Checking null in Launch Tab
+    else if(e=='lc_url'){
+      
+      if(event.target.value==''){
+         this.lc_url=true;
+      }
+      else{
+        this.lc_url=false;
+      }
+    }
+    else if(e=='ls_url'){
+      if(event.target.value==''){
+         this.ls_url=true;
+      }
+      else{
+        this.ls_url=false;
+       
+      }
+    }
+  
+    else if(e=='lm_url'){
+      if(event.target.value==''){
+        this.lm_url=true;
+      }
+      else{
+        this.lm_url=false;
+      
+      }
+    }
+    else if(e=='lt_url'){
+      if(event.target.value==''){
+        this.lt_url=true;
+         
+      }
+      else{
+        this.lt_url=false;
+        
+      }
+    }
+    else if(e=='lstart'){
+      if(event.target.value==''){
+        this.lend_url=true;
+         
+      }
+      else{
+        this.lend_url=false;
+     
+      }
+    }
+    else if(e=='lend'){
+      if(event.target.value==''){
+      this.lstart_url=true;
+         
+      }
+      else{
+        this.lstart_url=false;
+
+     
+      }
+    }
+     //For Checking null in dinner Tab
+     else if(e=='dc_url'){
+      
+      if(event.target.value==''){
+         this.dc_url=true;
+      }
+      else{
+        this.dc_url=false;
+      }
+    }
+    else if(e=='ds_url'){
+      if(event.target.value==''){
+         this.ds_url=true;
+      }
+      else{
+        this.ds_url=false;
+       
+      }
+    }
+  
+    else if(e=='dm_url'){
+      if(event.target.value==''){
+        this.dm_url=true;
+      }
+      else{
+        this.dm_url=false;
+      
+      }
+    }
+    else if(e=='dt_url'){
+      if(event.target.value==''){
+        this.dt_url=true;
+         
+      }
+      else{
+        this.dt_url=false;
+        
+      }
+    }
+    else if(e=='dstart'){
+      if(event.target.value==''){
+        this.dend_url=true;
+         
+      }
+      else{
+        this.dend_url=false;
+     
+      }
+    }
+    else if(e=='dend'){
+      if(event.target.value==''){
+      this.dstart_url=true;
+         
+      }
+      else{
+        this.dstart_url=false;
+
+     
+      }
+    }
+   //For checking null in Brunch tab
+   else if(e=='brs_url'){
+      
+    if(event.target.value==''){
+       this.brs_url=true;
+    }
+    else{
+      this.brs_url=false;
+    }
+  }
+  else if(e=='brc_url'){
+    if(event.target.value==''){
+       this.brc_url=true;
+    }
+    else{
+      this.brc_url=false;
+     
+    }
+  }
+
+  else if(e=='brt_url'){
+    if(event.target.value==''){
+      this.brt_url=true;
+    }
+    else{
+      this.brt_url=false;
+    
+    }
+  }
+  else if(e=='brm_url'){
+    if(event.target.value==''){
+      this.brm_url=true;
+       
+    }
+    else{
+      this.brm_url=false;
       
     }
-    else if(event.target.id=='start'){
-
-    }
-    else if(event.target.id=='end'){
-
-    }
+  }
+ 
     
   }
   checkstart(e:any){
-   
+    if(e.target.value!=''){
       this.brunch_start=e.target.value;
+      this.brstart_url=false;
+         
+      }
+      else{
+      this.brstart_url=true;
+         
+      }
+   
+     
   console.log(this.brunch_start);
 
 }
   checksend(e:any){
-  
+      if(e.target.value!=''){
       this.brunch_end=e.target.value;
+      this.brend_url=false;
+         
+      }
+      else{
+      this.brend_url=true;
+         
+      }
     
   console.log(  this.brunch_end);
 
   }
   checkbreakend(e:any,v:any){
     if(v=='start'){
+      if(e.target.value!=''){
       this.brunch_start=e.target.value;
+         this.bstart_url=false;
+      }
+      else {
+         this.bstart_url=true;
+          
+      }
     }
     else if(v=='end'){
-      this.brunch_end=e.target.value;
+      if(e.target.value!=''){
+        this.brunch_end=e.target.value;
+           this.bend_url=false;
+        }
+        else {
+           this.bend_url=true;
+            
+        }
+     
       
     }
 
@@ -2777,15 +3039,27 @@ else if(e ==='tuesday'){
 
     console.log(this.brunch_end,this.brunch_start)
   }
-  checkdinnertime(e:any,v:any){
-    
-
-     
+  checkdinnertime(e:any,v:any){ 
     if(v=='start'){
-      this.brunch_start=e.target.value;
+      if(e.target.value!=''){
+        this.brunch_start=e.target.value;
+        this.dstart_url=false;
+
+      }
+      else {
+        this.dstart_url=true;
+      }
+     
     }
     else if(v=='end'){
-      this.brunch_end=e.target.value;
+      if(e.target.value!=''){
+        this.brunch_end=e.target.value;
+        this.dend_url=false;
+
+      }
+      else {
+        this.dend_url=true;
+      }
       
     }
 

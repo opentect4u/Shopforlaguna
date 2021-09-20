@@ -61,7 +61,7 @@
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url" name="url" value=""
                                     size="28" #COVERPAGEURL
-                                    (keyup)="checkvalidity($event)" (change)="checkvalidity($event)">
+                                    (keyup)="checkvalidity($event,'bc_url')" (change)="checkvalidity($event,'bc_url')">
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
                                 contact you</p>
@@ -82,8 +82,8 @@
                             <form>
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_top" name="url" value=""
-                                    size="28" #TOPIMAGEURL
-                                    (keyup)="checkvalidity($event)" (change)="checkvalidity($event)">
+                                    size="28" #TOPIMAGEURL 
+                                    (keyup)="checkvalidity($event,'bt_url')" (change)="checkvalidity($event,'bt_url')">
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
                                 contact you</p>
@@ -104,7 +104,7 @@
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_menu" name="url" value=""
                                     size="28" #MENUURL
-                                    (keyup)="checkvalidity($event)" (change)="checkvalidity($event)">
+                                    (keyup)="checkvalidity($event,'bm_url')" (change)="checkvalidity($event,'bm_url')">
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
                                 contact you</p>
@@ -129,7 +129,7 @@
                                     <form>
                                         <label for="url">Enter the url:</label>
                                         <input type="text" id="Url_section" name="Url"  size="28" #SECTIONURL
-                                        (keyup)="checkvalidity($event)" (change)="checkvalidity($event)">
+                                        (keyup)="checkvalidity($event,'bs_url')" (change)="checkvalidity($event,'bs_url')" >
                                     <!-- <input type="text" [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"> -->
     
                                     </form>
@@ -157,26 +157,26 @@
                                     <div class="row">
                                    <div class="col-5">
                                     <form >
-                                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (change)="checkday($event,'everyday')">
+                                        <input type="checkbox" id="vehicle1"  name="vehicle1" value="Bike" (change)="checkday($event,'everyday')">
                                         <label for="vehicle1" class="m-2"> Every Day</label><br>
                                     </form>
         
                                     <form class="form-inline" >
-                                        <input type="checkbox" (change)="checkday($event,'monday')" name="vehicle2" id="vehicle2" value="Car">
+                                        <input type="checkbox"  (change)="checkday($event,'monday')" name="vehicle2" id="vehicle2" >
                                         <label for="vehicle2"> Monday</label><br>
-                                        <input type="checkbox" (change)="checkday($event,'tuesday')" name="vehicle3" id="vehicle3" value="Boat">
+                                        <input type="checkbox" (change)="checkday($event,'tuesday')" name="vehicle3" id="vehicle3" >
                                         <label for="vehicle3"> Tuesday</label><br>
-                                        <input type="checkbox" (change)="checkday($event,'wednesday')" name="vehicle1" id="vehicle4" value="Bike">
+                                        <input type="checkbox"  (change)="checkday($event,'wednesday')" name="vehicle1" id="vehicle4" >
                                         <label for="vehicle1"> Wednesday</label><br>
                                     </form>
                                     <form class="form-inline" >
-                                        <input type="checkbox" (change)="checkday($event,'thursday')" name="vehicle2" id="vehicle5" value="Car">
+                                        <input type="checkbox" (change)="checkday($event,'thursday')" name="vehicle2" id="vehicle5" >
                                         <label for="vehicle2"> Thursday</label><br>
-                                        <input type="checkbox" (change)="checkday($event,'friday')" name="vehicle3" id="vehicle6" value="Boat">
+                                        <input type="checkbox"  (change)="checkday($event,'friday')" name="vehicle3" id="vehicle6" >
                                         <label for="vehicle3"> Friday</label><br>
-                                        <input type="checkbox" (change)="checkday($event,'sat')" name="vehicle1" id="vehicle7" value="Bike">
+                                        <input type="checkbox"  (change)="checkday($event,'sat')" name="vehicle1" id="vehicle7" >
                                         <label for="vehicle1"> Saturday</label><br>
-                                        <input type="checkbox" (change)="checkday($event,'sun')" name="vehicle2" id="vehicle8" value="Car">
+                                        <input type="checkbox" (change)="checkday($event,'sun')" name="vehicle2" id="vehicle8" >
                                         <label for="vehicle2"> Sunday</label><br>
                                     </form>
         
@@ -186,11 +186,11 @@
                                         <label for="selfcling">Start Time:</label>
                                         <input type="time"
                                          (change)="checkbreakend($event,'start')"
-                                        id="start" name="selfcling" value="" size="4" #start_break><br><br>
+                                        id="start" name="selfcling" value="" size="4" #start_break ><br><br>
                                         <label for="selfcling">End Time:</label>
                                         <input type="time" 
                                          (change)="checkbreakend($event,'end')"
-                                        id="end" name="selfcling" value="" size="4" #end_break>
+                                        id="end" name="selfcling" value="" size="4" #end_break >
                                     </form>
                                    </div>
                                    <div class="col-2"></div>
@@ -200,10 +200,11 @@
     
     
                             </div>                          
-
+                            
                         <!-- <button class="w3-button w3-green" type="submit">Previous</button> -->
+                        
                          <button
-                            class="w3-button w3-green m-1" type="submit" 
+                            class="w3-button w3-green m-1" type="submit" [disabled]="b_url || bc_url || bt_url || bm_url || bs_url || bstart_url || bend_url"
                             (click)="opennextab(COVERPAGEURL.value,TOPIMAGEURL.value,MENUURL.value,SECTIONURL.value,break.value,start_break.value,end_break.value)"
                             >Save & Continue</button>
                           
@@ -236,8 +237,9 @@
                             Lunch menu image.
                             <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url_launch" name="url" value=""
-                                    size="28" #launchcoverurl>
+                                <input type="text" id="url_launch" name="url" 
+                                (keyup)="checkvalidity($event,'lc_url')" (change)="checkvalidity($event,'lc_url')"
+                                    size="28" #launchcoverurl >
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
                                 contact you</p>
@@ -258,8 +260,8 @@
                             menu:
                             <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url_launchtop" name="url" value=""
-                                    size="28" #launchtopimageurl>
+                                <input type="text" id="url_launchtop" name="url" 
+                                    size="28" #launchtopimageurl (keyup)="checkvalidity($event,'lt_url')" (change)="checkvalidity($event,'lt_url')">
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
                                 contact you</p>
@@ -282,8 +284,9 @@
                             </form>Or, please provide a web site address/url where we can collect your menu content:
                             <form>
                                 <label for="url">Enter the url:</label>
-                                 <input type="text" id="url_launchmenu" name="url" value=""
-                                    size="28" #launchmenuurl>
+                                 <input type="text" id="url_launchmenu" name="url"
+                                    size="28" #launchmenuurl 
+                                    (keyup)="checkvalidity($event,'lm_url')" (change)="checkvalidity($event,'lm_url')">
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
                                 contact you</p>
@@ -306,8 +309,11 @@
                                         <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
                                         Or, please provide a web site address/url where we can collect your menu content:
                                         <form>
+                                            
                                             <label for="url">Enter the url:</label>
-                                            <input type="text" id="url_launchsection" name="Url"  size="28" #SECTIONURLAUNCH>
+                                            <input type="text"
+                                            (keyup)="checkvalidity($event,'ls_url')" (change)="checkvalidity($event,'ls_url')"
+                                            id="url_launchsection" name="Url"  size="28" #SECTIONURLAUNCH>
                                         <!-- <input type="text" [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"> -->
 
                                         </form>
@@ -404,14 +410,21 @@
                                    <div class="col-5">
                                     <form class="form-inline" action="">
                                         <label for="selfcling">Start Time:</label>
-                                        
+                             
+                                         
                                          <input type="time"
                                          (change)="checkblaunch($event,'start')"
-                                          id="start_launch"  name="selfcling" value="" size="4" #start_break><br><br>
+                                          id="start_launch"  name="selfcling" 
+                                        (change)="checkvalidity($event,'lstart')"
+                                          
+                                          size="4" #start_break><br><br>
                                         <label for="selfcling">End Time:</label>
+                               
                                         <input type="time"
                                         (change)="checkblaunch($event,'end')"
-                                        id="end_launch" name="selfcling" value="" size="4" #end_break>
+                                        id="end_launch" name="selfcling"
+                                        (change)="checkvalidity($event,'lend')"
+                                        size="4" #end_break>
                                     </form>
                                    </div>
                                    <div class="col-2"></div>
@@ -433,11 +446,10 @@
                             <!-- </div> -->
 
 
-
                         <!-- <button class="w3-button w3-green" type="submit" (click)="goprev('paris')">Previous</button>  -->
                         <button
                             class="w3-button w3-green m-1" type="submit"  
-                            
+                            [disabled]="lcc_url || lc_url || ls_url || lm_url || lt_url || lstart_url || lend_url"
                             (click)="opennextab1('Paris',launchcoverurl.value,launchtopimageurl.value,launchmenuurl.value,SECTIONURLAUNCH.value,launch.value,start_break.value,end_break.value)">Save & Continue</button>
                     </div>
 
@@ -469,7 +481,9 @@
                             Dinner menu image.
                             <form>
                                 <label for="url">Enter the url:</label>
-                                 <input type="text" id="url_brunch" name="url" value=""
+                                 <input type="text" id="url_brunch" name="url" 
+                                (keyup)="checkvalidity($event,'dc_url')" (change)="checkvalidity($event,'dc_url')"
+
                                     size="28" #coverbrunchurl>
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
@@ -492,8 +506,10 @@
                             Dinner menu:
                             <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url_topbrunch" name="url" value=""
-                                    size="28" #topurl>
+                                <input type="text" id="url_topbrunch" name="url"
+                                    size="28" #topurl
+                                (keyup)="checkvalidity($event,'dt_url')" (change)="checkvalidity($event,'dt_url')"
+                                >
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
                                 contact you</p>
@@ -514,8 +530,10 @@
                             </form>Or, please provide a web site address/url where we can collect your menu content:
                             <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url_menubrunch" name="url" value=""
-                                    size="28" #MENUURLBRUNCH>
+                                <input type="text" id="url_menubrunch" name="url" 
+                                    size="28" #MENUURLBRUNCH
+                                (keyup)="checkvalidity($event,'dm_url')" (change)="checkvalidity($event,'dm_url')"
+                                >
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
                                 contact you</p>
@@ -540,7 +558,10 @@
                                     Or, please provide a web site address/url where we can collect your menu content:
                                     <form>
                                         <label for="url">Enter the url:</label>
-                                        <input type="text" id="url_sectionbrunch" name="Url"  size="28" #SECTIONURBRUNCH>
+                                        <input type="text" id="url_sectionbrunch" 
+                                    (keyup)="checkvalidity($event,'ds_url')" (change)="checkvalidity($event,'ds_url')"
+
+                                        name="Url"  size="28" #SECTIONURBRUNCH>
                                     <!-- <input type="text" [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"> -->
 
                                     </form>
@@ -657,7 +678,7 @@
 
                         <!-- <button class="w3-button w3-green" type="submit" (click)="goprev('tokyo')">Previous</button> -->
                             <button 
-                            class="w3-button w3-green m-1" type="submit"
+                            class="w3-button w3-green m-1" type="submit" [disabled]="d_url || dend_url || dstart_url || dc_url || dt_url || dm_url || ds_url"
                             (click)="opennextab2('Tokyo',SECTIONURBRUNCH.value,MENUURLBRUNCH.value,topurl.value,coverbrunchurl.value,brunch.value,start_break.value,end_break.value)">Save & Continue</button>
                     </div>
 
@@ -693,8 +714,10 @@
                             address/url where we can collect your menu content.
                             <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url_dinner" name="url" value=""
-                                    size="28" #dinnercoverurl>
+                                <input type="text" id="url_dinner" name="url"
+                                    size="28" #dinnercoverurl
+                                (keyup)="checkvalidity($event,'brc_url')" (change)="checkvalidity($event,'brc_url')"
+                                >
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
                                 contact you</p>
@@ -714,8 +737,10 @@
                             Brunch menu:
                             <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url_dinnertop" name="url" value=""
-                                    size="28" #dinnertopurl>
+                                <input type="text" id="url_dinnertop" name="url" 
+                                    size="28" #dinnertopurl
+                                (keyup)="checkvalidity($event,'brt_url')" (change)="checkvalidity($event,'brt_url')"
+                                >
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
                                 contact you</p>
@@ -737,8 +762,10 @@
                             </form>Or, please provide a web site address/url where we can collect your menu content:
                             <form>
                                 <label for="url">Enter the url:</label>
-                                 <input type="text" id="url_dinnermenu" name="url" value=""
-                                    size="28" #dinnermenuurl>
+                                 <input type="text" id="url_dinnermenu" name="url"
+                                    size="28" #dinnermenuurl
+                                (keyup)="checkvalidity($event,'brm_url')" (change)="checkvalidity($event,'brm_url')"
+                                >
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
                                 contact you</p>
@@ -763,7 +790,10 @@
                                     Or, please provide a web site address/url where we can collect your menu content:
                                     <form>
                                         <label for="url">Enter the url:</label>
-                                        <input type="text" id="url_section" name="Url"  size="28" #SECTIONURlDINNER>
+                                        <input type="text"
+                                    (keyup)="checkvalidity($event,'brs_url')" (change)="checkvalidity($event,'brs_url')"
+                                        
+                                        id="url_section" name="Url"  size="28" #SECTIONURlDINNER>
                                     <!-- <input type="text" [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"> -->
 
                                     </form>
@@ -874,7 +904,7 @@
                      
                         <!-- <button class="w3-button w3-green" type="submit" (click)="goprev('laguna')">Previous</button>  -->
                         <button
-                            class="w3-button w3-green m-1" type="submit" (click)="opennextab3('laguna',dinnermenuurl.value,dinnertopurl.value,dinnercoverurl.value,SECTIONURlDINNER.value,dinner.value,start_break.value,end_break.value)">Save & Continue</button>
+                            class="w3-button w3-green m-1" [disabled]="br_url || brstart_url || brend_url || brc_url || brt_url || brm_url || brs_url" type="submit" (click)="opennextab3('laguna',dinnermenuurl.value,dinnertopurl.value,dinnercoverurl.value,SECTIONURlDINNER.value,dinner.value,start_break.value,end_break.value)">Save & Continue</button>
                     </div>
 
                     <!-- <div id="Shrewsbury" class="tabcontent"  [hidden]="tab5">
