@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataserviceService } from '../../service/dataservice.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -9,7 +10,8 @@ import { DataserviceService } from '../../service/dataservice.service';
 })
 export class RegistrationComponent implements OnInit {
   // v = 'test';
-  constructor(private _data:DataserviceService,private router:Router) { }
+  click:any;
+  constructor(private _data:DataserviceService,private router:Router,public toastr: ToastrManager) { }
    regData:any;
    email_data:any;
    invalid_data=true;
@@ -30,9 +32,22 @@ export class RegistrationComponent implements OnInit {
       // console.log(data)
     this.email_data=data;
     if(this.email_data.suc==2)
-     {this.invalid_data=true;this.show_msg=true;}
+     {
+    console.log("sadasdaasdasd")
+
+       this.invalid_data=true;
+      // this.show_msg=true;
+      // this.click=document.getElementById('openmod');
+      // this.click.click();
+      this.toastr.errorToastr('This mail id is already in use', 'Oops!');
+    }
     else if(this.email_data.suc==1)
-     {this.invalid_data=false;this.show_msg=false;}
+     {
+    console.log("sadasda")
+
+       this.invalid_data=false;
+      //  this.show_msg=false;
+      }
     else
     {}
     
@@ -66,4 +81,17 @@ myFunction() {
   // After 3 seconds, remove the show class from DIV
   setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
 } 
+
+  preventNonNumericalInput(e:any){
+    e = e || window.event;
+    
+    var charCode = (typeof e.which == "undefined") ? e.keyCode : e.which;
+    var charStr = String.fromCharCode(charCode);
+
+    if (!charStr.match(/^[0-9]+$/))
+     { e.preventDefault();}
+
+  }
+
+
 }

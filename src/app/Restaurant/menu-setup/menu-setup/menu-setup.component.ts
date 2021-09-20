@@ -53,7 +53,7 @@ export class MenuSetupComponent implements OnInit {
   sat:any=0;
   sun:any=0;
   every:any;
-  
+  error_msg:any="Please Update your package";
   //For Paris
   mon_launch:any=0;;
   tue_launch:any=0;
@@ -90,7 +90,8 @@ export class MenuSetupComponent implements OnInit {
   sun_check:any;
   // mon_check:any;
 
-
+   brunch_start:any;
+   brunch_end:any;
   
   breakfastcoverimage: any;
   breakfasttopimage: any;
@@ -135,11 +136,13 @@ export class MenuSetupComponent implements OnInit {
   // }
 
   openCity(e: any) {
+    this.brunch_start=0;
+    this.brunch_end=0;
     if (e == 'London') {
       console.log(this.v);
        if((localStorage.getItem('No_of_menu')=='O')){
         if((localStorage.getItem('No_of_menu')=='O')&&(this.v==1)){
-
+           this. myFunction_forerror();
         }
         else if(localStorage.getItem('No_of_menu')=='O'&&this.v!=1){
           console.log("asdasdasdasdasd");
@@ -176,6 +179,8 @@ export class MenuSetupComponent implements OnInit {
        else if(localStorage.getItem('No_of_menu')=='T'){
         if((localStorage.getItem('No_of_menu')=='T')&&(this.v==2)){
           //Snackbar
+          this. myFunction_forerror();
+
         }
         else if((localStorage.getItem('No_of_menu')=='T')&&(this.v!=2)){
           this.tab1 = false;
@@ -246,6 +251,8 @@ export class MenuSetupComponent implements OnInit {
      if(localStorage.getItem('No_of_menu')=='O'){
       if((localStorage.getItem('No_of_menu')=='O')&&(this.v==1)){
         //Snackbar
+        this. myFunction_forerror();
+
       }
      else if((localStorage.getItem('No_of_menu')=='O')&&(this.v!=1)){
       
@@ -281,6 +288,8 @@ export class MenuSetupComponent implements OnInit {
     else if(localStorage.getItem('No_of_menu')=='T'){
      if((localStorage.getItem('No_of_menu')=='T')&&(this.v==2)){
            //Snackbar
+           this. myFunction_forerror();
+
         }
         else if((localStorage.getItem('No_of_menu')=='T')&&(this.v!=2)){
           this.tab1 = true;
@@ -345,6 +354,8 @@ export class MenuSetupComponent implements OnInit {
         if(localStorage.getItem('No_of_menu')=='O'){
           if((localStorage.getItem('No_of_menu')=='O')&&(this.v==1)){
           //Snack Bar
+          this. myFunction_forerror();
+
           }
           else if((localStorage.getItem('No_of_menu')=='O')&&(this.v!=1)){
             this.tab1 = true;
@@ -378,6 +389,8 @@ export class MenuSetupComponent implements OnInit {
          {
           if((localStorage.getItem('No_of_menu')=='T')&&(this.v==2)){
             //Snack Bar
+           this. myFunction_forerror();
+
             }
             else if((localStorage.getItem('No_of_menu')=='T')&&(this.v!=2)){
               this.tab1 = true;
@@ -443,6 +456,8 @@ export class MenuSetupComponent implements OnInit {
     if(localStorage.getItem('No_of_menu')=='O'){
           if((localStorage.getItem('No_of_menu')=='O')&&(this.v==1)){
             //Snackbar
+           this. myFunction_forerror();
+
           }
          else if((localStorage.getItem('No_of_menu')=='O')&&(this.v!=1)){
           this.tab1 = true;
@@ -476,6 +491,8 @@ export class MenuSetupComponent implements OnInit {
       else if(localStorage.getItem('No_of_menu')=='T'){
       if((localStorage.getItem('No_of_menu')=='T')&&(this.v==2)){
         //Snackbar
+        this. myFunction_forerror();
+
       }
      else if((localStorage.getItem('No_of_menu')=='T')&&(this.v!=2)){
       this.tab1 = true;
@@ -622,8 +639,8 @@ export class MenuSetupComponent implements OnInit {
       "restaurant_id":this.resid,
       "menu_id":hidevalue,
       "break_check":this.break_check,
-      "start_time":v1,
-      "end_time":v2,
+      "start_time":this.brunch_start,
+      "end_time":this.brunch_end,
       "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
     });
 
@@ -678,6 +695,8 @@ export class MenuSetupComponent implements OnInit {
       }
       else{
         //snackbar
+        this. myFunction_forerror();
+
       }
     }
     else if(localStorage.getItem('No_of_menu')=='T'){  
@@ -692,8 +711,8 @@ export class MenuSetupComponent implements OnInit {
          "restaurant_id":this.resid,
          "menu_id":hidevalue,
          "break_check":this.break_check,
-         "start_time":v1,
-         "end_time":v2,
+         "start_time":this.brunch_start,
+      "end_time":this.brunch_end,
          "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
        });
    
@@ -758,8 +777,8 @@ export class MenuSetupComponent implements OnInit {
          "restaurant_id":this.resid,
          "menu_id":hidevalue,
          "break_check":this.break_check,
-         "start_time":v1,
-         "end_time":v2,
+         "start_time":this.brunch_start,
+      "end_time":this.brunch_end,
          "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
        });
    
@@ -815,6 +834,8 @@ export class MenuSetupComponent implements OnInit {
       }
       else{
         //snackbar
+        this. myFunction_forerror();
+
       }
     }
     else {
@@ -828,8 +849,8 @@ export class MenuSetupComponent implements OnInit {
        "restaurant_id":this.resid,
        "menu_id":hidevalue,
        "break_check":this.break_check,
-       "start_time":v1,
-       "end_time":v2,
+       "start_time":this.brunch_start,
+      "end_time":this.brunch_end,
        "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
      });
  
@@ -884,7 +905,8 @@ export class MenuSetupComponent implements OnInit {
     }
  
 
-    
+    this.brunch_end=0;
+    this.brunch_start=0;
     
    
 
@@ -913,8 +935,8 @@ export class MenuSetupComponent implements OnInit {
               "restaurant_id":this.resid,
               "menu_id":v5,
               "break_check":this.brunch_check,
-              "start_time":v1,
-          "end_time":v2,
+              "start_time":this.brunch_start,
+              "end_time":this.brunch_end,
           "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
     
             });
@@ -968,6 +990,8 @@ export class MenuSetupComponent implements OnInit {
       }
       else{
         //SnackBar
+        this. myFunction_forerror();
+
       }
     }
     else if(localStorage.getItem('No_of_menu')=='T'){
@@ -980,8 +1004,8 @@ export class MenuSetupComponent implements OnInit {
                  "restaurant_id":this.resid,
                  "menu_id":v5,
                  "break_check":this.brunch_check,
-                 "start_time":v1,
-             "end_time":v2,
+                 "start_time":this.brunch_start,
+             "end_time":this.brunch_end,
              "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
        
                });
@@ -1042,8 +1066,8 @@ export class MenuSetupComponent implements OnInit {
                  "restaurant_id":this.resid,
                  "menu_id":v5,
                  "break_check":this.brunch_check,
-                 "start_time":v1,
-             "end_time":v2,
+                 "start_time":this.brunch_start,
+                 "end_time":this.brunch_end,
              "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
        
                });
@@ -1096,6 +1120,8 @@ export class MenuSetupComponent implements OnInit {
                this.sun_dinner=0;
          }
          else {
+          this. myFunction_forerror();
+
            //SnackBar
          }
     }
@@ -1108,8 +1134,8 @@ export class MenuSetupComponent implements OnInit {
              "restaurant_id":this.resid,
              "menu_id":v5,
              "break_check":this.brunch_check,
-             "start_time":v1,
-         "end_time":v2,
+             "start_time":this.brunch_start,
+             "end_time":this.brunch_end,
          "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
    
            });
@@ -1161,7 +1187,8 @@ export class MenuSetupComponent implements OnInit {
            this.sat_dinner=0;
            this.sun_dinner=0;
     }
-   
+   this.brunch_start=0;
+    this.brunch_end=0;
     // if (e == 'Tokyo') {
     //   this.t1 = 'London';
     //   this.t2 = 'Paris';
@@ -1199,8 +1226,8 @@ export class MenuSetupComponent implements OnInit {
           "restaurant_id":this.resid,
           "menu_id":v6,
           "break_check":this.launch_check,
-          "start_time":v1,
-      "end_time":v2,
+          "start_time":this.brunch_start,
+      "end_time":this.brunch_end,
       "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
 
         });
@@ -1254,20 +1281,22 @@ export class MenuSetupComponent implements OnInit {
       }
       else{
    //Snackbar
+   this. myFunction_forerror();
+
       }
     }
     else if(localStorage.getItem('No_of_menu')=='T'){
             if(this.v==0){
            this.v=1
            this.storevalue.length=0;
-    this.storevalue.push({
+           this.storevalue.push({
           "coverurl": v1,
           "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
           "restaurant_id":this.resid,
           "menu_id":v6,
           "break_check":this.launch_check,
-          "start_time":v1,
-      "end_time":v2,
+          "start_time":this.brunch_start,
+          "end_time":this.brunch_end,
       "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
 
         });
@@ -1328,8 +1357,8 @@ export class MenuSetupComponent implements OnInit {
           "restaurant_id":this.resid,
           "menu_id":v6,
           "break_check":this.launch_check,
-          "start_time":v1,
-      "end_time":v2,
+          "start_time":this.brunch_start,
+      "end_time":this.brunch_end,
       "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
 
         });
@@ -1383,6 +1412,8 @@ export class MenuSetupComponent implements OnInit {
           }
          else{
              //SnackBar
+           this. myFunction_forerror();
+
           }
     }
     else {
@@ -1394,8 +1425,8 @@ export class MenuSetupComponent implements OnInit {
       "restaurant_id":this.resid,
       "menu_id":v6,
       "break_check":this.launch_check,
-      "start_time":v1,
-  "end_time":v2,
+      "start_time":this.brunch_start,
+      "end_time":this.brunch_end,
   "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
 
     });
@@ -1448,7 +1479,8 @@ export class MenuSetupComponent implements OnInit {
     this.sun_launch=0;
     }
   
-
+    this.brunch_start=0;
+    this.brunch_end=0;
     // if (e == 'Paris') {
     //   this.storevalue.length = 0;
     //   this.storevalue.push({
@@ -1489,6 +1521,7 @@ export class MenuSetupComponent implements OnInit {
   }
   // For Submitting the data of Brunch
  opennextab3(e: any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any,v7:any) {
+   console.log(v6,v7);
     if(localStorage.getItem('No_of_menu')=='O'){
        if(this.v==0){
          this.v=1;
@@ -1499,8 +1532,8 @@ export class MenuSetupComponent implements OnInit {
           "restaurant_id":this.resid,
           "menu_id":v5,
           "break_check":this.dinner_check,
-          "start_time":v1,
-          "end_time":v2,
+          "start_time":this.brunch_start,
+          "end_time":this.brunch_end,
           "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
 
         });
@@ -1554,6 +1587,8 @@ export class MenuSetupComponent implements OnInit {
        }
        else if(this.v==1){
          //snackBar
+         this. myFunction_forerror();
+
        }
     }
     else if(localStorage.getItem('No_of_menu')=='T'){
@@ -1566,8 +1601,8 @@ export class MenuSetupComponent implements OnInit {
          "restaurant_id":this.resid,
          "menu_id":v5,
          "break_check":this.dinner_check,
-         "start_time":v1,
-         "end_time":v2,
+         "start_time":this.brunch_start,
+         "end_time":this.brunch_end,
          "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
 
        });
@@ -1628,8 +1663,8 @@ export class MenuSetupComponent implements OnInit {
          "restaurant_id":this.resid,
          "menu_id":v5,
          "break_check":this.dinner_check,
-         "start_time":v1,
-         "end_time":v2,
+         "start_time":this.brunch_start,
+         "end_time":this.brunch_start,
          "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
 
        });
@@ -1683,6 +1718,8 @@ export class MenuSetupComponent implements OnInit {
       }
       else{
         //Snackbar
+        this. myFunction_forerror();
+
       }
     }
     else {
@@ -1694,8 +1731,8 @@ export class MenuSetupComponent implements OnInit {
          "restaurant_id":this.resid,
          "menu_id":v5,
          "break_check":this.dinner_check,
-         "start_time":v1,
-         "end_time":v2,
+         "start_time":this.brunch_start,
+         "end_time":this.brunch_end,
          "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
 
        });
@@ -1748,7 +1785,8 @@ export class MenuSetupComponent implements OnInit {
        this.sun_brunch=0;
     }
 
-    
+    this.brunch_start=0;
+    this.brunch_end=0; 
    
   }
   changetopImage(event: any) {
@@ -2625,10 +2663,21 @@ else if(e ==='tuesday'){
  console.log(this.mon_brunch,this.tue_brunch,this.wed_brunch,this.thu_brunch,this.fri_brunch,this.sat_brunch,this.sun_brunch)
   }
 
-  // For  snackbar
+  // For success snackbar
   myFunction() {
     // Get the snackbar DIV
     this.x = document.getElementById("snackbar");
+  
+    // Add the "show" class to DIV
+    this.x.className = "show";
+  
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
+  } 
+   // For success snackbar
+   myFunction_forerror() {
+    // Get the snackbar DIV
+    this.x = document.getElementById("snackbar1");
   
     // Add the "show" class to DIV
     this.x.className = "show";
@@ -2691,4 +2740,57 @@ else if(e ==='tuesday'){
     }
     
   }
+  checkstart(e:any){
+   
+      this.brunch_start=e.target.value;
+  console.log(this.brunch_start);
+
+}
+  checksend(e:any){
+  
+      this.brunch_end=e.target.value;
+    
+  console.log(  this.brunch_end);
+
+  }
+  checkbreakend(e:any,v:any){
+    if(v=='start'){
+      this.brunch_start=e.target.value;
+    }
+    else if(v=='end'){
+      this.brunch_end=e.target.value;
+      
+    }
+
+    console.log(this.brunch_end,this.brunch_start)
+  }
+    
+  checkblaunch(e:any,v:any){
+
+    if(v=='start'){
+      this.brunch_start=e.target.value;
+    }
+    else if(v=='end'){
+      this.brunch_end=e.target.value;
+      
+    }
+
+    console.log(this.brunch_end,this.brunch_start)
+  }
+  checkdinnertime(e:any,v:any){
+    
+
+     
+    if(v=='start'){
+      this.brunch_start=e.target.value;
+    }
+    else if(v=='end'){
+      this.brunch_end=e.target.value;
+      
+    }
+
+    console.log(this.brunch_end,this.brunch_start)
+  }
+    
+  
 }

@@ -13,6 +13,10 @@ export class OrderPageComponent implements OnInit {
   e_calendar:any;
   a_calendar:any;
   s_calendar:any;
+  value1:any=0;
+  value2:any=0;
+  value3:any=0;
+
   w:any;
   w2:any;
   t:any;
@@ -153,6 +157,7 @@ export class OrderPageComponent implements OnInit {
     })
   }
   enable_birthday(){
+    this.value1=1;
     this.enable_birthday_tab=false
     this.mode1='birthday';
     this.birthday_mode=document.getElementById('defaultOpen1');
@@ -170,6 +175,7 @@ export class OrderPageComponent implements OnInit {
   }
   enable_event(v:any){
     this.enable_event_tab=false;
+    this.value1=1;
     if(v==true)
     this.op1='Y';
     else
@@ -190,6 +196,8 @@ export class OrderPageComponent implements OnInit {
     this.package_mode.style.color='black'
   }
   enable_package_next(v:any){
+    this.value2=2;
+
     if(v==1)
     {
       this.standard=true;
@@ -213,6 +221,8 @@ export class OrderPageComponent implements OnInit {
     // alert(this.enable_next);
   }
   submit_text_data(v1:any,v2:any,v3:any,v4:any){
+    this.value1=1;
+
     this.tbl=v1;
     this.wall=v2;
     this.wall2=v3;
@@ -241,6 +251,7 @@ export class OrderPageComponent implements OnInit {
       error=>{this.myFunction()})
   }
   enable_wall(v:any){
+    this.value3=3;
     if(v==true)
    this.op2='Y';
    else
@@ -262,8 +273,13 @@ export class OrderPageComponent implements OnInit {
    this.package_mode.style.color='black'
   }
   openCity(v1:any){
-    if(v1=='birthday'){
-      if(this.enable_birthday_tab==false)
+    
+
+   if(v1=='birthday'){
+    if(this.value1==1 && this.enable_birthday_tab==false)
+    {
+      
+     
       this.mode1=v1
       this.birthday_mode=document.getElementById('defaultOpen1');
       this.birthday_mode.style.background="#00477E";
@@ -277,10 +293,15 @@ export class OrderPageComponent implements OnInit {
       this.package_mode=document.getElementById('defaultOpen');
       this.package_mode.style.background='white';
       this.package_mode.style.color='black'
+    } 
+    else {
+
+    }
     }
     else if(v1=='entertainment')
     {
-      if(this.enable_event_tab==false)
+      if(this.value1=='1' &&this.enable_event_tab==false){
+     
        this.mode1=v1
        this.birthday_mode=document.getElementById('defaultOpen1');
        this.birthday_mode.style.background="white";
@@ -293,10 +314,16 @@ export class OrderPageComponent implements OnInit {
        this.wall_mode.style.color='black'
        this.package_mode=document.getElementById('defaultOpen');
        this.package_mode.style.background='white';
-       this.package_mode.style.color='black'
+       this.package_mode.style.color='black'}
+       else {
+
+       }
     }
     else if(v1=='packages')
     {
+      if(this.value2=='2'){
+
+     
       this.birthday_mode=document.getElementById('defaultOpen1');
       this.birthday_mode.style.background="white";
       this.birthday_mode.style.color='black'
@@ -309,10 +336,17 @@ export class OrderPageComponent implements OnInit {
       this.package_mode=document.getElementById('defaultOpen');
       this.package_mode.style.background='#00477E';
       this.package_mode.style.color='white'
-       this.mode1=v1
+       this.mode1=v1 ;
+      }
+       else {
+
+       }
     }
     else if(v1=='wallSignHolder')
     {
+      if(this.value3==3){
+
+     
       if(this.enable_wall_tab==false)
        this.mode1=v1
        this.birthday_mode=document.getElementById('defaultOpen1');
@@ -327,7 +361,7 @@ export class OrderPageComponent implements OnInit {
        this.package_mode=document.getElementById('defaultOpen');
        this.package_mode.style.background='white';
        this.package_mode.style.color='black'
-       
+      }
     }
     
    

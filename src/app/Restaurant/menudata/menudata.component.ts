@@ -8,8 +8,13 @@ import { DataserviceService } from '../service/dataservice.service';
   styleUrls: ['./menudata.component.css']
 })
 export class MenudataComponent implements OnInit {
+  role:any=0;
+  val:any='';
+  maxChars=150;
+  disabld:boolean=false;
   tab1:boolean=false;
   tab2:boolean=true;
+  counter:any=0;
   aboutus:any;
   value_menu:boolean=true;
   value_position:boolean=true;
@@ -17,6 +22,7 @@ export class MenudataComponent implements OnInit {
   value_font=true;
   value_background=true;
  value_text=true;
+ color_font=true;
   
   valid_aboutus:any;
   disabled_about:boolean=true;;
@@ -173,10 +179,14 @@ changecolor(event:any,e:any){
 checknotice(event:any){
   if(event.target.checked){
     this.notice_flag='Y';
+    this.color_font=false;
+ 
   }
   else
   {
+  
     this.notice_flag='N';
+    this.color_font=true;
   }
 
 }
@@ -191,18 +201,29 @@ myFunction() {
   setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
 } 
 prevent_null(event:any){
-  console.log(event)
-  if(event.target.id=='about'){
 
+  console.log(event.target.value);
+  this.role=event.target.value.length;
+  // console.log(event);
+
+    if(event.target.id=='about'){
+       
  
-  if(event.target.value == ''){
-    console.log("adsasda1")
-    this.disabled_about=true;
-  }
-  else{
-    console.log("adsasda")
-    this.disabled_about=false;
-  }
+      if(event.target.value == ''){
+        console.log("adsasda1")
+        this.disabled_about=true;
+      }
+      
+      else{
+        console.log("adsasda")
+        this.disabled_about=false;
+      }
+ 
+ 
+}
+else {
+     this.disabld=true;
+      
 }
 }
 checkvalidity(event:any){

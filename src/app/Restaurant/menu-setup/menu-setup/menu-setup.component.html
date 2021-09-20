@@ -184,12 +184,12 @@
                                    <div class="col-5">
                                     <form class="form-inline" action="">
                                         <label for="selfcling">Start Time:</label>
-                                        <input type="text"
-                                        (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"
+                                        <input type="time"
+                                         (change)="checkbreakend($event,'start')"
                                         id="start" name="selfcling" value="" size="4" #start_break><br><br>
                                         <label for="selfcling">End Time:</label>
-                                        <input type="text" 
-                                        (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"
+                                        <input type="time" 
+                                         (change)="checkbreakend($event,'end')"
                                         id="end" name="selfcling" value="" size="4" #end_break>
                                     </form>
                                    </div>
@@ -404,9 +404,14 @@
                                    <div class="col-5">
                                     <form class="form-inline" action="">
                                         <label for="selfcling">Start Time:</label>
-                                        <input type="text" id="start_launch" name="selfcling" value="" size="4" #start_break><br><br>
+                                        
+                                         <input type="time"
+                                         (change)="checkblaunch($event,'start')"
+                                          id="start_launch"  name="selfcling" value="" size="4" #start_break><br><br>
                                         <label for="selfcling">End Time:</label>
-                                        <input type="text" id="end_launch" name="selfcling" value="" size="4" #end_break>
+                                        <input type="time"
+                                        (change)="checkblaunch($event,'end')"
+                                        id="end_launch" name="selfcling" value="" size="4" #end_break>
                                     </form>
                                    </div>
                                    <div class="col-2"></div>
@@ -429,7 +434,7 @@
 
 
 
-                        <button class="w3-button w3-green" type="submit" (click)="goprev('paris')">Previous</button> 
+                        <!-- <button class="w3-button w3-green" type="submit" (click)="goprev('paris')">Previous</button>  -->
                         <button
                             class="w3-button w3-green m-1" type="submit"  
                             
@@ -501,10 +506,10 @@
                             <label class="titleCustom"><strong>MENU:</strong></label>
                             Upload a PDF file of your Dinner menu.<br>
                             Please be sure to include your Kids, Desert and Beverage menus, if you have one.<br>
-                            <input type="checkbox" id="menuImg" name="menuImg" value="menuImg">
+                            <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                             <label for="menuImg"> <strong>File (you can add multiple files)</strong></label><br>
                             <input type="file" id="myfile" name="myfile" multiple (change)="changebrunchmenubreak1($event)"><br><br>
-                            <input type="checkbox" id="menuImg" name="menuImg" value="menuImg">
+                            <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                             <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
                             </form>Or, please provide a web site address/url where we can collect your menu content:
                             <form>
@@ -631,9 +636,14 @@
                                <div class="col-5">
                                 <form class="form-inline" action="">
                                     <label for="selfcling">Start Time:</label>
-                                    <input type="text" id="start_brunch" name="selfcling" value="" size="4" #start_break><br><br>
+                                    <input type="time" 
+                                     (change)="checkdinnertime($event,'start')"
+                                    id="start_brunch" name="selfcling" value="" size="4" #start_break><br><br>
                                     <label for="selfcling">End Time:</label>
-                                    <input type="text" id="end_brunch" name="selfcling" value="" size="4" #end_break>
+                                    <input type="time"
+                                    (change)="checkdinnertime($event,'end')"
+                                    
+                                    id="end_brunch" name="selfcling" value="" size="4" #end_break>
                                 </form>
                                </div>
                                <div class="col-2"></div>
@@ -645,7 +655,8 @@
                         </div> 
 
 
-                        <button class="w3-button w3-green" type="submit" (click)="goprev('tokyo')">Previous</button> <button
+                        <!-- <button class="w3-button w3-green" type="submit" (click)="goprev('tokyo')">Previous</button> -->
+                            <button 
                             class="w3-button w3-green m-1" type="submit"
                             (click)="opennextab2('Tokyo',SECTIONURBRUNCH.value,MENUURLBRUNCH.value,topurl.value,coverbrunchurl.value,brunch.value,start_break.value,end_break.value)">Save & Continue</button>
                     </div>
@@ -718,10 +729,10 @@
                             <label class="titleCustom"><strong>MENU:</strong></label><br>
                             Upload a PDF file of your Brunch menu
                             Please be sure to include your Kids, Desert and Beverage menus, if you have one.<br>
-                            <input type="checkbox" id="menuImg" name="menuImg" value="menuImg">
+                            <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                             <label for="menuImg"> <strong>File (you can add multiple files)</strong></label><br>
                             <input type="file" id="myfile" name="myfile" multiple (change)="changedinnermenuimage($event)"><br><br>
-                            <input type="checkbox" id="menuImg" name="menuImg" value="menuImg">
+                            <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                             <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
                             </form>Or, please provide a web site address/url where we can collect your menu content:
                             <form>
@@ -848,9 +859,9 @@
                                <div class="col-5">
                                 <form class="form-inline" action="">
                                     <label for="selfcling">Start Time:</label>
-                                    <input type="text" id="start_dinner" name="selfcling" value="" size="4" #start_break><br><br>
+                                    <input type="time" id="start_dinner" name="selfcling" value="" size="4" #start_break (change)="checkstart($event)"><br><br>
                                     <label for="selfcling">End Time:</label>
-                                    <input type="text" id="end_dinner" name="selfcling" value="" size="4" #end_break>
+                                    <input type="time" id="end_dinner" name="selfcling" value="" size="4" #end_break (change)="checksend($event)">
                                 </form>
                                </div>
                                <div class="col-2"></div>
@@ -861,7 +872,8 @@
 
                         </div> 
                      
-                        <button class="w3-button w3-green" type="submit" (click)="goprev('laguna')">Previous</button> <button
+                        <!-- <button class="w3-button w3-green" type="submit" (click)="goprev('laguna')">Previous</button>  -->
+                        <button
                             class="w3-button w3-green m-1" type="submit" (click)="opennextab3('laguna',dinnermenuurl.value,dinnertopurl.value,dinnercoverurl.value,SECTIONURlDINNER.value,dinner.value,start_break.value,end_break.value)">Save & Continue</button>
                     </div>
 
@@ -1134,3 +1146,5 @@
 
 </div>
 <div id="snackbar">Successfully Inserted...</div>
+<div id="snackbar1">{{error_msg}}</div>
+

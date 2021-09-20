@@ -1,6 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -38,7 +39,8 @@ import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
 import { SectionimagesComponent } from './Restaurant/sectionimages/sectionimages.component';
 import { DisplaydaytimeComponent } from './Restaurant/displaydaytime/displaydaytime.component';
 import { MenudataComponent } from './Restaurant/menudata/menudata.component';
-
+import { ToastrModule } from 'ng6-toastr-notifications';
+import { RestaurantSetupComponent } from './Laguna_Admin/restaurant-setup/restaurant-setup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +72,8 @@ import { MenudataComponent } from './Restaurant/menudata/menudata.component';
     LogosetupComponent,
     SectionimagesComponent,
     DisplaydaytimeComponent,
-    MenudataComponent
+    MenudataComponent,
+    RestaurantSetupComponent
   ],
 
 
@@ -81,7 +84,8 @@ import { MenudataComponent } from './Restaurant/menudata/menudata.component';
     AppRoutingModule,
 
     FormsModule,
-
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule
   ],

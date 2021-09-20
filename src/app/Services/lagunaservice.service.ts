@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { global_url_test } from '../global_url';
+import { url_set } from '../globalvar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LagunaserviceService {
+  url_reg = url_set.api_url;
   Url=global_url_test.URL+'package';
   _Url=global_url_test.URL+'promo';
   __url=global_url_test.URL+'holder_cling';
@@ -35,5 +37,55 @@ PostWIndowCling(dt:any){//For windowcling Api Post in Admin Order setup Page
 }
 GetWindowCling(){//For windowcling Api get in Admin Order setup Page
   return this.http.get(this.holder_Url);
+}
+get_menu_urls(id:any){//api to retireve urls for cover and top urls
+  return this.http.get(url_set.api_url+'/menu_setup?id='+id)
+}
+//api to retrieve section urls
+get_sec_url(menu_id:any,res_id:any){
+  return this.http.get(url_set.api_url+'/section_image?id='+res_id + '&menu_id=' + menu_id)
+}
+//api to retrieve date and time value
+get_set_time(menu_id:any,res_id:any){
+  return this.http.get(url_set.api_url+'/date_time?id='+res_id + '&menu_id=' + menu_id)
+
+}
+//api to retrieve about us
+get_about_us(res_id:any){
+  return this.http.get(url_set.api_url+'/aboutus?id='+res_id)
+}
+post_about_us(about_txt:any,res_id:any){
+  var dt={
+    restaurant_id:res_id,
+    aboutus:about_txt
+  }
+
+ return this.http.post(url_set.api_url+'/aboutus',dt);
+}
+post_date_time(dt:any){
+  return this.http.post(url_set.api_url+'/date_time',dt);
+}
+post_section_create(dt:any){
+  return this.http.post(url_set.api_url+'/section',dt);
+}
+get_section_data(res_id:any,menu_id:any){
+  
+  return this.http.get(url_set.api_url+'/section?id='+res_id + '&menu_id=' + menu_id)
+}
+post_item_data(dt:any){
+  return this.http.post(url_set.api_url+"/items",dt)
+}
+get_item_data(res_id:any,menu_id:any,section_id:any){
+  return this.http.get(url_set.api_url+'/items?id='+res_id + '&menu_id=' + menu_id+'&sec_id='+section_id)
+  
+}
+post_item_data_desc(dt:any){
+  return this.http.post(url_set.api_url+"/item_price",dt)
+}
+get_special(v:any){
+  return this.http.get(url_set.api_url+'/notice?id='+v);
+}
+post_special(dt:any){
+  return this.http.post(url_set.api_url+'/notice',dt);
 }
 }

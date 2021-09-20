@@ -46,11 +46,11 @@
                             <form>
                                 <div class="rowCustomFour">
                                     <div class="fieldSecFull">
-                                        <label for="spclMore">Write Bio here (max 150 words):</label>
-                                        <textarea (keypress)="prevent_null($event)"  (keyup)="prevent_null($event)"  (change)="prevent_null($event)"
-                                        id="about" name="abouteee" class="aboutTextarea" rows="5" cols="50"
-                                            #bio>
-          </textarea>
+                                        <label for="spclMore">Write Bio here <strong>({{this.role}}/150):</strong></label>
+                                        <textarea 
+                                        [(ngModel)]="this.val"
+                                        [maxlength]="maxChars" (input)="prevent_null($event)"  (keyup)="prevent_null($event)" (change)="prevent_null($event)" id="about" name="abouteee" class="aboutTextarea" rows="5" cols="50" #bio></textarea>
+                                       
                                     </div>
                                 </div>
                             </form>
@@ -94,7 +94,7 @@
                                 <div class="rowCustomFour">
                                     <div class="fieldSecHalf">
                                         <label>Menu</label>
-                                        <select id="pickup_place" name="pickup_place" id="menuselect" class="formCss" #Menu
+                                        <select id="pickup_place" [disabled]="color_font" name="pickup_place" id="menuselect" class="formCss" #Menu
                                             (change)="pickup_place(Menu.value)">
                                             <option value="" selected="selected">Select One</option>
                                             <option value="0">ALL Menus</option>
@@ -109,7 +109,7 @@
 
                                     <div class="fieldSecHalf">
                                         <label>Position</label>
-                                        <select id="pos" name="pos1" class="formCss" #position
+                                        <select id="pos" [disabled]="color_font" name="pos1" class="formCss" #position
                                             (change)="getposition(position.value)">
                                             <option value="" selected="selected">Select One</option>
                                             <option value="1">Top under Header Image</option>
@@ -127,7 +127,7 @@
                                 <div class="rowCustomFour">
                                     <div class="fieldSecFull">
                                         <label for="headTitle">Header Title:</label>
-                                        <input type="text" (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"  id="headTitle" name="headTitle1" value="" class="formCss"
+                                        <input type="text" [disabled]="color_font" (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"  id="headTitle" name="headTitle1" value="" class="formCss"
                                             #title>
                                     </div>
                                 </div>
@@ -136,13 +136,13 @@
                                 <div class="rowCustomFour">
                                     <div class="fieldSecHalf">
                                         <label for="favcolor">Select your font color:</label>
-                                        <input type="color" id="colorPicker" class="colorPickerCustom" name="favcolor"
+                                        <input type="color" [disabled]="color_font" id="colorPicker" class="colorPickerCustom" name="favcolor"
                                             value="#ff0000" #code1 (change)="changecolor($event,'back')">
                                     </div>
 
                                     <div class="fieldSecHalf">
                                         <label for="code">Enter Code:</label>
-                                        <input type="text" id="box" name="code1" class="formCss" #code2  (change)="checkvalidity($event)">
+                                        <input type="text" [disabled]="color_font" id="box" name="code1" class="formCss" #code2  (change)="checkvalidity($event)">
                                     </div>
                                 </div>
 
@@ -151,12 +151,12 @@
                                 <div class="rowCustomFour">
                                     <div class="fieldSecHalf">
                                         <label for="favcolor">Select your background color:</label>
-                                        <input type="color" id="colorPicker2" class="colorPickerCustom" value="#6a5acd"
+                                        <input type="color" [disabled]="color_font" id="colorPicker2" class="colorPickerCustom" value="#6a5acd"
                                             #code3 (change)="changecolor($event,'font')">
                                     </div>
                                     <div class="fieldSecHalf">
                                         <label for="code">Enter Code:</label>
-                                        <input type="text" id="box2" name="code" value="" class="formCss" #code4  (change)="checkvalidity($event)">
+                                        <input type="text" [disabled]="color_font" id="box2" name="code" value="" class="formCss" #code4  (change)="checkvalidity($event)">
                                     </div>
                                 </div>
                             </form>
@@ -166,7 +166,7 @@
                                         <label for="vehicle2"> Notice Content</label>
                                         <textarea id="spclMore" name="spclMore1" rows="5" cols="60"
                                             class="formCssTextArea" #notice
-                                            (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"></textarea>
+                                            (keyup)="checkvalidity($event)" [disabled]="color_font" (change)="checkvalidity($event)"></textarea>
                                     </div>
                                 </div>
                             </form>

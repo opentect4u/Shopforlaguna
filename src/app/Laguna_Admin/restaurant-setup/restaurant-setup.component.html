@@ -1,0 +1,956 @@
+<div class="w3-white">
+
+    <!-- Top container -->
+    <div class="w3-bar w3-top w3-indigo w3-large" style="z-index:4">
+        <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
+            onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+        <span class="w3-bar-item w3-right">SLL PLATFORM</span>
+    </div>
+
+    <!-- <?php echo file_get_contents("navigation-admin.html"); ?> -->
+<app-Header></app-Header>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+        title="close side menu" id="myOverlay">
+    </div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+        <!-- Header -->
+        <header class="w3-container" style="padding-top:22px">
+            <h5><b><i class="fa fa-wpforms"></i> Restaurant Account</b></h5>
+        </header>
+        <div class="w3-container w3-white w3-padding-32">
+            <div class="w3-container adminResturentTab">
+
+                <div class="tab">
+                    <button class="tablinks" (click)="openCity('tab1')" id="defaultOpen">Restaurant</button>
+                    <button class="tablinks" (click)="openCity('tab2')" id="defaultOpen1">Download & Upload Image</button>
+                    <button class="tablinks" (click)="openCity('tab3')" id="defaultOpen2">Download Section Image</button>
+                    <button class="tablinks" (click)="openCity('tab33')" id="defaultOpen33">Set Date & Time</button>
+                    <button class="tablinks" (click)="openCity('tab4')" id="defaultOpen4">Create Section</button>
+                    <button class="tablinks" (click)="openCity('tab5')" id="defaultOpen5">Add Items</button>
+
+
+                    <button class="tablinks" (click)="openCity('tab6')" id="defaultOpen6">Description & Price</button>
+                    <button class="tablinks" (click)="openCity('tab7')" id="defaultOpen7">Special Notes</button>
+                    <button class="tablinks" (click)="openCity('tab8')" id="defaultOpen8">About Us</button>
+
+                    <button class="tablinks" (click)="openCity('tab9')" id="defaultOpen9">Live Menus</button>
+                    <button class="tablinks" (click)="openCity('tab10')" id="defaultOpen10">QR Codes</button>
+                </div>
+
+                <div id="tab1" [hidden]="show_tab!='tab1'" class="tabcontent"><br><br>
+                    <div style="overflow-x:auto;">
+                        <table width="100%" cellspacing="15">
+                            <tr>
+                                <th scope="col">RESTAURANT NAME</th>
+                                <th scope="col">CONTACT NAME</th>
+                                <th scope="col">ADDRESS</th>
+                                <th scope="col">PHONE</th>
+                                <th scope="col">EMAIL</th>
+                                <th scope="col">WEBSITE</th>
+                            </tr>
+                            <tr bgcolor="#fff" align="center">
+                                <td bgcolor="#f1f1f1">
+                                    <script>
+                                        function msg() {
+                                            alert("Click on File Record to view details");
+                                        }
+                                    </script>The Cliff Restaurant
+                                </td>
+                                <td>John Doe</td>
+                                <td>Laguna Beach 92651 CA</td>
+                                <td>(949) 123 4567</td>
+                                <td>info@thecliffrestaurant.com</td>
+                                <td>https://www.thecliffrestaurant.com/</td>
+                            </tr>
+                        </table> <br>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table width="100%" cellspacing="15">
+                            <tr>
+                                <th scope="col">LIVE DATE</th>
+                                <th scope="col">SETUP FEE</th>
+                                <th scope="col">MONTHLY FEE</th>
+                                <th scope="col">LAST PAID</th>
+                                <th scope="col">CANCEL DATE</th>
+                            </tr>
+                            <tr bgcolor="#fff" align="center">
+                                <td bgcolor="#f1f1f1">07/30/2021</td>
+                                <td>275.00</td>
+                                <td>45.00</td>
+                                <td>08/30/2021</td>
+                                <td>00/00/0000</td>
+                            </tr>
+                        </table> <br>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <strong>REPORTS</strong><br><br>
+                        <table width="100%" cellspacing="10">
+                            <tr>
+                                <th scope="col">Report Title</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                            <tr bgcolor="#fff" align="center">
+                                <td>Menu Scans</td>
+                                <td bgcolor="#f1f1f1"><a href="">
+                                        <form>
+                                            <input type="button" value="EXCEL" onclick="msg()">
+                                        </form>
+
+                                        <script>
+                                            function msg() {
+                                                alert("Displays EXCEL Report");
+                                            }
+                                        </script>
+                                    </a></td>
+                                <td bgcolor="#f1f1f1"><a href="">
+                                        <form>
+                                            <input type="button" value="PDF" onclick="msg()">
+                                        </form>
+
+                                        <script>
+                                            function msg() {
+                                                alert("Displays PDF Report");
+                                            }
+                                        </script>
+                                    </a></td>
+                                <td bgcolor="#f1f1f1"><a href="">
+                                        <form>
+                                            <input type="button" value="PRINT" onclick="msg()">
+                                        </form>
+
+                                        <script>
+                                            function msg() {
+                                                alert("Displays PRINT Report");
+                                            }
+                                        </script>
+                                    </a></td>
+                            </tr>
+                            <tr bgcolor="#fff" align="center">
+                                <td>Promotion - Registrations </td>
+                                <td bgcolor="#f1f1f1">
+                                    <form>
+                                        <input type="button" value="EXCEL" onclick="msg()">
+                                    </form>
+
+                                    <script>
+                                        function msg() {
+                                            alert("Displays EXCEL Report");
+                                        }
+                                    </script>
+                                </td>
+                                <td bgcolor="#f1f1f1"><a href="">
+                                        <form>
+                                            <input type="button" value="PDF" onclick="msg()">
+                                        </form>
+
+                                        <script>
+                                            function msg() {
+                                                alert("Displays PDF Report");
+                                            }
+                                        </script>
+                                    </a></td>
+                                <td bgcolor="#f1f1f1"><a href="">
+                                        <form>
+                                            <input type="button" value="PRINT" onclick="msg()">
+                                        </form>
+
+                                        <script>
+                                            function msg() {
+                                                alert("Displays PRINT Report");
+                                            }
+                                        </script>
+                                    </a></td>
+                            </tr>
+                            <tr bgcolor="#fff" align="center">
+                                <td>Promotion - Emailed Offers</td>
+                                <td bgcolor="#f1f1f1">
+                                    <form>
+                                        <input type="button" value="EXCEL" onclick="msg()">
+                                    </form>
+
+                                    <script>
+                                        function msg() {
+                                            alert("Displays EXCEL Report");
+                                        }
+                                    </script>
+                                </td>
+                                <td bgcolor="#f1f1f1"><a href="">
+                                        <form>
+                                            <input type="button" value="PDF" onclick="msg()">
+                                        </form>
+
+                                        <script>
+                                            function msg() {
+                                                alert("Displays PDF Report");
+                                            }
+                                        </script>
+                                    </a></td>
+                                <td bgcolor="#f1f1f1"><a href="">
+                                        <form>
+                                            <input type="button" value="PRINT" onclick="msg()">
+                                        </form>
+
+                                        <script>
+                                            function msg() {
+                                                alert("Displays PRINT Report");
+                                            }
+                                        </script>
+                                    </a></td>
+                            </tr>
+                        </table><br><br>
+                    </div>
+                </div>
+
+                <div id="tab2" [hidden]="show_tab!='tab2'" class="tabcontent">
+
+                    <label class="titleCustom"><i class="fa fa-arrow-right"></i> Logo</label>
+                    <div class="table-responsive table_responsiveCus">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <!-- <th scope="col">#</th>
+                                    <th scope="col">Logo URL</th> -->
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col">Download </th>
+                                    <th scope="col">Upload Logo <br><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label></th>
+                                    <!-- <th scope="col">Action</th> -->
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td> 
+                                        <a href="{{logo_img}}" target="_blank"> {{logo_img}}</a>
+                                        <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
+                                            class="formCss"> -->
+                                        </td>
+
+                                    <td><a><i class="fa fa-picture-o prvImg" aria-hidden="true"></i></a>
+                                    </td>
+                                    <td>
+                                        <!-- <label class="uploadTxt">Upload Section images JPG or PNG:</label> -->
+                                    <!-- <td><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label> -->
+
+
+                                        <input type="file" id="myfile" class="uploadField" name="myfile" multiple="">
+                                    </td>
+                                    <td class="divFlex"><a href="#" class="edite">
+                                        <!-- <i class="fa fa-pencil-square"
+                                                aria-hidden="true"></i> -->
+                                            </a> <a class="update">Update</a></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <hr>
+                    <label class="titleCustom"><i class="fa fa-arrow-right"></i> Cover Image</label>
+                    <div class="table-responsive table_responsiveCus">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <!-- <th scope="col">#</th> 
+                                     <th scope="col">Restaurant - Time</th> -->
+                                     <th scope="col"></th> 
+                                     <th scope="col"></th>
+                                     <th scope="col"></th>
+                                    <!-- <th scope="col">Download Link</th> -->
+                                    <th scope="col">Download </th>
+                                    <th scope="col"> Upload Image <br><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label></th>
+                                    <!-- <th scope="col">Action</th> -->
+                                    <th scope="col"></th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let menu of menuData; let i=index">
+                                    <th scope="row">{{i+1}}</th>
+                                    <td><strong>{{menu.menu_name}}</strong></td>
+                                    <td>
+                                         <a href="{{menu.cover_page_url}}" target="_blank">{{menu.cover_page_url}}</a>
+                                        <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
+                                            class="formCss"> -->
+
+                                    </td>
+                                    <td><a><i class="fa fa-picture-o prvImg" aria-hidden="true"></i></a>
+                                    </td>
+                                   <td>
+                                       <!-- <label class="uploadTxt">Upload Section images JPG or PNG:</label> -->
+                                    <!-- <td><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label> -->
+                                        <input type="file" id="myfile" class="uploadField" name="myfile" multiple="">
+                                    </td>
+                                    <td class="divFlex"><a href="#" class="edite">
+                                        <!-- <i class="fa fa-pencil-square"
+                                                aria-hidden="true"></i> -->
+                                            </a> <a class="update">Update</a></td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <hr>
+
+                    <label class="titleCustom"><i class="fa fa-arrow-right"></i> Top Image</label>
+                    <div class="table-responsive table_responsiveCus">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <!-- <th scope="col">#</th>
+                                    <th scope="col">Restaurant - Time</th> -->
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+
+                                    <!-- <th scope="col">Download Link</th> -->
+                                    <th scope="col">Download </th>
+                                    <th scope="col"> Upload Image <br><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label></th>
+                                    <!-- <th scope="col">Action</th> -->
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let menu of menuData; let i=index">
+                                    <th scope="row">{{i+1}}</th>
+                                    <td><strong>{{menu.menu_name}}</strong></td>
+                                    <td>
+                                        <a href="{{menu.top_img_url}}" target="_blank">{{menu.top_img_url}}</a>
+                                        <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
+                                            class="formCss"> -->
+
+                                    </td>
+                                    <td><a><i class="fa fa-picture-o prvImg" aria-hidden="true"></i></a>
+                                    </td>
+                                    <td>
+                                        <!-- <label class="uploadTxt">Upload Section images JPG or PNG:</label> -->
+                                        <!-- <td><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label> -->
+                                        <input type="file" id="myfile" class="uploadField" name="myfile" multiple="">
+                                    </td>
+                                    <td class="divFlex"><a href="#" class="edite">
+                                        <!-- <i class="fa fa-pencil-square"
+                                                aria-hidden="true"></i> -->
+                                            </a> <a class="update">Update</a></td>
+                                </tr>
+                             
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+                </div>
+
+                <div id="tab3" [hidden]="show_tab!='tab3'" class="tabcontent">
+
+                    <div class="radioBtnSec"><label class="radioButtonName"><input type="radio" id="bkmenu1"
+                                name="bkmenu" value="Breakfast Menu" (click)="get_sec_img(1)" > Breakfast Menu</label>
+                        <label class="radioButtonName"><input type="radio" (click)="get_sec_img(2)" id="bkmenu" name="bkmenu"
+                                value="Lunch  Menu" > Lunch Menu</label>
+                        <label class="radioButtonName" ><input type="radio" (click)="get_sec_img(3)" id="bkmenu" name="bkmenu" value="bkMenu4">
+                            Dinner Menu</label>
+                        <label class="radioButtonName" ><input type="radio"  (click)="get_sec_img(4)" id="bkmenu" name="bkmenu" value="bkMenu48">
+                            Brunch Menu</label>
+                        <label class="radioButtonName"
+                        ><input type="radio" (click)="get_sec_img(5)" id="bkmenu" name="bkmenu" value="bkMenu43">
+                            Specials Menu</label>
+                    </div>
+                    <div class="table-responsive table_responsiveCus">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Sl. No.</th>
+                                    <th scope="col">URL</th>
+                                    <th scope="col">Download Images </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let sec of secData; let i=index">
+                                    <th scope="row">{{i+1}}</th>
+                                    <td><a href="{{sec.sec_url}}">{{sec.sec_url}}</a>
+                                        <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
+                                            class="formCss"> -->
+                                        </td>
+
+                                    <td><a href="#"><i class="fa fa-picture-o prvImg" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                              
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+                </div>
+                <div id="tab33" [hidden]="show_tab!='tab33'" class="tabcontent">
+                    <div class="dateTime">
+
+
+                        <div class="formTable">
+
+
+                            <form class="form-inline" action="">
+                                <div class="rowCustomFour">
+                                    <div class="fieldSecHalf">
+                                        <label>Menu</label>
+                                        <select id="pickup_place" #menu_select name="pickup_place" (change)="menu_set_date_time(menu_select.value)" class="formCss">
+                                            <option value="" selected="selected">Select One</option>
+                                            <option value="6">ALL Menus</option>
+                                            <option value="1">Breakfast</option>
+                                            <option value="2">Lunch</option>
+                                            <option value="3">Dinner</option>
+                                            <option value="4">Brunch</option>
+                                            <option value="5">Specials</option>
+                                        </select>
+
+                                    </div>
+
+
+
+                                </div>
+                            </form>
+
+
+
+                        </div>
+
+                        <div class="dateTimLeft">
+                            <div class="form-inline dateTimRow">
+                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (change)="checkbrucnhday($event,'everyday')">
+                                <label for="vehicle1"> Every Day</label><br>
+                            </div>
+
+                            <div class="form-inline dateTimRow">
+                                <input type="checkbox" id="1" name="vehicle2" #mon value="1" (change)="checkbrucnhday($event,'monday')">
+                                <label for="vehicle2"> Monday</label><br>
+                                <input type="checkbox" id="2" name="vehicle3" #tue value="2" (change)="checkbrucnhday($event,'tuesday')">
+                                <label for="vehicle3"> Tuesday</label><br>
+                                <input type="checkbox" id="3" name="vehicle1" #wed value="3" (change)="checkbrucnhday($event,'wednesday')">
+                                <label for="vehicle1"> Wednesday</label><br>
+                            </div>
+                            <div class="form-inline dateTimRow">
+                                <input type="checkbox" id="4" name="vehicle2" #thur value="4" (change)="checkbrucnhday($event,'thursday')">
+                                <label for="vehicle2"> Thursday</label><br>
+                                <input type="checkbox" id="5" name="vehicle3" #fri value="5" (change)="checkbrucnhday($event,'friday')">
+                                <label for="vehicle3"> Friday</label><br>
+                                <input type="checkbox" id="6" name="vehicle1" #sat value="6" (change)="checkbrucnhday($event,'saturday')">
+                                <label for="vehicle1"> Saturday</label><br>
+                                <input type="checkbox" id="7" name="vehicle2" #sun value="7" (change)="checkbrucnhday($event,'sunday')">
+                                <label for="vehicle2"> Sunday</label><br>
+                            </div>
+                        </div>
+                        <div class="dateTimRight">
+                            <div class="form-inline timRow">
+                                <label for="selfcling">Start Time:</label>
+                                <input type="time" id="selfcling" #strt name="selfcling" value="{{starttime}}" size="4">
+                                <label for="selfcling">End Time:</label>
+                                <input type="time" id="selfcling" #end name="selfcling" value="{{endtime}}" size="4">
+                            </div>
+                        </div>
+                        <br clear="all">
+
+                        <form target="_self">
+                            <button class="w3-button w3-green" (click)="submitup(mon.checked,tue.checked,wed.checked,thur.checked,fri.checked,sat.checked,sun.checked,strt.value,end.value)" type="submit">Submit </button>
+                        </form>
+
+
+                    </div>
+                </div>
+
+                <div id="tab4" [hidden]="show_tab!='tab4'" class="tabcontent">
+
+
+                    <div class="radioBtnSec"><label class="radioButtonName"><input type="radio" id="bkmenu"
+                                name="bkmenu" (click)="store_menu(1);section_value.value=''" value="1"> Breakfast Menu</label>
+                        <label class="radioButtonName"><input type="radio" (click)="store_menu(2);section_value.value=''" id="bkmenu" name="bkmenu"
+                                value="2"> Lunch Menu</label>
+                        <label class="radioButtonName"><input type="radio" (click)="store_menu(3);section_value.value=''" id="bkmenu" name="bkmenu" value="3">
+                            Dinner Menu</label>
+                        <label class="radioButtonName"><input type="radio" (click)="store_menu(4);section_value.value=''" id="bkmenu" name="bkmenu" value="4">
+                            Brunch Menu</label>
+                        <label class="radioButtonName"><input type="radio" (click)="store_menu(5);section_value.value=''" id="bkmenu" name="bkmenu" value="5">
+                            Specials Menu</label>
+                    </div>
+                    <div class="formTable">
+
+
+                        <form class="form-inline" action="">
+                            <div class="rowCustomFour">
+                                <div class="fieldSecFull">
+                                    <label>Section</label>
+                                    <input type="url" #section_value id="headTitle" name="headTitle" value="" class="formCss">
+
+                                </div>
+                            </div>
+
+                            <div class="rowCustomFour">
+
+                                <div class="fieldSecFull">
+                                    <!--<label>Upload Section Images</label>
+                <label class="uploadTxt">Upload Section images JPG or PNG:</label>
+            <input type="file" id="myfile" class="uploadField" name="myfile" multiple="">-->
+
+                                    <label>Upload Section Image <small class="text-muted">(File Types:JPEG/JPG/PNG. Maximum Size: 2MB)</small> </label>
+                                    <!--  -->
+                                    <input id='files' type='file' multiple />
+                                    <!-- <output id='result' /> -->
+
+
+                                </div>
+
+                            </div>
+                        </form>
+
+
+
+                    </div>
+
+                    <form action="thanks-order.php" target="_self">
+                        <button class="w3-button w3-green" (click)="create_section(section_value.value)" type="submit">Submit </button>
+                    </form>
+
+                </div>
+
+
+                <div id="tab5" [hidden]="show_tab!='tab5'" class="tabcontent">
+                    <div class="dateTime">
+                        <div class="formTable">
+
+
+                            <form class="form-inline" action="">
+                                <div class="rowCustomFour">
+                                    <div class="fieldSecHalf">
+                                        <label>Menu</label>
+                                        <select id="pickup_place" name="pickup_place" class="formCss" #menu_for_item (change)="select_section_with_menu(menu_for_item.value)">
+                                            <option value="" selected="selected"  >Select One</option>
+                                            <option value="6">ALL Menus</option>
+                                            <option value="1">Breakfast</option>
+                                            <option value="2">Lunch</option>
+                                            <option value="3">Dinner</option>
+                                            <option value="4">Brunch</option>
+                                            <option value="5">Specials</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="fieldSecHalf">
+                                        <label>Section</label>
+                                        <select id="pickup_place" #section_item name="pickup_place" class="formCss" (change)="get_section_item(section_item.value)">
+                                            <option value="" selected="selected">Select One</option>
+                                            <option *ngFor="let s of get_section_for_item" value="{{s.id}}">{{s.section_name}}</option>
+                                            
+
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="rowCustomFour">
+                                    <!-- <div class="fieldSecHalf">
+                                        <label>Section</label>
+                                        <select id="pickup_place" name="pickup_place" class="formCss">
+                                            <option value="" selected="selected">Select One</option>
+                                            <option value="all">ALL Menus</option>
+                                            <option value="breakfast">Top </option>
+                                            <option value="lunch">Cover</option>
+
+                                        </select>
+
+                                    </div> -->
+
+                                    <div class="fieldSecFull">
+                                        <label>Item</label>
+                                         <input type="text" #itemval id="headTitle" name="headTitle" value=""
+                                            class="formCss">
+                                        
+
+                                    </div>
+                                </div>
+                            </form>
+
+
+
+                        </div>
+
+
+
+                        <form action="thanks-order.php" target="_self">
+                            <button class="w3-button w3-green" type="submit" (click)="send_item(itemval.value);itemval.value=''">Submit </button>
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+
+                <div id="tab6" [hidden]="show_tab!='tab6'" class="tabcontent">
+
+                    <div class="formTable">
+
+
+                        <form class="form-inline" action="">
+                            <div class="rowCustomFour">
+                                <div class="fieldSecHalf">
+                                    <label>Menu</label>
+                                    <select id="pickup_place" #select_price_menu name="pickup_place" class="formCss" (change)="select_for_desc_menu(select_price_menu.value)">
+                                        <option value="" selected="selected">Select One</option>
+                                        <option value="6">ALL Menus</option>
+                                        <option value="1">Breakfast</option>
+                                        <option value="2">Lunch</option>
+                                        <option value="3">Dinner</option>
+                                        <option value="4">Brunch</option>
+                                        <option value="5">Specials</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="fieldSecHalf">
+                                    <label>Section</label>
+                                    <!-- <input type="text" id="headTitle" name="headTitle" value="" class="formCss"> -->
+                                    <select id="pickup_place" #section_select_for_item name="pickup_place" class="formCss" (change)="get_item_select(section_select_for_item.value)">
+                                        <option value="" selected="selected">Select One</option>
+                                        <option *ngFor="let g of get_section_for_item1" value="{{g.id}}">{{g.section_name}}</option>
+                                        
+
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="rowCustomFour">
+                                <div class="fieldSecFull">
+                                    <label>Items</label>
+                                    <!-- <input type="text" id="headTitle" name="headTitle" value="" class="formCss"> -->
+                                    <select id="pickup_place" #item_select (change)="get_item_select1(item_select.value)" name="pickup_place" class="formCss">
+                                        <option value="" selected="selected">Select One</option>
+                                        <option *ngFor="let i of idata" value="{{i.id}}">{{i.item_name}}</option>
+                                        <!-- <option value="breakfast">Top </option>
+                                        <option value="lunch">Cover</option> -->
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="rowCustomFour">
+                                <div class="fieldSecFull">
+                                    <label>Price</label>
+                                    <input  #price type="text" id="headTitle" name="headTitle" value="" class="formCss">
+
+                                </div>
+
+                            </div>
+                        </form>
+
+                        <form class="form-inline" action="">
+                            <div class="rowCustomFour">
+                                <div class="fieldSecFull">
+                                    <label for="vehicle2"> Description</label>
+                                    <textarea id="spclMore" #desc name="spclMore" rows="5" cols="60"
+                                        class="formCssTextArea"></textarea>
+                                </div>
+                            </div>
+                        </form>
+
+                        <form class="form-inline" action="">
+                            <div class="rowCustomFour">
+                                <div class="fieldSecFull">
+                                    <label for="vehicle2"> Additional Notes</label>
+                                    <textarea #additional id="spclMore" name="spclMore" rows="5" cols="60"
+                                        class="formCssTextArea"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <form action="thanks-order.php" target="_self">
+                            <button class="w3-button w3-green" type="submit" (click)="submit_price_desc(price.value,desc.value,additional.value)">Submit </button>
+                        </form>
+                    </div>
+
+                </div>
+                <div id="tab7" [hidden]="show_tab!='tab7'" class="tabcontent">
+
+                    This is where you provide details of any notices that need to be displayed on your menus. They could be regulatory notices required by law, food allergy comments, disclaimers or comments which relate to specific localized circumstances.<br>
+                    <br>Using the drop down selectors choose a Menu and Position of the Notice. You then select the Header Title and the color of the Font followed by the Description. You must then SAVE this before entering another Notice.<br><br>
+                  
+                  <div class="formTable">
+                      
+              
+                          <form class="form-inline" action="">
+                              <div class="rowCustomFour">
+                          <div class="fieldSecHalf">
+                          <label>Menu</label>
+                          <select id="pickup_place"  name="pickup_place" id="menuselect" class="formCss" #Menu
+                          (change)="pickup_place(Menu.value)">
+                          <option value="">Select One</option>
+                          <option value="0" [selected]="sp_menuid=='0'">ALL Menus</option>
+                          <option value="1" [selected]="sp_menuid=='1'">Breakfast</option>
+                          <option value="2" [selected]="sp_menuid=='2'">Lunch</option>
+                          <option value="3" [selected]="sp_menuid=='3'">Dinner</option>
+                          <option value="4" [selected]="sp_menuid=='4'">Brunch</option>
+                          <option value="5" [selected]="sp_menuid=='5'">Specials</option>
+                      </select>
+                           
+                          </div>
+                              
+                          <div class="fieldSecHalf">
+                          <label>Position</label>
+                          <select id="pos"  name="pos1" class="formCss" #position
+                          (change)="getposition(position.value)">
+                          <option value="">Select One</option>
+                          <option value="1" [selected]="sp_posid=='1'">Top under Header Image</option>
+                          <option value="2" [selected]="sp_posid=='2'">Bottom after last Section </option>
+                          <option value="3" [selected]="sp_posid=='3'">After each Section</option>
+                      </select>
+                           
+                          </div>
+                                  
+                          </div>
+                              </form> 
+                          
+                          
+                          <form action="">
+                              <div class="rowCustomFour">
+                          <div class="fieldSecFull">
+                          <label for="headTitle">Header Title:</label>
+                          <input type="text" value="{{sp_head}}"  #head id="headTitle" name="headTitle" value="" class="formCss"></div>
+                          </div>
+                          </form>	
+                          <form class="form-inline" >
+                            <div class="rowCustomFour">
+                                <div class="fieldSecHalf">
+                                    <label for="favcolor">Select your font color:</label>
+                                    <input type="color"  id="colorPicker" class="colorPickerCustom" name="favcolor"
+                                        value="{{sp_font}}" #code1 (change)="changecolor($event,'back')">
+                                </div>
+
+                                <div class="fieldSecHalf">
+                                    <label for="code">Enter Code:</label>
+                                    <input type="text" value="{{sp_font}}" id="box" name="code1" class="formCss" #code2  (change)="checkvalidity($event)">
+                                </div>
+                            </div>
+
+                        </form>
+                        <form class="form-inline" >
+                            <div class="rowCustomFour">
+                                <div class="fieldSecHalf">
+                                    <label for="favcolor">Select your background color:</label>
+                                    <input type="color"  id="colorPicker2" class="colorPickerCustom" value="#6a5acd"
+                                        #code3 value="{{sp_back}}" (change)="changecolor($event,'font')">
+                                </div>
+                                <div class="fieldSecHalf">
+                                    <label for="code">Enter Code:</label>
+                                    <input type="text" value="{{sp_back}}"  id="box2" name="code" value="" class="formCss" #code4  (change)="checkvalidity($event)">
+                                </div>
+                            </div>
+                        </form>
+                          <form class="form-inline" action="">
+                          <div class="rowCustomFour">
+                          <div class="fieldSecFull">
+                          <label for="vehicle2"> Notice Content</label>
+                          <textarea #notice id="spclMore" value="{{sp_notice}}" name="spclMore" rows="5" cols="60" class="formCssTextArea"></textarea>	
+                          </div>
+                          </div>
+                          </form>
+                          </div>
+                  
+                  <br>
+                    
+                    
+                    
+                    
+                    
+                      <form action="thanks-order.php" target="_self">	
+                      <button class="w3-button w3-green" type="submit" (click)="submit_special(Menu.value,position.value,head.value,code2.value,code4.value,notice.value)">Save & Continue </button>
+                      </form> 
+                  
+                </div>
+                <div id="tab8" [hidden]="show_tab!='tab8'" class="tabcontent">
+
+                    <form action="" class="form-inline">
+
+
+                        <div class="aboutLeft">
+                            <label class="titleCustom">About Us</label>
+                            <textarea name="introduction" maxlength="500" rows="6" cols="25" class="formCssTextArea"
+                                readonly>{{about_text_readonly}}</textarea>
+
+                        </div>
+                        <div class="aboutLeft">
+                            <label class="titleCustom">About Us (update)</label>
+                            <textarea name="introduction" maxlength="500" rows="6" cols="25"
+                                class="formCssTextArea" #about_write_txt></textarea>
+
+                        </div>
+                    </form>
+
+
+                    <p>Please check that your update is correct before you press SUBMIT as the change will take effect
+                        immediately</p>
+
+                    <form class="form-inline" action="">
+                        <button type="submit" class="btn btn-default" (click)="send_about_us(about_write_txt.value);about_write_txt.value=''">SUBMIT</button>
+                        <button type="reset" value="Reset" (click)="about_write_txt.value=''" style="background-color:#F00">Clear</button>
+                    </form>
+                </div>
+
+
+
+                <div id="tab9" [hidden]="show_tab!='tab9'" class="tabcontent">
+                    <strong>MENU URL's</strong><br><br>
+                    <form class="form-inine">
+                        Breakfast URL: <input type="text" value="" size="100">
+                    </form> <br>
+                    <form class="form-inine">
+                        Lunch URL: <input type="text" value="" size="100">
+                    </form> <br>
+                    <form class="form-inine">
+                        Dinner URL: <input type="text" size="100">
+                    </form> <br>
+                    <form class="form-inine">
+                        Brunch URL: <input type="text" size="100">
+                    </form> <br>
+                    <form class="form-inine">
+                        Specials URL: <input type="text" size="100">
+                    </form><br><br>
+                    <strong>REDIRECT URL (to be used for Menu QR Code)</strong><br><br>
+                    <form class="form-inine">
+                        Bitly URL: <input type="text" size="120">
+                    </form><br>
+                    <strong>LANDING PAGE URL (to be used on vCard)</strong><br><br>
+                    <form class="form-inine">
+                        Bitly URL: <input type="text" size="120">
+                    </form><br><br>
+
+
+
+                    <strong>You can check any amendments by using the menu button below to view that menu. Always
+                        refresh the page before checking and clearing your cache memory if you need to.</strong>
+                    <div style="overflow-x:auto;">
+                        <table width="100%" cellspacing="15">
+                            <tr>
+                                <th scope="col">BREAKFAST</th>
+                                <th scope="col">LUNCH</th>
+                                <th scope="col">DINNER</th>
+                                <th scope="col">BRUNCH</th>
+                                <th scope="col">SPECIALS</th>
+                            </tr>
+                            <tr bgcolor="#fff" align="center">
+                                <td><a href="https://shoplocallaguna.com/restaurants/the-cliff/breakfast.php"
+                                        target="popup"
+                                        onclick="window.open('https://shoplocallaguna.com/restaurants/the-cliff/breakfast.php','popup','width=400,height=500'); return false;">
+                                        VIEW</a></td>
+                                <td><a href="https://shoplocallaguna.com/restaurants/the-cliff/lunch.php" target="popup"
+                                        onclick="window.open('https://shoplocallaguna.com/restaurants/the-cliff/lunch.php','popup','width=400,height=500'); return false;">
+                                        VIEW</a></td>
+                                <td><a href="https://shoplocallaguna.com/restaurants/the-cliff/dinner.php"
+                                        target="popup" class="w3-container"
+                                        onclick="window.open('https://shoplocallaguna.com/restaurants/the-cliff/dinner.php','popup','width=400,height=500'); return false;">
+                                        VIEW</a></td>
+                                <td><a href="" target="popup" onclick="">
+                                        VIEW</a></td>
+                                <td><a href="" target="popup" onclick="">
+                                        VIEW</a></td>
+                            </tr><br>
+                        </table> <br><br><br><br>
+
+
+
+
+                    </div>
+
+                </div>
+
+                <div id="tab10" [hidden]="show_tab!='tab10'" class="tabcontent">
+
+                    <div class="row">
+                        <div class="w3-third">
+                            <strong>QR Code for Dynamic Menu</strong><br><br>
+                            <a href="images/qr-code-thecliff.png" download><img src="/assets/images/qr-code-thecliff.png"
+                                    width="60%" height="auto"></a><br><br>
+                            This points to the redirect URL.<br><br>
+
+                            <label>To replace the QR Code upload your image file</label>
+                            <form action="">
+                                <input type="file" id="myFile" name="filename"><br><br>
+                                <input type="submit">
+                            </form><br>
+                            <em>Click image to download for printing purposes</em><br>
+                        </div>
+                        <div class="w3-third">
+
+                            <strong>QR Code for vCard</strong><br><br>
+                            <a href="images/qr-code-thecliff.png" download><img src="/assets/images/qr-code-thecliff.png"
+                                    width="60%" height="auto"></a><br><br>
+                            This points to the vCard URL.<br><br>
+
+                            <label>To replace the QR Code upload your image file</label>
+                            <form action="">
+                                <input type="file" id="myFile" name="filename"><br><br>
+                                <input type="submit">
+                            </form><br>
+                            <em>Click image to download for printing purposes</em><br>
+                            <!-- </form> -->
+
+
+
+                        </div>
+                        <div class="w3-third">
+                            <strong>QR Code for Laguna Beach Fun Directory</strong><br><br>
+
+                            <a href="images/qr-code-thecliff.png" download><img src="/assets/images/qr-code-thecliff.png"
+                                    width="60%" height="auto"></a><br><br>
+                            This points to the Laguna Fun Map URL.<br><br>
+
+                            <label>To replace the QR Code upload your image file</label>
+                            <form action="">
+                                <input type="file" id="myFile" name="filename"><br><br>
+                                <input type="submit">
+                            </form><br>
+                            <em>Click image to download for printing purposes</em><br>
+                            <!-- </form> -->
+
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <!-- <?php echo file_get_contents("footer.html"); ?>	 -->
+
+        <!-- Footer -->
+    </div>
+
+    <div id="snackbar">{{m}}</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

@@ -21,6 +21,7 @@ import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
 import { SectionimagesComponent } from './Restaurant/sectionimages/sectionimages.component';
 import { DisplaydaytimeComponent } from './Restaurant/displaydaytime/displaydaytime.component';
 import { MenudataComponent } from './Restaurant/menudata/menudata.component';
+import { RestaurantSetupComponent } from './Laguna_Admin/restaurant-setup/restaurant-setup.component';
 
 
 const routes: Routes = [
@@ -59,8 +60,17 @@ const routes: Routes = [
 
   },
   {
+    path:'order',
+    component:OrderPageComponent
+
+  },
+  {
     path:'payment/:id',
     component:PaymentPageComponent
+  },
+  {
+    path:'admin/restaurant_setup',
+    component:RestaurantSetupComponent
   },
   {
     path:'menu_setup',
