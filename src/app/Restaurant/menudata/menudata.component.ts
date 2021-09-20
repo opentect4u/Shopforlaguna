@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { DataserviceService } from '../service/dataservice.service';
 
 @Component({
@@ -9,9 +10,25 @@ import { DataserviceService } from '../service/dataservice.service';
 export class MenudataComponent implements OnInit {
   tab1:boolean=false;
   tab2:boolean=true;
+  aboutus:any;
+  value_menu:boolean=true;
+  value_position:boolean=true;
+  value_Headertitle:boolean=true;
+  value_font=true;
+  value_background=true;
+ value_text=true;
+  
+  valid_aboutus:any;
+  disabled_about:boolean=true;;
+  notice:any
   t1:any;
+  x :any;
   t2:any;
-  res_id:any=10;
+  // res_id:any=10;
+  res_id:any=localStorage.getItem('Restaurant_id');
+
+  success:any;
+  clearall:any;
   menu:any;
   position:any;
   font:any;
@@ -20,16 +37,34 @@ export class MenudataComponent implements OnInit {
   constructor(private about:DataserviceService) { }
 
   ngOnInit(): void {
+    
+    this.aboutus=document.getElementById('defaultOpen');
+    this.aboutus.style.background='#00477e';
+    this.aboutus.style.color='white';
   }
   openCity(e:any){
     if(e=='aboutUs'){
         this.tab1=false;
         this.tab2=true;
+        this.aboutus=document.getElementById('defaultOpen');
+        this.aboutus.style.background='#00477e';
+        this.aboutus.style.color='white';
+        this.notice=document.getElementById('defaultOpen1');
+        this.notice.style.background='#f1f1f1';
+        this.notice.style.color='black';
+
     }
    else{
      if( this.t1=='notices'){
+
     this.tab1=true;
     this.tab2=false;
+    this.aboutus=document.getElementById('defaultOpen1');
+    this.aboutus.style.background='#00477e';
+    this.aboutus.style.color='white';
+    this.notice=document.getElementById('defaultOpen');
+    this.notice.style.background='#f1f1f1';
+    this.notice.style.color='black';
      }
    }  
    
@@ -41,8 +76,28 @@ nexttab(e:any,e1:any){
       this.t1='notices';
        this.about.Aboutus(e1,this.res_id).subscribe(data=>{
          console.log(data);
+         this.success=data;
+         if(this.success.suc==1){
+          this.myFunction();
+          this.clearall=document.getElementById('about');
+           this.clearall.value='';
+      }
+      else{
+
+      }
        })
+
+      
     }
+    // For Change the color of active tab
+     
+   
+    this.aboutus=document.getElementById('defaultOpen1');
+    this.aboutus.style.background='#00477e';
+    this.aboutus.style.color='white';
+    this.notice=document.getElementById('defaultOpen');
+    this.notice.style.background='#f1f1f1';
+    this.notice.style.color='black';
     
 }
 nexttab1(e:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
@@ -51,16 +106,53 @@ nexttab1(e:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
     this.tab2=false;
     this.about.Notice(this.menu,this.position,v1,v3,v5,v6,this.res_id,this.notice_flag).subscribe(data=>{
         console.log(data);
+        this.success=data
+        if(this.success.suc==1){
+             this.myFunction();
+             this.clearall=document.getElementById('noticechecked');
+             this.clearall.checked=false;
+             this.notice_flag='N';
+             this.clearall=document.getElementById('menuselect');
+             this.clearall.value='';
+             this.menu='';
+             this.clearall=document.getElementById('pos');
+             this.clearall.value='';
+             this.position='';
+             this.clearall=document.getElementById('headTitle');
+             this.clearall.value='';
+             this.clearall=document.getElementById('box');
+             this.clearall.value='';
+             this.clearall=document.getElementById('box2');
+             this.clearall.value='';
+             this.clearall=document.getElementById('spclMore');
+             this.clearall.value='';
+            }
+            else{
+
+            }
     })
   }
 }
 pickup_place(event:any){
  this.menu=event;
+ if(this.menu!=''){
+   this.value_menu=false;
+ }
+ else{
+  this.value_menu=true;
+
+ }
  console.log(this.menu)
 }
 getposition(e:any){
  this.position=e;
  console.log(this.position)
+ if(e!=''){
+   this.value_position=false;
+ }
+ else{
+  this.value_position=true;
+ }
 
 }
 changecolor(event:any,e:any){
@@ -85,6 +177,71 @@ checknotice(event:any){
     this.notice_flag='N';
   }
 
+}
+myFunction() {
+  // Get the snackbar DIV
+  this.x = document.getElementById("snackbar");
+
+  // Add the "show" class to DIV
+  this.x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
+} 
+prevent_null(event:any){
+  console.log(event)
+  if(event.target.id=='about'){
+
+ 
+  if(event.target.value == ''){
+    console.log("adsasda1")
+    this.disabled_about=true;
+  }
+  else{
+    console.log("adsasda")
+    this.disabled_about=false;
+  }
+}
+}
+checkvalidity(event:any){
+  console.log(event)
+  if(event.target.id=='headTitle'){
+    if(event.target.value!=''){
+      this.value_Headertitle=false;
+      }
+      else{
+      this.value_Headertitle=true;
+        
+      }
+  }
+  else if(event.target.id=='box'){
+    if(event.target.value!=''){
+      this.value_font=false;
+      }
+      else{
+      this.value_font=true;
+        
+      }
+  }
+  else if(event.target.id=='box2'){
+    if(event.target.value!=''){
+      this.value_background=false;
+      }
+      else{
+      this.value_background=true;
+        
+      }
+  }
+  else if(event.target.id=='spclMore'){
+    if(event.target.value!=''){
+      this.value_text=false;
+      }
+      else{
+      this.value_text=true;
+        
+      }
+  }
+ 
 }
 
 }

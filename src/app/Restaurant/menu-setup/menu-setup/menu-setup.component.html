@@ -28,15 +28,16 @@
                 <div class="w3-container w3-full w3-cell w3-mobile">
                     <div class="tab">
                         <button class="tablinks" (click)="openCity('London')" id="defaultOpen">Breakfast</button>
-                        <button class="tablinks" (click)="openCity('Paris')">Lunch</button>
-                        <button class="tablinks" (click)="openCity('Tokyo')">Dinner</button>
-                        <button class="tablinks" (click)="openCity('Laguna')">Brunch</button>
-                        <button class="tablinks" (click)="openCity('Shrewsbury')" [hidden]="true">Specials</button>
+                        <button class="tablinks" (click)="openCity('Paris')"  id="defaultOpen1">Lunch</button>
+                        <button class="tablinks" (click)="openCity('Tokyo')"  id="defaultOpen2">Dinner</button>
+                        <button class="tablinks" (click)="openCity('Laguna')"  id="defaultOpen3">Brunch</button>
+                        <button class="tablinks" (click)="openCity('Shrewsbury')" [hidden]="true"  id="defaultOpen4">Specials</button>
                     </div>
 
-                    <div id="London" class="tabcontent" [hidden]="tab1">
-                        <label class="titleCustom" for="bkmenu">
-                            <input type="checkbox" (change)="checkbreakfast($event)" id="bkmenu" name="bkmenu" value="bkMenu"> <strong>Breakfast Menu</strong></label>
+                    <div id="London" class="tabcontent mt-1" [hidden]="tab1">
+                     
+                        <label class="titleCustom" for="bkmenu" >
+                            <input type="checkbox" (change)="checkbreakfast($event)" id="bkmenu" name="bkmenu" value="bkMenu"> <strong class="m-1">Breakfast Menu</strong></label>
                             <input hidden type="text" value="1" #break>
                         With the content that you provide to us below, we will design your menu platform. If you offer a
                         different menu for Breakfast, Lunch, Dinner, Brunch, etc., you can provide us with that
@@ -59,7 +60,8 @@
                             <form>
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url" name="url" value=""
-                                    size="28" #COVERPAGEURL>
+                                    size="28" #COVERPAGEURL
+                                    (keyup)="checkvalidity($event)" (change)="checkvalidity($event)">
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
                                 contact you</p>
@@ -78,8 +80,10 @@
                             </form>Or, we can collect a photo found on your web site and add it to the top of your
                             Breakfast menu:
                             <form>
-                                <label for="url">Enter the url:</label> <input type="text" id="url" name="url" value=""
-                                    size="28" #TOPIMAGEURL>
+                                <label for="url">Enter the url:</label> 
+                                <input type="text" id="url_top" name="url" value=""
+                                    size="28" #TOPIMAGEURL
+                                    (keyup)="checkvalidity($event)" (change)="checkvalidity($event)">
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
                                 contact you</p>
@@ -98,8 +102,9 @@
                              Or, please provide a web site address/url where we can collect your menu content:
                              <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url" name="url" value=""
-                                    size="28" #MENUURL>
+                                <input type="text" id="url_menu" name="url" value=""
+                                    size="28" #MENUURL
+                                    (keyup)="checkvalidity($event)" (change)="checkvalidity($event)">
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
                                 contact you</p>
@@ -123,7 +128,8 @@
                                     Or, please provide a web site address/url where we can collect your menu content:
                                     <form>
                                         <label for="url">Enter the url:</label>
-                                        <input type="text" id="url" name="Url"  size="28" #SECTIONURL>
+                                        <input type="text" id="Url_section" name="Url"  size="28" #SECTIONURL
+                                        (keyup)="checkvalidity($event)" (change)="checkvalidity($event)">
                                     <!-- <input type="text" [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"> -->
     
                                     </form>
@@ -178,9 +184,13 @@
                                    <div class="col-5">
                                     <form class="form-inline" action="">
                                         <label for="selfcling">Start Time:</label>
-                                        <input type="text" id="selfcling" name="selfcling" value="" size="4" #start_break><br><br>
+                                        <input type="text"
+                                        (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"
+                                        id="start" name="selfcling" value="" size="4" #start_break><br><br>
                                         <label for="selfcling">End Time:</label>
-                                        <input type="text" id="selfcling" name="selfcling" value="" size="4" #end_break>
+                                        <input type="text" 
+                                        (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"
+                                        id="end" name="selfcling" value="" size="4" #end_break>
                                     </form>
                                    </div>
                                    <div class="col-2"></div>
@@ -198,12 +208,13 @@
                             >Save & Continue</button>
                           
                    </div>
-                    <div id="Paris" class="tabcontent"  [hidden]="tab2">
-                        <label class="titleCustom" for="bkmenu">
-                            <input type="checkbox" id="bkmenu" name="bkmenu"
+                    <div id="Paris" class="tabcontent mt-1"  [hidden]="tab2">
+                      
+                        <label class="titleCustom" for="bkmenu" >
+                            <input type="checkbox" id="paris" name="bkmenu"
                                 value="bkMenu" (change)="launchchaked($event)">
                                 <input type="text" hidden value="2" #launch>
-                            <strong>Lunch Menu</strong></label>
+                            <strong class="m-1">Lunch Menu</strong></label>
                         With the content that you provide to us below, we will design your menu platform. If you offer a
                         different menu for Breakfast, Lunch, Dinner, Brunch, etc., you can provide us with that
                         information, and we will create your dynamic menu platform, displaying the appropriate menu, at
@@ -225,7 +236,7 @@
                             Lunch menu image.
                             <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url" name="url" value=""
+                                <input type="text" id="url_launch" name="url" value=""
                                     size="28" #launchcoverurl>
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
@@ -247,7 +258,7 @@
                             menu:
                             <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url" name="url" value=""
+                                <input type="text" id="url_launchtop" name="url" value=""
                                     size="28" #launchtopimageurl>
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
@@ -271,7 +282,7 @@
                             </form>Or, please provide a web site address/url where we can collect your menu content:
                             <form>
                                 <label for="url">Enter the url:</label>
-                                 <input type="text" id="url" name="url" value=""
+                                 <input type="text" id="url_launchmenu" name="url" value=""
                                     size="28" #launchmenuurl>
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
@@ -296,7 +307,7 @@
                                         Or, please provide a web site address/url where we can collect your menu content:
                                         <form>
                                             <label for="url">Enter the url:</label>
-                                            <input type="text" id="url" name="Url"  size="28" #SECTIONURLAUNCH>
+                                            <input type="text" id="url_launchsection" name="Url"  size="28" #SECTIONURLAUNCH>
                                         <!-- <input type="text" [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"> -->
 
                                         </form>
@@ -366,26 +377,26 @@
                                     <div class="row">
                                    <div class="col-5">
                                     <form >
-                                        <input type="checkbox" id="vehicle1" (change)="checkday($event,'everyday')">
+                                        <input type="checkbox" id="vehicle12" (change)="checkeveday($event,'everyday')">
                                         <label for="vehicle1" class="m-2"> Every Day</label><br>
                                     </form>
         
                                     <form class="form-inline" >
-                                        <input type="checkbox" (change)="checkday($event,'monday')"  id="vehicle2" >
+                                        <input type="checkbox" (change)="checkeveday($event,'monday')"  id="vehicle22" >
                                         <label for="vehicle2"> Monday</label><br>
-                                        <input type="checkbox" (change)="checkday($event,'tuesday')"id="vehicle3" >
+                                        <input type="checkbox" (change)="checkeveday($event,'tuesday')"id="vehicle32" >
                                         <label for="vehicle3"> Tuesday</label><br>
-                                        <input type="checkbox" (change)="checkday($event,'wednesday')"  id="vehicle4">
+                                        <input type="checkbox" (change)="checkeveday($event,'wednesday')"  id="vehicle42">
                                         <label for="vehicle1"> Wednesday</label><br>
                                     </form>
                                     <form class="form-inline" >
-                                        <input type="checkbox" (change)="checkday($event,'thursday')"  id="vehicle5" >
+                                        <input type="checkbox" (change)="checkeveday($event,'thursday')"  id="vehicle52" >
                                         <label for="vehicle2"> Thursday</label><br>
-                                        <input type="checkbox" (change)="checkday($event,'friday')"  id="vehicle6" >
+                                        <input type="checkbox" (change)="checkeveday($event,'friday')"  id="vehicle62" >
                                         <label for="vehicle3"> Friday</label><br>
-                                        <input type="checkbox" (change)="checkday($event,'sat')"  id="vehicle7" >
+                                        <input type="checkbox" (change)="checkeveday($event,'sat')"  id="vehicle72" >
                                         <label for="vehicle1"> Saturday</label><br>
-                                        <input type="checkbox" (change)="checkday($event,'sun')"  id="vehicle8">
+                                        <input type="checkbox" (change)="checkeveday($event,'sun')"  id="vehicle82">
                                         <label for="vehicle2"> Sunday</label><br>
                                     </form>
         
@@ -393,9 +404,9 @@
                                    <div class="col-5">
                                     <form class="form-inline" action="">
                                         <label for="selfcling">Start Time:</label>
-                                        <input type="text" id="selfcling" name="selfcling" value="" size="4" #start_break><br><br>
+                                        <input type="text" id="start_launch" name="selfcling" value="" size="4" #start_break><br><br>
                                         <label for="selfcling">End Time:</label>
-                                        <input type="text" id="selfcling" name="selfcling" value="" size="4" #end_break>
+                                        <input type="text" id="end_launch" name="selfcling" value="" size="4" #end_break>
                                     </form>
                                    </div>
                                    <div class="col-2"></div>
@@ -418,19 +429,20 @@
 
 
 
-                        <button class="w3-button w3-green" type="submit">Previous</button> 
+                        <button class="w3-button w3-green" type="submit" (click)="goprev('paris')">Previous</button> 
                         <button
                             class="w3-button w3-green m-1" type="submit"  
                             
                             (click)="opennextab1('Paris',launchcoverurl.value,launchtopimageurl.value,launchmenuurl.value,SECTIONURLAUNCH.value,launch.value,start_break.value,end_break.value)">Save & Continue</button>
                     </div>
 
-                    <div id="Tokyo" class="tabcontent"  [hidden]="tab3">
+                    <div id="Tokyo" class="tabcontent mt-1"  [hidden]="tab3">
+                
                         <label class="titleCustom" for="bkmenu">
-                            <input type="checkbox" id="bkmenu" name="bkmenu"
+                            <input type="checkbox" id="tokyo" name="bkmenu"
                                 value="bkMenu" (change)="checkbrunch($event)">
                                 <input type="text" hidden value="3" #brunch>
-                            <strong>Dinner Menu</strong></label>
+                            <strong class="m-1">Dinner Menu</strong></label>
                         With the content that you provide to us below, we will design your menu platform. If you offer a
                         different menu for Breakfast, Lunch, Dinner, Brunch, etc., you can provide us with that
                         information, and we will create your dynamic menu platform, displaying the appropriate menu, at
@@ -451,7 +463,8 @@
                             </form><br>Or, we can collect a photo found on your web site and add it as your background
                             Dinner menu image.
                             <form>
-                                <label for="url">Enter the url:</label> <input type="text" id="url" name="url" value=""
+                                <label for="url">Enter the url:</label>
+                                 <input type="text" id="url_brunch" name="url" value=""
                                     size="28" #coverbrunchurl>
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
@@ -473,7 +486,8 @@
                             </form>Or, we can collect a photo found on your web site and add it to the top of your
                             Dinner menu:
                             <form>
-                                <label for="url">Enter the url:</label> <input type="text" id="url" name="url" value=""
+                                <label for="url">Enter the url:</label> 
+                                <input type="text" id="url_topbrunch" name="url" value=""
                                     size="28" #topurl>
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
@@ -495,7 +509,7 @@
                             </form>Or, please provide a web site address/url where we can collect your menu content:
                             <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url" name="url" value=""
+                                <input type="text" id="url_menubrunch" name="url" value=""
                                     size="28" #MENUURLBRUNCH>
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
@@ -521,7 +535,7 @@
                                     Or, please provide a web site address/url where we can collect your menu content:
                                     <form>
                                         <label for="url">Enter the url:</label>
-                                        <input type="text" id="url" name="Url"  size="28" #SECTIONURBRUNCH>
+                                        <input type="text" id="url_sectionbrunch" name="Url"  size="28" #SECTIONURBRUNCH>
                                     <!-- <input type="text" [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"> -->
 
                                     </form>
@@ -590,26 +604,26 @@
                                 <div class="row">
                                <div class="col-5">
                                 <form >
-                                    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (change)="checkday($event,'everyday')">
+                                    <input type="checkbox" id="vehicle13" value="Bike" (change)="checkdinnerday($event,'everyday')">
                                     <label for="vehicle1" class="m-2"> Every Day</label><br>
                                 </form>
     
                                 <form class="form-inline" >
-                                    <input type="checkbox" (change)="checkday($event,'monday')" name="vehicle2" id="vehicle2" value="Car">
+                                    <input type="checkbox" (change)="checkdinnerday($event,'monday')" id="vehicle23" value="Car">
                                     <label for="vehicle2"> Monday</label><br>
-                                    <input type="checkbox" (change)="checkday($event,'tuesday')" name="vehicle3" id="vehicle3" value="Boat">
+                                    <input type="checkbox" (change)="checkdinnerday($event,'tuesday')"  id="vehicle33" value="Boat">
                                     <label for="vehicle3"> Tuesday</label><br>
-                                    <input type="checkbox" (change)="checkday($event,'wednesday')" name="vehicle1" id="vehicle4" value="Bike">
+                                    <input type="checkbox" (change)="checkdinnerday($event,'wednesday')"  id="vehicle43" value="Bike">
                                     <label for="vehicle1"> Wednesday</label><br>
                                 </form>
                                 <form class="form-inline" >
-                                    <input type="checkbox" (change)="checkday($event,'thursday')" name="vehicle2" id="vehicle5" value="Car">
+                                    <input type="checkbox" (change)="checkdinnerday($event,'thursday')"  id="vehicle53" value="Car">
                                     <label for="vehicle2"> Thursday</label><br>
-                                    <input type="checkbox" (change)="checkday($event,'friday')" name="vehicle3" id="vehicle6" value="Boat">
+                                    <input type="checkbox" (change)="checkdinnerday($event,'friday')"  id="vehicle63" value="Boat">
                                     <label for="vehicle3"> Friday</label><br>
-                                    <input type="checkbox" (change)="checkday($event,'sat')" name="vehicle1" id="vehicle7" value="Bike">
+                                    <input type="checkbox" (change)="checkdinnerday($event,'sat')"  id="vehicle73" value="Bike">
                                     <label for="vehicle1"> Saturday</label><br>
-                                    <input type="checkbox" (change)="checkday($event,'sun')" name="vehicle2" id="vehicle8" value="Car">
+                                    <input type="checkbox" (change)="checkdinnerday($event,'sun')"  id="vehicle83" value="Car">
                                     <label for="vehicle2"> Sunday</label><br>
                                 </form>
     
@@ -617,9 +631,9 @@
                                <div class="col-5">
                                 <form class="form-inline" action="">
                                     <label for="selfcling">Start Time:</label>
-                                    <input type="text" id="selfcling" name="selfcling" value="" size="4" #start_break><br><br>
+                                    <input type="text" id="start_brunch" name="selfcling" value="" size="4" #start_break><br><br>
                                     <label for="selfcling">End Time:</label>
-                                    <input type="text" id="selfcling" name="selfcling" value="" size="4" #end_break>
+                                    <input type="text" id="end_brunch" name="selfcling" value="" size="4" #end_break>
                                 </form>
                                </div>
                                <div class="col-2"></div>
@@ -631,17 +645,18 @@
                         </div> 
 
 
-                        <button class="w3-button w3-green" type="submit">Previous</button> <button
+                        <button class="w3-button w3-green" type="submit" (click)="goprev('tokyo')">Previous</button> <button
                             class="w3-button w3-green m-1" type="submit"
                             (click)="opennextab2('Tokyo',SECTIONURBRUNCH.value,MENUURLBRUNCH.value,topurl.value,coverbrunchurl.value,brunch.value,start_break.value,end_break.value)">Save & Continue</button>
                     </div>
 
-                    <div id="Laguna" class="tabcontent"  [hidden]="tab4">
-                        <label class="titleCustom" for="bkmenu"> 
-                            <input type="checkbox" id="bkmenu" name="bkmenu"
+                    <div id="Laguna" class="tabcontent mt-1"  [hidden]="tab4" >
+                     
+                        <label class="titleCustom" for="bkmenu" > 
+                            <input type="checkbox" id="laguna" name="bkmenu"
                                 value="bkMenu" (change)="checkdinner($event)">
                                 <input type="text" value="4" hidden #dinner> 
-                            <strong>Brunch Menu</strong></label>
+                            <strong class="m-1">Brunch Menu</strong></label>
                         With the content that you provide to us below, we will design your menu platform. If you offer a
                         different menu for Breakfast, Lunch, Dinner, Brunch, etc., you can provide us with that
                         information, and we will create your dynamic menu platform, displaying the appropriate menu, at
@@ -667,7 +682,7 @@
                             address/url where we can collect your menu content.
                             <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url" name="url" value=""
+                                <input type="text" id="url_dinner" name="url" value=""
                                     size="28" #dinnercoverurl>
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
@@ -687,7 +702,8 @@
                             </form>Or, we can collect a photo found on your web site and add it to the top of your
                             Brunch menu:
                             <form>
-                                <label for="url">Enter the url:</label> <input type="text" id="url" name="url" value=""
+                                <label for="url">Enter the url:</label> 
+                                <input type="text" id="url_dinnertop" name="url" value=""
                                     size="28" #dinnertopurl>
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
@@ -709,7 +725,8 @@
                             <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
                             </form>Or, please provide a web site address/url where we can collect your menu content:
                             <form>
-                                <label for="url">Enter the url:</label> <input type="text" id="url" name="url" value=""
+                                <label for="url">Enter the url:</label>
+                                 <input type="text" id="url_dinnermenu" name="url" value=""
                                     size="28" #dinnermenuurl>
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
@@ -735,7 +752,7 @@
                                     Or, please provide a web site address/url where we can collect your menu content:
                                     <form>
                                         <label for="url">Enter the url:</label>
-                                        <input type="text" id="url" name="Url"  size="28" #SECTIONURlDINNER>
+                                        <input type="text" id="url_section" name="Url"  size="28" #SECTIONURlDINNER>
                                     <!-- <input type="text" [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"> -->
 
                                     </form>
@@ -804,26 +821,26 @@
                                 <div class="row">
                                <div class="col-5">
                                 <form >
-                                    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" (change)="checkday($event,'everyday')">
+                                    <input type="checkbox" id="vehicle14" name="vehicle1"  (change)="checkbrucnhday($event,'everyday')">
                                     <label for="vehicle1" class="m-2"> Every Day</label><br>
                                 </form>
     
                                 <form class="form-inline" >
-                                    <input type="checkbox" (change)="checkday($event,'monday')" name="vehicle2" id="vehicle2" value="Car">
+                                    <input type="checkbox" (change)="checkbrucnhday($event,'monday')" name="vehicle2" id="vehicle24" >
                                     <label for="vehicle2"> Monday</label><br>
-                                    <input type="checkbox" (change)="checkday($event,'tuesday')" name="vehicle3" id="vehicle3" value="Boat">
+                                    <input type="checkbox" (change)="checkbrucnhday($event,'tuesday')" name="vehicle3" id="vehicle34" >
                                     <label for="vehicle3"> Tuesday</label><br>
-                                    <input type="checkbox" (change)="checkday($event,'wednesday')" name="vehicle1" id="vehicle4" value="Bike">
+                                    <input type="checkbox" (change)="checkbrucnhday($event,'wednesday')" name="vehicle1" id="vehicle44" >
                                     <label for="vehicle1"> Wednesday</label><br>
                                 </form>
                                 <form class="form-inline" >
-                                    <input type="checkbox" (change)="checkday($event,'thursday')" name="vehicle2" id="vehicle5" value="Car">
+                                    <input type="checkbox" (change)="checkbrucnhday($event,'thursday')" name="vehicle2" id="vehicle54" >
                                     <label for="vehicle2"> Thursday</label><br>
-                                    <input type="checkbox" (change)="checkday($event,'friday')" name="vehicle3" id="vehicle6" value="Boat">
+                                    <input type="checkbox" (change)="checkbrucnhday($event,'friday')" name="vehicle3" id="vehicle64">
                                     <label for="vehicle3"> Friday</label><br>
-                                    <input type="checkbox" (change)="checkday($event,'sat')" name="vehicle1" id="vehicle7" value="Bike">
+                                    <input type="checkbox" (change)="checkbrucnhday($event,'sat')" name="vehicle1" id="vehicle74" >
                                     <label for="vehicle1"> Saturday</label><br>
-                                    <input type="checkbox" (change)="checkday($event,'sun')" name="vehicle2" id="vehicle8" value="Car">
+                                    <input type="checkbox" (change)="checkbrucnhday($event,'sun')" name="vehicle2" id="vehicle84" >
                                     <label for="vehicle2"> Sunday</label><br>
                                 </form>
     
@@ -831,9 +848,9 @@
                                <div class="col-5">
                                 <form class="form-inline" action="">
                                     <label for="selfcling">Start Time:</label>
-                                    <input type="text" id="selfcling" name="selfcling" value="" size="4" #start_break><br><br>
+                                    <input type="text" id="start_dinner" name="selfcling" value="" size="4" #start_break><br><br>
                                     <label for="selfcling">End Time:</label>
-                                    <input type="text" id="selfcling" name="selfcling" value="" size="4" #end_break>
+                                    <input type="text" id="end_dinner" name="selfcling" value="" size="4" #end_break>
                                 </form>
                                </div>
                                <div class="col-2"></div>
@@ -844,7 +861,7 @@
 
                         </div> 
                      
-                        <button class="w3-button w3-green" type="submit">Previous</button> <button
+                        <button class="w3-button w3-green" type="submit" (click)="goprev('laguna')">Previous</button> <button
                             class="w3-button w3-green m-1" type="submit" (click)="opennextab3('laguna',dinnermenuurl.value,dinnertopurl.value,dinnercoverurl.value,SECTIONURlDINNER.value,dinner.value,start_break.value,end_break.value)">Save & Continue</button>
                     </div>
 
@@ -1081,7 +1098,6 @@
 
 
 
-
         <br>
         <!-- Footer -->
     </div>
@@ -1117,3 +1133,4 @@
 
 
 </div>
+<div id="snackbar">Successfully Inserted...</div>

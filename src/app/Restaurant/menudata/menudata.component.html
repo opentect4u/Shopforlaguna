@@ -30,7 +30,7 @@
                 <div class="w3-container w3-full w3-cell w3-mobile">
                     <div class="tab">
                         <button class="tablinks" (click)="openCity('aboutUs')" id="defaultOpen">About Us</button>
-                        <button class="tablinks" (click)="openCity('notices')"> Notices </button>
+                        <button class="tablinks" (click)="openCity('notices')" id="defaultOpen1"> Notices </button>
 
                     </div>
 
@@ -43,20 +43,21 @@
 
                             Please add a short bio of your restaurant: cuisine type, days/hours, safety, etc., <br>
                             <br>
-                            <form action="">
+                            <form>
                                 <div class="rowCustomFour">
                                     <div class="fieldSecFull">
                                         <label for="spclMore">Write Bio here (max 150 words):</label>
-                                        <textarea id="spclMore" name="spclMore" class="aboutTextarea" rows="5" cols="50"
+                                        <textarea (keypress)="prevent_null($event)"  (keyup)="prevent_null($event)"  (change)="prevent_null($event)"
+                                        id="about" name="abouteee" class="aboutTextarea" rows="5" cols="50"
                                             #bio>
           </textarea>
                                     </div>
                                 </div>
                             </form>
+                            
 
-
-                            <button class="w3-button w3-green" type="submit"
-                                (click)="nexttab('notices',bio.value)">Save</button>
+                            <button class="w3-button w3-green" 
+                                (click)="nexttab('notices',bio.value)" [disabled]="this.disabled_about">Save</button>
                         </div>
                         <div class="aboutRight"><label class="titleCustom"><strong>ENTERTAINMENT/EVENT
                                     CALENDAR</strong></label>
@@ -77,7 +78,8 @@
 
                     <div id="notices" class="tabcontent" [hidden]="tab2">
 
-                        <label class="titleCustom"><input type="checkbox" (change)="checknotice($event)"><strong>NOTICES</strong> </label>
+                        <label class="titleCustom">
+                            <input type="checkbox" id="noticechecked" (change)="checknotice($event)"><strong class="m-1">NOTICES</strong> </label>
                         This is where you provide details of any notices that need to be displayed on your menus. They
                         could be regulatory notices required by law, food allergy comments, disclaimers or comments
                         which relate to specific localized circumstances.<br>
@@ -88,11 +90,11 @@
                         <div class="formTable">
 
 
-                            <form class="form-inline" action="">
+                            <form class="form-inline">
                                 <div class="rowCustomFour">
                                     <div class="fieldSecHalf">
                                         <label>Menu</label>
-                                        <select id="pickup_place" name="pickup_place" class="formCss" #Menu
+                                        <select id="pickup_place" name="pickup_place" id="menuselect" class="formCss" #Menu
                                             (change)="pickup_place(Menu.value)">
                                             <option value="" selected="selected">Select One</option>
                                             <option value="0">ALL Menus</option>
@@ -107,7 +109,7 @@
 
                                     <div class="fieldSecHalf">
                                         <label>Position</label>
-                                        <select id="" name="" class="formCss" #position
+                                        <select id="pos" name="pos1" class="formCss" #position
                                             (change)="getposition(position.value)">
                                             <option value="" selected="selected">Select One</option>
                                             <option value="1">Top under Header Image</option>
@@ -121,11 +123,11 @@
                             </form>
 
 
-                            <form action="">
+                            <form >
                                 <div class="rowCustomFour">
                                     <div class="fieldSecFull">
                                         <label for="headTitle">Header Title:</label>
-                                        <input type="text" id="headTitle" name="headTitle" value="" class="formCss"
+                                        <input type="text" (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"  id="headTitle" name="headTitle1" value="" class="formCss"
                                             #title>
                                     </div>
                                 </div>
@@ -140,12 +142,12 @@
 
                                     <div class="fieldSecHalf">
                                         <label for="code">Enter Code:</label>
-                                        <input type="text" id="box" name="code" value="" class="formCss" #code2>
+                                        <input type="text" id="box" name="code1" class="formCss" #code2 (keyup)="checkvalidity($event)" (change)="checkvalidity($event)">
                                     </div>
                                 </div>
 
                             </form>
-                            <form class="form-inline" action="">
+                            <form class="form-inline" >
                                 <div class="rowCustomFour">
                                     <div class="fieldSecHalf">
                                         <label for="favcolor">Select your background color:</label>
@@ -154,16 +156,17 @@
                                     </div>
                                     <div class="fieldSecHalf">
                                         <label for="code">Enter Code:</label>
-                                        <input type="text" id="box2" name="code" value="" class="formCss" #code4>
+                                        <input type="text" id="box2" name="code" value="" class="formCss" #code4 (keyup)="checkvalidity($event)" (change)="checkvalidity($event)">
                                     </div>
                                 </div>
                             </form>
-                            <form class="form-inline" action="">
+                            <form class="form-inline" >
                                 <div class="rowCustomFour">
                                     <div class="fieldSecFull">
                                         <label for="vehicle2"> Notice Content</label>
-                                        <textarea id="spclMore" name="spclMore" rows="5" cols="60"
-                                            class="formCssTextArea" #notice></textarea>
+                                        <textarea id="spclMore" name="spclMore1" rows="5" cols="60"
+                                            class="formCssTextArea" #notice
+                                            (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"></textarea>
                                     </div>
                                 </div>
                             </form>
@@ -175,8 +178,8 @@
 
 
 
-                        <form action="thanks-order.php" target="_self">
-                            <button class="w3-button w3-green" type="submit"
+                        <form >
+                            <button class="w3-button w3-green" [disabled]="value_menu || value_position || value_Headertitle ||value_font||value_background  || value_text"
                                 (click)="nexttab1('about',title.value,code1.value,code2.value,code3.value,code4.value,notice.value)">Save & Continue </button>
                         </form>
 
@@ -220,3 +223,5 @@
 
 
 </div>
+
+<div id="snackbar">Successfully Inserted</div>

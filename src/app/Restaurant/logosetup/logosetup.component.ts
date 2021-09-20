@@ -11,24 +11,50 @@ export class LogosetupComponent implements OnInit {
 
   constructor(private router:Router,private Logo:DataserviceService) { }
   logo:any;
-  resid=10;
+  clearvalue:any;
+  value_logo_url=true;
+  x:any;
+  // resid=10;
+  resid:any=localStorage.getItem('Restaurant_id');
+
   ngOnInit(): void {
   }
   goto_MenuDatapage(e:any){
     console.log(e,this.logo,this.resid);
-     
+    
    this.Logo.logosubmit(e,this.logo,this.resid).subscribe((data:any)=>{
      console.log(data);
      if(data.suc==1){
-      this.router.navigate(['/menudata'])
+       this.clearvalue=document.getElementById('url');
+       this.clearvalue.value=''
+     this.router.navigate(['/menudata'])
      }
      else{
-       
+          this.myFunction();
      }
    })
-    //  this.router.navigate(['/menudata'])
+     
   }
   selectimage(event:any){
    this.logo=event.target.files[0];
  }
+ myFunction() {
+  // Get the snackbar DIV
+  this.x = document.getElementById("snackbar");
+
+  // Add the "show" class to DIV
+  this.x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
+} 
+checkvalidity(event:any){
+  if(event.target.value!=''){
+    this.value_logo_url=false;
+  }
+  else{
+    this.value_logo_url=true;
+    
+  }
+}
 }

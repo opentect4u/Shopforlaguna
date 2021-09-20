@@ -6,7 +6,7 @@ import { url_set } from 'src/app/globalvar';
 })
 export class DataserviceService {
   url_reg = url_set.api_url + '/registration';
-
+ 
   // url_reg='http://localhost:3000/reg';
   constructor(private http: HttpClient) { }
   //submitting registration data
@@ -49,21 +49,18 @@ export class DataserviceService {
   submit_log(v: any) {
     return this.http.post(url_set.api_url + '', v)
   }
+  
   submit_breakfast_menu_setup(dt:any) {
-    // const formdata=new FormData();
-    // formdata.append('img',dt);
-    // console.log(formdata.get('img'))
-    // return this.http.post(url_set.api_url+'/upload',formdata)
-    // const formdata = new FormData();
-    // formdata.append('file', dt);
-    // formdata.append('cov_img',dt1);
-    // formdata.append('mul_img',dt2)
-    // console.log(formdata.getAll);
-    
-    // return this.http.post(url_set.api_url + '/upload', formdata
     return this.http.post(url_set.api_url + '/menu_setup', dt
-
     )
+  }
+
+  //TESTING PURPOSE
+  submit_breakfast_menu(v3:any) {
+    const formdata=new FormData();
+    formdata.append('files', v3);
+    // console.log(v3);
+    return this.http.post(url_set.api_url + '/testing',v3)
   }
   //For Menu Images in Restaurant
   submit_menu_setup(dt:any) {

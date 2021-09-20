@@ -46,7 +46,8 @@
                     <p>Please provide a url/website address where we can collect your logo.</p>
                     <form>
                         <label for="url">Enter the url:</label>
-                        <input type="text" id="url" name="url" value="" size="28" #logo><br>
+                        <input type="text" id="url" name="url" value="" size="28" #logo
+                        (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"><br>
                     </form>
                     <p style="font-style: italic">If we cannot collect the logo from your web site, we will contact you
                     </p>
@@ -55,7 +56,7 @@
             </div>
 
 
-            <button class="w3-button w3-green" type="submit" (click)="goto_MenuDatapage(logo.value)">Submit</button>
+            <button class="w3-button w3-green" type="submit" (click)="goto_MenuDatapage(logo.value)" [disabled]="value_logo_url">Submit</button>
 
 
         </div>
@@ -76,3 +77,5 @@
 
 
 </div>
+
+<div id="snackbar">Something Went Wrong Please Try After Sometime</div>
