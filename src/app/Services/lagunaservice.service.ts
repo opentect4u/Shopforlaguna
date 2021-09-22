@@ -109,4 +109,13 @@ get_admin_dashboard(){
 get_specific_admin_dashboard(v:any){
   return this.http.get(url_set.api_url+'/res_details?id='+v)
 }
+
+//menu_url
+get_menu_url(v:any){
+   return this.http.get(url_set.api_url+'/get_url?id='+v)
+}
+get_qrcode(v:any){
+  return this.http.post(url_set.api_url+'/generate_qr', v)
+
+}
 }

@@ -21,7 +21,7 @@ export class DataserviceService {
   }
   //country API
   getCountries() {
-    return this.http.get('https://restcountries.eu/rest/v2/all')
+    return this.http.get(url_set.api_url + '/country');
   }
   //retrieving package data for order
   getPackage() {

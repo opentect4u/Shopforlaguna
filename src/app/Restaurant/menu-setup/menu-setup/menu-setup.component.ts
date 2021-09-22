@@ -16,7 +16,9 @@ export class MenuSetupComponent implements OnInit {
    dinner_start:any='';
  Brunch_end:any='';
   Brunch_start:any='';
-
+  stor:any=[];
+  comma:any;
+  com:any=[];
 
   londondefault:any;
   lagunadefault:any;
@@ -203,27 +205,32 @@ export class MenuSetupComponent implements OnInit {
   constructor(private _data: DataserviceService,private lagunaserve:LagunaserviceService) { }
 
   ngOnInit(): void {
+
+
+
+  
     this.arr_brak_check.length=0;
     this.brunch_start='';
     this.brunch_end='';
     this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
+      this.cove_top.length=0;
       console.log(data);
       this.cove_top=data;
+      if(this.cove_top.length!=0){
+
+      
       for(let i=0;i<this.cove_top.msg.length;i++){
+        console.log(this.cove_top.msg[i].menu_id)
            if(this.cove_top.msg[i].menu_id==1){
                 
-          
-              //  if(this.cove_top.msg[i].cover_page_url!=''){
+            console.log("sadasda1");
+             
                  this.break_cover=this.cove_top.msg[i].cover_page_url;
                  this.break_top=this.cove_top.msg[i].top_img_url;
                  this.break_menu=this.cove_top.msg[i].menu_url;
                  console.log(this.break_menu);
                 
-              //  }
-              //  else{
-              //   this.break_cover="";
-              //   this.break_top=""
-              //  }
+             
                if(this.cove_top.msg[i].active_flag=='Y'){
                   this.check_break=document.getElementById('bkmenu');
                   this.check_break.checked=true;
@@ -235,20 +242,16 @@ export class MenuSetupComponent implements OnInit {
                 this.break_check='N';
                }
             }
-            if(this.cove_top.msg[i].menu_id==2){
+            else if(this.cove_top.msg[i].menu_id==2){
 
-          
-              // if(this.cove_top.msg[i].cover_page_url!=''){
+              console.log("sadasda3");
+             
                 this.launch_cover=this.cove_top.msg[i].cover_page_url;
                 this.launch_top=this.cove_top.msg[i].top_img_url;
                 this.launch_menu=this.cove_top.msg[i].menu_url;
+                console.log(this.launch_top,this.launch_cover);
 
-
-              // }
-              // else{
-              //  this.launch_cover="";
-              //  this.launch_top="";
-              // }
+            
               if(this.cove_top.msg[i].active_flag=='Y'){
                 this.check_launch=document.getElementById('paris');
                 this.check_launch.checked=true;
@@ -260,19 +263,11 @@ export class MenuSetupComponent implements OnInit {
               this.launch_check='N';
              }
            }
-           if(this.cove_top.msg[i].menu_id==3){
-
-          
-            // if(this.cove_top.msg[i].cover_page_url!=''){
+           else if(this.cove_top.msg[i].menu_id==3){
+            console.log("sadasda2");
               this.dinner_cover=this.cove_top.msg[i].cover_page_url;
               this.dinner_top=this.cove_top.msg[i].top_img_url;
               this.dinner_menu=this.cove_top.msg[i].menu_url;
-
-            // }
-            // else{
-            //  this.dinner_cover="";
-            //  this.dinner_top=""
-            // }
             if(this.cove_top.msg[i].active_flag=='Y'){
               this.check_dinner=document.getElementById('tokyo');
               this.check_dinner.checked=true;
@@ -284,9 +279,9 @@ export class MenuSetupComponent implements OnInit {
             this.brunch_check='N';
            }
            }
-           if(this.cove_top.msg[i].menu_id==4){
+           else if(this.cove_top.msg[i].menu_id==4){
 
-          
+            console.log("sadasda4");
             // if(this.cove_top.msg[i].cover_page_url!=''){
               this.brunch_cover=this.cove_top.msg[i].cover_page_url;
               this.brunch_top=this.cove_top.msg[i].top_img_url;
@@ -310,6 +305,7 @@ export class MenuSetupComponent implements OnInit {
          }
 
       }
+    }
     })
     this.lagunaserve.get_sec_url('1',this.resid).subscribe(data=>{
       console.log(data);
@@ -344,6 +340,9 @@ export class MenuSetupComponent implements OnInit {
       if(breakfast==''){
         this.lagunaserve.get_set_time('1',this.resid).subscribe((data:any)=>{
           this.arr_brak_check=data;
+        if(this.arr_brak_check.msg.length!=0){
+
+        
           this.breakfast_start=this.arr_brak_check.msg[0].start_time;
           this.breakfast_end=this.arr_brak_check.msg[0].end_time;
           this.brunch_start= this.breakfast_start;
@@ -417,7 +416,7 @@ export class MenuSetupComponent implements OnInit {
               this.sun=8;
              }
         }
-         
+      }
         })
         this.londondefault=false;
         this.lagunadefault=true;
@@ -441,6 +440,7 @@ export class MenuSetupComponent implements OnInit {
       else if(launch==''){
         this.lagunaserve.get_set_time('2',this.resid).subscribe(data=>{
           this.arr_brak_check=data;
+          if(this.arr_brak_check.msg.length!=0){
           this.launch_start=this.arr_brak_check.msg[0].start_time;
           this.launch_end=this.arr_brak_check.msg[0].end_time;
           this.brunch_start=this.launch_start;
@@ -512,6 +512,7 @@ export class MenuSetupComponent implements OnInit {
               this.sun_launch=8;
              }
       }
+    }
         })
         this.coc=document.getElementById('defaultOpen1');
         this.coc.className='active';
@@ -536,6 +537,7 @@ export class MenuSetupComponent implements OnInit {
       else if(dinner==''){
         this.lagunaserve.get_set_time('3',this.resid).subscribe(data=>{
           this.arr_brak_check=data;
+          if(this.arr_brak_check.msg.length!=0){
           this.dinner_start=this.arr_brak_check.msg[0].start_time;
           this.dinner_end=this.arr_brak_check.msg[0].end_time;
           this.brunch_start=this.dinner_start;
@@ -608,6 +610,7 @@ export class MenuSetupComponent implements OnInit {
               this.sun_dinner=8;
              }
       }
+    }
         })
         this.coc=document.getElementById('defaultOpen2');
         this.coc.className='active';
@@ -629,6 +632,7 @@ export class MenuSetupComponent implements OnInit {
       else if(brunch==''){
         this.lagunaserve.get_set_time('4',this.resid).subscribe(data=>{
           this.arr_brak_check=data;
+          if(this.arr_brak_check.msg.length!=0){
           this.Brunch_start=this.arr_brak_check.msg[0].start_time;
           this.Brunch_end=this.arr_brak_check.msg[0].end_time;
           this.brunch_start=this.Brunch_start;
@@ -701,6 +705,7 @@ export class MenuSetupComponent implements OnInit {
               this.sun_brunch=8;
              }
       }
+    }
         })
         this.coc=document.getElementById('defaultOpen3');
         this.coc.className='active';
@@ -719,8 +724,9 @@ export class MenuSetupComponent implements OnInit {
       }
      }
     if(localStorage.getItem('No_of_menu')=='T'){
+
       //IF select breakfast && launch
-   if(breakfast=='' && launch==''){
+    if(breakfast=='' && launch==''){
     this.coc=document.getElementById('defaultOpen');
     this.coc.className='active';
     this.coc.style.background = '#00477e;';
@@ -789,6 +795,7 @@ export class MenuSetupComponent implements OnInit {
           }
            if(this.arr_brak_check.msg.length==7){
             this.every=document.getElementById('vehicle1');
+            this.every.checked=true;
             this.mon_check=document.getElementById('vehicle2');
             this.mon_check.checked=true;
             this.tue_check=document.getElementById('vehicle3');
@@ -822,6 +829,9 @@ export class MenuSetupComponent implements OnInit {
       this.lagunaserve.get_set_time('1',this.resid).subscribe(data=>{
         console.log(data);
         this.arr_brak_check=data;
+        if(this.arr_brak_check.msg.length!=0){
+
+       
         this.breakfast_start=this.arr_brak_check.msg[0].start_time;
         this.breakfast_end=this.arr_brak_check.msg[0].end_time;
         this.brunch_start= this.breakfast_start;
@@ -894,6 +904,7 @@ export class MenuSetupComponent implements OnInit {
             this.sun=8;
            }
         }
+      }
       })
       this.coc=document.getElementById('defaultOpen');
       this.coc.className='active';
@@ -1018,6 +1029,7 @@ export class MenuSetupComponent implements OnInit {
     else if(launch=='' && brunch==''){
       this.lagunaserve.get_set_time('2',this.resid).subscribe(data=>{
         this.arr_brak_check=data;
+        console.log(data)
         this.launch_start=this.arr_brak_check.msg[0].start_time;
         this.launch_end=this.arr_brak_check.msg[0].end_time;
         this.brunch_start=this.launch_start;
@@ -1416,6 +1428,9 @@ export class MenuSetupComponent implements OnInit {
       this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
         console.log(data);
         this.cove_top=data;
+        if(this.cove_top.msg.length!=0){
+
+       
         for(let i=0;i<this.cove_top.msg.length;i++){
              if(this.cove_top.msg[i].menu_id==1){
                   
@@ -1430,11 +1445,15 @@ export class MenuSetupComponent implements OnInit {
                  }
               }
           }
+        }
       })
 
       this.lagunaserve.get_sec_url('1',this.resid).subscribe(data=>{
         console.log(data);
         this.break_sec=data
+        if(this.break_sec.msg.length!=0){
+
+       
         for(let i=0;i<this.break_sec.msg.length;i++)
         {
         
@@ -1448,7 +1467,7 @@ export class MenuSetupComponent implements OnInit {
            }
         }
         
-  
+      }
       })
        if((localStorage.getItem('No_of_menu')=='O')){
         if((localStorage.getItem('No_of_menu')=='O')&&(this.v==1)){
@@ -1488,6 +1507,9 @@ export class MenuSetupComponent implements OnInit {
 
             this.lagunaserve.get_set_time(v1,this.resid).subscribe((data:any)=>{
               this.arr_brak_check=data;
+              if(this.arr_brak_check.msg.length!=0){
+
+              
               this.breakfast_start=this.arr_brak_check.msg[0].start_time;
               this.breakfast_end=this.arr_brak_check.msg[0].end_time;
               this.brunch_start=this.breakfast_start;
@@ -1559,8 +1581,8 @@ export class MenuSetupComponent implements OnInit {
                   this.sun=8;
                  }
             }
-             
-            })
+          } 
+        })
 
           
   
@@ -1602,6 +1624,9 @@ export class MenuSetupComponent implements OnInit {
             this.WALL.style.color = 'white';
             this.lagunaserve.get_set_time('1',this.resid).subscribe((data:any)=>{
               this.arr_brak_check=data;
+              if(this.arr_brak_check.msg.length!=0){
+
+             
               this.breakfast_start=this.arr_brak_check.msg[0].start_time;
               this.breakfast_end=this.arr_brak_check.msg[0].end_time;
               this.brunch_start=this.breakfast_start;
@@ -1673,7 +1698,7 @@ export class MenuSetupComponent implements OnInit {
                   this.sun=8;
                  }
             }
-             
+          }
             })
             
            
@@ -1711,6 +1736,9 @@ export class MenuSetupComponent implements OnInit {
           this.WALL.style.color = 'white';
           this.lagunaserve.get_set_time('1',this.resid).subscribe((data:any)=>{
             this.arr_brak_check=data;
+            if(this.arr_brak_check.msg.length!=0){
+
+           
             this.breakfast_start=this.arr_brak_check.msg[0].start_time;
               this.breakfast_end=this.arr_brak_check.msg[0].end_time;
               this.brunch_start=this.breakfast_start;
@@ -1782,7 +1810,7 @@ export class MenuSetupComponent implements OnInit {
                 this.sun=8;
                }
           }
-           
+        }
           })
           
         
@@ -1820,8 +1848,13 @@ export class MenuSetupComponent implements OnInit {
       this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
         console.log(data);
         this.cove_top=data;
+       
+
+       if(this.cove_top.msg.length!=0){
+
+      
         for(let i=0;i<this.cove_top.msg.length;i++){
-             if(this.cove_top.msg[i].menu_id==1){
+             if(this.cove_top.msg[i].menu_id==2){
                   
             
                  if(this.cove_top.msg[i].cover_page_url!=''){
@@ -1834,11 +1867,15 @@ export class MenuSetupComponent implements OnInit {
                  }
               }
           }
+        }
       })
        
       this.lagunaserve.get_sec_url(v1,this.resid).subscribe(data=>{
         console.log(data);
         this.break_sec=data
+        if(this.break_sec.msg.length!=0){
+
+        
         for(let i=0;i<this.break_sec.msg.length;i++)
         {
           
@@ -1851,7 +1888,7 @@ export class MenuSetupComponent implements OnInit {
            }
             
         }
-        
+      }
   
       })
 
@@ -1890,6 +1927,8 @@ export class MenuSetupComponent implements OnInit {
        this.WALL.style.color = 'white';
        this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
          this.arr_brak_check=data;
+         if(this.arr_brak_check.msg.length!=0){
+
          this.launch_start=this.arr_brak_check.msg[0].start_time;
               this.launch_end=this.arr_brak_check.msg[0].end_time;
               this.brunch_start=this.launch_start;
@@ -1961,6 +2000,8 @@ export class MenuSetupComponent implements OnInit {
             this.sun_launch=8;
            }
     }
+  }
+
       })
       
      }
@@ -2000,7 +2041,10 @@ export class MenuSetupComponent implements OnInit {
           this.WALL.style.color = 'white';
 
           this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
+            console.log(data);
             this.arr_brak_check=data;
+            if(this.arr_brak_check.msg.length!=0){
+
             this.launch_start=this.arr_brak_check.msg[0].start_time;
               this.launch_end=this.arr_brak_check.msg[0].end_time;
               this.brunch_start=this.launch_start;
@@ -2049,6 +2093,7 @@ export class MenuSetupComponent implements OnInit {
               }
               if(this.arr_brak_check.msg.length==7) {
                 this.every=document.getElementById('vehicle1');
+                this.every.checked=true;
                 this.mon_check=document.getElementById('vehicle22');
                 this.mon_check.checked=true;
                 this.tue_check=document.getElementById('vehicle32');
@@ -2072,6 +2117,7 @@ export class MenuSetupComponent implements OnInit {
                 this.sun_launch=8;
                }
         }
+      }
           })
          
         }
@@ -2104,7 +2150,8 @@ export class MenuSetupComponent implements OnInit {
         this.WALL.style.color = 'white';
         this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
           this.arr_brak_check=data;
-          this.launch_start=this.arr_brak_check.msg[0].start_time;
+          if(this.arr_brak_check.msg.length!=0){
+             this.launch_start=this.arr_brak_check.msg[0].start_time;
           this.launch_end=this.arr_brak_check.msg[0].end_time;
           this.brunch_start=this.launch_start;
           this.brunch_end=this.launch_end;
@@ -2152,6 +2199,7 @@ export class MenuSetupComponent implements OnInit {
             }
             if(this.arr_brak_check.msg.length==7) {
               this.every=document.getElementById('vehicle1');
+              this.every.checked=true;
               this.mon_check=document.getElementById('vehicle22');
               this.mon_check.checked=true;
               this.tue_check=document.getElementById('vehicle32');
@@ -2175,6 +2223,7 @@ export class MenuSetupComponent implements OnInit {
               this.sun_launch=8;
              }
       }
+    }
         })
       }
     }
@@ -2187,8 +2236,9 @@ export class MenuSetupComponent implements OnInit {
       this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
         console.log(data);
         this.cove_top=data;
+        if(this.cove_top.msg.length!=0){
         for(let i=0;i<this.cove_top.msg.length;i++){
-             if(this.cove_top.msg[i].menu_id==1){
+             if(this.cove_top.msg[i].menu_id==3){
                   
             
                  if(this.cove_top.msg[i].cover_page_url!=''){
@@ -2201,11 +2251,13 @@ export class MenuSetupComponent implements OnInit {
                  }
               }
           }
+        }
       })
 
       this.lagunaserve.get_sec_url(v1,this.resid).subscribe(data=>{
         console.log(data);
         this.break_sec=data
+        if(this.break_sec.msg.length!=0){
         for(let i=0;i<this.break_sec.msg.length;i++)
         {
           if(this.break_sec.msg[i].sec_url!=''){
@@ -2216,7 +2268,7 @@ export class MenuSetupComponent implements OnInit {
 
            }
         }
-        
+      }
   
       })
  
@@ -2271,6 +2323,9 @@ export class MenuSetupComponent implements OnInit {
             this.WALL.style.color = 'white';
             this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
               this.arr_brak_check=data;
+              if(this.arr_brak_check.msg.length!=0){
+
+              
               this.dinner_start=this.arr_brak_check.msg[0].start_time;
               this.dinner_end=this.arr_brak_check.msg[0].end_time;
               this.brunch_start=this.dinner_start;
@@ -2343,6 +2398,7 @@ export class MenuSetupComponent implements OnInit {
                   this.sun_dinner=8;
                  }
           }
+        }
             })
       
           }
@@ -2382,6 +2438,9 @@ export class MenuSetupComponent implements OnInit {
               this.WALL.style.color = 'white';
               this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
               this.arr_brak_check=data;
+              if(this.arr_brak_check.msg.length!=0){
+
+              
               this.dinner_start=this.arr_brak_check.msg[0].start_time;
               this.dinner_end=this.arr_brak_check.msg[0].end_time;
               this.brunch_start=this.dinner_start;
@@ -2454,6 +2513,7 @@ export class MenuSetupComponent implements OnInit {
                     this.sun_dinner=8;
                    }
             }
+          }
               })
         
             }
@@ -2486,6 +2546,9 @@ export class MenuSetupComponent implements OnInit {
           this.WALL.style.color = 'white';
           this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
             this.arr_brak_check=data;
+            if(this.arr_brak_check.msg.length!=0){
+
+           
             this.dinner_start=this.arr_brak_check.msg[0].start_time;
             this.dinner_end=this.arr_brak_check.msg[0].end_time;
             this.brunch_start=this.dinner_start;
@@ -2558,6 +2621,7 @@ export class MenuSetupComponent implements OnInit {
                 this.sun_dinner=8;
                }
         }
+      }
           })
     
          }
@@ -2571,8 +2635,11 @@ export class MenuSetupComponent implements OnInit {
       this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
         console.log(data);
         this.cove_top=data;
+        if(this.cove_top.msg.length!=0){
+
+       
         for(let i=0;i<this.cove_top.msg.length;i++){
-             if(this.cove_top.msg[i].menu_id==1){
+             if(this.cove_top.msg[i].menu_id==4){
                   
             
                  if(this.cove_top.msg[i].cover_page_url!=''){
@@ -2585,10 +2652,14 @@ export class MenuSetupComponent implements OnInit {
                  }
               }
           }
+        }
       })
       this.lagunaserve.get_sec_url(v1,this.resid).subscribe(data=>{
         console.log(data);
         this.break_sec=data
+        if(this.break_sec.msg.length!=0){
+
+        
         for(let i=0;i<this.break_sec.msg.length;i++)
         {
           if(this.break_sec.msg[i].sec_url!=''){
@@ -2599,7 +2670,7 @@ export class MenuSetupComponent implements OnInit {
 
            }
         }
-        
+      }
   
       })
       console.log(this.v);
@@ -2764,6 +2835,8 @@ export class MenuSetupComponent implements OnInit {
       this.WALL.style.color = 'white';
       this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
         this.arr_brak_check=data;
+        if( this.arr_brak_check.msg.length!=0){
+       
         this.Brunch_start=this.arr_brak_check.msg[0].start_time;
         this.Brunch_end=this.arr_brak_check.msg[0].end_time;
         this.brunch_start=this.Brunch_start;
@@ -2836,6 +2909,8 @@ export class MenuSetupComponent implements OnInit {
             this.sun_brunch=8;
            }
     }
+       
+  }
       })
   
      }
@@ -3021,7 +3096,7 @@ export class MenuSetupComponent implements OnInit {
     }
   }
   opennextab(COVERPAGEURL: any, TOPIMAGEURL: any,MENUURL:any,SECTIONURL:any,hidevalue:any,v1:any,v2:any) {
-
+   console.log(this.v);
     localStorage.setItem('breakfast','');
     if(localStorage.getItem('No_of_menu')=='O'){
       if(this.v==0){
@@ -3090,7 +3165,7 @@ export class MenuSetupComponent implements OnInit {
     // this.sun=0;
       }
       else{
-        //snackbar
+       
         this. myFunction_forerror();
 
       }
@@ -3119,47 +3194,11 @@ export class MenuSetupComponent implements OnInit {
          console.log("data");
           if(this.success.suc==1){
              this.myFunction();
-            //  this.bkmenu=document.getElementById('bkmenu');
-            //  this.bkmenu.checked=false;
-            //  this.break_check='N';
-            //  this.bkmenu=document.getElementById('url');
-            //  this.bkmenu.value='';
-            //  this.bkmenu=document.getElementById('url_top');
-            //    this.bkmenu.value='';
-            //    this.bkmenu=document.getElementById('url_menu');
-            //    this.bkmenu.value='';
-            //    this.bkmenu=document.getElementById('Url_section');
-            //    this.bkmenu.value='';
-            //    this.bkmenu=document.getElementById('start');
-            //    this.bkmenu.value='';
-            //    this.bkmenu=document.getElementById('end');
-            //    this.bkmenu.value='';
+            
           }
        })
        console.log(this.storevalue);
-      //  this.mon_check=document.getElementById('vehicle1');
-      //  this.mon_check.checked=false;
-      //  this.mon_check=document.getElementById('vehicle2');
-      //      this.mon_check.checked=false;
-      //      this.tue_check=document.getElementById('vehicle3');
-      //      this.tue_check.checked=false;
-      //      this.wed_check=document.getElementById('vehicle4');
-      //      this.wed_check.checked=false;
-      //      this.thu_check=document.getElementById('vehicle5');
-      //      this.thu_check.checked=false;
-      //      this.fri_check=document.getElementById('vehicle6');
-      //      this.fri_check.checked=false;
-      //      this.sat_check=document.getElementById('vehicle7');
-      //      this.sat_check.checked=false;
-      //      this.sun_check=document.getElementById('vehicle8');
-      //      this.sun_check.checked=false;
-      //  this.mon=0;;
-      //  this.tue=0;
-      //  this.wed=0;
-      //  this.thu=0;
-      //  this.fri=0;
-      //  this.sat=0;
-      //  this.sun=0;
+     
 
       }
       else if(this.v==1){
@@ -3421,47 +3460,10 @@ export class MenuSetupComponent implements OnInit {
                  this.success=data;
                  if(this.success.suc==1){
                    this.myFunction();
-                  //  this.bkmenu=document.getElementById('tokyo');
-                  //  this.bkmenu.checked=false;
-                  //  this.brunch_check='N';
-                  //  this.bkmenu=document.getElementById('url_topbrunch');
-                  //  this.bkmenu.value='';
-                  //  this.bkmenu=document.getElementById('url_menubrunch');
-                  //    this.bkmenu.value='';
-                  //    this.bkmenu=document.getElementById('url_sectionbrunch');
-                  //    this.bkmenu.value='';
-                  //    this.bkmenu=document.getElementById('url_brunch');
-                  //    this.bkmenu.value='';
-                  //    this.bkmenu=document.getElementById('start_brunch');
-                  //    this.bkmenu.value='';
-                  //    this.bkmenu=document.getElementById('end_brunch');
-                  //    this.bkmenu.value='';
-       
+                
                  }
                })
-              //  this.mon_check=document.getElementById('vehicle13');
-              //  this.mon_check.checked=false;
-              //  this.mon_check=document.getElementById('vehicle23');
-              //  this.mon_check.checked=false;
-              //  this.tue_check=document.getElementById('vehicle33');
-              //  this.tue_check.checked=false;
-              //  this.wed_check=document.getElementById('vehicle43');
-              //  this.wed_check.checked=false;
-              //  this.thu_check=document.getElementById('vehicle53');
-              //  this.thu_check.checked=false;
-              //  this.fri_check=document.getElementById('vehicle63');
-              //  this.fri_check.checked=false;
-              //  this.sat_check=document.getElementById('vehicle73');
-              //  this.sat_check.checked=false;
-              //  this.sun_check=document.getElementById('vehicle83');
-              //  this.sun_check.checked=false;
-              //  this.mon_dinner=0;
-              //  this.tue_dinner=0;
-              //  this.wed_dinner=0;
-              //  this.thu_dinner=0;
-              //  this.fri_dinner=0;
-              //  this.sat_dinner=0;
-              //  this.sun_dinner=0;
+             
          }
          else if(this.v==1){
            this.v=2;
@@ -3483,47 +3485,11 @@ export class MenuSetupComponent implements OnInit {
                  this.success=data;
                  if(this.success.suc==1){
                    this.myFunction();
-                  //  this.bkmenu=document.getElementById('tokyo');
-                  //  this.bkmenu.checked=false;
-                  //  this.brunch_check='N';
-                  //  this.bkmenu=document.getElementById('url_topbrunch');
-                  //  this.bkmenu.value='';
-                  //  this.bkmenu=document.getElementById('url_menubrunch');
-                  //    this.bkmenu.value='';
-                  //    this.bkmenu=document.getElementById('url_sectionbrunch');
-                  //    this.bkmenu.value='';
-                  //    this.bkmenu=document.getElementById('url_brunch');
-                  //    this.bkmenu.value='';
-                  //    this.bkmenu=document.getElementById('start_brunch');
-                  //    this.bkmenu.value='';
-                  //    this.bkmenu=document.getElementById('end_brunch');
-                  //    this.bkmenu.value='';
-       
+                  
                  }
                })
-              //  this.mon_check=document.getElementById('vehicle13');
-              //  this.mon_check.checked=false;
-              //  this.mon_check=document.getElementById('vehicle23');
-              //  this.mon_check.checked=false;
-              //  this.tue_check=document.getElementById('vehicle33');
-              //  this.tue_check.checked=false;
-              //  this.wed_check=document.getElementById('vehicle43');
-              //  this.wed_check.checked=false;
-              //  this.thu_check=document.getElementById('vehicle53');
-              //  this.thu_check.checked=false;
-              //  this.fri_check=document.getElementById('vehicle63');
-              //  this.fri_check.checked=false;
-              //  this.sat_check=document.getElementById('vehicle73');
-              //  this.sat_check.checked=false;
-              //  this.sun_check=document.getElementById('vehicle83');
-              //  this.sun_check.checked=false;
-              //  this.mon_dinner=0;
-              //  this.tue_dinner=0;
-              //  this.wed_dinner=0;
-              //  this.thu_dinner=0;
-              //  this.fri_dinner=0;
-              //  this.sat_dinner=0;
-              //  this.sun_dinner=0;
+              
+             
          }
          else {
           this. myFunction_forerror();

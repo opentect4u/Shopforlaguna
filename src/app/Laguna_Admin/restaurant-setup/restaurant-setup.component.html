@@ -38,8 +38,8 @@
                     <button class="tablinks" (click)="openCity('tab7')" id="defaultOpen7">Special Notes</button>
                     <button class="tablinks" (click)="openCity('tab8')" id="defaultOpen8">About Us</button>
 
-                    <button class="tablinks" (click)="openCity('tab9')" id="defaultOpen9">Live Menus</button>
-                    <button class="tablinks" (click)="openCity('tab10')" id="defaultOpen10">QR Codes</button>
+                    <button class="tablinks" (click)="openCity('tab9')" id="defaultOpen9">Live Menu & QR-Code</button>
+                    <!-- <button class="tablinks" (click)="openCity('tab10')" id="defaultOpen10">QR Codes</button> -->
                 </div>
 
                 <div id="tab1" [hidden]="show_tab!='tab1'" class="tabcontent"><br><br>
@@ -565,6 +565,8 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                       </table>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
                 </div>
 
 
@@ -630,6 +632,7 @@
 
 
                         <form action="thanks-order.php" target="_self">
+                            
                             <button [hidden]="submit_show2" class="w3-button w3-green" type="submit" (click)="send_item(itemval.value);itemval.value=''">Submit </button>
                             <button [hidden]="!submit_show2" class="w3-button w3-green" type="submit" (click)="update_send_item(itemval.value);itemval.value=''">Update </button>
                         </form>
@@ -677,6 +680,7 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
                       </table>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
                     
                 </div>
 
@@ -809,6 +813,8 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
                       </table>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"   showFirstLastButtons  aria-label="Select page of users"></mat-paginator>
+
                 </div>
                 <div id="tab7" [hidden]="show_tab!='tab7'" class="tabcontent">
 
@@ -938,128 +944,62 @@
 
 
 
-                <div id="tab9" [hidden]="show_tab!='tab9'" class="tabcontent">
-                    <strong>MENU URL's</strong><br><br>
-                    <form class="form-inine">
-                        Breakfast URL: <input type="text" value="" size="100">
-                    </form> <br>
-                    <form class="form-inine">
-                        Lunch URL: <input type="text" value="" size="100">
-                    </form> <br>
-                    <form class="form-inine">
-                        Dinner URL: <input type="text" size="100">
-                    </form> <br>
-                    <form class="form-inine">
-                        Brunch URL: <input type="text" size="100">
-                    </form> <br>
-                    <form class="form-inine">
-                        Specials URL: <input type="text" size="100">
-                    </form><br><br>
-                    <strong>REDIRECT URL (to be used for Menu QR Code)</strong><br><br>
-                    <form class="form-inine">
-                        Bitly URL: <input type="text" size="120">
-                    </form><br>
-                    <strong>LANDING PAGE URL (to be used on vCard)</strong><br><br>
-                    <form class="form-inine">
-                        Bitly URL: <input type="text" size="120">
-                    </form><br><br>
-
-
-
-                    <strong>You can check any amendments by using the menu button below to view that menu. Always
-                        refresh the page before checking and clearing your cache memory if you need to.</strong>
+                <div id="tab9"  [hidden]="show_tab!='tab9'" class="tabcontent">
+    
+                    <div class="formTable">
+                    <div class="rowCustomFour">
+                            <div class="fieldSecFull">
+                            <label><strong>Menu URL</strong></label>
+                            <input type="url" value="{{url1}}" readonly id="headTitle" name="headTitle" value="" class="formCss" placeholder="URL" >
+                            </div>
+                    </div>
+                    </div>
+                    <hr>
+                    <div class="formTable">
+                    <div class="rowCustomFour">
+                            <div class="fieldSecFull">
+                            <label><strong> QR Code for Dynamic Menu</strong> </label>
+                            <a  href="{{getimagepath}}" download=""><img src="{{getimagepath}}" class="barcodeImg"></a>
+                            <button class="w3-button w3-green" type="submit" style="margin-left: 118%; margin-top: -8%;" (click)="gen_code()">Generate QR-Code </button>
+                        </div>
+                    </div>
+                    
+                    </div>
+                    <hr>
+                    
+                    <strong>You can check any amendments by using the menu button below to view that menu. Always refresh the page before checking and clearing your cache memory if you need to.</strong>	
                     <div style="overflow-x:auto;">
-                        <table width="100%" cellspacing="15">
-                            <tr>
-                                <th scope="col">BREAKFAST</th>
-                                <th scope="col">LUNCH</th>
-                                <th scope="col">DINNER</th>
-                                <th scope="col">BRUNCH</th>
-                                <th scope="col">SPECIALS</th>
-                            </tr>
-                            <tr bgcolor="#fff" align="center">
-                                <td><a href="https://shoplocallaguna.com/restaurants/the-cliff/breakfast.php"
-                                        target="popup"
-                                        onclick="window.open('https://shoplocallaguna.com/restaurants/the-cliff/breakfast.php','popup','width=400,height=500'); return false;">
-                                        VIEW</a></td>
-                                <td><a href="https://shoplocallaguna.com/restaurants/the-cliff/lunch.php" target="popup"
-                                        onclick="window.open('https://shoplocallaguna.com/restaurants/the-cliff/lunch.php','popup','width=400,height=500'); return false;">
-                                        VIEW</a></td>
-                                <td><a href="https://shoplocallaguna.com/restaurants/the-cliff/dinner.php"
-                                        target="popup" class="w3-container"
-                                        onclick="window.open('https://shoplocallaguna.com/restaurants/the-cliff/dinner.php','popup','width=400,height=500'); return false;">
-                                        VIEW</a></td>
-                                <td><a href="" target="popup" onclick="">
-                                        VIEW</a></td>
-                                <td><a href="" target="popup" onclick="">
-                                        VIEW</a></td>
-                            </tr><br>
-                        </table> <br><br><br><br>
-
-
-
-
+                    <table width="100%" cellspacing="15">
+                    <tr>
+                    <th scope="col">Breakfast</th>
+                    <th scope="col">Lunch</th>
+                    <th scope="col">Dinner</th>
+                    <th scope="col">Brunch</th>
+                    <th scope="col">Special</th>
+                    </tr>
+                    <tr bgcolor="#fff" align="center">
+                    <td><button class="w3-button w3-green"
+                    
+                    (click)="open_popup_window()">
+                    View</button></td>
+                    <td><button  class="w3-button w3-green" (click)="open_popup_window()"
+                    >
+                    View</button></td>
+                    <td><button class="w3-button w3-green" (click)="open_popup_window()"
+                   >
+                    View</button></td>
+                    <td><button class="w3-button w3-green" (click)="open_popup_window()">
+                    View</button></td>
+                    <td><button class="w3-button w3-green" (click)="open_popup_window()">
+                    View</button></td>
+                    </tr><br>	
+                    </table> <br>
+                    
+                    </div>
+                    <button class="w3-button w3-green" type="submit">Send Mail </button>
                     </div>
 
-                </div>
-
-                <div id="tab10" [hidden]="show_tab!='tab10'" class="tabcontent">
-
-                    <div class="row">
-                        <div class="w3-third">
-                            <strong>QR Code for Dynamic Menu</strong><br><br>
-                            <a href="images/qr-code-thecliff.png" download><img src="/assets/images/qr-code-thecliff.png"
-                                    width="60%" height="auto"></a><br><br>
-                            This points to the redirect URL.<br><br>
-
-                            <label>To replace the QR Code upload your image file</label>
-                            <form action="">
-                                <input type="file" id="myFile" name="filename"><br><br>
-                                <input type="submit">
-                            </form><br>
-                            <em>Click image to download for printing purposes</em><br>
-                        </div>
-                        <div class="w3-third">
-
-                            <strong>QR Code for vCard</strong><br><br>
-                            <a href="images/qr-code-thecliff.png" download><img src="/assets/images/qr-code-thecliff.png"
-                                    width="60%" height="auto"></a><br><br>
-                            This points to the vCard URL.<br><br>
-
-                            <label>To replace the QR Code upload your image file</label>
-                            <form action="">
-                                <input type="file" id="myFile" name="filename"><br><br>
-                                <input type="submit">
-                            </form><br>
-                            <em>Click image to download for printing purposes</em><br>
-                            <!-- </form> -->
-
-
-
-                        </div>
-                        <div class="w3-third">
-                            <strong>QR Code for Laguna Beach Fun Directory</strong><br><br>
-
-                            <a href="images/qr-code-thecliff.png" download><img src="/assets/images/qr-code-thecliff.png"
-                                    width="60%" height="auto"></a><br><br>
-                            This points to the Laguna Fun Map URL.<br><br>
-
-                            <label>To replace the QR Code upload your image file</label>
-                            <form action="">
-                                <input type="file" id="myFile" name="filename"><br><br>
-                                <input type="submit">
-                            </form><br>
-                            <em>Click image to download for printing purposes</em><br>
-                            <!-- </form> -->
-
-
-
-                        </div>
-                    </div>
-
-
-
-                </div>
+                
             </div>
 
         </div>

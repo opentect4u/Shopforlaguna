@@ -6,6 +6,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
+import { url_set } from 'src/app/globalvar';
+// import { url } from 'inspector';
 @Component({
   selector: 'app-restaurant-setup',
   templateUrl: './restaurant-setup.component.html',
@@ -27,6 +29,13 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  @ViewChild(MatPaginator) paginator1!: MatPaginator;
+  @ViewChild(MatSort) sort1!: MatSort;
+
+
+  @ViewChild(MatPaginator) paginator2!: MatPaginator;
+  @ViewChild(MatSort) sort2!: MatSort;
   storevalue: any=[];
   specialData:any;
   menufordesc: any;
@@ -102,6 +111,13 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  descriptionData:any;
  submit_show=false;
  iid:any;
+ menu_url_data:any;
+ menulength:any;
+ url_nm:any;
+ url1="http://localhost:4200/menu/";
+ sendpathdata="assets/the_cliff_logo.png";
+ getimagepath=url_set.api_url+'/';
+ imgcheck:any;
   ngOnInit(): void {
     // this.daycheck=document.getElementById('1');
     //   this.daycheck.checked=true;
@@ -111,10 +127,22 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.fetchdata();
     this.fetchdata1();
     this.fetchdata2();
+    this.admin_data.get_menu_url(this.r_id).subscribe(data=>{console.log(data)
+      this.menu_url_data=data;
+      this.menu_url_data=this.menu_url_data.msg;
+      this.getimagepath=this.menu_url_data[0].image? this.getimagepath+this.menu_url_data[0].image : this.getimagepath;
+      this.imgcheck=this.menu_url_data[0].image ? true : false;
+      console.log("imgcheck="+this.imgcheck);
+      this.menulength=this.menu_url_data.length;
+      console.log("length="+this.menulength)
+    })
     this.admin_data.get_specific_admin_dashboard(this.r_id).subscribe(data=>{console.log(data)
     this.dashboardData=data;
     this.dashboardData=this.dashboardData.msg;
     this.rest_nm=this.dashboardData[0].restaurant_name;
+    this.url_nm=this.rest_nm.replace(' ','_');
+    this.url1=this.url1+this.url_nm+'/'+btoa(this.r_id);
+    console.log(this.url1)
     this.rest_contact=this.dashboardData[0].contact_name;
     this.rest_phone=this.dashboardData[0].phone_no;
     this.rest_em=this.dashboardData[0].email;
@@ -154,6 +182,32 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   this.menuData=this.menuData.msg;
   })
   }
+  open_popup_window(){
+    window.open('http://localhost:4200/menu/'+this.rest_nm+'/'+btoa(this.r_id),'popup','width=400,height=500')
+  }
+  gen_code(){
+    this.getimagepath=url_set.api_url+'/';
+    this.admin_data.get_qrcode({url: this.url1, res_id: this.r_id, img: this.sendpathdata}).subscribe(data=>{console.log(data)
+      this.menu_url_data=data;
+      console.log({dt: this.menu_url_data});
+      
+      this.menu_url_data=this.menu_url_data.msg;
+      // this.getimagepath=this.getimagepath+this.menu_url_data[0].image
+      // this.imgcheck=this.menu_url_data[0].image ? true : false;
+
+      this.menulength=this.menu_url_data.length;
+      console.log("length="+this.menulength)
+      this.admin_data.get_menu_url(this.r_id).subscribe(data1=>{console.log(data1)
+        this.menu_url_data=data1;
+        this.menu_url_data=this.menu_url_data.msg;
+        this.getimagepath=this.getimagepath+this.menu_url_data[0].image
+        this.imgcheck=this.menu_url_data[0].image ? true : false;
+        console.log("imgcheck="+this.imgcheck);
+        this.menulength=this.menu_url_data.length;
+        console.log("length="+this.menulength)
+      })
+    })
+  }
   fetchdata(){
     
     this.admin_data.get_section_data(this.r_id,'').subscribe(data=>{console.log(data)
@@ -169,12 +223,18 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   }
   putdata2(v:any){
     this.dataSource2= new MatTableDataSource(v);
-    this.dataSource2.paginator=this.paginator;
-    this.dataSource2.sort=this.sort;
+    this.dataSource2.paginator=this.paginator2;
+    this.dataSource2.sort=this.sort2;
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    this.dataSource1.paginator = this.paginator1
+    this.dataSource1.sort = this.sort1;
+
+    this.dataSource2.paginator = this.paginator2;
+    this.dataSource2.sort = this.sort2;
   }
   send_about_us(v:any){
     if(v!='')
@@ -383,8 +443,8 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   }
   putdata1(v:any){
     this.dataSource1= new MatTableDataSource(v);
-    this.dataSource1.paginator=this.paginator;
-    this.dataSource1.sort=this.sort;
+    this.dataSource1.paginator=this.paginator1;
+    this.dataSource1.sort=this.sort1;
   }
   get_item_select1(v:any){
     this.i_data=v;
@@ -418,7 +478,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     })
   }
   fetchdata2(){
-    this.admin_data.get_item_data_desc(this.r_id).subscribe((data:any)=>{console.log(data)
+    this.admin_data.get_item_data_desc(this.r_id).subscribe(data=>{console.log(data)
       this.descriptionData=data;
       this.descriptionData=this.descriptionData.msg
     this.putdata2(this.descriptionData)
@@ -560,9 +620,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen10');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen10');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
       
 
     }
@@ -597,9 +657,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen10');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen10');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
       
 
     }
@@ -634,9 +694,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen10');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen10');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
       
 
     }
@@ -671,9 +731,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen10');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen10');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
       
 
     }
@@ -708,9 +768,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen10');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen10');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
       
 
     }
@@ -745,9 +805,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen10');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen10');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
       
 
     }
@@ -782,9 +842,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen10');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen10');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
       
 
     }
@@ -820,9 +880,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen10');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen10');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
       
 
     }
@@ -857,9 +917,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen10');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen10');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
       
 
     }
@@ -894,49 +954,49 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='#3F51B5'
       this.tab_el.style.color="white";
-      this.tab_el=document.getElementById('defaultOpen10');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen10');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
       
 
     }
-    if(v=='tab10'){
-      this.tab_el=document.getElementById('defaultOpen');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen1');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen2');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen33');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen4');
-      this.tab_el.style.background=''
-      this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen5');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen6');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen7');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen8');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen9');
-      this.tab_el.style.background='white'
-      this.tab_el.style.color="black";
-      this.tab_el=document.getElementById('defaultOpen10');
-      this.tab_el.style.background='#3F51B5'
-      this.tab_el.style.color="white";
+    // if(v=='tab10'){
+    //   this.tab_el=document.getElementById('defaultOpen');
+    //   this.tab_el.style.background='white'
+    //   this.tab_el.style.color="black";
+    //   this.tab_el=document.getElementById('defaultOpen1');
+    //   this.tab_el.style.background='white'
+    //   this.tab_el.style.color="black";
+    //   this.tab_el=document.getElementById('defaultOpen2');
+    //   this.tab_el.style.background='white'
+    //   this.tab_el.style.color="black";
+    //   this.tab_el=document.getElementById('defaultOpen33');
+    //   this.tab_el.style.background='white'
+    //   this.tab_el.style.color="black";
+    //   this.tab_el=document.getElementById('defaultOpen4');
+    //   this.tab_el.style.background=''
+    //   this.tab_el.style.color="black";
+    //   this.tab_el=document.getElementById('defaultOpen5');
+    //   this.tab_el.style.background='white'
+    //   this.tab_el.style.color="black";
+    //   this.tab_el=document.getElementById('defaultOpen6');
+    //   this.tab_el.style.background='white'
+    //   this.tab_el.style.color="black";
+    //   this.tab_el=document.getElementById('defaultOpen7');
+    //   this.tab_el.style.background='white'
+    //   this.tab_el.style.color="black";
+    //   this.tab_el=document.getElementById('defaultOpen8');
+    //   this.tab_el.style.background='white'
+    //   this.tab_el.style.color="black";
+    //   this.tab_el=document.getElementById('defaultOpen9');
+    //   this.tab_el.style.background='white'
+    //   this.tab_el.style.color="black";
+    //   this.tab_el=document.getElementById('defaultOpen10');
+    //   this.tab_el.style.background='#3F51B5'
+    //   this.tab_el.style.color="white";
       
 
-    }
+    // }
    this.show_tab=v;
    
   }

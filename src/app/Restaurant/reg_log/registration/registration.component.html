@@ -84,16 +84,17 @@
           <div class="fieldHalf">
           <select class="w3-input w3-padding-16 w3-border" name="country"  #country="ngModel" ngModel required>
             <option value="">Select Country</option>
-            <option *ngFor="let c of countryData" value="{{c.name}}">{{c.name}}</option>
+            <option *ngFor="let c of counry" value="{{c.id}}">{{c.name}}</option>
+          </select>
             <!-- <option value="select2">Select 2</option>
             <option value="select3">Select 3</option> -->
-          </select>
+          
           <div *ngIf="country.errors?.required && (country.dirty || country.touched)" class="text-danger">Country is required</div>
 
           </div>
           
           <div class="fieldHalf"><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Website"  name="Website" #Website="ngModel" ngModel>
-            <!-- <div *ngIf="Website.errors?.required && (Website.dirty || Website.touched)" class="text-danger">Website is required</div> -->
+            <div *ngIf="Website.errors?.required && (Website.dirty || Website.touched)" class="text-danger">Website is required</div>
           
           </div>
           </div>

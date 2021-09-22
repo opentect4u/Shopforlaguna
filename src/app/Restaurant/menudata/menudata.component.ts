@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 
 import { DataserviceService } from '../service/dataservice.service';
@@ -52,7 +53,7 @@ export class MenudataComponent implements OnInit {
   font:any;
   back:any;
   notice_flag:any;
-  constructor(private about:DataserviceService,private lagunaserve:LagunaserviceService) { }
+  constructor(private router:Router,private about:DataserviceService,private lagunaserve:LagunaserviceService) { }
 
   ngOnInit(): void {
    this.lagunaserve.get_special(this.res_id).subscribe(data=>{
@@ -167,7 +168,9 @@ nexttab1(e:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
         console.log(data);
         this.success=data
         if(this.success.suc==1){
-             this.myFunction();
+            //  this.myFunction();
+            this.router.navigate(['/thankyou'])
+
             //  this.clearall=document.getElementById('noticechecked');
             //  this.clearall.checked=false;
             //  this.notice_flag='N';

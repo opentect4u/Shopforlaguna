@@ -11,8 +11,13 @@ import { DataserviceService } from '../../service/dataservice.service';
 ]
 })
 export class LoginComponent implements OnInit {
+  v:any;
   message='';
-  constructor(private _data:DataserviceService,private router:Router,private lagunaserve:LagunaserviceService) { }
+  stor:any=[]; 
+com:any=[];
+comma:any;
+
+   constructor(private _data:DataserviceService,private router:Router,private lagunaserve:LagunaserviceService) { }
   logData:any;
   x:any;
   confirm_modal:any;
@@ -22,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
   // function for sending the login credentials
   logSubmit(v:any){
+
     // this.confirm_modal.style.display='block';
     console.log(v);
     this._data.submit_log(v).subscribe(data=>{
@@ -29,26 +35,101 @@ export class LoginComponent implements OnInit {
       this.logData=data;
       if(this.logData.suc>0)
       {
-        var id=this.logData.msg.restaurant_id;
-        console.log(id);
-        this.lagunaserve.getrestaurant_check_menu_setup(id).subscribe(data=>{
-          console.log(data);
-          // localStorage.setItem('Restaurant_id',)
-        })
-        // localStorage.setItem('token_rest_id','');
-        // alert('successful,need to change the password.');
-        this.router.navigate(['/changepass']);
-      }
-      // else if(this.logData.suc==1) {
-      //   alert('succesful,password has been changed.')
-      //   localStorage.setItem('token_rest_id','');
-       // this.router.navigate(['/dashboard'])
+          localStorage.setItem('Restaurant_id',this.logData.msg.restaurant_id);
+          localStorage.setItem('breakfast','active');
+          localStorage.setItem('dinner','active');
 
-      // }
-      // else{
-      //   this.message="Failed to log in. Please check your ID and Password"
-      //   this.myFunction()
-      // }
+          localStorage.setItem('launch','active');
+
+          localStorage.setItem('brunch','active');
+
+          localStorage.setItem('isloggedin','true');
+          this.lagunaserve.getrestaurant_check_menu_setup(this.logData.msg.restaurant_id).subscribe(data=>{
+            console.log(data);
+          
+
+            this.stor=data;
+       // for(let i=0;i<this.stor.msg.length;i++){
+            
+              localStorage.setItem('Restaurant_id',this.stor.msg[0].restaurant_id);
+              localStorage.setItem('Restaurant_name',this.stor.msg[0].contact_name);
+              localStorage.setItem('No_of_menu',this.stor.msg[0].menu_name);
+              localStorage.setItem('Restaurant_email',this.stor.msg[0].email_id);
+              if(this.stor.msg[0].menu!=null){
+                this.comma=this.stor.msg[0].menu;
+                this.com=this.comma.split(',');
+                console.log(this.com.length);
+                console.log(this.com);
+              }
+              else {
+                this.com.length=0;
+              }
+          
+              if(this.stor.msg[0].menu_name=='T'){
+                 if(this.com.length==1) {
+                   
+                      this.v=1;
+                      localStorage.setItem('V',this.v)
+                     
+                      for(let j=0;j<this.com.length;j++){
+                          if(this.com[j]==1){
+                              
+                            localStorage.setItem('breakfast','');
+
+                          }
+                          else if(this.com[j]==2){
+                            localStorage.setItem('launch','');
+
+                             
+                          }
+                          else if(this.com[j]==3){
+                            localStorage.setItem('dinner','');
+                             
+                          }
+                          else if(this.com[j]==4){
+                            localStorage.setItem('brunch','');
+                             
+                          }
+                      }
+                  }
+                  else if(this.com.length==2){
+                       
+                    for(let j=0;j<this.com.length;j++){
+                      if(this.com[j]==1){
+                          
+                        localStorage.setItem('breakfast','');
+
+                      }
+                      else if(this.com[j]==2){
+                        localStorage.setItem('launch','');
+
+                         
+                      }
+                      else if(this.com[j]==3){
+                        localStorage.setItem('dinner','');
+                         
+                      }
+                      else if(this.com[j]==4){
+                        localStorage.setItem('brunch','');
+                         
+                      }
+                  }
+                  }
+              }
+              
+              else if(this.stor.msg[0].menu_name=='U'){
+
+              }
+           
+           
+         
+          })
+        this.router.navigate(['/menu_setup']);
+      }
+      else {
+        this.router.navigate(['/changepass'])
+      }
+     
     },error=>{
       this.message="An error occurred"
       this.myFunction()})

@@ -20,6 +20,8 @@ import { RestaurantSetupComponent } from './Laguna_Admin/restaurant-setup/restau
 import { AdminloginComponent } from './Laguna_Admin/adminlogin/adminlogin.component';
 import { MenudataComponent } from './Restaurant/menudata/menudata.component';
 import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
+import { ThankyoupageComponent } from './thankyoupage/thankyoupage.component';
+import { UserMenuComponent } from './user/user-menu/user-menu.component';
 
 
 const routes: Routes = [
@@ -73,6 +75,7 @@ const routes: Routes = [
     path:'menu_setup',
     component:MenuSetupComponent
   },
+  
   {
     path:'dashboard',
     component:DashboardComponent
@@ -88,7 +91,15 @@ const routes: Routes = [
 {
   path:'logo-setup',
   component:LogosetupComponent
-}
+},
+{
+  path:'thankyou',
+  component:ThankyoupageComponent
+},
+  {
+    path:'menu/:rname/:rid',
+    component:UserMenuComponent
+  }
 
 ];
 

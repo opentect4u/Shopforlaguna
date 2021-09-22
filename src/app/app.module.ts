@@ -52,6 +52,8 @@ import { AdminloginComponent } from './Laguna_Admin/adminlogin/adminlogin.compon
 import {MatTableModule} from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ThankyoupageComponent } from './thankyoupage/thankyoupage.component';
+import { ConfirmationmailComponent } from './Restaurant/confirmationmail/confirmationmail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -109,7 +111,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     SectionimagesComponent,
     DisplaydaytimeComponent,
     MenudataComponent,
-    RestaurantSetupComponent
+    RestaurantSetupComponent,
+    ThankyoupageComponent,
+    ConfirmationmailComponent
     
   ],
 

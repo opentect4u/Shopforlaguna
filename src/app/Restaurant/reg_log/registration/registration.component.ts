@@ -17,12 +17,15 @@ export class RegistrationComponent implements OnInit {
    invalid_data=true;
    show_msg=false;
    countryData:any;
+   counry:any=[];
    x:any
   ngOnInit(): void {
     // function for retrieving countries
     this._data.getCountries().subscribe(data=>{
-      // console.log(data);
+      console.log(data);
       this.countryData=data;
+      console.log(this.countryData.msg);
+      this.counry=this.countryData.msg;
     })
   }
   // function for checking the existing email
@@ -36,9 +39,6 @@ export class RegistrationComponent implements OnInit {
     console.log("sadasdaasdasd")
 
        this.invalid_data=true;
-      // this.show_msg=true;
-      // this.click=document.getElementById('openmod');
-      // this.click.click();
       this.toastr.errorToastr('This mail id is already in use', 'Oops!');
     }
     else if(this.email_data.suc==1)
