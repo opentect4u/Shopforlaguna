@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 
@@ -9,9 +9,12 @@ import { DataserviceService } from '../service/dataservice.service';
   templateUrl: './menudata.component.html',
   styleUrls: ['./menudata.component.css']
 })
-export class MenudataComponent implements OnInit {
+export class MenudataComponent implements OnInit, AfterViewInit{
   name:any=localStorage.getItem('Restaurant_name');
   notice_check:any;
+  v:any=0;
+  abut=false;
+    not=true;
   position_id:any;
   header_title:any;
   notice_content:any;
@@ -54,8 +57,18 @@ export class MenudataComponent implements OnInit {
   back:any;
   notice_flag:any;
   constructor(private router:Router,private about:DataserviceService,private lagunaserve:LagunaserviceService) { }
+  ngAfterViewInit(): void {
+    if('notice' in localStorage){
+      this.abut=false;
+      this.not=false;
+      this.t1='notices';
+   }
+  }
 
   ngOnInit(): void {
+   
+       
+    
    this.lagunaserve.get_special(this.res_id).subscribe(data=>{
      console.log(data);
      this.notic=data;
@@ -132,6 +145,10 @@ export class MenudataComponent implements OnInit {
 }
 nexttab(e:any,e1:any){
    if(e=='notices'){
+    this.v=1;
+    this.abut=false;
+       this.not=false;
+    localStorage.setItem('notice',this.v);
       this.tab1=true;
       this.tab2=false;
       this.t1='notices';
@@ -162,6 +179,8 @@ nexttab(e:any,e1:any){
 }
 nexttab1(e:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
   if(e=='about'){
+    this.abut=false;
+    this.not=false;
     this.tab1=true;
     this.tab2=false;
     this.about.Notice(this.menu,this.position,v1,v3,v5,v6,this.res_id,this.notice_flag).subscribe(data=>{
@@ -171,32 +190,11 @@ nexttab1(e:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
             //  this.myFunction();
             this.router.navigate(['/thankyou'])
 
-            //  this.clearall=document.getElementById('noticechecked');
-            //  this.clearall.checked=false;
-            //  this.notice_flag='N';
-            //  this.clearall=document.getElementById('menuselect');
-            //  this.clearall.value='';
-            //  this.menu='';
-            //  this.clearall=document.getElementById('pos');
-            //  this.clearall.value='';
-            //  this.position='';
-            //  this.clearall=document.getElementById('headTitle');
-            //  this.clearall.value='';
-            //  this.clearall=document.getElementById('box');
-            //  this.clearall.value='';
-            //  this.clearall=document.getElementById('box2');
-            //  this.clearall.value='';
-            //  this.clearall=document.getElementById('spclMore');
-            //  this.clearall.value='';
             }
             else{
 
             }
-          //   localStorage.setItem('breakfast','');
-             
-          //   localStorage.setItem('launch','');
-          //  localStorage.setItem('dinner','');
-          //  localStorage.setItem('brunch','');
+        
     })
   }
 }

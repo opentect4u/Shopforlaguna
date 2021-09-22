@@ -205,11 +205,13 @@ export class MenuSetupComponent implements OnInit {
   constructor(private _data: DataserviceService,private lagunaserve:LagunaserviceService) { }
 
   ngOnInit(): void {
-
-
-
   
-    this.arr_brak_check.length=0;
+    if("value" in localStorage){
+      this.v=localStorage.getItem('value');
+  } else {
+    
+   }
+   this.arr_brak_check.length=0;
     this.brunch_start='';
     this.brunch_end='';
     this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
@@ -340,6 +342,7 @@ export class MenuSetupComponent implements OnInit {
       if(breakfast==''){
         this.lagunaserve.get_set_time('1',this.resid).subscribe((data:any)=>{
           this.arr_brak_check=data;
+          console.log(data);
         if(this.arr_brak_check.msg.length!=0){
 
         
@@ -488,7 +491,8 @@ export class MenuSetupComponent implements OnInit {
               this.sun_launch=8;
             }
             if(this.arr_brak_check.msg.length==7) {
-              this.every=document.getElementById('vehicle1');
+              this.every=document.getElementById('vehicle12');
+              this.every.checked=true
               this.mon_check=document.getElementById('vehicle22');
               this.mon_check.checked=true;
               this.tue_check=document.getElementById('vehicle32');
@@ -727,6 +731,7 @@ export class MenuSetupComponent implements OnInit {
 
       //IF select breakfast && launch
     if(breakfast=='' && launch==''){
+ 
     this.coc=document.getElementById('defaultOpen');
     this.coc.className='active';
     this.coc.style.background = '#00477e;';
@@ -826,6 +831,7 @@ export class MenuSetupComponent implements OnInit {
       //IF select breakfast && dinner
 
     else if(breakfast=='' && dinner==''){
+  
       this.lagunaserve.get_set_time('1',this.resid).subscribe(data=>{
         console.log(data);
         this.arr_brak_check=data;
@@ -881,6 +887,7 @@ export class MenuSetupComponent implements OnInit {
           }
           if(this.arr_brak_check.msg.length==7) {
             this.every=document.getElementById('vehicle1');
+            this.every.checked=true
             this.mon_check=document.getElementById('vehicle2');
             this.mon_check.checked=true;
             this.tue_check=document.getElementById('vehicle3');
@@ -929,6 +936,7 @@ export class MenuSetupComponent implements OnInit {
       //IF select breakfast && brunch
 
     else if(breakfast=='' && brunch==''){
+
       this.lagunaserve.get_set_time('1',this.resid).subscribe(data=>{
          
         this.arr_brak_check=data;
@@ -981,6 +989,7 @@ export class MenuSetupComponent implements OnInit {
           }
           else {
             this.every=document.getElementById('vehicle1');
+            this.every.checked=true;
             this.mon_check=document.getElementById('vehicle2');
             this.mon_check.checked=true;
             this.tue_check=document.getElementById('vehicle3');
@@ -1027,6 +1036,7 @@ export class MenuSetupComponent implements OnInit {
       //IF select launch && brunch
 
     else if(launch=='' && brunch==''){
+
       this.lagunaserve.get_set_time('2',this.resid).subscribe(data=>{
         this.arr_brak_check=data;
         console.log(data)
@@ -1077,7 +1087,8 @@ export class MenuSetupComponent implements OnInit {
             this.sun_launch=8;
           }
           if(this.arr_brak_check.msg.length==7) {
-            this.every=document.getElementById('vehicle1');
+            this.every=document.getElementById('vehicle12');
+            this.every.checked=true;
             this.mon_check=document.getElementById('vehicle22');
             this.mon_check.checked=true;
             this.tue_check=document.getElementById('vehicle32');
@@ -1122,7 +1133,7 @@ export class MenuSetupComponent implements OnInit {
       //IF select dinner && launch
 
     else if(launch=='' && dinner==''){
-
+ 
       this.coc=document.getElementById('defaultOpen1');
       this.coc.className='active';
       this.coc.style.background = '#00477e;';
@@ -1187,7 +1198,9 @@ export class MenuSetupComponent implements OnInit {
             this.sun_launch=8;
           }
           if(this.arr_brak_check.msg.length==7) {
-            this.every=document.getElementById('vehicle1');
+            this.every=document.getElementById('vehicle12');
+            this.every.checked=true;
+
             this.mon_check=document.getElementById('vehicle22');
             this.mon_check.checked=true;
             this.tue_check=document.getElementById('vehicle32');
@@ -1217,6 +1230,7 @@ export class MenuSetupComponent implements OnInit {
       //IF select dinner && brunch
 
     else if(dinner=='' && brunch==''){
+
       this.lagunaserve.get_set_time('3',this.resid).subscribe(data=>{
         this.arr_brak_check=data;
         this.dinner_start=this.arr_brak_check.msg[0].start_time;
@@ -1417,6 +1431,7 @@ export class MenuSetupComponent implements OnInit {
 }
   //For changing the tab
   openCity(e: any,v1:any) {
+    console.log("val:",this.v)
     this.brunch_start=0;
     this.brunch_end=0;
     if (e == 'London'){
@@ -1474,8 +1489,7 @@ export class MenuSetupComponent implements OnInit {
            this. myFunction_forerror();
         }
         else if(localStorage.getItem('No_of_menu')=='O'&&this.v!=1){
-          console.log("asdasdasdasdasd");
-               
+                  
           this.tab1 = false;
           this.tab2 = true;
           this.tab3 = true;
@@ -1558,6 +1572,8 @@ export class MenuSetupComponent implements OnInit {
                 }
                 if(this.arr_brak_check.msg.length==7) {
                   this.every=document.getElementById('vehicle1');
+                  this.every.checked=true;
+
                   this.mon_check=document.getElementById('vehicle2');
                   this.mon_check.checked=true;
                   this.tue_check=document.getElementById('vehicle3');
@@ -1675,6 +1691,8 @@ export class MenuSetupComponent implements OnInit {
                 }
                 if(this.arr_brak_check.msg.length==7){
                   this.every=document.getElementById('vehicle1');
+                  this.every.checked=true;
+
                   this.mon_check=document.getElementById('vehicle2');
                   this.mon_check.checked=true;
                   this.tue_check=document.getElementById('vehicle3');
@@ -1787,6 +1805,8 @@ export class MenuSetupComponent implements OnInit {
               }
               if(this.arr_brak_check.msg.length==7) {
                 this.every=document.getElementById('vehicle1');
+                this.every.checked=true;
+
                 this.mon_check=document.getElementById('vehicle2');
                 this.mon_check.checked=true;
                 this.tue_check=document.getElementById('vehicle3');
@@ -1822,22 +1842,22 @@ export class MenuSetupComponent implements OnInit {
       this.brunch_start='';
       this.brunch_end='';
       this.arr_brak_check.length=0;
-      this.every=document.getElementById('vehicle1');
-      this.every.checked=false;
-      this.mon_check=document.getElementById('vehicle2');
-      this.mon_check.checked=false;
-      this.tue_check=document.getElementById('vehicle3');
-      this.tue_check.checked=false;
-      this.wed_check=document.getElementById('vehicle4');
-      this.wed_check.checked=false;
-      this.thu_check=document.getElementById('vehicle5');
-      this.thu_check.checked=false;
-      this.fri_check=document.getElementById('vehicle6');
-      this.fri_check.checked=false;
-      this.sat_check=document.getElementById('vehicle7');
-      this.sat_check.checked=false;
-      this.sun_check=document.getElementById('vehicle8');
-      this.sun_check.checked=false;
+      // this.every=document.getElementById('vehicle1');
+      // this.every.checked=false;
+      // this.mon_check=document.getElementById('vehicle2');
+      // this.mon_check.checked=false;
+      // this.tue_check=document.getElementById('vehicle3');
+      // this.tue_check.checked=false;
+      // this.wed_check=document.getElementById('vehicle4');
+      // this.wed_check.checked=false;
+      // this.thu_check=document.getElementById('vehicle5');
+      // this.thu_check.checked=false;
+      // this.fri_check=document.getElementById('vehicle6');
+      // this.fri_check.checked=false;
+      // this.sat_check=document.getElementById('vehicle7');
+      // this.sat_check.checked=false;
+      // this.sun_check=document.getElementById('vehicle8');
+      // this.sun_check.checked=false;
 
       console.log(this.v);
 
@@ -1976,7 +1996,8 @@ export class MenuSetupComponent implements OnInit {
             this.sun_launch=8;
           }
           if(this.arr_brak_check.msg.length==7){
-            this.every=document.getElementById('vehicle1');
+            this.every=document.getElementById('vehicle12');
+            this.every.checked=true;
             this.mon_check=document.getElementById('vehicle22');
             this.mon_check.checked=true;
             this.tue_check=document.getElementById('vehicle32');
@@ -2092,7 +2113,7 @@ export class MenuSetupComponent implements OnInit {
                 this.sun_launch=8;
               }
               if(this.arr_brak_check.msg.length==7) {
-                this.every=document.getElementById('vehicle1');
+                this.every=document.getElementById('vehicle12');
                 this.every.checked=true;
                 this.mon_check=document.getElementById('vehicle22');
                 this.mon_check.checked=true;
@@ -2198,7 +2219,7 @@ export class MenuSetupComponent implements OnInit {
               this.sun_launch=8;
             }
             if(this.arr_brak_check.msg.length==7) {
-              this.every=document.getElementById('vehicle1');
+              this.every=document.getElementById('vehicle12');
               this.every.checked=true;
               this.mon_check=document.getElementById('vehicle22');
               this.mon_check.checked=true;
@@ -2241,13 +2262,15 @@ export class MenuSetupComponent implements OnInit {
              if(this.cove_top.msg[i].menu_id==3){
                   
             
-                 if(this.cove_top.msg[i].cover_page_url!=''){
+                 if(this.cove_top.msg.length!=0){
                    this.dinner_cover=this.cove_top.msg[i].cover_page_url;
                    this.dinner_top=this.cove_top.msg[i].top_img_url;
+                   this.dinner_menu=this.cove_top.msg[i].menu_url;
                  }
                  else{
                   this.dinner_cover="";
-                  this.dinner_top=""
+                  this.dinner_top="";
+                  this.dinner_menu="";
                  }
               }
           }
@@ -2272,22 +2295,7 @@ export class MenuSetupComponent implements OnInit {
   
       })
  
-      this.every=document.getElementById('vehicle1');
-      this.every.checked=false;
-      this.mon_check=document.getElementById('vehicle2');
-      this.mon_check.checked=false;
-      this.tue_check=document.getElementById('vehicle3');
-      this.tue_check.checked=false;
-      this.wed_check=document.getElementById('vehicle4');
-      this.wed_check.checked=false;
-      this.thu_check=document.getElementById('vehicle5');
-      this.thu_check.checked=false;
-      this.fri_check=document.getElementById('vehicle6');
-      this.fri_check.checked=false;
-      this.sat_check=document.getElementById('vehicle7');
-      this.sat_check.checked=false;
-      this.sun_check=document.getElementById('vehicle8');
-      this.sun_check.checked=false;
+    
      
         if(localStorage.getItem('No_of_menu')=='O'){
           if((localStorage.getItem('No_of_menu')=='O')&&(this.v==1)){
@@ -2438,6 +2446,7 @@ export class MenuSetupComponent implements OnInit {
               this.WALL.style.color = 'white';
               this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
               this.arr_brak_check=data;
+              console.log(data);
               if(this.arr_brak_check.msg.length!=0){
 
               
@@ -2642,7 +2651,7 @@ export class MenuSetupComponent implements OnInit {
              if(this.cove_top.msg[i].menu_id==4){
                   
             
-                 if(this.cove_top.msg[i].cover_page_url!=''){
+                 if(this.cove_top.msg.length!=0){
                    this.brunch_cover=this.cove_top.msg[i].cover_page_url;
                    this.brunch_top=this.cove_top.msg[i].top_img_url;
                  }
@@ -2726,6 +2735,7 @@ export class MenuSetupComponent implements OnInit {
           this.WALL.style.color = 'white';
           this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
             this.arr_brak_check=data;
+            if(this.arr_brak_check.msg.length!=0){
             this.Brunch_start=this.arr_brak_check.msg[0].start_time;
             this.Brunch_end=this.arr_brak_check.msg[0].end_time;
             this.brunch_start=this.Brunch_start;
@@ -2798,6 +2808,7 @@ export class MenuSetupComponent implements OnInit {
                 this.sun_brunch=8;
                }
         }
+      }
           })
          }
         }
@@ -3122,47 +3133,11 @@ export class MenuSetupComponent implements OnInit {
       console.log("data");
        if(this.success.suc==1){
           this.myFunction();
-          // this.bkmenu=document.getElementById('bkmenu');
-          // this.bkmenu.checked=false;
-          // this.break_check='N';
-          // this.bkmenu=document.getElementById('url');
-          // this.bkmenu.value='';
-          // this.bkmenu=document.getElementById('url_top');
-          //   this.bkmenu.value='';
-          //   this.bkmenu=document.getElementById('url_menu');
-          //   this.bkmenu.value='';
-          //   this.bkmenu=document.getElementById('Url_section');
-          //   this.bkmenu.value='';
-          //   this.bkmenu=document.getElementById('start');
-          //   this.bkmenu.value='';
-          //   this.bkmenu=document.getElementById('end');
-          //   this.bkmenu.value='';
+         
        }
     })
     console.log(this.storevalue);
-    // this.mon_check=document.getElementById('vehicle1');
-    // this.mon_check.checked=false;
-    // this.mon_check=document.getElementById('vehicle2');
-    //     this.mon_check.checked=false;
-    //     this.tue_check=document.getElementById('vehicle3');
-    //     this.tue_check.checked=false;
-    //     this.wed_check=document.getElementById('vehicle4');
-    //     this.wed_check.checked=false;
-    //     this.thu_check=document.getElementById('vehicle5');
-    //     this.thu_check.checked=false;
-    //     this.fri_check=document.getElementById('vehicle6');
-    //     this.fri_check.checked=false;
-    //     this.sat_check=document.getElementById('vehicle7');
-    //     this.sat_check.checked=false;
-    //     this.sun_check=document.getElementById('vehicle8');
-    //     this.sun_check.checked=false;
-    // this.mon=0;;
-    // this.tue=0;
-    // this.wed=0;
-    // this.thu=0;
-    // this.fri=0;
-    // this.sat=0;
-    // this.sun=0;
+    
       }
       else{
        
@@ -3224,47 +3199,10 @@ export class MenuSetupComponent implements OnInit {
          console.log("data");
           if(this.success.suc==1){
              this.myFunction();
-            //  this.bkmenu=document.getElementById('bkmenu');
-            //  this.bkmenu.checked=false;
-            //  this.break_check='N';
-            //  this.bkmenu=document.getElementById('url');
-            //  this.bkmenu.value='';
-            //  this.bkmenu=document.getElementById('url_top');
-            //    this.bkmenu.value='';
-            //    this.bkmenu=document.getElementById('url_menu');
-            //    this.bkmenu.value='';
-            //    this.bkmenu=document.getElementById('Url_section');
-            //    this.bkmenu.value='';
-            //    this.bkmenu=document.getElementById('start');
-            //    this.bkmenu.value='';
-            //    this.bkmenu=document.getElementById('end');
-            //    this.bkmenu.value='';
+            
           }
        })
        console.log(this.storevalue);
-      //  this.mon_check=document.getElementById('vehicle1');
-      //  this.mon_check.checked=false;
-      //  this.mon_check=document.getElementById('vehicle2');
-      //      this.mon_check.checked=false;
-      //      this.tue_check=document.getElementById('vehicle3');
-      //      this.tue_check.checked=false;
-      //      this.wed_check=document.getElementById('vehicle4');
-      //      this.wed_check.checked=false;
-      //      this.thu_check=document.getElementById('vehicle5');
-      //      this.thu_check.checked=false;
-      //      this.fri_check=document.getElementById('vehicle6');
-      //      this.fri_check.checked=false;
-      //      this.sat_check=document.getElementById('vehicle7');
-      //      this.sat_check.checked=false;
-      //      this.sun_check=document.getElementById('vehicle8');
-      //      this.sun_check.checked=false;
-      //  this.mon=0;;
-      //  this.tue=0;
-      //  this.wed=0;
-      //  this.thu=0;
-      //  this.fri=0;
-      //  this.sat=0;
-      //  this.sun=0;
 
       }
       else{
@@ -3296,65 +3234,18 @@ export class MenuSetupComponent implements OnInit {
        console.log("data");
         if(this.success.suc==1){
            this.myFunction();
-          //  this.bkmenu=document.getElementById('bkmenu');
-          //  this.bkmenu.checked=false;
-          //  this.break_check='N';
-          //  this.bkmenu=document.getElementById('url');
-          //  this.bkmenu.value='';
-          //  this.bkmenu=document.getElementById('url_top');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('url_menu');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('Url_section');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('start');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('end');
-          //    this.bkmenu.value='';
+        
         }
      })
      console.log(this.storevalue);
-    //  this.mon_check=document.getElementById('vehicle1');
-    //  this.mon_check.checked=false;
-    //  this.mon_check=document.getElementById('vehicle2');
-    //      this.mon_check.checked=false;
-    //      this.tue_check=document.getElementById('vehicle3');
-    //      this.tue_check.checked=false;
-    //      this.wed_check=document.getElementById('vehicle4');
-    //      this.wed_check.checked=false;
-    //      this.thu_check=document.getElementById('vehicle5');
-    //      this.thu_check.checked=false;
-    //      this.fri_check=document.getElementById('vehicle6');
-    //      this.fri_check.checked=false;
-    //      this.sat_check=document.getElementById('vehicle7');
-    //      this.sat_check.checked=false;
-    //      this.sun_check=document.getElementById('vehicle8');
-    //      this.sun_check.checked=false;
-    //  this.mon=0;;
-    //  this.tue=0;
-    //  this.wed=0;
-    //  this.thu=0;
-    //  this.fri=0;
-    //  this.sat=0;
-    //  this.sun=0;
+  
     }
  
 
     this.brunch_end=0;
     this.brunch_start=0;
     
-   
-
-    // console.log(COVERPAGEURL + TOPIMAGEURL);
-    // this.t1 = 'London';
-    // this.t2 = 'Paris';
-    // this.tab2 = false;
-    // this.tab1 = true;
-    // this.tab3 = true;
-    // this.tab4 = true;
-    // this.paris = document.getElementById('Paris');
-    // this.paris.className = 'active';
-
+  
 
   }
 
@@ -3598,7 +3489,7 @@ export class MenuSetupComponent implements OnInit {
       if(this.v==0){
            this.v=1
            this.storevalue.length=0;
-    this.storevalue.push({
+           this.storevalue.push({
           "coverurl": v1,
           "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
           "restaurant_id":this.resid,
@@ -3616,46 +3507,10 @@ export class MenuSetupComponent implements OnInit {
           this.success=data;
           if(this.success.suc==1){
             this.myFunction();
-            // this.bkmenu=document.getElementById('paris');
-            // this.bkmenu.checked=false;
-            // this.launch_check='N';
-            // this.bkmenu=document.getElementById('url_launch');
-            // this.bkmenu.value='';
-            // this.bkmenu=document.getElementById('url_launchtop');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('url_launchmenu');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('url_launchsection');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('start_launch');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('end_launch');
-            //   this.bkmenu.value='';
+          
           }
         })
-        // this.every=document.getElementById('vehicle12');
-        // this.every.checked=false;
-        // this.mon_check=document.getElementById('vehicle22');
-        // this.mon_check.checked=false;
-        // this.tue_check=document.getElementById('vehicle32');
-        // this.tue_check.checked=false;
-        // this.wed_check=document.getElementById('vehicle42');
-        // this.wed_check.checked=false;
-        // this.thu_check=document.getElementById('vehicle52');
-        // this.thu_check.checked=false;
-        // this.fri_check=document.getElementById('vehicle62');
-        // this.fri_check.checked=false;
-        // this.sat_check=document.getElementById('vehicle72');
-        // this.sat_check.checked=false;
-        // this.sun_check=document.getElementById('vehicle82');
-        // this.sun_check.checked=false;
-        // this.mon_launch=0;
-        // this.tue_launch=0;
-        // this.wed_launch=0;
-        // this.thu_launch=0;
-        // this.fri_launch=0;
-        // this.sat_launch=0;
-        // this.sun_launch=0;
+       
       }
       else{
    //Snackbar
@@ -3664,7 +3519,7 @@ export class MenuSetupComponent implements OnInit {
       }
     }
     else if(localStorage.getItem('No_of_menu')=='T'){
-            if(this.v==0){
+    if(this.v==0){
            this.v=1
            this.storevalue.length=0;
            this.storevalue.push({
@@ -3685,46 +3540,10 @@ export class MenuSetupComponent implements OnInit {
           this.success=data;
           if(this.success.suc==1){
             this.myFunction();
-            // this.bkmenu=document.getElementById('paris');
-            // this.bkmenu.checked=false;
-            // this.launch_check='N';
-            // this.bkmenu=document.getElementById('url_launch');
-            // this.bkmenu.value='';
-            // this.bkmenu=document.getElementById('url_launchtop');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('url_launchmenu');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('url_launchsection');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('start_launch');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('end_launch');
-            //   this.bkmenu.value='';
+           
           }
         })
-        // this.every=document.getElementById('vehicle12');
-        // this.every.checked=false;
-        // this.mon_check=document.getElementById('vehicle22');
-        // this.mon_check.checked=false;
-        // this.tue_check=document.getElementById('vehicle32');
-        // this.tue_check.checked=false;
-        // this.wed_check=document.getElementById('vehicle42');
-        // this.wed_check.checked=false;
-        // this.thu_check=document.getElementById('vehicle52');
-        // this.thu_check.checked=false;
-        // this.fri_check=document.getElementById('vehicle62');
-        // this.fri_check.checked=false;
-        // this.sat_check=document.getElementById('vehicle72');
-        // this.sat_check.checked=false;
-        // this.sun_check=document.getElementById('vehicle82');
-        // this.sun_check.checked=false;
-        // this.mon_launch=0;
-        // this.tue_launch=0;
-        // this.wed_launch=0;
-        // this.thu_launch=0;
-        // this.fri_launch=0;
-        // this.sat_launch=0;
-        // this.sun_launch=0;
+        
           }
           else if(this.v==1){
              this.v=2;
@@ -3747,51 +3566,14 @@ export class MenuSetupComponent implements OnInit {
           this.success=data;
           if(this.success.suc==1){
             this.myFunction();
-            // this.bkmenu=document.getElementById('paris');
-            // this.bkmenu.checked=false;
-            // this.launch_check='N';
-            // this.bkmenu=document.getElementById('url_launch');
-            // this.bkmenu.value='';
-            // this.bkmenu=document.getElementById('url_launchtop');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('url_launchmenu');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('url_launchsection');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('start_launch');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('end_launch');
-            //   this.bkmenu.value='';
+            
           }
         })
-        // this.every=document.getElementById('vehicle12');
-        // this.every.checked=false;
-        // this.mon_check=document.getElementById('vehicle22');
-        // this.mon_check.checked=false;
-        // this.tue_check=document.getElementById('vehicle32');
-        // this.tue_check.checked=false;
-        // this.wed_check=document.getElementById('vehicle42');
-        // this.wed_check.checked=false;
-        // this.thu_check=document.getElementById('vehicle52');
-        // this.thu_check.checked=false;
-        // this.fri_check=document.getElementById('vehicle62');
-        // this.fri_check.checked=false;
-        // this.sat_check=document.getElementById('vehicle72');
-        // this.sat_check.checked=false;
-        // this.sun_check=document.getElementById('vehicle82');
-        // this.sun_check.checked=false;
-        // this.mon_launch=0;
-        // this.tue_launch=0;
-        // this.wed_launch=0;
-        // this.thu_launch=0;
-        // this.fri_launch=0;
-        // this.sat_launch=0;
-        // this.sun_launch=0;
+       
           }
          else{
              //SnackBar
            this. myFunction_forerror();
-
           }
     }
     else {
@@ -3859,24 +3641,7 @@ export class MenuSetupComponent implements OnInit {
   
     this.brunch_start=0;
     this.brunch_end=0;
-    // if (e == 'Paris') {
-    //   this.storevalue.length = 0;
-    //   this.storevalue.push({
-    //     "coverimg": this.launchcoverimage, "topimg": this.launchtopimage, "menuimg": this.launchmenuimage, "coverurl": v1,
-    //     "topurl": v2
-    //   });
-    //   console.log(this.storevalue);
-    //   this.t1 = 'London';
-    //   this.t2 = 'Paris';
-    //   this.t3 = 'Tokyo';
-    //   this.tab1 = true;
-    //   this.tab2 = true;
-
-    //   this.tab3 = false;
-    //   this.tab4 = true;
-    //   this.paris = document.getElementById('Tokyo');
-    //   this.paris.className = 'active';
-    // }
+    
   }
   checkbrunch(event:any){
     if(event.target.checked){

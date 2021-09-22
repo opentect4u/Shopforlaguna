@@ -35,6 +35,7 @@ comma:any;
       this.logData=data;
       if(this.logData.suc>0)
       {
+        
           localStorage.setItem('Restaurant_id',this.logData.msg.restaurant_id);
           localStorage.setItem('breakfast','active');
           localStorage.setItem('dinner','active');
@@ -64,57 +65,127 @@ comma:any;
               else {
                 this.com.length=0;
               }
-          
-              if(this.stor.msg[0].menu_name=='T'){
-                 if(this.com.length==1) {
+              if(this.stor.msg[0].menu_name=='O'){
+                if(this.com.length==1) {
                    
-                      this.v=1;
-                      localStorage.setItem('V',this.v)
+                  this.v=1;
+                  localStorage.setItem('value',this.v);
+                  console.log(this.v,localStorage.getItem('value'));
                      
                       for(let j=0;j<this.com.length;j++){
-                          if(this.com[j]==1){
+                          if(this.com[j]=="1"){
                               
                             localStorage.setItem('breakfast','');
 
                           }
-                          else if(this.com[j]==2){
+                          else if(this.com[j]=="2"){
                             localStorage.setItem('launch','');
 
                              
                           }
-                          else if(this.com[j]==3){
+                          else if(this.com[j]=="3"){
                             localStorage.setItem('dinner','');
                              
                           }
-                          else if(this.com[j]==4){
+                          else if(this.com[j]=="4"){
                             localStorage.setItem('brunch','');
                              
                           }
                       }
                   }
+                  else if(this.com.length==0){
+                    this.v=0;
+                    localStorage.setItem('value',this.v);
+                   
+                  }
+              }
+              if(this.stor.msg[0].menu_name=='T'){
+               
+                 if(this.com.length==1) {
+                   
+                  this.v=1;
+                  localStorage.setItem('value',this.v);
+                  console.log(this.v,localStorage.getItem('value'));
+                     
+                      for(let j=0;j<this.com.length;j++){
+                          if(this.com[j]=="1"){
+                              
+                            localStorage.setItem('breakfast','');
+
+                          }
+                          else if(this.com[j]=="2"){
+                            localStorage.setItem('launch','');
+
+                             
+                          }
+                          else if(this.com[j]=="3"){
+                            localStorage.setItem('dinner','');
+                             
+                          }
+                          else if(this.com[j]=="4"){
+                            localStorage.setItem('brunch','');
+                             
+                          }
+                      }
+                  }
+                  else if(this.com.length==0){
+                    this.v=0;
+                    localStorage.setItem('value',this.v);
+                   
+                  }
                   else if(this.com.length==2){
-                       
-                    for(let j=0;j<this.com.length;j++){
-                      if(this.com[j]==1){
+                    this.v=2;
+                    localStorage.setItem('value',this.v);
+                      if(this.com[0]=="1" && this.com[1]=="2"){
                           
                         localStorage.setItem('breakfast','');
-
-                      }
-                      else if(this.com[j]==2){
                         localStorage.setItem('launch','');
+                        localStorage.setItem('dinner','active');
+                        localStorage.setItem('brunch','active');
+
+
+                      }
+                     if(this.com[0]=="1" && this.com[1]=="3"){
+                      localStorage.setItem('breakfast','');
+                      localStorage.setItem('launch','active');
+                      localStorage.setItem('dinner','');
+                      localStorage.setItem('brunch','active');
 
                          
                       }
-                      else if(this.com[j]==3){
-                        localStorage.setItem('dinner','');
-                         
-                      }
-                      else if(this.com[j]==4){
+                      if(this.com[0]=="1" && this.com[1]=="4"){
+                        localStorage.setItem('breakfast','');
+                        localStorage.setItem('launch','active');
+                        localStorage.setItem('dinner','active');
                         localStorage.setItem('brunch','');
                          
                       }
+                       if(this.com[0]=="2" && this.com[1]=="3"){
+                        localStorage.setItem('brunch','active');
+                        localStorage.setItem('breakfast','active');
+                        localStorage.setItem('launch','');
+                        localStorage.setItem('dinner','');
+                      }
+                      if(this.com[0]=="2" && this.com[1]=="4"){
+                        localStorage.setItem('brunch','');
+                        localStorage.setItem('breakfast','active');
+                        localStorage.setItem('launch','');
+                        localStorage.setItem('dinner','active');
+                      }
+                      if(this.com[0]=="2" && this.com[1]=="4"){
+                        localStorage.setItem('brunch','');
+                        localStorage.setItem('breakfast','active');
+                        localStorage.setItem('launch','');
+                        localStorage.setItem('dinner','active');
+                      }
+                      if(this.com[0]=="3" && this.com[1]=="4"){
+                        localStorage.setItem('brunch','');
+                        localStorage.setItem('breakfast','active');
+                        localStorage.setItem('launch','active');
+                        localStorage.setItem('dinner','');
+                      }
                   }
-                  }
+               
               }
               
               else if(this.stor.msg[0].menu_name=='U'){
@@ -124,7 +195,9 @@ comma:any;
            
          
           })
-        this.router.navigate(['/menu_setup']);
+        this.router.navigate(['/menu_setup']).then(()=>{
+        location.reload();
+        });
       }
       else {
         this.router.navigate(['/changepass'])

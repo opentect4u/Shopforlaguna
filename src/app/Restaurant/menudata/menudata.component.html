@@ -35,8 +35,8 @@
             <div class="w3-cell-row">
                 <div class="w3-container w3-full w3-cell w3-mobile">
                     <div class="tab">
-                        <button class="tablinks" (click)="openCity('aboutUs')" id="defaultOpen">About Us</button>
-                        <button class="tablinks" (click)="openCity('notices')" id="defaultOpen1"> Notices </button>
+                        <button class="tablinks" [disabled]='abut' (click)="openCity('aboutUs')" id="defaultOpen">About Us</button>
+                        <button class="tablinks" [disabled]='not' (click)="openCity('notices')" id="defaultOpen1"> Notices </button>
 
                     </div>
 
