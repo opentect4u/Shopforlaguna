@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { global_url_test } from '../global_url';
 import { url_set } from '../globalvar';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,18 @@ export class LagunaserviceService {
   _Url=global_url_test.URL+'promo';
   __url=global_url_test.URL+'holder_cling';
   holder_Url=global_url_test.URL+'holder_cling';
-  constructor(private http:HttpClient){ }
+  constructor(private http:HttpClient,private router:Router){ }
   postpackagedata(v:any){//For Package Api In Admin order setup Page 
     console.log(v);
        return this.http.post(this.Url,v)
+  }
+  //api for admin login
+  submit_log(v: any) {
+    return this.http.post(url_set.api_url + '/login', v)
+  }
+ logout_service(){
+    localStorage.clear();
+    this.router.navigate(['/admin/login'])
   }
   getpackagedata(){//For Package Api Get in Admin Order setup Page
     return this.http.get(this.Url);
@@ -79,6 +88,9 @@ get_item_data(res_id:any,menu_id:any,section_id:any){
   return this.http.get(url_set.api_url+'/items?id='+res_id + '&menu_id=' + menu_id+'&sec_id='+section_id)
   
 }
+get_item_data_desc(v:any){
+  return this.http.get(url_set.api_url+'/item_price?id='+v)
+}
 post_item_data_desc(dt:any){
   return this.http.post(url_set.api_url+"/item_price",dt)
 }
@@ -87,5 +99,14 @@ get_special(v:any){
 }
 post_special(dt:any){
   return this.http.post(url_set.api_url+'/notice',dt);
+}
+getrestaurant_check_menu_setup(v:any){
+  return this.http.get(url_set.api_url+ '/check_menu_setup?id='+v);
+}
+get_admin_dashboard(){
+  return this.http.get(url_set.api_url+'/res_details?id=')
+}
+get_specific_admin_dashboard(v:any){
+  return this.http.get(url_set.api_url+'/res_details?id='+v)
 }
 }

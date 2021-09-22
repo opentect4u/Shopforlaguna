@@ -47,7 +47,7 @@ export class DataserviceService {
   }
   //for login
   submit_log(v: any) {
-    return this.http.post(url_set.api_url + '', v)
+    return this.http.post(url_set.api_url + '/login', v)
   }
   
   submit_breakfast_menu_setup(dt:any) {

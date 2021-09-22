@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 import { DataserviceService } from '../../service/dataservice.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { DataserviceService } from '../../service/dataservice.service';
 })
 export class LoginComponent implements OnInit {
   message='';
-  constructor(private _data:DataserviceService,private router:Router) { }
+  constructor(private _data:DataserviceService,private router:Router,private lagunaserve:LagunaserviceService) { }
   logData:any;
   x:any;
   confirm_modal:any;
@@ -26,22 +27,28 @@ export class LoginComponent implements OnInit {
     this._data.submit_log(v).subscribe(data=>{
       console.log(data);
       this.logData=data;
-      if(this.logData.suc==2)
+      if(this.logData.suc>0)
       {
-        localStorage.setItem('token_rest_id','');
-        alert('successful,need to change the password.')
-        // this.router.navigate(['/changepass'])
+        var id=this.logData.msg.restaurant_id;
+        console.log(id);
+        this.lagunaserve.getrestaurant_check_menu_setup(id).subscribe(data=>{
+          console.log(data);
+          // localStorage.setItem('Restaurant_id',)
+        })
+        // localStorage.setItem('token_rest_id','');
+        // alert('successful,need to change the password.');
+        this.router.navigate(['/changepass']);
       }
-      else if(this.logData.suc==1) {
-        alert('succesful,password has been changed.')
-        localStorage.setItem('token_rest_id','');
+      // else if(this.logData.suc==1) {
+      //   alert('succesful,password has been changed.')
+      //   localStorage.setItem('token_rest_id','');
        // this.router.navigate(['/dashboard'])
 
-      }
-      else{
-        this.message="Failed to log in. Please check your ID and Password"
-        this.myFunction()
-      }
+      // }
+      // else{
+      //   this.message="Failed to log in. Please check your ID and Password"
+      //   this.myFunction()
+      // }
     },error=>{
       this.message="An error occurred"
       this.myFunction()})

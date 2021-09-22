@@ -16,12 +16,10 @@ import { LoginComponent } from './Restaurant/reg_log/login/login.component';
 import { OrderPageComponent } from './Restaurant/reg_log/order-page/order-page.component';
 import { PaymentPageComponent } from './Restaurant/reg_log/payment-page/payment-page.component';
 import { RegistrationComponent } from './Restaurant/reg_log/registration/registration.component';
-import { MenuComponent } from './Restaurant/menu/menu.component';
-import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
-import { SectionimagesComponent } from './Restaurant/sectionimages/sectionimages.component';
-import { DisplaydaytimeComponent } from './Restaurant/displaydaytime/displaydaytime.component';
-import { MenudataComponent } from './Restaurant/menudata/menudata.component';
 import { RestaurantSetupComponent } from './Laguna_Admin/restaurant-setup/restaurant-setup.component';
+import { AdminloginComponent } from './Laguna_Admin/adminlogin/adminlogin.component';
+import { MenudataComponent } from './Restaurant/menudata/menudata.component';
+import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
 
 
 const routes: Routes = [
@@ -33,6 +31,14 @@ const routes: Routes = [
   {
     path:'admin/restaurent',
     component:RestaurentComponent
+  },
+  {
+     path:'admin/login',
+     component:AdminloginComponent
+  },
+  {
+    path:'admin/restaurant_setup/:id',
+    component:RestaurantSetupComponent
   },
   {
     path:'admin/OrderPagesertup',
@@ -60,17 +66,8 @@ const routes: Routes = [
 
   },
   {
-    path:'order',
-    component:OrderPageComponent
-
-  },
-  {
     path:'payment/:id',
     component:PaymentPageComponent
-  },
-  {
-    path:'admin/restaurant_setup',
-    component:RestaurantSetupComponent
   },
   {
     path:'menu_setup',
@@ -85,25 +82,13 @@ const routes: Routes = [
     component:ChangepassComponent
   },
   {
-    path:'menu',
-    component:MenuComponent
-  },
-  {
-    path:'logo-setup',
-    component:LogosetupComponent
-  },
-  {
-    path:'sectionimage',
-    component:SectionimagesComponent
-  },
-  {
-    path:'displaydayandtime',
-    component:DisplaydaytimeComponent
-  },
-  {
     path:'menudata',
     component:MenudataComponent
-  }
+  },
+{
+  path:'logo-setup',
+  component:LogosetupComponent
+}
 
 ];
 
@@ -112,5 +97,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-

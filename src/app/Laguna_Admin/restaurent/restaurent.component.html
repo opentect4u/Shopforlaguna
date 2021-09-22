@@ -19,20 +19,62 @@
         <h5><strong>Database</strong></h5>
                 
                 You can locate a record by searching on any of the criteria shown below or scrolling through the list to find the entry. Clicking EDIT will bring up that restaurant's record.<br><br>
-                
-                <form class="form-inline" action="">
-                  <label for="rest">Restaurant:</label>
-                  <input type="text" id="rest" placeholder="Restaurant" name="rest">
-                  <label for="address" class="m-2">Address:</label>
-                  <input type="text" id="address" placeholder="Address" name="address">
-                  <label for="mobile" class="m-2">Mobile:</label>
-                  <input type="text" id="mobile" placeholder="Mobile" name="mobile">
-                  <label for="email" class="m-2">Email:</label>
-                  <input type="Email" id="Email" placeholder="Email" name="email">
-                  <button type="submit" class="btn btn-success m-2">SEARCH</button>
-                </form><br><br>
+                <mat-form-field appearance="standard">
+                    <mat-label>Filter</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+                  </mat-form-field>
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+                  
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef> # </th>
+                      <td mat-cell *matCellDef="let element">{{element.id}}  </td>
+                    </ng-container>
+                  
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="restaurant_name">
+                      <th mat-header-cell *matHeaderCellDef matSortHeader="restaurant_name"> Name </th>
+                      <td mat-cell *matCellDef="let element">{{element.restaurant_name}}</td>
+                    </ng-container>
+                  
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="phone_no">
+                      <th mat-header-cell *matHeaderCellDef matSortHeader="phone_no"> Phone </th>
+                      <td mat-cell *matCellDef="let element">{{element.phone_no}} </td>
+                    </ng-container>
+                  
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="email">
+                      <th mat-header-cell *matHeaderCellDef matSortHeader="email"> Email </th>
+                      <td mat-cell *matCellDef="let element">{{element.email}}  </td>
+                    </ng-container>
+                    <ng-container matColumnDef="edit">
+                        <th mat-header-cell class="text-center" *matHeaderCellDef > Manage </th>
+                        <td  mat-cell *matCellDef="let element">
+                         <div class="row">  
+                             <div class="col-sm-6">
+                            <a class="text-center" (click)="go_details(element.id)">
+                            <i class="fa fa-edit" style="color:blue;cursor:pointer" ></i>
+                        </a>
+                        </div> 
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-success  btn-sm" *ngIf="element.monthly_fee!=null">Active</button>    
+                            <button type="button" class="btn btn-warning  btn-sm" *ngIf="element.monthly_fee==null"><small>Pending</small></button> 
+                        </div>
+                        </div> 
+                    
+                    </td>
+                      </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+              <br><br>
               
-                <a  target="_self"><img src="assets/images/database-list.jpg" width="100%" height="auto"></a>
     
         
         
@@ -40,61 +82,10 @@
         
         
         </div>
-    <div class="w3-row-padding" style="margin:0 -16px">	
-    <div class="w3-twothird">
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    </div>
-            
-    </div>
-    </div>
-    <hr>
-    <div class="w3-container">
-    
-        
-        
-        
-    </div>
-    <hr>
-    <div class="w3-container">
-    
-        
-        
-        
-    </div>
-    <hr>
-    <div class="w3-container">
-    
-        
-        
-        
-        
-    </div>
-    <hr>
-    <div class="w3-container">
-    
-        
-        
-        
-        
-    </div>
-        
-    <br>
-    <hr>
-        <hr>
-        <hr>
-        <hr>
+  
         
     <!-- <?php echo file_get_contents("footer.html"); ?>	 -->
-    <app-footer></app-footer>
+    <!-- <app-footer></app-footer> -->
         <!-- </div> -->
         
     </div>

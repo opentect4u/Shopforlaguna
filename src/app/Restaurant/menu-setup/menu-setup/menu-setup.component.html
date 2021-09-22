@@ -1,7 +1,12 @@
 <div class="w3-white">
 
     <!-- Top container -->
-    <app-header></app-header>
+    <!-- <app-header></app-header> -->
+    <div class="w3-bar w3-top w3-highway-blue w3-large" style="z-index:4;height:42px">
+        <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Help</button>
+        <span class="w3-bar-item w3-left">Welcome, {{this.name}}</span>
+        <span class="w3-bar-item w3-right">SLL Platform</span>
+      </div>
 
     <!-- <?php echo file_get_contents("navigation-setup.html"); ?> -->
     <app-menu-setup-sidebar></app-menu-setup-sidebar>
@@ -27,11 +32,11 @@
             <div class="w3-cell-row">
                 <div class="w3-container w3-full w3-cell w3-mobile">
                     <div class="tab">
-                        <button class="tablinks" (click)="openCity('London')" id="defaultOpen">Breakfast</button>
-                        <button class="tablinks" (click)="openCity('Paris')"  id="defaultOpen1">Lunch</button>
-                        <button class="tablinks" (click)="openCity('Tokyo')"  id="defaultOpen2">Dinner</button>
-                        <button class="tablinks" (click)="openCity('Laguna')"  id="defaultOpen3">Brunch</button>
-                        <button class="tablinks" (click)="openCity('Shrewsbury')" [hidden]="true"  id="defaultOpen4">Specials</button>
+                        <button class="tablinks" [disabled]="londondefault" (click)="openCity('London','1')" id="defaultOpen">Breakfast</button>
+                        <button class="tablinks" [disabled]="parisdefault" (click)="openCity('Paris','2')"  id="defaultOpen1">Lunch</button>
+                        <button class="tablinks" [disabled]="tokyodefault" (click)="openCity('Tokyo','3')"  id="defaultOpen2">Dinner</button>
+                        <button class="tablinks" [disabled]="lagunadefault" (click)="openCity('Laguna','4')"  id="defaultOpen3">Brunch</button>
+                        <button class="tablinks" (click)="openCity('Shrewsbury','5')" [hidden]="true"  id="defaultOpen4">Specials</button>
                     </div>
 
                     <div id="London" class="tabcontent mt-1" [hidden]="tab1">
@@ -61,6 +66,7 @@
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url" name="url" value=""
                                     size="28" #COVERPAGEURL
+                                    value="{{break_cover}}"
                                     (keyup)="checkvalidity($event,'bc_url')" (change)="checkvalidity($event,'bc_url')">
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
@@ -81,7 +87,8 @@
                             Breakfast menu:
                             <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url_top" name="url" value=""
+                                <input type="text" id="url_top" name="url" 
+                                value="{{break_top}}"
                                     size="28" #TOPIMAGEURL 
                                     (keyup)="checkvalidity($event,'bt_url')" (change)="checkvalidity($event,'bt_url')">
                             </form>
@@ -102,7 +109,7 @@
                              Or, please provide a web site address/url where we can collect your menu content:
                              <form>
                                 <label for="url">Enter the url:</label> 
-                                <input type="text" id="url_menu" name="url" value=""
+                                <input type="text" id="url_menu" name="url" value="{{break_menu}}"
                                     size="28" #MENUURL
                                     (keyup)="checkvalidity($event,'bm_url')" (change)="checkvalidity($event,'bm_url')">
                             </form>
@@ -128,7 +135,9 @@
                                     Or, please provide a web site address/url where we can collect your menu content:
                                     <form>
                                         <label for="url">Enter the url:</label>
-                                        <input type="text" id="Url_section" name="Url"  size="28" #SECTIONURL
+                                        <input type="text" id="Url_section" name="Url" 
+                                        value="{{menu_sec}}"
+                                        size="28" #SECTIONURL
                                         (keyup)="checkvalidity($event,'bs_url')" (change)="checkvalidity($event,'bs_url')" >
                                     <!-- <input type="text" [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"> -->
     
@@ -157,14 +166,14 @@
                                     <div class="row">
                                    <div class="col-5">
                                     <form >
-                                        <input type="checkbox" id="vehicle1"  name="vehicle1" value="Bike" (change)="checkday($event,'everyday')">
+                                        <input type="checkbox" id="vehicle1"  name="vehicle"  (change)="checkday($event,'everyday')">
                                         <label for="vehicle1" class="m-2"> Every Day</label><br>
                                     </form>
         
                                     <form class="form-inline" >
                                         <input type="checkbox"  (change)="checkday($event,'monday')" name="vehicle2" id="vehicle2" >
                                         <label for="vehicle2"> Monday</label><br>
-                                        <input type="checkbox" (change)="checkday($event,'tuesday')" name="vehicle3" id="vehicle3" >
+                                        <input type="checkbox"  (change)="checkday($event,'tuesday')" name="vehicle3" id="vehicle3" >
                                         <label for="vehicle3"> Tuesday</label><br>
                                         <input type="checkbox"  (change)="checkday($event,'wednesday')" name="vehicle1" id="vehicle4" >
                                         <label for="vehicle1"> Wednesday</label><br>
@@ -185,12 +194,14 @@
                                     <form class="form-inline" action="">
                                         <label for="selfcling">Start Time:</label>
                                         <input type="time"
+
                                          (change)="checkbreakend($event,'start')"
-                                        id="start" name="selfcling" value="" size="4" #start_break ><br><br>
+                                        id="start" name="selfcling" value="{{breakfast_start}}" size="4" #start_break ><br><br>
                                         <label for="selfcling">End Time:</label>
                                         <input type="time" 
+                                        value="{{breakfast_end}}"
                                          (change)="checkbreakend($event,'end')"
-                                        id="end" name="selfcling" value="" size="4" #end_break >
+                                        id="end" name="selfcling"  size="4" #end_break >
                                     </form>
                                    </div>
                                    <div class="col-2"></div>
@@ -202,11 +213,15 @@
                             </div>                          
                             
                         <!-- <button class="w3-button w3-green" type="submit">Previous</button> -->
+                        <button
+                        class="w3-button w3-green m-1" type="submit"
+                        (click)="opennextab(COVERPAGEURL.value,TOPIMAGEURL.value,MENUURL.value,SECTIONURL.value,break.value,start_break.value,end_break.value)"
+                        >Save & Continue</button>
                         
-                         <button
+                         <!-- <button
                             class="w3-button w3-green m-1" type="submit" [disabled]="b_url || bc_url || bt_url || bm_url || bs_url || bstart_url || bend_url"
                             (click)="opennextab(COVERPAGEURL.value,TOPIMAGEURL.value,MENUURL.value,SECTIONURL.value,break.value,start_break.value,end_break.value)"
-                            >Save & Continue</button>
+                            >Save & Continue</button> -->
                           
                    </div>
                     <div id="Paris" class="tabcontent mt-1"  [hidden]="tab2">
@@ -239,7 +254,8 @@
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_launch" name="url" 
                                 (keyup)="checkvalidity($event,'lc_url')" (change)="checkvalidity($event,'lc_url')"
-                                    size="28" #launchcoverurl >
+                                    size="28" #launchcoverurl 
+                                    value="{{launch_cover}}">
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
                                 contact you</p>
@@ -261,6 +277,8 @@
                             <form>
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_launchtop" name="url" 
+                                 value="{{launch_top}}"
+
                                     size="28" #launchtopimageurl (keyup)="checkvalidity($event,'lt_url')" (change)="checkvalidity($event,'lt_url')">
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
@@ -286,6 +304,7 @@
                                 <label for="url">Enter the url:</label>
                                  <input type="text" id="url_launchmenu" name="url"
                                     size="28" #launchmenuurl 
+                                    value="{{launch_menu}}"
                                     (keyup)="checkvalidity($event,'lm_url')" (change)="checkvalidity($event,'lm_url')">
                             </form>
                             <p style="font-style: italic">If we cannot collect the content from your web site, we will
@@ -312,7 +331,9 @@
                                             
                                             <label for="url">Enter the url:</label>
                                             <input type="text"
-                                            (keyup)="checkvalidity($event,'ls_url')" (change)="checkvalidity($event,'ls_url')"
+                                            (keyup)="checkvalidity($event,'ls_url')"
+                                            value="{{launch_sec}}"
+                                            (change)="checkvalidity($event,'ls_url')"
                                             id="url_launchsection" name="Url"  size="28" #SECTIONURLAUNCH>
                                         <!-- <input type="text" [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"> -->
 
@@ -415,6 +436,7 @@
                                          <input type="time"
                                          (change)="checkblaunch($event,'start')"
                                           id="start_launch"  name="selfcling" 
+                                          value="{{launch_start}}"
                                         (change)="checkvalidity($event,'lstart')"
                                           
                                           size="4" #start_break><br><br>
@@ -423,6 +445,7 @@
                                         <input type="time"
                                         (change)="checkblaunch($event,'end')"
                                         id="end_launch" name="selfcling"
+                                        value="{{launch_end}}"
                                         (change)="checkvalidity($event,'lend')"
                                         size="4" #end_break>
                                     </form>
@@ -437,21 +460,19 @@
                             
                             
 
-                            <!-- <button class="w3-button w3-green" type="submit">Previous</button> -->
-                            <!-- <button
-                                class="w3-button w3-green m-1" type="submit" 
-                                (click)="opennextab(COVERPAGEURL.value,TOPIMAGEURL.value,MENUURL.value,SECTIONURL.value,
-                                SECTIONURLAUNCH.value)"
-                                >Save & Continue</button> -->
-                            <!-- </div> -->
+                         
 
 
-                        <!-- <button class="w3-button w3-green" type="submit" (click)="goprev('paris')">Previous</button>  -->
-                        <button
+                            <button
+                            class="w3-button w3-green m-1" type="submit"  
+                            
+                            (click)="opennextab1('Paris',launchcoverurl.value,launchtopimageurl.value,launchmenuurl.value,SECTIONURLAUNCH.value,launch.value,start_break.value,end_break.value)">Save & Continue</button>
+                    </div>
+                        <!-- <button
                             class="w3-button w3-green m-1" type="submit"  
                             [disabled]="lcc_url || lc_url || ls_url || lm_url || lt_url || lstart_url || lend_url"
                             (click)="opennextab1('Paris',launchcoverurl.value,launchtopimageurl.value,launchmenuurl.value,SECTIONURLAUNCH.value,launch.value,start_break.value,end_break.value)">Save & Continue</button>
-                    </div>
+                    </div> -->
 
                     <div id="Tokyo" class="tabcontent mt-1"  [hidden]="tab3">
                 
@@ -484,7 +505,8 @@
                                  <input type="text" id="url_brunch" name="url" 
                                 (keyup)="checkvalidity($event,'dc_url')" (change)="checkvalidity($event,'dc_url')"
 
-                                    size="28" #coverbrunchurl>
+                                    size="28" #coverbrunchurl
+                                    value="{{dinner_cover}}">
                             </form>
                             <p style="font-style: italic">If we cannot collect the photos from your web site, we will
                                 contact you</p>
@@ -508,6 +530,8 @@
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_topbrunch" name="url"
                                     size="28" #topurl
+                                value="{{dinner_top}}"
+                     
                                 (keyup)="checkvalidity($event,'dt_url')" (change)="checkvalidity($event,'dt_url')"
                                 >
                             </form>
@@ -532,6 +556,7 @@
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_menubrunch" name="url" 
                                     size="28" #MENUURLBRUNCH
+                                    value="{{dinner_menu}}"
                                 (keyup)="checkvalidity($event,'dm_url')" (change)="checkvalidity($event,'dm_url')"
                                 >
                             </form>
@@ -560,7 +585,7 @@
                                         <label for="url">Enter the url:</label>
                                         <input type="text" id="url_sectionbrunch" 
                                     (keyup)="checkvalidity($event,'ds_url')" (change)="checkvalidity($event,'ds_url')"
-
+                                        value="{{dinner_sec}}"
                                         name="Url"  size="28" #SECTIONURBRUNCH>
                                     <!-- <input type="text" [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"> -->
 
@@ -658,12 +683,14 @@
                                 <form class="form-inline" action="">
                                     <label for="selfcling">Start Time:</label>
                                     <input type="time" 
+                                    value="{{dinner_start}}"
+
                                      (change)="checkdinnertime($event,'start')"
                                     id="start_brunch" name="selfcling" value="" size="4" #start_break><br><br>
                                     <label for="selfcling">End Time:</label>
                                     <input type="time"
                                     (change)="checkdinnertime($event,'end')"
-                                    
+                                     value="{{dinner_end}}"
                                     id="end_brunch" name="selfcling" value="" size="4" #end_break>
                                 </form>
                                </div>
@@ -674,12 +701,15 @@
 
 
                         </div> 
-
-
-                        <!-- <button class="w3-button w3-green" type="submit" (click)="goprev('tokyo')">Previous</button> -->
+                               
                             <button 
-                            class="w3-button w3-green m-1" type="submit" [disabled]="d_url || dend_url || dstart_url || dc_url || dt_url || dm_url || ds_url"
+                            class="w3-button w3-green m-1" type="submit" 
                             (click)="opennextab2('Tokyo',SECTIONURBRUNCH.value,MENUURLBRUNCH.value,topurl.value,coverbrunchurl.value,brunch.value,start_break.value,end_break.value)">Save & Continue</button>
+
+                        
+                            <!-- <button 
+                            class="w3-button w3-green m-1" type="submit" [disabled]="d_url || dend_url || dstart_url || dc_url || dt_url || dm_url || ds_url"
+                            (click)="opennextab2('Tokyo',SECTIONURBRUNCH.value,MENUURLBRUNCH.value,topurl.value,coverbrunchurl.value,brunch.value,start_break.value,end_break.value)">Save & Continue</button> -->
                     </div>
 
                     <div id="Laguna" class="tabcontent mt-1"  [hidden]="tab4" >
@@ -716,6 +746,7 @@
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_dinner" name="url"
                                     size="28" #dinnercoverurl
+                                    value="{{brunch_cover}}"
                                 (keyup)="checkvalidity($event,'brc_url')" (change)="checkvalidity($event,'brc_url')"
                                 >
                             </form>
@@ -739,6 +770,8 @@
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_dinnertop" name="url" 
                                     size="28" #dinnertopurl
+                                value="{{brunch_top}}"
+
                                 (keyup)="checkvalidity($event,'brt_url')" (change)="checkvalidity($event,'brt_url')"
                                 >
                             </form>
@@ -764,6 +797,7 @@
                                 <label for="url">Enter the url:</label>
                                  <input type="text" id="url_dinnermenu" name="url"
                                     size="28" #dinnermenuurl
+                                    value="{{brunch_menu}}"
                                 (keyup)="checkvalidity($event,'brm_url')" (change)="checkvalidity($event,'brm_url')"
                                 >
                             </form>
@@ -792,7 +826,7 @@
                                         <label for="url">Enter the url:</label>
                                         <input type="text"
                                     (keyup)="checkvalidity($event,'brs_url')" (change)="checkvalidity($event,'brs_url')"
-                                        
+                                         value="{{brunch_sec}}"
                                         id="url_section" name="Url"  size="28" #SECTIONURlDINNER>
                                     <!-- <input type="text" [(ngModel)]="value.value" #name="ngModel" name="value{{i}}"> -->
 
@@ -889,9 +923,9 @@
                                <div class="col-5">
                                 <form class="form-inline" action="">
                                     <label for="selfcling">Start Time:</label>
-                                    <input type="time" id="start_dinner" name="selfcling" value="" size="4" #start_break (change)="checkstart($event)"><br><br>
+                                    <input type="time" id="start_dinner" name="selfcling" value="{{Brunch_start}}" size="4" #start_break (change)="checkstart($event)"><br><br>
                                     <label for="selfcling">End Time:</label>
-                                    <input type="time" id="end_dinner" name="selfcling" value="" size="4" #end_break (change)="checksend($event)">
+                                    <input type="time" id="end_dinner" name="selfcling" value="{{Brunch_end}}" size="4" #end_break (change)="checksend($event)">
                                 </form>
                                </div>
                                <div class="col-2"></div>
@@ -901,10 +935,13 @@
 
 
                         </div> 
-                     
-                        <!-- <button class="w3-button w3-green" type="submit" (click)="goprev('laguna')">Previous</button>  -->
+                          
+
                         <button
-                            class="w3-button w3-green m-1" [disabled]="br_url || brstart_url || brend_url || brc_url || brt_url || brm_url || brs_url" type="submit" (click)="opennextab3('laguna',dinnermenuurl.value,dinnertopurl.value,dinnercoverurl.value,SECTIONURlDINNER.value,dinner.value,start_break.value,end_break.value)">Save & Continue</button>
+                        class="w3-button w3-green m-1"  type="submit" (click)="opennextab3('laguna',dinnermenuurl.value,dinnertopurl.value,dinnercoverurl.value,SECTIONURlDINNER.value,dinner.value,start_break.value,end_break.value)">Save & Continue</button>
+                        
+                        <!-- <button
+                            class="w3-button w3-green m-1" [disabled]="br_url || brstart_url || brend_url || brc_url || brt_url || brm_url || brs_url" type="submit" (click)="opennextab3('laguna',dinnermenuurl.value,dinnertopurl.value,dinnercoverurl.value,SECTIONURlDINNER.value,dinner.value,start_break.value,end_break.value)">Save & Continue</button> -->
                     </div>
 
                     <!-- <div id="Shrewsbury" class="tabcontent"  [hidden]="tab5">

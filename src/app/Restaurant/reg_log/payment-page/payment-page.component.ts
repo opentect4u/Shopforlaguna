@@ -26,6 +26,13 @@ export class PaymentPageComponent implements OnInit {
       console.log(data);
        this.success=data;
        if(this.success.suc == 1){
+         localStorage.setItem('breakfast','active');
+         localStorage.setItem('launch','active');
+
+         localStorage.setItem('dinner','active');
+
+         localStorage.setItem('brunch','active');
+
          localStorage.setItem('No_of_menu',this.success.res.no_of_menu)
         localStorage.setItem('Restaurant_id',this.success.res.id);
         localStorage.setItem('Restaurant_email',this.success.res.email);

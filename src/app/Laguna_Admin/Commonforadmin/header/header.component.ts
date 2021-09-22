@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 
 @Component({
   selector: 'app-Header',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private logout_data:LagunaserviceService) { }
 
   ngOnInit(): void {
   }
-
+ logout(){
+   this.logout_data.logout_service();
+ }
+ show_alert(){
+   alert("hello")
+ }
 }

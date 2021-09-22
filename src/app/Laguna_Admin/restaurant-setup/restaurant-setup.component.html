@@ -59,16 +59,16 @@
                                         function msg() {
                                             alert("Click on File Record to view details");
                                         }
-                                    </script>The Cliff Restaurant
+                                    </script>{{rest_nm}}
                                 </td>
-                                <td>John Doe</td>
-                                <td>Laguna Beach 92651 CA</td>
-                                <td>(949) 123 4567</td>
-                                <td>info@thecliffrestaurant.com</td>
-                                <td>https://www.thecliffrestaurant.com/</td>
+                                <td>{{rest_contact}} </td>
+                                <td><small>{{rest_add}}</small></td>
+                                <td>{{rest_phone}}</td>
+                                <td><small>{{rest_em}}</small></td>
+                                <td>{{rest_web}}</td>
                             </tr>
                         </table> <br>
-                    </div>
+                    </div><br><br><br>
                     <div style="overflow-x:auto;">
                         <table width="100%" cellspacing="15">
                             <tr>
@@ -80,14 +80,14 @@
                             </tr>
                             <tr bgcolor="#fff" align="center">
                                 <td bgcolor="#f1f1f1">07/30/2021</td>
-                                <td>275.00</td>
-                                <td>45.00</td>
+                                <td>${{rest_setup}}</td>
+                                <td>${{rest_monthly}}</td>
                                 <td>08/30/2021</td>
                                 <td>00/00/0000</td>
                             </tr>
                         </table> <br>
                     </div>
-                    <div style="overflow-x:auto;">
+                    <!-- <div style="overflow-x:auto;">
                         <strong>REPORTS</strong><br><br>
                         <table width="100%" cellspacing="10">
                             <tr>
@@ -205,7 +205,7 @@
                                     </a></td>
                             </tr>
                         </table><br><br>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div id="tab2" [hidden]="show_tab!='tab2'" class="tabcontent">
@@ -473,15 +473,15 @@
                 <div id="tab4" [hidden]="show_tab!='tab4'" class="tabcontent">
 
 
-                    <div class="radioBtnSec"><label class="radioButtonName"><input type="radio" id="bkmenu"
+                    <div class="radioBtnSec"><label class="radioButtonName"><input type="radio" id="b1"
                                 name="bkmenu" (click)="store_menu(1);section_value.value=''" value="1"> Breakfast Menu</label>
-                        <label class="radioButtonName"><input type="radio" (click)="store_menu(2);section_value.value=''" id="bkmenu" name="bkmenu"
+                        <label class="radioButtonName"><input type="radio" (click)="store_menu(2);section_value.value=''" id="b2" name="bkmenu"
                                 value="2"> Lunch Menu</label>
-                        <label class="radioButtonName"><input type="radio" (click)="store_menu(3);section_value.value=''" id="bkmenu" name="bkmenu" value="3">
+                        <label class="radioButtonName"><input type="radio" (click)="store_menu(3);section_value.value=''" id="b3" name="bkmenu" value="3">
                             Dinner Menu</label>
-                        <label class="radioButtonName"><input type="radio" (click)="store_menu(4);section_value.value=''" id="bkmenu" name="bkmenu" value="4">
+                        <label class="radioButtonName"><input type="radio" (click)="store_menu(4);section_value.value=''" id="b4" name="bkmenu" value="4">
                             Brunch Menu</label>
-                        <label class="radioButtonName"><input type="radio" (click)="store_menu(5);section_value.value=''" id="bkmenu" name="bkmenu" value="5">
+                        <label class="radioButtonName"><input type="radio" (click)="store_menu(5);section_value.value=''" id="b5" name="bkmenu" value="5">
                             Specials Menu</label>
                     </div>
                     <div class="formTable">
@@ -491,7 +491,7 @@
                             <div class="rowCustomFour">
                                 <div class="fieldSecFull">
                                     <label>Section</label>
-                                    <input type="url" #section_value id="headTitle" name="headTitle" value="" class="formCss">
+                                    <input type="url"  #section_value id="headTitle" name="headTitle" value="{{sec_value}}" class="formCss">
 
                                 </div>
                             </div>
@@ -513,15 +513,58 @@
 
                             </div>
                         </form>
-
+                       
+    
 
 
                     </div>
 
                     <form action="thanks-order.php" target="_self">
-                        <button class="w3-button w3-green" (click)="create_section(section_value.value)" type="submit">Submit </button>
+                        <button [hidden]="submit_show" class="w3-button w3-green" (click)="create_section(section_value.value)" type="submit">Submit </button>
+                        <button [hidden]="!submit_show" class="w3-button w3-green" (click)="update_section(section_value.value);section_value.value='';" type="submit">Update </button>
                     </form>
+                    <br><br>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+                      </mat-form-field>
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+                       
+                        <ng-container matColumnDef="id">
+                          <th mat-header-cell *matHeaderCellDef> # </th>
+                          <td mat-cell *matCellDef="let element; let i=index">{{i+1}}  </td>
+                        </ng-container>
+                      
+                      
+                        <ng-container matColumnDef="section_name">
+                          <th mat-header-cell *matHeaderCellDef matSortHeader="section_name"> Section </th>
+                          <td mat-cell *matCellDef="let element">{{element.section_name}} </td>
+                        </ng-container>
+                      
+                     
+                        <ng-container matColumnDef="edit">
+                            <th mat-header-cell  *matHeaderCellDef > Edit </th>
+                            <td  mat-cell *matCellDef="let element">
+                            
+                                 <a (click)="get_sec_id(element.menu_id,element.id,element.section_name)">
+                                    <i class="fa fa-edit" style="color:blue;cursor:pointer" ></i>
 
+                                 </a>
+                               
+                           
+                            
+                            
+                                
+                            
+                            
+                        
+                        </td>
+                          </ng-container>
+                      
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
                 </div>
 
 
@@ -536,12 +579,12 @@
                                         <label>Menu</label>
                                         <select id="pickup_place" name="pickup_place" class="formCss" #menu_for_item (change)="select_section_with_menu(menu_for_item.value)">
                                             <option value="" selected="selected"  >Select One</option>
-                                            <option value="6">ALL Menus</option>
-                                            <option value="1">Breakfast</option>
-                                            <option value="2">Lunch</option>
-                                            <option value="3">Dinner</option>
-                                            <option value="4">Brunch</option>
-                                            <option value="5">Specials</option>
+                                            <option [selected]="mid2=='6'" value="6">ALL Menus</option>
+                                            <option [selected]="mid2=='1'" value="1">Breakfast</option>
+                                            <option [selected]="mid2=='2'" value="2">Lunch</option>
+                                            <option [selected]="mid2=='3'" value="3">Dinner</option>
+                                            <option [selected]="mid2=='4'" value="4">Brunch</option>
+                                            <option [selected]="mid2=='5'" value="5">Specials</option>
                                         </select>
 
                                     </div>
@@ -549,7 +592,7 @@
                                         <label>Section</label>
                                         <select id="pickup_place" #section_item name="pickup_place" class="formCss" (change)="get_section_item(section_item.value)">
                                             <option value="" selected="selected">Select One</option>
-                                            <option *ngFor="let s of get_section_for_item" value="{{s.id}}">{{s.section_name}}</option>
+                                            <option *ngFor="let s of get_section_for_item" [selected]="s.id==eid2" value="{{s.id}}">{{s.section_name}}</option>
                                             
 
                                         </select>
@@ -572,14 +615,14 @@
 
                                     <div class="fieldSecFull">
                                         <label>Item</label>
-                                         <input type="text" #itemval id="headTitle" name="headTitle" value=""
+                                         <input type="text" #itemval id="headTitle" name="headTitle" value="{{i_value}}"
                                             class="formCss">
                                         
 
                                     </div>
                                 </div>
                             </form>
-
+                           
 
 
                         </div>
@@ -587,13 +630,54 @@
 
 
                         <form action="thanks-order.php" target="_self">
-                            <button class="w3-button w3-green" type="submit" (click)="send_item(itemval.value);itemval.value=''">Submit </button>
+                            <button [hidden]="submit_show2" class="w3-button w3-green" type="submit" (click)="send_item(itemval.value);itemval.value=''">Submit </button>
+                            <button [hidden]="!submit_show2" class="w3-button w3-green" type="submit" (click)="update_send_item(itemval.value);itemval.value=''">Update </button>
                         </form>
-
+<br><br>
 
                     </div>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+                      </mat-form-field>
+                    <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
+    
+                       
+                        <ng-container matColumnDef="id">
+                          <th mat-header-cell *matHeaderCellDef> # </th>
+                          <td mat-cell *matCellDef="let element; let i=index">{{i+1}}  </td>
+                        </ng-container>
+                      
+                      
+                        <ng-container matColumnDef="item_name">
+                          <th mat-header-cell *matHeaderCellDef matSortHeader="item_name"> Item </th>
+                          <td mat-cell *matCellDef="let element">{{element.item_name}} </td>
+                        </ng-container>
+                      
+                     
+                        <ng-container matColumnDef="edit">
+                            <th mat-header-cell  *matHeaderCellDef > Edit </th>
+                            <td  mat-cell *matCellDef="let element">
+                            
+                                 <a (click)="update_add_item(element.menu_id,element.section_id,element.item_name,element.id)">
+                                    <i class="fa fa-edit" style="color:blue;cursor:pointer" ></i>
 
-
+                                 </a>
+                               
+                           
+                            
+                            
+                                
+                            
+                            
+                        
+                        </td>
+                          </ng-container>
+                      
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+                      </table>
+                    
                 </div>
 
                 <div id="tab6" [hidden]="show_tab!='tab6'" class="tabcontent">
@@ -676,7 +760,55 @@
                             <button class="w3-button w3-green" type="submit" (click)="submit_price_desc(price.value,desc.value,additional.value)">Submit </button>
                         </form>
                     </div>
+                    <br><br>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+                      </mat-form-field>
+                    <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+    
+                       
+                        <ng-container matColumnDef="id">
+                          <th mat-header-cell *matHeaderCellDef> # </th>
+                          <td mat-cell *matCellDef="let element; let i=index">{{i+1}}  </td>
+                        </ng-container>
+                      
+                      
+                        <ng-container matColumnDef="item_desc">
+                          <th mat-header-cell *matHeaderCellDef matSortHeader="item_desc"> Description </th>
+                          <td mat-cell *matCellDef="let element">{{element.item_desc}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="item_price">
+                            <th mat-header-cell *matHeaderCellDef matSortHeader="item_price"> Price </th>
+                            <td mat-cell *matCellDef="let element">{{element.item_price}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="item_note">
+                            <th mat-header-cell *matHeaderCellDef matSortHeader="item_note"> Note </th>
+                            <td mat-cell *matCellDef="let element">{{element.item_note}} </td>
+                          </ng-container>
+                     
+                        <ng-container matColumnDef="edit">
+                            <th mat-header-cell  *matHeaderCellDef > Edit </th>
+                            <td  mat-cell *matCellDef="let element">
+                            
+                                 <a (click)="get_sec_id(element.menu_id,element.id,element.section_name)">
+                                    <i class="fa fa-edit" style="color:blue;cursor:pointer" ></i>
 
+                                 </a>
+                               
+                           
+                            
+                            
+                                
+                            
+                            
+                        
+                        </td>
+                          </ng-container>
+                      
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                      </table>
                 </div>
                 <div id="tab7" [hidden]="show_tab!='tab7'" class="tabcontent">
 

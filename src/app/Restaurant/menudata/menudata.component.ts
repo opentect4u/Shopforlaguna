@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 
 import { DataserviceService } from '../service/dataservice.service';
 
@@ -8,8 +9,19 @@ import { DataserviceService } from '../service/dataservice.service';
   styleUrls: ['./menudata.component.css']
 })
 export class MenudataComponent implements OnInit {
+  name:any=localStorage.getItem('Restaurant_name');
+  notice_check:any;
+  position_id:any;
+  header_title:any;
+  notice_content:any;
+  font_color:any;
+  back_color:any;
   role:any=0;
-  val:any='';
+  menu_id:any;
+  val:any="";
+  notic:any=[];
+  abou:any=[];
+  val_about:any;
   maxChars=150;
   disabld:boolean=false;
   tab1:boolean=false;
@@ -40,9 +52,51 @@ export class MenudataComponent implements OnInit {
   font:any;
   back:any;
   notice_flag:any;
-  constructor(private about:DataserviceService) { }
+  constructor(private about:DataserviceService,private lagunaserve:LagunaserviceService) { }
 
   ngOnInit(): void {
+   this.lagunaserve.get_special(this.res_id).subscribe(data=>{
+     console.log(data);
+     this.notic=data;
+     for(let i=0;i<this.notic.msg.length;i++){
+       if(this.notic.msg[i].notice_flag=='Y'){
+         this.notice_check=document.getElementById('noticechecked');
+         this.notice_check.checked=true;
+         this.color_font=false;
+       }
+       else {
+        this.notice_check=document.getElementById('noticechecked');
+        this.notice_check.checked=false;
+        this.color_font=true;
+
+       }
+       this.menu_id=this.notic.msg[i].menu_id;
+       this.position_id=this.notic.msg[i].position_id;
+       this.header_title=this.notic.msg[i].header_title;
+       this.notice_content=this.notic.msg[i].notice_content;
+       this.font_color=this.notic.msg[i].font_color;
+       this.back_color=this.notic.msg[i].back_color;
+
+     }
+    
+   })
+
+     this.lagunaserve.get_about_us(this.res_id).subscribe(data=>{
+       console.log(data);
+       this.abou=data;
+       for(let i=0;i<this.abou.msg.length;i++){
+         if(this.abou.msg[i].about_us!=''){
+         this.val=this.abou.msg[i].about_us;
+         this.disabled_about=false;
+          }
+         else {
+         this.val="";
+             this.disabled_about=true;
+         }
+       }
+
+     })
+
     
     this.aboutus=document.getElementById('defaultOpen');
     this.aboutus.style.background='#00477e';
@@ -85,8 +139,7 @@ nexttab(e:any,e1:any){
          this.success=data;
          if(this.success.suc==1){
           this.myFunction();
-          this.clearall=document.getElementById('about');
-           this.clearall.value='';
+         
       }
       else{
 
@@ -115,27 +168,32 @@ nexttab1(e:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
         this.success=data
         if(this.success.suc==1){
              this.myFunction();
-             this.clearall=document.getElementById('noticechecked');
-             this.clearall.checked=false;
-             this.notice_flag='N';
-             this.clearall=document.getElementById('menuselect');
-             this.clearall.value='';
-             this.menu='';
-             this.clearall=document.getElementById('pos');
-             this.clearall.value='';
-             this.position='';
-             this.clearall=document.getElementById('headTitle');
-             this.clearall.value='';
-             this.clearall=document.getElementById('box');
-             this.clearall.value='';
-             this.clearall=document.getElementById('box2');
-             this.clearall.value='';
-             this.clearall=document.getElementById('spclMore');
-             this.clearall.value='';
+            //  this.clearall=document.getElementById('noticechecked');
+            //  this.clearall.checked=false;
+            //  this.notice_flag='N';
+            //  this.clearall=document.getElementById('menuselect');
+            //  this.clearall.value='';
+            //  this.menu='';
+            //  this.clearall=document.getElementById('pos');
+            //  this.clearall.value='';
+            //  this.position='';
+            //  this.clearall=document.getElementById('headTitle');
+            //  this.clearall.value='';
+            //  this.clearall=document.getElementById('box');
+            //  this.clearall.value='';
+            //  this.clearall=document.getElementById('box2');
+            //  this.clearall.value='';
+            //  this.clearall=document.getElementById('spclMore');
+            //  this.clearall.value='';
             }
             else{
 
             }
+          //   localStorage.setItem('breakfast','');
+             
+          //   localStorage.setItem('launch','');
+          //  localStorage.setItem('dinner','');
+          //  localStorage.setItem('brunch','');
     })
   }
 }

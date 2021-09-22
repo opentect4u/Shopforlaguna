@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+
+
+
 
 html,body,h1,h2,h3,h4,h5{font-family:"Raleway",sans-serif}
 
@@ -74,6 +80,3 @@ background-clip: padding-box;
 border: 1px solid #ced4da;
 border-radius: .25rem;
 transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; margin: 0 !important; height: 406px;}
-
-
-

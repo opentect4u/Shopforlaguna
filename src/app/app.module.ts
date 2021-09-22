@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +22,19 @@ import { FormsModule } from '@angular/forms';
 // import { HttpClientModule } from '@angular/common/http';
 // import { AppRoutingModule } from './app-routing.module';
 // import { AppComponent } from './app.component';
+
+import { MenuComponent } from './Restaurant/menu/menu.component';
+import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
+import { SectionimagesComponent } from './Restaurant/sectionimages/sectionimages.component';
+import { DisplaydaytimeComponent } from './Restaurant/displaydaytime/displaydaytime.component';
+import { MenudataComponent } from './Restaurant/menudata/menudata.component';
+import { ToastrModule } from 'ng6-toastr-notifications';
+
+
+
+
+
+
 import { LoginComponent } from './Restaurant/reg_log/login/login.component';
 import { RegistrationComponent } from './Restaurant/reg_log/registration/registration.component';
 import { ForgotPassComponent } from './Restaurant/reg_log/forgot-pass/forgot-pass.component';
@@ -34,13 +46,12 @@ import { MenuSetupComponent } from './Restaurant/menu-setup/menu-setup/menu-setu
 import { DashboardComponent } from './Restaurant/after_login/dashboard/dashboard.component';
 import { ChangepassComponent } from './Restaurant/reg_log/changepass/changepass.component';
 import { MenuSetupSidebarComponent } from './common/menu-setup-sidebar/menu-setup-sidebar.component';
-import { MenuComponent } from './Restaurant/menu/menu.component';
-import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
-import { SectionimagesComponent } from './Restaurant/sectionimages/sectionimages.component';
-import { DisplaydaytimeComponent } from './Restaurant/displaydaytime/displaydaytime.component';
-import { MenudataComponent } from './Restaurant/menudata/menudata.component';
-import { ToastrModule } from 'ng6-toastr-notifications';
 import { RestaurantSetupComponent } from './Laguna_Admin/restaurant-setup/restaurant-setup.component';
+import { AdminloginComponent } from './Laguna_Admin/adminlogin/adminlogin.component';
+
+import {MatTableModule} from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,12 +79,38 @@ import { RestaurantSetupComponent } from './Laguna_Admin/restaurant-setup/restau
     DashboardComponent,
     ChangepassComponent,
     MenuSetupSidebarComponent,
+    RestaurantSetupComponent,
+    AdminloginComponent,
+    
+
+  
+   
+   
+    
+    
+  
+
+    AdminHeaderComponent,
+    AdminOrderPageComponent,
+    AppComponent,
+    LoginComponent,
+    RegistrationComponent,
+    ForgotPassComponent,
+    PaymentPageComponent,
+    OrderPageComponent,
+    HeaderComponent,
+    SideBarComponent,
+    MenuSetupComponent,
+    DashboardComponent,
+    ChangepassComponent,
+    MenuSetupSidebarComponent,
     MenuComponent,
     LogosetupComponent,
     SectionimagesComponent,
     DisplaydaytimeComponent,
     MenudataComponent,
     RestaurantSetupComponent
+    
   ],
 
 
@@ -82,12 +119,14 @@ import { RestaurantSetupComponent } from './Laguna_Admin/restaurant-setup/restau
   imports: [
     BrowserModule,
     AppRoutingModule,
-
+    MatTableModule,
     FormsModule,
-    ToastrModule.forRoot(),
-    BrowserAnimationsModule,
+    MatPaginatorModule,
+    MatSortModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ToastrModule.forRoot(),
+
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
