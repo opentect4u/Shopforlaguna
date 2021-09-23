@@ -141,20 +141,20 @@
       
      
      <div class="modal-body">
-     <div class="menuSecGroup">
+     <div class="menuSecGroup" *ngFor="let m of menuData">
      <div class="menuSecGroupImg"><img src="../../../assets/dynemicmenu/images/breakfast_2.jpg" alt=""></div>
-     <div class="menuSecGroupTitle"><h5>House Specialities</h5></div>
-     <div class="menuSecGroupList">
+     <div class="menuSecGroupTitle"><h5>{{m.section_name}}</h5></div>
+     <div class="menuSecGroupList" >
          <div class="menuSecGroupListGroup">
          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
            
-           <tr>
-             <td class="menuName">BREAKFAST BURRITO</td>
-             <td class="menuPrice">$12</td>
+           <tr  *ngFor="let m1 of menudata">
+             <td class="menuName">{{m.item_name}}</td>
+             <td class="menuPrice">${{m.item_price}}</td>
            </tr>
            
          </table>
-         <p class="descroption">Choice of bacon or chorizo with scrambled eggs, potatoes & cheese, wrapped in a flour tortilla Served with breakfast potatoes or fresh fruit</p>
+         <p class="descroption">{{m.item_desc}}</p>
          </div>
          
         

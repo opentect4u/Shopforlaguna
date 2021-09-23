@@ -82,7 +82,7 @@
             
           <div class="rowCustom">
           <div class="fieldHalf">
-          <select class="w3-input w3-padding-16 w3-border" name="country"  #country="ngModel" ngModel required>
+          <select class="w3-input w3-padding-16 w3-border" name="country"  #country="ngModel" ngModel >
             <option value="">Select Country</option>
             <option *ngFor="let c of counry" value="{{c.id}}">{{c.name}}</option>
           </select>

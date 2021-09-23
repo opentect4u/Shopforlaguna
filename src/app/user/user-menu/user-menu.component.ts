@@ -51,7 +51,7 @@ export class UserMenuComponent implements OnInit {
       "st_time":this.start,
       "end_time":this.end
     }
-    this.admin_data.get_menu_by_time(dt).subscribe((data:any)=>{console.log(data)
+    this.admin_data.get_menu_by_time(dt).subscribe(data=>{console.log(data)
     this.menuData=data;
     this.menuData=this.menuData.res;
     console.log(this.menuData)

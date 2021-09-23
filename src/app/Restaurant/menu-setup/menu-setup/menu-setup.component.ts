@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 import { DataserviceService } from '../../service/dataservice.service';
@@ -201,9 +202,9 @@ export class MenuSetupComponent implements OnInit {
   dinnercoverimage:any;
  dinnertopimage:any
   dinnermenuimage:any;
+  multipleImages:any=[];
 
-
-  constructor(private _data: DataserviceService,private lagunaserve:LagunaserviceService) { }
+  constructor(private _data: DataserviceService,private lagunaserve:LagunaserviceService,private http: HttpClient) { }
 
   ngOnInit(): void {
   
@@ -3114,6 +3115,20 @@ export class MenuSetupComponent implements OnInit {
       if(this.v==0){
         this.v=1;
         this.storevalue.length=0;
+
+        // const formData = new FormData();
+        // formData.append('file', this.breakfastcoverimage);
+        // formData.append('ac_id', COVERPAGEURL)
+       
+        // for (let img of this.multipleImages) {
+        //   formData.append('files', img);
+        // }
+    
+        // this.http.post<any>('http://localhost:3000/file', formData).subscribe(
+        //   (res) => console.log(res),
+        //   (err) => console.log(err)
+        // );
+
      this.storevalue.push({
       "coverurl": COVERPAGEURL,
       "topurl": TOPIMAGEURL,
@@ -3956,8 +3971,13 @@ export class MenuSetupComponent implements OnInit {
   // For breakfastcoverimage
   Breakfast(event: any) {
     console.log(event.target.files[0].name);
-    this.breakfastcoverimage = event.target.files[0];
-    console.log(this.breakfastcoverimage);
+    // this.breakfastcoverimage = event.target.files[0];
+
+    if (event.target.files.length > 0) {
+      this.multipleImages = event.target.files;
+    }
+   
+    // console.log(this.breakfastcoverimage);
     
     // this._data.submit_breakfast_menu_setup(this.breakfastcoverimage).subscribe(data=>{
     //   console.log(data);
