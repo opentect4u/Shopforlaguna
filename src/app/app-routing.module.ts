@@ -22,6 +22,7 @@ import { MenudataComponent } from './Restaurant/menudata/menudata.component';
 import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
 import { ThankyoupageComponent } from './thankyoupage/thankyoupage.component';
 import { UserMenuComponent } from './user/user-menu/user-menu.component';
+import { ConfirmationmailComponent } from './Restaurant/confirmationmail/confirmationmail.component';
 
 
 const routes: Routes = [
@@ -99,6 +100,10 @@ const routes: Routes = [
   {
     path:'menu/:rname/:rid',
     component:UserMenuComponent
+  },
+  {
+    path:'confirmation/:id',
+    component:ConfirmationmailComponent
   }
 
 ];

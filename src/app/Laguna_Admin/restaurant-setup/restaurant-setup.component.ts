@@ -114,6 +114,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  menu_url_data:any;
  menulength:any;
  url_nm:any;
+ rad:any;
  url1="http://localhost:4200/menu/";
  sendpathdata="assets/the_cliff_logo.png";
  getimagepath=url_set.api_url+'/';
@@ -182,8 +183,17 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   this.menuData=this.menuData.msg;
   })
   }
-  open_popup_window(){
-    window.open('http://localhost:4200/menu/'+this.rest_nm+'/'+btoa(this.r_id),'popup','width=400,height=500')
+  open_popup_window(i_menu:any){
+    this.admin_data.get_set_time(i_menu,this.r_id).subscribe(data=>{
+      console.log(data)
+      this.datetimeData=data;
+      this.starttime=this.datetimeData.msg[0].start_time;
+      this.endtime=this.datetimeData.msg[0].end_time;
+    window.open('http://localhost:4200/menu/'+this.rest_nm+'/'+btoa(this.r_id+'/'+this.starttime+'/'+this.endtime),'popup','width=400,height=500')
+
+    })
+    // this.admin_data.get_menu_by_time()
+    
   }
   gen_code(){
     this.getimagepath=url_set.api_url+'/';
@@ -287,7 +297,14 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     {
       this.m="Updation Successful";
     this.myFunction();
-    this.fetchdata()
+    this.fetchdata();
+    // setTimeout(()=>{
+    //   location.reload();
+    // },3000)
+    this.rad=document.getElementById('b'+this.mid1);
+    console.log(this.rad)
+    this.rad.checked=false;
+    
     }
     else{
       this.m="Failed to update"

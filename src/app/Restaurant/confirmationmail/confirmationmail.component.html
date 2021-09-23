@@ -1,12 +1,51 @@
 <div class="w3-white">
 
     <!-- Top container -->
-    <div class="w3-bar w3-top w3-highway-blue w3-large" style="z-index:4">
+    <div class="w3-bar w3-top w3-highway-blue w3-large" style="z-index:4;height:42px">
       <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Help</button>
       <span class="w3-bar-item w3-right">SLL Platform</span>
     </div>
     
     <!-- <?php echo file_get_contents("navigation-confirm.html"); ?> -->
+
+
+
+
+
+    <!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-highway-blue w3-animate-left" style="z-index:3;width:200px;" id="mySidebar"><br>
+
+  <div class="w3-container">
+	 <img src="assets/images/sll_logo.png" width="65%" height="auto"><br><br>
+    <h6 style="font-weight: bold">Restaurant Setup</h6>
+  </div>
+  <div class="w3-bar-block" id="side_nav_bar">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-highway-blue w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+<!--<a href="rest-order.php" class="w3-bar-item w3-button w3-padding order"><i class="fa fa-wpforms fa-fw"></i>  Order</a>
+	<a href="payment.php" class="w3-bar-item w3-button w3-padding payment"><i class="fa fa-credit-card fa-fw"></i>  Payment</a> -->
+	<a  class="w3-bar-item w3-button w3-padding setup"><i class="fa fa-bars fa-fw"></i>  Approve/Reject</a>  
+<!--<a href="menu-setup-2.php" class="w3-bar-item w3-button w3-padding setup"><i class="fa fa-bars fa-fw"></i>  Menu Data</a> -->
+<!--<a href="profile.php" class="w3-bar-item w3-button w3-padding account"><i class="fa fa-credit-card fa-fw"></i>  Profile</a>
+    <a href="index.php?ac=logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  Sign Out</a> -->
+  </div>
+	
+	<br><br>
+	<p class="w3-small" align="center">Powered by<br><br> <!-- <a href="https://www.shoplocallaguna.com" target="_blank"><img src="images/sll_logo.png" width="75%" height="auto"></a><br>  <br> --><a href="https://www.fozzysites.com" target="_blank"><img src="assets/images/powered_by_white-fozzy.png" width="50%" height="auto"></a><br>
+				</p>
+</nav>
+<script>
+    var manageActiveMenuItem = function (menuItemToActive) {
+        //debugger;
+        $("#side_nav_bar a").removeClass("m-menu__item--active");
+        $("#side_nav_bar a." + menuItemToActive).addClass("m-menu__item--active");
+    }
+
+    jQuery.validator.addMethod('mobileUK', function (phone_number, element) {
+        return this.optional(element) || phone_number.length > 9 &&
+            phone_number.match(/^((0|\+44)7(0|4|5|6|7|8|9){1}\d{2}\s?\d{6})$/);
+    }, 'Please specify a valid mobile number');
+
+</script>
         
     
     <!-- Overlay effect when opening sidebar on small screens -->
@@ -50,12 +89,12 @@
         <div class="rowCustomFour">
                 <div class="fieldSecHalf">
                 <label>Restaurant Name:</label>
-                 <input type="text" id="rest" name="rest" class="formCss">
+                 <input type="text" id="rest" name="rest" class="formCss" readonly value={{restaurant_name}}>
                 </div>
                 
                 <div class="fieldSecHalf">
                 <label>Name of person:</label>
-                <input type="text" id="contact" name="contact" class="formCss">
+                <input type="text" id="contact" name="contact" class="formCss" readonly value="{{name}}">
                  
                 </div>
                 </div>
@@ -63,32 +102,32 @@
         
         <br>Please signify your approval or request an update of the Menu:<br>
           <form>
-              <input type="radio" id="html" name="fav_language" value="HTML">
+              <input type="radio" id="html" name="fav_language" value="HTML"  (change)="enableonlyapprovefield($event)">
               <label for="html">I have reviewed my MENU platform, and I APPROVE</label><br><br>
-              <input type="radio" id="css" name="fav_language" value="CSS">
+              <input type="radio" id="css" name="fav_language" value="CSS" (change)="enableallfield($event)">
               <label for="javascript">I have checked my MENU Platform, and would like to request an update:</label><br><br>
               
           </form>
           Which Menu/s require an update?<br>
-          <form class="form-inline" action="">
+          <form class="form-inline" >
           <label class="container">Breakfast
-              <input type="checkbox" checked="checked">
+              <input type="checkbox" id="breakfast" value="1" #check1 [disabled]='enable1' (change)="enableallfield($event)">
               <span class="checkmark"></span>
             </label>
             <label class="container">Lunch
-              <input type="checkbox">
+              <input type="checkbox" id="launch" value="2" #check2 [disabled]='enable2' (change)="enableallfield($event)">
               <span class="checkmark"></span>
             </label>
             <label class="container">Dinner
-              <input type="checkbox">
+              <input type="checkbox" id="dinner" value="3" #check3 [disabled]='enable3' (change)="enableallfield($event)">
               <span class="checkmark"></span>
             </label>
             <label class="container">Brunch
-              <input type="checkbox">
+              <input type="checkbox" id="brunch" value="4" #check4 [disabled]='enable4' (change)="enableallfield($event)">
               <span class="checkmark"></span>
             </label>
             <label class="container">Specials
-              <input type="checkbox">
+              <input type="checkbox" disabled>
               <span class="checkmark"></span>
             </label>
           </form><br>
@@ -97,11 +136,12 @@
           <div class="rowCustomFour">
                 <div class="fieldSecFull">
                 <label for="vehicle2"> Please describe what requires updating for each Menu.</label>
-                <textarea rows="6" cols="60" maxlength="50" class="formCssTextArea"></textarea>
+                <textarea rows="6" cols="60" [disabled]="enable" maxlength="50" class="formCssTextArea" (input)="prevent_null($event)" (keypress)="prevent_null($event)" (change)="prevent_null($event)" required [(ngModel)]="textarea"></textarea>
+               
+              </div>
                 </div>
-                </div>
-          
-    <button class="w3-button w3-green" type="submit">Submit </button>
+            <!-- {{this.bind}} -->
+    <button class="w3-button w3-green" type="submit" [disabled]="bind" (click)="getvalue()">Submit </button>
           
     
           

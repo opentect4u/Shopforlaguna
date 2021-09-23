@@ -129,7 +129,8 @@ MenuSetRouter.post('/mulflupload', upFile.array('mul_img'), (req, res, next) => 
 MenuSetRouter.post('/breakfast', BreakfastSave);
 
 MenuSetRouter.post('/menu_setup', async (req, res) => {
-    console.log({ body: req.body[0] });
+    // console.log({ body: req.body[0] });
+    console.log(req.body[0].month_day);
     var data = await MenuSave(req.body[0]);
     res.send(data);
 })

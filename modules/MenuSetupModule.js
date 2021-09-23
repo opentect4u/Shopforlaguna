@@ -113,6 +113,8 @@ const MonthDateSave = (data) => {
                     sql = `UPDATE td_date_time SET start_time = "${data.start_time}", end_time = "${data.end_time}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}" 
                     WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}" AND month_day = "${d.dt}"`;
                 }
+                console.log(data);
+                console.log(sql);
                 db.query(sql, (err, lastId) => {
                     if (err) {
                         console.log(err);

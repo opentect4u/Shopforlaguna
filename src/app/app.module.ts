@@ -54,6 +54,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ThankyoupageComponent } from './thankyoupage/thankyoupage.component';
 import { ConfirmationmailComponent } from './Restaurant/confirmationmail/confirmationmail.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -124,7 +126,9 @@ import { ConfirmationmailComponent } from './Restaurant/confirmationmail/confirm
     BrowserModule,
     AppRoutingModule,
     MatTableModule,
+    MatInputModule,
     FormsModule,
+    MatFormFieldModule,
     MatPaginatorModule,
     MatSortModule,
     HttpClientModule,

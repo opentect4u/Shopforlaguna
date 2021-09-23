@@ -634,7 +634,7 @@
                         <form action="thanks-order.php" target="_self">
                             
                             <button [hidden]="submit_show2" class="w3-button w3-green" type="submit" (click)="send_item(itemval.value);itemval.value=''">Submit </button>
-                            <button [hidden]="!submit_show2" class="w3-button w3-green" type="submit" (click)="update_send_item(itemval.value);itemval.value=''">Update </button>
+                            <button [hidden]="!submit_show2" class="w3-button w3-green" type="submit" (click)="update_send_item(itemval.value);itemval.value='';menu_for_item.value='';section_item.value=''">Update </button>
                         </form>
 <br><br>
 
@@ -761,7 +761,7 @@
                             </div>
                         </form>
                         <form action="thanks-order.php" target="_self">
-                            <button class="w3-button w3-green" type="submit" (click)="submit_price_desc(price.value,desc.value,additional.value)">Submit </button>
+                            <button class="w3-button w3-green" type="submit" (click)="submit_price_desc(price.value,desc.value,additional.value);select_price_menu.value='';section_select_for_item.value='';item_select.value='';desc.value='';additional.value=''">Submit </button>
                         </form>
                     </div>
                     <br><br>
@@ -959,7 +959,7 @@
                     <div class="rowCustomFour">
                             <div class="fieldSecFull">
                             <label><strong> QR Code for Dynamic Menu</strong> </label>
-                            <a  href="{{getimagepath}}" download=""><img src="{{getimagepath}}" class="barcodeImg"></a>
+                            <a  href="{{getimagepath}}" download=""><img src="{{getimagepath}}" class="barcodeImg" alt="Tap the button to generate code"></a>
                             <button class="w3-button w3-green" type="submit" style="margin-left: 118%; margin-top: -8%;" (click)="gen_code()">Generate QR-Code </button>
                         </div>
                     </div>
@@ -980,17 +980,17 @@
                     <tr bgcolor="#fff" align="center">
                     <td><button class="w3-button w3-green"
                     
-                    (click)="open_popup_window()">
+                    (click)="open_popup_window(1)">
                     View</button></td>
-                    <td><button  class="w3-button w3-green" (click)="open_popup_window()"
+                    <td><button  class="w3-button w3-green" (click)="open_popup_window(2)"
                     >
                     View</button></td>
-                    <td><button class="w3-button w3-green" (click)="open_popup_window()"
+                    <td><button class="w3-button w3-green" (click)="open_popup_window(3)"
                    >
                     View</button></td>
-                    <td><button class="w3-button w3-green" (click)="open_popup_window()">
+                    <td><button class="w3-button w3-green" (click)="open_popup_window(4)">
                     View</button></td>
-                    <td><button class="w3-button w3-green" (click)="open_popup_window()">
+                    <td><button class="w3-button w3-green" (click)="open_popup_window(5)">
                     View</button></td>
                     </tr><br>	
                     </table> <br>

@@ -268,7 +268,7 @@ prevent_null(event:any){
     if(event.target.id=='about'){
        
  
-      if(event.target.value == ''){
+      if(this.val == ''){
         console.log("adsasda1")
         this.disabled_about=true;
       }
@@ -279,7 +279,7 @@ prevent_null(event:any){
       }
  
  
-}
+    }
 else {
      this.disabld=true;
       

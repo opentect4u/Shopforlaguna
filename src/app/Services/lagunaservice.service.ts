@@ -118,4 +118,15 @@ get_qrcode(v:any){
   return this.http.post(url_set.api_url+'/generate_qr', v)
 
 }
+
+//view menu depending on the menuid
+get_menu_by_time(dt:any){
+  return this.http.get(url_set.api_url+'/preview_menu?id='+ dt.id + '&st_time=' + dt.st_time + '&end_time=' + dt.end_time);
+}
+post_approve_menu(dt:any){
+  // const formdata=new FormData();
+  // formdata.append(""dt);
+  return this.http.post(url_set.api_url+'/approve_menu',dt)
+
+}
 }

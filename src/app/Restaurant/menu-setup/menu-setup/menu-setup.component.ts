@@ -5,7 +5,8 @@ import { DataserviceService } from '../../service/dataservice.service';
 @Component({
   selector: 'app-menu-setup',
   templateUrl: './menu-setup.component.html',
-  styleUrls: ['./menu-setup.component.css']
+  styleUrls: ['./menu-setup.component.css',
+'../../../../assets/appcss.css']
 })
 export class MenuSetupComponent implements OnInit {
   breakfast_end:any='';
