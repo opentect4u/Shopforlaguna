@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 import { DataserviceService } from '../../service/dataservice.service';
 
 @Component({
@@ -9,20 +10,36 @@ import { DataserviceService } from '../../service/dataservice.service';
 })
 export class PaymentPageComponent implements OnInit {
   id_rest: any;
+  menu_url:any="http://localhost:4200/menu/";
+  res_nme:any;
   x: any;
+  dashboardData:any=[];
   success:any;
+  rest_nm:any;
   paymentData: any;
-  constructor(private activatedroute: ActivatedRoute, private router: Router, private _data: DataserviceService) { }
+  constructor(private activatedroute: ActivatedRoute,private lagunaserve:LagunaserviceService, private router: Router, private _data: DataserviceService) { }
 
   ngOnInit(): void {
     this.id_rest = this.activatedroute.snapshot.params['id'];
-    console.log(this.id_rest)
+    console.log(atob(this.id_rest).split('/')[0]);
+   
   }
   go_to_login() {
+    this.lagunaserve.get_specific_admin_dashboard(atob(this.id_rest).split('/')[0]).subscribe(data=>{console.log(data);
+      this.dashboardData=data;
+      this.dashboardData=this.dashboardData.msg;
+      this.rest_nm=this.dashboardData[0].restaurant_name;
+      this.rest_nm=this.rest_nm.replace(' ','_')
+      console.log(this.rest_nm);
+  
+    console.log(this.rest_nm);
+
     var dt = {
-      res_id: this.id_rest
-    }
-    this._data.sendPaymentData(dt).subscribe(data => {
+      res_id: this.id_rest,
+      url:this.menu_url= this.menu_url+this.rest_nm+'/'+btoa(this.id_rest)
+      }
+    console.log(dt);
+     this._data.sendPaymentData(dt).subscribe(data => {
       console.log(data);
        this.success=data;
        if(this.success.suc == 1){
@@ -37,6 +54,7 @@ export class PaymentPageComponent implements OnInit {
         localStorage.setItem('Restaurant_id',this.success.res.id);
         localStorage.setItem('Restaurant_email',this.success.res.email);
         localStorage.setItem('Restaurant_name',this.success.res.restaurant_name);
+      
        this.myFunction();
        setTimeout(() => {
         this.router.navigate(['/menu_setup']);
@@ -44,6 +62,8 @@ export class PaymentPageComponent implements OnInit {
        }
       
     })
+  })
+   
 
    
   }

@@ -3109,6 +3109,34 @@ export class MenuSetupComponent implements OnInit {
     }
   }
   opennextab(COVERPAGEURL: any, TOPIMAGEURL: any,MENUURL:any,SECTIONURL:any,hidevalue:any,v1:any,v2:any) {
+    if(localStorage.getItem('breakfast')==''){
+      this.storevalue.length=0;
+      this.storevalue.push({
+      "coverurl": COVERPAGEURL,
+      "topurl": TOPIMAGEURL,
+      "MenuUrl":MENUURL,
+      "SectionUrl":SECTIONURL,
+      "restaurant_id":this.resid,
+      "menu_id":hidevalue,
+      "break_check":this.break_check,
+      "start_time":this.brunch_start,
+      "end_time":this.brunch_end,
+      "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
+    });
+      console.log(this.storevalue);
+  
+    this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+      console.log(data);
+      this.success=data;
+      console.log("data");
+       if(this.success.suc==1){
+          this.myFunction();
+         
+       }
+    })
+    }
+    else{
+  
    console.log(this.v);
     localStorage.setItem('breakfast','');
     if(localStorage.getItem('No_of_menu')=='O'){
@@ -3256,7 +3284,8 @@ export class MenuSetupComponent implements OnInit {
      console.log(this.storevalue);
   
     }
- 
+        
+     }
 
     this.brunch_end=0;
     this.brunch_start=0;
@@ -3267,16 +3296,38 @@ export class MenuSetupComponent implements OnInit {
 
   // For Submitting the data of Dinner
   opennextab2(e: any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any,v7:any) {
-     localStorage.setItem('dinner','');
+    if( localStorage.getItem('dinner')==''){
+      this.storevalue.length=0;
+      this.storevalue.push({
+            "coverurl": v4,
+            "topurl": v3,"MenuUrl":v2,"SectionUrl":v1,
+            "restaurant_id":this.resid,
+            "menu_id":v5,
+            "break_check":this.brunch_check,
+            "start_time":this.brunch_start,
+        "end_time":this.brunch_end,
+        "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
+  
+          });
+          console.log(this.storevalue);
+          this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+            console.log(data);
+            this.success=data;
+            if(this.success.suc==1){
+              this.myFunction();
+           
+            }
+          })
+    }
+  
+    else{
+
+    
+    localStorage.setItem('dinner','');
     if(localStorage.getItem('No_of_menu')=='O'){
 
       if(this.v==0){
-    //  localStorage.setItem('dinner','active');
-    //  localStorage.setItem('launch','active');
-
-    //  localStorage.setItem('breakfast','');
-
-    //  localStorage.setItem('brunch','active');
+    
 
 
         this.v=1;
@@ -3466,21 +3517,10 @@ export class MenuSetupComponent implements OnInit {
            this.sat_dinner=0;
            this.sun_dinner=0;
     }
+  }
    this.brunch_start=0;
     this.brunch_end=0;
-    // if (e == 'Tokyo') {
-    //   this.t1 = 'London';
-    //   this.t2 = 'Paris';
-    //   this.t3 = 'Tokyo';
-    //   this.t4 = 'Laguna';
-    //   this.tab1 = true;
-    //   this.tab2 = true;
-
-    //   this.tab3 = true;
-    //   this.tab4 = false;
-    //   this.paris = document.getElementById('Laguna');
-    //   this.paris.className = 'active';
-    // }
+  
   }
 
   launchchaked(event:any){
@@ -3499,6 +3539,33 @@ export class MenuSetupComponent implements OnInit {
 
 // Fot Submitting data of Launch Tab
   opennextab1(e: any, v1: any, v2: any,v4:any,v5:any,v6:any,v7:any,v8:any) {
+
+    if(localStorage.getItem('launch')==''){
+      this.storevalue.length=0;
+           this.storevalue.push({
+          "coverurl": v1,
+          "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
+          "restaurant_id":this.resid,
+          "menu_id":v6,
+          "break_check":this.launch_check,
+          "start_time":this.brunch_start,
+      "end_time":this.brunch_end,
+      "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
+
+        });
+        this.success=0;
+        console.log(this.storevalue);
+        this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+          console.log(data);
+          this.success=data;
+          if(this.success.suc==1){
+            this.myFunction();
+          
+          }
+        })
+    }
+    else{
+   
     localStorage.setItem('launch','');
 
     if(localStorage.getItem('No_of_menu')=='O'){
@@ -3654,7 +3721,8 @@ export class MenuSetupComponent implements OnInit {
     // this.sat_launch=0;
     // this.sun_launch=0;
     }
-  
+     
+  }
     this.brunch_start=0;
     this.brunch_end=0;
     
@@ -3685,6 +3753,32 @@ export class MenuSetupComponent implements OnInit {
   }
   // For Submitting the data of Brunch
  opennextab3(e: any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any,v7:any) {
+
+
+  if(localStorage.getItem('brunch')==''){
+    this.storevalue.length=0;
+         this.storevalue.push({
+          "coverurl": v3,
+          "topurl": v2,"MenuUrl":v1,"SectionUrl":v4,
+          "restaurant_id":this.resid,
+          "menu_id":v5,
+          "break_check":this.dinner_check,
+          "start_time":this.brunch_start,
+          "end_time":this.brunch_end,
+          "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
+
+        });
+        console.log(this.storevalue);
+        this.success=0
+        this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+          console.log(data);
+          this.success=data;
+          if(this.success.suc==1){
+            this.myFunction();
+            }
+        })
+  }
+  else{
   localStorage.setItem('brunch','');
 
    console.log(v6,v7);
@@ -3710,46 +3804,10 @@ export class MenuSetupComponent implements OnInit {
           this.success=data;
           if(this.success.suc==1){
             this.myFunction();
-            // this.bkmenu=document.getElementById('laguna');
-            // this.bkmenu.checked=false;
-            // this.dinner_check='N';
-            // this.bkmenu=document.getElementById('url_dinner');
-            // this.bkmenu.value='';
-            // this.bkmenu=document.getElementById('url_dinnertop');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('url_dinnermenu');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('url_section');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('start_dinner');
-            //   this.bkmenu.value='';
-            //   this.bkmenu=document.getElementById('end_dinner');
-            //   this.bkmenu.value='';
+          
           }
         })
-        // this.mon_check=document.getElementById('vehicle14');
-        // this.mon_check.checked=false;
-        // this.mon_check=document.getElementById('vehicle24');
-        // this.mon_check.checked=false;
-        // this.tue_check=document.getElementById('vehicle34');
-        // this.tue_check.checked=false;
-        // this.wed_check=document.getElementById('vehicle44');
-        // this.wed_check.checked=false;
-        // this.thu_check=document.getElementById('vehicle54');
-        // this.thu_check.checked=false;
-        // this.fri_check=document.getElementById('vehicle64');
-        // this.fri_check.checked=false;
-        // this.sat_check=document.getElementById('vehicle74');
-        // this.sat_check.checked=false;
-        // this.sun_check=document.getElementById('vehicle84');
-        // this.sun_check.checked=false;
-        // this.mon_brunch=0;
-        // this.tue_brunch=0;
-        // this.wed_brunch=0;
-        // this.thu_brunch=0;
-        // this.fri_brunch=0;
-        // this.sat_brunch=0;
-        // this.sun_brunch=0;
+       
        }
        else if(this.v==1){
          //snackBar
@@ -3779,46 +3837,10 @@ export class MenuSetupComponent implements OnInit {
          this.success=data;
          if(this.success.suc==1){
            this.myFunction();
-          //  this.bkmenu=document.getElementById('laguna');
-          //  this.bkmenu.checked=false;
-          //  this.dinner_check='N';
-          //  this.bkmenu=document.getElementById('url_dinner');
-          //  this.bkmenu.value='';
-          //  this.bkmenu=document.getElementById('url_dinnertop');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('url_dinnermenu');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('url_section');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('start_dinner');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('end_dinner');
-          //    this.bkmenu.value='';
+         
          }
        })
-      //  this.mon_check=document.getElementById('vehicle14');
-      //  this.mon_check.checked=false;
-      //  this.mon_check=document.getElementById('vehicle24');
-      //  this.mon_check.checked=false;
-      //  this.tue_check=document.getElementById('vehicle34');
-      //  this.tue_check.checked=false;
-      //  this.wed_check=document.getElementById('vehicle44');
-      //  this.wed_check.checked=false;
-      //  this.thu_check=document.getElementById('vehicle54');
-      //  this.thu_check.checked=false;
-      //  this.fri_check=document.getElementById('vehicle64');
-      //  this.fri_check.checked=false;
-      //  this.sat_check=document.getElementById('vehicle74');
-      //  this.sat_check.checked=false;
-      //  this.sun_check=document.getElementById('vehicle84');
-      //  this.sun_check.checked=false;
-      //  this.mon_brunch=0;
-      //  this.tue_brunch=0;
-      //  this.wed_brunch=0;
-      //  this.thu_brunch=0;
-      //  this.fri_brunch=0;
-      //  this.sat_brunch=0;
-      //  this.sun_brunch=0;
+     
       }
       else if(this.v==1){
         this.v=2;
@@ -3950,7 +3972,7 @@ export class MenuSetupComponent implements OnInit {
       //  this.sat_brunch=0;
       //  this.sun_brunch=0;
     }
-
+  }
     this.brunch_start=0;
     this.brunch_end=0; 
    

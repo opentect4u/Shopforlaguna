@@ -56,6 +56,7 @@ import { ThankyoupageComponent } from './thankyoupage/thankyoupage.component';
 import { ConfirmationmailComponent } from './Restaurant/confirmationmail/confirmationmail.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -136,7 +137,7 @@ import { MatInputModule } from '@angular/material/input';
 
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{provide:LocationStrategy, useClass:HashLocationStrategy}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
