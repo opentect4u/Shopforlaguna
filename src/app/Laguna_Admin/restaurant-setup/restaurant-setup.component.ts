@@ -7,6 +7,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { url_set } from 'src/app/globalvar';
+// import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 // import { url } from 'inspector';
 @Component({
   selector: 'app-restaurant-setup',
@@ -40,6 +41,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   specialData:any;
   menufordesc: any;
   back: any;
+  idforcreatesection:any;
   value_font: boolean=false;
    value_background=true;
   value_Headertitle= true;
@@ -50,6 +52,8 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  get_section_for_item:any;
  tab_el:any;
  logo_img:any;
+ z1:any
+ createsecval='';
  idata:any;
  i_data:any;
  break_cov:any;
@@ -59,6 +63,9 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  brunch_cov:any;
  brunch_top:any;
  dinner_cov:any;
+ ide='';
+ ipr='';
+ ino=''
  dinner_top:any;
  menuData:any;
  starttime:any;
@@ -86,6 +93,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  get_section_for_item1:any
  menu_item:any;
  sid:any;
+ secval1:any;
  sp_menuid:any;
  sp_posid:any;
  sp_back:any;
@@ -93,6 +101,8 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  sp_head:any;
  sp_notice:any;
  r_id:any;
+ pick:any;
+ ht:any;
  secid:any;
  dashboardData:any;
  rest_nm:any;
@@ -105,20 +115,41 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  rest_setup:any;
  sec_value='';
  eid2:any;
+ q:any;
  sid2:any;
  i_value='';
  submit_show2=false;
  descriptionData:any;
  submit_show=false;
  iid:any;
+ setTimedata:any;
  menu_url_data:any;
  menulength:any;
  url_nm:any;
  rad:any;
+ item_i:any;
+ veh1:any;
+ mon:any=0;
+ tue:any=0;
+ wed:any=0;
+ thur:any=0;
+ fri:any=0;
+ sat:any=0;
+ sun:any=0;
+ veh2:any;
+ veh3:any;
+ veh4:any;
+ veh5:any;
+ veh6:any;
+ veh7:any;
+ veh8:any;
+ show_button3=false;
  url1="http://localhost:4200/menu/";
  sendpathdata="assets/the_cliff_logo.png";
  getimagepath=url_set.api_url+'/';
  imgcheck:any;
+ idfordesc:any;
+ mail_data:any;
   ngOnInit(): void {
     // this.daycheck=document.getElementById('1');
     //   this.daycheck.checked=true;
@@ -268,40 +299,66 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
 
   })
   }
-  get_sec_id(mid:any,v:any,v1:any){
-    this.secid=v;
+  get_sec_id(mid:any,v:any,v1:any,v2:any,id:any,ip:any,inote:any){
+    this.show_button3=true;
+    this.secid=v1;
     console.log(mid);
+    this.item_i=v2
+    this.ide=id;
+    this.ipr=ip;
+    this.ino=inote;
     this.mid1=mid;
+    this.idfordesc=v;
+    console.log(this.ide+" "+this.ino+" "+this.ipr)
     this.z=document.getElementById('b'+mid)
     this.z.checked=true;
     console.log(this.z)
     this.submit_show=true;
     this.sec_value=v1;
-    console.log("menu_id="+mid+" section_id="+this.secid+" section_name="+this.sec_value+" res_id="+this.r_id)
+    this.admin_data.get_section_data(this.r_id,this.mid1).subscribe(data=>{console.log(data)
+      this.get_section_for_item1=data;
+      this.get_section_for_item1=this.get_section_for_item1.msg;
+      
+      })
+      this.admin_data.get_item_data(this.r_id,this.mid1,this.secid).subscribe(data=>{console.log(data)
+        this.idata=data;
+        this.idata=this.idata.msg;
+      })    
+    console.log("menu_id="+mid+" section_id="+this.secid+" res_id="+this.r_id+" item_id="+this.item_i+" id="+this.idfordesc)
     // alert(v)
   }
   update_section(v:any){
     this.sec_value=v;
     this.submit_show=false;
+    this.createsecval=''
+    for(let i=1;i<=5;i++)
+    {
+      this.q=document.getElementById('b'+i);
+      if(this.q.checked==true)
+      this.m_id=this.q.value
+    }
     // console.log("menu_id="+this.mid1+" section_id="+this.secid+" section_name="+this.sec_value+" res_id="+this.r_id)
     console.log(this.m_id+" "+v);
     var dt={
       "restaurant_id" : this.r_id,
-    "menu_id":this.mid1,
+    "menu_id":this.m_id,
     "sec_name":this.sec_value,
-    "id":this.secid
+    "id":this.idforcreatesection
     }
     this.admin_data.post_section_create(dt).subscribe(data=>{console.log(data)
     this.sec_post_data=data;
     if(this.sec_post_data.suc==1)
     {
       this.m="Updation Successful";
+      // setTimeout(()=>{
+      //   location.reload();
+      // },3000)
     this.myFunction();
     this.fetchdata();
-    // setTimeout(()=>{
-    //   location.reload();
-    // },3000)
-    this.rad=document.getElementById('b'+this.mid1);
+    setTimeout(()=>{
+      location.reload();
+    },3000)
+    this.rad=document.getElementById('b'+this.m_id);
     console.log(this.rad)
     this.rad.checked=false;
     
@@ -328,7 +385,13 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   }
   store_menu(v:any){
     this.m_id=v;
-    alert("store "+v)
+    console.log(this.m_id)
+    // if(this.submit_show==false)
+    //  {
+    //    this.secval1=document.getElementById('secval');
+    //    this.secval1.value='';
+    //  }
+    // alert("store "+v)
     //alert(v);
     // this.fetchdata(v)
   }
@@ -365,7 +428,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     
     })
   }
-  update_send_item(v:any){
+  update_send_item(v1:any,v2:any,v:any){
     // this.mid2=m;
     // this.eid2=e;
     // this.sid2=s;
@@ -374,8 +437,8 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     console.log(this.mid2+" "+this.eid2+" "+this.i_value+" "+this.iid)
     var dt={
       "restaurant_id" : this.r_id,
-      "menu_id":this.mid2,
-      "sec_id":this.eid2,
+      "menu_id":v1,
+      "sec_id":v2,
       "item_name":v,
       "id":this.iid
       // "break_check" : 'Y',
@@ -389,6 +452,13 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
       this.m="Updation Successful";
       this.myFunction();
       this.fetchdata1();
+      setTimeout(()=>{location.reload();},3000)
+      
+      // location.reload();
+      // this.pick=document.getElementById('pickup_place');
+      // this.pick.value='';
+      // this.ht=document.getElementById('headtitle');
+      // this.ht.value='';
     }
     else{
       this.m="Failed to update"
@@ -504,44 +574,161 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   }
 submitup(mon:any,tue:any,wed:any,thur:any,fri:any,sat:any,sun:any,st:any,end:any){
   this.storevalue.length=0;
+  this.veh1=document.getElementById('vehicle1')
+  this.veh2=document.getElementById('vehicle2')
+  this.veh3=document.getElementById('vehicle3')
+  this.veh4=document.getElementById('vehicle4')
+  this.veh5=document.getElementById('vehicle5')
+  this.veh6=document.getElementById('vehicle6')
+  this.veh7=document.getElementById('vehicle7')
+  this.veh8=document.getElementById('vehicle8')
+  if(this.veh2.checked)
+  this.mon=2
+  if(this.veh3.checked)
+  this.tue=3
+  if(this.veh4.checked)
+  this.wed=4
+  if(this.veh5.checked)
+  this.thur=5
+  if(this.veh6.checked)
+  this.fri=6
+  if(this.veh7.checked)
+  this.sat=7
+  if(this.veh8.checked)
+  this.sun=8
+  
+  console.log(this.mon+" "+this.tue+" "+this.wed+" "+this.thur+" "+this.fri+" "+this.sat+" "+this.sun+" ")
   this.storevalue.push({
     "restaurant_id" : this.r_id,
     "menu_id":this.menuid,
     "break_check" : 'Y',
-    "month_day": [{"dt":mon},{"dt":tue},{"dt":wed},{"dt":thur},{"dt":fri},{"dt":sat},{"dt":sun}],
+    "month_day": [{"dt":this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thur},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}],
     "start_time" : st,
     "end_time" : end
 
   })
   this.admin_data.post_date_time(this.storevalue).subscribe(data=>{console.log(data)
-  
+  this.setTimedata=data;
+  console.log(this.setTimedata)
   })
 }
-checkbrucnhday(e:any,day:any){
+checkbrunchday(e:any,day:any){
   if(day=='everyday'){
-
+  if(e.target.checked){
+    this.veh1=document.getElementById('vehicle1')
+    this.veh2=document.getElementById('vehicle2')
+    this.veh3=document.getElementById('vehicle3')
+    this.veh4=document.getElementById('vehicle4')
+    this.veh5=document.getElementById('vehicle5')
+    this.veh6=document.getElementById('vehicle6')
+    this.veh7=document.getElementById('vehicle7')
+    this.veh8=document.getElementById('vehicle8')
+    this.veh2.checked=true;
+    this.veh3.checked=true;
+    this.veh4.checked=true;
+    this.veh5.checked=true;
+    this.veh6.checked=true;
+    this.veh7.checked=true;
+    this.veh8.checked=true;
+    this.mon=2;
+    this.tue=3;
+    this.wed=4;
+    this.thur=5;
+    this.fri=6;
+    this.sat=7;
+    this.sun=8;
+  }
+  else
+  {
+    this.mon=0;
+    this.tue=0;
+    this.wed=0;
+    this.thur=0;
+    this.fri=0;
+    this.sat=0;
+    this.sun=0;
+  }
+   
+  //  this.veh1.checked=true;
   }
   else if(day=='monday'){
-
+    if(e.target.checked){
+      this.veh2=document.getElementById('vehicle2')
+      this.veh2.checked=true;
+      this.mon=2;
+    }
+    else
+    { this.mon=0;
+    this.veh1=document.getElementById('vehicle1')
+     this.veh1.checked=false;}
   }
   else if(day=='tuesday'){
-
+    if(e.target.checked){
+      this.veh3=document.getElementById('vehicle3')
+      this.veh3.checked=true;
+      this.tue=3;
+    }
+    else
+    { this.tue=0;
+     this.veh1=document.getElementById('vehicle1')
+     this.veh1.checked=false;}
   }
   else if(day=='wednesday'){
-
+    if(e.target.checked){
+      this.veh4=document.getElementById('vehicle4')
+      this.veh4.checked=true;
+      this.wed=4;
+    }
+    else
+     {this.wed=0;
+     this.veh1=document.getElementById('vehicle1')
+     this.veh1.checked=false;}
   }
   else if(day=='thursday'){
-
+    if(e.target.checked){
+      this.veh5=document.getElementById('vehicle5')
+      this.veh5.checked=true;
+      this.thur=5;
+    }
+    else
+     {this.thur=0;
+     this.veh1=document.getElementById('vehicle1')
+     this.veh1.checked=false;}
   }
   else if(day=='friday'){
-
+    if(e.target.checked){
+      this.veh6=document.getElementById('vehicle6')
+      this.veh6.checked=true;
+      this.fri=6;
+    }
+    else
+     {this.fri=0;
+     this.veh1=document.getElementById('vehicle1')
+     this.veh1.checked=false;}
   }
   else if(day=='saturday'){
-
+    if(e.target.checked){
+      this.veh7=document.getElementById('vehicle7')
+      this.veh7.checked=true;
+      this.sat=7;
+    }
+    else
+     {this.sat=0;
+     this.veh1=document.getElementById('vehicle1')
+     this.veh1.checked=false;}
   }
   else if(day=='sunday'){
-
+    if(e.target.checked){
+      this.veh8=document.getElementById('vehicle8')
+      this.veh8.checked=true;
+      this.sun=8;
+    }
+    else
+    { this.sun=0;
+     this.veh1=document.getElementById('vehicle1')
+     this.veh1.checked=false;}
   }
+  else{}
 }
 pickup_place(v:any){
   this.menu_place=v
@@ -576,9 +763,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
   menu_set_date_time(v:any){
     this.menuid=v;
     // alert(v);
-    for(this.k=1;this.k<=7;this.k++)
+    for(this.k=1;this.k<=8;this.k++)
     {
-      this.daycheck=document.getElementById(this.k);
+      this.daycheck=document.getElementById('vehicle'+this.k);
       this.daycheck.checked=false;
     }
     this.admin_data.get_set_time(v,this.r_id).subscribe(data=>{console.log(data)
@@ -586,12 +773,44 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
     this.starttime=this.datetimeData.msg[0].start_time;
     this.endtime=this.datetimeData.msg[0].end_time;
     this.datetimeData=this.datetimeData.msg;
-
+    if(this.datetimeData.length==7){
+    this.veh1=document.getElementById('vehicle1')
+     this.veh1.checked=true;
+     this.mon=2;
+     this.tue=3;
+     this.wed=4;
+     this.thur=5;
+     this.fri=6;
+     this.sat=7;
+     this.sun=8;
+    }
     for(let i=0;i<this.datetimeData.length;i++)
     {
-      this.daycheck=document.getElementById(this.datetimeData[i].month_day);
+      this.daycheck=document.getElementById('vehicle'+this.datetimeData[i].month_day);
       this.daycheck.checked=true;
-
+      this.veh1=document.getElementById('vehicle1')
+      this.veh2=document.getElementById('vehicle2')
+      this.veh3=document.getElementById('vehicle3')
+      this.veh4=document.getElementById('vehicle4')
+      this.veh5=document.getElementById('vehicle5')
+      this.veh6=document.getElementById('vehicle6')
+      this.veh7=document.getElementById('vehicle7')
+      this.veh8=document.getElementById('vehicle8')
+      if(this.veh2.checked)
+      this.mon=2
+      if(this.veh3.checked)
+      this.tue=3
+      if(this.veh4.checked)
+      this.wed=4
+      if(this.veh5.checked)
+      this.thur=5
+      if(this.veh6.checked)
+      this.fri=6
+      if(this.veh7.checked)
+      this.sat=7
+      if(this.veh8.checked)
+      this.sun=8
+      
     }
     
     })
@@ -1051,5 +1270,73 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
     this.dataSource.paginator.firstPage();
   }
 }
+send_mail()
+{
+  console.log(this.r_id)
+ this.admin_data.send_admin_mail(this.r_id).subscribe((data:any)=>{console.log(data)
+  this.mail_data=data;
+  if(this.mail_data.suc==1)
+ {
+    this.m="Email Sent!"
+    this.myFunction()
+  }
+  else{
+    this.m="There was a problem while sending the email"
+    this.myFunction()
+  }
+},error=>{    this.m="There was a problem while sending the email"
 
+this.myFunction()}
+)
+}
+upload_logo(e:any){
+  console.log(e.target.files[0])
+}
+update_price_desc(menid:any,sectionid:any,itemid:any,pr:any,de:any,ad:any){
+  var dt={
+    "restaurant_id" : this.r_id,
+    "menu_id":menid,
+    "sec_id": sectionid,
+    "item_id": itemid,
+    "item_price" : pr,
+    "item_desc" : de,
+    "item_note" : ad,
+    "id":this.idfordesc
+  }
+  this.admin_data.post_item_data_desc(dt).subscribe(data=>{console.log(data)
+    this.itemdesc=data;
+    if(this.itemdesc.suc==1){
+    this.m="Updation Successful";
+    this.ide='';
+    this.ino='';
+
+    setTimeout(()=>{
+      location.reload();
+    },3000)
+    this.myFunction();
+    this.show_button3=false;
+    this.fetchdata2();
+    
+   
+  }
+  else{
+    this.m="Failed to update"
+    this.myFunction();
+  }
+   },error=>{
+     this.m="Failed to update"
+    this.myFunction();
+   })
+   
+}
+get_sec_id1(menid:any,id:any,val:any){
+  console.log(menid+" "+id+" "+val);
+  this.submit_show=true;
+  this.idforcreatesection=id;
+  this.z1=document.getElementById('b'+menid)
+  this.z1.checked=true;
+  this.createsecval=val;
+  console.log(this.createsecval)
+  
+}
 }

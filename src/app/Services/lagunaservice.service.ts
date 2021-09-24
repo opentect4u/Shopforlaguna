@@ -129,4 +129,10 @@ post_approve_menu(dt:any){
   return this.http.post(url_set.api_url+'/approve_menu',dt)
 
 }
+send_admin_mail(v:any){
+   return this.http.get(url_set.api_url+'/approve_menu?id='+v);
+ 
+ }
+ 
+ 
 }
