@@ -14,7 +14,7 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
 
-app.use(express.static('public'));
+app.use(express.static('assets'));
 
 // CALLING ROUTER MODULE FOLDER LOCATION //
 const { RegRouter } = require('./route/RegistrationRoute');
@@ -23,6 +23,7 @@ const { LogRouter } = require('./route/LoginRouter');
 const { MenuSetRouter } = require('./route/MenuSetupRouter');
 const { TestRouter } = require('./route/TestRoute');
 const { EmailRouter } = require('./route/EmailRouter');
+const { MenuRouter } = require('./route/MenuRouter');
 ///////////////////////////////////////////
 
 // REGISTRATION ROUTER RegistrationRouter.js FOLDER //
@@ -39,7 +40,9 @@ app.use(MenuSetRouter);
 
 app.use(TestRouter);
 
-app.use(EmailRouter)
+app.use(EmailRouter);
+
+app.use(MenuRouter);
 
 // CREATE EXPRESS SERVER //
 app.listen(port, (err) => {

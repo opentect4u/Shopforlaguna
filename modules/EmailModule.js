@@ -12,7 +12,7 @@ const ConfirmMenu = async (res_id) => {
     let param = await F_Select(parm_sql);
     var img = qr.msg[0].image,
         con_name = con.msg[0].contact_name,
-        email = con.msg[0].email_id,
+        email = con.msg[0].email,
         pro_name = param.msg[0].param_value,
         email_name = param.msg[1].param_value;
     console.log({ pro_name, email_name, con_name });
@@ -124,12 +124,12 @@ const SendAdminUnapproveMail = async (res_id, apr_flag, menu_list, desc) => {
     let res_email = con.msg[0].email;
     var app_chk = apr_flag == "A" ? "checked" : "",
         unap_chk = apr_flag == "U" ? "checked" : "",
-        brk_chk = menu_list[0].dt > 0 ?  'checked="checked"' : "",
-        lun_chk = menu_list[1].dt > 0 ?  'checked="checked"' : "",
+        brk_chk = menu_list[0].dt > 0 ? 'checked="checked"' : "",
+        lun_chk = menu_list[1].dt > 0 ? 'checked="checked"' : "",
         din_chk = menu_list[2].dt > 0 ? 'checked="checked"' : "",
         bru_chk = menu_list[3].dt > 0 ? 'checked="checked"' : "";
-        // spe_chk = menu_list[4].dt > 0 ? 'checked="checked"' : "";
-        console.log({ab: menu_list[0].dt, brk_chk, lun_chk, din_chk});
+    // spe_chk = menu_list[4].dt > 0 ? 'checked="checked"' : "";
+    console.log({ ab: menu_list[0].dt, brk_chk, lun_chk, din_chk });
     return new Promise(async (resolve, reject) => {
         // FOR LOCAL
         var transporter = nodemailer.createTransport({

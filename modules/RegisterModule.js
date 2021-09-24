@@ -157,21 +157,19 @@ const SaveUrl = (id, data) => {
             } else {
                 sql = `INSERT INTO md_url (restaurant_id, url) VALUES ("${id}", "${data.url}")`;
             }
-            console.log(sql);
-            return new Promise((resolve, reject) => {
-                db.query(sql, (err, lastId) => {
-                    if (err) {
-                        console.log(err);
-                        data = { suc: 0, msg: JSON.stringify(err) };
-                    } else {
-                        data = { suc: 1, msg: 'Inserted Successfully !!' };
-                    }
-                    resolve(data)
-                })
-            })
         }
     })
-    
+    return new Promise((resolve, reject) => {
+        db.query(sql, (err, lastId) => {
+            if (err) {
+                console.log(err);
+                data = { suc: 0, msg: JSON.stringify(err) };
+            } else {
+                data = { suc: 1, msg: 'Inserted Successfully !!' };
+            }
+            resolve(data)
+        })
+    })
 }
 
 module.exports = { ResRegistration, EmailCheck, OrderSave, PaySave };

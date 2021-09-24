@@ -2848,7 +2848,7 @@ export class MenuSetupComponent implements OnInit {
       this.WALL.style.color = 'white';
       this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
         this.arr_brak_check=data;
-        console.log(data)
+        console.log(data);
         if( this.arr_brak_check.msg.length!=0){
        
         this.Brunch_start=this.arr_brak_check.msg[0].start_time;
