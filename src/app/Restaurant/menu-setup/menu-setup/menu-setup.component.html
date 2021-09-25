@@ -196,12 +196,12 @@
                                         <input type="time"
 
                                          (change)="checkbreakend($event,'start')"
-                                        id="start" name="selfcling" value="{{breakfast_start}}" size="4" #start_break ><br><br>
+                                        id="start" name="selfcling" value="{{breakfast_start}}" size="4" #START_break ><br><br>
                                         <label for="selfcling">End Time:</label>
                                         <input type="time" 
                                         value="{{breakfast_end}}"
                                          (change)="checkbreakend($event,'end')"
-                                        id="end" name="selfcling"  size="4" #end_break >
+                                        id="end" name="selfcling"  size="4" #END_break >
                                     </form>
                                    </div>
                                    <div class="col-2"></div>
@@ -217,7 +217,7 @@
                         class="w3-button w3-green m-1" type="submit"
 
                         [disabled]="b_url"
-                        (click)="opennextab(COVERPAGEURL.value,TOPIMAGEURL.value,MENUURL.value,SECTIONURL.value,break.value,start_break.value,end_break.value)"
+                        (click)="opennextab(COVERPAGEURL.value,TOPIMAGEURL.value,MENUURL.value,SECTIONURL.value,break.value,START_break.value,END_break.value)"
                         >Save & Continue</button>
                         
                          <!-- <button
@@ -431,7 +431,7 @@
         
                                    </div>
                                    <div class="col-5">
-                                    <form class="form-inline" action="">
+                                    <form class="form-inline">
                                         <label for="selfcling">Start Time:</label>
                              
                                          
@@ -441,7 +441,7 @@
                                           value="{{launch_start}}"
                                        
                                           
-                                          size="4" #start_break><br><br>
+                                          size="4" #start_Break><br><br>
                                         <label for="selfcling">End Time:</label>
                                
                                         <input type="time"
@@ -449,7 +449,7 @@
                                         id="end_launch" name="selfcling"
                                         value="{{launch_end}}"
                                        
-                                        size="4" #end_break>
+                                        size="4" #end_Break>
                                     </form>
                                    </div>
                                    <div class="col-2"></div>
@@ -467,8 +467,8 @@
 
                             <button
                             class="w3-button w3-green m-1" type="submit"  
-                            
-                            (click)="opennextab1('Paris',launchcoverurl.value,launchtopimageurl.value,launchmenuurl.value,SECTIONURLAUNCH.value,launch.value,start_break.value,end_break.value)">Save & Continue</button>
+                            [disabled]="lcc_url"
+                            (click)="opennextab1('Paris',launchcoverurl.value,launchtopimageurl.value,launchmenuurl.value,SECTIONURLAUNCH.value,launch.value,start_Break.value,end_Break.value)">Save & Continue</button>
                     </div>
                         <!-- <button
                             class="w3-button w3-green m-1" type="submit"  
@@ -688,12 +688,12 @@
                                     value="{{dinner_start}}"
 
                                      (change)="checkdinnertime($event,'start')"
-                                    id="start_brunch" name="selfcling" value="" size="4" #start_break><br><br>
+                                    id="start_brunch" name="selfcling"  size="4" #Start_break><br><br>
                                     <label for="selfcling">End Time:</label>
                                     <input type="time"
                                     (change)="checkdinnertime($event,'end')"
                                      value="{{dinner_end}}"
-                                    id="end_brunch" name="selfcling" value="" size="4" #end_break>
+                                    id="end_brunch" name="selfcling"  size="4" #End_break>
                                 </form>
                                </div>
                                <div class="col-2"></div>
@@ -705,8 +705,9 @@
                         </div> 
                                
                             <button 
+                            [disabled]="d_url"
                             class="w3-button w3-green m-1" type="submit" 
-                            (click)="opennextab2('Tokyo',SECTIONURBRUNCH.value,MENUURLBRUNCH.value,topurl.value,coverbrunchurl.value,brunch.value,start_break.value,end_break.value)">Save & Continue</button>
+                            (click)="opennextab2('Tokyo',SECTIONURBRUNCH.value,MENUURLBRUNCH.value,topurl.value,coverbrunchurl.value,brunch.value,Start_break.value,End_break.value)">Save & Continue</button>
 
                         
                             <!-- <button 
@@ -940,6 +941,7 @@
                           
 
                         <button
+                        [disabled]="br_url"
                         class="w3-button w3-green m-1"  type="submit" (click)="opennextab3('laguna',dinnermenuurl.value,dinnertopurl.value,dinnercoverurl.value,SECTIONURlDINNER.value,dinner.value,start_break.value,end_break.value)">Save & Continue</button>
                         
                         <!-- <button
@@ -1216,4 +1218,6 @@
 </div>
 <div id="snackbar">Successfully Inserted...</div>
 <div id="snackbar1">{{error_msg}}</div>
+<div id="snackbar2">{{for_timing_problem}}</div>
+
 

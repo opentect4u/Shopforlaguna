@@ -30,9 +30,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./restaurent.component.css']
 })
 export class RestaurentComponent implements OnInit ,AfterViewInit{
-  displayedColumns: string[] = ['id', 'restaurant_name', 'phone_no', 'email','edit'];
+  displayedColumns: string[] = ['id', 'restaurant_name', 'phone_no', 'contact_name','setup','edit'];
   // dataSource = ELEMENT_DATA;
   userData:any;
+  divid:any;
+  show_edit=false;
+  setupmode:any;
   dataSource= new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -70,7 +73,19 @@ export class RestaurentComponent implements OnInit ,AfterViewInit{
       this.dataSource.paginator.firstPage();
     }
   }
-
+click_setup(v:any){
+  console.log(v)
+  this.setupmode=document.getElementById('setupmodeid');
+  console.log("checked:"+v.target.checked+" value:"+v.target.value);
+  if(this.setupmode.value)
+  {
+    console.log("True")
+  }
+  else{
+    console.log("False")
+  }
+   
+}
 
 
 }

@@ -8,6 +8,10 @@ import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
   styleUrls: ['./order-page.component.css']
 })
 export class AdminOrderPageComponent implements OnInit {
+  Window:any;
+  TopTable:any;
+  Sign2:any;
+  Sign1:any
   pack:boolean=false;
   promo:boolean=true;
   signhold:boolean=true;
@@ -63,13 +67,21 @@ export class AdminOrderPageComponent implements OnInit {
   signholder_price2:any;
   signholder_price3:any;
   signholder:any=[];
+  holder:any;
    
 
   windowcling_yes:any;
   window_no:boolean=true;
- 
+  signholder2:boolean=true;
+  wallmountsignholder1:any;
   windowcling_price:any
   window:any=[];
+  x:any;
+  wall2:boolean=true;
+  wall:any;
+   win_cling:any;
+   wallmountsignholder2:any;
+  success_msg_windowcling:any;
   constructor(private laguna:LagunaserviceService) { }
 
   ngOnInit(): void {
@@ -86,13 +98,12 @@ export class AdminOrderPageComponent implements OnInit {
              this.stnd_numberofmenu=this.Package.msg[i].no_of_menu;
              console.log(this.stnd_numberofmenu);
              console.log(this.stndpackage_setupfee,this.stndpacakge__monthlyfee);
-             if(this.Package.msg[i].special_menu=="Y"){
+             if(this.Package.msg[i].special_menu=='Y'){
              this.stnd_specialmenu_yes=document.getElementById('yes_stnd');
              this.stnd_specialmenu_yes.checked=true;
              }
              else{
-              
-               this.stnd_specialmenu_yes=document.getElementById('no_stnd');
+              this.stnd_specialmenu_yes=document.getElementById('no_stnd');
               this.stnd_specialmenu_yes.checked=true;
              }
 
@@ -161,14 +172,7 @@ export class AdminOrderPageComponent implements OnInit {
             this.promo_EventCalendarprice_no.checked=true;
           }
         }
-        else{
-
-        }
-      
-      
-     
-      
-      }
+       }
 
     })
     //For SignHolder
@@ -192,19 +196,33 @@ export class AdminOrderPageComponent implements OnInit {
                 this.signholder_price2=this.signholder.msg[i].price;
 
                    if(this.signholder.msg[i].free_flag=='Y'){
-                              this.wallmountsignholder=document.getElementById('yes_signholder2');
-                              this.wallmountsignholder.checked=true;
-                
+                    this.wallmountsignholder1=document.getElementById('yes_signholder2');
+                    this.wallmountsignholder1.checked=true;
+              
 
                    } 
                    else{
-                    this.wallmountsignholder=document.getElementById('no_signholder2');
-                    this.wallmountsignholder.checked=true;
+                    this.wallmountsignholder1=document.getElementById('no_signholder2');
+                    this.wallmountsignholder1.checked=true;
 
                    }
               }
-              else if(this.signholder.msg[i].id==8){
+              else if(this.signholder.msg[i].id == 8){
+                console.log(this.signholder.msg[i].id,i)
                 this.signholder_price3=this.signholder.msg[i].price;
+                if(this.signholder.msg[i].free_flag == 'Y'){
+                 this.wallmountsignholder2=document.getElementById('yes_wall');
+                 console.log(this.wallmountsignholder2)
+                  this.wallmountsignholder2.checked=true;
+                  console.log(this.wallmountsignholder2.checked);
+                } 
+                 else{
+                   this.wallmountsignholder2=document.getElementById('no_mount');
+                  this.wallmountsignholder2.checked=true;
+                  console.log(this.wallmountsignholder.checked);
+
+
+                 }
                 
               }
               
@@ -218,13 +236,13 @@ export class AdminOrderPageComponent implements OnInit {
         if(this.window.msg[i].id==9){
           this.windowcling_price=this.window.msg[i].price;
           if(this.window.msg[i].free_flag=='Y'){
-            this.windowcling_yes=document.getElementById('yes_last');
-            // this.windowcling_yes.value=0;
+            this.windowcling_yes=document.getElementById("yes_last");
+         
             this.windowcling_yes.checked=true;
           }
           else{
-            this.windowcling_yes=document.getElementById('no_end');
-            // this.windowcling_yes.value=0;
+            this.windowcling_yes=document.getElementById("no_end");
+           
             this.windowcling_yes.checked=true;
           }
         }
@@ -366,7 +384,7 @@ export class AdminOrderPageComponent implements OnInit {
     }
   }
   //Admin order set up page package tab first row
-  submit(v1:any,v2:any,v3:any,v4:any,v5:any){
+  submit(v1:any,v2:any,v3:any,v4:any){
     this.yes_stnd=document.getElementById('yes_stnd');
     this.no_stnd=document.getElementById('no_stnd');
     console.log(this.yes_stnd.checked,this.no_stnd.checked);
@@ -382,16 +400,20 @@ export class AdminOrderPageComponent implements OnInit {
        "Special_Menu":this.set_value,
        "SetUp_Fee":v3,
        "Monthly_Fee":v4,
-       "Description":v5
+      // "Description":v5
+     
     }
     // console.log(v1,v2,v3,v4,v5,this.set_value);
     console.log(dt);
     this.laguna.postpackagedata(dt).subscribe(data=>{
       console.log(data);
+      this.win_cling=data;
+      this.success_msg_windowcling=this.win_cling.msg;
+     this.myFunction();
     });
   }
     //Admin order set up page package tab second row
-  submitstndplus(v1:any,v2:any,v3:any,v4:any,v5:any){
+  submitstndplus(v1:any,v2:any,v3:any,v4:any){
     this.yes_stnd=document.getElementById('yes');
     this.no_stnd=document.getElementById('no');
     console.log(this.yes_stnd.checked,this.no_stnd.checked);
@@ -407,16 +429,19 @@ export class AdminOrderPageComponent implements OnInit {
       "Special_Menu":this.set_value,
       "SetUp_Fee":v3,
       "Monthly_Fee":v4,
-      "Description":v5
+      // "Description":v5
    }
     // console.log(v1,v2,v3,v4,v5,this.set_value);
     console.log(dt);
     this.laguna.postpackagedata(dt).subscribe(data=>{
       console.log(data);
+      this.win_cling=data;
+      this.success_msg_windowcling=this.win_cling.msg;
+     this.myFunction();
     });
   }
     //Admin order set up page package tab third row
-  submitpremium(v1:any,v2:any,v3:any,v4:any,v5:any){
+  submitpremium(v1:any,v2:any,v3:any,v4:any){
     console.log(v1)
     this.yes_stnd=document.getElementById('yes_premium');
     this.no_stnd=document.getElementById('no_premium');
@@ -433,12 +458,15 @@ export class AdminOrderPageComponent implements OnInit {
       "Special_Menu":this.set_value,
       "SetUp_Fee":v3,
       "Monthly_Fee":v4,
-      "Description":v5
+      // "Description":v5
    }
     // console.log(v1,v2,v3,v4,v5,this.set_value);
     console.log(dt);
     this.laguna.postpackagedata(dt).subscribe(data=>{
       console.log(data);
+      this.win_cling=data;
+      this.success_msg_windowcling=this.win_cling.msg;
+     this.myFunction();
     });
 
   }
@@ -463,6 +491,9 @@ export class AdminOrderPageComponent implements OnInit {
     console.log(dt);
     this.laguna.PostPromoCalendar(dt).subscribe(data=>{
       console.log(data);
+      this.win_cling=data;
+      this.success_msg_windowcling=this.win_cling.msg;
+     this.myFunction();
     })
   }
 //Admin order set up page Promo&calendar tab second row
@@ -486,6 +517,10 @@ export class AdminOrderPageComponent implements OnInit {
      console.log(dt);
       this.laguna.PostPromoCalendar(dt).subscribe(data=>{
         console.log(data);
+        this.win_cling=data;
+     this.success_msg_windowcling=this.win_cling.msg;
+     this.myFunction();
+
       })
      
 
@@ -494,48 +529,64 @@ export class AdminOrderPageComponent implements OnInit {
   opentabletop(v1:any,v2:any){
     var dt={
       "per_Holder_Price":v1,
-       "serial_no":v2
+       "serial_no":v2,
+      //  "free": this.TopTable
     }
     console.log(v1,v2);
     console.log(dt);
     this.laguna.Postsignupholder(dt).subscribe(data=>{
       console.log(data);
+      this.win_cling=data;
+      this.success_msg_windowcling=this.win_cling.msg;
+     this.myFunction();
     })
   }
    //Admin order set up page signholder tab second row
   openwallmount(v1:any,v2:any){
     var dt={
       "per_Holder_Price":v2,
-       "serial_no":v1
+       "serial_no":v1,
+      //  "free":this.Sign1
     }
     console.log(v1,v2);
     console.log(dt);
     this.laguna.Postsignupholder(dt).subscribe(data=>{
       console.log(data);
+      this.win_cling=data;
+      this.success_msg_windowcling=this.win_cling.msg;
+     this.myFunction();
     })
   }
    //Admin order set up page signholder tab third row
   showwall(v1:any,v2:any){
     var dt={
       "per_Holder_Price":v2,
-       "serial_no":v1
+       "serial_no":v1,
+      //  "free":this.Sign2
     }
     console.log(v1,v2);
     console.log(dt);
     this.laguna.Postsignupholder(dt).subscribe(data=>{
       console.log(data);
+      this.win_cling=data;
+      this.success_msg_windowcling=this.win_cling.msg;
+     this.myFunction();
     })
   }
   //Admin order set up page windowCling tab first row
   showwindow(v1:any,v2:any){
     var dt={
       "per_Holder_Price":v2,
-       "serial_no":v1
+       "serial_no":v1,
+      //  "free":this.Window
     }
    console.log(v1,v2);
    console.log(dt);
    this.laguna.PostWIndowCling(dt).subscribe(data=>{
      console.log(data);
+     this.win_cling=data;
+     this.success_msg_windowcling=this.win_cling.msg;
+     this.myFunction();
    })
   }
   //For Disabled the Price on Enable the yes radio button in Promo&Calendar Tab
@@ -578,36 +629,72 @@ export class AdminOrderPageComponent implements OnInit {
       console.log(event.target.value);
        this.Tabletop=true;
        this.table=document.getElementById('tabletop');
-       this.table.value=0;     
+       this.table.value=0;    
+       this.TopTable='Y'
     }
     else if(event.target.id=='no_signholder1'){
       console.log(event.target.value);
       this.Tabletop=false;
+      this.TopTable='N'
+
      }
     else if(event.target.id=='yes_signholder2'){
       console.log(event.target.value);
+      this.holder=document.getElementById('wallmount2');
+      this.holder.value=0;      
+      this.signholder2=true;
+      this.Sign1='Y';
+      
+
     }
     else if(event.target.id=='no_signholder2'){
-      console.log(event.target.value);
+      this.signholder2=false;
+      this.Sign1='N';
+
     }
     else if(event.target.id=='yes_wall'){
-      console.log(event.target.value);
+      // console.log(event.target.value);
+      this.wall=document.getElementById('wall');
+      this.wall.value=0;
+      this.wall2=true;
+      this.Sign2='Y';
     }
     else if(event.target.id=='no_mount')
     {
-      console.log(event.target.value);
+      this.wall2=false;
+      this.Sign2='N';
+
+
+      // console.log(event.target.value);
     }
     else if(event.target.id=='yes_last'){
       console.log(event.target.value);
        this.windowcling_yes=document.getElementById('window_cling');
        this.windowcling_yes.value=0;
        this.window_no=true;
+       this.Window='Y';
       
     }
     else if(event.target.id=='no_end'){
       console.log(event.target.value);
       this.window_no=false;
+      this.Window='N';
+
     }
 
   }
+
+  // For success snackbar
+  myFunction() {
+    // Get the snackbar DIV
+    this.x = document.getElementById("snackbar");
+  
+    // Add the "show" class to DIV
+    this.x.className = "show";
+  
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
+  } 
+
+
 }

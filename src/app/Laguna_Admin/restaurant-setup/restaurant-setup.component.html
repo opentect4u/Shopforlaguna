@@ -48,10 +48,10 @@
                             <tr>
                                 <th scope="col">RESTAURANT NAME</th>
                                 <th scope="col">CONTACT NAME</th>
-                                <th scope="col">ADDRESS</th>
+                                <!-- <th scope="col">ADDRESS</th>
                                 <th scope="col">PHONE</th>
                                 <th scope="col">EMAIL</th>
-                                <th scope="col">WEBSITE</th>
+                                <th scope="col">WEBSITE</th> -->
                             </tr>
                             <tr bgcolor="#fff" align="center">
                                 <td bgcolor="#f1f1f1">
@@ -62,12 +62,68 @@
                                     </script>{{rest_nm}}
                                 </td>
                                 <td>{{rest_contact}} </td>
-                                <td><small>{{rest_add}}</small></td>
+                                <!-- <td><small>{{rest_add}}</small></td>
                                 <td>{{rest_phone}}</td>
                                 <td><small>{{rest_em}}</small></td>
-                                <td>{{rest_web}}</td>
+                                <td>{{rest_web}}</td> -->
                             </tr>
-                        </table> <br>
+                        <!-- </table> -->
+                        
+                        <br>
+                        <!-- <table width="100%" cellspacing="15">  -->
+                            <tr style="background: white;">
+                                <!-- <th scope="col">RESTAURANT NAME</th>
+                                <th scope="col">CONTACT NAME</th> -->
+                                <th scope="col">ADDRESS</th>
+                                <th scope="col">PHONE</th>
+                                <!-- <th scope="col">EMAIL</th>
+                                <th scope="col">WEBSITE</th> -->
+                            </tr>
+                            <tr style="background:rgb(240, 239, 239)" align="center">
+                                <!-- <td bgcolor="#f1f1f1">
+                                    <script>
+                                        function msg() {
+                                            alert("Click on File Record to view details");
+                                        }
+                                    </script>
+                                    {{rest_nm}}
+                                </td> -->
+                                <!-- <td>{{rest_contact}} </td> -->
+                                <td>{{rest_add}}</td>
+                                <td>{{rest_phone}}</td>
+                                <!-- <td><small>{{rest_em}}</small></td>
+                                <td>{{rest_web}}</td> -->
+                            </tr>
+                        <!-- </table> -->
+                         
+                        <br>
+                        <!-- <table width="100%" cellspacing="15"> -->
+                            <tr>
+                                <!-- <th scope="col">RESTAURANT NAME</th>
+                                <th scope="col">CONTACT NAME</th>
+                                <th scope="col">ADDRESS</th>
+                                <th scope="col">PHONE</th> -->
+                                <th scope="col">EMAIL</th>
+                                <th scope="col">WEBSITE</th>
+                            </tr>
+                            <tr bgcolor="#fff" align="center">
+                                <!-- <td bgcolor="#f1f1f1">
+                                    <script>
+                                        function msg() {
+                                            alert("Click on File Record to view details");
+                                        }
+                                    </script>{{rest_nm}}
+                                </td>
+                                <td>{{rest_contact}} </td>
+                                <td><small>{{rest_add}}</small></td>
+                                <td>{{rest_phone}}</td> -->
+                                <td>{{rest_em}}</td>
+                           <td>{{rest_web}}</td>     
+                           
+                                
+
+                            </tr>
+                        </table>
                     </div><br><br><br>
                     <div style="overflow-x:auto;">
                         <table width="100%" cellspacing="15">
@@ -378,7 +434,7 @@
                             <tbody>
                                 <tr *ngFor="let sec of secData; let i=index">
                                     <th scope="row">{{i+1}}</th>
-                                    <td><a href="{{sec.sec_url}}">{{sec.sec_url}}</a>
+                                    <td><a href="{{sec.sec_url}}" target="_blank">{{sec.sec_url}}</a>
                                         <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
                                             class="formCss"> -->
                                         </td>
@@ -453,11 +509,16 @@
                             </div>
                         </div>
                         <div class="dateTimRight">
-                            <div class="form-inline timRow">
-                                <label for="selfcling">Start Time:</label>
-                                <input type="time" id="selfcling" #strt name="selfcling" value="{{starttime}}" size="4">
+                            <div class="row form-inline timRow">
+                                <div class="col-6">
+                                    <label for="selfcling">Start Time:</label>
+                                    <input type="time" id="selfcling" #strt name="selfcling" value="{{starttime}}" size="4">
+                                </div>
+                               <div class="col-6">
                                 <label for="selfcling">End Time:</label>
                                 <input type="time" id="selfcling" #end name="selfcling" value="{{endtime}}" size="4">
+                               </div>
+                               
                             </div>
                         </div>
                         <br clear="all">
@@ -520,8 +581,8 @@
                     </div>
 
                     <form action="thanks-order.php" target="_self">
-                        <button [hidden]="submit_show" class="w3-button w3-green" (click)="create_section(section_value.value);section_value.value=''" type="submit">Submit </button>
-                        <button [hidden]="!submit_show" class="w3-button w3-green" (click)="update_section(section_value.value);" type="submit">Update </button>
+                        <button [hidden]="submit_show"  class="w3-button w3-green" (click)="create_section(section_value.value);section_value.value=''" type="submit">Submit </button>
+                        <button [hidden]="!submit_show" class="w3-button w3-green" (click)="update_section(section_value.value)" type="submit">Update </button>
                     </form>
                     <br><br>
                     <mat-form-field appearance="standard">
@@ -543,7 +604,7 @@
                         </ng-container>
                       
                      
-                        <ng-container matColumnDef="edit">
+                        <!-- <ng-container matColumnDef="edit">
                             <th mat-header-cell  *matHeaderCellDef > Edit </th>
                             <td  mat-cell *matCellDef="let element">
                             
@@ -560,10 +621,10 @@
                             
                         
                         </td>
-                          </ng-container>
+                          </ng-container> -->
                       
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: pointer;" (click)="get_sec_id1(row.menu_id,row.id,row.section_name)" ></tr>
                       </table>
                   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 
@@ -658,7 +719,7 @@
                         </ng-container>
                       
                      
-                        <ng-container matColumnDef="edit">
+                        <!-- <ng-container matColumnDef="edit">
                             <th mat-header-cell  *matHeaderCellDef > Edit </th>
                             <td  mat-cell *matCellDef="let element">
                             
@@ -675,10 +736,10 @@
                             
                         
                         </td>
-                          </ng-container>
+                          </ng-container> -->
                       
                         <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns1;" (click)="update_add_item(row.menu_id,row.section_id,row.item_name,row.id)" style="cursor: pointer;"></tr>
                       </table>
                   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
                     
@@ -761,7 +822,7 @@
                             </div>
                         </form>
                         <form action="thanks-order.php" target="_self">
-                            <button [hidden]="show_button3" class="w3-button w3-green" type="submit" (click)="submit_price_desc(price.value,desc.value,additional.value);select_price_menu.value='';section_select_for_item.value='';item_select.value='';desc.value='';additional.value=''">Submit </button>
+                            <button [hidden]="show_button3" class="w3-button w3-green" type="submit" (click)="submit_price_desc(price.value,desc.value,additional.value);">Submit </button>
                             <button [hidden]="!show_button3" class="w3-button w3-green" type="submit" (click)="update_price_desc(select_price_menu.value,section_select_for_item.value,item_select.value,price.value,desc.value,additional.value);">Update </button>
 
                         </form>
@@ -793,7 +854,7 @@
                             <td mat-cell *matCellDef="let element">{{element.item_note}} </td>
                           </ng-container>
                      
-                        <ng-container matColumnDef="edit">
+                        <!-- <ng-container matColumnDef="edit">
                             <th mat-header-cell  *matHeaderCellDef > Edit </th>
                             <td  mat-cell *matCellDef="let element">
                             
@@ -810,10 +871,10 @@
                             
                         
                         </td>
-                          </ng-container>
+                          </ng-container> -->
                       
                         <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns2;" (click)="get_sec_id(row.menu_id,row.id,row.section_id,row.item_id,row.item_desc,row.item_price,row.item_note)" style="cursor: pointer;"></tr>
                       </table>
                   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"   showFirstLastButtons  aria-label="Select page of users"></mat-paginator>
 
@@ -911,7 +972,7 @@
                     
                     
                       <form action="thanks-order.php" target="_self">	
-                      <button class="w3-button w3-green" type="submit" (click)="submit_special(Menu.value,position.value,head.value,code2.value,code4.value,notice.value);show_tab='tab8';openCity('tab8')">Save & Continue </button>
+                      <button class="w3-button w3-green" type="submit" (click)="submit_special(Menu.value,position.value,head.value,code2.value,code4.value,notice.value);">Save & Continue </button>
                       </form> 
                   
                 </div>
@@ -939,8 +1000,8 @@
                         immediately</p>
 
                     <form class="form-inline" action="">
-                        <button type="submit" class="btn btn-default" (click)="send_about_us(about_write_txt.value);about_write_txt.value=''">SUBMIT</button>
-                        <button type="reset" value="Reset" (click)="about_write_txt.value=''" style="background-color:#F00">Clear</button>
+                        <button type="submit" class="btn btn-default" (click)="send_about_us(about_write_txt.value)">SUBMIT</button>
+                        <button type="reset" value="Reset" id="clickreset" (click)="about_write_txt.value=''" style="background-color:#F00">Clear</button>
                     </form>
                 </div>
 

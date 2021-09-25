@@ -36,7 +36,7 @@
                   
                     <!-- Name Column -->
                     <ng-container matColumnDef="restaurant_name">
-                      <th mat-header-cell *matHeaderCellDef matSortHeader="restaurant_name"> Name </th>
+                      <th mat-header-cell *matHeaderCellDef matSortHeader="restaurant_name"> Restaurant Name </th>
                       <td mat-cell *matCellDef="let element">{{element.restaurant_name}}</td>
                     </ng-container>
                   
@@ -47,9 +47,13 @@
                     </ng-container>
                   
                     <!-- Symbol Column -->
-                    <ng-container matColumnDef="email">
-                      <th mat-header-cell *matHeaderCellDef matSortHeader="email"> Email </th>
-                      <td mat-cell *matCellDef="let element">{{element.email}}  </td>
+                    <ng-container matColumnDef="contact_name">
+                      <th mat-header-cell *matHeaderCellDef matSortHeader="contact_name"> Contact Name </th>
+                      <td mat-cell *matCellDef="let element">{{element.contact_name}}  </td>
+                    </ng-container>
+                    <ng-container matColumnDef="setup" class="text-center" >
+                      <th mat-header-cell *matHeaderCellDef matSortHeader="setup"> Setup Mode</th>
+                      <td mat-cell *matCellDef="let element"><mat-slide-toggle color="primary" id="setupmodeid" (click)="click_setup($event)"></mat-slide-toggle> </td>
                     </ng-container>
                     <ng-container matColumnDef="edit">
                         <th mat-header-cell class="text-center" *matHeaderCellDef > Manage </th>

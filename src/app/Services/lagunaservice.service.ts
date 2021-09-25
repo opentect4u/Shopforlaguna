@@ -71,6 +71,8 @@ post_about_us(about_txt:any,res_id:any){
 
  return this.http.post(url_set.api_url+'/aboutus',dt);
 }
+
+//posting date and time
 post_date_time(dt:any){
   return this.http.post(url_set.api_url+'/date_time',dt);
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 import { DataserviceService } from '../../service/dataservice.service';
 
@@ -10,6 +11,7 @@ import { DataserviceService } from '../../service/dataservice.service';
 '../../../../assets/appcss.css']
 })
 export class MenuSetupComponent implements OnInit {
+  for_timing_problem:any="Error!! Start time must be greater then end time"
   break_dt:any=[];
   breakfast_end:any='';
   breakfast_start:any='';
@@ -263,11 +265,14 @@ export class MenuSetupComponent implements OnInit {
                 this.check_launch=document.getElementById('paris');
                 this.check_launch.checked=true;
                 this.launch_check='Y'
+                this.lcc_url=false;
              }
              else {
               this.check_launch=document.getElementById('paris');
               this.check_launch.checked=false;
               this.launch_check='N';
+              this.lcc_url=true;
+
              }
            }
            else if(this.cove_top.msg[i].menu_id==3){
@@ -279,11 +284,14 @@ export class MenuSetupComponent implements OnInit {
               this.check_dinner=document.getElementById('tokyo');
               this.check_dinner.checked=true;
               this.brunch_check='Y';
+              this.d_url=false;
            }
            else {
             this.check_dinner=document.getElementById('tokyo');
             this.check_dinner.checked=false;
             this.brunch_check='N';
+            this.d_url=true;
+
            }
            }
            else if(this.cove_top.msg[i].menu_id==4){
@@ -303,11 +311,14 @@ export class MenuSetupComponent implements OnInit {
               this.check_brunch=document.getElementById('laguna');
               this.check_brunch.checked=true;
               this.dinner_check='Y';
+              this.br_url=false;
            }
            else {
             this.check_brunch=document.getElementById('laguna');
             this.check_brunch.checked=false;
             this.dinner_check='N';
+            this.br_url=true;
+
            }
          }
 
@@ -445,7 +456,7 @@ export class MenuSetupComponent implements OnInit {
       }
        //If Select only launch
 
-      else if(launch==''){
+      if(launch==''){
         this.lagunaserve.get_set_time('2',this.resid).subscribe(data=>{
           this.arr_brak_check=data;
           if(this.arr_brak_check.msg.length!=0){
@@ -543,7 +554,7 @@ export class MenuSetupComponent implements OnInit {
       }
        //If Select only dinner
 
-      else if(dinner==''){
+       if(dinner==''){
         this.lagunaserve.get_set_time('3',this.resid).subscribe(data=>{
           this.arr_brak_check=data;
           if(this.arr_brak_check.msg.length!=0){
@@ -638,7 +649,7 @@ export class MenuSetupComponent implements OnInit {
       }
        //If Select only brunch
 
-      else if(brunch==''){
+      if(brunch==''){
         this.lagunaserve.get_set_time('4',this.resid).subscribe(data=>{
           this.arr_brak_check=data;
           if(this.arr_brak_check.msg.length!=0){
@@ -835,7 +846,7 @@ export class MenuSetupComponent implements OnInit {
     }
       //IF select breakfast && dinner
 
-    else if(breakfast=='' && dinner==''){
+    if(breakfast=='' && dinner==''){
   
       this.lagunaserve.get_set_time('1',this.resid).subscribe(data=>{
         console.log(data);
@@ -940,7 +951,7 @@ export class MenuSetupComponent implements OnInit {
     }
       //IF select breakfast && brunch
 
-    else if(breakfast=='' && brunch==''){
+  if(breakfast=='' && brunch==''){
 
       this.lagunaserve.get_set_time('1',this.resid).subscribe(data=>{
          
@@ -1040,7 +1051,7 @@ export class MenuSetupComponent implements OnInit {
     }
       //IF select launch && brunch
 
-    else if(launch=='' && brunch==''){
+    if(launch=='' && brunch==''){
 
       this.lagunaserve.get_set_time('2',this.resid).subscribe(data=>{
         this.arr_brak_check=data;
@@ -1137,7 +1148,7 @@ export class MenuSetupComponent implements OnInit {
     }
       //IF select dinner && launch
 
-    else if(launch=='' && dinner==''){
+   if(launch=='' && dinner==''){
  
       this.coc=document.getElementById('defaultOpen1');
       this.coc.className='active';
@@ -1234,7 +1245,7 @@ export class MenuSetupComponent implements OnInit {
     }
       //IF select dinner && brunch
 
-    else if(dinner=='' && brunch==''){
+    if(dinner=='' && brunch==''){
 
       this.lagunaserve.get_set_time('3',this.resid).subscribe(data=>{
         this.arr_brak_check=data;
@@ -1437,8 +1448,8 @@ export class MenuSetupComponent implements OnInit {
   //For changing the tab
   openCity(e: any,v1:any) {
     console.log("val:",this.v)
-    this.brunch_start=0;
-    this.brunch_end=0;
+    // this.brunch_start=0;
+    // this.brunch_end=0;
     if (e == 'London'){
       this.brunch_start='';
       this.brunch_end='';
@@ -1857,22 +1868,7 @@ export class MenuSetupComponent implements OnInit {
       this.brunch_start='';
       this.brunch_end='';
       this.arr_brak_check.length=0;
-      // this.every=document.getElementById('vehicle1');
-      // this.every.checked=false;
-      // this.mon_check=document.getElementById('vehicle2');
-      // this.mon_check.checked=false;
-      // this.tue_check=document.getElementById('vehicle3');
-      // this.tue_check.checked=false;
-      // this.wed_check=document.getElementById('vehicle4');
-      // this.wed_check.checked=false;
-      // this.thu_check=document.getElementById('vehicle5');
-      // this.thu_check.checked=false;
-      // this.fri_check=document.getElementById('vehicle6');
-      // this.fri_check.checked=false;
-      // this.sat_check=document.getElementById('vehicle7');
-      // this.sat_check.checked=false;
-      // this.sun_check=document.getElementById('vehicle8');
-      // this.sun_check.checked=false;
+     
 
       console.log(this.v);
 
@@ -1964,10 +1960,10 @@ export class MenuSetupComponent implements OnInit {
          this.arr_brak_check=data;
          if(this.arr_brak_check.msg.length!=0){
 
-         this.launch_start=this.arr_brak_check.msg[0].start_time;
+          this.launch_start=this.arr_brak_check.msg[0].start_time;
               this.launch_end=this.arr_brak_check.msg[0].end_time;
-              this.brunch_start=this.launch_start;
-              this.brunch_end=this.launch_end;
+              // this.brunch_start=this.launch_start;
+              // this.brunch_end=this.launch_end;
         for(let i=0;i<this.arr_brak_check.msg.length;i++){
           if(this.arr_brak_check.msg[i].month_day==2){
             this.mon_check=document.getElementById('vehicle22');
@@ -2083,8 +2079,8 @@ export class MenuSetupComponent implements OnInit {
 
             this.launch_start=this.arr_brak_check.msg[0].start_time;
               this.launch_end=this.arr_brak_check.msg[0].end_time;
-              this.brunch_start=this.launch_start;
-              this.brunch_end=this.launch_end;
+              // this.brunch_start=this.launch_start;
+              // this.brunch_end=this.launch_end;
             for(let i=0;i<this.arr_brak_check.msg.length;i++){
               if(this.arr_brak_check.msg[i].month_day==2){
                 this.mon_check=document.getElementById('vehicle22');
@@ -2189,8 +2185,8 @@ export class MenuSetupComponent implements OnInit {
           if(this.arr_brak_check.msg.length!=0){
              this.launch_start=this.arr_brak_check.msg[0].start_time;
           this.launch_end=this.arr_brak_check.msg[0].end_time;
-          this.brunch_start=this.launch_start;
-          this.brunch_end=this.launch_end;
+          // this.brunch_start=this.launch_start;
+          // this.brunch_end=this.launch_end;
           for(let i=0;i<this.arr_brak_check.msg.length;i++){
             if(this.arr_brak_check.msg[i].month_day==2){
               this.mon_check=document.getElementById('vehicle22');
@@ -2351,8 +2347,8 @@ export class MenuSetupComponent implements OnInit {
               
               this.dinner_start=this.arr_brak_check.msg[0].start_time;
               this.dinner_end=this.arr_brak_check.msg[0].end_time;
-              this.brunch_start=this.dinner_start;
-                this.brunch_end=this.dinner_end;
+              // this.brunch_start=this.dinner_start;
+              //   this.brunch_end=this.dinner_end;
               for(let i=0;i<this.arr_brak_check.msg.length;i++){
                 if(this.arr_brak_check.msg[i].month_day==2){
                   this.mon_check=document.getElementById('vehicle23');
@@ -2467,8 +2463,8 @@ export class MenuSetupComponent implements OnInit {
               
               this.dinner_start=this.arr_brak_check.msg[0].start_time;
               this.dinner_end=this.arr_brak_check.msg[0].end_time;
-              this.brunch_start=this.dinner_start;
-              this.brunch_end=this.dinner_end;
+              // this.brunch_start=this.dinner_start;
+              // this.brunch_end=this.dinner_end;
                 for(let i=0;i<this.arr_brak_check.msg.length;i++){
                   if(this.arr_brak_check.msg[i].month_day==2){
                     this.mon_check=document.getElementById('vehicle23');
@@ -2575,8 +2571,8 @@ export class MenuSetupComponent implements OnInit {
            
             this.dinner_start=this.arr_brak_check.msg[0].start_time;
             this.dinner_end=this.arr_brak_check.msg[0].end_time;
-            this.brunch_start=this.dinner_start;
-            this.brunch_end=this.dinner_end;
+            // this.brunch_start=this.dinner_start;
+            // this.brunch_end=this.dinner_end;
             for(let i=0;i<this.arr_brak_check.msg.length;i++){
               if(this.arr_brak_check.msg[i].month_day==2){
                 this.mon_check=document.getElementById('vehicle23');
@@ -2698,22 +2694,22 @@ export class MenuSetupComponent implements OnInit {
   
       })
       console.log(this.v);
-      this.every=document.getElementById('vehicle1');
-      this.every.checked=false;
-      this.mon_check=document.getElementById('vehicle2');
-      this.mon_check.checked=false;
-      this.tue_check=document.getElementById('vehicle3');
-      this.tue_check.checked=false;
-      this.wed_check=document.getElementById('vehicle4');
-      this.wed_check.checked=false;
-      this.thu_check=document.getElementById('vehicle5');
-      this.thu_check.checked=false;
-      this.fri_check=document.getElementById('vehicle6');
-      this.fri_check.checked=false;
-      this.sat_check=document.getElementById('vehicle7');
-      this.sat_check.checked=false;
-      this.sun_check=document.getElementById('vehicle8');
-      this.sun_check.checked=false;
+      // this.every=document.getElementById('vehicle1');
+      // this.every.checked=false;
+      // this.mon_check=document.getElementById('vehicle2');
+      // this.mon_check.checked=false;
+      // this.tue_check=document.getElementById('vehicle3');
+      // this.tue_check.checked=false;
+      // this.wed_check=document.getElementById('vehicle4');
+      // this.wed_check.checked=false;
+      // this.thu_check=document.getElementById('vehicle5');
+      // this.thu_check.checked=false;
+      // this.fri_check=document.getElementById('vehicle6');
+      // this.fri_check.checked=false;
+      // this.sat_check=document.getElementById('vehicle7');
+      // this.sat_check.checked=false;
+      // this.sun_check=document.getElementById('vehicle8');
+      // this.sun_check.checked=false;
    
 
     if(localStorage.getItem('No_of_menu')=='O'){
@@ -2753,8 +2749,8 @@ export class MenuSetupComponent implements OnInit {
             if(this.arr_brak_check.msg.length!=0){
             this.Brunch_start=this.arr_brak_check.msg[0].start_time;
             this.Brunch_end=this.arr_brak_check.msg[0].end_time;
-            this.brunch_start=this.Brunch_start;
-            this.brunch_end=this.Brunch_end;
+            // this.brunch_start=this.Brunch_start;
+            // this.brunch_end=this.Brunch_end;
             for(let i=0;i<this.arr_brak_check.msg.length;i++){
               if(this.arr_brak_check.msg[i].month_day==2){
                 this.mon_check=document.getElementById('vehicle24');
@@ -2866,8 +2862,8 @@ export class MenuSetupComponent implements OnInit {
        
         this.Brunch_start=this.arr_brak_check.msg[0].start_time;
         this.Brunch_end=this.arr_brak_check.msg[0].end_time;
-        this.brunch_start=this.Brunch_start;
-        this.brunch_end=this.Brunch_end;
+        // this.brunch_start=this.Brunch_start;
+        // this.brunch_end=this.Brunch_end;
         for(let i=0;i<this.arr_brak_check.msg.length;i++){
           if(this.arr_brak_check.msg[i].month_day==2){
             this.mon_check=document.getElementById('vehicle24');
@@ -2972,8 +2968,8 @@ export class MenuSetupComponent implements OnInit {
           this.arr_brak_check=data;
           this.Brunch_start=this.arr_brak_check.msg[0].start_time;
             this.Brunch_end=this.arr_brak_check.msg[0].end_time;
-            this.brunch_start=this.Brunch_start;
-            this.brunch_end=this.Brunch_end;
+            // this.brunch_start=this.Brunch_start;
+            // this.brunch_end=this.Brunch_end;
           for(let i=0;i<this.arr_brak_check.msg.length;i++){
             if(this.arr_brak_check.msg[i].month_day==2){
               this.mon_check=document.getElementById('vehicle24');
@@ -3124,9 +3120,12 @@ export class MenuSetupComponent implements OnInit {
   }
   opennextab(COVERPAGEURL: any, TOPIMAGEURL: any,MENUURL:any,SECTIONURL:any,hidevalue:any,v1:any,v2:any) {
    
-    this.break_dt=[{
-      "dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}];
-    if(localStorage.getItem('breakfast')==''){
+  //   var break_dt=[{
+  //  "dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}];
+   if(v1<v2){
+  
+  
+  if(localStorage.getItem('breakfast')==''){
      
       const formData = new FormData();
       // formData.append('file', this.breakfastcoverimage);
@@ -3136,12 +3135,12 @@ export class MenuSetupComponent implements OnInit {
       formData.append('SectionUrl',SECTIONURL);
       formData.append('cov_img',this.breakfastcoverimage);
       formData.append('top_img', this.breakfasttopimage);
-       formData.append('month_day',this.break_dt);
+      //  formData.append('month_day',this.break_dt);
        formData.append('restaurant_id',this.resid);
        formData.append('menu_id',hidevalue);
        formData.append('break_check',this.break_check);
-       formData.append("start_time",this.brunch_start);
-       formData.append('end_time',this.brunch_end);
+      //  formData.append("start_time",this.brunch_start);
+      //  formData.append('end_time',this.brunch_end);
        formData.append('restaurant_name',this.res_name);
 
 
@@ -3161,19 +3160,7 @@ export class MenuSetupComponent implements OnInit {
       );
           this.myFunction();
 
-      this.storevalue.length=0;
-      this.storevalue.push({
-      "coverurl": COVERPAGEURL,
-      "topurl": TOPIMAGEURL,
-      "MenuUrl":MENUURL,
-      "SectionUrl":SECTIONURL,
-      "restaurant_id":this.resid,
-      "menu_id":hidevalue,
-      "break_check":this.break_check,
-      "start_time":this.brunch_start,
-      "end_time":this.brunch_end,
-      "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
-    });
+     
       
   
     // this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
@@ -3201,12 +3188,12 @@ export class MenuSetupComponent implements OnInit {
         formData.append('SectionUrl',SECTIONURL);
         formData.append('cov_img',this.breakfastcoverimage);
         formData.append('top_img', this.breakfasttopimage);
-         formData.append('month_day',this.break_dt);
+        //  formData.append('month_day',this.break_dt);
          formData.append('restaurant_id',this.resid);
          formData.append('menu_id',hidevalue);
          formData.append('break_check',this.break_check);
-         formData.append("start_time",this.brunch_start);
-         formData.append('end_time',this.brunch_end);
+        //  formData.append("start_time",this.brunch_start);
+        //  formData.append('end_time',this.brunch_end);
          formData.append('restaurant_name',this.res_name);
   
   
@@ -3271,12 +3258,12 @@ export class MenuSetupComponent implements OnInit {
         formData.append('SectionUrl',SECTIONURL);
         formData.append('cov_img',this.breakfastcoverimage);
         formData.append('top_img', this.breakfasttopimage);
-         formData.append('month_day',this.break_dt);
+        //  formData.append('month_day',this.break_dt);
          formData.append('restaurant_id',this.resid);
          formData.append('menu_id',hidevalue);
          formData.append('break_check',this.break_check);
-         formData.append("start_time",this.brunch_start);
-         formData.append('end_time',this.brunch_end);
+        //  formData.append("start_time",this.brunch_start);
+        //  formData.append('end_time',this.brunch_end);
          formData.append('restaurant_name',this.res_name);
   
   
@@ -3335,12 +3322,12 @@ export class MenuSetupComponent implements OnInit {
         formData.append('SectionUrl',SECTIONURL);
         formData.append('cov_img',this.breakfastcoverimage);
         formData.append('top_img', this.breakfasttopimage);
-         formData.append('month_day',this.break_dt);
+        //  formData.append('month_day',this.break_dt);
          formData.append('restaurant_id',this.resid);
          formData.append('menu_id',hidevalue);
          formData.append('break_check',this.break_check);
-         formData.append("start_time",this.brunch_start);
-         formData.append('end_time',this.brunch_end);
+        //  formData.append("start_time",this.brunch_start);
+        //  formData.append('end_time',this.brunch_end);
          formData.append('restaurant_name',this.res_name);
   
   
@@ -3404,12 +3391,12 @@ export class MenuSetupComponent implements OnInit {
         formData.append('SectionUrl',SECTIONURL);
         formData.append('cov_img',this.breakfastcoverimage);
         formData.append('top_img', this.breakfasttopimage);
-         formData.append('month_day',this.break_dt);
+        //  formData.append('month_day',this.break_dt);
          formData.append('restaurant_id',this.resid);
          formData.append('menu_id',hidevalue);
          formData.append('break_check',this.break_check);
-         formData.append("start_time",this.brunch_start);
-         formData.append('end_time',this.brunch_end);
+        //  formData.append("start_time",this.brunch_start);
+        //  formData.append('end_time',this.brunch_end);
          formData.append('restaurant_name',this.res_name);
   
   
@@ -3457,9 +3444,30 @@ export class MenuSetupComponent implements OnInit {
     }
         
      }
+    
+     this.storevalue.length=0;
+      this.storevalue.push({
+      
+      "restaurant_id":this.resid,
+      "menu_id":hidevalue,
+      "break_check":this.break_check,
+      "start_time":v1,
+      "end_time":v2,
+      "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
+    });
+        console.log(this.storevalue);
+   
+        this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
+       console.log(data);
+     })
+        
+   }
+   else{
+     this.myFunction_fortime()
+   }
 
-    this.brunch_end=0;
-    this.brunch_start=0;
+    // this.brunch_end=0;
+    // this.brunch_start=0;
     
   
 
@@ -3467,9 +3475,11 @@ export class MenuSetupComponent implements OnInit {
 
   // For Submitting the data of Dinner
   opennextab2(e: any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any,v7:any) {
-    this.break_dt.length=0;
-    this.break_dt=[{
-      "dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
+    // this.break_dt.length=0;
+    //  var break_dt=[{
+    //   "dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
+    if(v6<v7){
+   
     if( localStorage.getItem('dinner')==''){
       this.storevalue.length=0;
       const formData = new FormData();
@@ -3480,12 +3490,12 @@ export class MenuSetupComponent implements OnInit {
         formData.append('SectionUrl',v1);
         formData.append('cov_img',this.branchcoverimage);
         formData.append('top_img', this.branchtopimage);
-         formData.append('month_day',this.break_dt);
+        //  formData.append('month_day',this.break_dt);
          formData.append('restaurant_id',this.resid);
          formData.append('menu_id',v5);
          formData.append('break_check',this.brunch_check);
-         formData.append("start_time",this.brunch_start);
-         formData.append('end_time',this.brunch_end);
+        //  formData.append("start_time",this.brunch_start);
+        //  formData.append('end_time',this.brunch_end);
          formData.append('restaurant_name',this.res_name);
   
   
@@ -3529,8 +3539,7 @@ export class MenuSetupComponent implements OnInit {
           //   }
           // })
     }
-  
-    else{
+  else{
     localStorage.setItem('dinner','');
     if(localStorage.getItem('No_of_menu')=='O'){
 
@@ -3547,12 +3556,12 @@ export class MenuSetupComponent implements OnInit {
         formData.append('SectionUrl',v1);
         formData.append('cov_img',this.branchcoverimage);
         formData.append('top_img', this.branchtopimage);
-         formData.append('month_day',this.break_dt);
+        //  formData.append('month_day',this.break_dt);
          formData.append('restaurant_id',this.resid);
          formData.append('menu_id',v5);
          formData.append('break_check',this.brunch_check);
-         formData.append("start_time",this.brunch_start);
-         formData.append('end_time',this.brunch_end);
+        //  formData.append("start_time",this.brunch_start);
+        //  formData.append('end_time',this.brunch_end);
          formData.append('restaurant_name',this.res_name);
   
   
@@ -3615,12 +3624,12 @@ export class MenuSetupComponent implements OnInit {
            formData.append('SectionUrl',v1);
            formData.append('cov_img',this.branchcoverimage);
            formData.append('top_img', this.branchtopimage);
-            formData.append('month_day',this.break_dt);
+            // formData.append('month_day',this.break_dt);
             formData.append('restaurant_id',this.resid);
             formData.append('menu_id',v5);
             formData.append('break_check',this.brunch_check);
-            formData.append("start_time",this.brunch_start);
-            formData.append('end_time',this.brunch_end);
+            // formData.append("start_time",this.brunch_start);
+            // formData.append('end_time',this.brunch_end);
             formData.append('restaurant_name',this.res_name);
      
      
@@ -3674,12 +3683,12 @@ export class MenuSetupComponent implements OnInit {
            formData.append('SectionUrl',v1);
            formData.append('cov_img',this.branchcoverimage);
            formData.append('top_img', this.branchtopimage);
-            formData.append('month_day',this.break_dt);
+            // formData.append('month_day',this.break_dt);
             formData.append('restaurant_id',this.resid);
             formData.append('menu_id',v5);
             formData.append('break_check',this.brunch_check);
-            formData.append("start_time",this.brunch_start);
-            formData.append('end_time',this.brunch_end);
+            // formData.append("start_time",this.brunch_start);
+            // formData.append('end_time',this.brunch_end);
             formData.append('restaurant_name',this.res_name);
      
      
@@ -3740,12 +3749,12 @@ export class MenuSetupComponent implements OnInit {
        formData.append('SectionUrl',v1);
        formData.append('cov_img',this.branchcoverimage);
        formData.append('top_img', this.branchtopimage);
-        formData.append('month_day',this.break_dt);
+        // formData.append('month_day',this.break_dt);
         formData.append('restaurant_id',this.resid);
         formData.append('menu_id',v5);
         formData.append('break_check',this.brunch_check);
-        formData.append("start_time",this.brunch_start);
-        formData.append('end_time',this.brunch_end);
+        // formData.append("start_time",this.brunch_start);
+        // formData.append('end_time',this.brunch_end);
         formData.append('restaurant_name',this.res_name);
  
  
@@ -3825,8 +3834,28 @@ export class MenuSetupComponent implements OnInit {
           //  this.sun_dinner=0;
     }
       }
-   this.brunch_start=0;
-    this.brunch_end=0;
+
+      this.storevalue.length=0;
+      this.storevalue.push({
+           
+            "restaurant_id":this.resid,
+            "menu_id":v5,
+            "break_check":this.brunch_check,
+            "start_time":v6,
+        "end_time":v7,
+        "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
+  
+          });
+      this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
+        console.log(data);
+      })
+        
+    }
+    else{
+      this.myFunction_fortime();
+    }
+
+   
   
   }
 
@@ -3846,10 +3875,10 @@ export class MenuSetupComponent implements OnInit {
 
 // Fot Submitting data of Launch Tab
   opennextab1(e: any, v1: any, v2: any,v4:any,v5:any,v6:any,v7:any,v8:any) {
-    this.break_dt=[{
-      "dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}];
-    if(localStorage.getItem('launch')==''){
-      this.storevalue.length=0;
+
+   if(v7<v8){
+      if(localStorage.getItem('launch')==''){
+     
 
       const formData = new FormData();
       // formData.append('file', this.breakfastcoverimage);
@@ -3859,12 +3888,12 @@ export class MenuSetupComponent implements OnInit {
       formData.append('SectionUrl',v5);
       formData.append('cov_img',this.launchcoverimage);
       formData.append('top_img',this.launchtopimage);
-       formData.append('month_day',this.break_dt);
+      //  formData.append('month_day',this.break_dt);
        formData.append('restaurant_id',this.resid);
        formData.append('menu_id',v6);
        formData.append('break_check',this.launch_check);
-       formData.append("start_time",this.brunch_start);
-       formData.append('end_time',this.brunch_end);
+      //  formData.append("start_time",this.brunch_start);
+      //  formData.append('end_time',this.brunch_end);
        formData.append('restaurant_name',this.res_name);
 
 
@@ -3921,12 +3950,12 @@ export class MenuSetupComponent implements OnInit {
            formData.append('SectionUrl',v5);
            formData.append('cov_img',this.launchcoverimage);
            formData.append('top_img',this.launchtopimage);
-            formData.append('month_day',this.break_dt);
+            // formData.append('month_day',this.break_dt);
             formData.append('restaurant_id',this.resid);
             formData.append('menu_id',v6);
             formData.append('break_check',this.launch_check);
-            formData.append("start_time",this.brunch_start);
-            formData.append('end_time',this.brunch_end);
+            // formData.append("start_time",this.brunch_start);
+            // formData.append('end_time',this.brunch_end);
             formData.append('restaurant_name',this.res_name);
      
      
@@ -3986,12 +4015,12 @@ export class MenuSetupComponent implements OnInit {
            formData.append('SectionUrl',v5);
            formData.append('cov_img',this.launchcoverimage);
            formData.append('top_img',this.launchtopimage);
-            formData.append('month_day',this.break_dt);
+            // formData.append('month_day',this.break_dt);
             formData.append('restaurant_id',this.resid);
             formData.append('menu_id',v6);
             formData.append('break_check',this.launch_check);
-            formData.append("start_time",this.brunch_start);
-            formData.append('end_time',this.brunch_end);
+            // formData.append("start_time",this.brunch_start);
+            // formData.append('end_time',this.brunch_end);
             formData.append('restaurant_name',this.res_name);
      
      
@@ -4044,12 +4073,12 @@ export class MenuSetupComponent implements OnInit {
              formData.append('SectionUrl',v5);
              formData.append('cov_img',this.launchcoverimage);
              formData.append('top_img',this.launchtopimage);
-              formData.append('month_day',this.break_dt);
+              // formData.append('month_day',this.break_dt);
               formData.append('restaurant_id',this.resid);
               formData.append('menu_id',v6);
               formData.append('break_check',this.launch_check);
-              formData.append("start_time",this.brunch_start);
-              formData.append('end_time',this.brunch_end);
+              // formData.append("start_time",this.brunch_start);
+              // formData.append('end_time',this.brunch_end);
               formData.append('restaurant_name',this.res_name);
        
        
@@ -4107,12 +4136,12 @@ export class MenuSetupComponent implements OnInit {
       formData.append('SectionUrl',v5);
       formData.append('cov_img',this.launchcoverimage);
       formData.append('top_img',this.launchtopimage);
-       formData.append('month_day',this.break_dt);
+      //  formData.append('month_day',this.break_dt);
        formData.append('restaurant_id',this.resid);
        formData.append('menu_id',v6);
        formData.append('break_check',this.launch_check);
-       formData.append("start_time",this.brunch_start);
-       formData.append('end_time',this.brunch_end);
+      //  formData.append("start_time",this.brunch_start);
+      //  formData.append('end_time',this.brunch_end);
        formData.append('restaurant_name',this.res_name);
 
 
@@ -4155,11 +4184,32 @@ export class MenuSetupComponent implements OnInit {
     
     }
      
-  }
-    this.brunch_start=0;
-    this.brunch_end=0;
+  } this.storevalue.length=0;
+          this.storevalue.push({
+          
+          "restaurant_id":this.resid,
+          "menu_id":v6,
+          "break_check":this.launch_check,
+          "start_time":v7,
+      "end_time":v8,
+      "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
+
+        });
+      console.log(this.storevalue);
     
-  }
+      this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
+    console.log(data);
+  })
+}
+else{
+  this.myFunction_fortime();
+ }
+}
+
+    // this.brunch_start=0;
+    // this.brunch_end=0;
+    
+  // }
   checkbrunch(event:any){
     if(event.target.checked){
       this.brunch_check='Y';
@@ -4186,11 +4236,12 @@ export class MenuSetupComponent implements OnInit {
   }
   // For Submitting the data of Brunch
  opennextab3(e: any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any,v7:any) {
-  this.break_dt=[{
-    "dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}];
-
+  
+  console.log(e,v1,v2,v3,v4,v5,v6,v7);
+ if(v6<v7){
+   
   if(localStorage.getItem('brunch')==''){
-    this.storevalue.length=0;
+    // this.storevalue.length=0;
     const formData = new FormData();
     // formData.append('file', this.breakfastcoverimage);
     formData.append('coverurl', v3);
@@ -4199,12 +4250,12 @@ export class MenuSetupComponent implements OnInit {
     formData.append('SectionUrl',v4);
     formData.append('cov_img',this.dinnercoverimage);
     formData.append('top_img',this.dinnertopimage);
-     formData.append('month_day',this.break_dt);
+    //  formData.append('month_day',this.break_dt);
      formData.append('restaurant_id',this.resid);
      formData.append('menu_id',v5);
      formData.append('break_check',this.dinner_check);
-     formData.append("start_time",this.brunch_start);
-     formData.append('end_time',this.brunch_end);
+    //  formData.append("start_time",this.brunch_start);
+    //  formData.append('end_time',this.brunch_end);
      formData.append('restaurant_name',this.res_name);
 
 
@@ -4251,7 +4302,7 @@ export class MenuSetupComponent implements OnInit {
     if(localStorage.getItem('No_of_menu')=='O'){
        if(this.v==0){
          this.v=1;
-         this.storevalue.length=0;
+        //  this.storevalue.length=0;
          const formData = new FormData();
     // formData.append('file', this.breakfastcoverimage);
     formData.append('coverurl', v3);
@@ -4260,12 +4311,12 @@ export class MenuSetupComponent implements OnInit {
     formData.append('SectionUrl',v4);
     formData.append('cov_img',this.dinnercoverimage);
     formData.append('top_img',this.dinnertopimage);
-     formData.append('month_day',this.break_dt);
+    //  formData.append('month_day',this.break_dt);
      formData.append('restaurant_id',this.resid);
      formData.append('menu_id',v5);
      formData.append('break_check',this.dinner_check);
-     formData.append("start_time",this.brunch_start);
-     formData.append('end_time',this.brunch_end);
+    //  formData.append("start_time",this.brunch_start);
+    //  formData.append('end_time',this.brunch_end);
      formData.append('restaurant_name',this.res_name);
 
 
@@ -4316,7 +4367,7 @@ export class MenuSetupComponent implements OnInit {
     else if(localStorage.getItem('No_of_menu')=='T'){
       if(this.v==0){
         this.v=1;
-        this.storevalue.length=0;
+        // this.storevalue.length=0;
         const formData = new FormData();
     // formData.append('file', this.breakfastcoverimage);
     formData.append('coverurl', v3);
@@ -4325,12 +4376,12 @@ export class MenuSetupComponent implements OnInit {
     formData.append('SectionUrl',v4);
     formData.append('cov_img',this.dinnercoverimage);
     formData.append('top_img',this.dinnertopimage);
-     formData.append('month_day',this.break_dt);
+    //  formData.append('month_day',this.break_dt);
      formData.append('restaurant_id',this.resid);
      formData.append('menu_id',v5);
      formData.append('break_check',this.dinner_check);
-     formData.append("start_time",this.brunch_start);
-     formData.append('end_time',this.brunch_end);
+    //  formData.append("start_time",this.brunch_start);
+    //  formData.append('end_time',this.brunch_end);
      formData.append('restaurant_name',this.res_name);
 
 
@@ -4383,12 +4434,12 @@ export class MenuSetupComponent implements OnInit {
     formData.append('SectionUrl',v4);
     formData.append('cov_img',this.dinnercoverimage);
     formData.append('top_img',this.dinnertopimage);
-     formData.append('month_day',this.break_dt);
+    //  formData.append('month_day',this.break_dt);
      formData.append('restaurant_id',this.resid);
      formData.append('menu_id',v5);
      formData.append('break_check',this.dinner_check);
-     formData.append("start_time",this.brunch_start);
-     formData.append('end_time',this.brunch_end);
+    //  formData.append("start_time",this.brunch_start);
+    //  formData.append('end_time',this.brunch_end);
      formData.append('restaurant_name',this.res_name);
 
 
@@ -4452,7 +4503,7 @@ export class MenuSetupComponent implements OnInit {
     }
     else {
       this.v=3;
-        this.storevalue.length=0;
+        // this.storevalue.length=0;
         const formData = new FormData();
     // formData.append('file', this.breakfastcoverimage);
     formData.append('coverurl', v3);
@@ -4461,12 +4512,12 @@ export class MenuSetupComponent implements OnInit {
     formData.append('SectionUrl',v4);
     formData.append('cov_img',this.dinnercoverimage);
     formData.append('top_img',this.dinnertopimage);
-     formData.append('month_day',this.break_dt);
+    //  formData.append('month_day',this.break_dt);
      formData.append('restaurant_id',this.resid);
      formData.append('menu_id',v5);
      formData.append('break_check',this.dinner_check);
-     formData.append("start_time",this.brunch_start);
-     formData.append('end_time',this.brunch_end);
+    //  formData.append("start_time",this.brunch_start);
+    //  formData.append('end_time',this.brunch_end);
      formData.append('restaurant_name',this.res_name);
 
 
@@ -4509,9 +4560,25 @@ export class MenuSetupComponent implements OnInit {
     
     }
   }
-    this.brunch_start=0;
-    this.brunch_end=0; 
-   
+ 
+
+    this.storevalue.length=0;
+     this.storevalue.push({
+         "restaurant_id":this.resid,
+          "menu_id":v5,
+          "break_check":this.dinner_check,
+          "start_time":v6,
+          "end_time":v7,
+          "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]});
+     console.log(this.storevalue);
+    
+     this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
+      console.log(data);
+    })
+  }
+  else{
+   this.myFunction_fortime();
+  }
   }
   changetopImage(event: any) {
 
@@ -5420,6 +5487,18 @@ else if(e ==='tuesday'){
     // After 3 seconds, remove the show class from DIV
     setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
   } 
+
+    // For Timing Error snackbar
+    myFunction_fortime() {
+      // Get the snackbar DIV
+      this.x = document.getElementById("snackbar2");
+    
+      // Add the "show" class to DIV
+      this.x.className = "show";
+    
+      // After 3 seconds, remove the show class from DIV
+      setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 5000);
+    } 
   //Previous button
   goprev(e:any){
     if(e=='paris'){

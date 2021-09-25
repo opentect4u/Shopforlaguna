@@ -17,9 +17,9 @@ import { url_set } from 'src/app/globalvar';
 ]
 })
 export class RestaurantSetupComponent implements OnInit,AfterViewInit {
-  displayedColumns: string[] = ['id','section_name','edit'];
-  displayedColumns1: string[] = ['id','item_name','edit'];
-  displayedColumns2: string[] = ['id','item_desc','item_price','item_note','edit'];
+  displayedColumns: string[] = ['id','section_name'];
+  displayedColumns1: string[] = ['id','item_name'];
+  displayedColumns2: string[] = ['id','item_desc','item_price','item_note'];
  
   // dataSource = ELEMENT_DATA;
   userData:any;
@@ -84,8 +84,8 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  sec_post_data:any;
  m='';
  itemdesc:any;
- m_id='';
- menuid:any;
+ m_id:any;
+ menuid='';
  aboutusData1:any;
  aboutusData:any;
  about_text_readonly:any;
@@ -278,7 +278,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.dataSource2.sort = this.sort2;
   }
   send_about_us(v:any){
-    if(v!='')
+    if(v!=''){
    this.admin_data.post_about_us(v,this.r_id).subscribe(data=>{console.log(data)
     this.aboutusData1=data;
     if(this.aboutusData1.suc==1)
@@ -298,6 +298,11 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.myFunction();
 
   })
+}
+else{
+  this.m="Sorry! You can't keep an empty field";
+  this.myFunction();
+}
   }
   get_sec_id(mid:any,v:any,v1:any,v2:any,id:any,ip:any,inote:any){
     this.show_button3=true;
@@ -326,10 +331,11 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
       })    
     console.log("menu_id="+mid+" section_id="+this.secid+" res_id="+this.r_id+" item_id="+this.item_i+" id="+this.idfordesc)
     // alert(v)
+  window.scrollTo(0, 0)
+
   }
   update_section(v:any){
     this.sec_value=v;
-    this.submit_show=false;
     this.createsecval=''
     for(let i=1;i<=5;i++)
     {
@@ -339,6 +345,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     }
     // console.log("menu_id="+this.mid1+" section_id="+this.secid+" section_name="+this.sec_value+" res_id="+this.r_id)
     console.log(this.m_id+" "+v);
+    if(v!=''&&this.m_id!=''&&this.m_id!=undefined&&this.m_id!=null){
     var dt={
       "restaurant_id" : this.r_id,
     "menu_id":this.m_id,
@@ -353,6 +360,8 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
       // setTimeout(()=>{
       //   location.reload();
       // },3000)
+    this.submit_show=false;
+
     this.myFunction();
     this.fetchdata();
     setTimeout(()=>{
@@ -373,6 +382,12 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   
     })
   }
+  else{
+    this.m="Sorry! You can't keep an empty field"
+    this.myFunction();
+      
+  }
+  }
   update_add_item(m:any,e:any,s:any,k:any){
     this.mid2=m;
     this.eid2=e;
@@ -381,6 +396,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.i_value=s
     console.log(this.eid2)
     this.submit_show2=true;
+    window.scrollTo(0, 0)
 
   }
   store_menu(v:any){
@@ -397,6 +413,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   }
   create_section(v:any){
     console.log(this.m_id+" "+v);
+    if(v!=''&&this.m_id!=''&&this.m_id!=null&&this.m_id!=undefined){
     var dt={
       "restaurant_id" : this.r_id,
     "menu_id":this.m_id,
@@ -420,6 +437,11 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   
     })
   }
+  else{
+    this.m="Sorry! You can't keep an empty field"
+      this.myFunction();
+  }
+  }
   select_section_with_menu(v:any){
     this.menu_item=v;
     this.admin_data.get_section_data(this.r_id,v).subscribe(data=>{console.log(data)
@@ -435,6 +457,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     // this.i_value=s
     this.submit_show2=false;
     console.log(this.mid2+" "+this.eid2+" "+this.i_value+" "+this.iid)
+    if(v1!=''&&v2!=''&&v!=''){
     var dt={
       "restaurant_id" : this.r_id,
       "menu_id":v1,
@@ -468,7 +491,10 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
       this.m="Failed to update"
       this.myFunction();
   
-    })
+    })}
+    else{
+      this.m="Sorry! You can't keep an empty field"
+    }
   }
   get_section_item(v:any){
    this.sectionitem=v;
@@ -485,6 +511,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   }
   send_item(v:any){
     console.log(this.menu_item+" "+this.sectionitem+" "+v)
+    if(this.menu_item!=''&&this.sectionitem!=''&&v!=''){
     var dt={
       "restaurant_id" : this.r_id,
       "menu_id":this.menu_item,
@@ -500,6 +527,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     if(this.itemData.suc==1){
       this.m="Updation Successful";
       this.myFunction();
+      this.fetchdata1()
     }
     else{
       this.m="Failed to update"
@@ -510,6 +538,11 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
       this.myFunction();
   
     })
+  }
+  else{
+    this.m="Sorry! You can't keep an empty field"
+    this.myFunction()
+  }
   }
   select_for_desc_menu(v:any){
     this.menufordesc=v;
@@ -540,6 +573,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   submit_price_desc(p:any,d:any,a:any)
   {
     console.log(this.sid+" "+this.menufordesc+" "+this.i_data)
+    if(this.sid!=''&&this.menufordesc!=''&&p!=''&&d!=''){
     var dt={
       "restaurant_id" : this.r_id,
       "menu_id":this.menufordesc,
@@ -554,6 +588,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
      if(this.itemdesc.suc==1){
      this.m="Updation Successful";
      this.myFunction();
+     this.fetchdata2()
    }
    else{
      this.m="Failed to update"
@@ -563,6 +598,11 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
       this.m="Failed to update"
      this.myFunction();
     })
+  }
+  else{
+    this.m="Sorry! You can't keep an empty field";
+    this.myFunction();
+  }
   }
   fetchdata2(){
     this.admin_data.get_item_data_desc(this.r_id).subscribe(data=>{console.log(data)
@@ -582,6 +622,7 @@ submitup(mon:any,tue:any,wed:any,thur:any,fri:any,sat:any,sun:any,st:any,end:any
   this.veh6=document.getElementById('vehicle6')
   this.veh7=document.getElementById('vehicle7')
   this.veh8=document.getElementById('vehicle8')
+  
   if(this.veh2.checked)
   this.mon=2
   if(this.veh3.checked)
@@ -596,7 +637,8 @@ submitup(mon:any,tue:any,wed:any,thur:any,fri:any,sat:any,sun:any,st:any,end:any
   this.sat=7
   if(this.veh8.checked)
   this.sun=8
-  
+  if(st<end){
+  if(this.menuid!=''&&st!=''&&end!=''){
   console.log(this.mon+" "+this.tue+" "+this.wed+" "+this.thur+" "+this.fri+" "+this.sat+" "+this.sun+" ")
   this.storevalue.push({
     "restaurant_id" : this.r_id,
@@ -610,7 +652,16 @@ submitup(mon:any,tue:any,wed:any,thur:any,fri:any,sat:any,sun:any,st:any,end:any
   this.admin_data.post_date_time(this.storevalue).subscribe(data=>{console.log(data)
   this.setTimedata=data;
   console.log(this.setTimedata)
-  })
+  })}
+  else{
+    this.m="Sorry! You can't keep an empty field"
+    this.myFunction()
+  }
+}
+else{
+  this.m="Sorry! Starting time should not exceed end time"
+    this.myFunction()
+}
 }
 checkbrunchday(e:any,day:any){
   if(day=='everyday'){
@@ -739,6 +790,7 @@ getposition(e:any){
 submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
   this.menu_place=m;
   this.pos=p;
+  if(m!=''&&p!=''&&h!=''){
   var dt = {
     "menu":this.menu_place,notice_flag: 'Y', position: this.pos,headertitle:h,fontcolor:c1,back_color:c2,notice:notice,restaurant_id:this.r_id};
     this.admin_data.post_special(dt).subscribe(data=>{console.log(data)
@@ -746,6 +798,8 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       if(this.spData.suc==1){
         this.m="Updation successful"
         this.myFunction()
+        this.show_tab='tab8';
+        this.openCity('tab8')
       }
       else{
         this.m="Failed to update"
@@ -753,6 +807,11 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       }
     },error=>{this.m="Failed to update"
     this.myFunction()})
+  }
+  else{
+    this.m="Sorry! You can't keep an empty field"
+    this.myFunction();
+  }
 }
   myFunction() {
     this.x = document.getElementById("snackbar");
@@ -1273,7 +1332,7 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
 send_mail()
 {
   console.log(this.r_id)
- this.admin_data.send_admin_mail(this.r_id).subscribe((data:any)=>{console.log(data)
+ this.admin_data.send_admin_mail(this.r_id).subscribe(data=>{console.log(data)
   this.mail_data=data;
   if(this.mail_data.suc==1)
  {
@@ -1293,6 +1352,7 @@ upload_logo(e:any){
   console.log(e.target.files[0])
 }
 update_price_desc(menid:any,sectionid:any,itemid:any,pr:any,de:any,ad:any){
+  if(menid!=''&&sectionid!=''&&itemid!=''&&pr!=''&&de!=''){
   var dt={
     "restaurant_id" : this.r_id,
     "menu_id":menid,
@@ -1327,7 +1387,11 @@ update_price_desc(menid:any,sectionid:any,itemid:any,pr:any,de:any,ad:any){
      this.m="Failed to update"
     this.myFunction();
    })
-   
+  }
+  else{
+    this.m="Sorry! You can't keep an empty field";
+    this.myFunction();
+  }
 }
 get_sec_id1(menid:any,id:any,val:any){
   console.log(menid+" "+id+" "+val);
@@ -1337,6 +1401,7 @@ get_sec_id1(menid:any,id:any,val:any){
   this.z1.checked=true;
   this.createsecval=val;
   console.log(this.createsecval)
+  window.scrollTo(0, 0)
   
 }
 }

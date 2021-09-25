@@ -41,7 +41,7 @@
         <th scope="col">Special Menu</th>
         <th scope="col">Set Up Fee</th>
         <th scope="col">Monthly Fee</th>
-        <th scope="col">Description </th>
+        <!-- <th scope="col">Description </th> -->
         <th scope="col">Action </th>
         </tr>
             
@@ -58,15 +58,17 @@
         </select>	
         </td>
         <td>
-            <input type="radio" id="yes_stnd" name="specialMenuStd" value="Y"> <label for="yes_stnd" class="m-1">Yes</label> 
-            <input type="radio" id="no_stnd" name="specialMenuStd" value="N"> <label for="No_stnd" class="m-1">No</label>
+            <input type="radio" id="yes_stnd" name="specialMenustd" value="Y"> <label for="yes_stnd" class="m-1">Yes</label> 
+            <input type="radio" id="no_stnd" name="specialMenustd" value="N"> <label for="No_stnd" class="m-1">No</label>
         </td>
         <td><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Amount" required="" name="setUpFee" #amm1 (keypress)="preventNonNumericalInput($event)" value="{{this.stndpackage_setupfee}}"></td>
         <td><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Amount" required="" name="monthlyFee" #amm2 (keypress)="preventNonNumericalInput($event)" value="{{this.stndpacakge__monthlyfee}}"></td>
-        <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #desc value={{this.stndpackage_desc}}></textarea></td>
+        <!-- <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #desc value={{this.stndpackage_desc}}></textarea></td> -->
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
-            <button type="submit" class="btn btn-default saveCustom" (click)="submit(opt.value,sl_no.value,amm1.value,amm2.value,desc.value)">Save</button></td>
+          <button type="submit" class="btn btn-default saveCustom" (click)="submit(opt.value,sl_no.value,amm1.value,amm2.value)">Save</button></td>
+
+            <!-- <button type="submit" class="btn btn-default saveCustom" (click)="submit(opt.value,sl_no.value,amm1.value,amm2.value,desc.value)">Save</button></td> -->
         </tr>
             
         <tr align="center">
@@ -86,10 +88,12 @@
         </td>
         <td><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Amount" required="" name="setUpFee"  #amm1stndplus (keypress)="preventNonNumericalInput($event)" value={{this.stndpluspacakge_setupfee}}></td>
         <td><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Amount" required="" name="monthlyFee"  #amm2stndplus (keypress)="preventNonNumericalInput($event)" value={{this.stndpluspackage_monthlyfee}}></td>
-        <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #descstndplus value={{this.stndpluspacakge_desc}}></textarea></td>
+        <!-- <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #descstndplus value={{this.stndpluspacakge_desc}}></textarea></td> -->
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
-          <button (click)="submitstndplus(optstndplus.value,sl_nostndplus.value,amm1stndplus.value,amm2stndplus.value,descstndplus.value)" type="submit" class="btn btn-default saveCustom">Save</button></td>
+          <button (click)="submitstndplus(optstndplus.value,sl_nostndplus.value,amm1stndplus.value,amm2stndplus.value)" type="submit" class="btn btn-default saveCustom">Save</button></td>
+
+          <!-- <button (click)="submitstndplus(optstndplus.value,sl_nostndplus.value,amm1stndplus.value,amm2stndplus.value,descstndplus.value)" type="submit" class="btn btn-default saveCustom">Save</button></td> -->
         </tr>
             
         <tr align="center">
@@ -109,10 +113,12 @@
         </td>
         <td><input class="w3-input w3-padding-16 w3-border" #amm1premium type="text" placeholder="Amount" required="" name="setUpFee" (keypress)="preventNonNumericalInput($event)" value={{this.premiumpacakge_setupfee}}></td>
         <td><input class="w3-input w3-padding-16 w3-border" #amm2premium type="text" placeholder="Amount" required="" name="monthlyFee" (keypress)="preventNonNumericalInput($event)" value={{this.premiumpacakge_monthlyfee}}></td>
-        <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #descpremium value={{this.premiumpacakge_des}}></textarea></td>
+        <!-- <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #descpremium value={{this.premiumpacakge_des}}></textarea></td> -->
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
-            <button type="submit" class="btn btn-default saveCustom" (click)="submitpremium(opspremium.value,slpremium.value,amm1premium.value,amm2premium.value,descpremium.value)">Save</button></td>
+          <button type="submit" class="btn btn-default saveCustom" (click)="submitpremium(opspremium.value,slpremium.value,amm1premium.value,amm2premium.value)">Save</button></td>
+
+            <!-- <button type="submit" class="btn btn-default saveCustom" (click)="submitpremium(opspremium.value,slpremium.value,amm1premium.value,amm2premium.value,descpremium.value)">Save</button></td> -->
         </tr>
             
         </table> <br>
@@ -207,7 +213,7 @@
         </td>
         <td> 5" x 7"</td>
         <td>
-            <input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Price" required="" name="price" value="{{this.signholder_price2}}"  #text2 (keypress)="preventNonNumericalInput($event)">
+            <input class="w3-input w3-padding-16 w3-border" id="wallmount2" [disabled]="signholder2" type="text" placeholder="Price" required="" name="price" value="{{this.signholder_price2}}"  #text2 (keypress)="preventNonNumericalInput($event)">
         </td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button> -->
@@ -220,12 +226,12 @@
         <td>3 <input type="hidden" name="" value="8" #wallmount1></td>
         <td>Wall Mount Sign Holder</td>
         <td>
-          <input type="radio" id="yes_wall" [checked]="true" name="specialMenuStd1" value="y_wall" (change)="check($event)"> <label for="yes" class="m-1">Yes</label> 
-          <input type="radio" id="no_mount" name="specialMenuStd1" value="n_mount" (change)="check($event)"> <label for="No">No</label>
+          <input type="radio" id="yes_wall" [checked]="true" name="specialMenuStd1"  (change)="check($event)" value="YES"> <label for="yes" class="m-1">Yes</label> 
+          <input type="radio" id="no_mount"  name="specialMenuStd1" (change)="check($event)"  value="NO"> <label for="No">No</label>
         </td>
         <td>8.5" x 11"</td>
         <td>
-            <input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Price" required="" name="price" #text3 value="{{this.signholder_price3}}" (keypress)="preventNonNumericalInput($event)">
+            <input class="w3-input w3-padding-16 w3-border" id="wall" [disabled]=wall2   type="text" placeholder="Price" required="" name="price" #text3 value="{{this.signholder_price3}}" (keypress)="preventNonNumericalInput($event)">
         </td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
@@ -256,8 +262,8 @@
         <td>1 <input type="hidden" name="" value="9" #window></td>
         <td>Window Clings </td>
         <td>
-          <input type="radio" id="yes_last" [checked]="true" name="specialMenuStd1" value="y_last" (change)="check($event)"> <label for="yes" class="m-1">Yes</label> 
-          <input type="radio" id="no_end" name="specialMenuStd1" value="n_end" (change)="check($event)"> <label for="No">No</label>
+          <input type="radio" id="yes_last"  name="specialMenuSt" value="y_last" (change)="check($event)"> <label for="yes" class="m-1">Yes</label> 
+          <input type="radio" id="no_end" name="specialMenuSt" value="n_end" (change)="check($event)"> <label for="No">No</label>
         </td>
         <td> 6" x 10" </td>
         <td>
@@ -339,5 +345,4 @@
                   overlayBg.style.display = "none";
                 }
                 </script> -->
-
-
+  <div id="snackbar">{{success_msg_windowcling}}</div>

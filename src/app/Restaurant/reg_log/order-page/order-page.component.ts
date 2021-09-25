@@ -8,6 +8,19 @@ import { DataserviceService } from '../../service/dataservice.service';
   styleUrls: ['./order-page.component.css']
 })
 export class OrderPageComponent implements OnInit {
+  stnd_spl_menu:boolean=false;
+  stnd_calendar:any;
+  stnd_birth_day:any;
+
+  stnd_plus_spl_menu:boolean=false;
+  stnd_plus_calendar:any;
+  stnd_plus_birth_day:any;
+
+
+  premium_spl_menu:boolean=false;
+  premium_calendar:any;
+  premium_birth_day:any;
+
   m_calendar:any;
   b_calendar:any;
   e_calendar:any;
@@ -89,8 +102,9 @@ export class OrderPageComponent implements OnInit {
     // this.id_rest=atob(this.id_rest);
     console.log(this.id_rest);
     // retrieving the package data for order page
-    this._data.getPackage().subscribe(data=>{console.log(data)
+    this._data.getPackage().subscribe(data=>{
     this.packageData=data;
+    console.log(data)
     this.sp_setup=this.packageData.msg[0].setup_fee;
     this.sp_monthly=this.packageData.msg[0].monthly_fee;
     this.sp_desc=this.packageData.msg[0].pack_description;
@@ -101,9 +115,22 @@ export class OrderPageComponent implements OnInit {
     this.p_monthly=this.packageData.msg[2].monthly_fee;
     this.p_desc=this.packageData.msg[2].pack_description;
     
+      if(this.packageData.msg[0].special_menu=='N'){
+          this.stnd_spl_menu=true;
+      }
+     if(this.packageData.msg[1].special_menu=='N'){
+          this.stnd_plus_spl_menu=true;
+       }
+     if(this.packageData.msg[2].special_menu=='N')
+       {
+        this.premium_spl_menu=true;
+
+       }
+    
     })
     this._data.getPromo().subscribe(data=>{console.log(data)
     this.promoData=data;
+    console.log(data)
     if(this.promoData.msg[0].free_flag=='Y')
     {
       this.price_b='FREE'
@@ -124,6 +151,7 @@ export class OrderPageComponent implements OnInit {
     })
     this._data.getHoldercling().subscribe(data=>{console.log(data)
     this.clingData=data;
+    console.log(data);
     if(this.clingData.msg[0].free_flag=='Y'){
       this.cling_data1='FREE'
     }

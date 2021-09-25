@@ -1,7 +1,7 @@
 const express = require('express')
 const upload = require('express-fileupload')
 const fs = require('fs');
-const { MenuImageSave, SectionImageSave } = require('../modules/MenuSetupModule');
+const { MenuImageSave, SectionImageSave, OtherImageSave, MonthDateSave } = require('../modules/MenuSetupModule');
 const TestRouter = express.Router();
 // const db = require('./db')
 
@@ -17,18 +17,19 @@ if (!fs.existsSync(dir)) {
 }
 
 TestRouter.post('/testing', async (req, res) => {
-    // await uploadFile(req.files.files, req.body.ac_id);
+    console.log({ bd: req.body});
+
     let res_name = req.body.restaurant_name.replace(' ', '_');
     let menu_name = req.body.menu_id == 1 ? 'breakfast' : (req.body.menu_id == 2 ? 'lunch' : (req.body.menu_id == 3 ? 'dinner' : (req.body.menu_id == 4 ? 'brunch' : 'special')));
     var upload_cover_top = await UploadCover(req.files.cov_img, req.files.top_img, menu_name, res_name, req.body),
         upload_sec = await UploadSection(req.files.section_img, menu_name, res_name, req.body),
-        upload_menu = true;
+        upload_menu = await UploadMenu(req.files.menu_img, menu_name, res_name, req.body);
+        // month_day_save = await MonthDateSave(req.body);
     if (upload_cover_top && upload_sec && upload_menu) {
         res.send({ suc: 1, msg: 'Success' });
     } else {
         res.send({ suc: 0, msg: 'Not Inserted' });
     }
-    console.log({ fi: req.files, dt: req.body, re: req });
 })
 
 const UploadCover = async (cov_img, top_img, menu_name, res_name, data) => {
@@ -86,11 +87,12 @@ const UploadCover = async (cov_img, top_img, menu_name, res_name, data) => {
 
 const UploadSection = async (sec_img, menu_name, res_name, data) => {
     if (sec_img) {
+        console.log();
         var sec_file = sec_img,
             // filename = sec_file.name,
             // file_ext = filename.split('.')[1],
             ResIdPath = "public/uploads/" + res_name,
-            UploadsPath = ResIdPath + "/" + menu_name + "/section/";
+            UploadsPath = ResIdPath + "/" + menu_name + "/";
         // file_path = "uploads/" + res_name + "/" + menu_name + "/section/" + file_name;
 
         if (!fs.existsSync(ResIdPath)) {
@@ -101,30 +103,57 @@ const UploadSection = async (sec_img, menu_name, res_name, data) => {
                 fs.mkdirSync(UploadsPath);
             }
         }
-        sec_file.forEach(dt => {
-            var file = dt;
-            var filename = file.name,
-                file_name = filename.split('.')[0] + '_' + Date.now() + '.' + filename.split('.')[1],
-                file_path = "uploads/" + res_name + "/" + menu_name + "/section/" + file_name;
-            console.log({filename, ext: filename.split('.')[1], nm: filename.split('.')[0]});
+        if(Array.isArray(sec_img)){
+            sec_file.forEach(dt => {
+                var file = dt;
+                var filename = file.name,
+                    // file_name = filename.split('.')[0] + '_' + new Date() + '.' + filename.split('.')[1],
+                    file_path = "uploads/" + res_name + "/" + menu_name + "/" + filename;
+                // console.log(filename);
+    
+                file.mv(UploadsPath + filename, async (err) => {
+                    if (err) {
+                        console.log(`${filename} not uploaded`);
+                    } else {
+                        console.log(`Successfully ${filename} uploaded`);
+                        await SectionImageSave(data, file_path);
+                    }
+                })
+                return new Promise((resolve, reject) => {
+                    resolve(true);
+                });
+            })
+        }else{
+            var filename = sec_file.name,
+                // file_name = filename.split('.')[0] + '_' + new Date() + '.' + filename.split('.')[1],
+                file_path = "uploads/" + res_name + "/" + menu_name + "/" + filename;
+            // console.log(filename);
 
-            file.mv(UploadsPath + file_name, async (err) => {
+            sec_file.mv(UploadsPath + filename, async (err) => {
                 if (err) {
-                    console.log(`${file_name} not uploaded`);
+                    console.log(`${filename} not uploaded`);
                 } else {
-                    console.log(`Successfully ${file_name} uploaded`);
+                    console.log(`Successfully ${filename} uploaded`);
+                    console.log(data);
                     await SectionImageSave(data, file_path);
                 }
             })
-            return true;
-        })
+            return new Promise((resolve, reject) => {
+                resolve(true);
+            });
+        }
+        
     }
 }
 
-const uploadFile = (files, name) => {
-    if (files) {
-        var ResIdPath = "public/uploads/" + name;
-        var UploadsPath = "public/uploads/" + name + "/breakfast/";
+const UploadMenu = async (menu_img, menu_name, res_name, data) => {
+    if (menu_img) {
+        var sec_file = menu_img,
+            // filename = sec_file.name,
+            // file_ext = filename.split('.')[1],
+            ResIdPath = "public/uploads/" + res_name,
+            UploadsPath = ResIdPath + "/" + menu_name + "/";
+        // file_path = "uploads/" + res_name + "/" + menu_name + "/section/" + file_name;
 
         if (!fs.existsSync(ResIdPath)) {
             fs.mkdirSync(ResIdPath);
@@ -134,18 +163,45 @@ const uploadFile = (files, name) => {
                 fs.mkdirSync(UploadsPath);
             }
         }
-        files.forEach(dt => {
-            var file = dt;
-            var filename = file.name
+        if(Array.isArray(sec_file)){
+            sec_file.forEach(dt => {
+                var file = dt;
+                var filename = file.name,
+                    // file_name = filename.split('.')[0] + '_' + new Date() + '.' + filename.split('.')[1],
+                    file_path = "uploads/" + res_name + "/" + menu_name + "/" + filename;
+                // console.log(filename);
+    
+                file.mv(UploadsPath + filename, async (err) => {
+                    if (err) {
+                        console.log(`${filename} not uploaded`);
+                    } else {
+                        console.log(`Successfully ${filename} uploaded`);
+                        await OtherImageSave(data, file_path);
+                    }
+                })
+                return new Promise((resolve, reject) => {
+                    resolve(true);
+                });
+            })
+        }else{
+            var filename = sec_file.name,
+                // file_name = filename.split('.')[0] + '_' + new Date() + '.' + filename.split('.')[1],
+                file_path = "uploads/" + res_name + "/" + menu_name + "/" + filename;
             // console.log(filename);
 
-            file.mv(UploadsPath + filename, (err) => {
+            sec_file.mv(UploadsPath + filename, async (err) => {
                 if (err) {
-                    // res.send(err)
+                    console.log(`${filename} not uploaded`);
                 } else {
+                    console.log(`Successfully ${filename} uploaded`);
+                    await OtherImageSave(data, file_path);
                 }
             })
-        })
+            return new Promise((resolve, reject) => {
+                resolve(true);
+            });
+        }
+        
     }
 }
 

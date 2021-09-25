@@ -68,10 +68,10 @@ const MenuImageSave = (data, cov_img_path, top_img_path) => {
     })
 }
 
-const OtherImageSave = (data) => {
+const OtherImageSave = (data, menu_img) => {
     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
-    var sql = `INSERT INTO td_menu_image (restaurant_id, menu_id, active_flag, menu_url, created_by, created_dt) VALUES 
-    ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.MenuUrl}", "${data.restaurant_id}", "${datetime}")`;
+    var sql = `INSERT INTO td_menu_image (restaurant_id, menu_id, active_flag, menu_url, menu_img, created_by, created_dt) VALUES
+    ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.MenuUrl}", "${menu_img}", "${data.restaurant_id}", "${datetime}")`;
     return new Promise((resolve, reject) => {
         db.query(sql, (err, lastId) => {
             if (err) {
@@ -86,6 +86,7 @@ const OtherImageSave = (data) => {
 }
 
 const SectionImageSave = (data, sec_img) => {
+    console.log({sec_dt: data});
     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
     var sql = `INSERT INTO td_section_image_request (restaurant_id, menu_id, active_flag, sec_img, sec_url, created_by, created_dt) VALUES
     ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${sec_img}", "${data.SectionUrl}", "${data.restaurant_id}", "${datetime}")`;
@@ -103,7 +104,8 @@ const SectionImageSave = (data, sec_img) => {
 }
 
 const MonthDateSave = async (data) => {
-
+// console.log({data:JSON.parse(data.month_day)});
+// console.log({data});
     var sql = '';
     await DeleteDatetime(data);
     return new Promise((resolve, reject) => {
@@ -118,6 +120,7 @@ const MonthDateSave = async (data) => {
                     sql = `UPDATE td_date_time SET start_time = "${data.start_time}", end_time = "${data.end_time}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}" 
                     WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}" AND month_day = "${d.dt}"`;
                 }
+                // console.log(sql);
                 db.query(sql, (err, lastId) => {
                     if (err) {
                         console.log(err);
@@ -133,26 +136,27 @@ const MonthDateSave = async (data) => {
 }
 
 const DeleteDatetime = (data) => {
-    var dt = {
-        coverurl: 'asdsadasd',
-        topurl: '123.com',
-        MenuUrl: 'asdsad',
-        SectionUrl: 'asdsa',
-        restaurant_id: '55',
-        menu_id: '3',
-        break_check: 'Y',
-        start_time: '22:11',
-        end_time: '22:11',
-        month_day: [
-            { dt: 2 },
-            { dt: 3 },
-            { dt: 4 },
-            { dt: 5 },
-            { dt: 6 },
-            { dt: 7 },
-            { dt: 8 }
-        ]
+    var v = '',
+        v1 = '';
+    for (let i = 0; i < data.month_day.length; i++) {
+        if (data.month_day[i].dt > 0) {
+            v = data.month_day[i].dt;
+            if (v1 != '') {
+                v1 = v + ',' + v1;
+            } else {
+                v1 = v;
+            }
+        }
     }
+    // console.log({len: data.month_day.length, v1});
+    var sql = `DELETE FROM td_date_time WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}" AND month_day NOT IN(${v1})`;
+    db.query(sql, (err, lastId) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Deleted Date-Time");
+        }
+    })
 }
 
 const LogoSave = (data) => {
