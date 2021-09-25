@@ -51,10 +51,10 @@ const MenuSave = async (data) => {
     })
 }
 
-const MenuImageSave = (data) => {
+const MenuImageSave = (data, cov_img_path, top_img_path) => {
     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
-    var sql = `INSERT INTO td_other_image (restaurant_id, menu_id, active_flag, cover_page_url, top_img_url, created_by, created_dt) VALUES
-    ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.coverurl}", "${data.topurl}", "${data.restaurant_id}", "${datetime}")`;
+    var sql = `INSERT INTO td_other_image (restaurant_id, menu_id, active_flag, cover_page_img, cover_page_url, top_image_img, top_img_url, created_by, created_dt) VALUES
+    ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${cov_img_path}", "${data.coverurl}", "${top_img_path}", "${data.topurl}", "${data.restaurant_id}", "${datetime}")`;
     return new Promise((resolve, reject) => {
         db.query(sql, (err, lastId) => {
             if (err) {
@@ -85,10 +85,10 @@ const OtherImageSave = (data) => {
     })
 }
 
-const SectionImageSave = (data) => {
+const SectionImageSave = (data, sec_img) => {
     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
-    var sql = `INSERT INTO td_section_image_request (restaurant_id, menu_id, active_flag, sec_url, created_by, created_dt) VALUES 
-    ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.SectionUrl}", "${data.restaurant_id}", "${datetime}")`;
+    var sql = `INSERT INTO td_section_image_request (restaurant_id, menu_id, active_flag, sec_img, sec_url, created_by, created_dt) VALUES
+    ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${sec_img}", "${data.SectionUrl}", "${data.restaurant_id}", "${datetime}")`;
     return new Promise((resolve, reject) => {
         db.query(sql, (err, lastId) => {
             if (err) {

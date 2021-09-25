@@ -96,6 +96,11 @@ export class DataserviceService {
     // console.log(formdata.getAll)
     return this.http.post(url_set.api_url+'/notice',data);
   }
+  //For Check Mobile existing or not
+  getmobile(v:any){
+    console.log(v);
+    return this.http.get(url_set.api_url + '/mobile_check?no=' + v);
+  }
 
 
 }

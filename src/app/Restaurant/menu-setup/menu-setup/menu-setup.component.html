@@ -215,6 +215,8 @@
                         <!-- <button class="w3-button w3-green" type="submit">Previous</button> -->
                         <button
                         class="w3-button w3-green m-1" type="submit"
+
+                        [disabled]="b_url"
                         (click)="opennextab(COVERPAGEURL.value,TOPIMAGEURL.value,MENUURL.value,SECTIONURL.value,break.value,start_break.value,end_break.value)"
                         >Save & Continue</button>
                         
@@ -269,7 +271,7 @@
                             <label for="menuImg"> <strong>Photo File</strong></label><br>
                             <form>
                                 <label for="myfile">Upload 1 Lunch JPG or PNG images:</label><br>
-                                <input type="file" id="myfile" name="myfile" multiple (change)="changelaunchtopimage($event)"><br><br>
+                                <input type="file" id="myfile" name="myfile"  (change)="changelaunchtopimage($event)"><br><br>
                                 <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                                 <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
                             </form>Or, we can collect a photo found on your web site and add it to the top of your Lunch

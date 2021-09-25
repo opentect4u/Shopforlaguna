@@ -28,7 +28,6 @@ comma:any;
   // function for sending the login credentials
   logSubmit(v:any){
 
-    // this.confirm_modal.style.display='block';
     console.log(v);
     this._data.submit_log(v).subscribe(data=>{
       console.log(data);

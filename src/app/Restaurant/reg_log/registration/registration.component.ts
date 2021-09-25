@@ -16,6 +16,9 @@ export class RegistrationComponent implements OnInit {
    email_data:any;
    invalid_data=true;
    show_msg=false;
+   exist_number=true;
+   exist:any;
+   suc_msg:any;
    countryData:any;
    counry:any=[];
    x:any
@@ -31,6 +34,9 @@ export class RegistrationComponent implements OnInit {
   // function for checking the existing email
   check_mail(e:any){
     // console.log(e.target.value);
+    if(e.target.id=='em'){
+
+    
     this._data.check_existing_email(e.target.value).subscribe(data=>{
       // console.log(data)
     this.email_data=data;
@@ -39,7 +45,9 @@ export class RegistrationComponent implements OnInit {
     console.log("sadasdaasdasd")
 
        this.invalid_data=true;
-      this.toastr.errorToastr('This mail id is already in use', 'Oops!');
+      this.toastr.errorToastr('This mail id is already in use', 'Oops!',{
+      position: 'top-center',
+      toastTimeout: (10000)});
     }
     else if(this.email_data.suc==1)
      {
@@ -50,8 +58,26 @@ export class RegistrationComponent implements OnInit {
       }
     else
     {}
-    
+ 
     })
+  }
+  else if(e.target.id=='tel'){
+    this._data.getmobile(e.target.value).subscribe(data=>{
+      console.log(data);
+      this.exist=data;
+      if(this.exist.suc==2){
+        this.exist_number=true;
+          this.suc_msg=this.exist.msg;
+          this.toastr.errorToastr('This no. is already in use', 'Sorry!',{
+            position: 'top-center',
+            toastTimeout: (10000)});
+       
+      }
+      else{
+        this.exist_number=false;
+      }
+    })
+  }
   }
   // function for sending registration data
   regSubmit(v:any){

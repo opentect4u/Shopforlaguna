@@ -10,6 +10,7 @@ import { DataserviceService } from '../../service/dataservice.service';
 '../../../../assets/appcss.css']
 })
 export class MenuSetupComponent implements OnInit {
+  break_dt:any=[];
   breakfast_end:any='';
   breakfast_start:any='';
   launch_end:any='';
@@ -183,27 +184,27 @@ export class MenuSetupComponent implements OnInit {
   breakfastcoverimage: any;
   breakfasttopimage: any;
   breakfastmenuimage: any;
-  breakfastsectionimage:any; 
+  breakfastsectionimage:any=[]; 
 
   v:any=0;
 
   launchcoverimage: any;
   launchtopimage: any;
-  launchmenuimage: any;
-  launchsectionimage:any;
+  launchmenuimage: any=[];
+  launchsectionimage:any=[];
 
 
-  branchsectionimage:any;
+  branchsectionimage:any=[];
   branchcoverimage:any;
   branchtopimage:any
-  branchmenuimage:any;
+  branchmenuimage:any=[];
 
-  dinnersectionimage:any;
+  dinnersectionimage:any=[];
   dinnercoverimage:any;
  dinnertopimage:any
-  dinnermenuimage:any;
+  dinnermenuimage:any=[];
   multipleImages:any=[];
-
+  res_name:any=localStorage.getItem('Restaurant_name');
   constructor(private _data: DataserviceService,private lagunaserve:LagunaserviceService,private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -239,11 +240,13 @@ export class MenuSetupComponent implements OnInit {
                   this.check_break=document.getElementById('bkmenu');
                   this.check_break.checked=true;
                   this.break_check='Y';
+                  this.b_url=false;
                }
                else {
                 this.check_break=document.getElementById('bkmenu');
                 this.check_break.checked=false;
                 this.break_check='N';
+                this.b_url=true
                }
             }
             else if(this.cove_top.msg[i].menu_id==2){
@@ -1450,16 +1453,26 @@ export class MenuSetupComponent implements OnInit {
        
         for(let i=0;i<this.cove_top.msg.length;i++){
              if(this.cove_top.msg[i].menu_id==1){
-                  
-            
-                 if(this.cove_top.msg[i].cover_page_url!=''){
+                if(this.cove_top.msg[i].cover_page_url!=''){
                    this.break_cover=this.cove_top.msg[i].cover_page_url;
                    this.break_top=this.cove_top.msg[i].top_img_url;
                  }
-                 else{
+                 else if(this.cove_top.msg[i].cover_page_url!=''){
                   this.break_cover="";
                   this.break_top=""
                  }
+                if(this.cove_top.msg[i].active_flag=='Y'){
+                  this.check_break=document.getElementById('bkmenu');
+                  this.check_break.checked=true;
+                  this.break_check='Y';
+                  this.b_url=false;
+                }
+                else if(this.cove_top.msg[i].active_flag=='N'){
+                this.check_break=document.getElementById('bkmenu');
+                this.check_break.checked=false;
+                this.break_check='N';
+                this.b_url=true
+               }
               }
           }
         }
@@ -3110,7 +3123,44 @@ export class MenuSetupComponent implements OnInit {
     }
   }
   opennextab(COVERPAGEURL: any, TOPIMAGEURL: any,MENUURL:any,SECTIONURL:any,hidevalue:any,v1:any,v2:any) {
+   
+    this.break_dt=[{
+      "dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}];
     if(localStorage.getItem('breakfast')==''){
+     
+      const formData = new FormData();
+      // formData.append('file', this.breakfastcoverimage);
+      formData.append('coverurl', COVERPAGEURL);
+      formData.append('topurl', TOPIMAGEURL);
+      formData.append('MenuUrl', MENUURL);
+      formData.append('SectionUrl',SECTIONURL);
+      formData.append('cov_img',this.breakfastcoverimage);
+      formData.append('top_img', this.breakfasttopimage);
+       formData.append('month_day',this.break_dt);
+       formData.append('restaurant_id',this.resid);
+       formData.append('menu_id',hidevalue);
+       formData.append('break_check',this.break_check);
+       formData.append("start_time",this.brunch_start);
+       formData.append('end_time',this.brunch_end);
+       formData.append('restaurant_name',this.res_name);
+
+
+      
+
+      for(let img of this.breakfastsectionimage){
+        formData.append('section_img', img);
+      }
+      for (let img of this.multipleImages) {
+        formData.append('menu_img', img);
+      }
+      
+      console.log(this.multipleImages)
+      this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+        (res) => console.log(res),
+        (err) => console.log(err)
+      );
+          this.myFunction();
+
       this.storevalue.length=0;
       this.storevalue.push({
       "coverurl": COVERPAGEURL,
@@ -3124,39 +3174,58 @@ export class MenuSetupComponent implements OnInit {
       "end_time":this.brunch_end,
       "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
     });
-      console.log(this.storevalue);
+      
   
-    this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-      console.log(data);
-      this.success=data;
-      console.log("data");
-       if(this.success.suc==1){
-          this.myFunction();
+    // this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+    //   console.log(data);
+    //   this.success=data;
+    //   console.log("data");
+    //    if(this.success.suc==1){
+    //       this.myFunction();
          
-       }
-    })
+    //    }
+    // })
     }
     else{
-  
-   console.log(this.v);
+    console.log(this.v);
     localStorage.setItem('breakfast','');
     if(localStorage.getItem('No_of_menu')=='O'){
       if(this.v==0){
         this.v=1;
         this.storevalue.length=0;
-
-        // const formData = new FormData();
+        const formData = new FormData();
         // formData.append('file', this.breakfastcoverimage);
-        // formData.append('ac_id', COVERPAGEURL)
-       
-        // for (let img of this.multipleImages) {
-        //   formData.append('files', img);
-        // }
-    
-        // this.http.post<any>('http://localhost:3000/file', formData).subscribe(
-        //   (res) => console.log(res),
-        //   (err) => console.log(err)
-        // );
+        formData.append('coverurl', COVERPAGEURL);
+        formData.append('topurl', TOPIMAGEURL);
+        formData.append('MenuUrl', MENUURL);
+        formData.append('SectionUrl',SECTIONURL);
+        formData.append('cov_img',this.breakfastcoverimage);
+        formData.append('top_img', this.breakfasttopimage);
+         formData.append('month_day',this.break_dt);
+         formData.append('restaurant_id',this.resid);
+         formData.append('menu_id',hidevalue);
+         formData.append('break_check',this.break_check);
+         formData.append("start_time",this.brunch_start);
+         formData.append('end_time',this.brunch_end);
+         formData.append('restaurant_name',this.res_name);
+  
+  
+        
+  
+        for(let img of this.breakfastsectionimage){
+          formData.append('section_img', img);
+        }
+        for (let img of this.multipleImages) {
+          formData.append('menu_img', img);
+        }
+        
+        console.log(this.multipleImages)
+        this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+          (res) => console.log(res),
+          (err) => console.log(err)
+        );
+            this.myFunction();
+          
 
      this.storevalue.push({
       "coverurl": COVERPAGEURL,
@@ -3170,17 +3239,17 @@ export class MenuSetupComponent implements OnInit {
       "end_time":this.brunch_end,
       "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
     });
-      console.log(this.storevalue);
+      // console.log(this.storevalue);
   
-    this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-      console.log(data);
-      this.success=data;
-      console.log("data");
-       if(this.success.suc==1){
-          this.myFunction();
+    // this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+    //   console.log(data);
+    //   this.success=data;
+    //   console.log("data");
+    //    if(this.success.suc==1){
+    //       this.myFunction();
          
-       }
-    })
+    //    }
+    // })
     console.log(this.storevalue);
     
       }
@@ -3194,6 +3263,40 @@ export class MenuSetupComponent implements OnInit {
       if(this.v==0){
         this.v=1;
         this.storevalue.length=0;
+        const formData = new FormData();
+        // formData.append('file', this.breakfastcoverimage);
+        formData.append('coverurl', COVERPAGEURL);
+        formData.append('topurl', TOPIMAGEURL);
+        formData.append('MenuUrl', MENUURL);
+        formData.append('SectionUrl',SECTIONURL);
+        formData.append('cov_img',this.breakfastcoverimage);
+        formData.append('top_img', this.breakfasttopimage);
+         formData.append('month_day',this.break_dt);
+         formData.append('restaurant_id',this.resid);
+         formData.append('menu_id',hidevalue);
+         formData.append('break_check',this.break_check);
+         formData.append("start_time",this.brunch_start);
+         formData.append('end_time',this.brunch_end);
+         formData.append('restaurant_name',this.res_name);
+  
+  
+        
+  
+        for(let img of this.breakfastsectionimage){
+          formData.append('section_img', img);
+        }
+        for (let img of this.multipleImages) {
+          formData.append('menu_img', img);
+        }
+        
+        console.log(this.multipleImages)
+        this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+          (res) => console.log(res),
+          (err) => console.log(err)
+        );
+            this.myFunction();
+          
+        
         this.storevalue.push({
          "coverurl": COVERPAGEURL,
          "topurl": TOPIMAGEURL,
@@ -3208,22 +3311,55 @@ export class MenuSetupComponent implements OnInit {
        });
    
      
-       this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-         console.log(data);
-         this.success=data;
-         console.log("data");
-          if(this.success.suc==1){
-             this.myFunction();
+      //  this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+      //    console.log(data);
+      //    this.success=data;
+      //    console.log("data");
+      //     if(this.success.suc==1){
+      //        this.myFunction();
             
-          }
-       })
-       console.log(this.storevalue);
+      //     }
+      //  })
+      //  console.log(this.storevalue);
      
 
       }
       else if(this.v==1){
         this.v=2;
         this.storevalue.length=0;
+        const formData = new FormData();
+        // formData.append('file', this.breakfastcoverimage);
+        formData.append('coverurl', COVERPAGEURL);
+        formData.append('topurl', TOPIMAGEURL);
+        formData.append('MenuUrl', MENUURL);
+        formData.append('SectionUrl',SECTIONURL);
+        formData.append('cov_img',this.breakfastcoverimage);
+        formData.append('top_img', this.breakfasttopimage);
+         formData.append('month_day',this.break_dt);
+         formData.append('restaurant_id',this.resid);
+         formData.append('menu_id',hidevalue);
+         formData.append('break_check',this.break_check);
+         formData.append("start_time",this.brunch_start);
+         formData.append('end_time',this.brunch_end);
+         formData.append('restaurant_name',this.res_name);
+  
+  
+        
+  
+        for(let img of this.breakfastsectionimage){
+          formData.append('section_img', img);
+        }
+        for (let img of this.multipleImages) {
+          formData.append('menu_img', img);
+        }
+        
+        console.log(this.multipleImages)
+        this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+          (res) => console.log(res),
+          (err) => console.log(err)
+        );
+            this.myFunction();
+          
         this.storevalue.push({
          "coverurl": COVERPAGEURL,
          "topurl": TOPIMAGEURL,
@@ -3238,16 +3374,16 @@ export class MenuSetupComponent implements OnInit {
        });
    
      
-       this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-         console.log(data);
-         this.success=data;
-         console.log("data");
-          if(this.success.suc==1){
-             this.myFunction();
+      //  this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+      //    console.log(data);
+      //    this.success=data;
+      //    console.log("data");
+      //     if(this.success.suc==1){
+      //        this.myFunction();
             
-          }
-       })
-       console.log(this.storevalue);
+      //     }
+      //  })
+      //  console.log(this.storevalue);
 
       }
       else{
@@ -3259,6 +3395,40 @@ export class MenuSetupComponent implements OnInit {
     else {
       this.v=3
       this.storevalue.length=0;
+
+      const formData = new FormData();
+        // formData.append('file', this.breakfastcoverimage);
+        formData.append('coverurl', COVERPAGEURL);
+        formData.append('topurl', TOPIMAGEURL);
+        formData.append('MenuUrl', MENUURL);
+        formData.append('SectionUrl',SECTIONURL);
+        formData.append('cov_img',this.breakfastcoverimage);
+        formData.append('top_img', this.breakfasttopimage);
+         formData.append('month_day',this.break_dt);
+         formData.append('restaurant_id',this.resid);
+         formData.append('menu_id',hidevalue);
+         formData.append('break_check',this.break_check);
+         formData.append("start_time",this.brunch_start);
+         formData.append('end_time',this.brunch_end);
+         formData.append('restaurant_name',this.res_name);
+  
+  
+        
+  
+        for(let img of this.breakfastsectionimage){
+          formData.append('section_img', img);
+        }
+        for (let img of this.multipleImages) {
+          formData.append('menu_img', img);
+        }
+        
+        console.log(this.multipleImages)
+        this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+          (res) => console.log(res),
+          (err) => console.log(err)
+        );
+            this.myFunction();
+          
       this.storevalue.push({
        "coverurl": COVERPAGEURL,
        "topurl": TOPIMAGEURL,
@@ -3273,16 +3443,16 @@ export class MenuSetupComponent implements OnInit {
      });
  
    
-     this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-       console.log(data);
-       this.success=data;
-       console.log("data");
-        if(this.success.suc==1){
-           this.myFunction();
+    //  this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+    //    console.log(data);
+    //    this.success=data;
+    //    console.log("data");
+    //     if(this.success.suc==1){
+    //        this.myFunction();
         
-        }
-     })
-     console.log(this.storevalue);
+    //     }
+    //  })
+    //  console.log(this.storevalue);
   
     }
         
@@ -3297,100 +3467,134 @@ export class MenuSetupComponent implements OnInit {
 
   // For Submitting the data of Dinner
   opennextab2(e: any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any,v7:any) {
+    this.break_dt.length=0;
+    this.break_dt=[{
+      "dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
     if( localStorage.getItem('dinner')==''){
       this.storevalue.length=0;
-      this.storevalue.push({
-            "coverurl": v4,
-            "topurl": v3,"MenuUrl":v2,"SectionUrl":v1,
-            "restaurant_id":this.resid,
-            "menu_id":v5,
-            "break_check":this.brunch_check,
-            "start_time":this.brunch_start,
-        "end_time":this.brunch_end,
-        "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
+      const formData = new FormData();
+        // formData.append('file', this.breakfastcoverimage);
+        formData.append('coverurl', v4);
+        formData.append('topurl',  v3);
+        formData.append('MenuUrl', v2);
+        formData.append('SectionUrl',v1);
+        formData.append('cov_img',this.branchcoverimage);
+        formData.append('top_img', this.branchtopimage);
+         formData.append('month_day',this.break_dt);
+         formData.append('restaurant_id',this.resid);
+         formData.append('menu_id',v5);
+         formData.append('break_check',this.brunch_check);
+         formData.append("start_time",this.brunch_start);
+         formData.append('end_time',this.brunch_end);
+         formData.append('restaurant_name',this.res_name);
   
-          });
-          console.log(this.storevalue);
-          this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-            console.log(data);
-            this.success=data;
-            if(this.success.suc==1){
-              this.myFunction();
+  
+        
+  
+        for(let img1 of this.branchsectionimage){
+          formData.append('section_img', img1);
+        }
+        for (let img of this.branchmenuimage) {
+          formData.append('menu_img', img);
+        }
+        console.log(this.branchsectionimage);
+        console.log(this.branchmenuimage)
+        this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+          (res) => console.log(res),
+          (err) => console.log(err)
+        );
+            this.myFunction();
+          
+
+
+
+      // this.storevalue.push({
+      //       "coverurl": v4,
+      //       "topurl": v3,"MenuUrl":v2,"SectionUrl":v1,
+      //       "restaurant_id":this.resid,
+      //       "menu_id":v5,
+      //       "break_check":this.brunch_check,
+      //       "start_time":this.brunch_start,
+      //   "end_time":this.brunch_end,
+      //   "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
+  
+      //     });
+          // console.log(this.storevalue);
+          // this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+          //   console.log(data);
+          //   this.success=data;
+          //   if(this.success.suc==1){
+          //     this.myFunction();
            
-            }
-          })
+          //   }
+          // })
     }
   
     else{
-
-    
     localStorage.setItem('dinner','');
     if(localStorage.getItem('No_of_menu')=='O'){
 
       if(this.v==0){
-    
-
-
-        this.v=1;
+      this.v=1;
         this.storevalue.length=0;
-        this.storevalue.push({
-              "coverurl": v4,
-              "topurl": v3,"MenuUrl":v2,"SectionUrl":v1,
-              "restaurant_id":this.resid,
-              "menu_id":v5,
-              "break_check":this.brunch_check,
-              "start_time":this.brunch_start,
-              "end_time":this.brunch_end,
-             "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
+
+
+        const formData = new FormData();
+        // formData.append('file', this.breakfastcoverimage);
+        formData.append('coverurl', v4);
+        formData.append('topurl',  v3);
+        formData.append('MenuUrl', v2);
+        formData.append('SectionUrl',v1);
+        formData.append('cov_img',this.branchcoverimage);
+        formData.append('top_img', this.branchtopimage);
+         formData.append('month_day',this.break_dt);
+         formData.append('restaurant_id',this.resid);
+         formData.append('menu_id',v5);
+         formData.append('break_check',this.brunch_check);
+         formData.append("start_time",this.brunch_start);
+         formData.append('end_time',this.brunch_end);
+         formData.append('restaurant_name',this.res_name);
+  
+  
+        
+  
+         for(let img1 of this.branchsectionimage){
+          formData.append('section_img', img1);
+        }
+        for (let img of this.branchmenuimage) {
+          formData.append('menu_img', img);
+        }
+        
+        
+        console.log(this.multipleImages)
+        this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+          (res) => console.log(res),
+          (err) => console.log(err)
+        );
+            this.myFunction();
+          
+        // this.storevalue.push({
+        //       "coverurl": v4,
+        //       "topurl": v3,"MenuUrl":v2,"SectionUrl":v1,
+        //       "restaurant_id":this.resid,
+        //       "menu_id":v5,
+        //       "break_check":this.brunch_check,
+        //       "start_time":this.brunch_start,
+        //       "end_time":this.brunch_end,
+        //      "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
     
-            });
-            console.log(this.storevalue);
-            this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-              console.log(data);
-              this.success=data;
-              if(this.success.suc==1){
-                this.myFunction();
-                // this.bkmenu=document.getElementById('tokyo');
-                // this.bkmenu.checked=false;
-                // this.brunch_check='N';
-                // this.bkmenu=document.getElementById('url_topbrunch');
-                // this.bkmenu.value='';
-                // this.bkmenu=document.getElementById('url_menubrunch');
-                //   this.bkmenu.value='';
-                //   this.bkmenu=document.getElementById('url_sectionbrunch');
-                //   this.bkmenu.value='';
-                //   this.bkmenu=document.getElementById('url_brunch');
-                //   this.bkmenu.value='';
-                //   this.bkmenu=document.getElementById('start_brunch');
-                //   this.bkmenu.value='';
-                //   this.bkmenu=document.getElementById('end_brunch');
-                //   this.bkmenu.value='';
+        //     });
+        //     console.log(this.storevalue);
+            // this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+            //   console.log(data);
+            //   this.success=data;
+            //   if(this.success.suc==1){
+            //     this.myFunction();
+               
     
-              }
-            })
-            // this.mon_check=document.getElementById('vehicle13');
-            // this.mon_check.checked=false;
-            // this.mon_check=document.getElementById('vehicle23');
-            // this.mon_check.checked=false;
-            // this.tue_check=document.getElementById('vehicle33');
-            // this.tue_check.checked=false;
-            // this.wed_check=document.getElementById('vehicle43');
-            // this.wed_check.checked=false;
-            // this.thu_check=document.getElementById('vehicle53');
-            // this.thu_check.checked=false;
-            // this.fri_check=document.getElementById('vehicle63');
-            // this.fri_check.checked=false;
-            // this.sat_check=document.getElementById('vehicle73');
-            // this.sat_check.checked=false;
-            // this.sun_check=document.getElementById('vehicle83');
-            // this.sun_check.checked=false;
-            // this.mon_dinner=0;
-            // this.tue_dinner=0;
-            // this.wed_dinner=0;
-            // this.thu_dinner=0;
-            // this.fri_dinner=0;
-            // this.sat_dinner=0;
-            // this.sun_dinner=0;
+            //   }
+            // })
+          
       }
       else{
         //SnackBar
@@ -3402,51 +3606,119 @@ export class MenuSetupComponent implements OnInit {
          if(this.v==0){
            this.v=1;
            this.storevalue.length=0;
-           this.storevalue.push({
-                 "coverurl": v4,
-                 "topurl": v3,"MenuUrl":v2,"SectionUrl":v1,
-                 "restaurant_id":this.resid,
-                 "menu_id":v5,
-                 "break_check":this.brunch_check,
-                 "start_time":this.brunch_start,
-             "end_time":this.brunch_end,
-             "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
+
+           const formData = new FormData();
+           // formData.append('file', this.breakfastcoverimage);
+           formData.append('coverurl', v4);
+           formData.append('topurl',  v3);
+           formData.append('MenuUrl', v2);
+           formData.append('SectionUrl',v1);
+           formData.append('cov_img',this.branchcoverimage);
+           formData.append('top_img', this.branchtopimage);
+            formData.append('month_day',this.break_dt);
+            formData.append('restaurant_id',this.resid);
+            formData.append('menu_id',v5);
+            formData.append('break_check',this.brunch_check);
+            formData.append("start_time",this.brunch_start);
+            formData.append('end_time',this.brunch_end);
+            formData.append('restaurant_name',this.res_name);
+     
+     
+           
+     
+            for(let img1 of this.branchsectionimage){
+              formData.append('section_img', img1);
+            }
+            for (let img of this.branchmenuimage) {
+              formData.append('menu_img', img);
+            }
+           
+           console.log(this.multipleImages)
+           this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+             (res) => console.log(res),
+             (err) => console.log(err)
+           );
+               this.myFunction();
+             
+          //  this.storevalue.push({
+          //        "coverurl": v4,
+          //        "topurl": v3,"MenuUrl":v2,"SectionUrl":v1,
+          //        "restaurant_id":this.resid,
+          //        "menu_id":v5,
+          //        "break_check":this.brunch_check,
+          //        "start_time":this.brunch_start,
+          //    "end_time":this.brunch_end,
+          //    "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
        
-               });
-               console.log(this.storevalue);
-               this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-                 console.log(data);
-                 this.success=data;
-                 if(this.success.suc==1){
-                   this.myFunction();
+          //      });
+          //      console.log(this.storevalue);
+              //  this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+              //    console.log(data);
+              //    this.success=data;
+              //    if(this.success.suc==1){
+              //      this.myFunction();
                 
-                 }
-               })
+              //    }
+              //  })
              
          }
          else if(this.v==1){
            this.v=2;
            this.storevalue.length=0;
-           this.storevalue.push({
-                 "coverurl": v4,
-                 "topurl": v3,"MenuUrl":v2,"SectionUrl":v1,
-                 "restaurant_id":this.resid,
-                 "menu_id":v5,
-                 "break_check":this.brunch_check,
-                 "start_time":this.brunch_start,
-                 "end_time":this.brunch_end,
-             "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
+
+           const formData = new FormData();
+           // formData.append('file', this.breakfastcoverimage);
+           formData.append('coverurl', v4);
+           formData.append('topurl',  v3);
+           formData.append('MenuUrl', v2);
+           formData.append('SectionUrl',v1);
+           formData.append('cov_img',this.branchcoverimage);
+           formData.append('top_img', this.branchtopimage);
+            formData.append('month_day',this.break_dt);
+            formData.append('restaurant_id',this.resid);
+            formData.append('menu_id',v5);
+            formData.append('break_check',this.brunch_check);
+            formData.append("start_time",this.brunch_start);
+            formData.append('end_time',this.brunch_end);
+            formData.append('restaurant_name',this.res_name);
+     
+     
+           
+     
+           for(let img of this.breakfastsectionimage){
+             formData.append('section_img', img);
+           }
+           for (let img of this.branchmenuimage) {
+             formData.append('menu_img', img);
+           }
+           
+           console.log(this.multipleImages)
+           this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+             (res) => console.log(res),
+             (err) => console.log(err)
+           );
+               this.myFunction();
+             
+          //  this.storevalue.push({
+          //        "coverurl": v4,
+          //        "topurl": v3,"MenuUrl":v2,"SectionUrl":v1,
+          //        "restaurant_id":this.resid,
+          //        "menu_id":v5,
+          //        "break_check":this.brunch_check,
+          //        "start_time":this.brunch_start,
+          //        "end_time":this.brunch_end,
+          //    "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
        
-               });
-               console.log(this.storevalue);
-               this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-                 console.log(data);
-                 this.success=data;
-                 if(this.success.suc==1){
-                   this.myFunction();
+          //      });
+          //      console.log(this.storevalue);
+              //  this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+              //    console.log(data);
+              //    this.success=data;
+              //    if(this.success.suc==1){
+              //      this.myFunction();
                   
-                 }
-               })
+              //    }
+              //  })
               
              
          }
@@ -3459,66 +3731,100 @@ export class MenuSetupComponent implements OnInit {
     else {
        this.v=3;
        this.storevalue.length=0;
-       this.storevalue.push({
-             "coverurl": v4,
-             "topurl": v3,"MenuUrl":v2,"SectionUrl":v1,
-             "restaurant_id":this.resid,
-             "menu_id":v5,
-             "break_check":this.brunch_check,
-             "start_time":this.brunch_start,
-             "end_time":this.brunch_end,
-         "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
+
+       const formData = new FormData();
+       // formData.append('file', this.breakfastcoverimage);
+       formData.append('coverurl', v4);
+       formData.append('topurl',  v3);
+       formData.append('MenuUrl', v2);
+       formData.append('SectionUrl',v1);
+       formData.append('cov_img',this.branchcoverimage);
+       formData.append('top_img', this.branchtopimage);
+        formData.append('month_day',this.break_dt);
+        formData.append('restaurant_id',this.resid);
+        formData.append('menu_id',v5);
+        formData.append('break_check',this.brunch_check);
+        formData.append("start_time",this.brunch_start);
+        formData.append('end_time',this.brunch_end);
+        formData.append('restaurant_name',this.res_name);
+ 
+ 
+       
+ 
+        for(let img1 of this.branchsectionimage){
+          formData.append('section_img', img1);
+        }
+        for (let img of this.branchmenuimage) {
+          formData.append('menu_img', img);
+        }
+       
+       console.log(this.multipleImages)
+       this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+         (res) => console.log(res),
+         (err) => console.log(err)
+       );
+           this.myFunction();
+         
+      //  this.storevalue.push({
+      //        "coverurl": v4,
+      //        "topurl": v3,"MenuUrl":v2,"SectionUrl":v1,
+      //        "restaurant_id":this.resid,
+      //        "menu_id":v5,
+      //        "break_check":this.brunch_check,
+      //        "start_time":this.brunch_start,
+      //        "end_time":this.brunch_end,
+      //    "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
    
-           });
+      //      });
            console.log(this.storevalue);
-           this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-             console.log(data);
-             this.success=data;
-             if(this.success.suc==1){
-               this.myFunction();
-               this.bkmenu=document.getElementById('tokyo');
-               this.bkmenu.checked=false;
-               this.brunch_check='N';
-               this.bkmenu=document.getElementById('url_topbrunch');
-               this.bkmenu.value='';
-               this.bkmenu=document.getElementById('url_menubrunch');
-                 this.bkmenu.value='';
-                 this.bkmenu=document.getElementById('url_sectionbrunch');
-                 this.bkmenu.value='';
-                 this.bkmenu=document.getElementById('url_brunch');
-                 this.bkmenu.value='';
-                 this.bkmenu=document.getElementById('start_brunch');
-                 this.bkmenu.value='';
-                 this.bkmenu=document.getElementById('end_brunch');
-                 this.bkmenu.value='';
+          //  this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+          //    console.log(data);
+          //    this.success=data;
+          //    if(this.success.suc==1){
+          //      this.myFunction();
+              //  this.bkmenu=document.getElementById('tokyo');
+              //  this.bkmenu.checked=false;
+              //  this.brunch_check='N';
+              //  this.bkmenu=document.getElementById('url_topbrunch');
+              //  this.bkmenu.value='';
+              //  this.bkmenu=document.getElementById('url_menubrunch');
+              //    this.bkmenu.value='';
+              //    this.bkmenu=document.getElementById('url_sectionbrunch');
+              //    this.bkmenu.value='';
+              //    this.bkmenu=document.getElementById('url_brunch');
+              //    this.bkmenu.value='';
+              //    this.bkmenu=document.getElementById('start_brunch');
+              //    this.bkmenu.value='';
+              //    this.bkmenu=document.getElementById('end_brunch');
+              //    this.bkmenu.value='';
    
-             }
-           })
-           this.mon_check=document.getElementById('vehicle13');
-           this.mon_check.checked=false;
-           this.mon_check=document.getElementById('vehicle23');
-           this.mon_check.checked=false;
-           this.tue_check=document.getElementById('vehicle33');
-           this.tue_check.checked=false;
-           this.wed_check=document.getElementById('vehicle43');
-           this.wed_check.checked=false;
-           this.thu_check=document.getElementById('vehicle53');
-           this.thu_check.checked=false;
-           this.fri_check=document.getElementById('vehicle63');
-           this.fri_check.checked=false;
-           this.sat_check=document.getElementById('vehicle73');
-           this.sat_check.checked=false;
-           this.sun_check=document.getElementById('vehicle83');
-           this.sun_check.checked=false;
-           this.mon_dinner=0;
-           this.tue_dinner=0;
-           this.wed_dinner=0;
-           this.thu_dinner=0;
-           this.fri_dinner=0;
-           this.sat_dinner=0;
-           this.sun_dinner=0;
+          //    }
+          //  })
+          //  this.mon_check=document.getElementById('vehicle13');
+          //  this.mon_check.checked=false;
+          //  this.mon_check=document.getElementById('vehicle23');
+          //  this.mon_check.checked=false;
+          //  this.tue_check=document.getElementById('vehicle33');
+          //  this.tue_check.checked=false;
+          //  this.wed_check=document.getElementById('vehicle43');
+          //  this.wed_check.checked=false;
+          //  this.thu_check=document.getElementById('vehicle53');
+          //  this.thu_check.checked=false;
+          //  this.fri_check=document.getElementById('vehicle63');
+          //  this.fri_check.checked=false;
+          //  this.sat_check=document.getElementById('vehicle73');
+          //  this.sat_check.checked=false;
+          //  this.sun_check=document.getElementById('vehicle83');
+          //  this.sun_check.checked=false;
+          //  this.mon_dinner=0;
+          //  this.tue_dinner=0;
+          //  this.wed_dinner=0;
+          //  this.thu_dinner=0;
+          //  this.fri_dinner=0;
+          //  this.sat_dinner=0;
+          //  this.sun_dinner=0;
     }
-  }
+      }
    this.brunch_start=0;
     this.brunch_end=0;
   
@@ -3540,60 +3846,126 @@ export class MenuSetupComponent implements OnInit {
 
 // Fot Submitting data of Launch Tab
   opennextab1(e: any, v1: any, v2: any,v4:any,v5:any,v6:any,v7:any,v8:any) {
-
+    this.break_dt=[{
+      "dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}];
     if(localStorage.getItem('launch')==''){
       this.storevalue.length=0;
-           this.storevalue.push({
-          "coverurl": v1,
-          "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
-          "restaurant_id":this.resid,
-          "menu_id":v6,
-          "break_check":this.launch_check,
-          "start_time":this.brunch_start,
-      "end_time":this.brunch_end,
-      "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
 
-        });
+      const formData = new FormData();
+      // formData.append('file', this.breakfastcoverimage);
+      formData.append('coverurl', v1);
+      formData.append('topurl',  v2);
+      formData.append('MenuUrl', v4);
+      formData.append('SectionUrl',v5);
+      formData.append('cov_img',this.launchcoverimage);
+      formData.append('top_img',this.launchtopimage);
+       formData.append('month_day',this.break_dt);
+       formData.append('restaurant_id',this.resid);
+       formData.append('menu_id',v6);
+       formData.append('break_check',this.launch_check);
+       formData.append("start_time",this.brunch_start);
+       formData.append('end_time',this.brunch_end);
+       formData.append('restaurant_name',this.res_name);
+
+
+      
+
+      for(let img of this.launchsectionimage){
+        formData.append('section_img', img);
+      }
+      for (let img of this.launchmenuimage) {
+        formData.append('menu_img', img);
+      }
+      
+      console.log(this.multipleImages)
+      this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+        (res) => console.log(res),
+        (err) => console.log(err)
+      );
+          this.myFunction();
+        
+      //      this.storevalue.push({
+      //     "coverurl": v1,
+      //     "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
+      //     "restaurant_id":this.resid,
+      //     "menu_id":v6,
+      //     "break_check":this.launch_check,
+      //     "start_time":this.brunch_start,
+      // "end_time":this.brunch_end,
+      // "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
+
+      //   });
         this.success=0;
         console.log(this.storevalue);
-        this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-          console.log(data);
-          this.success=data;
-          if(this.success.suc==1){
-            this.myFunction();
+        // this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+        //   console.log(data);
+        //   this.success=data;
+        //   if(this.success.suc==1){
+        //     this.myFunction();
           
-          }
-        })
+        //   }
+        // })
     }
     else{
-   
-    localStorage.setItem('launch','');
+     localStorage.setItem('launch','');
 
     if(localStorage.getItem('No_of_menu')=='O'){
       if(this.v==0){
            this.v=1
            this.storevalue.length=0;
-           this.storevalue.push({
-          "coverurl": v1,
-          "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
-          "restaurant_id":this.resid,
-          "menu_id":v6,
-          "break_check":this.launch_check,
-          "start_time":this.brunch_start,
-      "end_time":this.brunch_end,
-      "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
+           const formData = new FormData();
+           // formData.append('file', this.breakfastcoverimage);
+           formData.append('coverurl', v1);
+           formData.append('topurl',  v2);
+           formData.append('MenuUrl', v4);
+           formData.append('SectionUrl',v5);
+           formData.append('cov_img',this.launchcoverimage);
+           formData.append('top_img',this.launchtopimage);
+            formData.append('month_day',this.break_dt);
+            formData.append('restaurant_id',this.resid);
+            formData.append('menu_id',v6);
+            formData.append('break_check',this.launch_check);
+            formData.append("start_time",this.brunch_start);
+            formData.append('end_time',this.brunch_end);
+            formData.append('restaurant_name',this.res_name);
+     
+     
+           
+     
+           for(let img of this.launchsectionimage){
+             formData.append('section_img', img);
+           }
+           for (let img of this.launchmenuimage) {
+             formData.append('menu_img', img);
+           }
+           
+           console.log(this.multipleImages)
+           this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+             (res) => console.log(res),
+             (err) => console.log(err)
+           );
+               this.myFunction();
+      //      this.storevalue.push({
+      //     "coverurl": v1,
+      //     "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
+      //     "restaurant_id":this.resid,
+      //     "menu_id":v6,
+      //     "break_check":this.launch_check,
+      //     "start_time":this.brunch_start,
+      // "end_time":this.brunch_end,
+      // "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
 
-        });
-        this.success=0;
-        console.log(this.storevalue);
-        this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-          console.log(data);
-          this.success=data;
-          if(this.success.suc==1){
-            this.myFunction();
+      //   });
+        // this.success=0;
+        // console.log(this.storevalue);
+        // this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+        //   console.log(data);
+        //   this.success=data;
+        //   if(this.success.suc==1){
+        //     this.myFunction();
           
-          }
-        })
+        //   }
+        // })
        
       }
       else{
@@ -3603,56 +3975,120 @@ export class MenuSetupComponent implements OnInit {
       }
     }
     else if(localStorage.getItem('No_of_menu')=='T'){
-    if(this.v==0){
+         if(this.v==0){
            this.v=1
            this.storevalue.length=0;
-           this.storevalue.push({
-          "coverurl": v1,
-          "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
-          "restaurant_id":this.resid,
-          "menu_id":v6,
-          "break_check":this.launch_check,
-          "start_time":this.brunch_start,
-          "end_time":this.brunch_end,
-      "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
-
-        });
-        this.success=0;
-        console.log(this.storevalue);
-        this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-          console.log(data);
-          this.success=data;
-          if(this.success.suc==1){
-            this.myFunction();
+           const formData = new FormData();
+           // formData.append('file', this.breakfastcoverimage);
+           formData.append('coverurl', v1);
+           formData.append('topurl',  v2);
+           formData.append('MenuUrl', v4);
+           formData.append('SectionUrl',v5);
+           formData.append('cov_img',this.launchcoverimage);
+           formData.append('top_img',this.launchtopimage);
+            formData.append('month_day',this.break_dt);
+            formData.append('restaurant_id',this.resid);
+            formData.append('menu_id',v6);
+            formData.append('break_check',this.launch_check);
+            formData.append("start_time",this.brunch_start);
+            formData.append('end_time',this.brunch_end);
+            formData.append('restaurant_name',this.res_name);
+     
+     
            
-          }
-        })
+     
+           for(let img of this.launchsectionimage){
+             formData.append('section_img', img);
+           }
+           for (let img of this.launchmenuimage) {
+             formData.append('menu_img', img);
+           }
+           
+           console.log(this.multipleImages)
+           this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+             (res) => console.log(res),
+             (err) => console.log(err)
+           );
+               this.myFunction();
+      //      this.storevalue.push({
+      //     "coverurl": v1,
+      //     "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
+      //     "restaurant_id":this.resid,
+      //     "menu_id":v6,
+      //     "break_check":this.launch_check,
+      //     "start_time":this.brunch_start,
+      //     "end_time":this.brunch_end,
+      // "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
+
+      //   });
+        // this.success=0;
+        // console.log(this.storevalue);
+        // this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+        //   console.log(data);
+        //   this.success=data;
+        //   if(this.success.suc==1){
+        //     this.myFunction();
+           
+        //   }
+        // })
         
           }
           else if(this.v==1){
              this.v=2;
              this.storevalue.length=0;
-          this.storevalue.push({
-          "coverurl": v1,
-          "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
-          "restaurant_id":this.resid,
-          "menu_id":v6,
-          "break_check":this.launch_check,
-          "start_time":this.brunch_start,
-      "end_time":this.brunch_end,
-      "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
+             const formData = new FormData();
+             // formData.append('file', this.breakfastcoverimage);
+             formData.append('coverurl', v1);
+             formData.append('topurl',  v2);
+             formData.append('MenuUrl', v4);
+             formData.append('SectionUrl',v5);
+             formData.append('cov_img',this.launchcoverimage);
+             formData.append('top_img',this.launchtopimage);
+              formData.append('month_day',this.break_dt);
+              formData.append('restaurant_id',this.resid);
+              formData.append('menu_id',v6);
+              formData.append('break_check',this.launch_check);
+              formData.append("start_time",this.brunch_start);
+              formData.append('end_time',this.brunch_end);
+              formData.append('restaurant_name',this.res_name);
+       
+       
+             
+       
+             for(let img of this.launchsectionimage){
+               formData.append('section_img', img);
+             }
+             for (let img of this.launchmenuimage) {
+               formData.append('menu_img', img);
+             }
+             
+             console.log(this.multipleImages)
+             this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+               (res) => console.log(res),
+               (err) => console.log(err)
+             );
+                 this.myFunction();
+      //     this.storevalue.push({
+      //     "coverurl": v1,
+      //     "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
+      //     "restaurant_id":this.resid,
+      //     "menu_id":v6,
+      //     "break_check":this.launch_check,
+      //     "start_time":this.brunch_start,
+      // "end_time":this.brunch_end,
+      // "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
 
-        });
-        this.success=0;
-        console.log(this.storevalue);
-        this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-          console.log(data);
-          this.success=data;
-          if(this.success.suc==1){
-            this.myFunction();
+      //   });
+        // this.success=0;
+        // console.log(this.storevalue);
+        // this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+        //   console.log(data);
+        //   this.success=data;
+        //   if(this.success.suc==1){
+        //     this.myFunction();
             
-          }
-        })
+        //   }
+        // })
        
           }
          else{
@@ -3663,64 +4099,60 @@ export class MenuSetupComponent implements OnInit {
     else {
       this.v=3;
       this.storevalue.length=0;
-      this.storevalue.push({
-      "coverurl": v1,
-      "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
-      "restaurant_id":this.resid,
-      "menu_id":v6,
-      "break_check":this.launch_check,
-      "start_time":this.brunch_start,
-      "end_time":this.brunch_end,
-  "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
+      const formData = new FormData();
+      // formData.append('file', this.breakfastcoverimage);
+      formData.append('coverurl', v1);
+      formData.append('topurl',  v2);
+      formData.append('MenuUrl', v4);
+      formData.append('SectionUrl',v5);
+      formData.append('cov_img',this.launchcoverimage);
+      formData.append('top_img',this.launchtopimage);
+       formData.append('month_day',this.break_dt);
+       formData.append('restaurant_id',this.resid);
+       formData.append('menu_id',v6);
+       formData.append('break_check',this.launch_check);
+       formData.append("start_time",this.brunch_start);
+       formData.append('end_time',this.brunch_end);
+       formData.append('restaurant_name',this.res_name);
 
-    });
-    this.success=0;
-    console.log(this.storevalue);
-    this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-      console.log(data);
-      this.success=data;
-      if(this.success.suc==1){
-        this.myFunction();
-        // this.bkmenu=document.getElementById('paris');
-        // this.bkmenu.checked=false;
-        // this.launch_check='N';
-        // this.bkmenu=document.getElementById('url_launch');
-        // this.bkmenu.value='';
-        // this.bkmenu=document.getElementById('url_launchtop');
-        //   this.bkmenu.value='';
-        //   this.bkmenu=document.getElementById('url_launchmenu');
-        //   this.bkmenu.value='';
-        //   this.bkmenu=document.getElementById('url_launchsection');
-        //   this.bkmenu.value='';
-        //   this.bkmenu=document.getElementById('start_launch');
-        //   this.bkmenu.value='';
-        //   this.bkmenu=document.getElementById('end_launch');
-        //   this.bkmenu.value='';
+
+      
+
+      for(let img of this.launchsectionimage){
+        formData.append('section_img', img);
       }
-    })
-    // this.every=document.getElementById('vehicle12');
-    // this.every.checked=false;
-    // this.mon_check=document.getElementById('vehicle22');
-    // this.mon_check.checked=false;
-    // this.tue_check=document.getElementById('vehicle32');
-    // this.tue_check.checked=false;
-    // this.wed_check=document.getElementById('vehicle42');
-    // this.wed_check.checked=false;
-    // this.thu_check=document.getElementById('vehicle52');
-    // this.thu_check.checked=false;
-    // this.fri_check=document.getElementById('vehicle62');
-    // this.fri_check.checked=false;
-    // this.sat_check=document.getElementById('vehicle72');
-    // this.sat_check.checked=false;
-    // this.sun_check=document.getElementById('vehicle82');
-    // this.sun_check.checked=false;
-    // this.mon_launch=0;
-    // this.tue_launch=0;
-    // this.wed_launch=0;
-    // this.thu_launch=0;
-    // this.fri_launch=0;
-    // this.sat_launch=0;
-    // this.sun_launch=0;
+      for (let img of this.launchmenuimage) {
+        formData.append('menu_img', img);
+      }
+      
+      console.log(this.multipleImages)
+      this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+        (res) => console.log(res),
+        (err) => console.log(err)
+      );
+          this.myFunction();
+  //     this.storevalue.push({
+  //     "coverurl": v1,
+  //     "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
+  //     "restaurant_id":this.resid,
+  //     "menu_id":v6,
+  //     "break_check":this.launch_check,
+  //     "start_time":this.brunch_start,
+  //     "end_time":this.brunch_end,
+  // "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
+
+  //   });
+    // this.success=0;
+    // console.log(this.storevalue);
+    // this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+    //   console.log(data);
+    //   this.success=data;
+    //   if(this.success.suc==1){
+    //     this.myFunction();
+       
+    //   }
+    // })
+    
     }
      
   }
@@ -3754,30 +4186,63 @@ export class MenuSetupComponent implements OnInit {
   }
   // For Submitting the data of Brunch
  opennextab3(e: any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any,v7:any) {
-
+  this.break_dt=[{
+    "dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}];
 
   if(localStorage.getItem('brunch')==''){
     this.storevalue.length=0;
-         this.storevalue.push({
-          "coverurl": v3,
-          "topurl": v2,"MenuUrl":v1,"SectionUrl":v4,
-          "restaurant_id":this.resid,
-          "menu_id":v5,
-          "break_check":this.dinner_check,
-          "start_time":this.brunch_start,
-          "end_time":this.brunch_end,
-          "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
+    const formData = new FormData();
+    // formData.append('file', this.breakfastcoverimage);
+    formData.append('coverurl', v3);
+    formData.append('topurl',  v2);
+    formData.append('MenuUrl', v1);
+    formData.append('SectionUrl',v4);
+    formData.append('cov_img',this.dinnercoverimage);
+    formData.append('top_img',this.dinnertopimage);
+     formData.append('month_day',this.break_dt);
+     formData.append('restaurant_id',this.resid);
+     formData.append('menu_id',v5);
+     formData.append('break_check',this.dinner_check);
+     formData.append("start_time",this.brunch_start);
+     formData.append('end_time',this.brunch_end);
+     formData.append('restaurant_name',this.res_name);
 
-        });
-        console.log(this.storevalue);
-        this.success=0
-        this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-          console.log(data);
-          this.success=data;
-          if(this.success.suc==1){
-            this.myFunction();
-            }
-        })
+
+    
+
+    for(let img of this.dinnersectionimage){
+      formData.append('section_img', img);
+    }
+    for (let img of this.dinnermenuimage) {
+      formData.append('menu_img', img);
+    }
+    
+    console.log(this.multipleImages)
+    this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    );
+        this.myFunction();
+        //  this.storevalue.push({
+        //   "coverurl": v3,
+        //   "topurl": v2,"MenuUrl":v1,"SectionUrl":v4,
+        //   "restaurant_id":this.resid,
+        //   "menu_id":v5,
+        //   "break_check":this.dinner_check,
+        //   "start_time":this.brunch_start,
+        //   "end_time":this.brunch_end,
+        //   "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
+
+        // });
+        // console.log(this.storevalue);
+        // this.success=0
+        // this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+        //   console.log(data);
+        //   this.success=data;
+        //   if(this.success.suc==1){
+        //     this.myFunction();
+        //     }
+        // })
   }
   else{
   localStorage.setItem('brunch','');
@@ -3787,27 +4252,59 @@ export class MenuSetupComponent implements OnInit {
        if(this.v==0){
          this.v=1;
          this.storevalue.length=0;
-         this.storevalue.push({
-          "coverurl": v3,
-          "topurl": v2,"MenuUrl":v1,"SectionUrl":v4,
-          "restaurant_id":this.resid,
-          "menu_id":v5,
-          "break_check":this.dinner_check,
-          "start_time":this.brunch_start,
-          "end_time":this.brunch_end,
-          "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
+         const formData = new FormData();
+    // formData.append('file', this.breakfastcoverimage);
+    formData.append('coverurl', v3);
+    formData.append('topurl',  v2);
+    formData.append('MenuUrl', v1);
+    formData.append('SectionUrl',v4);
+    formData.append('cov_img',this.dinnercoverimage);
+    formData.append('top_img',this.dinnertopimage);
+     formData.append('month_day',this.break_dt);
+     formData.append('restaurant_id',this.resid);
+     formData.append('menu_id',v5);
+     formData.append('break_check',this.dinner_check);
+     formData.append("start_time",this.brunch_start);
+     formData.append('end_time',this.brunch_end);
+     formData.append('restaurant_name',this.res_name);
 
-        });
-        console.log(this.storevalue);
-        this.success=0
-        this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-          console.log(data);
-          this.success=data;
-          if(this.success.suc==1){
-            this.myFunction();
+
+    
+
+    for(let img of this.dinnersectionimage){
+      formData.append('section_img', img);
+    }
+    for (let img of this.dinnermenuimage) {
+      formData.append('menu_img', img);
+    }
+    
+    console.log(this.multipleImages)
+    this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    );
+        this.myFunction();
+        //  this.storevalue.push({
+        //   "coverurl": v3,
+        //   "topurl": v2,"MenuUrl":v1,"SectionUrl":v4,
+        //   "restaurant_id":this.resid,
+        //   "menu_id":v5,
+        //   "break_check":this.dinner_check,
+        //   "start_time":this.brunch_start,
+        //   "end_time":this.brunch_end,
+        //   "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
+
+        // });
+        // console.log(this.storevalue);
+        // this.success=0
+        // this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+        //   console.log(data);
+        //   this.success=data;
+        //   if(this.success.suc==1){
+        //     this.myFunction();
           
-          }
-        })
+        //   }
+        // })
        
        }
        else if(this.v==1){
@@ -3820,90 +4317,132 @@ export class MenuSetupComponent implements OnInit {
       if(this.v==0){
         this.v=1;
         this.storevalue.length=0;
-        this.storevalue.push({
-         "coverurl": v3,
-         "topurl": v2,"MenuUrl":v1,"SectionUrl":v4,
-         "restaurant_id":this.resid,
-         "menu_id":v5,
-         "break_check":this.dinner_check,
-         "start_time":this.brunch_start,
-         "end_time":this.brunch_end,
-         "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
+        const formData = new FormData();
+    // formData.append('file', this.breakfastcoverimage);
+    formData.append('coverurl', v3);
+    formData.append('topurl',  v2);
+    formData.append('MenuUrl', v1);
+    formData.append('SectionUrl',v4);
+    formData.append('cov_img',this.dinnercoverimage);
+    formData.append('top_img',this.dinnertopimage);
+     formData.append('month_day',this.break_dt);
+     formData.append('restaurant_id',this.resid);
+     formData.append('menu_id',v5);
+     formData.append('break_check',this.dinner_check);
+     formData.append("start_time",this.brunch_start);
+     formData.append('end_time',this.brunch_end);
+     formData.append('restaurant_name',this.res_name);
 
-       });
-       console.log(this.storevalue);
-       this.success=0
-       this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-         console.log(data);
-         this.success=data;
-         if(this.success.suc==1){
-           this.myFunction();
+
+    
+
+    for(let img of this.dinnersectionimage){
+      formData.append('section_img', img);
+    }
+    for (let img of this.dinnermenuimage) {
+      formData.append('menu_img', img);
+    }
+    
+    console.log(this.multipleImages)
+    this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    );
+        this.myFunction();
+      //   this.storevalue.push({
+      //    "coverurl": v3,
+      //    "topurl": v2,"MenuUrl":v1,"SectionUrl":v4,
+      //    "restaurant_id":this.resid,
+      //    "menu_id":v5,
+      //    "break_check":this.dinner_check,
+      //    "start_time":this.brunch_start,
+      //    "end_time":this.brunch_end,
+      //    "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
+
+      //  });
+      //  console.log(this.storevalue);
+      //  this.success=0
+      //  this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+      //    console.log(data);
+      //    this.success=data;
+      //    if(this.success.suc==1){
+      //      this.myFunction();
          
-         }
-       })
+      //    }
+      //  })
      
       }
       else if(this.v==1){
         this.v=2;
         this.storevalue.length=0;
-        this.storevalue.push({
-         "coverurl": v3,
-         "topurl": v2,"MenuUrl":v1,"SectionUrl":v4,
-         "restaurant_id":this.resid,
-         "menu_id":v5,
-         "break_check":this.dinner_check,
-         "start_time":this.brunch_start,
-         "end_time":this.brunch_start,
-         "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
+        const formData = new FormData();
+    // formData.append('file', this.breakfastcoverimage);
+    formData.append('coverurl', v3);
+    formData.append('topurl',  v2);
+    formData.append('MenuUrl', v1);
+    formData.append('SectionUrl',v4);
+    formData.append('cov_img',this.dinnercoverimage);
+    formData.append('top_img',this.dinnertopimage);
+     formData.append('month_day',this.break_dt);
+     formData.append('restaurant_id',this.resid);
+     formData.append('menu_id',v5);
+     formData.append('break_check',this.dinner_check);
+     formData.append("start_time",this.brunch_start);
+     formData.append('end_time',this.brunch_end);
+     formData.append('restaurant_name',this.res_name);
 
-       });
-       console.log(this.storevalue);
-       this.success=0
-       this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-         console.log(data);
-         this.success=data;
-         if(this.success.suc==1){
-           this.myFunction();
-          //  this.bkmenu=document.getElementById('laguna');
-          //  this.bkmenu.checked=false;
-          //  this.dinner_check='N';
-          //  this.bkmenu=document.getElementById('url_dinner');
-          //  this.bkmenu.value='';
-          //  this.bkmenu=document.getElementById('url_dinnertop');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('url_dinnermenu');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('url_section');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('start_dinner');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('end_dinner');
-          //    this.bkmenu.value='';
-         }
-       })
-      //  this.mon_check=document.getElementById('vehicle14');
-      //  this.mon_check.checked=false;
-      //  this.mon_check=document.getElementById('vehicle24');
-      //  this.mon_check.checked=false;
-      //  this.tue_check=document.getElementById('vehicle34');
-      //  this.tue_check.checked=false;
-      //  this.wed_check=document.getElementById('vehicle44');
-      //  this.wed_check.checked=false;
-      //  this.thu_check=document.getElementById('vehicle54');
-      //  this.thu_check.checked=false;
-      //  this.fri_check=document.getElementById('vehicle64');
-      //  this.fri_check.checked=false;
-      //  this.sat_check=document.getElementById('vehicle74');
-      //  this.sat_check.checked=false;
-      //  this.sun_check=document.getElementById('vehicle84');
-      //  this.sun_check.checked=false;
-      //  this.mon_brunch=0;
-      //  this.tue_brunch=0;
-      //  this.wed_brunch=0;
-      //  this.thu_brunch=0;
-      //  this.fri_brunch=0;
-      //  this.sat_brunch=0;
-      //  this.sun_brunch=0;
+
+    
+
+    for(let img of this.dinnersectionimage){
+      formData.append('section_img', img);
+    }
+    for (let img of this.dinnermenuimage) {
+      formData.append('menu_img', img);
+    }
+    
+    console.log(this.multipleImages)
+    this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    );
+        this.myFunction();
+      //   this.storevalue.push({
+      //    "coverurl": v3,
+      //    "topurl": v2,"MenuUrl":v1,"SectionUrl":v4,
+      //    "restaurant_id":this.resid,
+      //    "menu_id":v5,
+      //    "break_check":this.dinner_check,
+      //    "start_time":this.brunch_start,
+      //    "end_time":this.brunch_start,
+      //    "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
+
+      //  });
+      //  console.log(this.storevalue);
+      //  this.success=0
+      //  this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+      //    console.log(data);
+      //    this.success=data;
+      //    if(this.success.suc==1){
+      //      this.myFunction();
+      //     //  this.bkmenu=document.getElementById('laguna');
+      //     //  this.bkmenu.checked=false;
+      //     //  this.dinner_check='N';
+      //     //  this.bkmenu=document.getElementById('url_dinner');
+      //     //  this.bkmenu.value='';
+      //     //  this.bkmenu=document.getElementById('url_dinnertop');
+      //     //    this.bkmenu.value='';
+      //     //    this.bkmenu=document.getElementById('url_dinnermenu');
+      //     //    this.bkmenu.value='';
+      //     //    this.bkmenu=document.getElementById('url_section');
+      //     //    this.bkmenu.value='';
+      //     //    this.bkmenu=document.getElementById('start_dinner');
+      //     //    this.bkmenu.value='';
+      //     //    this.bkmenu=document.getElementById('end_dinner');
+      //     //    this.bkmenu.value='';
+      //    }
+      //  })
+      
       }
       else{
         //Snackbar
@@ -3914,64 +4453,60 @@ export class MenuSetupComponent implements OnInit {
     else {
       this.v=3;
         this.storevalue.length=0;
-        this.storevalue.push({
-         "coverurl": v3,
-         "topurl": v2,"MenuUrl":v1,"SectionUrl":v4,
-         "restaurant_id":this.resid,
-         "menu_id":v5,
-         "break_check":this.dinner_check,
-         "start_time":this.brunch_start,
-         "end_time":this.brunch_end,
-         "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
+        const formData = new FormData();
+    // formData.append('file', this.breakfastcoverimage);
+    formData.append('coverurl', v3);
+    formData.append('topurl',  v2);
+    formData.append('MenuUrl', v1);
+    formData.append('SectionUrl',v4);
+    formData.append('cov_img',this.dinnercoverimage);
+    formData.append('top_img',this.dinnertopimage);
+     formData.append('month_day',this.break_dt);
+     formData.append('restaurant_id',this.resid);
+     formData.append('menu_id',v5);
+     formData.append('break_check',this.dinner_check);
+     formData.append("start_time",this.brunch_start);
+     formData.append('end_time',this.brunch_end);
+     formData.append('restaurant_name',this.res_name);
 
-       });
-       console.log(this.storevalue);
-       this.success=0
-       this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
-         console.log(data);
-         this.success=data;
-         if(this.success.suc==1){
-           this.myFunction();
-          //  this.bkmenu=document.getElementById('laguna');
-          //  this.bkmenu.checked=false;
-          //  this.dinner_check='N';
-          //  this.bkmenu=document.getElementById('url_dinner');
-          //  this.bkmenu.value='';
-          //  this.bkmenu=document.getElementById('url_dinnertop');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('url_dinnermenu');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('url_section');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('start_dinner');
-          //    this.bkmenu.value='';
-          //    this.bkmenu=document.getElementById('end_dinner');
-          //    this.bkmenu.value='';
-         }
-       })
-      //  this.mon_check=document.getElementById('vehicle14');
-      //  this.mon_check.checked=false;
-      //  this.mon_check=document.getElementById('vehicle24');
-      //  this.mon_check.checked=false;
-      //  this.tue_check=document.getElementById('vehicle34');
-      //  this.tue_check.checked=false;
-      //  this.wed_check=document.getElementById('vehicle44');
-      //  this.wed_check.checked=false;
-      //  this.thu_check=document.getElementById('vehicle54');
-      //  this.thu_check.checked=false;
-      //  this.fri_check=document.getElementById('vehicle64');
-      //  this.fri_check.checked=false;
-      //  this.sat_check=document.getElementById('vehicle74');
-      //  this.sat_check.checked=false;
-      //  this.sun_check=document.getElementById('vehicle84');
-      //  this.sun_check.checked=false;
-      //  this.mon_brunch=0;
-      //  this.tue_brunch=0;
-      //  this.wed_brunch=0;
-      //  this.thu_brunch=0;
-      //  this.fri_brunch=0;
-      //  this.sat_brunch=0;
-      //  this.sun_brunch=0;
+
+    
+
+    for(let img of this.dinnersectionimage){
+      formData.append('section_img', img);
+    }
+    for (let img of this.dinnermenuimage) {
+      formData.append('menu_img', img);
+    }
+    
+    console.log(this.multipleImages)
+    this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    );
+        this.myFunction();
+      //   this.storevalue.push({
+      //    "coverurl": v3,
+      //    "topurl": v2,"MenuUrl":v1,"SectionUrl":v4,
+      //    "restaurant_id":this.resid,
+      //    "menu_id":v5,
+      //    "break_check":this.dinner_check,
+      //    "start_time":this.brunch_start,
+      //    "end_time":this.brunch_end,
+      //    "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]
+
+      //  });
+      //  console.log(this.storevalue);
+      //  this.success=0
+      //  this._data.submit_breakfast_menu_setup(this.storevalue).subscribe(data=>{
+      //    console.log(data);
+      //    this.success=data;
+      //    if(this.success.suc==1){
+      //      this.myFunction();
+      
+      //    }
+      //  })
+    
     }
   }
     this.brunch_start=0;
@@ -3994,48 +4529,34 @@ export class MenuSetupComponent implements OnInit {
   // For breakfastcoverimage
   Breakfast(event: any) {
     console.log(event.target.files[0].name);
-    // this.breakfastcoverimage = event.target.files[0];
+    this.breakfastcoverimage = event.target.files[0];
 
-    if (event.target.files.length > 0) {
-      this.multipleImages = event.target.files;
-    }
    
-    // console.log(this.breakfastcoverimage);
-    
-    // this._data.submit_breakfast_menu_setup(this.breakfastcoverimage).subscribe(data=>{
-    //   console.log(data);
-    // })
    
   }
   
   // For breakfasttop image
   changeBreak(event: any) {
-    console.log(event.target.files[0].name);
+    // console.log(event.target.files[0].name);
     this.breakfasttopimage = event.target.files[0];
-    console.log(this.breakfastcoverimage);
+    console.log(this.breakfasttopimage);
 
   }
   //For breakfastmenuimage
   changeBreakmenubreak(event: any) {
-    // console.log(event.target.files.length);
-    var mul_img = new Array();
-    for(let i =0; i < event.target.files.length; i++){
-      // mul_img.push({'File':event.target.files[i]});
-      mul_img.push(event.target.files[i]);
-    
+   
+   if (event.target.files.length > 0) {
+      this.multipleImages = event.target.files;
     }
-    // console.log(mul_img);
-    this.breakfastmenuimage = mul_img;
-    // this.breakfastmenuimage = event.target.files;
-    // console.log(this.breakfastmenuimage);
-    this._data.submit_breakfast_menu(this.breakfastmenuimage).subscribe(data=>{
-        console.log(data);
-      })
 
   }
     // For breakfast section image
   changeBreakmenubreak1(event:any){
-    this.breakfastsectionimage=event.target.files;
+    // this.breakfastsectionimage=event.target.files;
+    if (event.target.files.length > 0) {
+      this.breakfastsectionimage = event.target.files;
+    }
+
   }
    // Event of launch cover image
 
@@ -4055,22 +4576,36 @@ export class MenuSetupComponent implements OnInit {
 
   changelaunchtmenuimage(event: any) {
     console.log((event.target.files));
-    this.launchmenuimage = event.target.files;
+    // this.launchmenuimage = event.target.files;
+    if(event.target.files.length>0){
+      this.launchmenuimage = event.target.files;
+    }
 
   }
    // Event of launch section image
 
   changelaunchsectionbreak1(event:any){
     console.log((event.target.files));
-    this.launchsectionimage = event.target.files;
+    if(event.target.files.length>0){
+      this.launchsectionimage = event.target.files;
+    }
+   
   }
    // Event of brunch section image
   changebrunchsectionbreak1(event:any){
-    this.branchsectionimage=event.target.files;
+    // this.branchsectionimage=event.target.files;
+    if(event.target.files.length>0){
+      this.branchsectionimage=event.target.files;
+    }
+    console.log(this.branchsectionimage)
   }
     // Event of brumch menu image
   changebrunchmenubreak1(event:any){
-    this.branchmenuimage=event.target.files;
+    // this.branchmenuimage=event.target.files;
+    if(event.target.files.length > 0){
+      this.branchmenuimage=event.target.files;
+    }
+   
   }
     // Event of brunch top image
   brunchtopimage(event:any){
@@ -4083,12 +4618,15 @@ export class MenuSetupComponent implements OnInit {
   }
    // Event of dinner section image
   changedinnersectionimage(event:any){
-     this.dinnersectionimage=event.target.files;
+    if(event.target.files.length>0){
+      this.dinnersectionimage=event.target.files;
+
+    }
   }
     // Event of dinner cover image
   dinnerchangecoverimage(event:any){
     // dinnersectionimage:any;
-  this.dinnercoverimage=event.target.diles[0];
+  this.dinnercoverimage=event.target.files[0];
  
   }
     // Event of dinner top image
@@ -4098,7 +4636,10 @@ export class MenuSetupComponent implements OnInit {
   }
   // Event of dinner menu image
   changedinnermenuimage(event:any){
-    this.dinnermenuimage=event.target.files;
+    if(event.target.files.length>0){
+      this.dinnermenuimage=event.target.files;
+
+    }
   }
   // For Breakfastmenu display day and time
   checkday(event:any,e:any){
@@ -4868,7 +5409,7 @@ else if(e ==='tuesday'){
     // After 3 seconds, remove the show class from DIV
     setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
   } 
-   // For success snackbar
+   // For Error snackbar
    myFunction_forerror() {
     // Get the snackbar DIV
     this.x = document.getElementById("snackbar1");
@@ -5117,6 +5658,7 @@ else if(e ==='tuesday'){
  
     
   }
+  //For setting brunch start time 
   checkstart(e:any){
     if(e.target.value!=''){
       this.brunch_start=e.target.value;
@@ -5132,6 +5674,7 @@ else if(e ==='tuesday'){
   console.log(this.brunch_start);
 
 }
+  //For setting brunch end time 
   checksend(e:any){
       if(e.target.value!=''){
       this.brunch_end=e.target.value;
@@ -5146,6 +5689,7 @@ else if(e ==='tuesday'){
   console.log(  this.brunch_end);
 
   }
+  //For srtting breakfast time
   checkbreakend(e:any,v:any){
     if(v=='start'){
       if(e.target.value!=''){
@@ -5172,8 +5716,8 @@ else if(e ==='tuesday'){
 
     console.log(this.brunch_end,this.brunch_start)
   }
-    
-  checkblaunch(e:any,v:any){
+  // For setting launch time 
+   checkblaunch(e:any,v:any){
 
     if(v=='start'){
       this.brunch_start=e.target.value;
@@ -5185,6 +5729,7 @@ else if(e ==='tuesday'){
 
     console.log(this.brunch_end,this.brunch_start)
   }
+  // For setting dinner time 
   checkdinnertime(e:any,v:any){ 
     if(v=='start'){
       if(e.target.value!=''){
@@ -5214,3 +5759,14 @@ else if(e ==='tuesday'){
     
   
 }
+
+
+
+
+
+
+
+
+
+
+

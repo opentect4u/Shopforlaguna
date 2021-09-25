@@ -56,6 +56,14 @@ export class MenudataComponent implements OnInit, AfterViewInit{
   font:any;
   back:any;
   notice_flag:any;
+  breakfast:boolean=true;
+  launch:boolean=true;
+  brunch:boolean=true;
+  dinner:boolean=true;
+  allmenus:boolean=true
+  showinitialvalue:any=[]
+
+
   constructor(private router:Router,private about:DataserviceService,private lagunaserve:LagunaserviceService) { }
   ngAfterViewInit(): void {
     if('notice' in localStorage){
@@ -85,12 +93,49 @@ export class MenudataComponent implements OnInit, AfterViewInit{
 
        }
        this.menu_id=this.notic.msg[i].menu_id;
+       if(this.menu_id!=''){
+         this.value_menu=false;
+       }
+       else{
+          this.value_menu=true;
+        }
        this.position_id=this.notic.msg[i].position_id;
+       if(this.position_id!=''){
+         this.value_position=false;
+       }
+       else{
+         this.value_position=true;
+       }
        this.header_title=this.notic.msg[i].header_title;
+       if( this.header_title!=''){
+         this.value_Headertitle=false;
+       }
+       else{
+         this.value_Headertitle=true;
+       }
        this.notice_content=this.notic.msg[i].notice_content;
+       if(this.notice_content!=''){
+         this.value_text=false;
+       }
+       else{
+        this.value_text=true;
+         
+       }
        this.font_color=this.notic.msg[i].font_color;
+       if(this.font_color!=''){
+        this.value_font=false;
+       }
+       else{
+        this.value_font=true
+         }
        this.back_color=this.notic.msg[i].back_color;
-
+          if(this.back_color!=''){
+            this.value_background=false;
+          }
+          else{
+            this.value_background=true;
+          
+          }
      }
     
    })
@@ -99,13 +144,13 @@ export class MenudataComponent implements OnInit, AfterViewInit{
        console.log(data);
        this.abou=data;
        for(let i=0;i<this.abou.msg.length;i++){
-         if(this.abou.msg[i].about_us!=''){
+         if(this.abou.msg[i].about_us!=""){
          this.val=this.abou.msg[i].about_us;
          this.disabled_about=false;
           }
          else {
          this.val="";
-             this.disabled_about=true;
+         this.disabled_about=true;
          }
        }
 
@@ -130,6 +175,34 @@ export class MenudataComponent implements OnInit, AfterViewInit{
     }
    else{
      if( this.t1=='notices'){
+    //   this.lagunaserve.getrestaurant_check_menu_setup(this.res_id).subscribe(data=>{
+    //     console.log(data);
+    // })
+
+    this.lagunaserve.get_menu_urls(this.res_id).subscribe(data=>{
+      console.log(data);
+      this.showinitialvalue=data;
+      if(this.showinitialvalue.msg.length!=0){
+            for(let i=0;i<this.showinitialvalue.msg.length;i++){
+              if(this.showinitialvalue.msg[i].menu_id==1){
+                this.breakfast=false;
+              }
+              if(this.showinitialvalue.msg[i].menu_id==2){
+                this.launch=false;
+              }
+            if(this.showinitialvalue.msg[i].menu_id==3){
+                this.dinner=false
+              }
+            if(this.showinitialvalue.msg[i].menu_id==4){
+                this.brunch=false;
+              }
+            }
+            if(this.brunch==false && this.breakfast==false && this.launch==false && this.dinner==false){
+              this.allmenus=false;
+            }
+      }
+  })
+
 
     this.tab1=true;
     this.tab2=false;

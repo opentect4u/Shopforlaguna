@@ -15,26 +15,34 @@ export class LogosetupComponent implements OnInit {
   logo:any;
   clearvalue:any;
   log:any=[];
-  log_url:any;
+  log_url:any='';
   value_logo_url=true;
   x:any;
   // resid=10;
   resid:any=localStorage.getItem('Restaurant_id');
 
   ngOnInit(): void {
+    console.log( this.value_logo_url);
+    
     this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
       console.log(data);
        this.log=data;
+       if(this.log.msg.length!=0){
+     
        for(let i=0;i<this.log.msg.length;i++){
-         if(this.log.msg[i].logo_url!=''){
-         this.log_url=this.log.msg[i].logo_url;    
+         if(this.log.msg[i].logo_url!=null){
+         this.log_url=this.log.msg[i].logo_url;  
+         this.value_logo_url=false;  
                  
          }
          else {
-          this.log_url='';
+         this.value_logo_url=true;  
+         this.log_url='';
          }
        }
-     
+    console.log( this.value_logo_url);
+         
+      }
     })
   }
   goto_MenuDatapage(e:any){
@@ -69,6 +77,8 @@ export class LogosetupComponent implements OnInit {
 checkvalidity(event:any){
   if(event.target.value!=''){
     this.value_logo_url=false;
+    this.log_url=event.target.value;
+    
   }
   else{
     this.value_logo_url=true;

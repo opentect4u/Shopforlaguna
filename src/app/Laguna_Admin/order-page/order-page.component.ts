@@ -24,7 +24,10 @@ export class AdminOrderPageComponent implements OnInit {
   no_stnd:any;
   set_value:any;
   Package:any=[];
-
+  Tabletop:boolean=true;
+  table:any;
+  tabletopyes:any;
+  wallmountsignholder:any;
 
   stnd_specialmenu_yes:any
   stnd_numberofmenu:any
@@ -47,18 +50,23 @@ export class AdminOrderPageComponent implements OnInit {
 
   promo_Birthdaypriceyes:any
   promo_Birthdaypriceno:any
-  promo_Birthdayprice:any;
-  promo_EventCalendarprice:any;
+  promo_Birthdayprice:any=0;
+  promo_EventCalendarprice:any=0;
   promo_EventCalendarprice_yes:any
   promo_EventCalendarprice_no:any
   promocalendar:any=[];
-
+   event:any;
+   birthdat:any
+   
 
   signholder_price1:any;
   signholder_price2:any;
   signholder_price3:any;
   signholder:any=[];
+   
 
+  windowcling_yes:any;
+  window_no:boolean=true;
  
   windowcling_price:any
   window:any=[];
@@ -76,6 +84,7 @@ export class AdminOrderPageComponent implements OnInit {
             this.stndpacakge__monthlyfee=this.Package.msg[i].monthly_fee;
              this.stndpackage_desc=this.Package.msg[i].pack_description;
              this.stnd_numberofmenu=this.Package.msg[i].no_of_menu;
+             console.log(this.stnd_numberofmenu);
              console.log(this.stndpackage_setupfee,this.stndpacakge__monthlyfee);
              if(this.Package.msg[i].special_menu=="Y"){
              this.stnd_specialmenu_yes=document.getElementById('yes_stnd');
@@ -127,7 +136,7 @@ export class AdminOrderPageComponent implements OnInit {
     })
     //For Promo Calendar Tab
     this.laguna.GetPromoCalendar().subscribe(data=>{
-      // console.log(data);
+      console.log(data);
       this.promocalendar=data;
       for(let i=0;i<this.promocalendar.msg.length;i++){
         if(this.promocalendar.msg[i].id==4){
@@ -165,25 +174,59 @@ export class AdminOrderPageComponent implements OnInit {
     //For SignHolder
     this.laguna.Getsignupholder().subscribe(data=>{
             this.signholder=data;
+            console.log(data);
             for(let i=0;i<this.signholder.msg.length;i++){
               if(this.signholder.msg[i].id==6){
                  this.signholder_price1=this.signholder.msg[i].price;
+                 if(this.signholder.msg[i].free_flag=='Y'){
+                       this.tabletopyes=document.getElementById('yes_signholder1');
+                       this.tabletopyes.checked=true;
+                 }
+                 else{
+                  this.tabletopyes=document.getElementById('no_signholder1');
+                  this.tabletopyes.checked=true;
+                 }
+                
               }
               else if(this.signholder.msg[i].id==7){
-                   this.signholder_price2=this.signholder.msg[i].price;
+                this.signholder_price2=this.signholder.msg[i].price;
+
+                   if(this.signholder.msg[i].free_flag=='Y'){
+                              this.wallmountsignholder=document.getElementById('yes_signholder2');
+                              this.wallmountsignholder.checked=true;
+                
+
+                   } 
+                   else{
+                    this.wallmountsignholder=document.getElementById('no_signholder2');
+                    this.wallmountsignholder.checked=true;
+
+                   }
               }
               else if(this.signholder.msg[i].id==8){
                 this.signholder_price3=this.signholder.msg[i].price;
+                
               }
+              
             }
     })
     //For Window Cling
     this.laguna.GetWindowCling().subscribe(data=>{
-      // console.log(data);
+      console.log(data);
       this.window=data;
       for(let i=0;i<this.window.msg.length;i++){
         if(this.window.msg[i].id==9){
           this.windowcling_price=this.window.msg[i].price;
+          if(this.window.msg[i].free_flag=='Y'){
+            this.windowcling_yes=document.getElementById('yes_last');
+            // this.windowcling_yes.value=0;
+            this.windowcling_yes.checked=true;
+          }
+          else{
+            this.windowcling_yes=document.getElementById('no_end');
+            // this.windowcling_yes.value=0;
+            this.windowcling_yes.checked=true;
+          }
         }
       }
 
@@ -224,7 +267,39 @@ export class AdminOrderPageComponent implements OnInit {
     }
     //For Promotion tab
     else if(e=='promo'){
-       this.pack=true;
+      this.laguna.GetPromoCalendar().subscribe(data=>{
+        console.log(data);
+        this.promocalendar=data;
+        for(let i=0;i<this.promocalendar.msg.length;i++){
+          if(this.promocalendar.msg[i].id==4){
+            this.promo_Birthdayprice=this.promocalendar.msg[i].price;
+              if(this.promocalendar.msg[i].free_flag=='Y'){
+            this.promo_Birthdaypriceyes=document.getElementById('yes_birth');
+            this.promo_Birthdaypriceyes.checked=true;
+           }
+          else{
+            this.promo_Birthdaypriceno=document.getElementById('no_birth');
+            this.promo_Birthdaypriceno.checked=true;
+          }
+          }
+          else if(this.promocalendar.msg[i].id==5){
+            this.promo_EventCalendarprice=this.promocalendar.msg[i].price;
+            if(this.promocalendar.msg[i].free_flag=='Y'){
+              this. promo_EventCalendarprice_yes=document.getElementById('yes_calend');
+              this. promo_EventCalendarprice_yes.checked=true;
+            }
+            else{
+              this.promo_EventCalendarprice_no=document.getElementById('no_calend');
+              this.promo_EventCalendarprice_no.checked=true;
+            }
+          }
+          else{
+  
+          }
+       }
+  
+      })
+    this.pack=true;
    this.promo=false;
    this.signhold=true;
    this.windowcl=true;
@@ -342,6 +417,7 @@ export class AdminOrderPageComponent implements OnInit {
   }
     //Admin order set up page package tab third row
   submitpremium(v1:any,v2:any,v3:any,v4:any,v5:any){
+    console.log(v1)
     this.yes_stnd=document.getElementById('yes_premium');
     this.no_stnd=document.getElementById('no_premium');
     console.log(this.yes_stnd.checked,this.no_stnd.checked);
@@ -466,6 +542,9 @@ export class AdminOrderPageComponent implements OnInit {
   verify(e:any){
     if(e=='y'){
       this.promo1=true;
+      // this.promo_Birthdayprice=0;
+      this.birthdat=document.getElementById('birthday');
+      this.birthdat.value=0;
     }
     else{
       this.promo1=false;
@@ -474,6 +553,9 @@ export class AdminOrderPageComponent implements OnInit {
   verifytre(e:any){
     if(e=='yes'){
       this.promo2=true;
+      // this.promo_EventCalendarprice=0;
+      this.event=document.getElementById('Event');
+      this.event.value=0;
     }
     else{
          this.promo2=false;
@@ -488,6 +570,44 @@ export class AdminOrderPageComponent implements OnInit {
 
     if (!charStr.match(/^[0-9]+$/))
      { e.preventDefault();}
+
+  }
+
+  check(event:any){
+    if(event.target.id=='yes_signholder1'){
+      console.log(event.target.value);
+       this.Tabletop=true;
+       this.table=document.getElementById('tabletop');
+       this.table.value=0;     
+    }
+    else if(event.target.id=='no_signholder1'){
+      console.log(event.target.value);
+      this.Tabletop=false;
+     }
+    else if(event.target.id=='yes_signholder2'){
+      console.log(event.target.value);
+    }
+    else if(event.target.id=='no_signholder2'){
+      console.log(event.target.value);
+    }
+    else if(event.target.id=='yes_wall'){
+      console.log(event.target.value);
+    }
+    else if(event.target.id=='no_mount')
+    {
+      console.log(event.target.value);
+    }
+    else if(event.target.id=='yes_last'){
+      console.log(event.target.value);
+       this.windowcling_yes=document.getElementById('window_cling');
+       this.windowcling_yes.value=0;
+       this.window_no=true;
+      
+    }
+    else if(event.target.id=='no_end'){
+      console.log(event.target.value);
+      this.window_no=false;
+    }
 
   }
 }
