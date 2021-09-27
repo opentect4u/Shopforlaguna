@@ -329,10 +329,10 @@ export class MenuSetupComponent implements OnInit {
 
            }
          }
-      
         }
-        for(let i=0;i<this.cove_top.oth_dt.length;i++){
-       if(this.cove_top.oth_dt.length!=0){
+      }
+      for(let i=0;i<this.cove_top.oth_dt.length;i++){
+        if(this.cove_top.oth_dt.length!=0){
           if(this.cove_top.oth_dt[i].menu_id==1){
                 
             console.log("sadasda1");
@@ -432,10 +432,11 @@ export class MenuSetupComponent implements OnInit {
         
         }
       }  
-
-      }
+   
+      
     
     })
+    //For breakfast section url
     this.lagunaserve.get_sec_url('1',this.resid).subscribe(data=>{
       console.log(data);
       this.break_sec=data
@@ -446,6 +447,66 @@ export class MenuSetupComponent implements OnInit {
          }
       }
       
+
+    })
+    //For launch section url
+  this.lagunaserve.get_sec_url('2',this.resid).subscribe(data=>{
+      console.log(data);
+      this.break_sec=data
+      if(this.break_sec.msg.length!=0){
+
+      
+      for(let i=0;i<this.break_sec.msg.length;i++)
+      {
+        
+          if(this.break_sec.msg[i].sec_url!=''){
+          this.launch_sec=this.break_sec.msg[i].sec_url
+         }
+         else{
+          this.launch_sec="";
+           
+         }
+          
+      }
+    }
+
+    })
+    //For dinner section url
+    this.lagunaserve.get_sec_url('3',this.resid).subscribe(data=>{
+      console.log(data);
+      this.break_sec=data
+      if(this.break_sec.msg.length!=0){
+      for(let i=0;i<this.break_sec.msg.length;i++)
+      {
+        if(this.break_sec.msg[i].sec_url!=''){
+          this.dinner_sec=this.break_sec.msg[i].sec_url
+         }
+         else{
+          this.dinner_sec="";
+
+         }
+      }
+    }
+
+    })
+    //For brunch section url
+    this.lagunaserve.get_sec_url('4',this.resid).subscribe(data=>{
+      console.log(data);
+      this.break_sec=data
+      if(this.break_sec.msg.length!=0){
+
+      
+      for(let i=0;i<this.break_sec.msg.length;i++)
+      {
+        if(this.break_sec.msg[i].sec_url!=''){
+          this.brunch_sec=this.break_sec.msg[i].sec_url
+         }
+         else{
+          this.brunch_sec="";
+
+         }
+      }
+    }
 
     })
     console.log("asdasdasdasdasd");
@@ -4136,7 +4197,13 @@ export class MenuSetupComponent implements OnInit {
 
 // Fot Submitting data of Launch Tab
   opennextab1(e: any, v1: any, v2: any,v4:any,v5:any,v6:any,v7:any,v8:any) {
+    console.log(this.launchcoverimage)
+    console.log(this.launchtopimage)
+    console.log(this.launchsectionimage)
+    console.log( this.launchmenuimage);
+   
 
+ 
    if(v7<v8){
       if(localStorage.getItem('launch')==''){
      
@@ -4160,14 +4227,14 @@ export class MenuSetupComponent implements OnInit {
 
       
 
-      for(let img of this.launchsectionimage){
-        formData.append('section_img', img);
+      for(let img1 of this.launchsectionimage){
+        formData.append('section_img', img1);
       }
       for (let img of this.launchmenuimage) {
         formData.append('menu_img', img);
       }
       
-      console.log(this.multipleImages)
+      // console.log(this.launchmenuimage)
       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
         (res) => console.log(res),
         (err) => console.log(err)
@@ -4892,6 +4959,7 @@ else{
   changelaunchcoverpage(event: any) {
     console.log(event.target.files[0]);
     this.launchcoverimage = event.target.files[0];
+    console.log(this.launchcoverimage);
 
 
   }
@@ -4909,6 +4977,8 @@ else{
     if(event.target.files.length>0){
       this.launchmenuimage = event.target.files;
     }
+    console.log( this.launchmenuimage);
+    
 
   }
    // Event of launch section image
