@@ -79,19 +79,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
       console.log(data);
       this.notice_select=data;
       this.notice_select=this.notice_select.msg;
-      // for
-        
-      // this.menu_id=this.notic.msg[i].menu_id;
-    
-      // this.notice_select=this.notice_select.msg;
-      // if(this.menu_id!=''){
-      //   this.value_menu=false;
-      // }
-      // else{
-      //    this.value_menu=true;
-      //  }
-      
-   })    
+      })    
     
    this.lagunaserve.get_special(this.res_id).subscribe(data=>{
      console.log(data);
