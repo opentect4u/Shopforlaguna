@@ -12,7 +12,7 @@ import { DataserviceService } from '../service/dataservice.service';
   styleUrls: ['./logosetup.component.css']
 })
 export class LogosetupComponent implements OnInit {
-  url_reg='http://localhost:3000/';
+  url_reg='https://shoplocal-lagunabeach.com/';
   constructor(private router:Router,private Logo:DataserviceService,private lagunaserve:LagunaserviceService) { }
   name:any=localStorage.getItem('Restaurant_name');
   base64Image: any;
