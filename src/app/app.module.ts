@@ -57,6 +57,7 @@ import { ConfirmationmailComponent } from './Restaurant/confirmationmail/confirm
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'
 @NgModule({
   declarations: [
     AppComponent,
@@ -133,6 +134,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MatPaginatorModule,
     MatSortModule,
     HttpClientModule,
+    MatSlideToggleModule,
     ToastrModule.forRoot(),
 
     BrowserAnimationsModule

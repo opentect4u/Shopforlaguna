@@ -59,6 +59,9 @@ export class OrderPageComponent implements OnInit {
   wall: any;
   wall2: any;
   self: any;
+  menus_first:any;
+  menus_second:any;
+  menus_third:any
   constructor(private _data:DataserviceService,private activatedroute:ActivatedRoute,private router:Router) { 
     
   }
@@ -114,6 +117,41 @@ export class OrderPageComponent implements OnInit {
     this.p_setup=this.packageData.msg[2].setup_fee;
     this.p_monthly=this.packageData.msg[2].monthly_fee;
     this.p_desc=this.packageData.msg[2].pack_description;
+    //  this.menus1=this.packageData.msg[0].no_of_menu;
+     if(this.packageData.msg[0].no_of_menu=='O'){
+       this.menus_first="1 Menu";
+     }
+     else if(this.packageData.msg[0].no_of_menu=='T'){
+      this.menus_first="2 Menus";
+
+     }
+     else{
+      this.menus_first="Unlimited";
+
+     }
+     if(this.packageData.msg[1].no_of_menu=='O'){
+      this.menus_second="1 Menu";
+
+     }
+     else if(this.packageData.msg[1].no_of_menu=='T'){
+      this.menus_second="2 Menus";
+   
+     }
+     else{
+      this.menus_second="Unlimited";
+  
+     }
+     if(this.packageData.msg[2].no_of_menu=='O'){
+       this.menus_third="1 Menu";
+     }
+     else if(this.packageData.msg[2].no_of_menu=='T'){
+      this.menus_third="2 Menus";
+     
+     }
+     else{
+      this.menus_third="Unlimited"
+
+     }
     
       if(this.packageData.msg[0].special_menu=='N'){
           this.stnd_spl_menu=true;

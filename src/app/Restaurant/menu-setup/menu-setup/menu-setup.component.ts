@@ -179,6 +179,12 @@ export class MenuSetupComponent implements OnInit {
   sat_check:any;
   sun_check:any;
   // mon_check:any;
+  every_break:any;
+  every_launch:any;
+
+  every_dinner:any;
+
+  every_brunch:any;
 
    brunch_start:any;
    brunch_end:any;
@@ -223,22 +229,23 @@ export class MenuSetupComponent implements OnInit {
       this.cove_top.length=0;
       console.log(data);
       this.cove_top=data;
-      if(this.cove_top.length!=0){
+      // if(this.cove_top.length!=0){
 
       
-      for(let i=0;i<this.cove_top.msg.length;i++){
-        console.log(this.cove_top.msg[i].menu_id)
-           if(this.cove_top.msg[i].menu_id==1){
+      for(let i=0;i<this.cove_top.menu_dt.length;i++){
+        // console.log(this.cove_top.menu_dt[i].menu_id);
+        if(this.cove_top.menu_dt.length!=0){
+          if(this.cove_top.menu_dt[i].menu_id==1){
                 
             console.log("sadasda1");
              
-                 this.break_cover=this.cove_top.msg[i].cover_page_url;
-                 this.break_top=this.cove_top.msg[i].top_img_url;
-                 this.break_menu=this.cove_top.msg[i].menu_url;
+                //  this.break_cover=this.cove_top.msg[i].cover_page_url;
+                //  this.break_top=this.cove_top.msg[i].top_img_url;
+                 this.break_menu=this.cove_top.menu_dt[i].menu_url;
                  console.log(this.break_menu);
                 
              
-               if(this.cove_top.msg[i].active_flag=='Y'){
+               if(this.cove_top.menu_dt[i].active_flag=='Y'){
                   this.check_break=document.getElementById('bkmenu');
                   this.check_break.checked=true;
                   this.break_check='Y';
@@ -251,17 +258,17 @@ export class MenuSetupComponent implements OnInit {
                 this.b_url=true
                }
             }
-            else if(this.cove_top.msg[i].menu_id==2){
+            else if(this.cove_top.menu_dt[i].menu_id==2){
 
               console.log("sadasda3");
              
-                this.launch_cover=this.cove_top.msg[i].cover_page_url;
-                this.launch_top=this.cove_top.msg[i].top_img_url;
-                this.launch_menu=this.cove_top.msg[i].menu_url;
-                console.log(this.launch_top,this.launch_cover);
+                // this.launch_cover=this.cove_top.msg[i].cover_page_url;
+                // this.launch_top=this.cove_top.msg[i].top_img_url;
+                this.launch_menu=this.cove_top.menu_dt[i].menu_url;
+                // console.log(this.launch_top,this.launch_cover);
 
             
-              if(this.cove_top.msg[i].active_flag=='Y'){
+              if(this.cove_top.menu_dt[i].active_flag=='Y'){
                 this.check_launch=document.getElementById('paris');
                 this.check_launch.checked=true;
                 this.launch_check='Y'
@@ -275,12 +282,12 @@ export class MenuSetupComponent implements OnInit {
 
              }
            }
-           else if(this.cove_top.msg[i].menu_id==3){
+           else if(this.cove_top.menu_dt[i].menu_id==3){
             console.log("sadasda2");
-              this.dinner_cover=this.cove_top.msg[i].cover_page_url;
-              this.dinner_top=this.cove_top.msg[i].top_img_url;
-              this.dinner_menu=this.cove_top.msg[i].menu_url;
-            if(this.cove_top.msg[i].active_flag=='Y'){
+              // this.dinner_cover=this.cove_top.menu_dt[i].cover_page_url;
+              // this.dinner_top=this.cove_top.menu_dt[i].top_img_url;
+              this.dinner_menu=this.cove_top.menu_dt[i].menu_url;
+            if(this.cove_top.menu_dt[i].active_flag=='Y'){
               this.check_dinner=document.getElementById('tokyo');
               this.check_dinner.checked=true;
               this.brunch_check='Y';
@@ -294,20 +301,119 @@ export class MenuSetupComponent implements OnInit {
 
            }
            }
-           else if(this.cove_top.msg[i].menu_id==4){
+           else if(this.cove_top.menu_dt[i].menu_id==4){
 
             console.log("sadasda4");
             // if(this.cove_top.msg[i].cover_page_url!=''){
-              this.brunch_cover=this.cove_top.msg[i].cover_page_url;
-              this.brunch_top=this.cove_top.msg[i].top_img_url;
-              this.brunch_menu=this.cove_top.msg[i].menu_url;
+              // this.brunch_cover=this.cove_top.menu_dt[i].cover_page_url;
+              // this.brunch_top=this.cove_top.menu_dt[i].top_img_url;
+              this.brunch_menu=this.cove_top.menu_dt[i].menu_url;
 
             // }
             // else{
             //  this.brunch_cover="";
             //  this.brunch_top=""
             // }
-            if(this.cove_top.msg[i].active_flag=='Y'){
+            if(this.cove_top.menu_dt[i].active_flag=='Y'){
+              this.check_brunch=document.getElementById('laguna');
+              this.check_brunch.checked=true;
+              this.dinner_check='Y';
+              this.br_url=false;
+           }
+           else {
+            this.check_brunch=document.getElementById('laguna');
+            this.check_brunch.checked=false;
+            this.dinner_check='N';
+            this.br_url=true;
+
+           }
+         }
+      
+        }
+        for(let i=0;i<this.cove_top.oth_dt.length;i++){
+       if(this.cove_top.oth_dt.length!=0){
+          if(this.cove_top.oth_dt[i].menu_id==1){
+                
+            console.log("sadasda1");
+             
+                 this.break_cover=this.cove_top.oth_dt[i].cover_page_url;
+                 this.break_top=this.cove_top.oth_dt[i].top_img_url;
+                 console.log(this.break_cover, this.break_top);
+                 
+                //  this.break_menu=this.cove_top.menu_dt[i].menu_url;
+                
+                
+             
+               if(this.cove_top.oth_dt[i].active_flag=='Y'){
+                  this.check_break=document.getElementById('bkmenu');
+                  this.check_break.checked=true;
+                  this.break_check='Y';
+                  this.b_url=false;
+               }
+               else {
+                this.check_break=document.getElementById('bkmenu');
+                this.check_break.checked=false;
+                this.break_check='N';
+                this.b_url=true
+               }
+            }
+            else if(this.cove_top.oth_dt[i].menu_id==2){
+
+              console.log("sadasda3");
+             
+                this.launch_cover=this.cove_top.oth_dt[i].cover_page_url;
+                this.launch_top=this.cove_top.oth_dt[i].top_img_url;
+                // this.launch_menu=this.cove_top.menu_dt[i].menu_url;
+                // console.log(this.launch_top,this.launch_cover);
+
+            
+              if(this.cove_top.oth_dt[i].active_flag=='Y'){
+                this.check_launch=document.getElementById('paris');
+                this.check_launch.checked=true;
+                this.launch_check='Y'
+                this.lcc_url=false;
+             }
+             else {
+              this.check_launch=document.getElementById('paris');
+              this.check_launch.checked=false;
+              this.launch_check='N';
+              this.lcc_url=true;
+
+             }
+           }
+           else if(this.cove_top.oth_dt[i].menu_id==3){
+            console.log("sadasda2");
+              this.dinner_cover=this.cove_top.oth_dt[i].cover_page_url;
+              this.dinner_top=this.cove_top.oth_dt[i].top_img_url;
+              // this.dinner_menu=this.cove_top.oth_dt[i].menu_url;
+            if(this.cove_top.oth_dt[i].active_flag=='Y'){
+              this.check_dinner=document.getElementById('tokyo');
+              this.check_dinner.checked=true;
+              this.brunch_check='Y';
+              this.d_url=false;
+           }
+           else {
+            this.check_dinner=document.getElementById('tokyo');
+            this.check_dinner.checked=false;
+            this.brunch_check='N';
+            this.d_url=true;
+
+           }
+           }
+           else if(this.cove_top.menu_dt[i].menu_id==4){
+
+            console.log("sadasda4");
+            // if(this.cove_top.msg[i].cover_page_url!=''){
+              this.brunch_cover=this.cove_top.oth_dt[i].cover_page_url;
+              this.brunch_top=this.cove_top.oth_dt[i].top_img_url;
+              // this.brunch_menu=this.cove_top.menu_dt[i].menu_url;
+
+            // }
+            // else{
+            //  this.brunch_cover="";
+            //  this.brunch_top=""
+            // }
+            if(this.cove_top.oth_dt[i].active_flag=='Y'){
               this.check_brunch=document.getElementById('laguna');
               this.check_brunch.checked=true;
               this.dinner_check='Y';
@@ -322,8 +428,12 @@ export class MenuSetupComponent implements OnInit {
            }
          }
 
+        
+        }
+      }  
+
       }
-    }
+    
     })
     this.lagunaserve.get_sec_url('1',this.resid).subscribe(data=>{
       console.log(data);
@@ -410,8 +520,8 @@ export class MenuSetupComponent implements OnInit {
               this.sun=8;
             }
             if(this.arr_brak_check.msg.length==7){
-              this.every=document.getElementById('vehicle1');
-              this.every.checked=true;
+              this.every_break=document.getElementById('vehicle1');
+              this.every_break.checked=true;
               this.mon_check=document.getElementById('vehicle2');
               this.mon_check.checked=true;
               this.tue_check=document.getElementById('vehicle3');
@@ -507,8 +617,8 @@ export class MenuSetupComponent implements OnInit {
               this.sun_launch=8;
             }
             if(this.arr_brak_check.msg.length==7) {
-              this.every=document.getElementById('vehicle12');
-              this.every.checked=true
+              this.every_launch=document.getElementById('vehicle12');
+              this.every_launch.checked=true
               this.mon_check=document.getElementById('vehicle22');
               this.mon_check.checked=true;
               this.tue_check=document.getElementById('vehicle32');
@@ -605,8 +715,8 @@ export class MenuSetupComponent implements OnInit {
               this.sun_dinner=8;
             }
             if(this.arr_brak_check.msg.length==7) {
-              this.every=document.getElementById('vehicle13');
-              this.every.checked=true;
+              this.every_dinner=document.getElementById('vehicle13');
+              this.every_dinner.checked=true;
               this.mon_check=document.getElementById('vehicle23');
               this.mon_check.checked=true;
               this.tue_check=document.getElementById('vehicle33');
@@ -700,8 +810,8 @@ export class MenuSetupComponent implements OnInit {
               this.sun_brunch=8;
             }
             if(this.arr_brak_check.msg.length==7) {
-              this.every=document.getElementById('vehicle14');
-              this.every.checked=true;
+              this.every_brunch=document.getElementById('vehicle14');
+              this.every_brunch.checked=true;
               this.mon_check=document.getElementById('vehicle24');
               this.mon_check.checked=true;
               this.tue_check=document.getElementById('vehicle34');
@@ -1457,37 +1567,71 @@ export class MenuSetupComponent implements OnInit {
       this.cove_top.length=0;
       this.break_sec.length=0;
       this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
+        this.cove_top.length=0;
         console.log(data);
         this.cove_top=data;
-        if(this.cove_top.msg.length!=0){
-
-       
-        for(let i=0;i<this.cove_top.msg.length;i++){
-             if(this.cove_top.msg[i].menu_id==1){
-                if(this.cove_top.msg[i].cover_page_url!=''){
-                   this.break_cover=this.cove_top.msg[i].cover_page_url;
-                   this.break_top=this.cove_top.msg[i].top_img_url;
+        // if(this.cove_top.length!=0){
+  
+        
+        for(let i=0;i<this.cove_top.menu_dt.length;i++){
+          // console.log(this.cove_top.menu_dt[i].menu_id);
+          if(this.cove_top.menu_dt.length!=0){
+            if(this.cove_top.menu_dt[i].menu_id==1){
+                  
+              console.log("sadasda1");
+               
+                 
+                   this.break_menu=this.cove_top.menu_dt[i].menu_url;
+                   console.log(this.break_menu);
+                  
+               
+                 if(this.cove_top.menu_dt[i].active_flag=='Y'){
+                    this.check_break=document.getElementById('bkmenu');
+                    this.check_break.checked=true;
+                    this.break_check='Y';
+                    this.b_url=false;
                  }
-                 else if(this.cove_top.msg[i].cover_page_url!=''){
-                  this.break_cover="";
-                  this.break_top=""
+                 else {
+                  this.check_break=document.getElementById('bkmenu');
+                  this.check_break.checked=false;
+                  this.break_check='N';
+                  this.b_url=true
                  }
-                if(this.cove_top.msg[i].active_flag=='Y'){
+              }
+            }
+      
+            
+  
+        }
+        for(let i=0;i<this.cove_top.oth_dt.length;i++){
+        if(this.cove_top.oth_dt.length!=0){
+          if(this.cove_top.oth_dt[i].menu_id==1){
+         
+                 this.break_cover=this.cove_top.oth_dt[i].cover_page_url;
+                 this.break_top=this.cove_top.oth_dt[i].top_img_url;
+                 console.log(this.break_cover, this.break_top);
+                 
+                //  this.break_menu=this.cove_top.menu_dt[i].menu_url;
+              if(this.cove_top.oth_dt[i].active_flag=='Y'){
                   this.check_break=document.getElementById('bkmenu');
                   this.check_break.checked=true;
                   this.break_check='Y';
                   this.b_url=false;
-                }
-                else if(this.cove_top.msg[i].active_flag=='N'){
+               }
+               else {
                 this.check_break=document.getElementById('bkmenu');
                 this.check_break.checked=false;
                 this.break_check='N';
                 this.b_url=true
                }
-              }
-          }
+            }
+            
+
+        
         }
+      }
       })
+    
 
       this.lagunaserve.get_sec_url('1',this.resid).subscribe(data=>{
         console.log(data);
@@ -1877,28 +2021,71 @@ export class MenuSetupComponent implements OnInit {
       this.cove_top.length=0;
 
       this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
+        this.cove_top.length=0;
         console.log(data);
         this.cove_top=data;
-       
-
-       if(this.cove_top.msg.length!=0){
-
-      
-        for(let i=0;i<this.cove_top.msg.length;i++){
-             if(this.cove_top.msg[i].menu_id==2){
-                  
-            
-                 if(this.cove_top.msg[i].cover_page_url!=''){
-                   this.launch_cover=this.cove_top.msg[i].cover_page_url;
-                   this.launch_top=this.cove_top.msg[i].top_img_url;
-                 }
-                 else{
-                  this.launch_cover="";
-                  this.launch_top=""
-                 }
-              }
+        // if(this.cove_top.length!=0){
+  
+        
+        for(let i=0;i<this.cove_top.menu_dt.length;i++){
+          // console.log(this.cove_top.menu_dt[i].menu_id);
+          if(this.cove_top.menu_dt.length!=0){
+         
+              if(this.cove_top.menu_dt[i].menu_id==2){
+  
+                console.log("sadasda3");
+               
+                  // this.launch_cover=this.cove_top.msg[i].cover_page_url;
+                  // this.launch_top=this.cove_top.msg[i].top_img_url;
+                  this.launch_menu=this.cove_top.menu_dt[i].menu_url;
+                  // console.log(this.launch_top,this.launch_cover);
+  
+              
+                if(this.cove_top.menu_dt[i].active_flag=='Y'){
+                  this.check_launch=document.getElementById('paris');
+                  this.check_launch.checked=true;
+                  this.launch_check='Y'
+                  this.lcc_url=false;
+               }
+               else {
+                this.check_launch=document.getElementById('paris');
+                this.check_launch.checked=false;
+                this.launch_check='N';
+                this.lcc_url=true;
+  
+               }
+             }
+             
+  
           }
         }
+        for(let i=0;i<this.cove_top.oth_dt.length;i++){
+         if(this.cove_top.oth_dt.length!=0){
+           
+             if(this.cove_top.oth_dt[i].menu_id==2){
+  
+                console.log("sadasda3");
+               
+                  this.launch_cover=this.cove_top.oth_dt[i].cover_page_url;
+                  this.launch_top=this.cove_top.oth_dt[i].top_img_url;
+                if(this.cove_top.oth_dt[i].active_flag=='Y'){
+                  this.check_launch=document.getElementById('paris');
+                  this.check_launch.checked=true;
+                  this.launch_check='Y'
+                  this.lcc_url=false;
+               }
+               else {
+                this.check_launch=document.getElementById('paris');
+                this.check_launch.checked=false;
+                this.launch_check='N';
+                this.lcc_url=true;
+  
+               }
+            }
+          }  
+        
+        }
+      
       })
        
       this.lagunaserve.get_sec_url(v1,this.resid).subscribe(data=>{
@@ -2265,28 +2452,67 @@ export class MenuSetupComponent implements OnInit {
       this.arr_brak_check.length=0;
       this.brunch_start='';
         this.brunch_end='';
-      this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
-        console.log(data);
-        this.cove_top=data;
-        if(this.cove_top.msg.length!=0){
-        for(let i=0;i<this.cove_top.msg.length;i++){
-             if(this.cove_top.msg[i].menu_id==3){
-                  
+        this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
+          this.cove_top.length=0;
+          console.log(data);
+          this.cove_top=data;
+          // if(this.cove_top.length!=0){
+    
+          
+          for(let i=0;i<this.cove_top.menu_dt.length;i++){
+            // console.log(this.cove_top.menu_dt[i].menu_id);
+            if(this.cove_top.menu_dt.length!=0){
+              if(this.cove_top.menu_dt[i].menu_id==3){
+                console.log("sadasda2");
+                  // this.dinner_cover=this.cove_top.menu_dt[i].cover_page_url;
+                  // this.dinner_top=this.cove_top.menu_dt[i].top_img_url;
+                  this.dinner_menu=this.cove_top.menu_dt[i].menu_url;
+                if(this.cove_top.menu_dt[i].active_flag=='Y'){
+                  this.check_dinner=document.getElementById('tokyo');
+                  this.check_dinner.checked=true;
+                  this.brunch_check='Y';
+                  this.d_url=false;
+               }
+               else {
+                this.check_dinner=document.getElementById('tokyo');
+                this.check_dinner.checked=false;
+                this.brunch_check='N';
+                this.d_url=true;
+    
+               }
+               }
+              
+    
+            }
+           }
+           for(let i=0;i<this.cove_top.oth_dt.length;i++){
+            if(this.cove_top.oth_dt.length!=0){
+              if(this.cove_top.oth_dt[i].menu_id == 3){
+                console.log("sadasda2");
+                  this.dinner_cover=this.cove_top.oth_dt[i].cover_page_url;
+                  this.dinner_top=this.cove_top.oth_dt[i].top_img_url;
+                  // this.dinner_menu=this.cove_top.oth_dt[i].menu_url;
+                if(this.cove_top.oth_dt[i].active_flag=='Y'){
+                  this.check_dinner=document.getElementById('tokyo');
+                  this.check_dinner.checked=true;
+                  this.brunch_check='Y';
+                  this.d_url=false;
+               }
+               else {
+                this.check_dinner=document.getElementById('tokyo');
+                this.check_dinner.checked=false;
+                this.brunch_check='N';
+                this.d_url=true;
+    
+               }
+               }
+               
+    
             
-                 if(this.cove_top.msg.length!=0){
-                   this.dinner_cover=this.cove_top.msg[i].cover_page_url;
-                   this.dinner_top=this.cove_top.msg[i].top_img_url;
-                   this.dinner_menu=this.cove_top.msg[i].menu_url;
-                 }
-                 else{
-                  this.dinner_cover="";
-                  this.dinner_top="";
-                  this.dinner_menu="";
-                 }
-              }
-          }
-        }
-      })
+            }
+           }
+        
+        })
 
       this.lagunaserve.get_sec_url(v1,this.resid).subscribe(data=>{
         console.log(data);
@@ -2652,28 +2878,79 @@ export class MenuSetupComponent implements OnInit {
       this.break_sec.length=0;
       this.cove_top.length=0;
       this.arr_brak_check.length=0;
+
       this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
+        this.cove_top.length=0;
         console.log(data);
         this.cove_top=data;
-        if(this.cove_top.msg.length!=0){
-
-       
-        for(let i=0;i<this.cove_top.msg.length;i++){
-             if(this.cove_top.msg[i].menu_id==4){
-                  
-            
-                 if(this.cove_top.msg.length!=0){
-                   this.brunch_cover=this.cove_top.msg[i].cover_page_url;
-                   this.brunch_top=this.cove_top.msg[i].top_img_url;
-                 }
-                 else{
-                  this.brunch_cover="";
-                  this.brunch_top=""
-                 }
-              }
+        // if(this.cove_top.length!=0){
+  
+        
+        for(let i=0;i<this.cove_top.menu_dt.length;i++){
+          // console.log(this.cove_top.menu_dt[i].menu_id);
+          if(this.cove_top.menu_dt.length!=0){
+            if(this.cove_top.menu_dt[i].menu_id==4){
+  
+              console.log("sadasda4");
+              // if(this.cove_top.msg[i].cover_page_url!=''){
+                // this.brunch_cover=this.cove_top.menu_dt[i].cover_page_url;
+                // this.brunch_top=this.cove_top.menu_dt[i].top_img_url;
+                this.brunch_menu=this.cove_top.menu_dt[i].menu_url;
+  
+              // }
+              // else{
+              //  this.brunch_cover="";
+              //  this.brunch_top=""
+              // }
+              if(this.cove_top.menu_dt[i].active_flag=='Y'){
+                this.check_brunch=document.getElementById('laguna');
+                this.check_brunch.checked=true;
+                this.dinner_check='Y';
+                this.br_url=false;
+             }
+             else {
+              this.check_brunch=document.getElementById('laguna');
+              this.check_brunch.checked=false;
+              this.dinner_check='N';
+              this.br_url=true;
+  
+             }
+           }
+  
           }
         }
+        for(let i=0;i<this.cove_top.oth_dt.length;i++){
+         if(this.cove_top.oth_dt.length!=0){
+            if(this.cove_top.oth_dt[i].menu_id==4){
+  
+              console.log("sadasda4");
+         
+                this.brunch_cover=this.cove_top.oth_dt[i].cover_page_url;
+                this.brunch_top=this.cove_top.oth_dt[i].top_img_url;
+               
+              if(this.cove_top.oth_dt[i].active_flag=='Y'){
+                this.check_brunch=document.getElementById('laguna');
+                this.check_brunch.checked=true;
+                this.dinner_check='Y';
+                this.br_url=false;
+             }
+             else {
+              this.check_brunch=document.getElementById('laguna');
+              this.check_brunch.checked=false;
+              this.dinner_check='N';
+              this.br_url=true;
+  
+             }
+           }
+  
+          }
+          }
+            
+  
+        
+      
       })
+     
       this.lagunaserve.get_sec_url(v1,this.resid).subscribe(data=>{
         console.log(data);
         this.break_sec=data
@@ -2694,25 +2971,8 @@ export class MenuSetupComponent implements OnInit {
   
       })
       console.log(this.v);
-      // this.every=document.getElementById('vehicle1');
-      // this.every.checked=false;
-      // this.mon_check=document.getElementById('vehicle2');
-      // this.mon_check.checked=false;
-      // this.tue_check=document.getElementById('vehicle3');
-      // this.tue_check.checked=false;
-      // this.wed_check=document.getElementById('vehicle4');
-      // this.wed_check.checked=false;
-      // this.thu_check=document.getElementById('vehicle5');
-      // this.thu_check.checked=false;
-      // this.fri_check=document.getElementById('vehicle6');
-      // this.fri_check.checked=false;
-      // this.sat_check=document.getElementById('vehicle7');
-      // this.sat_check.checked=false;
-      // this.sun_check=document.getElementById('vehicle8');
-      // this.sun_check.checked=false;
-   
-
-    if(localStorage.getItem('No_of_menu')=='O'){
+     
+      if(localStorage.getItem('No_of_menu')=='O'){
           if((localStorage.getItem('No_of_menu')=='O')&&(this.v==1)){
             //Snackbar
            this. myFunction_forerror();
@@ -3154,7 +3414,7 @@ export class MenuSetupComponent implements OnInit {
       }
       
       console.log(this.multipleImages)
-      this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+      this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
         (res) => console.log(res),
         (err) => console.log(err)
       );
@@ -3207,7 +3467,7 @@ export class MenuSetupComponent implements OnInit {
         }
         
         console.log(this.multipleImages)
-        this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+        this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err)
         );
@@ -3277,7 +3537,7 @@ export class MenuSetupComponent implements OnInit {
         }
         
         console.log(this.multipleImages)
-        this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+        this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err)
         );
@@ -3341,7 +3601,7 @@ export class MenuSetupComponent implements OnInit {
         }
         
         console.log(this.multipleImages)
-        this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+        this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err)
         );
@@ -3410,7 +3670,7 @@ export class MenuSetupComponent implements OnInit {
         }
         
         console.log(this.multipleImages)
-        this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+        this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err)
         );
@@ -3509,7 +3769,7 @@ export class MenuSetupComponent implements OnInit {
         }
         console.log(this.branchsectionimage);
         console.log(this.branchmenuimage)
-        this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+        this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err)
         );
@@ -3576,7 +3836,7 @@ export class MenuSetupComponent implements OnInit {
         
         
         console.log(this.multipleImages)
-        this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+        this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err)
         );
@@ -3643,7 +3903,7 @@ export class MenuSetupComponent implements OnInit {
             }
            
            console.log(this.multipleImages)
-           this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+           this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
              (res) => console.log(res),
              (err) => console.log(err)
            );
@@ -3702,7 +3962,7 @@ export class MenuSetupComponent implements OnInit {
            }
            
            console.log(this.multipleImages)
-           this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+           this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
              (res) => console.log(res),
              (err) => console.log(err)
            );
@@ -3768,7 +4028,7 @@ export class MenuSetupComponent implements OnInit {
         }
        
        console.log(this.multipleImages)
-       this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+       this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
          (res) => console.log(res),
          (err) => console.log(err)
        );
@@ -3907,7 +4167,7 @@ export class MenuSetupComponent implements OnInit {
       }
       
       console.log(this.multipleImages)
-      this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+      this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
         (res) => console.log(res),
         (err) => console.log(err)
       );
@@ -3969,7 +4229,7 @@ export class MenuSetupComponent implements OnInit {
            }
            
            console.log(this.multipleImages)
-           this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+           this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
              (res) => console.log(res),
              (err) => console.log(err)
            );
@@ -4034,7 +4294,7 @@ export class MenuSetupComponent implements OnInit {
            }
            
            console.log(this.multipleImages)
-           this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+           this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
              (res) => console.log(res),
              (err) => console.log(err)
            );
@@ -4092,7 +4352,7 @@ export class MenuSetupComponent implements OnInit {
              }
              
              console.log(this.multipleImages)
-             this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+             this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
                (res) => console.log(res),
                (err) => console.log(err)
              );
@@ -4155,7 +4415,7 @@ export class MenuSetupComponent implements OnInit {
       }
       
       console.log(this.multipleImages)
-      this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+      this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
         (res) => console.log(res),
         (err) => console.log(err)
       );
@@ -4269,7 +4529,7 @@ else{
     }
     
     console.log(this.multipleImages)
-    this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+    this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
@@ -4330,7 +4590,7 @@ else{
     }
     
     console.log(this.multipleImages)
-    this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+    this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
@@ -4395,7 +4655,7 @@ else{
     }
     
     console.log(this.multipleImages)
-    this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+    this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
@@ -4453,7 +4713,7 @@ else{
     }
     
     console.log(this.multipleImages)
-    this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+    this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
@@ -4531,7 +4791,7 @@ else{
     }
     
     console.log(this.multipleImages)
-    this.http.post<any>('http://localhost:3000/testing', formData).subscribe(
+    this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );

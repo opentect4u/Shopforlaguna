@@ -226,12 +226,12 @@
         <td>3 <input type="hidden" name="" value="8" #wallmount1></td>
         <td>Wall Mount Sign Holder</td>
         <td>
-          <input type="radio" id="yes_wall" [checked]="true" name="specialMenuStd1"  (change)="check($event)" value="YES"> <label for="yes" class="m-1">Yes</label> 
-          <input type="radio" id="no_mount"  name="specialMenuStd1" (change)="check($event)"  value="NO"> <label for="No">No</label>
+          <input type="radio" id="yes_wall" [checked]="true" name="SpecialMenuStd1"  (change)="check($event)" value="YES"> <label for="yes" class="m-1">Yes</label> 
+          <input type="radio" id="no_mount"  name="SpecialMenuStd1" (change)="check($event)"  value="NO"> <label for="No">No</label>
         </td>
         <td>8.5" x 11"</td>
         <td>
-            <input class="w3-input w3-padding-16 w3-border" id="wall" [disabled]=wall2   type="text" placeholder="Price" required="" name="price" #text3 value="{{this.signholder_price3}}" (keypress)="preventNonNumericalInput($event)">
+            <input class="w3-input w3-padding-16 w3-border" id="wall" [disabled]="wall2"   type="text" placeholder="Price" required="" name="price" #text3 value="{{this.signholder_price3}}" (keypress)="preventNonNumericalInput($event)">
         </td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->

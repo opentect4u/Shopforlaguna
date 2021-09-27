@@ -290,7 +290,9 @@
                                             class="formCss"> -->
                                         </td>
 
-                                    <td><a><i class="fa fa-picture-o prvImg" aria-hidden="true"></i></a>
+                                    <td>
+                                        <a ><img src="{{logopath}}" height="20" width="20" alt="">
+                                        </a>
                                     </td>
                                     <td>
                                         <!-- <label class="uploadTxt">Upload Section images JPG or PNG:</label> -->
@@ -410,7 +412,7 @@
 
                 <div id="tab3" [hidden]="show_tab!='tab3'" class="tabcontent">
 
-                    <div class="radioBtnSec"><label class="radioButtonName"><input type="radio" id="bkmenu1"
+                    <!-- <div class="radioBtnSec"><label class="radioButtonName"><input type="radio" id="bkmenu1"
                                 name="bkmenu" value="Breakfast Menu" (click)="get_sec_img(1)" > Breakfast Menu</label>
                         <label class="radioButtonName"><input type="radio" (click)="get_sec_img(2)" id="bkmenu" name="bkmenu"
                                 value="Lunch  Menu" > Lunch Menu</label>
@@ -420,8 +422,19 @@
                             Brunch Menu</label>
                         <label class="radioButtonName"
                         ><input type="radio" (click)="get_sec_img(5)" id="bkmenu" name="bkmenu" value="bkMenu43">
-                            Specials Menu</label>
-                    </div>
+                            Special Menu</label>
+                    </div> -->
+                    <div class="row" >
+                        <div class="col-2" *ngFor="let mnc of menuchoiceData; let i=index;">
+                            <label class="radioButtonName">
+                                <input type="radio" id="bkmenu{{mnc.menu_id}}" [checked]="i==0" name="bkmenu" value="Breakfast Menu" (click)="get_sec_img(mnc.menu_id)" > {{mnc.menu_name}}
+                            </label>
+                        </div>
+                        
+                <!-- <label class="radioButtonName"><input type="radio" (click)="get_sec_img(2)" id="bkmenu" name="bkmenu"
+                        value="Lunch  Menu" > Lunch Menu</label> -->
+              
+            </div><br>
                     <div class="table-responsive table_responsiveCus">
                         <table class="table">
                             <thead>
@@ -464,12 +477,12 @@
                                         <label>Menu</label>
                                         <select id="pickup_place" #menu_select name="pickup_place" (change)="menu_set_date_time(menu_select.value)" class="formCss">
                                             <option value="" selected="selected">Select One</option>
-                                            <option value="6">ALL Menus</option>
-                                            <option value="1">Breakfast</option>
+                                            <option *ngFor="let mnc of menuchoiceData" value="{{mnc.menu_id}}">{{mnc.menu_name}}</option>
+                                            <!-- <option value="1">Breakfast</option>
                                             <option value="2">Lunch</option>
                                             <option value="3">Dinner</option>
                                             <option value="4">Brunch</option>
-                                            <option value="5">Specials</option>
+                                            <option value="5">Special</option> -->
                                         </select>
 
                                     </div>
@@ -534,16 +547,23 @@
                 <div id="tab4" [hidden]="show_tab!='tab4'" class="tabcontent">
 
 
-                    <div class="radioBtnSec"><label class="radioButtonName"><input type="radio" id="b1" 
-                                name="bkmenu" (click)="store_menu(1);" value="1"> Breakfast Menu</label>
-                        <label class="radioButtonName"><input type="radio" (click)="store_menu(2);" id="b2" name="bkmenu"
+                    <div class="row">
+                        <!-- <label class="radioButtonName">
+                        <input type="radio" id="b1" name="bkmenu" (click)="store_menu(1);" value="1"> Breakfast Menu
+                    </label> -->
+                    <div class="col-2" *ngFor="let mnc of menuchoiceData; let i=index;">
+                        <label class="radioButtonName">
+                            <input type="radio" id="b{{mnc.menu_id}}" name="bkmenu" value="{{mnc.menu_id}}" (click)="store_menu(mnc.menu_id);" > {{mnc.menu_name}}
+                        </label>
+                    </div>
+                        <!-- <label class="radioButtonName"><input type="radio" (click)="store_menu(2);" id="b2" name="bkmenu"
                                value="2"> Lunch Menu</label>
                         <label class="radioButtonName"><input  type="radio" (click)="store_menu(3);" id="b3" name="bkmenu" value="3">
                             Dinner Menu</label>
                         <label class="radioButtonName"><input  type="radio" (click)="store_menu(4);" id="b4" name="bkmenu" value="4">
                             Brunch Menu</label>
                         <label class="radioButtonName"><input  type="radio" (click)="store_menu(5);" id="b5" name="bkmenu" value="5">
-                            Specials Menu</label>
+                            Special Menu</label> -->
                     </div>
                     <div class="formTable">
 
@@ -642,12 +662,12 @@
                                         <label>Menu</label>
                                         <select id="pickup_place" name="pickup_place" class="formCss" #menu_for_item (change)="select_section_with_menu(menu_for_item.value)">
                                             <option value="" selected="selected"  >Select One</option>
-                                            <option [selected]="mid2=='6'" value="6">ALL Menus</option>
-                                            <option [selected]="mid2=='1'" value="1">Breakfast</option>
+                                            <option *ngFor="let mnc of menuchoiceData" [selected]="mid2==mnc.menu_id" value="{{mnc.menu_id}}">{{mnc.menu_name}}</option>
+                                            <!-- <option [selected]="mid2=='1'" value="1">Breakfast</option>
                                             <option [selected]="mid2=='2'" value="2">Lunch</option>
                                             <option [selected]="mid2=='3'" value="3">Dinner</option>
                                             <option [selected]="mid2=='4'" value="4">Brunch</option>
-                                            <option [selected]="mid2=='5'" value="5">Specials</option>
+                                            <option [selected]="mid2=='5'" value="5">Special</option> -->
                                         </select>
 
                                     </div>
@@ -756,12 +776,12 @@
                                     <label>Menu</label>
                                     <select id="pickup_place" #select_price_menu name="pickup_place" class="formCss" (change)="select_for_desc_menu(select_price_menu.value)">
                                         <option value="" selected="selected">Select One</option>
-                                        <option [selected]="mid1=='6'" value="6">ALL Menus</option>
-                                        <option [selected]="mid1=='1'" value="1">Breakfast</option>
+                                        <option *ngFor="let mnc of menuchoiceData" [selected]="mid1==mnc.menu_id" value="{{mnc.menu_id}}">{{mnc.menu_name}}</option>
+                                        <!-- <option [selected]="mid1=='1'" value="1">Breakfast</option>
                                         <option [selected]="mid1=='2'" value="2">Lunch</option>
                                         <option [selected]="mid1=='3'" value="3">Dinner</option>
                                         <option [selected]="mid1=='4'" value="4">Brunch</option>
-                                        <option [selected]="mid1=='5'" value="5">Specials</option>
+                                        <option [selected]="mid1=='5'" value="5">Special</option> -->
                                     </select>
 
                                 </div>
@@ -894,12 +914,12 @@
                           <select id="pickup_place"  name="pickup_place" id="menuselect" class="formCss" #Menu
                           (change)="pickup_place(Menu.value)">
                           <option value="">Select One</option>
-                          <option value="0" [selected]="sp_menuid=='0'">ALL Menus</option>
-                          <option value="1" [selected]="sp_menuid=='1'">Breakfast</option>
+                          <option *ngFor="let mnc of menuchoiceData" value="{{mnc.menu_id}}" [selected]="sp_menuid==mnc.menu_id">{{mnc.menu_name}}</option>
+                          <!-- <option value="1" [selected]="sp_menuid=='1'">Breakfast</option>
                           <option value="2" [selected]="sp_menuid=='2'">Lunch</option>
                           <option value="3" [selected]="sp_menuid=='3'">Dinner</option>
                           <option value="4" [selected]="sp_menuid=='4'">Brunch</option>
-                          <option value="5" [selected]="sp_menuid=='5'">Specials</option>
+                          <option value="5" [selected]="sp_menuid=='5'">Special</option> -->
                       </select>
                            
                           </div>
@@ -1032,20 +1052,28 @@
                     
                     <strong>You can check any amendments by using the menu button below to view that menu. Always refresh the page before checking and clearing your cache memory if you need to.</strong>	
                     <div style="overflow-x:auto;">
-                    <table width="100%" cellspacing="15">
-                    <tr>
-                    <th scope="col">Breakfast</th>
-                    <th scope="col">Lunch</th>
-                    <th scope="col">Dinner</th>
-                    <th scope="col">Brunch</th>
-                    <th scope="col">Special</th>
-                    </tr>
-                    <tr bgcolor="#fff" align="center">
-                    <td><button class="w3-button w3-green"
+                    <!-- <div class="row"> -->
+                <br>
                     
-                    (click)="open_popup_window(1)">
-                    View</button></td>
-                    <td><button  class="w3-button w3-green" (click)="open_popup_window(2)"
+                        <div class="row" >
+                            <div class="col-2" *ngFor="let mnc of menuchoiceData">{{mnc.menu_name}}</div><br>
+                            <!-- <th scope="col">Lunch</th>
+                            <th scope="col">Dinner</th>
+                            <th scope="col">Brunch</th>
+                            <th scope="col">Special</th> -->
+                            <!-- </tr>
+                            
+                            <tr  bgcolor="#fff" align="center" *ngFor="let mnc of menuchoiceData"> -->
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-2"  *ngFor="let mnc of menuchoiceData">
+                                <button class="w3-button w3-green" (click)="open_popup_window(mnc.menu_id)">View</button>               
+                            
+                        
+                            </div>
+                        </div>
+                    
+                    <!-- <td><button  class="w3-button w3-green" (click)="open_popup_window(2)"
                     >
                     View</button></td>
                     <td><button class="w3-button w3-green" (click)="open_popup_window(3)"
@@ -1054,9 +1082,12 @@
                     <td><button class="w3-button w3-green" (click)="open_popup_window(4)">
                     View</button></td>
                     <td><button class="w3-button w3-green" (click)="open_popup_window(5)">
-                    View</button></td>
-                    </tr><br>	
-                    </table> <br>
+                    View</button></td> -->
+                    
+                    
+                    <br>	
+                <!-- </div>  -->
+                <br>
                     
                     </div>
                     <button class="w3-button w3-green" type="submit" (click)="send_mail()">Send Mail </button>

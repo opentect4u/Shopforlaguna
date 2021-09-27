@@ -135,6 +135,15 @@ send_admin_mail(v:any){
    return this.http.get(url_set.api_url+'/approve_menu?id='+v);
  
  }
+
+ get_approval(v1:any,v2:any){
+  return this.http.get(url_set.api_url+'/update_approval?flag='+v1+'&res_id='+v2)
+}
+get_menu_on_choice(v:any){
+  return this.http.get(url_set.api_url+'/res_menu?id='+v)
+}
+
+
  
  
 }

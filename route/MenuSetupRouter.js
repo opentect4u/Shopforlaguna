@@ -1,5 +1,6 @@
 const express = require('express');
 const { BreakfastSave, MenuSave, LogoSave, AboutUsSave, NoticeSave, F_Select, MonthDateSave, SectionSave, ItemSave, ItemPriceSave, GenerateQr } = require('../modules/MenuSetupModule');
+const { TestRouter, UploadLogo } = require('./TestRoute');
 const MenuSetRouter = express.Router();
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -134,11 +135,18 @@ MenuSetRouter.post('/menu_setup', async (req, res) => {
     res.send(data);
 })
 
-MenuSetRouter.post('/logo', async (req, res) => {
-    console.log({ body: req.body });
-    var data = await LogoSave(req.body);
-    res.send(data);
-})
+// MenuSetRouter.post('/logo', async (req, res) => {
+//     console.log({ body: req.body });
+//     var data = await LogoSave(req.body);
+//     res.send(data);
+// })
+
+// MenuSetRouter.post('/logo', async (req, res) => {
+//     console.log({ body: req.body, fl: req.files });
+//     let res_name = req.body.restaurant_name.replace(' ', '_');
+//     var data = await UploadLogo(req.files.logo_img, res_name, req.body);
+//     res.send(data);
+// })
 
 MenuSetRouter.post('/aboutus', async (req, res) => {
     console.log({ body: req.body });
@@ -152,14 +160,31 @@ MenuSetRouter.post('/notice', async (req, res) => {
     res.send(data);
 })
 
+// MenuSetRouter.get('/menu_setup', async (req, res) => {
+//     let id = req.query.id;
+//     let sql = `SELECT b.logo_url, a.menu_id, a.cover_page_url, a.top_img_url, a.active_flag, c.menu_url
+//         FROM td_other_image a
+//         left JOIN td_logo b ON a.restaurant_id = b.restaurant_id
+//         left JOIN td_menu_image c ON a.restaurant_id = c.restaurant_id
+//         WHERE a.restaurant_id = "${id}"`;
+//     var data = await F_Select(sql);
+//     res.send(data);
+// })
+
 MenuSetRouter.get('/menu_setup', async (req, res) => {
     let id = req.query.id;
-    let sql = `SELECT b.logo_url, a.menu_id, a.cover_page_url, a.top_img_url, a.active_flag, c.menu_url
-        FROM td_other_image a
-        left JOIN td_logo b ON a.restaurant_id = b.restaurant_id
-        left JOIN td_menu_image c ON a.restaurant_id = c.restaurant_id
-        WHERE a.restaurant_id = "${id}"`;
-    var data = await F_Select(sql);
+    // let sql = `SELECT b.logo_url, a.menu_id, a.cover_page_url, a.top_img_url, a.active_flag, c.menu_url
+    //     FROM td_other_image a
+    //     left JOIN td_logo b ON a.restaurant_id = b.restaurant_id
+    //     left JOIN td_menu_image c ON a.restaurant_id = c.restaurant_id
+    //     WHERE a.restaurant_id = "${id}"`;
+    let oth_sql = `SELECT menu_id, active_flag, cover_page_img, cover_page_url, top_image_img, top_img_url FROM td_other_image WHERE restaurant_id = "${id}"`;
+    var oth_dt = await F_Select(oth_sql),
+        logo_sql = `SELECT logo_url, logo_path FROM td_logo WHERE restaurant_id = "${id}"`,
+        logo_dt = await F_Select(logo_sql),
+        menu_sql = `SELECT menu_id, active_flag, menu_url, menu_img FROM td_menu_image WHERE restaurant_id = "${id}"`,
+        menu_dt = await F_Select(menu_sql)
+    var data = { suc: 1, oth_dt: oth_dt.msg, logo_dt: logo_dt.msg, menu_dt: menu_dt.msg };
     res.send(data);
 })
 

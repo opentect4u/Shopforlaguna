@@ -69,14 +69,16 @@ export class DataserviceService {
     return this.http.post(url_set.api_url+'/upload',dt);
   }
 
-  logosubmit(dt:any,dt1:any,dt2:any){
-    var data = {logo: dt, restaurant_id: dt2};
+  logosubmit(dt:any,dt1:any,dt2:any,dt3:any){
+    // var data = {logo: dt, restaurant_id: dt2, };
     const formdata=new FormData();
     formdata.append('logo',dt);
-    formdata.append('File',dt1);
+    formdata.append('logo_img',dt1);
     formdata.append('restaurant_id',dt2);
+    formdata.append('restaurant_name',dt3);
+
     console.log(formdata.getAll)
-    return this.http.post(url_set.api_url+'/logo',data);
+    return this.http.post(url_set.api_url+'/logo',formdata);
   }
   Aboutus(dt:any,dt1:any){
     var data = {aboutus: dt, restaurant_id: dt1};

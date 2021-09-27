@@ -7,6 +7,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { url_set } from 'src/app/globalvar';
+
 // import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 // import { url } from 'inspector';
 @Component({
@@ -140,16 +141,18 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  veh3:any;
  veh4:any;
  veh5:any;
+ logopath:any;
  veh6:any;
  veh7:any;
  veh8:any;
  show_button3=false;
- url1="http://localhost:4200/menu/";
+ url1="https://shoplocal-lagunabeach.com/menu/";
  sendpathdata="assets/the_cliff_logo.png";
  getimagepath=url_set.api_url+'/';
  imgcheck:any;
  idfordesc:any;
  mail_data:any;
+ menuchoiceData:any;
   ngOnInit(): void {
     // this.daycheck=document.getElementById('1');
     //   this.daycheck.checked=true;
@@ -159,6 +162,15 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.fetchdata();
     this.fetchdata1();
     this.fetchdata2();
+    this.admin_data.get_menu_on_choice(this.r_id).subscribe(data=>{console.log(data)
+
+    this.menuchoiceData=data;
+    this.menuchoiceData=this.menuchoiceData.msg;
+    // console.log('bkmenu'+this.menuchoiceData[0].menu_id)
+    // this.bkmenuid=document.getElementById('bkmenu'+this.menuchoiceData[0].menu_id);
+    // console.log(this.bkmenuid)
+   // this.bkmenuid.checked=true;
+    })
     this.admin_data.get_menu_url(this.r_id).subscribe(data=>{console.log(data)
       this.menu_url_data=data;
       this.menu_url_data=this.menu_url_data.msg;
@@ -199,8 +211,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
       this.about_text_readonly=this.aboutusData.msg[0].about_us;
     })
     
-    this.bkmenuid=document.getElementById('bkmenu1');
-    this.bkmenuid.checked=true;
+  
     this.admin_data.get_sec_url(1,this.r_id).subscribe(data=>{console.log(data)
       this.secData=data;
       this.secData=this.secData.msg;
@@ -210,8 +221,11 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.tab_el.style.color="white";
    this.admin_data.get_menu_urls(this.r_id).subscribe((data)=>{console.log(data)
    this.menuData=data;
-   this.logo_img=this.menuData.msg[0].logo_url;
-  this.menuData=this.menuData.msg;
+   this.logo_img=this.menuData.logo_dt[0].logo_url;
+   this.logopath=this.menuData.logo_dt[0].logo_path;
+   this.logopath=url_set.api_url+'/'+this.logopath;
+   console.log(this.logopath)
+  this.menuData=this.menuData.oth_dt;
   })
   }
   open_popup_window(i_menu:any){
@@ -220,7 +234,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
       this.datetimeData=data;
       this.starttime=this.datetimeData.msg[0].start_time;
       this.endtime=this.datetimeData.msg[0].end_time;
-    window.open('http://localhost:4200/menu/'+this.rest_nm+'/'+btoa(this.r_id+'/'+this.starttime+'/'+this.endtime),'popup','width=400,height=500')
+    window.open('https://shoplocal-lagunabeach.com/menu/'+this.rest_nm+'/'+btoa(this.r_id+'/'+this.starttime+'/'+this.endtime),'popup','width=400,height=500')
 
     })
     // this.admin_data.get_menu_by_time()
@@ -337,7 +351,7 @@ else{
   update_section(v:any){
     this.sec_value=v;
     this.createsecval=''
-    for(let i=1;i<=5;i++)
+    for(let i=1;i<=this.menuchoiceData.length;i++)
     {
       this.q=document.getElementById('b'+i);
       if(this.q.checked==true)
@@ -652,7 +666,20 @@ submitup(mon:any,tue:any,wed:any,thur:any,fri:any,sat:any,sun:any,st:any,end:any
   this.admin_data.post_date_time(this.storevalue).subscribe(data=>{console.log(data)
   this.setTimedata=data;
   console.log(this.setTimedata)
-  })}
+  if(this.setTimedata.suc==1){
+    this.m="Updation Successful";
+    this.myFunction();
+    // this.fetchdata2()
+  }
+  else{
+    this.m="Failed to update"
+    this.myFunction();
+  }
+  },error=>{
+    this.m="Failed to update"
+    this.myFunction();
+  })
+}
   else{
     this.m="Sorry! You can't keep an empty field"
     this.myFunction()

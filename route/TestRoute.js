@@ -1,7 +1,7 @@
 const express = require('express')
 const upload = require('express-fileupload')
 const fs = require('fs');
-const { MenuImageSave, SectionImageSave, OtherImageSave, MonthDateSave } = require('../modules/MenuSetupModule');
+const { MenuImageSave, SectionImageSave, OtherImageSave, MonthDateSave, LogoSave } = require('../modules/MenuSetupModule');
 const TestRouter = express.Router();
 // const db = require('./db')
 
@@ -205,4 +205,45 @@ const UploadMenu = async (menu_img, menu_name, res_name, data) => {
     }
 }
 
-module.exports = { TestRouter };
+TestRouter.post('/logo', async (req, res) => {
+    console.log({ body: req.body, fl: req.files, req });
+    let res_name = req.body.restaurant_name.replace(' ', '_');
+    var data = await UploadLogo(req.files.logo_img, res_name, req.body);
+    res.send(data);
+})
+
+const UploadLogo = async (logo_img, res_name, data) => {
+    var dt = '';
+    if (logo_img) {
+        var file = logo_img;
+        var filename = file.name,
+            file_ext = filename.split('.')[1],
+            file_name = "logo." + file_ext,
+            file_path = "uploads/" + res_name + "/" + file_name;
+        var ResIdPath = "public/uploads/" + res_name + "/";
+        // var UploadsPath = ResIdPath + "/" + menu_name + "/";
+        // var cov_file_name = "cover." + file_ext;
+        // var cov_file_path = "uploads/" + res_name + "/" + menu_name + "/" + cov_file_name;
+
+        if (!fs.existsSync(ResIdPath)) {
+            fs.mkdirSync(ResIdPath);
+        }
+        // console.log(filename);
+
+        file.mv(ResIdPath + file_name, async (err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Logo Uploaded ' + file_path);
+            }
+        })
+
+        return new Promise(async (resolve, reject) => {
+            dt = await LogoSave(data, file_path)
+            resolve(dt);
+        })
+
+    }
+}
+
+module.exports = { TestRouter, UploadLogo };

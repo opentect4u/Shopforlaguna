@@ -30,12 +30,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./restaurent.component.css']
 })
 export class RestaurentComponent implements OnInit ,AfterViewInit{
-  displayedColumns: string[] = ['id', 'restaurant_name', 'phone_no', 'contact_name','setup','edit'];
+  displayedColumns: string[] = ['id', 'restaurant_name', 'phone_no', 'contact_name','setup','edit','manage'];
   // dataSource = ELEMENT_DATA;
   userData:any;
+  modeData:any;
   divid:any;
+  flag:any;
   show_edit=false;
   setupmode:any;
+  x:any;
+  m='';
   dataSource= new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -48,6 +52,11 @@ export class RestaurentComponent implements OnInit ,AfterViewInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+  myFunction() {
+    this.x = document.getElementById("snackbar");
+    this.x.className = "show";
+    setTimeout(()=>{ this.x.className = this.x.className.replace("show", ""); }, 3000);
+  }
   go_details(v:any){
     // alert(v);
     this.router.navigate(['/admin/restaurant_setup',btoa(v)])
@@ -56,6 +65,7 @@ export class RestaurentComponent implements OnInit ,AfterViewInit{
     //Call APi
     this.admin_data.get_admin_dashboard().subscribe(data=>{console.log(data)
     this.userData=data
+    
      this.putdata(this.userData.msg)
     })
   }
@@ -63,7 +73,14 @@ export class RestaurentComponent implements OnInit ,AfterViewInit{
     this.dataSource= new MatTableDataSource(v);
     this.dataSource.paginator=this.paginator;
     this.dataSource.sort=this.sort;
-
+    for(let i=0;i<v.length;i++){
+      console.log('setup'+(i+1));
+      // this.divid=document.getElementById('setup'+(i+1));
+      // console.log(this.divid)
+      // this.divid.style.display='none'
+  
+    }
+    
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -73,17 +90,39 @@ export class RestaurentComponent implements OnInit ,AfterViewInit{
       this.dataSource.paginator.firstPage();
     }
   }
-click_setup(v:any){
-  console.log(v)
-  this.setupmode=document.getElementById('setupmodeid');
-  console.log("checked:"+v.target.checked+" value:"+v.target.value);
-  if(this.setupmode.value)
+click_setup(v:any,id:any){
+  console.log(id)
+  this.setupmode=document.getElementById('setupmodeid'+id);
+  console.log("checked:"+v.checked);
+  this.divid=document.getElementById('setup'+id);
+  if(v.checked)
+  {this.flag='S'
+  this.m='Setup Mode: On'}
+  else
   {
-    console.log("True")
+  this.flag='U'
+  this.m='Setup Mode: Off'}
+  this.admin_data.get_approval(this.flag,id).subscribe(data=>{console.log(data)
+  this.modeData=data;
+  if(this.modeData.suc==1){
+   
+    this.fetchdata();
+    this.myFunction()
   }
   else{
-    console.log("False")
+    this.m="Error! Cannot change support mode. Please try again later!"
+    
+    this.fetchdata()
+    this.myFunction()
+
   }
+  
+  },error=>{
+    this.m="Error! Cannot change support mode. Please try again later!"
+    this.fetchdata()
+    this.myFunction()
+
+  })
    
 }
 

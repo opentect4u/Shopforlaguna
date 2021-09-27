@@ -185,10 +185,13 @@ export class AdminOrderPageComponent implements OnInit {
                  if(this.signholder.msg[i].free_flag=='Y'){
                        this.tabletopyes=document.getElementById('yes_signholder1');
                        this.tabletopyes.checked=true;
+                        this.Tabletop=true;
                  }
                  else{
                   this.tabletopyes=document.getElementById('no_signholder1');
                   this.tabletopyes.checked=true;
+                  this.Tabletop=false;
+
                  }
                 
               }
@@ -198,25 +201,30 @@ export class AdminOrderPageComponent implements OnInit {
                    if(this.signholder.msg[i].free_flag=='Y'){
                     this.wallmountsignholder1=document.getElementById('yes_signholder2');
                     this.wallmountsignholder1.checked=true;
+                    this.signholder2=true;
               
 
                    } 
                    else{
                     this.wallmountsignholder1=document.getElementById('no_signholder2');
                     this.wallmountsignholder1.checked=true;
+                    this.signholder2=false;
+
 
                    }
               }
               else if(this.signholder.msg[i].id == 8){
-                console.log(this.signholder.msg[i].id,i)
+                // console.log(this.signholder.msg[i].id,i)
                 this.signholder_price3=this.signholder.msg[i].price;
                 if(this.signholder.msg[i].free_flag == 'Y'){
                  this.wallmountsignholder2=document.getElementById('yes_wall');
-                 console.log(this.wallmountsignholder2)
+                this.wall2=true;
                   this.wallmountsignholder2.checked=true;
                   console.log(this.wallmountsignholder2.checked);
                 } 
                  else{
+                this.wall2=false;
+
                    this.wallmountsignholder2=document.getElementById('no_mount');
                   this.wallmountsignholder2.checked=true;
                   console.log(this.wallmountsignholder.checked);
@@ -237,11 +245,12 @@ export class AdminOrderPageComponent implements OnInit {
           this.windowcling_price=this.window.msg[i].price;
           if(this.window.msg[i].free_flag=='Y'){
             this.windowcling_yes=document.getElementById("yes_last");
-         
+             this.window_no=true;
             this.windowcling_yes.checked=true;
           }
           else{
             this.windowcling_yes=document.getElementById("no_end");
+            this.window_no=false;
            
             this.windowcling_yes.checked=true;
           }
@@ -530,7 +539,7 @@ export class AdminOrderPageComponent implements OnInit {
     var dt={
       "per_Holder_Price":v1,
        "serial_no":v2,
-      //  "free": this.TopTable
+       "free_flag": this.TopTable
     }
     console.log(v1,v2);
     console.log(dt);
@@ -546,7 +555,7 @@ export class AdminOrderPageComponent implements OnInit {
     var dt={
       "per_Holder_Price":v2,
        "serial_no":v1,
-      //  "free":this.Sign1
+       "free_flag":this.Sign1
     }
     console.log(v1,v2);
     console.log(dt);
@@ -562,7 +571,7 @@ export class AdminOrderPageComponent implements OnInit {
     var dt={
       "per_Holder_Price":v2,
        "serial_no":v1,
-      //  "free":this.Sign2
+       "free_flag":this.Sign2
     }
     console.log(v1,v2);
     console.log(dt);
@@ -578,7 +587,7 @@ export class AdminOrderPageComponent implements OnInit {
     var dt={
       "per_Holder_Price":v2,
        "serial_no":v1,
-      //  "free":this.Window
+       "free_flag":this.Window
     }
    console.log(v1,v2);
    console.log(dt);
