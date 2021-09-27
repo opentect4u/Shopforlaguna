@@ -62,7 +62,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
   dinner:boolean=true;
   allmenus:boolean=true
   showinitialvalue:any=[]
-
+  notice_select:any=[];
 
   constructor(private router:Router,private about:DataserviceService,private lagunaserve:LagunaserviceService) { }
   ngAfterViewInit(): void {
@@ -75,7 +75,23 @@ export class MenudataComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
    
-       
+    this.lagunaserve.get_menu_on_choice(this.res_id).subscribe(data=>{
+      console.log(data);
+      this.notice_select=data;
+      this.notice_select=this.notice_select.msg;
+      // for
+        
+      // this.menu_id=this.notic.msg[i].menu_id;
+    
+      // this.notice_select=this.notice_select.msg;
+      // if(this.menu_id!=''){
+      //   this.value_menu=false;
+      // }
+      // else{
+      //    this.value_menu=true;
+      //  }
+      
+   })    
     
    this.lagunaserve.get_special(this.res_id).subscribe(data=>{
      console.log(data);
@@ -92,13 +108,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
         this.color_font=true;
 
        }
-       this.menu_id=this.notic.msg[i].menu_id;
-       if(this.menu_id!=''){
-         this.value_menu=false;
-       }
-       else{
-          this.value_menu=true;
-        }
+      
        this.position_id=this.notic.msg[i].position_id;
        if(this.position_id!=''){
          this.value_position=false;
@@ -273,6 +283,7 @@ nexttab1(e:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
 }
 pickup_place(event:any){
  this.menu=event;
+ console.log(this.menu)
  if(this.menu!=''){
    this.value_menu=false;
  }

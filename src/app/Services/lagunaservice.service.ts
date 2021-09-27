@@ -143,6 +143,9 @@ get_menu_on_choice(v:any){
   return this.http.get(url_set.api_url+'/res_menu?id='+v)
 }
 
+// postimage(){
+//   return this.http.post(url_set.api_url+'/testing',formdata)
+// }
 
  
  

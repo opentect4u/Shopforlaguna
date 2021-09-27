@@ -103,13 +103,15 @@
                                         <label>Menu</label>
                                         <select id="pickup_place" [disabled]="color_font" name="pickup_place" id="menuselect" class="formCss" #Menu
                                             (change)="pickup_place(Menu.value)">
+                                            <!--
+                                            <option value="0" [hidden]="allmenus" [selected]="this.notice_select=='0'">ALL Menus</option>
+                                            <option value="1"  [hidden]="breakfast" [selected]="this.notice_select=='1'">Breakfast</option>
+                                            <option value="2" [hidden]="launch" [selected]="this.notice_select=='2'">Lunch</option>
+                                            <option value="3" [hidden]="dinner" [selected]="this.notice_select=='3'">Dinner</option>
+                                            <option value="4" [hidden]="brunch" [selected]="this.notice_select=='4'">Brunch</option>
+                                            <option value="5" [selected]="this.menu_id=='5'">Specials</option> -->
                                             <option value="" selected="selected">Select One</option>
-                                            <option value="0" [hidden]="allmenus" [selected]="this.menu_id=='0'">ALL Menus</option>
-                                            <option value="1"  [hidden]="breakfast" [selected]="this.menu_id=='1'">Breakfast</option>
-                                            <option value="2" [hidden]="launch" [selected]="this.menu_id=='2'">Lunch</option>
-                                            <option value="3" [hidden]="dinner" [selected]="this.menu_id=='3'">Dinner</option>
-                                            <option value="4" [hidden]="brunch" [selected]="this.menu_id=='4'">Brunch</option>
-                                            <option value="5" [selected]="this.menu_id=='5'">Specials</option>
+                                            <option *ngFor="let n of notice_select" value="{{n.menu_id}}">{{n.menu_name}}</option>
                                         </select>
 
                                     </div>
@@ -190,7 +192,7 @@
 
 
                         <form >
-                            <button class="w3-button w3-green" [disabled]="value_menu || value_position || value_Headertitle ||value_font||value_background  || value_text"
+                            <button class="w3-button w3-green" [disabled]="value_position || value_Headertitle ||value_font||value_background  || value_text"
                                 (click)="nexttab1('about',title.value,code1.value,code2.value,code3.value,code4.value,notice.value)">Save & Continue </button>
                         </form>
 

@@ -22,6 +22,8 @@ comma:any;
   x:any;
   confirm_modal:any;
   ngOnInit(): void {
+    console.log("Login ROUTING");
+
     this.confirm_modal=document.getElementById('change_pass_modal');
     this.confirm_modal.style.display='none'
   }

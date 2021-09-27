@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { url_set } from 'src/app/globalvar';
 
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 import { DataserviceService } from '../../service/dataservice.service';
@@ -56,7 +57,7 @@ export class MenuSetupComponent implements OnInit {
    dinner_top:any;
    brunch_top:any;
 
-
+   url_reg = url_set.api_url;
 
    break_sec:any=[];
    cove_top:any=[];
@@ -3414,7 +3415,7 @@ export class MenuSetupComponent implements OnInit {
       }
       
       console.log(this.multipleImages)
-      this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+      this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
         (res) => console.log(res),
         (err) => console.log(err)
       );
@@ -3467,7 +3468,7 @@ export class MenuSetupComponent implements OnInit {
         }
         
         console.log(this.multipleImages)
-        this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err)
         );
@@ -3537,7 +3538,7 @@ export class MenuSetupComponent implements OnInit {
         }
         
         console.log(this.multipleImages)
-        this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err)
         );
@@ -3601,7 +3602,7 @@ export class MenuSetupComponent implements OnInit {
         }
         
         console.log(this.multipleImages)
-        this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err)
         );
@@ -3670,7 +3671,7 @@ export class MenuSetupComponent implements OnInit {
         }
         
         console.log(this.multipleImages)
-        this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err)
         );
@@ -3769,7 +3770,7 @@ export class MenuSetupComponent implements OnInit {
         }
         console.log(this.branchsectionimage);
         console.log(this.branchmenuimage)
-        this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err)
         );
@@ -3836,7 +3837,7 @@ export class MenuSetupComponent implements OnInit {
         
         
         console.log(this.multipleImages)
-        this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err)
         );
@@ -3903,7 +3904,7 @@ export class MenuSetupComponent implements OnInit {
             }
            
            console.log(this.multipleImages)
-           this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
              (res) => console.log(res),
              (err) => console.log(err)
            );
@@ -3962,7 +3963,7 @@ export class MenuSetupComponent implements OnInit {
            }
            
            console.log(this.multipleImages)
-           this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
              (res) => console.log(res),
              (err) => console.log(err)
            );
@@ -4028,7 +4029,7 @@ export class MenuSetupComponent implements OnInit {
         }
        
        console.log(this.multipleImages)
-       this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
          (res) => console.log(res),
          (err) => console.log(err)
        );
@@ -4167,7 +4168,7 @@ export class MenuSetupComponent implements OnInit {
       }
       
       console.log(this.multipleImages)
-      this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+      this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
         (res) => console.log(res),
         (err) => console.log(err)
       );
@@ -4229,7 +4230,7 @@ export class MenuSetupComponent implements OnInit {
            }
            
            console.log(this.multipleImages)
-           this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
              (res) => console.log(res),
              (err) => console.log(err)
            );
@@ -4294,7 +4295,7 @@ export class MenuSetupComponent implements OnInit {
            }
            
            console.log(this.multipleImages)
-           this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
              (res) => console.log(res),
              (err) => console.log(err)
            );
@@ -4352,7 +4353,7 @@ export class MenuSetupComponent implements OnInit {
              }
              
              console.log(this.multipleImages)
-             this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+             this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
                (res) => console.log(res),
                (err) => console.log(err)
              );
@@ -4415,7 +4416,7 @@ export class MenuSetupComponent implements OnInit {
       }
       
       console.log(this.multipleImages)
-      this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+      this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
         (res) => console.log(res),
         (err) => console.log(err)
       );
@@ -4529,7 +4530,8 @@ else{
     }
     
     console.log(this.multipleImages)
-    this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+
+    this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
@@ -4590,7 +4592,7 @@ else{
     }
     
     console.log(this.multipleImages)
-    this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+    this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
@@ -4655,7 +4657,7 @@ else{
     }
     
     console.log(this.multipleImages)
-    this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+    this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
@@ -4713,7 +4715,7 @@ else{
     }
     
     console.log(this.multipleImages)
-    this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+    this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
@@ -4791,7 +4793,7 @@ else{
     }
     
     console.log(this.multipleImages)
-    this.http.post<any>('https://shoplocal-lagunabeach.com/testing', formData).subscribe(
+    this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
