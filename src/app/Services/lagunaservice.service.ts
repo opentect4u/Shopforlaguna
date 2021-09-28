@@ -12,7 +12,7 @@ export class LagunaserviceService {
   Url=global_url_test.URL+'package';
   _Url=global_url_test.URL+'promo';
   __url=global_url_test.URL+'holder_cling';
-  holder_Url=global_url_test.URL+'holder_cling';
+  holder_Url=global_url_test.URL+'/holder_cling';
   constructor(private http:HttpClient,private router:Router){ }
   postpackagedata(v:any){//For Package Api In Admin order setup Page 
     console.log(v);

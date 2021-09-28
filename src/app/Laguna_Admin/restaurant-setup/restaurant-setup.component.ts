@@ -146,7 +146,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  veh7:any;
  veh8:any;
  show_button3=false;
- url1="https://shoplocal-lagunabeach.com/menu/";
+ url1=url_set.Redirect_url;
  sendpathdata="assets/the_cliff_logo.png";
  getimagepath=url_set.api_url+'/';
  imgcheck:any;
@@ -234,7 +234,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
       this.datetimeData=data;
       this.starttime=this.datetimeData.msg[0].start_time;
       this.endtime=this.datetimeData.msg[0].end_time;
-    window.open('https://shoplocal-lagunabeach.com/menu/'+this.rest_nm+'/'+btoa(this.r_id+'/'+this.starttime+'/'+this.endtime),'popup','width=400,height=500')
+    window.open(this.url1+this.rest_nm+'/'+btoa(this.r_id+'/'+this.starttime+'/'+this.endtime),'popup','width=400,height=500')
 
     })
     // this.admin_data.get_menu_by_time()

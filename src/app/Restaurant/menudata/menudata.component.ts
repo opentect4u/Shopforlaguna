@@ -63,7 +63,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
   allmenus:boolean=true
   showinitialvalue:any=[]
   notice_select:any=[];
-
+  notify:any;
   constructor(private router:Router,private about:DataserviceService,private lagunaserve:LagunaserviceService) { }
   ngAfterViewInit(): void {
     if('notice' in localStorage){
@@ -78,26 +78,31 @@ export class MenudataComponent implements OnInit, AfterViewInit{
     this.lagunaserve.get_menu_on_choice(this.res_id).subscribe(data=>{
       console.log(data);
       this.notice_select=data;
+    
       this.notice_select=this.notice_select.msg;
       })    
     
    this.lagunaserve.get_special(this.res_id).subscribe(data=>{
      console.log(data);
      this.notic=data;
+     this.notify=this.notic.msg[0].menu_id;
      for(let i=0;i<this.notic.msg.length;i++){
        if(this.notic.msg[i].notice_flag=='Y'){
          this.notice_check=document.getElementById('noticechecked');
          this.notice_check.checked=true;
          this.color_font=false;
+         this.notice_flag='Y';
        }
        else {
         this.notice_check=document.getElementById('noticechecked');
         this.notice_check.checked=false;
         this.color_font=true;
+        this.notice_flag='N';
 
        }
       
        this.position_id=this.notic.msg[i].position_id;
+       this.position=this.position_id;
        if(this.position_id!=''){
          this.value_position=false;
        }
@@ -180,6 +185,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
     this.lagunaserve.get_menu_urls(this.res_id).subscribe(data=>{
       console.log(data);
       this.showinitialvalue=data;
+      console.log(this.showinitialvalue.msg);
       if(this.showinitialvalue.msg.length!=0){
             for(let i=0;i<this.showinitialvalue.msg.length;i++){
               if(this.showinitialvalue.msg[i].menu_id==1){

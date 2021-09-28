@@ -111,7 +111,7 @@
                                             <option value="4" [hidden]="brunch" [selected]="this.notice_select=='4'">Brunch</option>
                                             <option value="5" [selected]="this.menu_id=='5'">Specials</option> -->
                                             <option value="" selected="selected">Select One</option>
-                                            <option *ngFor="let n of notice_select" value="{{n.menu_id}}">{{n.menu_name}}</option>
+                                            <option *ngFor="let n of notice_select" [selected]="notify" value="{{n.menu_id}}">{{n.menu_name}}</option>
                                         </select>
 
                                     </div>
