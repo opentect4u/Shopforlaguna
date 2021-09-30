@@ -1,174 +1,260 @@
-<div class="bgimgBreakFast">
-	
+<!-- <div class="bgimgBreakFast" [ngStyle]="{'background-image': 'url(' + cov + ')'}"> -->
+<div class="bgimgBreakFast" [style]="{'background-image': 'url(' + cov + ')'}">
 
-    <div class="topNav">
-        <ul>
-        <li><a style="cursor: pointer;" (click)="open_modal()" data-toggle="modal" data-target="#myModal">Menu</a></li>
-        <li><a >Birthday/Anniversary</a></li>
-        </ul>
-    </div>
-    <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
-    
-      <!-- Modal -->
-      <div class="modal fade modalCustom" id="MyModal" role="dialog">
-        <div class="modal-dialog modalDialogCustom">
+  
+   <!-- <div class="bgimgBreakFast"> -->
+
+
+  <div class="topNav">
+    <ul>
+      <li *ngIf="emptymenu==false">
         
-                   <div class="modal-content">
-           
-              <button type="button" class="close closeCustom" data-dismiss="modal">&times;</button>
-             
-            
-            <div class="modal-body">
+
+          <a style="cursor: pointer;" (click)="open_modal()" >Menu</a>
+
+      
+      </li>
+      <li *ngIf="emptymenu==true">
+
+         
+          <a style="cursor: pointer;" (click)="open_modal1()">Menu</a>
+      
+      
+      </li>
+      <li><a>Birthday/Anniversary</a></li>
+    </ul>
+  </div>
+  <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+
+  <!-- Modal -->
+  <div class="modal fade modalCustom" id="MyModal" role="dialog">
+    <div class="modal-dialog modalDialogCustom">
+
+      <div class="modal-content">
+
+        <button type="button" class="close closeCustom" data-dismiss="modal">&times;</button>
+
+
+        <div class="modal-body">
+          <div>
             <div class="menuSecGroup">
-            <div class="menuSecGroupImg"><img src="../../../assets/dynemicmenu/images/breakfast_2.jpg" alt=""></div>
-            <div class="menuSecGroupTitle"><h5>House Specialities</h5></div>
-            <div class="menuSecGroupList">
+              <div class="menuSecGroupImg"><img src="../../../assets/dynemicmenu/images/breakfast_2.jpg" alt=""></div>
+              <div class="menuSecGroupTitle">
+                <h5></h5>
+              </div>
+              <div class="menuSecGroupList">
                 <div class="menuSecGroupListGroup">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
-                  
-                  <tr>
-                    <td class="menuName">BREAKFAST BURRITO</td>
-                    <td class="menuPrice">$12</td>
-                  </tr>
-                  
-                </table>
-    <p class="descroption">Choice of bacon or chorizo with scrambled eggs, potatoes & cheese, wrapped in a flour tortilla Served with breakfast potatoes or fresh fruit</p>
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
+
+                    <tr >
+                      <td class="menuName"></td>
+                      <td class="menuPrice">$12</td>
+                    </tr>
+
+                  </table>
+                  <p class="descroption">Choice of bacon or chorizo with scrambled eggs, potatoes & cheese, wrapped in a
+                    flour tortilla Served with breakfast potatoes or fresh fruit</p>
                 </div>
-                
+
                 <div class="menuSecGroupListGroup">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
-                  
-                  <tr>
-                    <td class="menuName">LOX BAGEL</td>
-                    <td class="menuPrice">$12</td>
-                  </tr>
-                  
-                </table>
-    <p class="descroption">Cold smoked salmon, tomato, cucumber, avocado, capers, red onion & cream cheese</p>            </div>
-                
-                <div class="menuSecGroupListGroup">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
-                  
-                  <tr>
-                    <td class="menuName">STEEL CUT OATS BREAKFAST</td>
-                    <td class="menuPrice">$12</td>
-                  </tr>
-                  
-                </table>
-    <p class="descroption">Warm oats, brown sugar, dried cranberries & candied pecans. One egg any style and choice of bacon, ham or sausage</p>
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
+
+                    <tr>
+                      <td class="menuName">LOX BAGEL</td>
+                      <td class="menuPrice">$12</td>
+                    </tr>
+
+                  </table>
+                  <p class="descroption">Cold smoked salmon, tomato, cucumber, avocado, capers, red onion & cream cheese
+                  </p>
                 </div>
-                
-            </div>
-            
-            </div>
-            
-            <div class="menuSecGroup">
-            <div class="menuSecGroupImg"><img src="../../../assets/dynemicmenu/images/breakfast_2.jpg" alt=""></div>
-            <div class="menuSecGroupTitle"><h5>House Specialities</h5></div>
-            <div class="menuSecGroupList">
+
                 <div class="menuSecGroupListGroup">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
-                  
-                  <tr>
-                    <td class="menuName">BREAKFAST BURRITO</td>
-                    <td class="menuPrice">$12</td>
-                  </tr>
-                  
-                </table>
-    <p class="descroption">Choice of bacon or chorizo with scrambled eggs, potatoes & cheese, wrapped in a flour tortilla Served with breakfast potatoes or fresh fruit</p>
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
+
+                    <tr>
+                      <td class="menuName">STEEL CUT OATS BREAKFAST</td>
+                      <td class="menuPrice">$12</td>
+                    </tr>
+
+                  </table>
+                  <p class="descroption">Warm oats, brown sugar, dried cranberries & candied pecans. One egg any style
+                    and choice of bacon, ham or sausage</p>
                 </div>
-                
-                <div class="menuSecGroupListGroup">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
-                  
-                  <tr>
-                    <td class="menuName">LOX BAGEL</td>
-                    <td class="menuPrice">$12</td>
-                  </tr>
-                  
-                </table>
-    <p class="descroption">Cold smoked salmon, tomato, cucumber, avocado, capers, red onion & cream cheese</p>            </div>
-                
-                <div class="menuSecGroupListGroup">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
-                  
-                  <tr>
-                    <td class="menuName">STEEL CUT OATS BREAKFAST</td>
-                    <td class="menuPrice">$12</td>
-                  </tr>
-                  
-                </table>
-    <p class="descroption">Warm oats, brown sugar, dried cranberries & candied pecans. One egg any style and choice of bacon, ham or sausage</p>
-                </div>
-                
+
+              </div>
+
             </div>
-            
-            </div>
-            </div>
-            
+
           </div>
-          
         </div>
+
       </div>
-      
-    <div class="navbarBotomNav">
-        <ul>
-        <li><a href="#">Laguna Village Shops</a></li>
-        <li><a href="#">Entertainment</a></li>
-        <li><a href="#">Laguna Beach FUN Directory</a></li>
-        </ul>
-    </div>
-    
-    <div class="mainContainerFront ">
-    <img src="../../../assets/dynemicmenu/images/the_cliff_logo.png" alt="" class="logoImg"> 
 
-</div>
-
-    <footer class="footerFront">
-        <p>Powered by <a href="#">Shop Local Laguna</a> and <a href="#">Info Quick</a><br>
-            Photo: <a href="#">Cindy Ferguson</a> 
-                    </p>
-        </footer>
-  </div>  
-  <div id="id01" class="w3-modal">
-    <div class="w3-modal-content">
-  
-        <div class="modal-dialog modalDialogCustom">
-        
-            <div class="modal-content">
-    
-       <button type="button" class="close closeCustom" (click)="modalclose()">&times;</button>
-      
-     
-     <div class="modal-body">
-     <div class="menuSecGroup" *ngFor="let m of menuData">
-     <div class="menuSecGroupImg"><img src="../../../assets/dynemicmenu/images/breakfast_2.jpg" alt=""></div>
-     <div class="menuSecGroupTitle"><h5>{{m.section_name}}</h5></div>
-     <div class="menuSecGroupList" >
-         <div class="menuSecGroupListGroup">
-         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
-           
-           <tr  *ngFor="let m1 of menudata">
-             <td class="menuName">{{m.item_name}}</td>
-             <td class="menuPrice">${{m.item_price}}</td>
-           </tr>
-           
-         </table>
-         <p class="descroption">{{m.item_desc}}</p>
-         </div>
-         
-        
-         
-     </div>
-     
-     </div>
-     
-  
-     </div>
-     
-   </div>
-   
- </div>
-  
     </div>
   </div>
+
+  <div class="navbarBotomNav">
+    <ul>
+      <li><a href="#">Laguna Village Shops</a></li>
+      <li><a href="#">Entertainment</a></li>
+      <li><a href="#">Laguna Beach FUN Directory</a></li>
+    </ul>
+  </div>
+
+  <div class="mainContainerFront text-center">
+    <!-- top image -->
+    <!-- <img src="../../../assets/dynemicmenu/images/the_cliff_logo.png" alt="" class="logoImg">  -->
+    <img src="{{topimage}}" alt="">
+  </div>
+
+  <footer class="footerFront">
+    <p>Powered by <a href="#">Shop Local Laguna</a> and <a href="#">Info Quick</a><br>
+      Photo: <a href="#">Cindy Ferguson</a>
+    </p>
+  </footer>
+</div>
+<div id="id01" class="w3-modal">
+  <div class="w3-modal-content">
+
+    <div class="modal-dialog modalDialogCustom">
+
+      <div class="modal-content">
+
+        <button type="button" class="close closeCustom" (click)="modalclose()">&times;</button>
+
+
+        <div class="modal-body">
+          <div class="menuSecGroup" *ngFor="let m of keyData">
+            <div class="menuSecGroupImg"><img [src]="url1+'/'+m.img" alt=""></div>
+            <div class="menuSecGroupTitle">
+              <h5>{{m.sec}}</h5>
+            </div>
+            <div *ngFor="let m1 of m.itm; let i=index">
+            <div class="menuSecGroupList">
+              <div class="menuSecGroupListGroup">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
+
+                  <tr>
+                    <td class="menuName">{{m1.item_name}}</td>
+                    <td class="menuPrice">${{m1.item_price}}</td>
+                  </tr>
+
+                </table>
+                <p class="descroption">{{m1.item_desc}}</p>
+              </div>
+
+
+
+            </div>
+</div>
+          </div>
+
+
+        </div>
+        
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div id="id02" class="w3-modal">
+  <div class="w3-modal-content">
+
+    <div class="modal-dialog modalDialogCustom">
+
+      <div class="modal-content">
+
+        <button type="button" class="close closeCustom" (click)="modalclose1()">&times;</button>
+
+
+        <div class="modal-body">
+          <div class="menuSecGroup" >
+            <div class="menuSecGroupImg"></div>
+            <div class="menuSecGroupTitle">
+              <h5>No item is available at the moment</h5>
+            </div>
+            <!-- <div *ngFor="let m1 of m.itm; let i=index">
+            <div class="menuSecGroupList">
+              <div class="menuSecGroupListGroup">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
+
+                  <tr>
+                    <td class="menuName">{{m1.item_name}}</td>
+                    <td class="menuPrice">${{m1.item_price}}</td>
+                  </tr>
+
+                </table>
+                <p class="descroption">{{m1.item_desc}}</p>
+              </div>
+
+
+
+            </div>
+</div> -->
+          </div>
+
+
+        </div>
+        
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div id="id03" class="w3-modal">
+  <div class="w3-modal-content">
+
+    <div class="modal-dialog modalDialogCustom">
+
+      <div class="modal-content">
+
+        <button type="button" class="close closeCustom" (click)="modalclose2()">&times;</button>
+
+
+        <div class="modal-body">
+          <div class="menuSecGroup" >
+            <div class="menuSecGroupImg"></div>
+            <div class="menuSecGroupTitle">
+              <h5>There is an overlap of timing...please make a choice</h5>
+            </div>
+            <div>
+            <div class="menuSecGroupList">
+              <div class="menuSecGroupListGroup">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
+
+                  <tr *ngFor="let i of overlapData">
+                    <td class="menuName">
+                      
+                      <button (click)="open_menu(i.menu_id,i.start_time,i.end_time);modalclose2()">
+                        {{i.menu_description}}
+                      </button></td>
+                    
+                  </tr>
+
+                </table>
+                <!-- <p class="descroption">{{m1.item_desc}}</p> -->
+              </div>
+
+
+
+            </div>
+</div>
+          </div>
+
+
+        </div>
+        
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+

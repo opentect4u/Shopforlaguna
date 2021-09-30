@@ -68,6 +68,9 @@ MIT
 
 ng6-toastr-notifications
 
+ngx-spinner
+MIT
+
 ngx-toastr
 MIT
 The MIT License (MIT)

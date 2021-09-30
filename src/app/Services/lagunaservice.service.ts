@@ -12,7 +12,7 @@ export class LagunaserviceService {
   Url=global_url_test.URL+'package';
   _Url=global_url_test.URL+'promo';
   __url=global_url_test.URL+'holder_cling';
-  holder_Url=global_url_test.URL+'/holder_cling';
+  holder_Url=global_url_test.URL+'holder_cling';
   constructor(private http:HttpClient,private router:Router){ }
   postpackagedata(v:any){//For Package Api In Admin order setup Page 
     console.log(v);
@@ -76,8 +76,15 @@ post_about_us(about_txt:any,res_id:any){
 post_date_time(dt:any){
   return this.http.post(url_set.api_url+'/date_time',dt);
 }
-post_section_create(dt:any){
-  return this.http.post(url_set.api_url+'/section',dt);
+//create section
+post_section_create(dt:any,file:any){
+  const formdata=new FormData();
+  formdata.append('restaurant_id',dt.restaurant_id);
+  formdata.append('menu_id',dt.menu_id);
+  formdata.append('sec_name',dt.sec_name);
+  formdata.append('sec_img',file);
+  formdata.append('id',dt.id > 0 ? dt.id : 0);
+  return this.http.post(url_set.api_url+'/section',formdata);
 }
 get_section_data(res_id:any,menu_id:any){
   
@@ -122,9 +129,9 @@ get_qrcode(v:any){
 }
 
 //view menu depending on the menuid
-get_menu_by_time(dt:any){
-  return this.http.get(url_set.api_url+'/preview_menu?id='+ dt.id + '&st_time=' + dt.st_time + '&end_time=' + dt.end_time);
-}
+// get_menu_by_time(dt:any){
+//   return this.http.get(url_set.api_url+'/preview_menu?id='+ dt.id + '&st_time=' + dt.st_time + '&end_time=' + dt.end_time);
+// }
 post_approve_menu(dt:any){
   // const formdata=new FormData();
   // formdata.append(""dt);
@@ -147,6 +154,51 @@ get_menu_on_choice(v:any){
 //   return this.http.post(url_set.api_url+'/testing',formdata)
 // }
 
- 
+update_logo_service(id:any,name:any,url:any,img_file:any){
+  const formdata=new FormData();
+  formdata.append('restaurant_id',id);
+  formdata.append('restaurant_name',name);
+  formdata.append('logo',url)
+  formdata.append('logo_img',img_file)
+  return this.http.post(url_set.api_url+'/logo',formdata)
+}
+update_cover_service(menuid:any,vmenu:any,name:any,restaurantid:any,coverfile:any,url:any){
+ const formdata=new FormData();
+ formdata.append('id',menuid);
+ formdata.append('menu_id',vmenu)
+ formdata.append('restaurant_id',restaurantid);
+ formdata.append('restaurant_name',name);
+ formdata.append('cov_url',url)
+ formdata.append('cov_img',coverfile)
+ return this.http.post(url_set.api_url+'/cover_save',formdata)
+}
+update_top_service(menuid:any,vmenu:any,name:any,restaurantid:any,topfile:any,url:any){
+  const formdata=new FormData();
+ formdata.append('id',menuid);
+ formdata.append('menu_id',vmenu)
+ formdata.append('restaurant_id',restaurantid);
+ formdata.append('restaurant_name',name);
+ formdata.append('top_url',url)
+ formdata.append('top_img',topfile)
+ return this.http.post(url_set.api_url+'/top_save',formdata)
+}
+
+//For check whether the setup mode is on or not?
+checkactivity(v:any){
+  return this.http.get(url_set.api_url+'/check_activity?id='+v)
+
+}
+get_menu_by_time(dt:any){
+  return this.http.get(url_set.api_url+'/preview_menu?id='+ dt.id + '&st_time=' + dt.st_time + '&end_time=' + dt.end_time+'&menu_id='+dt.menu_id);
+}
+
+check_menu_overlap(dt:any){
+  return this.http.get(url_set.api_url+'/check_menu?id='+ dt.id + '&st_time=' + dt.st_time + '&end_time=' + dt.end_time);
+
+}
+get_menu(v:any){
+  return this.http.get(url_set.api_url+'/menu_data?id='+ v);
+
+}
  
 }

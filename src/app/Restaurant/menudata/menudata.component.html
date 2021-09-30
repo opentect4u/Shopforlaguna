@@ -54,7 +54,7 @@
                                     <div class="fieldSecFull">
                                         <label for="spclMore">Write Bio here <strong>({{this.role}}/150):</strong></label>
                                         <textarea 
-                                        
+                                        [disabled]="break_button"
                                         [(ngModel)]="this.val"
                                         maxlength="150" (input)="prevent_null($event)"  (keyup)="prevent_null($event)" (change)="prevent_null($event)" id="about" name="abouteee" class="aboutTextarea" rows="5" cols="50" #bio></textarea>
                                        
@@ -63,7 +63,8 @@
                             </form>
                             
 
-                            <button class="w3-button w3-green" 
+                            <button class="w3-button w3-green"
+                           
                                 (click)="nexttab('notices',bio.value)" [disabled]="this.disabled_about">Save</button>
                         </div>
                         <div class="aboutRight"><label class="titleCustom"><strong>ENTERTAINMENT/EVENT
@@ -86,7 +87,7 @@
                     <div id="notices" class="tabcontent" [hidden]="tab2">
 
                         <label class="titleCustom">
-                            <input type="checkbox" id="noticechecked" (change)="checknotice($event)"><strong class="m-1">NOTICES</strong> </label>
+                            <input type="checkbox" [disabled]="break_button" id="noticechecked" (change)="checknotice($event)"><strong class="m-1">NOTICES</strong> </label>
                         This is where you provide details of any notices that need to be displayed on your menus. They
                         could be regulatory notices required by law, food allergy comments, disclaimers or comments
                         which relate to specific localized circumstances.<br>
@@ -97,7 +98,7 @@
                         <div class="formTable">
 
 
-                            <form class="form-inline">
+                            <form class="form-inline" >
                                 <div class="rowCustomFour">
                                     <div class="fieldSecHalf">
                                         <label>Menu</label>
@@ -111,7 +112,7 @@
                                             <option value="4" [hidden]="brunch" [selected]="this.notice_select=='4'">Brunch</option>
                                             <option value="5" [selected]="this.menu_id=='5'">Specials</option> -->
                                             <option value="" selected="selected">Select One</option>
-                                            <option *ngFor="let n of notice_select" [selected]="notify" value="{{n.menu_id}}">{{n.menu_name}}</option>
+                                            <option *ngFor="let n of notice_select" [selected]="notify==n.menu_id" value="{{n.menu_id}}">{{n.menu_name}}</option>
                                         </select>
 
                                     </div>
@@ -130,8 +131,6 @@
 
                                 </div>
                             </form>
-
-
                             <form >
                                 <div class="rowCustomFour">
                                     <div class="fieldSecFull">
@@ -172,7 +171,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <form class="form-inline" >
+                            <form class="form-inline">
                                 <div class="rowCustomFour">
                                     <div class="fieldSecFull">
                                         <label for="vehicle2"> Notice Content</label>
@@ -192,8 +191,10 @@
 
 
                         <form >
-                            <button class="w3-button w3-green" [disabled]="value_position || value_Headertitle ||value_font||value_background  || value_text"
-                                (click)="nexttab1('about',title.value,code1.value,code2.value,code3.value,code4.value,notice.value)">Save & Continue </button>
+                            <button class="w3-button w3-green"
+                            
+                            [disabled]="value_position || value_Headertitle ||value_font||value_background  || value_text"
+                                (click)="nexttab1('about',Menu.value,title.value,code1.value,code2.value,code3.value,code4.value,notice.value)">Save & Continue </button>
                         </form>
 
 
@@ -238,3 +239,5 @@
 </div>
 
 <div id="snackbar">Successfully Inserted</div>
+<div id="snackbar1">Successfully Updated</div>
+

@@ -8,6 +8,18 @@ import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
   styleUrls: ['./order-page.component.css']
 })
 export class AdminOrderPageComponent implements OnInit {
+  v_stand:any=0;
+  stand:any;
+  v_standplus:any=0;
+   v_premium:any=0;
+   v_birthday:any=0;
+  v_calendar:any=0;
+  v_tabletop1:any=0;
+  v_tabletop2:any=0;
+  v_tabletop3:any=0;
+  v_windowcling:any=0;
+
+
   Window:any;
   TopTable:any;
   Sign2:any;
@@ -96,8 +108,13 @@ export class AdminOrderPageComponent implements OnInit {
             this.stndpacakge__monthlyfee=this.Package.msg[i].monthly_fee;
              this.stndpackage_desc=this.Package.msg[i].pack_description;
              this.stnd_numberofmenu=this.Package.msg[i].no_of_menu;
-             console.log(this.stnd_numberofmenu);
-             console.log(this.stndpackage_setupfee,this.stndpacakge__monthlyfee);
+             this.v_stand=1;
+      
+            
+            
+
+            //  console.log(this.stnd_numberofmenu);
+            //  console.log(this.stndpackage_setupfee,this.stndpacakge__monthlyfee);
              if(this.Package.msg[i].special_menu=='Y'){
              this.stnd_specialmenu_yes=document.getElementById('yes_stnd');
              this.stnd_specialmenu_yes.checked=true;
@@ -110,6 +127,9 @@ export class AdminOrderPageComponent implements OnInit {
           }
           else if(this.Package.msg[i].pakage_name==2){
             this.stndpluspacakge__numberofmenu=this.Package.msg[i].no_of_menu;
+            
+            this.v_standplus=1;
+           
             this.stndpluspackage_monthlyfee=this.Package.msg[i].monthly_fee;
             this.stndpluspacakge_setupfee=this.Package.msg[i].setup_fee;
                this.stndpluspacakge_desc=this.Package.msg[i].pack_description;
@@ -125,6 +145,9 @@ export class AdminOrderPageComponent implements OnInit {
           else if(this.Package.msg[i].pakage_name==3){
             // this.premiumpacakge_specialmenu_yes=
             this.premiumpacakge_numberofmenu=this.Package.msg[i].no_of_menu;
+           
+               this.v_premium=1;
+           
               this.premiumpacakge_monthlyfee=this.Package.msg[i].monthly_fee;
               this.premiumpacakge_setupfee=this.Package.msg[i].setup_fee;
              this.premiumpacakge_des=this.Package.msg[i].pack_description;
@@ -149,12 +172,17 @@ export class AdminOrderPageComponent implements OnInit {
     this.laguna.GetPromoCalendar().subscribe(data=>{
       console.log(data);
       this.promocalendar=data;
-      for(let i=0;i<this.promocalendar.msg.length;i++){
+     
+       for(let i=0;i<this.promocalendar.msg.length;i++){
+        
         if(this.promocalendar.msg[i].id==4){
+          this.v_birthday=1;
           this.promo_Birthdayprice=this.promocalendar.msg[i].price;
+        
             if(this.promocalendar.msg[i].free_flag=='Y'){
           this.promo_Birthdaypriceyes=document.getElementById('yes_birth');
           this.promo_Birthdaypriceyes.checked=true;
+         
          }
         else{
           this.promo_Birthdaypriceno=document.getElementById('no_birth');
@@ -162,6 +190,8 @@ export class AdminOrderPageComponent implements OnInit {
         }
         }
         else if(this.promocalendar.msg[i].id==5){
+          this.v_calendar=1;
+
           this.promo_EventCalendarprice=this.promocalendar.msg[i].price;
           if(this.promocalendar.msg[i].free_flag=='Y'){
             this. promo_EventCalendarprice_yes=document.getElementById('yes_calend');
@@ -181,53 +211,65 @@ export class AdminOrderPageComponent implements OnInit {
             console.log(data);
             for(let i=0;i<this.signholder.msg.length;i++){
               if(this.signholder.msg[i].id==6){
+                 this.v_tabletop1=1;
                  this.signholder_price1=this.signholder.msg[i].price;
                  if(this.signholder.msg[i].free_flag=='Y'){
                        this.tabletopyes=document.getElementById('yes_signholder1');
                        this.tabletopyes.checked=true;
                         this.Tabletop=true;
+                        this.TopTable='Y';
+
                  }
                  else{
                   this.tabletopyes=document.getElementById('no_signholder1');
                   this.tabletopyes.checked=true;
                   this.Tabletop=false;
+                  this.TopTable='N';
+
 
                  }
                 
               }
               else if(this.signholder.msg[i].id==7){
                 this.signholder_price2=this.signholder.msg[i].price;
-
+                 this.v_tabletop2=1;
+                   
                    if(this.signholder.msg[i].free_flag=='Y'){
                     this.wallmountsignholder1=document.getElementById('yes_signholder2');
                     this.wallmountsignholder1.checked=true;
                     this.signholder2=true;
-              
-
-                   } 
+                     this.Sign1='Y';
+                  } 
                    else{
                     this.wallmountsignholder1=document.getElementById('no_signholder2');
                     this.wallmountsignholder1.checked=true;
                     this.signholder2=false;
-
+                    this.Sign1='N';
+                    
 
                    }
               }
               else if(this.signholder.msg[i].id == 8){
                 // console.log(this.signholder.msg[i].id,i)
+                this.v_tabletop3=1;
+
                 this.signholder_price3=this.signholder.msg[i].price;
                 if(this.signholder.msg[i].free_flag == 'Y'){
                  this.wallmountsignholder2=document.getElementById('yes_wall');
                 this.wall2=true;
                   this.wallmountsignholder2.checked=true;
                   console.log(this.wallmountsignholder2.checked);
+                   this.Sign2='Y';
+
                 } 
                  else{
                 this.wall2=false;
 
                    this.wallmountsignholder2=document.getElementById('no_mount');
                   this.wallmountsignholder2.checked=true;
-                  console.log(this.wallmountsignholder.checked);
+                  this.Sign2='N';
+
+                  // console.log(this.wallmountsignholder.checked);
 
 
                  }
@@ -247,10 +289,12 @@ export class AdminOrderPageComponent implements OnInit {
             this.windowcling_yes=document.getElementById("yes_last");
              this.window_no=true;
             this.windowcling_yes.checked=true;
+            this.Window='Y';
           }
           else{
             this.windowcling_yes=document.getElementById("no_end");
             this.window_no=false;
+            this.Window='N';
            
             this.windowcling_yes.checked=true;
           }
@@ -394,6 +438,14 @@ export class AdminOrderPageComponent implements OnInit {
   }
   //Admin order set up page package tab first row
   submit(v1:any,v2:any,v3:any,v4:any){
+    if(this.v_stand==1){
+      this.stand='Updation Successfull'
+     
+    }
+    else{
+      this.v_stand=1;
+      this.stand='Insertion Successfull'
+    }
     this.yes_stnd=document.getElementById('yes_stnd');
     this.no_stnd=document.getElementById('no_stnd');
     console.log(this.yes_stnd.checked,this.no_stnd.checked);
@@ -423,6 +475,14 @@ export class AdminOrderPageComponent implements OnInit {
   }
     //Admin order set up page package tab second row
   submitstndplus(v1:any,v2:any,v3:any,v4:any){
+    if(this.v_standplus==1){
+      this.stand='Updation Successfull'
+     
+    }
+    else{
+      this.v_standplus=1;
+      this.stand='Insertion Successfull'
+    }
     this.yes_stnd=document.getElementById('yes');
     this.no_stnd=document.getElementById('no');
     console.log(this.yes_stnd.checked,this.no_stnd.checked);
@@ -451,7 +511,13 @@ export class AdminOrderPageComponent implements OnInit {
   }
     //Admin order set up page package tab third row
   submitpremium(v1:any,v2:any,v3:any,v4:any){
-    console.log(v1)
+   if(this.v_premium==1){
+     this.stand='Updation Successfull'
+    }
+   else{
+    this.v_premium=1;
+     this.stand='Insertion Successfull'
+   }
     this.yes_stnd=document.getElementById('yes_premium');
     this.no_stnd=document.getElementById('no_premium');
     console.log(this.yes_stnd.checked,this.no_stnd.checked);
@@ -481,6 +547,14 @@ export class AdminOrderPageComponent implements OnInit {
   }
     //Admin order set up page Promo&calendar tab first row
   showeventcalendar(v1:any,v2:any){
+    if(this.v_calendar==1){
+      this.stand='Updation Successfull';
+     
+    }
+    else{
+      this.v_calendar=1;
+      this.stand='Insertion Successfull';
+    }
     this.yes_stnd=document.getElementById('yes_calend');
     this.no_stnd=document.getElementById('no_calend');
     console.log(this.yes_stnd.checked,this.no_stnd.checked);
@@ -507,6 +581,13 @@ export class AdminOrderPageComponent implements OnInit {
   }
 //Admin order set up page Promo&calendar tab second row
   birthdayaniversery(v1:any,v2:any){
+    if(this.v_birthday==1){
+     this.stand='Updation Successfull';
+    }
+    else{
+     this.stand='Insertion Successfull';
+     this.v_birthday=1;
+    }
     this.yes_stnd=document.getElementById('yes_birth');
     this.no_stnd=document.getElementById('no_birth');
     console.log(this.yes_stnd.checked,this.no_stnd.checked);
@@ -536,6 +617,14 @@ export class AdminOrderPageComponent implements OnInit {
   }
  //Admin order set up page signholder tab first row
   opentabletop(v1:any,v2:any){
+ if(this.v_tabletop1==1){
+  this.stand='Updation Successfull';
+ 
+ }
+ else{
+  this.v_tabletop1=1;
+  this.stand='Insertion Successfull';
+ }
     var dt={
       "per_Holder_Price":v1,
        "serial_no":v2,
@@ -552,6 +641,13 @@ export class AdminOrderPageComponent implements OnInit {
   }
    //Admin order set up page signholder tab second row
   openwallmount(v1:any,v2:any){
+    if(this.v_tabletop2==1){
+      this.stand='Updation Successfull';
+      }
+     else{
+      this.v_tabletop2=1;
+      this.stand='Insertion Successfull';
+     }
     var dt={
       "per_Holder_Price":v2,
        "serial_no":v1,
@@ -568,6 +664,14 @@ export class AdminOrderPageComponent implements OnInit {
   }
    //Admin order set up page signholder tab third row
   showwall(v1:any,v2:any){
+    if(this.v_tabletop3==1){
+      this.stand='Updation Successfull';
+     
+     }
+     else{
+      this.v_tabletop3=1;
+      this.stand='Insertion Successfull';
+     }
     var dt={
       "per_Holder_Price":v2,
        "serial_no":v1,
@@ -584,6 +688,13 @@ export class AdminOrderPageComponent implements OnInit {
   }
   //Admin order set up page windowCling tab first row
   showwindow(v1:any,v2:any){
+    if(this.v_windowcling==1){
+      this.stand='Updation Successfull';
+     }
+    else{
+      this.v_windowcling=1;
+      this.stand='Insertion Successfull';
+    }
     var dt={
       "per_Holder_Price":v2,
        "serial_no":v1,

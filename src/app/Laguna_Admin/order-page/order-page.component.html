@@ -140,7 +140,7 @@
         <td>1 <input type="hidden" name="" value="4" #birth></td>
         <td>Birthday/Anniversary </td>
         <td>
-            <input type="radio" id="yes_birth" [checked]="true" name="specialMenuStd1" value="y" (change)="verify('y')"> <label for="yes" class="m-1">Yes</label> 
+            <input type="radio" id="yes_birth" name="specialMenuStd1" value="y" (change)="verify('y')"> <label for="yes" class="m-1">Yes</label> 
             <input type="radio" id="no_birth" name="specialMenuStd1" value="n" (change)="verify('n')"> <label for="No">No</label>
         </td>
         <td>
@@ -156,7 +156,7 @@
         <td>2 <input type="hidden" name="" value="5" #sent></td>
         <td>Entertainment / Event Calendar </td>
         <td>
-            <input type="radio" id="yes_calend" [checked]="true" name="specialMenu1" value="yes" (change)="verifytre('yes')"> <label for="yes" class="m-1">Yes</label> 
+            <input type="radio" id="yes_calend"  name="specialMenu1" value="yes" (change)="verifytre('yes')"> <label for="yes" class="m-1">Yes</label> 
             <input type="radio" id="no_calend" name="specialMenu1" value="no" (change)="verifytre('no')"> <label for="No">No</label>
         </td>
         <td>
@@ -190,7 +190,7 @@
         <td>1 <input type="hidden" name="" value="6" #tabletop></td>
         <td>Tabletop Sign Holder</td>
         <td>
-          <input type="radio" id="yes_signholder1" [checked]="true" name="specialMenuStd" value="y_window" (change)="check($event)"> <label for="yes" class="m-1">Yes</label> 
+          <input type="radio" id="yes_signholder1"  name="specialMenuStd" value="y_window" (change)="check($event)"> <label for="yes" class="m-1">Yes</label> 
           <input type="radio" id="no_signholder1" name="specialMenuStd" value="n_clicng" (change)="check($event)"> <label for="No">No</label>
         </td>
         <td> 5" x 7"</td>
@@ -208,7 +208,7 @@
         <td>2 <input type="hidden" name="" value="7" #wallmount></td>
         <td>Wall Mount Sign Holder </td>
         <td>
-          <input type="radio" id="yes_signholder2" [checked]="true" name="specialMenuStd_top" value="y_table" (change)="check($event)"> <label for="yes" class="m-1">Yes</label> 
+          <input type="radio" id="yes_signholder2"  name="specialMenuStd_top" value="y_table" (change)="check($event)"> <label for="yes" class="m-1">Yes</label> 
           <input type="radio" id="no_signholder2" name="specialMenuStd_top" value="n_top"  (change)="check($event)"> <label for="No">No</label>
         </td>
         <td> 5" x 7"</td>
@@ -226,7 +226,7 @@
         <td>3 <input type="hidden" name="" value="8" #wallmount1></td>
         <td>Wall Mount Sign Holder</td>
         <td>
-          <input type="radio" id="yes_wall" [checked]="true" name="SpecialMenuStd1"  (change)="check($event)" value="YES"> <label for="yes" class="m-1">Yes</label> 
+          <input type="radio" id="yes_wall"  name="SpecialMenuStd1"  (change)="check($event)" value="YES"> <label for="yes" class="m-1">Yes</label> 
           <input type="radio" id="no_mount"  name="SpecialMenuStd1" (change)="check($event)"  value="NO"> <label for="No">No</label>
         </td>
         <td>8.5" x 11"</td>
@@ -345,4 +345,4 @@
                   overlayBg.style.display = "none";
                 }
                 </script> -->
-  <div id="snackbar">{{success_msg_windowcling}}</div>
+  <div id="snackbar">{{stand}}</div>

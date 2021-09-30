@@ -291,7 +291,7 @@
                                         </td>
 
                                     <td>
-                                        <a ><img src="{{logopath}}" height="20" width="20" alt="">
+                                        <a href="{{logopath}}" target="_blank" download><img src="{{logopath}}" height="20" width="20" alt="">
                                         </a>
                                     </td>
                                     <td>
@@ -304,7 +304,7 @@
                                     <td class="divFlex"><a href="#" class="edite">
                                         <!-- <i class="fa fa-pencil-square"
                                                 aria-hidden="true"></i> -->
-                                            </a> <a class="update">Update</a></td>
+                                            </a> <a style="cursor: pointer;" class="update" (click)="update_logo()">Update</a></td>
                                 </tr>
 
                             </tbody>
@@ -336,22 +336,22 @@
                                     <th scope="row">{{i+1}}</th>
                                     <td><strong>{{menu.menu_name}}</strong></td>
                                     <td>
-                                         <a href="{{menu.cover_page_url}}" target="_blank">{{menu.cover_page_url}}</a>
+                                         <a href="{{menu.cover_page_url}}" target="_blank" >{{menu.cover_page_url}}</a>
                                         <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
                                             class="formCss"> -->
 
                                     </td>
-                                    <td><a><i class="fa fa-picture-o prvImg" aria-hidden="true"></i></a>
+                                    <td><a [href]="apiurlset+menu.cover_page_img" target="_blank" ><img [src]="apiurlset+menu.cover_page_img" height="20" width="20" alt=""></a>
                                     </td>
                                    <td>
                                        <!-- <label class="uploadTxt">Upload Section images JPG or PNG:</label> -->
                                     <!-- <td><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label> -->
-                                        <input type="file" id="myfile" class="uploadField" name="myfile" multiple="">
+                                        <input type="file" id="myfile" (change)="upload_cover($event)" class="uploadField" name="myfile" multiple="">
                                     </td>
                                     <td class="divFlex"><a href="#" class="edite">
                                         <!-- <i class="fa fa-pencil-square"
                                                 aria-hidden="true"></i> -->
-                                            </a> <a class="update">Update</a></td>
+                                            </a> <a class="update" style="cursor: pointer;" (click)="update_cover(menu.id,menu.menu_id,menu.cover_page_url)">Update</a></td>
                                 </tr>
                                
                             </tbody>
@@ -383,22 +383,22 @@
                                     <th scope="row">{{i+1}}</th>
                                     <td><strong>{{menu.menu_name}}</strong></td>
                                     <td>
-                                        <a href="{{menu.top_img_url}}" target="_blank">{{menu.top_img_url}}</a>
+                                        <a href="{{menu.top_img_url}}" target="_blank" >{{menu.top_img_url}}</a>
                                         <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
                                             class="formCss"> -->
 
                                     </td>
-                                    <td><a><i class="fa fa-picture-o prvImg" aria-hidden="true"></i></a>
+                                    <td><a [href]="apiurlset+menu.top_image_img" target="_blank"><img [src]="apiurlset+menu.top_image_img" height="20" width="20" alt=""></a>
                                     </td>
                                     <td>
                                         <!-- <label class="uploadTxt">Upload Section images JPG or PNG:</label> -->
                                         <!-- <td><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label> -->
-                                        <input type="file" id="myfile" class="uploadField" name="myfile" multiple="">
+                                        <input type="file" id="myfile" (change)="upload_top($event)" class="uploadField" name="myfile" multiple="">
                                     </td>
                                     <td class="divFlex"><a href="#" class="edite">
                                         <!-- <i class="fa fa-pencil-square"
                                                 aria-hidden="true"></i> -->
-                                            </a> <a class="update">Update</a></td>
+                                            </a> <a class="update" style="cursor: pointer;" (click)="update_top(menu.id,menu.menu_id,menu.top_img_url)">Update</a></td>
                                 </tr>
                              
                             </tbody>
@@ -452,7 +452,7 @@
                                             class="formCss"> -->
                                         </td>
 
-                                    <td><a href="#"><i class="fa fa-picture-o prvImg" aria-hidden="true"></i></a>
+                                    <td><a [href]="apiurlset+sec.sec_image" target="_blank"><img [src]="apiurlset+sec.sec_image" height="20" width="20"></a>
                                     </td>
                                 </tr>
                               
@@ -586,7 +586,7 @@
 
                                     <label>Upload Section Image <small class="text-muted">(File Types:JPEG/JPG/PNG. Maximum Size: 2MB)</small> </label>
                                     <!--  -->
-                                    <input id='files' type='file' multiple />
+                                    <input id='files' (change)="section_img_upload($event)" type='file' multiple />
                                     <!-- <output id='result' /> -->
 
 
@@ -624,15 +624,11 @@
                         </ng-container>
                       
                      
-                        <!-- <ng-container matColumnDef="edit">
-                            <th mat-header-cell  *matHeaderCellDef > Edit </th>
+                        <ng-container matColumnDef="sec_img">
+                            <th mat-header-cell  *matHeaderCellDef > Image </th>
                             <td  mat-cell *matCellDef="let element">
                             
-                                 <a (click)="get_sec_id1(element.menu_id,element.id,element.section_name)">
-                                    <i class="fa fa-edit" style="color:blue;cursor:pointer" ></i>
-
-                                 </a>
-                               
+                              <a [href]="apiurlset+element.section_img" target="_blank">  <img [src]="apiurlset+element.section_img" height="30" width="30"></a>
                            
                             
                             
@@ -641,7 +637,7 @@
                             
                         
                         </td>
-                          </ng-container> -->
+                          </ng-container>
                       
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: pointer;" (click)="get_sec_id1(row.menu_id,row.id,row.section_name)" ></tr>
@@ -1090,6 +1086,7 @@
                 <br>
                     
                     </div>
+                    <br>
                     <button class="w3-button w3-green" type="submit" (click)="send_mail()">Send Mail </button>
                     </div>
 

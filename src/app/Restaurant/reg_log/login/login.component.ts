@@ -22,8 +22,6 @@ comma:any;
   x:any;
   confirm_modal:any;
   ngOnInit(): void {
-    console.log("Login ROUTING");
-
     this.confirm_modal=document.getElementById('change_pass_modal');
     this.confirm_modal.style.display='none'
   }
@@ -38,6 +36,8 @@ comma:any;
       {
         
           localStorage.setItem('Restaurant_id',this.logData.msg.restaurant_id);
+           console.log(this.logData.msg.restaurant_id);
+           
           localStorage.setItem('breakfast','active');
           localStorage.setItem('dinner','active');
 
@@ -51,9 +51,8 @@ comma:any;
           
 
             this.stor=data;
-       // for(let i=0;i<this.stor.msg.length;i++){
-            
-              localStorage.setItem('Restaurant_id',this.stor.msg[0].restaurant_id);
+    
+              localStorage.setItem('Menu',this.stor.msg[0].menu);
               localStorage.setItem('Restaurant_name',this.stor.msg[0].contact_name);
               localStorage.setItem('No_of_menu',this.stor.msg[0].menu_name);
               localStorage.setItem('Restaurant_email',this.stor.msg[0].email_id);
@@ -190,7 +189,37 @@ comma:any;
               }
               
               else if(this.stor.msg[0].menu_name=='U'){
+             if(this.com.length==0){
+              localStorage.setItem('dinner','active');
 
+              localStorage.setItem('launch','active');
+    
+              localStorage.setItem('brunch','active');
+    
+              localStorage.setItem('isloggedin','true');
+             }
+             else{
+              for(let j=0;j<this.com.length;j++){
+                if(this.com[j]=="1"){
+                    
+                  localStorage.setItem('breakfast','');
+
+                }
+                else if(this.com[j]=="2"){
+                  localStorage.setItem('launch','');
+
+                   
+                }
+                else if(this.com[j]=="3"){
+                  localStorage.setItem('dinner','');
+                   
+                }
+                else if(this.com[j]=="4"){
+                  localStorage.setItem('brunch','');
+                   
+                }
+             }
+             }
               }
            
            

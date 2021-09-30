@@ -82,9 +82,13 @@ const OrderSave = (data) => {
     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
     var str = Buffer.from(data.res_id, 'base64').toString('ascii');
     var de_id = str.split('/');
+    var tabletop = data.tabletop > 0 ? data.tabletop : 0,
+        wall_mount1 = data.wall_mount1 > 0 ? data.wall_mount1 : 0,
+        wall_mount2 = data.wall_mount2 > 0 ? data.wall_mount2 : 0,
+        window = data.window > 0 ? data.window : 0;
     // console.log({ table_top, window_cling, st: str.split('/')[0] });
     var sql = `INSERT INTO td_order_items (restaurant_id, package_id, birth_calendar_flag, event_calendar, table_top_6, table_top_7, table_top_8, window_cling_9, created_by, created_dt) VALUES
-    ("${de_id[0]}", "${data.package}", "${data.birthday}", "${data.event}", '${data.tabletop}', '${data.wall_mount1}', "${data.wall_mount2}", "${data.window}", "${de_id[1]}", "${datetime}")`;
+    ("${de_id[0]}", "${data.package}", "${data.birthday}", "${data.event}", '${tabletop}', '${wall_mount1}', "${wall_mount2}", "${window}", "${de_id[1]}", "${datetime}")`;
     return new Promise((resolve, reject) => {
         db.query(sql, (err, result) => {
             if (err) {
@@ -149,7 +153,8 @@ const PaySave = async (data) => {
 }
 
 const GetResturentDetails = (id) => {
-    var sql = `SELECT a.*, c.no_of_menu FROM td_contacts a, td_order_items b, md_package c WHERE a.id = "${id}" AND a.id=b.restaurant_id AND b.package_id=c.id`;
+    var sql = `SELECT a.*, c.no_of_menu, d.approval_flag FROM td_contacts a, td_order_items b, md_package c, md_url d WHERE a.id = "${id}" AND a.id=b.restaurant_id AND b.package_id=c.pakage_name AND a.id=d.restaurant_id`;
+//   console.log(sql);
     return new Promise((resolve, reject) => {
         db.query(sql, (err, result) => {
             if (err) {
@@ -164,6 +169,11 @@ const GetResturentDetails = (id) => {
     })
 }
 
+
+
+
+
+
 const SaveUrl = (id, data) => {
     var sql = '';
     let ckh_sql = `SELECT * FROM md_url WHERE restaurant_id = "${id}"`;
@@ -172,17 +182,18 @@ const SaveUrl = (id, data) => {
             console.log(err);
         } else {
             if (result.length > 0) {
-                sql = `UPDATE md_url url = "${data.url}" WHERE restaurant_id = "${id}"`;
+                sql = `UPDATE md_url SET url = "${data.url}" WHERE restaurant_id = "${id}"`;
             } else {
                 sql = `INSERT INTO md_url (restaurant_id, url) VALUES ("${id}", "${data.url}")`;
             }
+            // console.log(sql);
             return new Promise((resolve, reject) => {
                 db.query(sql, (err, lastId) => {
                     if (err) {
                         console.log(err);
-                        data = { suc: 0, msg: JSON.stringify(err) };
+                        data = {suc: 0, msg: JSON.stringify(err)};
                     } else {
-                        data = { suc: 1, msg: 'Inserted Successfully !!' };
+                        data = {suc: 1, msg: 'Success'};
                     }
                     resolve(data)
                 })

@@ -15,11 +15,11 @@
       </div>
     <!-- <?php echo file_get_contents("navigation-setup.html"); ?> -->
     <app-menu-setup-sidebar></app-menu-setup-sidebar>
-
+  
     <!-- Overlay effect when opening sidebar on small screens -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
         title="close side menu" id="myOverlay"></div>
-
+       
     <!-- !PAGE CONTENT! -->
     <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
@@ -42,7 +42,9 @@
                 <p>Upload your logo which needs to be in JPG or PNG format :</p>
                 <!-- <form > -->
                     <label for="myfile">Select files:</label>
-                    <input type="file" id="myfile" name="myfile" (change)="selectimage($event)">
+                    <input type="file" id="myfile" [disabled]="break_button" name="myfile" (change)="selectimage($event)">
+                    <i type="button" [hidden]="logo_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"  data-bs-toggle="modal" data-bs-target="#myModal"></i>
+
                     <!-- <button (click)="downloadImage()">Preview</button>  -->
                     <br>
 
@@ -55,6 +57,7 @@
                     <form>
                         <label for="url">Enter the url:</label>
                         <input type="text" id="url" name="url" value="{{log_url}}" size="28" #logo
+                        [disabled]="break_button"
                         (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"><br>
                     </form>
                     <p style="font-style: italic">If we cannot collect the logo from your web site, we will contact you
@@ -64,7 +67,7 @@
             </div>
 
 
-            <button class="w3-button w3-green" type="submit" (click)="goto_MenuDatapage(logo.value)" [disabled]="value_logo_url">Submit</button>
+            <button  class="w3-button w3-green" type="submit" (click)="goto_MenuDatapage(logo.value)" [disabled]="value_logo_url">Submit</button>
 
 
         </div>
@@ -87,3 +90,31 @@
 </div>
 
 <div id="snackbar">Something Went Wrong Please Try After Sometime</div>
+
+<!-- For the image of dinner Section -->
+<div class="modal fade in" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Image</h4>
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body text-center">
+            
+                 <img src="{{img_logo}}"   height="70%" width="100%">
+              
+            </div>
+  
+        
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+         </div>
+      </div>
+</div>

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 
 import { DataserviceService } from '../service/dataservice.service';
@@ -64,7 +65,10 @@ export class MenudataComponent implements OnInit, AfterViewInit{
   showinitialvalue:any=[]
   notice_select:any=[];
   notify:any;
-  constructor(private router:Router,private about:DataserviceService,private lagunaserve:LagunaserviceService) { }
+  check:any=[];
+  break_button:boolean=false;
+  noticeme:any=0;
+  constructor(private toastr:ToastrManager,private router:Router,private about:DataserviceService,private lagunaserve:LagunaserviceService) { }
   ngAfterViewInit(): void {
     if('notice' in localStorage){
       this.abut=false;
@@ -74,6 +78,8 @@ export class MenudataComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit(): void {
+
+ 
    
     this.lagunaserve.get_menu_on_choice(this.res_id).subscribe(data=>{
       console.log(data);
@@ -86,7 +92,10 @@ export class MenudataComponent implements OnInit, AfterViewInit{
      console.log(data);
      this.notic=data;
      this.notify=this.notic.msg[0].menu_id;
+     console.log( this.notify);
+     
      for(let i=0;i<this.notic.msg.length;i++){
+       this.noticeme=1;
        if(this.notic.msg[i].notice_flag=='Y'){
          this.notice_check=document.getElementById('noticechecked');
          this.notice_check.checked=true;
@@ -150,19 +159,53 @@ export class MenudataComponent implements OnInit, AfterViewInit{
          if(this.abou.msg[i].about_us!=""){
          this.val=this.abou.msg[i].about_us;
          this.disabled_about=false;
+          this.not=false;
+          this.t1='notices';
+          this.v=1;
+
           }
          else {
          this.val="";
          this.disabled_about=true;
+         this.not=true;
+         this.t1='';
+         this.v=0;
+
+         
          }
        }
+       //For Checking approval flag is on or not
+            this.lagunaserve.checkactivity(this.res_id).subscribe(data=>{
+              console.log(data);
+              this.check=data;
+              if(this.check.msg[0].approval_flag=='U'){
+               
+              }
+              else{
+                this.toastr.warningToastr('Set up mode is on , you can not update or insert','Alert!!',{
+                  dismiss:'click',
+                   maxShown:'1',
+                   toastTimeout:'5000'
+   
 
+                })
+                this.break_button=true;
+                this.disabled_about=true;
+                this.color_font=true;
+                this.value_position=true;
+               
+              }
+            })
+          
      })
-
-    
+  
     this.aboutus=document.getElementById('defaultOpen');
+    this.aboutus.className='active';
+
     this.aboutus.style.background='#00477e';
     this.aboutus.style.color='white';
+
+  
   }
   openCity(e:any){
     if(e=='aboutUs'){
@@ -185,19 +228,19 @@ export class MenudataComponent implements OnInit, AfterViewInit{
     this.lagunaserve.get_menu_urls(this.res_id).subscribe(data=>{
       console.log(data);
       this.showinitialvalue=data;
-      console.log(this.showinitialvalue.msg);
-      if(this.showinitialvalue.msg.length!=0){
-            for(let i=0;i<this.showinitialvalue.msg.length;i++){
-              if(this.showinitialvalue.msg[i].menu_id==1){
+      console.log(this.showinitialvalue.menu_dt);
+      if(this.showinitialvalue.menu_dt.length!=0){
+            for(let i=0;i<this.showinitialvalue.menu_dt.length;i++){
+              if(this.showinitialvalue.menu_dt[i].menu_id==1){
                 this.breakfast=false;
               }
-              if(this.showinitialvalue.msg[i].menu_id==2){
+              if(this.showinitialvalue.menu_dt[i].menu_id==2){
                 this.launch=false;
               }
-            if(this.showinitialvalue.msg[i].menu_id==3){
+            if(this.showinitialvalue.menu_dt[i].menu_id==3){
                 this.dinner=false
               }
-            if(this.showinitialvalue.msg[i].menu_id==4){
+            if(this.showinitialvalue.menu_dt[i].menu_id==4){
                 this.brunch=false;
               }
             }
@@ -221,6 +264,29 @@ export class MenudataComponent implements OnInit, AfterViewInit{
    
 }
 nexttab(e:any,e1:any){
+  console.log(this.v)
+  if(this.v==1){
+    this.abut=false;
+       this.not=false;
+    //  localStorage.setItem('notice',this.v);
+      this.tab1=true;
+      this.tab2=false;
+      this.t1='notices';
+       this.about.Aboutus(e1,this.res_id).subscribe(data=>{
+         console.log(data);
+         this.success=data;
+         if(this.success.suc==1){
+          this.myFunction_update();
+         
+      }
+      else{
+
+      }
+       })
+
+  }
+  else{
+ 
    if(e=='notices'){
     this.v=1;
     this.abut=false;
@@ -243,6 +309,8 @@ nexttab(e:any,e1:any){
 
       
     }
+       
+  }
     // For Change the color of active tab
      
    
@@ -254,13 +322,39 @@ nexttab(e:any,e1:any){
     this.notice.style.color='black';
     
 }
-nexttab1(e:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
-  if(e=='about'){
+nexttab1(e:any,v7:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
+  console.log(v7,this.position,v1,v3,v5,v6,this.res_id,this.notice_flag);
+  
+  if(this.noticeme==1){
+  
+
+      this.abut=false;
+      this.not=false;
+      this.tab1=true;
+      this.tab2=false;
+      this.about.Notice(v7,this.position,v1,v3,v5,v6,this.res_id,this.notice_flag).subscribe(data=>{
+          console.log(data);
+          this.success=data
+          if(this.success.suc==1){
+              //  this.myFunction();
+              // this.router.navigate(['/thankyou'])
+              this.myFunction_update();
+  
+              }
+              else{
+  
+              }
+          
+      })
+   
+  }
+  else{
+ if(e=='about'){
     this.abut=false;
     this.not=false;
     this.tab1=true;
     this.tab2=false;
-    this.about.Notice(this.menu,this.position,v1,v3,v5,v6,this.res_id,this.notice_flag).subscribe(data=>{
+    this.about.Notice(v7,this.position,v1,v3,v5,v6,this.res_id,this.notice_flag).subscribe(data=>{
         console.log(data);
         this.success=data
         if(this.success.suc==1){
@@ -273,6 +367,8 @@ nexttab1(e:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
             }
         
     })
+  }
+  
   }
 }
 pickup_place(event:any){
@@ -337,6 +433,18 @@ myFunction() {
   // After 3 seconds, remove the show class from DIV
   setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
 } 
+
+
+myFunction_update() {
+  // Get the snackbar DIV
+  this.x = document.getElementById("snackbar1");
+
+  // Add the "show" class to DIV
+  this.x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
+}
 prevent_null(event:any){
 
   console.log(event.target.value);

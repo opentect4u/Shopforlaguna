@@ -51,58 +51,6 @@ const MenuSave = async (data) => {
     })
 }
 
-// const MenuImageSave = (data, cov_img_path, top_img_path) => {
-//     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
-//     var sql = `INSERT INTO td_other_image (restaurant_id, menu_id, active_flag, cover_page_img, cover_page_url, top_image_img, top_img_url, created_by, created_dt) VALUES
-//     ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${cov_img_path}", "${data.coverurl}", "${top_img_path}", "${data.topurl}", "${data.restaurant_id}", "${datetime}")`;
-//     return new Promise((resolve, reject) => {
-//         db.query(sql, (err, lastId) => {
-//             if (err) {
-//                 console.log(err);
-//                 data = false;
-//             } else {
-//                 data = true;
-//             }
-//         })
-//         resolve(data)
-//     })
-// }
-
-// const OtherImageSave = (data, menu_img) => {
-//     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
-//     var sql = `INSERT INTO td_menu_image (restaurant_id, menu_id, active_flag, menu_url, menu_img, created_by, created_dt) VALUES
-//     ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.MenuUrl}", "${menu_img}", "${data.restaurant_id}", "${datetime}")`;
-//     return new Promise((resolve, reject) => {
-//         db.query(sql, (err, lastId) => {
-//             if (err) {
-//                 console.log(err);
-//                 data = false;
-//             } else {
-//                 data = true;
-//             }
-//         })
-//         resolve(data)
-//     })
-// }
-
-// const SectionImageSave = (data, sec_img) => {
-//     console.log({sec_dt: data});
-//     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
-//     var sql = `INSERT INTO td_section_image_request (restaurant_id, menu_id, active_flag, sec_img, sec_url, created_by, created_dt) VALUES
-//     ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${sec_img}", "${data.SectionUrl}", "${data.restaurant_id}", "${datetime}")`;
-//     return new Promise((resolve, reject) => {
-//         db.query(sql, (err, lastId) => {
-//             if (err) {
-//                 console.log(err);
-//                 data = false;
-//             } else {
-//                 data = true;
-//             }
-//         })
-//         resolve(data)
-//     })
-// }
-
 const MenuImageSave = async (data, cov_img_path, top_img_path) => {
     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
     var sql = '';
@@ -114,7 +62,7 @@ const MenuImageSave = async (data, cov_img_path, top_img_path) => {
         sql = `UPDATE td_other_image SET active_flag = "${data.break_check}", cover_page_img = "${cov_img_path}", cover_page_url = "${data.coverurl}", top_image_img = "${top_img_path}", top_img_url = "${data.topurl}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}"
         WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}"`;
     }
-    console.log({other: sql});
+    console.log({ other: sql });
     // var sql = `INSERT INTO td_other_image (restaurant_id, menu_id, active_flag, cover_page_img, cover_page_url, top_image_img, top_img_url, created_by, created_dt) VALUES
     // ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${cov_img_path}", "${data.coverurl}", "${top_img_path}", "${data.topurl}", "${data.restaurant_id}", "${datetime}")`;
     return new Promise((resolve, reject) => {
@@ -141,7 +89,7 @@ const OtherImageSave = async (data, menu_img) => {
         sql = `UPDATE td_menu_image SET active_flag = "${data.break_check}", menu_img = "${menu_img}", menu_url = "${data.MenuUrl}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}"
         WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}"`;
     }
-    console.log({menu: sql});
+    console.log({ menu: sql });
     // var sql = `INSERT INTO td_menu_image (restaurant_id, menu_id, active_flag, menu_url, menu_img, created_by, created_dt) VALUES
     // ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.MenuUrl}", "${menu_img}", "${data.restaurant_id}", "${datetime}")`;
     return new Promise((resolve, reject) => {
@@ -168,7 +116,7 @@ const SectionImageSave = async (data, sec_img) => {
         sql = `UPDATE td_section_image_request SET active_flag = "${data.break_check}", sec_img = "${sec_img}", sec_url = "${data.SectionUrl}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}"
         WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}"`;
     }
-    console.log({sec: sql});
+    console.log({ sec: sql });
     // var sql = `INSERT INTO td_section_image_request (restaurant_id, menu_id, active_flag, sec_img, sec_url, created_by, created_dt) VALUES
     // ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${sec_img}" "${data.SectionUrl}", "${data.restaurant_id}", "${datetime}")`;
     return new Promise((resolve, reject) => {
@@ -185,9 +133,9 @@ const SectionImageSave = async (data, sec_img) => {
 }
 
 const MonthDateSave = async (data) => {
-// console.log({data:JSON.parse(data.month_day)});
-// console.log({data});
-    var sql = '';
+
+    var sql = '',
+        res = true;
     await DeleteDatetime(data);
     return new Promise((resolve, reject) => {
         var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
@@ -201,18 +149,17 @@ const MonthDateSave = async (data) => {
                     sql = `UPDATE td_date_time SET start_time = "${data.start_time}", end_time = "${data.end_time}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}" 
                     WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}" AND month_day = "${d.dt}"`;
                 }
-                // console.log(sql);
                 db.query(sql, (err, lastId) => {
                     if (err) {
                         console.log(err);
-                        data = false;
+                        res = false;
                     } else {
-                        data = true;
+                        res = true;
                     }
                 })
             }
         })
-        resolve(data);
+        resolve(res);
     })
 }
 
@@ -229,7 +176,6 @@ const DeleteDatetime = (data) => {
             }
         }
     }
-    // console.log({len: data.month_day.length, v1});
     var sql = `DELETE FROM td_date_time WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}" AND month_day NOT IN(${v1})`;
     db.query(sql, (err, lastId) => {
         if (err) {
@@ -241,7 +187,6 @@ const DeleteDatetime = (data) => {
 }
 
 const LogoSave = async (data, logo_img) => {
-    console.log(data);
     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
     var chk_dt = await Check_Data(db_name = 'td_logo', whr = `WHERE restaurant_id = "${data.restaurant_id}"`);
     var sql = '';
@@ -252,6 +197,7 @@ const LogoSave = async (data, logo_img) => {
         sql = `UPDATE td_logo SET logo_url = "${data.logo}", logo_path = "${logo_img}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}"
         WHERE restaurant_id = "${data.restaurant_id}"`;
     }
+    console.log(sql);
     // var sql = `INSERT INTO td_logo (restaurant_id, logo_url, created_by, created_dt) VALUES 
     // ("${data.restaurant_id}", "${data.logo}", "${data.restaurant_id}", "${datetime}")`;
 
@@ -350,15 +296,15 @@ const Check_Data = (db_name, whr) => {
     })
 }
 
-const SectionSave = (data) => {
+const SectionSave = (data, sec_img) => {
     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
     var sql = '';
     if (data.id) {
-        sql = `UPDATE md_section SET menu_id = "${data.menu_id}", section_name = "${data.sec_name}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}"
+        sql = `UPDATE md_section SET menu_id = "${data.menu_id}", section_name = "${data.sec_name}", section_img = "${sec_img}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}"
         WHERE id = "${data.id}"`;
     } else {
-        sql = `INSERT INTO md_section (restaurant_id, menu_id, section_name, created_by, created_dt) VALUES 
-        ("${data.restaurant_id}", "${data.menu_id}", "${data.sec_name}", "${data.restaurant_id}", "${datetime}")`;
+        sql = `INSERT INTO md_section (restaurant_id, menu_id, section_name, section_img, created_by, created_dt) VALUES
+        ("${data.restaurant_id}", "${data.menu_id}", "${data.sec_name}", "${sec_img}", "${data.restaurant_id}", "${datetime}")`;
     }
     return new Promise((resolve, reject) => {
         db.query(sql, (err, lastId) => {
@@ -421,7 +367,7 @@ const ItemPriceSave = (data) => {
     })
 }
 
-const create = async (dataForQRcode, center_image, width, cwidth) => {
+const create = async (dataForQRcode, center_image, width, cwidth, data) => {
     const canvas = createCanvas(width, width);
     QRCode.toCanvas(
         canvas,
@@ -439,8 +385,8 @@ const create = async (dataForQRcode, center_image, width, cwidth) => {
     const ctx = canvas.getContext("2d");
     const img = await loadImage(center_image);
     const center = (width - cwidth) / 2;
-    let path = 'assets/qr.png';
-    let img_name = 'qr.png';
+    let img_name = data.res_id + '_qr.png';
+    let path = 'uploads/' + img_name;
     ctx.drawImage(img, center, center, cwidth, cwidth);
     const buffer = canvas.toBuffer("image/png");
     fs.writeFileSync(path, buffer)
@@ -454,22 +400,17 @@ const GenerateQr = async (data) => {
     const qrCode = await create(
         data.url,
         data.img,
-        145,
-        45
+        150,
+        50,
+        data
     );
+    let chk_dt = await Check_Data(db_name = 'md_url', whr = `WHERE restaurant_id = "${data.res_id}"`);
     var sql = '';
-    let ckh_sql = `SELECT * FROM md_url WHERE restaurant_id = "${data.res_id}"`;
-    db.query(ckh_sql, (err, result) => {
-        if (err) {
-            console.log(err);
-        } else {
-            if (result.length > 0) {
-                sql = `UPDATE md_url url = "${data.url}", image = "${qrCode.img_name}" WHERE restaurant_id = "${data.res_id}"`;
-            } else {
-                sql = `INSERT INTO md_url (restaurant_id, url, image) VALUES ("${data.res_id}", "${data.url}", "${qrCode.img_name}")`;
-            }
-        }
-    })
+    if (chk_dt > 1) {
+        sql = `INSERT INTO md_url (restaurant_id, url, image) VALUES ("${data.res_id}", "${data.url}", "${qrCode.img_name}")`;
+    } else {
+        sql = `UPDATE md_url SET url = "${data.url}", image = "${qrCode.img_name}" WHERE restaurant_id = "${data.res_id}"`;
+    }
     return new Promise((resolve, reject) => {
         db.query(sql, (err, lastId) => {
             if (err) {
@@ -478,10 +419,14 @@ const GenerateQr = async (data) => {
             } else {
                 data = { suc: 1, msg: 'Inserted Successfully !!' };
             }
+            console.log(data);
             resolve(data)
         })
     })
+    // let ckh_sql = `SELECT * FROM md_url WHERE `;
+
 }
 
 module.exports = {
-    BreakfastSave, MenuSave, LogoSave, AboutUsSave, NoticeSave, F_Select, MonthDateSave, SectionSave, ItemSave, ItemPriceSave, GenerateQr, MenuImageSave, OtherImageSave, SectionImageSave };
+    BreakfastSave, MenuSave, LogoSave, AboutUsSave, NoticeSave, F_Select, MonthDateSave, SectionSave, ItemSave, ItemPriceSave, GenerateQr, MenuImageSave, OtherImageSave, SectionImageSave
+};

@@ -1,5 +1,5 @@
 const express = require('express');
-const { PackageSave, GetPackageData, PromoSave, GetResult, HolderClingSave } = require('../modules/AdminModule');
+const { PackageSave, GetPackageData, PromoSave, GetResult, HolderClingSave, UpdateApproval } = require('../modules/AdminModule');
 const { F_Select } = require('../modules/MenuSetupModule');
 const AdmRouter = express.Router();
 
@@ -33,9 +33,15 @@ AdmRouter.get('/holder_cling', async (req, res) => {
     res.send(data);
 })
 
+AdmRouter.get('/update_approval', async (req, res) => {
+    var data = await UpdateApproval(req.query.flag, req.query.res_id);
+    res.send(data);
+})
+
 AdmRouter.get('/res_menu', async (req, res) => {
     var sql = `SELECT a.menu_id, b.menu_description as menu_name FROM td_other_image a, md_menu b WHERE a.menu_id=b.id AND a.restaurant_id = "${req.query.id}"`;
     var data = await F_Select(sql);
     res.send(data);
 })
+
 module.exports = { AdmRouter };

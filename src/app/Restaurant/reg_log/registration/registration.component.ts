@@ -45,7 +45,7 @@ export class RegistrationComponent implements OnInit {
     console.log("sadasdaasdasd")
 
        this.invalid_data=true;
-      this.toastr.errorToastr('This mail id is already in use', 'Oops!',{
+      this.toastr.errorToastr('This mail id is already in use', 'Sorry!',{
       position: 'top-center',
       toastTimeout: (10000)});
     }

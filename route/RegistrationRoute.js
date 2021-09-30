@@ -16,7 +16,6 @@ RegRouter.get('/email_check', async (req, res) => {
 
 RegRouter.get('/mobile_check', async (req, res) => {
     const data = await MobileCheck(req.query.no);
-    console.log(data);
     res.send(data);
 })
 

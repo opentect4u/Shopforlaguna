@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule } from '@angular/forms';
@@ -16,12 +16,9 @@ import { RestaurentComponent } from './Laguna_Admin/restaurent/restaurent.compon
 import { AdminOrderPageComponent } from './Laguna_Admin/order-page/order-page.component';
 import { SalesAgentComponent } from './Laguna_Admin/sales-agent/sales-agent.component';
 import { MenuSetUpComponent } from './Laguna_Admin/menu-set-up/menu-set-up.component';
-// import { BrowserModule } from '@angular/platform-browser';
-// import { NgModule } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
-// import { HttpClientModule } from '@angular/common/http';
-// import { AppRoutingModule } from './app-routing.module';
-// import { AppComponent } from './app.component';
+
 
 import { MenuComponent } from './Restaurant/menu/menu.component';
 import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
@@ -58,6 +55,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'
+import { NgxSpinnerModule } from "ngx-spinner";
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -118,13 +117,14 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle'
     RestaurantSetupComponent,
     ThankyoupageComponent,
     ConfirmationmailComponent
-    
+
   ],
 
 
   //********** */
 
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     MatTableModule,
@@ -136,13 +136,17 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle'
     HttpClientModule,
     MatSlideToggleModule,
     ToastrModule.forRoot(),
-
+    NgxSpinnerModule,
+    
     BrowserAnimationsModule
   ],
+  exports:[CommonModule],
   providers: [{provide:LocationStrategy, useClass:HashLocationStrategy}],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]
 })
 
 export class AppModule { }
+
+
 
