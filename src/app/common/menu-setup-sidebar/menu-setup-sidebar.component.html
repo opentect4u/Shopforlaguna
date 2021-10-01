@@ -30,3 +30,17 @@
       <p class="w3-small" align="center">Powered by<br><br> <!-- <a href="https://www.shoplocallaguna.com" target="_blank"><img src="images/sll_logo.png" width="75%" height="auto"></a><br>  <br> -->Shop Local Laguna<br>&amp;<br>The Dynamic QR<br>
                   </p>
   </nav>
+
+  <script>
+    var manageActiveMenuItem = function (menuItemToActive) {
+      
+        $("#side_nav_bar a").removeClass("m-menu__item--active");
+        $("#side_nav_bar a." + menuItemToActive).addClass("m-menu__item--active");
+    }
+
+    jQuery.validator.addMethod('mobileUK', function (phone_number, element) {
+        return this.optional(element) || phone_number.length > 9 &&
+            phone_number.match(/^((0|\+44)7(0|4|5|6|7|8|9){1}\d{2}\s?\d{6})$/);
+    }, 'Please specify a valid mobile number');
+
+</script>

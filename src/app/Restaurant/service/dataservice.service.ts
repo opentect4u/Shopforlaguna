@@ -103,6 +103,9 @@ export class DataserviceService {
     console.log(v);
     return this.http.get(url_set.api_url + '/mobile_check?no=' + v);
   }
+  gettimezone(){
+    return this.http.get(url_set.api_url+'/get_timezone');
+  }
 
 
 }

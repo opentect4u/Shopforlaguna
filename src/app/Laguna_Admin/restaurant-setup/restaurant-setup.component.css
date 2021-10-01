@@ -163,3 +163,17 @@ body {font-family: "Raleway" sans-serif;}
   to {bottom: 0; opacity: 0;}
 }
 /*  */
+
+.d1{
+  width: 15%;
+
+}
+.d2{
+  width: 25%;
+
+}
+.nameoverflow{
+  white-space: nowrap; 
+  width: 150px;
+overflow: hidden;
+text-overflow: ellipsis;}

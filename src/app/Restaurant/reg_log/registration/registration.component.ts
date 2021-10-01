@@ -22,7 +22,16 @@ export class RegistrationComponent implements OnInit {
    countryData:any;
    counry:any=[];
    x:any
+   timezone:any=[];
   ngOnInit(): void {
+    //call api for getting timezone
+    this._data.gettimezone().subscribe(data=>{
+      console.log(data);
+      this.timezone=data;
+      this.timezone=this.timezone.msg;
+
+      
+    });
     // function for retrieving countries
     this._data.getCountries().subscribe(data=>{
       console.log(data);
@@ -82,7 +91,7 @@ export class RegistrationComponent implements OnInit {
   // function for sending registration data
   regSubmit(v:any){
    
-    // console.log(v);
+    console.log(v);
     this._data.submit_reg(v).subscribe((dt) => {
       console.log(dt);
       this.regData=JSON.parse(dt);

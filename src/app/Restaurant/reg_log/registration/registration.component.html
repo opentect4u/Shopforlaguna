@@ -104,6 +104,19 @@
           
           </div>
           </div>
+          <div class="row mt-4">
+            <div class="col-12">
+            <select class="form-select p-3" name="time_zone"  #time_zone="ngModel" ngModel required>
+              <option value="">Select Timezone</option>
+              <option *ngFor="let d of timezone" value="{{d.name}}">{{d.time_zone}}</option>
+            </select>
+              <!-- <option value="select2">Select 2</option>
+              <option value="select3">Select 3</option> -->
+            
+            <div *ngIf="time_zone.errors?.required && (time_zone.dirty || time_zone.touched)" class="text-danger">timezone is required</div>
+  
+            </div>
+          </div>
          
           <div class="rowCustom">
             <!-- {{regForm.invalid}}|{{this.invalid_data}} -->

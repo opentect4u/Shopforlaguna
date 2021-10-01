@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as e from 'cors';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 
@@ -449,7 +450,6 @@ prevent_null(event:any){
 
   console.log(event.target.value);
   this.role=event.target.value.length;
-  // console.log(event);
 
     if(event.target.id=='about'){
        
@@ -472,8 +472,10 @@ else {
 }
 }
 checkvalidity(event:any){
-  console.log(event)
+  console.log(event);
+ 
   if(event.target.id=='headTitle'){
+    
     if(event.target.value!=''){
       this.value_Headertitle=false;
       }
@@ -511,5 +513,25 @@ checkvalidity(event:any){
   }
  
 }
+see_validation(){
+  if(this.color_font==true){
+    this.myFunction_foralert();
+  }
+  else{
+
+  }
+}
+
+
+myFunction_foralert() {
+  // Get the snackbar DIV
+  this.x = document.getElementById("snackbar2");
+
+  // Add the "show" class to DIV
+  this.x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 5000);
+} 
 
 }

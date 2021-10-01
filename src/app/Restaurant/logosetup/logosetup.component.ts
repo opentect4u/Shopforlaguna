@@ -15,7 +15,8 @@ import { DataserviceService } from '../service/dataservice.service';
 })
 export class LogosetupComponent implements OnInit {
   // url_reg='https://shoplocal-lagunabeach.com/';
-  url_reg='https://localhost:4200/';
+  // url_reg='https://localhost:4200/';
+  url_reg=url_set.Api_url+'/';
 
   constructor(private toastr:ToastrManager,private router:Router,private Logo:DataserviceService,private lagunaserve:LagunaserviceService) { }
   name:any=localStorage.getItem('Restaurant_name');
@@ -32,6 +33,7 @@ export class LogosetupComponent implements OnInit {
   img_logo:any;
   img_showing=url_set.api_url;
   // resid=10;
+  currentInput:any;
   resid:any=localStorage.getItem('Restaurant_id');
 
   ngOnInit(): void {
@@ -50,6 +52,10 @@ export class LogosetupComponent implements OnInit {
            this.logo_preview=false;
            this.img_logo=this.img_showing+'/'+this.log.logo_dt[i].logo_path;
            this.logo=this.img_showing+'/'+this.log.logo_dt[i].logo_path;
+          //  this.logo_design=document.getElementById('myfile');
+          //  this.logo_design.files='1 file';
+          this.currentInput='1 file';
+          //  console.log(this.logo_design);
          }
          if(this.log.logo_dt[i].logo_url!=null){
           
@@ -148,5 +154,8 @@ checkvalidity(event:any){
     this.value_logo_url=true;
     
   }
+}
+deletephoto(e:any){
+  this.logo_preview=true;
 }
 }

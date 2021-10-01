@@ -57,6 +57,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'
 import { NgxSpinnerModule } from "ngx-spinner";
 import { CommonModule } from '@angular/common';
+import { UserMenuComponent } from './user/user-menu/user-menu.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,7 +101,7 @@ import { CommonModule } from '@angular/common';
     AdminOrderPageComponent,
     AppComponent,
     LoginComponent,
-    RegistrationComponent,
+    // RegistrationComponent,
     ForgotPassComponent,
     PaymentPageComponent,
     OrderPageComponent,
@@ -116,7 +118,8 @@ import { CommonModule } from '@angular/common';
     MenudataComponent,
     RestaurantSetupComponent,
     ThankyoupageComponent,
-    ConfirmationmailComponent
+    ConfirmationmailComponent,
+    UserMenuComponent
 
   ],
 
@@ -137,6 +140,7 @@ import { CommonModule } from '@angular/common';
     MatSlideToggleModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
+    MatTooltipModule,
     
     BrowserAnimationsModule
   ],

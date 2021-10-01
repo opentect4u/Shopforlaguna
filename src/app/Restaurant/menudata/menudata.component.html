@@ -95,7 +95,7 @@
                         Header Title and the color of the Font followed by the Description. You must then SAVE this
                         before entering another Notice.<br><br>
 
-                        <div class="formTable">
+                        <div class="formTable" (mouseenter)="see_validation()" >
 
 
                             <form class="form-inline" >
@@ -112,7 +112,7 @@
                                             <option value="4" [hidden]="brunch" [selected]="this.notice_select=='4'">Brunch</option>
                                             <option value="5" [selected]="this.menu_id=='5'">Specials</option> -->
                                             <option value="" selected="selected">Select One</option>
-                                            <option *ngFor="let n of notice_select" [selected]="notify==n.menu_id" value="{{n.menu_id}}">{{n.menu_name}}</option>
+                                            <option *ngFor="let n of notice_select" [selected]="notify==n.menu_id" [hidden]="n.active_flag=='N'" value="{{n.menu_id}}">{{n.menu_name}}</option>
                                         </select>
 
                                     </div>
@@ -132,12 +132,12 @@
                                 </div>
                             </form>
                             <form >
-                                <div class="rowCustomFour">
+                                <div class="rowCustomFour" >
                                     <div class="fieldSecFull">
                                         <label for="headTitle">Header Title:</label>
-                                        <input type="text" [disabled]="color_font"
-                                        value="{{header_title}}" (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"  id="headTitle" name="headTitle1" value="" class="formCss"
-                                            #title>
+                                        <input type="text" [disabled]="color_font" 
+                                        value="{{header_title}}" (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"  id="headTitle" name="headTitle1"  class="formCss"
+                                         #title>
                                     </div>
                                 </div>
                             </form>
@@ -240,4 +240,6 @@
 
 <div id="snackbar">Successfully Inserted</div>
 <div id="snackbar1">Successfully Updated</div>
+<div id="snackbar2"><i class="fa fa-warning" style="font-size:15px;color:white;padding-right:5px"></i>Please select the check box to proceed further</div>
+
 

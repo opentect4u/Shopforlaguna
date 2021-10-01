@@ -288,11 +288,16 @@
                                         <a href="{{logo_img}}" target="_blank"> {{logo_img}}</a>
                                         <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
                                             class="formCss"> -->
+
+
                                         </td>
 
                                     <td>
+
                                         <a href="{{logopath}}" target="_blank" download><img src="{{logopath}}" height="20" width="20" alt="">
                                         </a>
+                                        <i [hidden]="logospin" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+
                                     </td>
                                     <td>
                                         <!-- <label class="uploadTxt">Upload Section images JPG or PNG:</label> -->
@@ -315,6 +320,7 @@
                     <hr>
                     <label class="titleCustom"><i class="fa fa-arrow-right"></i> Cover Image</label>
                     <div class="table-responsive table_responsiveCus">
+
                         <table class="table">
                             <thead>
                                 <tr>
@@ -332,26 +338,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let menu of menuData; let i=index">
-                                    <th scope="row">{{i+1}}</th>
-                                    <td><strong>{{menu.menu_name}}</strong></td>
-                                    <td>
-                                         <a href="{{menu.cover_page_url}}" target="_blank" >{{menu.cover_page_url}}</a>
-                                        <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
-                                            class="formCss"> -->
+                                <i [hidden]="coverspin" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
 
-                                    </td>
-                                    <td><a [href]="apiurlset+menu.cover_page_img" target="_blank" ><img [src]="apiurlset+menu.cover_page_img" height="20" width="20" alt=""></a>
-                                    </td>
-                                   <td>
-                                       <!-- <label class="uploadTxt">Upload Section images JPG or PNG:</label> -->
-                                    <!-- <td><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label> -->
-                                        <input type="file" id="myfile" (change)="upload_cover($event)" class="uploadField" name="myfile" multiple="">
-                                    </td>
-                                    <td class="divFlex"><a href="#" class="edite">
-                                        <!-- <i class="fa fa-pencil-square"
-                                                aria-hidden="true"></i> -->
-                                            </a> <a class="update" style="cursor: pointer;" (click)="update_cover(menu.id,menu.menu_id,menu.cover_page_url)">Update</a></td>
+                                <tr *ngFor="let menu of menuData; let i=index"  >
+                                    
+                                        <th scope="row" *ngIf="menu.active_flag=='Y'">{{i+1}}</th>
+                                        <td *ngIf="menu.menu_id==1 && menu.active_flag=='Y'"><strong>Breakfast</strong></td>
+                                        <td *ngIf="menu.menu_id==2 && menu.active_flag=='Y'"><strong>Lunch</strong></td>
+                                        <td *ngIf="menu.menu_id==3 && menu.active_flag=='Y'"><strong>Brunch</strong></td>
+                                        <td *ngIf="menu.menu_id==4 && menu.active_flag=='Y'"><strong>Dinner</strong></td>
+                                        <td *ngIf="menu.menu_id==5 && menu.active_flag=='Y'"><strong>Special</strong></td>
+                                        <!-- <td><strong>{{menu.menu_name}}</strong></td> -->
+                                        <td *ngIf="menu.active_flag=='Y'">
+                                             <a href="{{menu.cover_page_url}}" target="_blank" >{{menu.cover_page_url}}</a>
+                                            <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
+                                                class="formCss"> -->
+    
+                                        </td>
+                                        <td  *ngIf="menu.active_flag=='Y'"><a [href]="apiurlset+menu.cover_page_img" target="_blank" ><img [src]="apiurlset+menu.cover_page_img" height="20" width="20" alt=""></a>
+                                        </td>
+                                       <td  *ngIf="menu.active_flag=='Y'">
+                                           <!-- <label class="uploadTxt">Upload Section images JPG or PNG:</label> -->
+                                        <!-- <td><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label> -->
+                                            <input type="file" id="myfile" (change)="upload_cover($event)" class="uploadField" name="myfile" multiple="">
+                                        </td>
+                                        <td  *ngIf="menu.active_flag=='Y'" class="divFlex"><a href="#" class="edite">
+                                            <!-- <i class="fa fa-pencil-square"
+                                                    aria-hidden="true"></i> -->
+                                                </a> <a class="update" style="cursor: pointer;" (click)="update_cover(menu.id,menu.menu_id,menu.cover_page_url)">Update</a></td>
+                                            
+
                                 </tr>
                                
                             </tbody>
@@ -379,23 +395,33 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <i [hidden]="topspin" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+
                                 <tr *ngFor="let menu of menuData; let i=index">
-                                    <th scope="row">{{i+1}}</th>
-                                    <td><strong>{{menu.menu_name}}</strong></td>
-                                    <td>
-                                        <a href="{{menu.top_img_url}}" target="_blank" >{{menu.top_img_url}}</a>
+                                    <th scope="row" *ngIf="menu.active_flag=='Y'">{{i+1}}</th>
+                                    <td *ngIf="menu.menu_id==1 && menu.active_flag=='Y'"><strong>Breakfast</strong></td>
+                                    <td *ngIf="menu.menu_id==2 && menu.active_flag=='Y'"><strong>Lunch</strong></td>
+                                    <td *ngIf="menu.menu_id==3 && menu.active_flag=='Y'"><strong>Brunch</strong></td>
+                                    <td *ngIf="menu.menu_id==4 && menu.active_flag=='Y'"><strong>Dinner</strong></td>
+                                    <td *ngIf="menu.menu_id==5 && menu.active_flag=='Y'"><strong>Special</strong></td>
+                                    <td *ngIf="menu.active_flag=='Y'">
+                                        <a href="{{menu.top_img_url}}" target="_blank" >{{menu.top_img_url}}
+
+
+
+                                        </a>
                                         <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
                                             class="formCss"> -->
 
                                     </td>
-                                    <td><a [href]="apiurlset+menu.top_image_img" target="_blank"><img [src]="apiurlset+menu.top_image_img" height="20" width="20" alt=""></a>
+                                    <td *ngIf="menu.active_flag=='Y'"><a [href]="apiurlset+menu.top_image_img" target="_blank"><img [src]="apiurlset+menu.top_image_img" height="20" width="20" alt=""></a>
                                     </td>
-                                    <td>
+                                    <td *ngIf="menu.active_flag=='Y'">
                                         <!-- <label class="uploadTxt">Upload Section images JPG or PNG:</label> -->
                                         <!-- <td><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label> -->
                                         <input type="file" id="myfile" (change)="upload_top($event)" class="uploadField" name="myfile" multiple="">
                                     </td>
-                                    <td class="divFlex"><a href="#" class="edite">
+                                    <td  *ngIf="menu.active_flag=='Y'"class="divFlex"><a href="#" class="edite">
                                         <!-- <i class="fa fa-pencil-square"
                                                 aria-hidden="true"></i> -->
                                             </a> <a class="update" style="cursor: pointer;" (click)="update_top(menu.id,menu.menu_id,menu.top_img_url)">Update</a></td>
@@ -403,6 +429,7 @@
                              
                             </tbody>
                         </table>
+                    <button class="w3-button w3-green w3-right">Download all <i class="fa fa-download" aria-hidden="true"></i></button>
 
                     </div>
 
@@ -447,6 +474,7 @@
                             <tbody>
                                 <tr *ngFor="let sec of secData; let i=index">
                                     <th scope="row">{{i+1}}</th>
+                                    
                                     <td><a href="{{sec.sec_url}}" target="_blank">{{sec.sec_url}}</a>
                                         <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
                                             class="formCss"> -->
@@ -458,6 +486,7 @@
                               
                             </tbody>
                         </table>
+                    <button class="w3-button w3-green w3-right">Download all <i class="fa fa-download" aria-hidden="true"></i></button>
 
                     </div>
 
@@ -602,8 +631,12 @@
 
                     <form action="thanks-order.php" target="_self">
                         <button [hidden]="submit_show"  class="w3-button w3-green" (click)="create_section(section_value.value);section_value.value=''" type="submit">Submit </button>
-                        <button [hidden]="!submit_show" class="w3-button w3-green" (click)="update_section(section_value.value)" type="submit">Update </button>
+                        <button [hidden]="!submit_show" class="w3-button w3-green" (click)="update_section(section_value.value)" type="submit">Update </button> 
+                        &nbsp; &nbsp;
+                        <button class="w3-button w3-red" (click)="reload_page('tab4');createsecval='';" type="submit">Reset </button>
                     </form>
+                    <i [hidden]="secspin" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+
                     <br><br>
                     <mat-form-field appearance="standard">
                         <mat-label>Filter</mat-label>
@@ -656,7 +689,7 @@
                                 <div class="rowCustomFour">
                                     <div class="fieldSecHalf">
                                         <label>Menu</label>
-                                        <select id="pickup_place" name="pickup_place" class="formCss" #menu_for_item (change)="select_section_with_menu(menu_for_item.value)">
+                                        <select id="pickup_place" name="pickup_place" class="formCss" #menu_for_item (change)="select_section_with_menu(menu_for_item.value)" ngModel>
                                             <option value="" selected="selected"  >Select One</option>
                                             <option *ngFor="let mnc of menuchoiceData" [selected]="mid2==mnc.menu_id" value="{{mnc.menu_id}}">{{mnc.menu_name}}</option>
                                             <!-- <option [selected]="mid2=='1'" value="1">Breakfast</option>
@@ -711,7 +744,9 @@
                         <form action="thanks-order.php" target="_self">
                             
                             <button [hidden]="submit_show2" class="w3-button w3-green" type="submit" (click)="send_item(itemval.value);itemval.value=''">Submit </button>
-                            <button [hidden]="!submit_show2" class="w3-button w3-green" type="submit" (click)="update_send_item(menu_for_item.value,section_item.value,itemval.value);">Update </button>
+                            <button [hidden]="!submit_show2" class="w3-button w3-green" type="submit" (click)="update_send_item(menu_for_item.value,section_item.value,itemval.value);">Update </button> &nbsp;
+                            <!-- <button class="w3-button w3-red" type="submit" (click)="reload_page('tab5')">Reset </button> -->
+                            <button class="w3-button w3-red" type="submit" (click)="mid2='';eid2='';i_value='';submit_show2=false;">Reset </button>
                         </form>
 <br><br>
 
@@ -724,14 +759,14 @@
     
                        
                         <ng-container matColumnDef="id">
-                          <th mat-header-cell *matHeaderCellDef> # </th>
-                          <td mat-cell *matCellDef="let element; let i=index">{{i+1}}  </td>
+                          <th class="d1" mat-header-cell *matHeaderCellDef> # </th>
+                          <td class="d1" mat-cell *matCellDef="let element; let i=index">{{i+1}}  </td>
                         </ng-container>
                       
                       
                         <ng-container matColumnDef="item_name">
-                          <th mat-header-cell *matHeaderCellDef matSortHeader="item_name"> Item </th>
-                          <td mat-cell *matCellDef="let element">{{element.item_name}} </td>
+                          <th class="d1" mat-header-cell *matHeaderCellDef matSortHeader="item_name"> Item </th>
+                          <td class="d1" mat-cell *matCellDef="let element">{{element.item_name}} </td>
                         </ng-container>
                       
                      
@@ -810,8 +845,8 @@
                             </div>
                             <div class="rowCustomFour">
                                 <div class="fieldSecFull">
-                                    <label>Price</label>
-                                    <input  #price type="text" id="headTitle" name="headTitle" value="{{ipr}}" class="formCss">
+                                    <label>Price ($)</label>
+                                    <input  #price type="text" id="headTitle" (keypress)="isNumberKey($event)" name="headTitle" value="{{ipr}}" class="formCss">
 
                                 </div>
 
@@ -821,9 +856,9 @@
                         <form class="form-inline" action="">
                             <div class="rowCustomFour">
                                 <div class="fieldSecFull">
-                                    <label for="vehicle2"> Description</label>
+                                    <label for="vehicle2"> Description <b>  ({{concatdatalength}}/150) </b></label>
                                     <textarea id="spclMore" #desc name="spclMore" rows="5" cols="60"
-                                        class="formCssTextArea">{{ide}}</textarea>
+                                      (input)="restrict($event)" (change)="restrict($event)" maxlength="150" [(ngModel)]="ide" class="formCssTextArea"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -839,7 +874,8 @@
                         </form>
                         <form action="thanks-order.php" target="_self">
                             <button [hidden]="show_button3" class="w3-button w3-green" type="submit" (click)="submit_price_desc(price.value,desc.value,additional.value);">Submit </button>
-                            <button [hidden]="!show_button3" class="w3-button w3-green" type="submit" (click)="update_price_desc(select_price_menu.value,section_select_for_item.value,item_select.value,price.value,desc.value,additional.value);">Update </button>
+                            <button [hidden]="!show_button3" class="w3-button w3-green" type="submit" (click)="update_price_desc(select_price_menu.value,section_select_for_item.value,item_select.value,price.value,desc.value,additional.value);">Update </button> &nbsp;
+                            <button class="w3-button w3-red" type="submit" (click)="secid='';item_i='';mid1='';ipr='';ide='';ino='';show_button3=false;">Reset </button>
 
                         </form>
                     </div>
@@ -852,22 +888,30 @@
     
                        
                         <ng-container matColumnDef="id">
-                          <th mat-header-cell *matHeaderCellDef> # </th>
-                          <td mat-cell *matCellDef="let element; let i=index">{{i+1}}  </td>
+                          <th class="d2" mat-header-cell *matHeaderCellDef> # </th>
+                          <td class="d2" mat-cell *matCellDef="let element; let i=index">{{i+1}}  </td>
                         </ng-container>
                       
                       
-                        <ng-container matColumnDef="item_desc">
-                          <th mat-header-cell *matHeaderCellDef matSortHeader="item_desc"> Description </th>
-                          <td mat-cell *matCellDef="let element">{{element.item_desc}} </td>
+                        <ng-container matColumnDef="item_desc" >
+                          <th class="d2" mat-header-cell *matHeaderCellDef matSortHeader="item_desc"> Description </th>
+                          <td class="d2" mat-cell *matCellDef="let element" >
+                              
+                            
+                            <p class="nameoverflow mt-3"
+              #tooltip="matTooltip"
+                matTooltip="{{element.item_desc}}"
+                matTooltipClass="custom-tooltip"
+               matTooltipPosition="below">{{element.item_desc}}</p> 
+                             </td>
                         </ng-container>
                         <ng-container matColumnDef="item_price">
-                            <th mat-header-cell *matHeaderCellDef matSortHeader="item_price"> Price </th>
-                            <td mat-cell *matCellDef="let element">{{element.item_price}} </td>
+                            <th class="d2" mat-header-cell *matHeaderCellDef matSortHeader="item_price"> Price </th>
+                            <td class="d2" mat-cell *matCellDef="let element">{{element.item_price}} </td>
                           </ng-container>
                           <ng-container matColumnDef="item_note">
-                            <th mat-header-cell *matHeaderCellDef matSortHeader="item_note"> Note </th>
-                            <td mat-cell *matCellDef="let element">{{element.item_note}} </td>
+                            <th class="d2" mat-header-cell *matHeaderCellDef matSortHeader="item_note"> Note </th>
+                            <td class="d2" mat-cell *matCellDef="let element">{{element.item_note}} </td>
                           </ng-container>
                      
                         <!-- <ng-container matColumnDef="edit">
@@ -1100,6 +1144,8 @@
         <!-- <?php echo file_get_contents("footer.html"); ?>	 -->
 
         <!-- Footer -->
+        <app-footer></app-footer>
+
     </div>
 
     <div id="snackbar">{{m}}</div>

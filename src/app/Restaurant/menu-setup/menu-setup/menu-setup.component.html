@@ -73,9 +73,19 @@
                             <form>
                                 <label for="myfile">Select file/s:</label>
                                 <input type="file" id="myfile" name="myfile" [disabled]="b_url"  (change)="Breakfast($event)">
-                              <i type="button" [hidden]="Breakfast_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal"></i>
-                                <br>
-                            </form><br>Or, we can collect a photo found on your web site and add it as your background
+                              <!-- <i type="button" [hidden]="Breakfast_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal"></i> -->
+                             
+                              
+                            </form><br>
+                            <div class="container">
+                            <div class="img-wrap rounded p-1" [hidden]="Breakfast_cover_preview">
+                              <a class="close" (click)="deletephoto('breakfast_cover')">&times;</a>
+                           
+                            <img src="{{img_cover}}"  height="50px" width="50px"> 
+
+                          </div></div>
+                            
+                            <br>Or, we can collect a photo found on your web site and add it as your background
                             Breakfast menu image.
                             <form>
                                
@@ -98,14 +108,24 @@
                             <form>
                                 <label for="myfile">Upload 1 Breakfast JPG or PNG images:</label><br>
                                 <input type="file" id="myfile" name="myfile" [disabled]="b_url"  (change)="changeBreak($event)">
-                                <i type="button" [hidden]="Breakfast_top_preview"  class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal1"></i>
-                                
-                                <br><br>
+                                <!-- <i type="button" [hidden]="Breakfast_top_preview"  class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal1"></i> -->
+                               
+                                <!-- <br><br> -->
+                              </form><br>
+                                <div class="container">
+                                <div class="img-wrap rounded p-1" [hidden]="Breakfast_top_preview">
+                                  <span class="close" (click)="deletephoto('breakfast_top')">&times;</span>
+                               
+                                <img src="{{img_top}}"  height="50px" width="50px"> 
+  
+                                 </div>
+                                </div><br>
+                                <form>
                                 <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg" (change)="changetopImage($event)"> -->
                                 <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
-                            </form>Or, we can collect a photo found on your web site and add it to the top of your
+                            Or, we can collect a photo found on your web site and add it to the top of your
                             Breakfast menu:
-                            <form>
+                            
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_top" name="url" 
                                 value="{{break_top}}"
@@ -125,9 +145,15 @@
                           
                             <label for="menuImg"> <strong>File (you can add multiple files)</strong></label><br>
                             <input type="file" [disabled]="b_url" id="myfile" name="myfile" multiple="multiple" (change)="changeBreakmenubreak($event)">
-                            <i type="button" [hidden]="Breakfast_menu_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal2"></i>
-                            
-                            <br><br>
+                            <!-- <i type="button" [hidden]="Breakfast_menu_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal2"></i> -->
+                            <div class="container"><br>
+                            <div class="img-wrap rounded p-1 m-1" [hidden]="Breakfast_menu_preview" *ngFor="let u of img_menu_break;let i=index">
+                              <span class="close" (click)="deletemultiple('breakfast_menu',i)">&times;</span>
+                           
+                            <img src="{{u}}"  height="50px" width="50px"> 
+                          </div>
+                          </div>
+                            <br>
                          
                             <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
                              Or, please provide a web site address/url where we can collect your menu content:
@@ -153,9 +179,17 @@
                                     <label for="menuImg"> <strong>File (you can add multiple files)</strong></label><br>
                                     <input type="file" [disabled]="b_url" id="myfile" name="myfile[]" multiple
                                         (change)="changeBreakmenubreak1($event)">
-                                   <i type="button" [hidden]="Breakfast_section_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal3"></i>
-                                        
-                                        <br><br>
+                                   <!-- <i type="button" [hidden]="Breakfast_section_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal3"></i> -->
+                                   <br><br><div class="container">
+                                   <div class="img-wrap rounded p-1 m-1" [hidden]="Breakfast_section_preview" *ngFor="let u of img_section_break;let i=index">
+                                    <span class="close" (click)="deletemultiplelunchsection('breakfast_section',i)">&times;</span>
+                                 
+                                  <img src="{{u}}"  height="50px" width="50px"> 
+      
+                                </div>
+                              </div>
+                                   
+                                      
                                 </div>
                                 <div class="col-5" id="input_url">
                                     <br><br>
@@ -244,6 +278,7 @@
                             
                             
                             <button
+                        
                             class="w3-button w3-green m-1" type="submit"
                             (click)="opennextab(COVERPAGEURL.value,TOPIMAGEURL.value,MENUURL.value,SECTIONURL.value,break.value,START_break.value,END_break.value)"
                             >Save & Continue</button>
@@ -291,10 +326,19 @@
                                 [disabled]="lcc_url"
                                 
                                 id="myfile" name="myfile"  (change)="changelaunchcoverpage($event)">
-                                <i type="button" [hidden]="Launch_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"  data-bs-toggle="modal" data-bs-target="#myModal4"></i>
+                                <!-- <i type="button" [hidden]="Launch_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"  data-bs-toggle="modal" data-bs-target="#myModal4"></i> -->
                                 
-                                <br>
-                            </form><br>Or, we can collect a photo found on your web site and add it as your background
+                                
+                            </form><br>
+                            <div class="container">
+                              <div class="img-wrap rounded p-1" [hidden]="Launch_cover_preview">
+                                <a class="close" (click)="deletephoto('lunch_cover')">&times;</a>
+                             
+                              <img src="{{img_launch_cover}}"  height="50px" width="50px"> 
+
+                            </div>
+                            </div>
+                            <br>Or, we can collect a photo found on your web site and add it as your background
                             Lunch menu image.
                             <form>
                                 <label for="url">Enter the url:</label> 
@@ -321,14 +365,22 @@
                                 <input type="file"
                                 [disabled]="lcc_url"
                                 id="myfile" name="myfile"  (change)="changelaunchtopimage($event)">
-                                <i type="button" [hidden]="Launch_top_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal5"></i>
-                                
-                                <br><br>
+                              </form><br>
+                                <!-- <i type="button" [hidden]="Launch_top_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal5"></i> -->
+                                <div class="container">
+                                  <div class="img-wrap rounded p-1" [hidden]="Launch_top_preview">
+                                    <span class="close" (click)="deletephoto('lunch_top')">&times;</span>
+                                 
+                                  <img src="{{img_launch_top}}" height="50px" width="50px"> 
+  
+                                </div>
+                              </div><br>
+                                <!-- <br> -->
                                 <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
-                                <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
-                            </form>Or, we can collect a photo found on your web site and add it to the top of your Lunch
+                                <form>  <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
+                            Or, we can collect a photo found on your web site and add it to the top of your Lunch
                             menu:
-                            <form>
+                            
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_launchtop" name="url" 
                                  value="{{launch_top}}"
@@ -351,13 +403,23 @@
                             
                             <label for="menuImg"> <strong>File (you can add multiple files)</strong></label><br>
                             <input type="file"   [disabled]="lcc_url" id="myfile" name="myfile" multiple (change)="changelaunchtmenuimage($event)">
-                            <i type="button" [hidden]="Launch_menu_preview"  data-bs-toggle="modal" data-bs-target="#myModal6" class="fa fa-picture-o fa-2x" aria-hidden="true"></i>
-                            
-                            <br><br>
+                            <!-- <br><br> -->
+                          </form><br>
+                            <!-- <i type="button" [hidden]="Launch_menu_preview"  data-bs-toggle="modal" data-bs-target="#myModal6" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
+                           <div class="container">
+                            <div class="img-wrap p-1 m-1 rounded" [hidden]="Launch_menu_preview" *ngFor="let u of img_launch_menu; let i=index">
+                             
+                              <span class="close" (click)="deletemultiple('lunch_menu',i)">&times;</span>
                            
-                            <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
-                            </form>Or, please provide a web site address/url where we can collect your menu content:
+                            <img src="{{u}}" height="45px" width="45px" > 
+
+                          </div>
+                        </div><br>
+                            <!-- <br><br> -->
                             <form>
+                            <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
+                           Or, please provide a web site address/url where we can collect your menu content:
+                        
                                 <label for="url">Enter the url:</label>
                                  <input type="text" id="url_launchmenu" name="url"
                                     size="28" #launchmenuurl 
@@ -378,11 +440,18 @@
                                         Please be sure to include your Kids, Desert and Beverage menus, if you have one.<br>
 
                                         <label for="menuImg"> <strong>File (you can add multiple files)</strong></label><br>
-                                        <input type="file" [disabled]="lcc_url" id="myfile" name="myfile[]" multiple
+                                        <input type="file"  [disabled]="lcc_url" id="myfile_section" name="myfile" multiple
                                             (change)="changelaunchsectionbreak1($event)">
-                                        <i type="button" [hidden]="Launch_section_preview" class="fa fa-picture-o fa-2x" data-bs-toggle="modal" data-bs-target="#myModal7" aria-hidden="true"></i>
-                                            
-                                            <br><br>
+                                        <!-- <i type="button" [hidden]="Launch_section_preview" class="fa fa-picture-o fa-2x" data-bs-toggle="modal" data-bs-target="#myModal7" aria-hidden="true"></i> -->
+                                        <br><br>
+                                          <div class="container">
+                                             <div class="img-wrap p-1 rounded m-1" [hidden]="Launch_section_preview" *ngFor="let u of img_launch_section;let i=index">
+                                              <a class="close" (click)="deletemultiplelunchsection('lunch_section',i)">&times;</a>
+                                           
+                                            <img src="{{u}}"  height="45px" width="48px" > 
+                
+                                          </div>
+                                        </div>    
                                     </div>
                                     <div class="col-5" id="input_url">
                                         <br><br>
@@ -562,10 +631,17 @@
                             <form>
                                 <label for="myfile">Select file/s:</label>
                                 <input type="file" id="myfile" name="myfile" [disabled]="d_url"  (change)="brunchcoverimage($event)">
-                                <i type="butoon" [hidden]="Dinner_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal8"></i>
-                                
-                                <br>
-                            </form><br>Or, we can collect a photo found on your web site and add it as your background
+                              </form><br>  <!-- <i type="butoon" [hidden]="Dinner_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal8"></i> -->
+                              <div class="container"> 
+                              <div class="img-wrap rounded p-1" [hidden]="Dinner_cover_preview">
+                                  <span class="close" (click)="deletephoto('dinner_cover')">&times;</span>
+                               
+                                <img src="{{img_dinner_cover}}"  height="50px" width="50px"> 
+
+                              </div></div>
+                              
+
+                            <br>Or, we can collect a photo found on your web site and add it as your background
                             Dinner menu image.
                             <form>
                                 <label for="url">Enter the url:</label>
@@ -589,15 +665,21 @@
                             <form>
                                 <label for="myfile">Upload 1 Dinner JPG or PNG images:</label><br>
                                 <input type="file" id="myfile" name="myfile" [disabled]="d_url"  (change)="brunchtopimage($event)">
-                                <i type="button" 
-                                data-bs-toggle="modal" data-bs-target="#myModal9" [hidden]="Dinner_top_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i>
-                                
+                             </form><br>   <!-- <i type="button" 
+                                data-bs-toggle="modal" data-bs-target="#myModal9" [hidden]="Dinner_top_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
+                                <div class="container">
+                                <div class="img-wrap rounded p-1" [hidden]="Dinner_top_preview">
+                                  <span class="close" (click)="deletephoto('dinner_top')">&times;</span>
+                               
+                                <img src="{{img_dinner_top}}"  height="50px" width="50px"> 
+
+                              </div></div>
                                 <br><br>
-                                <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
+                                <form> <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                                 <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
-                            </form>Or, we can collect a photo found on your web site and add it to the top of your
+                           Or, we can collect a photo found on your web site and add it to the top of your
                             Dinner menu:
-                            <form>
+                     
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_topbrunch" name="url"
                                     size="28" #topurl
@@ -621,14 +703,23 @@
                             <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                             <label for="menuImg"> <strong>File (you can add multiple files)</strong></label><br>
                             <input type="file" [disabled]="d_url" id="myfile" name="myfile" multiple (change)="changebrunchmenubreak1($event)">
-                            <i type="button" [hidden]="Dinner_menu_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" 
+                          </form> <!-- <i type="button" [hidden]="Dinner_menu_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" 
                             data-bs-toggle="modal" data-bs-target="#myModal10"
-                           ></i>
+                           ></i> -->
+                           <br>
+                           <div class="container">
                             
-                            <br><br>
+                           <div class="img-wrap rounded p-1 m-1" [hidden]="Dinner_menu_preview"  *ngFor="let u of img_dinner_menu;let i=index">
+                            <span class="close"  (click)="deletemultiple('dinner_menu',i)">&times;</span>
+                         
+                          <img src="{{u}}"  height="50px" width="50px"> 
+
+                        </div>
+                        </div><br>
+                            
                             <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                             <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
-                            </form>Or, please provide a web site address/url where we can collect your menu content:
+                           Or, please provide a web site address/url where we can collect your menu content:
                             <form>
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_menubrunch" name="url" 
@@ -654,9 +745,17 @@
                                     <label for="menuImg"> <strong>File (you can add multiple files)</strong></label><br>
                                     <input type="file" [disabled]="d_url" id="myfile" name="myfile[]" multiple
                                         (change)="changebrunchsectionbreak1($event)">
-                             <i type="button"   data-bs-toggle="modal" data-bs-target="#myModal11" [hidden]="Dinner_section_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i>
-                                        
+                             <!-- <i type="button"   data-bs-toggle="modal" data-bs-target="#myModal11" [hidden]="Dinner_section_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
+                              
                                         <br><br>
+                                        <div class="container">
+                                        <div class="img-wrap rounded p-1 m-1" [hidden]="Dinner_section_preview"    *ngFor="let u of img_dinner_section;let i=index">
+                                          <span class="close" (click)="deletemultiplelunchsection('dinner_section',i)">&times;</span>
+                                       
+                                        <img src="{{u}}"  height="50px" width="50px"> 
+              
+                                      </div>
+                                    </div>
                                 </div>
                                 <div class="col-5" id="input_url">
                                     <br><br>
@@ -835,10 +934,21 @@
                             <form>
                                 <label for="myfile">Select file/s:</label>
                                 <input type="file" [disabled]="br_url" id="myfile" name="myfile[]" (change)="dinnerchangecoverimage($event)">
-                                <i data-bs-toggle="modal" data-bs-target="#myModal12" type="button" [hidden]="Brunch_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i>
-                                
-                                <br>
-                            </form><br>Or if you would like us to select an image for you, please provide a web site
+                                <!-- <i data-bs-toggle="modal" data-bs-target="#myModal12" type="button" [hidden]="Brunch_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
+  
+                               
+                            </form>
+                            <br>
+                            <div class="container">
+                            <div class="img-wrap rounded p-1" [hidden]="Brunch_cover_preview">
+                              <span class="close" (click)="deletephoto('brunch_cover')">&times;</span>
+                           
+                            <img src="{{img_brunch_cover}}"  height="50px" width="50px"> 
+  
+                          </div>
+                        </div>
+                            
+                            <br>Or if you would like us to select an image for you, please provide a web site
                             address/url where we can collect your menu content.
                             <form>
                                 <label for="url">Enter the url:</label> 
@@ -861,14 +971,21 @@
                             <form>
                                 <label for="myfile">Upload 1 Brunch JPG or PNG images:</label><br>
                                 <input type="file" [disabled]="br_url" id="myfile" name="myfile[]" (change)="dinnerchangetopimage($event)">
-                                <i data-bs-toggle="modal" data-bs-target="#myModal13" type="button" [hidden]="Brunch_top_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i>
+                              </form><!-- <i data-bs-toggle="modal" data-bs-target="#myModal13" type="button" [hidden]="Brunch_top_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
                                 
-                                <br><br>
+                                <br>
+                                <div class="container">
+                                <div class="img-wrap rounded p-1 " [hidden]="Brunch_top_preview">
+                                  <span class="close" (click)="deletephoto('brunch_cover')">&times;</span>
+                               
+                                <img src="{{img_brunch_top}}"  height="50px" width="50px"> 
+      
+                              </div></div><br>
                                 <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
-                                <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
-                            </form>Or, we can collect a photo found on your web site and add it to the top of your
+                                <form><label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
+                            Or, we can collect a photo found on your web site and add it to the top of your
                             Brunch menu:
-                            <form>
+                           
                                 <label for="url">Enter the url:</label> 
                                 <input type="text" id="url_dinnertop" name="url" 
                                     size="28" #dinnertopurl
@@ -893,9 +1010,16 @@
                             <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                             <label for="menuImg"> <strong>File (you can add multiple files)</strong></label><br>
                             <input type="file" [disabled]="br_url" id="myfile" name="myfile" multiple (change)="changedinnermenuimage($event)">
-                            <i data-bs-toggle="modal" data-bs-target="#myModal14" type="button" [hidden]="Brunch_menu_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i>
-                            
-                            <br><br>
+                            <!-- <i data-bs-toggle="modal" data-bs-target="#myModal14" type="button" [hidden]="Brunch_menu_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
+                            <br> 
+                            <div class="container">
+
+                            <div class="img-wrap rounded p-1 m-1" [hidden]="Brunch_menu_preview" *ngFor="let u of img_brunch_menu;let i=index">
+                              <span class="close" (click)="deletemultiple('brunch_menu',i)">&times;</span> 
+                              <img src="{{u}}"  height="50px" width="50px">
+                            </div>
+                          </div>
+                            <br>
                             <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                             <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
                             </form>Or, please provide a web site address/url where we can collect your menu content:
@@ -924,9 +1048,15 @@
                                     <label for="menuImg"> <strong>File (you can add multiple files)</strong></label><br>
                                     <input type="file" [disabled]="br_url" id="myfile" name="myfile[]" multiple
                                         (change)="changedinnersectionimage($event)">
-                            <i data-bs-toggle="modal" data-bs-target="#myModal15" type="button" [hidden]="Brunch_section_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i>
+                                     <!-- <i data-bs-toggle="modal" data-bs-target="#myModal15" type="button" [hidden]="Brunch_section_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
                                         
                                         <br><br>
+                                        <div class="container">
+                                        <div class="img-wrap rounded p-1 m-1" [hidden]="Brunch_section_preview" *ngFor="let u of img_brunch_section;let i=index">
+                                          <span class="close" (click)="deletemultiplelunchsection('brunch_section',i)">&times;</span> 
+                                          <img src="{{u}}"  height="50px" width="50px">
+                                        </div>
+                                      </div>
                                 </div>
                                 <div class="col-5" id="input_url">
                                     <br><br>
@@ -1707,7 +1837,7 @@
       </div>
     </div>
   </div>
-  <!-- For the image of dinner Menu -->
+  <!-- For the image of brunch Menu -->
   <div class="modal fade in" id="myModal14">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -1736,7 +1866,7 @@
       </div>
 </div>
 
-<!-- For the image of dinner Section -->
+<!-- For the image of brunch Section -->
 <div class="modal fade in" id="myModal15">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">

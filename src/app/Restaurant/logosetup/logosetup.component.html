@@ -42,9 +42,18 @@
                 <p>Upload your logo which needs to be in JPG or PNG format :</p>
                 <!-- <form > -->
                     <label for="myfile">Select files:</label>
-                    <input type="file" id="myfile" [disabled]="break_button" name="myfile" (change)="selectimage($event)">
-                    <i type="button" [hidden]="logo_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"  data-bs-toggle="modal" data-bs-target="#myModal"></i>
+                    <input type="file" id="myfile"
+                   
+                    [disabled]="break_button"  (change)="selectimage($event)">
+                    <!-- <i type="button" [hidden]="logo_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"  data-bs-toggle="modal" data-bs-target="#myModal"></i> -->
+                    <br>  <br>  <div class="container">
+                    <div class="img-wrap rounded p-1" [hidden]="logo_preview">
+                        <a class="close" (click)="deletephoto('logo_setup')">&times;</a>
+                     
+                      <img src="{{img_logo}}"  height="50px" width="50px"> 
 
+                    </div>
+                    </div>
                     <!-- <button (click)="downloadImage()">Preview</button>  -->
                     <br>
 

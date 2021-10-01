@@ -54,6 +54,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   constructor(private sanitizer: DomSanitizer,private admin_data:LagunaserviceService,private activatedRoute:ActivatedRoute) { }
  show_tab='tab1'
  pos:any;
+ reloadval=false;
  get_section_for_item:any;
  tab_el:any;
  logo_img:any;
@@ -123,6 +124,8 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  rest_setup:any;
  sec_value='';
  eid2:any;
+ pp:any;
+ hh:any;
  q:any;
  sid2:any;
  apiurlset=url_set.api_url+'/';
@@ -161,7 +164,13 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  idfordesc:any;
  mail_data:any;
  imgel:any;
+ concatdata='';
+ concatdatalength=0;
  menuchoiceData:any;
+ logospin=true;
+ coverspin=true;
+ topspin=true;
+ secspin=true;
   ngOnInit(): void {
     
     // this.daycheck=document.getElementById('1');
@@ -172,6 +181,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.fetchdata();
     this.fetchdata1();
     this.fetchdata2();
+    
     this.admin_data.get_menu_on_choice(this.r_id).subscribe(data=>{console.log(data)
 
     this.menuchoiceData=data;
@@ -231,6 +241,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.tab_el.style.color="white";
    this.admin_data.get_menu_urls(this.r_id).subscribe((data)=>{console.log(data)
    this.menuData=data;
+   console.log(this.menuData)
    this.logo_img=this.menuData.logo_dt[0].logo_url;
    this.logopath=this.menuData.logo_dt[0].logo_path;
    this.logopath=url_set.api_url+'/'+this.logopath;
@@ -341,6 +352,7 @@ else{
     console.log(mid);
     this.item_i=v2
     this.ide=id;
+    this.concatdatalength=this.ide.length
     this.ipr=ip;
     this.ino=inote;
     this.mid1=mid;
@@ -366,6 +378,7 @@ else{
 
   }
   update_section(v:any){
+    this.secspin=false;
     this.sec_value=v;
     this.createsecval=''
     for(let i=0;i<this.menuchoiceData.length;i++)
@@ -388,6 +401,7 @@ else{
     this.sec_post_data=data;
     if(this.sec_post_data.suc==1)
     {
+    this.secspin=true;
       this.m="Updation Successful";
       // setTimeout(()=>{
       //   location.reload();
@@ -408,10 +422,13 @@ else{
     
     }
     else{
+    this.secspin=true;
+
       this.m="Failed to update"
       this.myFunction();
     }
     },error=>{
+      this.secspin=true
       this.m="Failed to update"
       this.myFunction();
   
@@ -447,6 +464,7 @@ else{
     // this.fetchdata(v)
   }
   create_section(v:any){
+    this.secspin=false
     console.log(this.m_id+" "+v);
     if(v!=''&&this.m_id!=''&&this.m_id!=null&&this.m_id!=undefined){
     var dt={
@@ -461,19 +479,26 @@ else{
     {
       this.m="Updation Successful";
     this.myFunction();
+    this.secspin=true;
     this.fetchdata()
     }
     else{
       this.m="Failed to update"
+    this.secspin=true;
+
       this.myFunction();
     }
     },error=>{
+    this.secspin=true;
+
       this.m="Failed to update"
       this.myFunction();
   
     })
   }
   else{
+    this.secspin=true;
+
     this.m="Sorry! You can't keep an empty field"
       this.myFunction();
   }
@@ -1402,6 +1427,7 @@ this.myFunction()}
 )
 }
 update_logo(){
+  this.logospin=false;
   console.log(this.rest_nm+" "+this.r_id+" "+this.logo_img+" "+this.logo_file);
   if(this.logo_file!=undefined)
   this.admin_data.update_logo_service(this.r_id,this.rest_nm,this.logo_img,this.logo_file).subscribe(data=>{console.log(data)
@@ -1411,6 +1437,7 @@ update_logo(){
       this.logo_img=this.menuData.logo_dt[0].logo_url;
       this.logopath=this.menuData.logo_dt[0].logo_path;
       this.logopath=url_set.api_url+'/'+this.logopath;
+      this.logospin=true;
      //  const data = 'some text';
      this.imgel=document.createElement('img');
      this.imgel.src=this.logopath
@@ -1449,6 +1476,7 @@ update_price_desc(menid:any,sectionid:any,itemid:any,pr:any,de:any,ad:any){
     if(this.itemdesc.suc==1){
     this.m="Updation Successful";
     this.ide='';
+    this.concatdatalength=0
     this.ino='';
 
     setTimeout(()=>{
@@ -1492,6 +1520,7 @@ upload_cover(e:any){
   console.log(this.cover_file)
 }
 update_cover(v:any,v_menu:any,v1:any){
+  this.coverspin=false;
   if(this.cover_file!=undefined)
   {console.log(v+" "+this.rest_nm+" "+this.r_id+" "+this.cover_file+" "+v1)
    this.admin_data.update_cover_service(v,v_menu,this.rest_nm,this.r_id,this.cover_file,v1).subscribe(data=>{console.log(data)
@@ -1501,6 +1530,7 @@ update_cover(v:any,v_menu:any,v1:any){
       this.logopath=this.menuData.logo_dt[0].logo_path;
       this.logopath=url_set.api_url+'/'+this.logopath;
      //  const data = 'some text';
+     this.coverspin=true
      this.imgel=document.createElement('img');
      this.imgel.src=this.logopath
        const blob = new Blob([this.imgel], { type: 'application/octet-stream' });
@@ -1523,6 +1553,7 @@ upload_top(e:any){
   this.top_file=e.target.files[0];
 }
 update_top(v:any,vmenu:any,v1:any){
+  this.topspin=false;
   if(this.top_file!=undefined)
   {console.log(v+" "+this.rest_nm+" "+this.r_id+" "+this.top_file+" "+v1)
     this.admin_data.update_top_service(v,vmenu,this.rest_nm,this.r_id,this.top_file,v1).subscribe(data=>{console.log(data)
@@ -1532,6 +1563,7 @@ update_top(v:any,vmenu:any,v1:any){
         this.logopath=this.menuData.logo_dt[0].logo_path;
         this.logopath=url_set.api_url+'/'+this.logopath;
        //  const data = 'some text';
+       this.topspin=true;
        this.imgel=document.createElement('img');
        this.imgel.src=this.logopath
          const blob = new Blob([this.imgel], { type: 'application/octet-stream' });
@@ -1556,5 +1588,32 @@ update_top(v:any,vmenu:any,v1:any){
 section_img_upload(e:any){
   this.sectionimage=e.target.files[0];
   console.log(this.sectionimage)
+}
+restrict(e:any){
+  this.concatdatalength=e.target.value.length;
+  console.log(this.concatdatalength)
+}
+isNumberKey(evt:any)
+{
+   var charCode = (evt.which) ? evt.which : evt.keyCode;
+   if (charCode != 46 && charCode > 31 
+     && (charCode < 48 || charCode > 57))
+      return false;
+
+   return true;
+}
+reload_page(v:any){
+  this.show_tab=v
+  if(v=='tab4')
+  this.ngOnInit();
+  this.concatdatalength=0;
+  this.hh=document.getElementById('pickup_place');
+  console.log(this.hh)
+  this.hh.value='';
+  this.pp=document.getElementById('headTitle');
+  this.pp.value='';
+// this.openCity('tab4');  // this.ngOnInit();
+   this.submit_show=false;
+  this.openCity(v);
 }
 }

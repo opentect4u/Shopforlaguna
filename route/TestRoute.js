@@ -9,7 +9,7 @@ const TestRouter = express.Router();
 TestRouter.use(upload());
 
 TestRouter.post('/testing', async (req, res) => {
-    // console.log({ bd: req.body });
+    console.log({ bd: req.body });
     var cov_file_name = '',
         top_img_name = '';
     if (req.files.cov_img) {
@@ -35,7 +35,7 @@ TestRouter.post('/testing', async (req, res) => {
 
     var dt = await MenuImageSave(req.body, cov_file_name, top_img_name);
     var upload_menu = await UploadMenu(req.files.menu_img ? req.files.menu_img : null, req.body);
-    var upload_sec = await UploadSection(req.files.section_img ? req.files.section_img : null, req.body);
+    // var upload_sec = await UploadSection(req.files.section_img ? req.files.section_img : null, req.body);
     res.send({ suc: 1, msg: 'Success' });
 })
 
@@ -152,9 +152,10 @@ const UploadMenu = async (menu_img, data) => {
             ResIdPath = "uploads/";
 
         if (Array.isArray(sec_file)) {
-            var i = 1;
-            sec_file.forEach(dt => {
-                var file = dt;
+            let j = 0;
+            for(let i = 1; i <= sec_file.length; i++){
+                // j = j + 1;
+                var file = sec_file[i];
                 var filename = data.restaurant_id + '_' + data.menu_id + '_menu_' + i + '_' + file.name;
 
                 file.mv('uploads/' + filename, async (err) => {
@@ -162,11 +163,25 @@ const UploadMenu = async (menu_img, data) => {
                         console.log(`${filename} not uploaded`);
                     } else {
                         console.log(`Successfully ${filename} uploaded`);
-                        await OtherImageSave(data, filename);
+                        await OtherImageSave(data, filename, i);
                     }
                 })
-                i++;
-            })
+            }
+            // var i = 1;
+            // sec_file.forEach(dt => {
+            //     var file = dt;
+            //     var filename = data.restaurant_id + '_' + data.menu_id + '_menu_' + i + '_' + file.name;
+
+            //     file.mv('uploads/' + filename, async (err) => {
+            //         if (err) {
+            //             console.log(`${filename} not uploaded`);
+            //         } else {
+            //             console.log(`Successfully ${filename} uploaded`);
+            //             await OtherImageSave(data, filename, i);
+            //         }
+            //     })
+            //     i++;
+            // })
         } else {
             var filename = data.restaurant_id + '_' + data.menu_id + '_menu_' + sec_file.name;
 
@@ -175,13 +190,13 @@ const UploadMenu = async (menu_img, data) => {
                     console.log(`${filename} not uploaded`);
                 } else {
                     console.log(`Successfully ${filename} uploaded`);
-                    await OtherImageSave(data, filename);
+                    await OtherImageSave(data, filename, i=0);
                 }
             })
         }
 
     } else {
-        await OtherImageSave(data, file_path)
+        await OtherImageSave(data, file_path, i=0)
     }
 }
 
