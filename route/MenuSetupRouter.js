@@ -123,7 +123,9 @@ MenuSetRouter.get('/item_price', async (req, res) => {
 
 MenuSetRouter.get('/notice', async (req, res) => {
     var res_id = req.query.id;
-    let sql = `SELECT * FROM td_menu_notice WHERE restaurant_id = "${res_id}"`;
+    var menu_id = req.query.menu_id;
+    var whr = menu_id > 0 ? `AND menu_id = "${menu_id}"` : '';
+    let sql = `SELECT * FROM td_menu_notice WHERE restaurant_id = "${res_id}" ${whr}`;
     var data = await F_Select(sql);
     res.send(data);
 })

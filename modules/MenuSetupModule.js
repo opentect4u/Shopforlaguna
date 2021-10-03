@@ -78,55 +78,78 @@ const MenuImageSave = async (data, cov_img_path, top_img_path) => {
     })
 }
 
-const OtherImageSave = async (data, menu_img, i) => {
+const OtherImageSave = async (data, menu_img) => {
+    console.log({ menu_img, t: Array.isArray(menu_img) });
     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
     var sql = '';
-    var chk_dt = await Check_Data(db_name = 'td_menu_image', whr = `WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}"`);
-    var chk = await F_Select(`SELECT * FROM td_menu_image WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}"`);
-    console.log({chk: chk.msg[i] ? 'success' : 'er', i: i});
-    if(i > 0){
-        if(chk.msg[i]){
-            id = chk.msg[i].id;
-            sql = `UPDATE td_menu_image SET active_flag = "${data.break_check}", menu_img = "${menu_img}", menu_url = "${data.MenuUrl}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}"
-        WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}" AND id = ${id}`;
-        }else{
+    if (Array.isArray(menu_img)) {
+        for (let i = 0; i < menu_img.length; i++) {
             sql = `INSERT INTO td_menu_image (restaurant_id, menu_id, active_flag, menu_url, menu_img, created_by, created_dt) VALUES
-        ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.MenuUrl}", "${menu_img}", "${data.restaurant_id}", "${datetime}")`; 
-        }
-        return new Promise((resolve, reject) => {
+            ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.MenuUrl}", "${menu_img[i].filename}", "${data.restaurant_id}", "${datetime}")`;
             db.query(sql, (err, lastId) => {
                 if (err) {
                     console.log(err);
-                    data = false;
+                    res = false;
                 } else {
-                    data = true;
+                    res = true;
                 }
             })
-            resolve(data)
+        }
+        sql = `UPDATE td_menu_image SET active_flag = "${data.break_check}", menu_url = "${data.MenuUrl}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}"
+    WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}"`;
+        db.query(sql, (err, lastId) => {
+            if (err) {
+                console.log(err);
+                res = false;
+            } else {
+                res = true;
+            }
         })
-    }else{
-        if (chk_dt > 1) {
+    } else {
+        // var chk_dt = await Check_Data(db_name = 'td_menu_image', whr = `WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}"`);
+        if (menu_img != '') {
             sql = `INSERT INTO td_menu_image (restaurant_id, menu_id, active_flag, menu_url, menu_img, created_by, created_dt) VALUES
-        ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.MenuUrl}", "${menu_img}", "${data.restaurant_id}", "${datetime}")`;
+        ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.MenuUrl}", "${data.menu_img}", "${data.restaurant_id}", "${datetime}")`;
         } else {
-            sql = `UPDATE td_menu_image SET active_flag = "${data.break_check}", menu_img = "${menu_img}", menu_url = "${data.MenuUrl}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}"
-            WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}"`;
+            sql = `UPDATE td_menu_image SET active_flag = "${data.break_check}", menu_url = "${data.MenuUrl}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}"
+        WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}"`;
         }
-        console.log({ menu: sql });
-        var sql = `INSERT INTO td_menu_image (restaurant_id, menu_id, active_flag, menu_url, menu_img, created_by, created_dt) VALUES
-        ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.MenuUrl}", "${menu_img}", "${data.restaurant_id}", "${datetime}")`;
-        return new Promise((resolve, reject) => {
-            db.query(sql, (err, lastId) => {
-                if (err) {
-                    console.log(err);
-                    data = false;
-                } else {
-                    data = true;
-                }
-            })
-            resolve(data)
+        db.query(sql, (err, lastId) => {
+            if (err) {
+                console.log(err);
+                res = false;
+            } else {
+                res = true;
+            }
         })
     }
+    // for()
+    // let up_img = menu_img != '' ? `, menu_img = "${menu_img}"` : '';
+    // var chk_dt = await Check_Data(db_name = 'td_menu_image', whr = `WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}" AND menu_img LIKE "${data.restaurant_id}_${data.menu_id}_menu_${i}_%"`);
+
+    // console.log({ i, menu_img, chk_dt: chk_dt });
+
+    // if (chk_dt > 1) {
+    //     sql = `INSERT INTO td_menu_image (restaurant_id, menu_id, active_flag, menu_url, menu_img, created_by, created_dt) VALUES
+    //  ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.MenuUrl}", "${menu_img}", "${data.restaurant_id}", "${datetime}")`;
+    // } else {
+    //     sql = `UPDATE td_menu_image SET active_flag = "${data.break_check}" ${up_img}, menu_url = "${data.MenuUrl}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}"
+    //     WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu_id}"`;
+    // }
+    // console.log({ menu: sql });
+    // // var sql = `INSERT INTO td_menu_image (restaurant_id, menu_id, active_flag, menu_url, menu_img, created_by, created_dt) VALUES
+    // // ("${data.restaurant_id}", "${data.menu_id}", "${data.break_check}", "${data.MenuUrl}", "${menu_img}", "${data.restaurant_id}", "${datetime}")`;
+    // return new Promise((resolve, reject) => {
+    //     db.query(sql, (err, lastId) => {
+    //         if (err) {
+    //             console.log(err);
+    //             data = false;
+    //         } else {
+    //             data = true;
+    //         }
+    //     })
+    //     resolve(data)
+    // })
 }
 
 const SectionImageSave = async (data, sec_img) => {
@@ -221,7 +244,7 @@ const LogoSave = async (data, logo_img) => {
         sql = `UPDATE td_logo SET logo_url = "${data.logo}", logo_path = "${logo_img}", modified_by = "${data.restaurant_id}", modified_dt = "${datetime}"
         WHERE restaurant_id = "${data.restaurant_id}"`;
     }
-    console.log(sql);
+    // console.log(sql);
     // var sql = `INSERT INTO td_logo (restaurant_id, logo_url, created_by, created_dt) VALUES 
     // ("${data.restaurant_id}", "${data.logo}", "${data.restaurant_id}", "${datetime}")`;
 
@@ -264,15 +287,15 @@ const AboutUsSave = async (data) => {
 
 const NoticeSave = async (data) => {
     var datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
-    let chk_dt = await Check_Data(db_name = 'td_menu_notice', whr = `WHERE restaurant_id = "${data.restaurant_id}"`);
+    let chk_dt = await Check_Data(db_name = 'td_menu_notice', whr = `WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu}"`);
     var sql = '';
     if (chk_dt > 1) {
         sql = `INSERT INTO td_menu_notice (restaurant_id, menu_id, notice_flag, position_id, header_title, font_color, back_color, notice_content, created_by, created_dt) VALUES 
     ("${data.restaurant_id}", "${data.menu}", "${data.notice_flag}", "${data.position}", "${data.headertitle}", "${data.fontcolor}", "${data.back_color}", "${data.notice}", "${data.restaurant_id}", "${datetime}")`;
     } else {
-        sql = `UPDATE td_menu_notice SET menu_id = "${data.menu}", notice_flag = "${data.notice_flag}", position_id = "${data.position}",
+        sql = `UPDATE td_menu_notice SET notice_flag = "${data.notice_flag}", position_id = "${data.position}",
          header_title = "${data.headertitle}", font_color = "${data.fontcolor}", back_color = "${data.back_color}", notice_content = "${data.notice}", 
-         modified_by = "${data.restaurant_id}", modified_dt = "${datetime}" WHERE restaurant_id = "${data.restaurant_id}"`;
+         modified_by = "${data.restaurant_id}", modified_dt = "${datetime}" WHERE restaurant_id = "${data.restaurant_id}" AND menu_id = "${data.menu}"`;
     }
 
     return new Promise((resolve, reject) => {
@@ -443,7 +466,7 @@ const GenerateQr = async (data) => {
             } else {
                 data = { suc: 1, msg: 'Inserted Successfully !!' };
             }
-            console.log(data);
+            // console.log(data);
             resolve(data)
         })
     })

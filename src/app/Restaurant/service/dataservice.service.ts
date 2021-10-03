@@ -69,13 +69,15 @@ export class DataserviceService {
     return this.http.post(url_set.api_url+'/upload',dt);
   }
 
-  logosubmit(dt:any,dt1:any,dt2:any,dt3:any){
+  logosubmit(dt:any,dt1:any,dt2:any,dt3:any,dt4:any){
     // var data = {logo: dt, restaurant_id: dt2, };
     const formdata=new FormData();
     formdata.append('logo',dt);
     formdata.append('logo_img',dt1);
     formdata.append('restaurant_id',dt2);
     formdata.append('restaurant_name',dt3);
+    formdata.append('file_name',dt3);
+
 
     console.log(formdata.getAll)
     return this.http.post(url_set.api_url+'/logo',formdata);

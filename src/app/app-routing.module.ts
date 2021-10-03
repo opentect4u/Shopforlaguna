@@ -66,8 +66,7 @@ const routes: Routes = [
   {
     path:'order/:id',
     component:OrderPageComponent
-
-  },
+},
   {
     path:'payment/:id',
     component:PaymentPageComponent

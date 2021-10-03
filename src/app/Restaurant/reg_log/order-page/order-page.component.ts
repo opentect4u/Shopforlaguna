@@ -89,6 +89,8 @@ export class OrderPageComponent implements OnInit {
   standardplus=false;
   premium=false;
   ngOnInit(): void {
+
+    
     this.birthday_mode=document.getElementById('defaultOpen1');
     this.birthday_mode.style.background="white";
     this.birthday_mode.style.color='black'

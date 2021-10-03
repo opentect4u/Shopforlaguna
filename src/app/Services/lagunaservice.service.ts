@@ -103,8 +103,9 @@ get_item_data_desc(v:any){
 post_item_data_desc(dt:any){
   return this.http.post(url_set.api_url+"/item_price",dt)
 }
-get_special(v:any){
-  return this.http.get(url_set.api_url+'/notice?id='+v);
+get_special(v:any,d1:any){
+  var v1 = d1 > 0 ? d1 : '';
+  return this.http.get(url_set.api_url+'/notice?id='+v + '&menu_id=' +v1);
 }
 post_special(dt:any){
   return this.http.post(url_set.api_url+'/notice',dt);
@@ -199,6 +200,14 @@ check_menu_overlap(dt:any){
 get_menu(v:any){
   return this.http.get(url_set.api_url+'/menu_data?id='+ v);
 
+}
+
+// For deleting permanent image
+delete_file(e:any,e1:any){
+  const formdata=new FormData();
+  formdata.append('res_id',e);
+  formdata.append('id',e1);
+  return this.http.get(url_set.api_url+'/del_menu?id=' + e1 + '&res_id=' + e)
 }
 
  

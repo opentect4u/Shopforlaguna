@@ -59,6 +59,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { CommonModule } from '@angular/common';
 import { UserMenuComponent } from './user/user-menu/user-menu.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,15 +92,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MenuSetupSidebarComponent,
     RestaurantSetupComponent,
     AdminloginComponent,
-    
-
-  
-   
-   
-    
-    
-  
-
     AdminHeaderComponent,
     AdminOrderPageComponent,
     AppComponent,
@@ -141,7 +136,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ToastrModule.forRoot(),
     NgxSpinnerModule,
     MatTooltipModule,
-    
+    ImageCropperModule,
+    PdfViewerModule,
+    NgxExtendedPdfViewerModule ,
     BrowserAnimationsModule
   ],
   exports:[CommonModule],

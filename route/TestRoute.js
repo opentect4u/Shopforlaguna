@@ -9,33 +9,64 @@ const TestRouter = express.Router();
 TestRouter.use(upload());
 
 TestRouter.post('/testing', async (req, res) => {
-    console.log({ bd: req.body });
+    // console.log({ bd: req.body, file: req.files, req: req });
     var cov_file_name = '',
-        top_img_name = '';
-    if (req.files.cov_img) {
-        cov_file_name = req.body.restaurant_id + '_' + req.body.menu_id + '_cover_' + req.files.cov_img.name;
-        req.files.cov_img.mv('uploads/' + cov_file_name, async (err) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Other Image Top Uploaded');
-            }
-        })
+        top_img_name = '',
+        data = req.body;
+    if (req.body.cov_img) {
+        var cov_buffer = req.body.cov_img;
+        // var dt = buffer.split(';');
+        // var ext = dt[0].split('/')[1];
+        cov_file_name = data.restaurant_id + '_cover_' + req.body.cov_filename;
+
+        // console.log(ext);
+        var cov_buffer_dt = cov_buffer.replace(/^data:image\/png;base64,/, "");
+        cov_buffer_dt += cov_buffer_dt.replace('+', ' ');
+        let cov_binaer_dt = new Buffer(cov_buffer_dt, 'base64').toString('binary');
+        fs.writeFile("uploads/" + cov_file_name, cov_binaer_dt, "binary", async (err) => {
+            if (err) console.log(err);
+            // else {
+            //     await LogoSave(data, filename);
+            // }
+        });
+        // cov_file_name = req.body.restaurant_id + '_' + req.body.menu_id + '_cover_' + req.files.cov_img.name;
+        // req.files.cov_img.mv('uploads/' + cov_file_name, async (err) => {
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         console.log('Other Image Top Uploaded');
+        //     }
+        // })
     }
-    if (req.files.top_img) {
-        top_img_name = req.body.restaurant_id + '_' + req.body.menu_id + '_top_' + req.files.top_img.name;
-        req.files.top_img.mv('uploads/' + top_img_name, async (err) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Other Image Top Uploaded');
-            }
-        })
+    if (req.body.top_img) {
+        // top_img_name = req.body.restaurant_id + '_' + req.body.menu_id + '_top_' + req.files.top_img.name;
+        // req.files.top_img.mv('uploads/' + top_img_name, async (err) => {
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         console.log('Other Image Top Uploaded');
+        //     }
+        // })
+        var top_buffer = req.body.top_img;
+        // var dt = buffer.split(';');
+        // var ext = dt[0].split('/')[1];
+        top_img_name = data.restaurant_id + '_top_' + req.body.top_filename;
+
+        // console.log(ext);
+        var top_buffer_dt = top_buffer.replace(/^data:image\/png;base64,/, "");
+        top_buffer_dt += top_buffer_dt.replace('+', ' ');
+        let top_binaer_dt = new Buffer(top_buffer_dt, 'base64').toString('binary');
+        fs.writeFile("uploads/" + top_img_name, top_binaer_dt, "binary", async (err) => {
+            if (err) console.log(err);
+            // else {
+            //     await LogoSave(data, filename);
+            // }
+        });
     }
 
     var dt = await MenuImageSave(req.body, cov_file_name, top_img_name);
     var upload_menu = await UploadMenu(req.files.menu_img ? req.files.menu_img : null, req.body);
-    // var upload_sec = await UploadSection(req.files.section_img ? req.files.section_img : null, req.body);
+    var upload_sec = await UploadSection(req.files.section_img ? req.files.section_img : null, req.body);
     res.send({ suc: 1, msg: 'Success' });
 })
 
@@ -152,21 +183,6 @@ const UploadMenu = async (menu_img, data) => {
             ResIdPath = "uploads/";
 
         if (Array.isArray(sec_file)) {
-            let j = 0;
-            for(let i = 1; i <= sec_file.length; i++){
-                // j = j + 1;
-                var file = sec_file[i];
-                var filename = data.restaurant_id + '_' + data.menu_id + '_menu_' + i + '_' + file.name;
-
-                file.mv('uploads/' + filename, async (err) => {
-                    if (err) {
-                        console.log(`${filename} not uploaded`);
-                    } else {
-                        console.log(`Successfully ${filename} uploaded`);
-                        await OtherImageSave(data, filename, i);
-                    }
-                })
-            }
             // var i = 1;
             // sec_file.forEach(dt => {
             //     var file = dt;
@@ -177,26 +193,48 @@ const UploadMenu = async (menu_img, data) => {
             //             console.log(`${filename} not uploaded`);
             //         } else {
             //             console.log(`Successfully ${filename} uploaded`);
-            //             await OtherImageSave(data, filename, i);
+            //             await OtherImageSave(data, filename);
             //         }
             //     })
             //     i++;
             // })
-        } else {
-            var filename = data.restaurant_id + '_' + data.menu_id + '_menu_' + sec_file.name;
+            console.log(sec_file.length);
+            let j = 0;
+            file_path = new Array();
+            for (let i = 1; i <= sec_file.length; i++) {
+                var filename = '';
+                var file = sec_file[i - 1];
+                filename = data.restaurant_id + '_' + data.menu_id + '_menu_' + i + '_' + file.name;
+                file_path.push({ i, filename });
 
-            sec_file.mv('Uploads/' + filename, async (err) => {
+                file.mv('uploads/' + filename, async (err) => {
+                    if (err) {
+                        console.log(`${filename} not uploaded`);
+                    } else {
+                        console.log(`Successfully ${filename} uploaded`);
+                        // console.log({ i, filename });
+                        // await OtherImageSave(data, filename, i);
+                    }
+                })
+            }
+            await OtherImageSave(data, file_path);
+            console.log(Array.isArray(file_path));
+        } else {
+            console.log(Array.isArray(file_path));
+            file_path = data.restaurant_id + '_' + data.menu_id + '_menu_' + sec_file.name;
+
+            sec_file.mv('Uploads/' + file_path, async (err) => {
                 if (err) {
-                    console.log(`${filename} not uploaded`);
+                    console.log(`${file_path} not uploaded`);
                 } else {
-                    console.log(`Successfully ${filename} uploaded`);
-                    await OtherImageSave(data, filename, i=0);
+                    console.log(`Successfully ${file_path} uploaded`);
+                    await OtherImageSave(data, file_path);
                 }
             })
         }
 
     } else {
-        await OtherImageSave(data, file_path, i=0)
+        await OtherImageSave(data, file_path)
     }
 }
 
@@ -204,7 +242,8 @@ TestRouter.post('/logo', async (req, res) => {
     // console.log({ body: req.body, fl: req.files, req });
     // let res_name = req.body.restaurant_name.replace(' ', '_');
     // var data = await UploadLogo(req.files.logo_img, res_name, req.body);
-    var data = await UploadLogo(req.files ? req.files.logo_img : null, req.body);
+    var data = await UploadLogo(req.body.logo_img, req.body);
+    // console.log({logo_img: req.body.logo_img, body: req.body, req});
     res.send({ suc: 1, msg: 'Success' });
 })
 
@@ -212,17 +251,29 @@ const UploadLogo = async (logo_img, data) => {
     var dt = '',
         file_path = '';
     if (logo_img) {
-        var file = logo_img;
-        var filename = data.restaurant_id + '_logo_' + file.name;
+        var buffer = logo_img;
+        // var dt = buffer.split(';');
+        // var ext = dt[0].split('/')[1];
+        var filename = data.restaurant_id + '_logo_' + data.filename;
 
-        file.mv("uploads/" + filename, async (err) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Logo Uploaded ' + filename);
+        console.log(filename);
+        var buffer_dt = buffer.replace(/^data:image\/png;base64,/, "");
+        buffer_dt += buffer_dt.replace('+', ' ');
+        let binaer_dt = new Buffer(buffer_dt, 'base64').toString('binary');
+        fs.writeFile("uploads/" + filename, binaer_dt, "binary", async (err) => {
+            if (err) console.log(err); // writes out file without error, but it's not a valid image
+            else {
                 await LogoSave(data, filename);
             }
-        })
+        });
+        // file.mv("uploads/" + filename, async (err) => {
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         console.log('Logo Uploaded ' + filename);
+        //         await LogoSave(data, filename);
+        //     }
+        // })
 
     } else {
         await LogoSave(data, file_path);
@@ -336,5 +387,29 @@ const UpdateOtherImg = (fields, whr, table_name) => {
         })
     })
 }
+
+TestRouter.get('/del_menu', (req, res) => {
+    var sql = `DELETE FROM td_menu_image WHERE restaurant_id = ${req.query.res_id} AND id = ${req.query.id}`;
+    db.query(sql, (err, lastId) => {
+        if (err) {
+            console.log(err);
+            res.send({ suc: 0, msg: JSON.stringify(err) });
+        } else {
+            res.send({ suc: 1, msg: "Deleted" });
+        }
+    })
+})
+
+TestRouter.get('/del_sec', (req, res) => {
+    var sql = `DELETE FROM td_section_image_request WHERE restaurant_id = ${req.query.res_id} AND id = ${req.query.id}`;
+    db.query(sql, (err, lastId) => {
+        if (err) {
+            console.log(err);
+            res.send({ suc: 0, msg: JSON.stringify(err) });
+        } else {
+            res.send({ suc: 1, msg: "Deleted" });
+        }
+    })
+})
 
 module.exports = { TestRouter, UploadLogo };

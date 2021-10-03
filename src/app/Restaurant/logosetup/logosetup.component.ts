@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 import { Observable, Observer } from 'rxjs';
 import { url_set } from 'src/app/globalvar';
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
@@ -33,9 +34,29 @@ export class LogosetupComponent implements OnInit {
   img_logo:any;
   img_showing=url_set.api_url;
   // resid=10;
+  common:any;
+  common_image:any;
   currentInput:any;
   resid:any=localStorage.getItem('Restaurant_id');
 
+  //Image Cropper
+ scale = 1;
+ transform: ImageTransform = {};
+ showCropper = false;
+ hide=false;
+ valu = true;
+ Zoomout = true;
+ ZoomIn = true;
+ modal = true;
+ croppedImage:any ;
+ Modal:any;
+ common_for_all:any;
+ common_value:any;
+ logo_fileName:any;
+ logo_design:any;
+ width:any=200;
+ height:any=130;
+ show_toast:boolean=true;
   ngOnInit(): void {
 
 
@@ -52,8 +73,9 @@ export class LogosetupComponent implements OnInit {
            this.logo_preview=false;
            this.img_logo=this.img_showing+'/'+this.log.logo_dt[i].logo_path;
            this.logo=this.img_showing+'/'+this.log.logo_dt[i].logo_path;
-          //  this.logo_design=document.getElementById('myfile');
-          //  this.logo_design.files='1 file';
+           this.logo_design=document.getElementById('myfile');
+           this.logo_design.filename=this.log.logo_dt[i].logo_path;
+          
           this.currentInput='1 file';
           //  console.log(this.logo_design);
          }
@@ -79,16 +101,17 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   console.log(data);
   this.check=data;
   if(this.check.msg[0].approval_flag=='U'){
-   
+    this.show_toast=true;
+    
   }
   else{
    
-    
-    this.toastr.warningToastr('Set up mode is on , you can not update or insert','Alert!!',{
-      dismiss:'click',
-      maxShown:'1',
-      toastTimeout:'5000'
-    })
+     this.show_toast=false;
+    // this.toastr.warningToastr('Set up mode is on , you can not update or insert','Alert!!',{
+    //   dismiss:'click',
+    //   maxShown:'1',
+    //   toastTimeout:'5000'
+    // })
 
     this.break_button=true;
     this.value_logo_url=true;
@@ -101,9 +124,9 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
   }
   goto_MenuDatapage(e:any){
-    console.log(e,this.logo,this.resid);
+    console.log(e,this.logo,this.resid,this.logo_fileName);
     
-   this.Logo.logosubmit(e,this.logo,this.resid,this.name).subscribe((data:any)=>{
+   this.Logo.logosubmit(e,this.logo,this.resid,this.name,this.logo_fileName).subscribe((data:any)=>{
      console.log(data);
      if(data.suc==1){
       //  this.clearvalue=document.getElementById('url');
@@ -119,13 +142,17 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   selectimage(event:any){
    
    if(event.target.files.length!=0){
-    this.logo=event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.img_logo = reader.result as string;
-     }
-    reader.readAsDataURL(this.logo)
-    this.logo_preview=false;
+ this.logo_fileName=event.target.files[0].name;
+    // this.logo=event.target.files[0];
+    this.common_image=event;
+    this.common=document.getElementById('id01');
+ this.common.style.display='block';
+    // const reader = new FileReader();
+    // reader.onload = () => {
+    //   this.img_logo = reader.result as string;
+    //  }
+    // reader.readAsDataURL(this.logo)
+    // this.logo_preview=false;
    }
    else{
     this.logo_preview=true;
@@ -157,5 +184,77 @@ checkvalidity(event:any){
 }
 deletephoto(e:any){
   this.logo_preview=true;
+  this.common=document.getElementById('myfile');
+  this.common.value=null;
+}
+
+//Image Cropper
+
+zoomOut() {
+  this.scale -= .1;
+  this.transform = {
+    ...this.transform,
+    scale: this.scale
+  };
+}
+
+zoomIn() {
+  this.scale += .1;
+  this.transform = {
+    ...this.transform,
+    scale: this.scale
+  };
+}
+imageLoaded() {
+  console.log("image loaded")
+  this.showCropper = true;
+  this.modal = false;
+  this.hide = false;
+  this.valu = false;
+  this.Zoomout = false;
+  this.ZoomIn = false;
+}
+imageCropped(event: ImageCroppedEvent) {
+  console.log('imagecropped');
+  console.log("width:" + event.width);
+  console.log("height:" + event.height)
+  this.croppedImage = event.base64;
+  console.log(this.croppedImage);
+}
+cropperReady(sourceImageDimensions: Dimensions) {
+ console.log('Cropper ready', sourceImageDimensions);
+  console.log("cropper ready CROPPED IMAGE:" + this.croppedImage);
+}
+loadImageFailed() {
+  console.log('Load failed');
+}
+click_it(e:any){
+  // this.cover_change=true;
+  this.common_for_all=document.getElementById('id01');
+  this.common_for_all.style.display='none';
+    this.valu = true;
+    this.logo_preview=false;
+    this.logo=this.croppedImage;
+    this.img_logo=this.croppedImage;
+   console.log(this.logo);
+   
+}
+close_it(){
+  this.valu=true;
+  this.logo_preview=true;
+    this.logo='';
+    this.img_logo='';
+    this.common_for_all=document.getElementById('myfile');
+    this.common_for_all.value=''
+  this.common_for_all=document.getElementById('id01');
+  this.common_for_all.style.display='none';
+ 
+
+
+}
+
+openmodal(){
+ this.common=document.getElementById('id01');
+ this.common.style.display='block';
 }
 }

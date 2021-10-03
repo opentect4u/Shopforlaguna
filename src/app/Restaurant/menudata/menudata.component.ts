@@ -69,6 +69,14 @@ export class MenudataComponent implements OnInit, AfterViewInit{
   check:any=[];
   break_button:boolean=false;
   noticeme:any=0;
+  show_toast:boolean=true;
+  Header_title:any;
+  Notice_content:any;
+  Font_color:any;
+  Backcolor:any;
+  color_Font:any;
+  color_Back:any;
+
   constructor(private toastr:ToastrManager,private router:Router,private about:DataserviceService,private lagunaserve:LagunaserviceService) { }
   ngAfterViewInit(): void {
     if('notice' in localStorage){
@@ -89,7 +97,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
       this.notice_select=this.notice_select.msg;
       })    
     
-   this.lagunaserve.get_special(this.res_id).subscribe(data=>{
+   this.lagunaserve.get_special(this.res_id,null).subscribe(data=>{
      console.log(data);
      this.notic=data;
      this.notify=this.notic.msg[0].menu_id;
@@ -180,16 +188,18 @@ export class MenudataComponent implements OnInit, AfterViewInit{
               console.log(data);
               this.check=data;
               if(this.check.msg[0].approval_flag=='U'){
+                this.show_toast=true;
                
               }
               else{
-                this.toastr.warningToastr('Set up mode is on , you can not update or insert','Alert!!',{
-                  dismiss:'click',
-                   maxShown:'1',
-                   toastTimeout:'5000'
+                // this.toastr.warningToastr('Set up mode is on , you can not update or insert','Alert!!',{
+                //   dismiss:'click',
+                //    maxShown:'1',
+                //    toastTimeout:'5000'
    
 
-                })
+                // })
+                this.show_toast=false;
                 this.break_button=true;
                 this.disabled_about=true;
                 this.color_font=true;
@@ -373,12 +383,153 @@ nexttab1(e:any,v7:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
   }
 }
 pickup_place(event:any){
- this.menu=event;
- console.log(this.menu)
+
+  this.menu=event;
+  console.log(this.menu)
  if(this.menu!=''){
    this.value_menu=false;
- }
+   
+ 
+ this.lagunaserve.get_special(this.res_id,this.menu).subscribe(data=>{
+   console.log(data);
+   
+  this.notic=data;
+  if(this.notic.msg.length > 0)
+  {for(let i=0;i<this.notic.msg.length;i++){
+    console.log("asdada"+this.notic.msg[i].menu_id,event);
+    // if(this.notic.msg[i].menu_id > 0)
+   if(this.notic.msg[i].menu_id == event){
+
+      this.noticeme=1;
+      if(this.notic.msg[i].notice_flag=='Y'){
+        this.notice_check=document.getElementById('noticechecked');
+        this.notice_check.checked=true;
+        this.color_font=false;
+        this.notice_flag='Y';
+      }
+      else {
+       this.notice_check=document.getElementById('noticechecked');
+       this.notice_check.checked=false;
+       this.color_font=true;
+       this.notice_flag='N';
+
+      }
+     
+      this.position_id=this.notic.msg[i].position_id;
+      this.position=this.position_id;
+      if(this.position_id!=''){
+        this.value_position=false;
+      }
+      else{
+        this.value_position=true;
+      }
+      this.header_title=this.notic.msg[i].header_title;
+      if( this.header_title!=''){
+        this.value_Headertitle=false;
+        this.Header_title=document.getElementById('headTitle');
+        this.Header_title.value= this.header_title;
+      }
+      else{
+       
+        this.value_Headertitle=true;
+      }
+      this.notice_content=this.notic.msg[i].notice_content;
+      if(this.notice_content!=''){
+        this.value_text=false;
+        this.Notice_content=document.getElementById('spclMore');
+        this.Notice_content.value=this.notice_content;
+      }
+      else{
+
+       this.value_text=true;
+        
+      }
+      this.font_color=this.notic.msg[i].font_color;
+      if(this.font_color!=''){
+       this.value_font=false;
+       this.Font_color=document.getElementById('box');
+       this.Font_color.value=this.font_color;
+       this.color_Font=document.getElementById('colorPicker');
+       this.color_Font.value=this.font_color;
+      }
+      else{
+       this.value_font=true
+        }
+      this.back_color=this.notic.msg[i].back_color;
+         if(this.back_color!=''){
+           this.value_background=false;
+           this.Backcolor=document.getElementById('box2');
+           this.Backcolor.value=this.back_color;
+           this.color_Back=document.getElementById('colorPicker2');
+          this.color_Back.value=this.font_color;
+         }
+         else{
+           this.value_background=true;
+         
+         }
+    }
+    else{
+      console.log("haisdaids");
+      
+      this.notice_check=document.getElementById('noticechecked');
+      this.notice_check.checked=false;
+      this.color_font=true;
+      this.notice_flag='N';
+      this.position_id='';
+      this.Header_title=document.getElementById('headTitle');
+      this.Header_title.value='';
+      this.header_title='';
+      this.Notice_content=document.getElementById('spclMore');
+      this.Notice_content.value='';
+      this.notice_content='';
+      this.Font_color=document.getElementById('box');
+      this.Font_color.value='';
+      this.font_color='';
+      this.color_Font=document.getElementById('colorPicker');
+      this.color_Font.value='black';
+      this.Backcolor=document.getElementById('box2');
+      this.Backcolor.value='';
+      this.back_color=''
+      this.color_Back=document.getElementById('colorPicker2');
+     this.color_Back.value='';
+     this.value_font=true;
+    
+      
+    }
+  }}else{
+    console.log('Elaseeesss');
+    console.log("haisdaids");
+      
+      this.notice_check=document.getElementById('noticechecked');
+      this.notice_check.checked=false;
+      this.color_font=true;
+      this.notice_flag='N';
+      this.position_id='';
+      this.Header_title=document.getElementById('headTitle');
+      this.Header_title.value='';
+      this.header_title='';
+      this.Notice_content=document.getElementById('spclMore');
+      this.Notice_content.value='';
+      this.notice_content='';
+      this.Font_color=document.getElementById('box');
+      this.Font_color.value='';
+      this.font_color='';
+      this.color_Font=document.getElementById('colorPicker');
+      this.color_Font.value='black';
+      this.Backcolor=document.getElementById('box2');
+      this.Backcolor.value='';
+      this.back_color=''
+      this.color_Back=document.getElementById('colorPicker2');
+     this.color_Back.value='';
+     this.value_font=true;
+    
+    
+  }
+ })
+}
  else{
+  console.log("asdasd");
+
   this.value_menu=true;
 
  }

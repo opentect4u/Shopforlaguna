@@ -216,7 +216,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
 
     this.rest_add=this.dashboardData[0].addr_line1+" "+this.dashboardData[0].addr_line2+" "+this.dashboardData[0].zip+" "+this.dashboardData[0].city+", "+this.dashboardData[0].country
     })
-    this.admin_data.get_special(this.r_id).subscribe(data=>{console.log(data)
+    this.admin_data.get_special(this.r_id,null).subscribe(data=>{console.log(data)
     this.specialData=data;
     this.specialData=this.specialData.msg;
     this.sp_menuid=this.specialData[0].menu_id;

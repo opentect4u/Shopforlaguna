@@ -30,17 +30,20 @@
                 problems, please do not hesitate to email us: <a
                     href="mailto:Support@shoplocallaguna.com">Support@ShopLocalLaguna.com</a></p>
             <h5><b><i class="fa fa-wpforms"></i> Restaurant - MENU Platform SET-UP</b></h5>
+          
         </header>
         <div class="w3-container w3-white w3-padding-24">
-
-
+        
             <div class="secDifer">
-                <label class="titleCustom"><strong>LOGO</strong></label>
+            <h3 class="text-danger text-center" [hidden]="show_toast">As admin set your order,you can not modified</h3>
 
+                <label class="titleCustom"><strong>LOGO</strong></label>
+                
                 <!-- <input type="checkbox" id="logo" name="logo" value="Logo"> -->
                 <label for="logo"><strong>Logo File</strong></label><br>
                 <p>Upload your logo which needs to be in JPG or PNG format :</p>
                 <!-- <form > -->
+                    <button hidden (click)="openmodal()" id="hid">Open Modal</button>
                     <label for="myfile">Select files:</label>
                     <input type="file" id="myfile"
                    
@@ -50,7 +53,7 @@
                     <div class="img-wrap rounded p-1" [hidden]="logo_preview">
                         <a class="close" (click)="deletephoto('logo_setup')">&times;</a>
                      
-                      <img src="{{img_logo}}"  height="50px" width="50px"> 
+                      <img src="{{img_logo}}"  height="50px" width="50px" data-bs-toggle="modal" data-bs-target="#myModal"> 
 
                     </div>
                     </div>
@@ -114,7 +117,7 @@
         <!-- Modal body -->
         <div class="modal-body text-center">
             
-                 <img src="{{img_logo}}"   height="70%" width="100%">
+                 <img src="{{img_logo}}"   class="img-fluid">
               
             </div>
   
@@ -127,3 +130,72 @@
          </div>
       </div>
 </div>
+
+<!-- For Image Cropper -->
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+  
+      <div class="modal-dialog-sm">
+  
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" >Adjust
+              Image</h4>
+    
+        
+              <i class="fa fa-times-circle fa-2x" type="button"  (click)="close_it()" ></i>
+     
+    
+          </div>
+          
+  
+          <div class="modal-body">
+            <input type="text" hidden value="{{common_value}}" #common>
+        
+           
+            <image-cropper [hidden]="hide" [imageChangedEvent]="common_image"
+            [maintainAspectRatio]="true" 
+          
+            [onlyScaleDown]="false" 
+           
+            [cropperMaxWidth]=width
+            [cropperMaxHeight]=height
+            
+            
+            (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady($event)"
+            (loadImageFailed)="loadImageFailed()"
+            [style.display]="showCropper ? null: 'none'" [transform]="transform">
+          </image-cropper>
+          <div class="row">
+            <div class="col-5"></div>
+
+            <div class="col-1 text-center">
+                <i class="fa fa-minus-circle fa-2x " type="button" [hidden]="ZoomIn"  (click)="zoomOut()"></i>
+            </div>
+            <div class="col-1 text-center">
+                <i class="fa fa-plus-circle fa-2x " type="button" [hidden]="Zoomout" (click)="zoomIn()"></i>
+            </div>
+        </div>
+  
+          </div>
+          <footer class="w3-container  mt-2">
+              <div class="row">
+                  <div class="col-6"></div>
+                  <div class="col-4"></div>
+
+                  <div class="col-2 ">
+                      <button class="btn btn-danger"   
+                    (click)="click_it(common.value)">Save</button>
+                </div>
+
+              </div>
+          
+          </footer>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  </div>
