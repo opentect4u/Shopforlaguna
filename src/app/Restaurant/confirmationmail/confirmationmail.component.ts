@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { global_url_test } from 'src/app/global_url';
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 
 @Component({
@@ -35,15 +36,23 @@ export class ConfirmationmailComponent implements OnInit {
    check3:any='';
    check4:any='';
    bind:boolean=true;
-
-
- 
+   get_url:any=[]; 
+   img_path=global_url_test.URL
+   img_url:any;
    brunch:any;
+   sos:any;
+   x:any;
   constructor(private lagunaserve:LagunaserviceService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-
+     
     this.resid=this.route.snapshot.params['id'];
+    this.lagunaserve.get_menu_url(this.resid).subscribe(data=>{
+      console.log(data);
+      this.get_url=data;
+       this.img_url=this.img_path + this.get_url.msg[0].image;
+
+    })
     this.lagunaserve.getrestaurant_check_menu_setup(this.resid).subscribe(data=>{
       console.log(data);
       this.store_data=data;
@@ -56,27 +65,28 @@ export class ConfirmationmailComponent implements OnInit {
       
 
        
-        for(let i=0;i<this.com.length;i++){
-          if(this.com[i]=='1'){
-            this.check1=1;
-          }
-          else if(this.com[i]=='2'){
+        // for(let i=0;i<this.com.length;i++){
+        //   if(this.com[i]=='1'){
+        //     this.check1=1;
+        //   }
+        //   else if(this.com[i]=='2'){
            
-            this.check2=2;
-          }
-          else if(this.com[i]=='3'){
-            this.check3=3;
-          }
-          else if(this.com[i]=='4'){
+        //     this.check2=2;
+        //   }
+        //   else if(this.com[i]=='3'){
+        //     this.check3=3;
+        //   }
+        //   else if(this.com[i]=='4'){
          
-           this.check4=4;
-          }
-        }
+        //    this.check4=4;
+        //   }
+        // }
     
      })
   }
   enableonlyapprovefield(event:any){
     console.log(event.target.value);
+    console.log(this.sos);
     
     if(event.target.checked==true){
       this.Approv='A';
@@ -98,15 +108,18 @@ export class ConfirmationmailComponent implements OnInit {
       
       this.dinner=document.getElementById('dinner');
        this.dinner.checked=false;
+       this.sos=document.getElementById('text');
+      this.sos.value='';
     }
     else {
+      
       this.enable1=false;
       this.enable2=false;
        this.enable3=false;
       this.enable4=false;
       this.enable=false;
      this.Approv='';
-
+ 
       
     }
   }
@@ -125,30 +138,34 @@ export class ConfirmationmailComponent implements OnInit {
         this.com=this.comma.split(',');
         console.log(this.com.length);
         console.log(this.com);
-        for(let i=0;i<this.com.length;i++){
-          if(this.com[i]=='1'){
-            this.breakfast=document.getElementById('breakfast');
-            this.breakfast.checked=true;
-               this.enable1=false;
-          }
-          else if(this.com[i]=='2'){
-            this.launch=document.getElementById('launch');
-            this.launch.checked=true;
-            this.enable2=false;
-          }
-          else if(this.com[i]=='3'){
+        this.enable4=false;
+        this.enable1=false;
+        this.enable2=false;
+        this.enable3=false;
+        // for(let i=0;i<this.com.length;i++){
+        //   if(this.com[i]=='1'){
+        //     this.breakfast=document.getElementById('breakfast');
+        //     this.breakfast.checked=true;
+        //        this.enable1=false;
+        //   }
+        //   else if(this.com[i]=='2'){
+        //     this.launch=document.getElementById('launch');
+        //     this.launch.checked=true;
+        //     this.enable2=false;
+        //   }
+        //   else if(this.com[i]=='3'){
             
-            this.dinner=document.getElementById('dinner');
-            this.dinner.checked=true;
-            this.enable3=false;
-          }
-          else if(this.com[i]=='4'){
+        //     this.dinner=document.getElementById('dinner');
+        //     this.dinner.checked=true;
+        //     this.enable3=false;
+        //   }
+        //   else if(this.com[i]=='4'){
          
-            this.enable4=false;
-            this.brunch=document.getElementById('brunch')
-            this.brunch.checked=false;
-          }
-        }
+        //     this.enable4=false;
+        //     this.brunch=document.getElementById('brunch')
+        //     this.brunch.checked=false;
+        //   }
+        // }
       })
     
      this.bind=true;
@@ -177,35 +194,49 @@ export class ConfirmationmailComponent implements OnInit {
   }
   else if(event.target.id=='breakfast'){
     if(event.target.checked==true){
-      this.check1='1';
+      this.check1=1;
+      // this.bind=false;
+
     }
     else{
       this.check1='';
+      // this.bind=true;
     }
   }
   else if(event.target.id=='launch'){
     if(event.target.checked==true){
-      this.check2='2';
+      this.check2=2;
+      // this.bind=false;
+
     }
     else{
       this.check2='';
+      // this.bind=true;
+
     }
   }
   else if(event.target.id=='dinner'){
     if(event.target.checked==true){
-      this.check3='3';
+      this.check3=3;
+      // this.bind=false;
+
     }
     else{
       this.check3='';
+      // this.bind=true;
+
     }
   }
   else if(event.target.id=='brunch'){
     if(event.target.checked==true){
-      this.check4='4'
-      ;
+      this.check4=4;
+      // this.bind=false;
+
     }
     else{
       this.check4='';
+      // this.bind=true;
+
     }
   }
   
@@ -223,8 +254,11 @@ export class ConfirmationmailComponent implements OnInit {
   }
 
   getvalue(){
+    this.unapprove.length=0
    this.radio1=document.getElementById('css');
     this.radio2=document.getElementById('html')
+  
+    
     if(this.radio1.checked){
       
       console.log("Breakfast:"+this.check1);
@@ -242,9 +276,11 @@ export class ConfirmationmailComponent implements OnInit {
      this.lagunaserve.post_approve_menu(this.unapprove).subscribe(data=>{
        console.log(data);
      })
+
+     console.log( this.unapprove);
     }
     else if(this.radio2.checked){
-      console.log("Unapprove:"+this.unapprov);
+    
        console.log("Approve:"+this.Approv);
        this.unapprove.push({"apr_flag":this.Approv,
       "res_id":this.resid});
@@ -252,8 +288,22 @@ export class ConfirmationmailComponent implements OnInit {
         console.log(data);
       })
     }
-   
+   this.myFunction();
 
 
   }
+
+
+   // For success snackbar
+   myFunction() {
+    // Get the snackbar DIV
+    this.x = document.getElementById("snackbar");
+  
+    // Add the "show" class to DIV
+    this.x.className = "show";
+  
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
+  } 
+
 }

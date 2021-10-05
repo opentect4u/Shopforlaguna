@@ -2,9 +2,11 @@ const db = require('../core/db');
 const Buffer = require('buffer').Buffer;
 const dateFormat = require('dateformat');
 const bcrypt = require('bcrypt');
+const {OrderEmail} = require('./EmailModule')
 var data = '';
 
 const ResRegistration = (data) => {
+    var res = '';
     // console.log(data);
     var add2_fl = data.Address2 ? ',addr_line2' : '';
     var add2_vl = data.Address2 ? `,"${data.Address2}"` : '';
@@ -12,17 +14,19 @@ const ResRegistration = (data) => {
     var sql = `INSERT INTO td_contacts (contact_date, restaurant_name, contact_name, phone_no, email, addr_line1 ${add2_fl}, city, zip, country, time_zone, website, created_by, created_at) 
     VALUES ("${datetime}","${data.Name}", "${data.Contact}","${data.Telephone}","${data.Email}","${data.Address1}" ${add2_vl}, "${data.cityState}","${data.zip}","${data.country}", "${data.time_zone}", "${data.Website}", "${data.Email}", "${datetime}")`;
     return new Promise((resolve, reject) => {
-        db.query(sql, (err, result) => {
+        db.query(sql, async (err, result) => {
             if (err) {
                 console.log(err);
-                data = { suc: 0, msg: JSON.stringify(err) };
+                res = { suc: 0, msg: JSON.stringify(err) };
             }
             else {
                 let str = result.insertId + '/' + data.Email;
                 let id_en = Buffer.from(str).toString('base64');
-                data = { suc: 1, msg: 'Successfully Inserted !!', id: id_en };
+                res = { suc: 1, msg: 'Successfully Inserted !!', id: id_en };
+                // SEND EMAIL TO USER ORDER PAGE AS URL //
+                var or_res = await OrderEmail(result.insertId, data.Email, data.Contact, id_en);
             }
-            resolve(data);
+            resolve(res);
         })
     })
 }

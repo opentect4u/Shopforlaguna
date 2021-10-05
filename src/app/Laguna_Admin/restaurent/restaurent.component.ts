@@ -3,6 +3,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
+
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 export interface PeriodicElement {
   name: string;
@@ -27,7 +29,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-restaurent',
   templateUrl: './restaurent.component.html',
-  styleUrls: ['./restaurent.component.css']
+  styleUrls: ['./restaurent.component.css',
+
+]
 })
 export class RestaurentComponent implements OnInit ,AfterViewInit{
   displayedColumns: string[] = ['id', 'restaurant_name', 'phone_no', 'contact_name','setup','edit','manage'];
@@ -42,15 +46,16 @@ export class RestaurentComponent implements OnInit ,AfterViewInit{
   m='';
   dataSource= new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  constructor(private admin_data:LagunaserviceService,private router:Router) { }
-
+  @ViewChild(MatSort) matsort!: MatSort;
+  constructor(private spinner: NgxSpinnerService,private admin_data:LagunaserviceService,private router:Router) { }
+  show_spinner=false;
   ngOnInit(): void {
+    this.spinner.show()
     this.fetchdata();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSource.sort = this.matsort;
   }
   myFunction() {
     this.x = document.getElementById("snackbar");
@@ -65,14 +70,15 @@ export class RestaurentComponent implements OnInit ,AfterViewInit{
     //Call APi
     this.admin_data.get_admin_dashboard().subscribe(data=>{console.log(data)
     this.userData=data
-    
+    // this.show_spinner=true;
+    this.spinner.hide();
      this.putdata(this.userData.msg)
     })
   }
   putdata(v:any){
     this.dataSource= new MatTableDataSource(v);
     this.dataSource.paginator=this.paginator;
-    this.dataSource.sort=this.sort;
+    this.dataSource.sort=this.matsort;
     for(let i=0;i<v.length;i++){
       console.log('setup'+(i+1));
       // this.divid=document.getElementById('setup'+(i+1));

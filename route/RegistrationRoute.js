@@ -1,6 +1,7 @@
 const express = require('express');
 const { F_Select } = require('../modules/MenuSetupModule');
 const { ResRegistration, EmailCheck, OrderSave, PaySave, MobileCheck } = require('../modules/RegisterModule');
+const {PayEmail} = require('../modules/EmailModule')
 const RegRouter = express.Router();
 
 RegRouter.post('/registration', async (req, res) => {
@@ -39,6 +40,18 @@ RegRouter.get('/get_timezone', async (req, res) => {
     let sql = `SELECT * FROM md_time_zone`;
     var data = await F_Select(sql);
     res.send(data);
+})
+
+RegRouter.get('/order_dtls', async (req, res) => {
+    let sql = `SELECT * FROM td_order_items WHERE restaurant_id = ${req.query.id}`;
+    var data = await F_Select(sql);
+    res.send(data);
+})
+
+RegRouter.get('/pay_email', async (req, res) => {
+    console.log('Pay Email');
+    var dt = await PayEmail(req.query.id, req.query.en_dt);
+    res.send({ suc: 1, msg: 'Email Sent' })
 })
 
 module.exports = { RegRouter };

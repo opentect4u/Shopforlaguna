@@ -87,12 +87,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 
-.img-wrap {
+/* .img-wrap {
    position: relative;
     display: inline-block;
      border: 1px #00477e solid;
      font-size: 0;
-}
+} */
 .img-wrap .close {
 
     position: absolute;
@@ -112,7 +112,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-weight: bold;
     cursor: pointer;
 
-    opacity: .2;
+    opacity: 0; transition: all 0.2s linear;
 
     text-align: center;
 

@@ -207,13 +207,13 @@ You can now begin to set-up your platform. Please follow the simple steps below.
                         mounted holder.<br>
                         Please add the number of sign holders that you would like:<br><br>
 
-                        <input type="text" id="tblsign" name="tblsign" value="" size="4" #tblsign>
+                        <input type="text" id="tblsign" name="tblsign" [(ngModel)]="Tabletop_Sign_Holder" size="4" #tblsign>
                         <label for="tblsign">5" x 7" Tabletop Sign Holder - {{cling_data1}} </label>
                         <br><br>
-                        <input type="text" id="wallsign1" name="wallsign1" value="" size="4" #wallsign1>
+                        <input type="text" id="wallsign1" name="wallsign1" [(ngModel)]="Wall_Mount_Sign_Holder1" size="4" #wallsign1>
                         <label for="wallsign1">5" x 7" Wall Mount Sign Holder - {{cling_data2}}</label>
                         <br><br>
-                        <input type="text" id="wallsign2" name="wallsign2" value="" size="4" #wallsign2>
+                        <input type="text" id="wallsign2" name="wallsign2" [(ngModel)]="Wall_Mount_Sign_Holder2" size="4" #wallsign2>
                         <label for="wallsign2">8.5" x 11" Wall Mount Sign Holder - {{cling_data3}}</label>
                         <br><br>
 
@@ -226,7 +226,7 @@ You can now begin to set-up your platform. Please follow the simple steps below.
                             Includes your custom Contact Information QR Code and the Laguna Beach FUN Directory QR Code.
                             One is included in your Menu Platform package, order here for additional pieces.<br><br>
     
-                            <input type="text" id="selfcling" name="selfcling" value="" size="4" #selfcling>
+                            <input type="text" id="selfcling" name="selfcling" [(ngModel)]="Window_Clings" size="4" #selfcling>
                             <label for="selfcling">6" x 10" Window Clings - {{cling_data4}}</label><br>
                             <br>
     

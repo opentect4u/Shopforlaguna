@@ -23,6 +23,7 @@ export class PaymentPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.id_rest = this.activatedroute.snapshot.params['id'];
+    localStorage.setItem('rest_id',this.id_rest);
     console.log(atob(this.id_rest).split('/')[0]);
    console.log(this.id_rest);
   }

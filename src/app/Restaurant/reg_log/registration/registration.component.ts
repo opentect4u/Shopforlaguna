@@ -11,6 +11,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 export class RegistrationComponent implements OnInit {
   // v = 'test';
   click:any;
+  rest:any;
   constructor(private _data:DataserviceService,private router:Router,public toastr: ToastrManager) { }
    regData:any;
    email_data:any;
@@ -95,8 +96,16 @@ export class RegistrationComponent implements OnInit {
     this._data.submit_reg(v).subscribe((dt) => {
       console.log(dt);
       this.regData=JSON.parse(dt);
-      if(this.regData.suc==1)
-       this.router.navigate(['/order',this.regData.id])
+      if(this.regData.suc==1){
+        console.log(this.regData.id);
+        localStorage.setItem('encoded_data',this.regData.id);
+      this.router.navigate(['/order',this.regData.id])
+      this.rest=atob(this.regData.id);
+        this.rest=this.rest.split('/');
+       
+        
+      localStorage.setItem('RES_id',this.rest[0]);
+    }
       else
         this.myFunction()
     },error=>{this.myFunction});

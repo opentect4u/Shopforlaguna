@@ -70,7 +70,7 @@
                   <br>When those issues have been completed you'll receive the confirmation email again.<br>
                 <br><strong>Once you've provided us with your final approval, your Menu will go LIVE.</strong><br>
                   </p>
-        
+        <img src="{{this.img_url}}" class="img-fluid">
     
       </div>
       <div class="w3-container w3-half w3-cell w3-mobile">
@@ -136,7 +136,7 @@
           <div class="rowCustomFour">
                 <div class="fieldSecFull">
                 <label for="vehicle2"> Please describe what requires updating for each Menu.</label>
-                <textarea rows="6" cols="60" [disabled]="enable" maxlength="50" class="formCssTextArea" (input)="prevent_null($event)" (keypress)="prevent_null($event)" (change)="prevent_null($event)" required [(ngModel)]="textarea"></textarea>
+                <textarea rows="6" cols="60" [disabled]="enable" id="text" maxlength="50" class="formCssTextArea" (input)="prevent_null($event)" (keypress)="prevent_null($event)" (change)="prevent_null($event)" required [(ngModel)]="textarea"></textarea>
                
               </div>
                 </div>
@@ -206,3 +206,4 @@
     
     
 </div>
+<div id="snackbar">Submited successfully</div>

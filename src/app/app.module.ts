@@ -62,6 +62,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SidebarpaymentComponent } from './Restaurant/reg_log/common/sidebarpayment/sidebarpayment.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     RestaurantSetupComponent,
     ThankyoupageComponent,
     ConfirmationmailComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    SidebarpaymentComponent
 
   ],
 

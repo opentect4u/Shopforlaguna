@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 import { DataserviceService } from '../../service/dataservice.service';
 
 @Component({
@@ -62,7 +63,7 @@ export class OrderPageComponent implements OnInit {
   menus_first:any;
   menus_second:any;
   menus_third:any
-  constructor(private _data:DataserviceService,private activatedroute:ActivatedRoute,private router:Router) { 
+  constructor(private _data:DataserviceService,private activatedroute:ActivatedRoute,private router:Router,private lagunaserve:LagunaserviceService) { 
     
   }
   x:any
@@ -88,9 +89,15 @@ export class OrderPageComponent implements OnInit {
   standard=false;
   standardplus=false;
   premium=false;
+  birthday:any;
+  RES_ID:any=localStorage.getItem('RES_id');
+  entertainment:any;
+  catch_selected_order:any=[];
+  Tabletop_Sign_Holder:any='';
+  Wall_Mount_Sign_Holder1:any='';
+  Wall_Mount_Sign_Holder2:any='';
+  Window_Clings:any='';
   ngOnInit(): void {
-
-    
     this.birthday_mode=document.getElementById('defaultOpen1');
     this.birthday_mode.style.background="white";
     this.birthday_mode.style.color='black'
@@ -223,6 +230,64 @@ export class OrderPageComponent implements OnInit {
 
     
     })
+
+     this.lagunaserve.get_selectedd_order(this.RES_ID).subscribe(data=>{
+     console.log(data);
+     this.catch_selected_order=data;
+     if(this.catch_selected_order.msg!=''){
+    this.value1=1;
+    this.value2=2;
+    this.value3=3;
+    this.enable_birthday_tab = false
+    this.enable_wall_tab=false;
+    this.enable_event_tab=false;
+     if(this.catch_selected_order.msg[0].event_calendar=='Y'){
+     this.entertainment=document.getElementById('option2a');
+     this.entertainment.checked=true;
+
+     }
+     else{
+      this.entertainment=document.getElementById('option2a');
+      this.entertainment.checked=false;
+     }
+     if(this.catch_selected_order.msg[0].birth_calendar_flag=='Y'){
+      this.birthday=document.getElementById('option1a');
+      this.birthday.checked=true;
+     }
+    else{
+      this.birthday=document.getElementById('option1a');
+      this.birthday.checked=false;
+    }
+     if(this.catch_selected_order.msg[0].package_id==1){
+      console.log("package1");
+      
+       this.standard=true;
+       this.enable_next=false;
+     }
+     if(this.catch_selected_order.msg[0].package_id==2){
+      console.log("package2");
+
+      this.standardplus=true;
+      this.enable_next=false;
+
+
+     }
+     if(this.catch_selected_order.msg[0].package_id==3){
+      console.log("package3");
+
+      this.premium=true;
+      this.enable_next=false;
+
+
+     }
+    this.Tabletop_Sign_Holder=this.catch_selected_order.msg[0].table_top_6;
+    this.Wall_Mount_Sign_Holder1=this.catch_selected_order.msg[0].table_top_7;
+    this.Wall_Mount_Sign_Holder2=this.catch_selected_order.msg[0].table_top_8;
+    this.Window_Clings=this.catch_selected_order.msg[0].window_cling_9;
+     }
+   })
+          
+ 
   }
   enable_birthday(){
     this.value1=1;
@@ -290,7 +355,11 @@ export class OrderPageComponent implements OnInit {
   }
   submit_text_data(v1:any,v2:any,v3:any,v4:any){
     this.value1=1;
-
+    console.log(this.RES_ID,localStorage.getItem('encoded_data'));
+    
+    this.lagunaserve.pay_email(this.RES_ID,localStorage.getItem('encoded_data')).subscribe(data=>{
+      console.log(data);
+    });
     this.tbl=v1;
     this.wall=v2;
     this.wall2=v3;
@@ -341,14 +410,14 @@ export class OrderPageComponent implements OnInit {
    this.package_mode.style.color='black'
   }
   openCity(v1:any){
-    
+    console.log(this.value1,this.enable_birthday_tab);
 
    if(v1=='birthday'){
-    if(this.value1==1 && this.enable_birthday_tab==false)
+    if(this.value1==1 && this.enable_birthday_tab == false)
     {
-      
-     
-      this.mode1=v1
+    console.log(this.value1,this.enable_birthday_tab);
+
+       this.mode1=v1
       this.birthday_mode=document.getElementById('defaultOpen1');
       this.birthday_mode.style.background="#00477E";
       this.birthday_mode.style.color='white'

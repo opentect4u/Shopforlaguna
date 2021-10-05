@@ -13,13 +13,13 @@ TestRouter.post('/testing', async (req, res) => {
     var cov_file_name = '',
         top_img_name = '',
         data = req.body;
-    if (req.body.cov_img) {
+    if (req.body.cov_img != '' && req.body.cov_img !=undefined) {
         var cov_buffer = req.body.cov_img;
         // var dt = buffer.split(';');
         // var ext = dt[0].split('/')[1];
         cov_file_name = data.restaurant_id + '_cover_' + req.body.cov_filename;
 
-        // console.log(ext);
+        console.log({cov_file_name, cov_filename: req.body.cov_filename});
         var cov_buffer_dt = cov_buffer.replace(/^data:image\/png;base64,/, "");
         cov_buffer_dt += cov_buffer_dt.replace('+', ' ');
         let cov_binaer_dt = new Buffer(cov_buffer_dt, 'base64').toString('binary');
@@ -38,7 +38,7 @@ TestRouter.post('/testing', async (req, res) => {
         //     }
         // })
     }
-    if (req.body.top_img) {
+    if (req.body.top_img != '' && req.body.top_img != undefined) {
         // top_img_name = req.body.restaurant_id + '_' + req.body.menu_id + '_top_' + req.files.top_img.name;
         // req.files.top_img.mv('uploads/' + top_img_name, async (err) => {
         //     if (err) {
@@ -52,7 +52,7 @@ TestRouter.post('/testing', async (req, res) => {
         // var ext = dt[0].split('/')[1];
         top_img_name = data.restaurant_id + '_top_' + req.body.top_filename;
 
-        // console.log(ext);
+        console.log({top_img_name, top_filename: req.body.top_filename});
         var top_buffer_dt = top_buffer.replace(/^data:image\/png;base64,/, "");
         top_buffer_dt += top_buffer_dt.replace('+', ' ');
         let top_binaer_dt = new Buffer(top_buffer_dt, 'base64').toString('binary');
@@ -134,6 +134,7 @@ const UploadCover = async (menu_name, res_name, data) => {
 }
 
 const UploadSection = async (sec_img, data) => {
+    console.log(sec_img);
     var file_path = '';
     if (sec_img) {
         // console.log();
@@ -141,25 +142,27 @@ const UploadSection = async (sec_img, data) => {
             ResIdPath = "uploads/";
 
         if (Array.isArray(sec_img)) {
-            var i = 1;
-            sec_file.forEach(dt => {
-                var file = dt;
-                var filename = data.restaurant_id + '_' + data.menu_id + '_section_' + i + '_' + file.name;
+            console.log(sec_file.length);
+            file_path = new Array();
+            for (let i = 1; i <= sec_file.length; i++) {
+                var filename = '';
+                var file = sec_file[i - 1];
+                filename = data.restaurant_id + '_' + data.menu_id + '_section_' + i + '_' + file.name;
+                file_path.push({ i, filename });
 
-                file.mv("uploads/" + filename, async (err) => {
+                file.mv('uploads/' + filename, async (err) => {
                     if (err) {
                         console.log(`${filename} not uploaded`);
                     } else {
                         console.log(`Successfully ${filename} uploaded`);
-                        await SectionImageSave(data, filename);
                     }
                 })
-                i++;
-            })
+            }
+            await SectionImageSave(data, file_path);
         } else {
             var filename = data.restaurant_id + '_' + data.menu_id + '_section_' + sec_file.name;
 
-            sec_file.mv("uploads/" + filename, async (err) => {
+            sec_file.mv('Uploads/' + filename, async (err) => {
                 if (err) {
                     console.log(`${filename} not uploaded`);
                 } else {
@@ -175,29 +178,11 @@ const UploadSection = async (sec_img, data) => {
 
 const UploadMenu = async (menu_img, data) => {
     var file_path = '';
-    // console.log({ menu_len: menu_img });
     if (menu_img) {
         var sec_file = menu_img,
-            // filename = sec_file.name,
-            // file_ext = filename.split('.')[1],
             ResIdPath = "uploads/";
 
         if (Array.isArray(sec_file)) {
-            // var i = 1;
-            // sec_file.forEach(dt => {
-            //     var file = dt;
-            //     var filename = data.restaurant_id + '_' + data.menu_id + '_menu_' + i + '_' + file.name;
-
-            //     file.mv('uploads/' + filename, async (err) => {
-            //         if (err) {
-            //             console.log(`${filename} not uploaded`);
-            //         } else {
-            //             console.log(`Successfully ${filename} uploaded`);
-            //             await OtherImageSave(data, filename);
-            //         }
-            //     })
-            //     i++;
-            // })
             console.log(sec_file.length);
             let j = 0;
             file_path = new Array();
@@ -212,28 +197,27 @@ const UploadMenu = async (menu_img, data) => {
                         console.log(`${filename} not uploaded`);
                     } else {
                         console.log(`Successfully ${filename} uploaded`);
-                        // console.log({ i, filename });
-                        // await OtherImageSave(data, filename, i);
                     }
                 })
             }
             await OtherImageSave(data, file_path);
-            console.log(Array.isArray(file_path));
+            // console.log(Array.isArray(file_path));
         } else {
-            console.log(Array.isArray(file_path));
-            file_path = data.restaurant_id + '_' + data.menu_id + '_menu_' + sec_file.name;
+            // console.log({ else: Array.isArray(file_path) });
+            var filename = data.restaurant_id + '_' + data.menu_id + '_menu_' + sec_file.name;
 
-            sec_file.mv('Uploads/' + file_path, async (err) => {
+            sec_file.mv('Uploads/' + filename, async (err) => {
                 if (err) {
-                    console.log(`${file_path} not uploaded`);
+                    console.log(`${filename} not uploaded`);
                 } else {
-                    console.log(`Successfully ${file_path} uploaded`);
-                    await OtherImageSave(data, file_path);
+                    console.log(`Successfully ${filename} uploaded`);
+                    await OtherImageSave(data, filename);
                 }
             })
         }
 
     } else {
+        // console.log("Null File Selected");
         await OtherImageSave(data, file_path)
     }
 }

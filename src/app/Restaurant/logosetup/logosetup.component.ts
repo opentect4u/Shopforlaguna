@@ -56,6 +56,7 @@ export class LogosetupComponent implements OnInit {
  logo_design:any;
  width:any=200;
  height:any=130;
+ common_size_check:any;
  show_toast:boolean=true;
   ngOnInit(): void {
 
@@ -63,7 +64,7 @@ export class LogosetupComponent implements OnInit {
 
     console.log( this.value_logo_url);
     
-    this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
+    this.lagunaserve.get_menu_urls(this.resid,null).subscribe(data=>{
       console.log(data);
        this.log=data;
        if(this.log.logo_dt.length!=0){
@@ -140,13 +141,22 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
      
   }
   selectimage(event:any){
-   
+   if(event.target.files[0].size>2097152){
+   this.common_size_check=document.getElementById('myfile');
+   this.common_size_check.value='';
+   this.myFunction_for_size();
+   console.log("asdad");
+   this.value_logo_url=true;
+   }
+   else{
+    
    if(event.target.files.length!=0){
  this.logo_fileName=event.target.files[0].name;
     // this.logo=event.target.files[0];
     this.common_image=event;
     this.common=document.getElementById('id01');
  this.common.style.display='block';
+ 
     // const reader = new FileReader();
     // reader.onload = () => {
     //   this.img_logo = reader.result as string;
@@ -158,7 +168,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
     this.logo_preview=true;
       
    }
-
+ 
+  }
 
  }
  myFunction() {
@@ -188,6 +199,17 @@ deletephoto(e:any){
   this.common.value=null;
 }
 
+//For file size greater than 2mb
+myFunction_for_size() {
+  // Get the snackbar DIV
+  this.x = document.getElementById("snackbar1");
+
+  // Add the "show" class to DIV
+  this.x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
+} 
 //Image Cropper
 
 zoomOut() {

@@ -25,56 +25,83 @@
 
         <!-- Header -->
         <header class="w3-container" style="padding-top:22px"><br>
-            <p><strong>Thank You for your payment and participation!</strong><br>
+            <!-- <p><strong>Thank You for your payment and participation!</strong><br>
                 You can now begin to set-up your platform. Please follow the simple steps below. If you have any
                 problems, please do not hesitate to email us: <a
-                    href="mailto:Support@shoplocallaguna.com">Support@ShopLocalLaguna.com</a></p>
+                    href="mailto:Support@shoplocallaguna.com">Support@ShopLocalLaguna.com</a></p> -->
+                    <div class="thankYou"><h3>Thank You for your payment and participation!</h3>
+                      <p>You can now begin to set-up your platform. Please follow the simple steps below. If you have any
+                      problems, please do not hesitate to email us: <a
+                          href="mailto:Support@shoplocallaguna.com">support@shoplocal-lagunabeach.com</a></p></div>
             <h5><b><i class="fa fa-wpforms"></i> Restaurant - MENU Platform SET-UP</b></h5>
           
         </header>
         <div class="w3-container w3-white w3-padding-24">
         
             <div class="secDifer">
-            <h3 class="text-danger text-center" [hidden]="show_toast">As admin set your order,you can not modified</h3>
-
-                <label class="titleCustom"><strong>LOGO</strong></label>
+              <div class="alert alert-danger text-center" role="alert"  [hidden]="show_toast">
+                <strong>Setup mode is on.</strong>
+                 <p>Admin is setting up your menu,you can not modify</p> 
+                </div>
+              <div class="row">
+                <div class="col-12">
+                  <label class="titleCustom"><strong>LOGO</strong></label>
                 
-                <!-- <input type="checkbox" id="logo" name="logo" value="Logo"> -->
-                <label for="logo"><strong>Logo File</strong></label><br>
-                <p>Upload your logo which needs to be in JPG or PNG format :</p>
-                <!-- <form > -->
-                    <button hidden (click)="openmodal()" id="hid">Open Modal</button>
-                    <label for="myfile">Select files:</label>
-                    <input type="file" id="myfile"
-                   
-                    [disabled]="break_button"  (change)="selectimage($event)">
-                    <!-- <i type="button" [hidden]="logo_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"  data-bs-toggle="modal" data-bs-target="#myModal"></i> -->
-                    <br>  <br>  <div class="container">
-                    <div class="img-wrap rounded p-1" [hidden]="logo_preview">
-                        <a class="close" (click)="deletephoto('logo_setup')">&times;</a>
-                     
-                      <img src="{{img_logo}}"  height="50px" width="50px" data-bs-toggle="modal" data-bs-target="#myModal"> 
+                  <!-- <input type="checkbox" id="logo" name="logo" value="Logo"> -->
+                  <!-- <p>Upload your logo which needs to be in JPG or PNG format :</p> -->
+                </div>
+                <div class="col-5">
+                  <button hidden (click)="openmodal()" id="hid">Open Modal</button>
+                 <label for="logo"><strong>Logo File (Upload your logo which needs to be in JPG or PNG format):</strong></label><br>
 
-                    </div>
-                    </div>
+                  <label for="myfile">Select files:</label>
+                  <input type="file" id="myfile"
+                 
+                  [disabled]="break_button"  (change)="selectimage($event)">
+                  <!-- <i type="button" [hidden]="logo_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"  data-bs-toggle="modal" data-bs-target="#myModal"></i> -->
+                  <br>  <br>  <div class="container1">
+                  <div class="img-wrap rounded p-1" [hidden]="logo_preview">
+                      <a class="close" (click)="deletephoto('logo_setup')"  [hidden]="!show_toast">&times;</a>
+                   
+                    <img src="{{img_logo}}"  height="50px" width="50px" data-bs-toggle="modal" data-bs-target="#myModal"> 
+
+                  </div>
+                  </div>
+                </div>
+                <div class="col-5">
+                  <label for="logo2"> <strong>Or Logo Url:
+                    <i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
+                                #tooltip="matTooltip"
+                            matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                   ></i>
+                  </strong></label>
+                  <!-- <p>Please provide a url/website address where we can collect your logo.</p> -->
+                  <form>
+                      <!-- <label for="url">Enter the url:</label> -->
+                      <input type="text" id="url" name="url" value="{{log_url}}" size="28" #logo
+                      [disabled]="break_button"
+                      (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"><br>
+                  </form>
+                  <p style="font-style: italic">If we cannot collect the logo from your web site, we will contact you
+                  </p>
+
+                </div>
+              </div>
+            <!-- <h3 class="text-danger text-center" [hidden]="show_toast">As admin set your order,you can not modified</h3> -->
+
+
+            
+               
+                <!-- <form > -->
+                   
                     <!-- <button (click)="downloadImage()">Preview</button>  -->
                     <br>
 
 
-                    <strong><u>OR</u></strong><br>
+                    <!-- <strong><u></u></strong><br> -->
 
                     <!-- <input type="checkbox" id="logo2" name="logo2" value="Logo Link"> -->
-                    <label for="logo2"> <strong>Logo Url</strong></label>
-                    <p>Please provide a url/website address where we can collect your logo.</p>
-                    <form>
-                        <label for="url">Enter the url:</label>
-                        <input type="text" id="url" name="url" value="{{log_url}}" size="28" #logo
-                        [disabled]="break_button"
-                        (keyup)="checkvalidity($event)" (change)="checkvalidity($event)"><br>
-                    </form>
-                    <p style="font-style: italic">If we cannot collect the logo from your web site, we will contact you
-                    </p>
-
+                   
           
             </div>
 
@@ -102,6 +129,8 @@
 </div>
 
 <div id="snackbar">Something Went Wrong Please Try After Sometime</div>
+<div id="snackbar1"><i class="fa fa-warning p-1"></i><span>File Size Can't be greater than 2MB</span></div>
+
 
 <!-- For the image of dinner Section -->
 <div class="modal fade in" id="myModal">
@@ -132,7 +161,7 @@
 </div>
 
 <!-- For Image Cropper -->
-<div id="id01" class="w3-modal">
+<div id="id01" class="modal">
     <div class="w3-modal-content">
   
       <div class="modal-dialog-sm">
@@ -160,7 +189,7 @@
            
             [cropperMaxWidth]=width
             [cropperMaxHeight]=height
-            
+            [roundCropper]="true"
             
             (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
             (cropperReady)="cropperReady($event)"
@@ -179,12 +208,11 @@
         </div>
   
           </div>
-          <footer class="w3-container  mt-2">
+          <footer class="w3-container  mt-2 mb-2">
               <div class="row">
-                  <div class="col-6"></div>
-                  <div class="col-4"></div>
+                  <div class="col-11"></div>
 
-                  <div class="col-2 ">
+                  <div class="col-1">
                       <button class="btn btn-danger"   
                     (click)="click_it(common.value)">Save</button>
                 </div>

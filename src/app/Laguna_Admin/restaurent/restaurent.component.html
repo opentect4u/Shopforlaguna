@@ -19,11 +19,12 @@
         <h5><strong>Database</strong></h5>
                 
                 You can locate a record by searching on any of the criteria shown below or scrolling through the list to find the entry. Clicking EDIT will bring up that restaurant's record.<br><br>
-                <mat-form-field appearance="standard">
-                    <mat-label>Filter</mat-label>
-                    <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
-                  </mat-form-field>
-                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <mat-form-field appearance="outline" class="float-end">
+                    <mat-label>Search</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Search restaurant" #input>
+                  </mat-form-field> 
+                  <!-- <div [hidden]="show_spinner" class="loader"></div> -->
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
                     <!--- Note that these columns can be defined in any order.
                           The actual rendered columns are set as a property on the row definition" -->
@@ -36,31 +37,31 @@
                   
                     <!-- Name Column -->
                     <ng-container matColumnDef="restaurant_name">
-                      <th mat-header-cell *matHeaderCellDef matSortHeader="restaurant_name"> Restaurant Name </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header="restaurant_name"> Restaurant Name </th>
                       <td mat-cell *matCellDef="let element">{{element.restaurant_name}}</td>
                     </ng-container>
                   
                     <!-- Weight Column -->
                     <ng-container matColumnDef="phone_no">
-                      <th mat-header-cell *matHeaderCellDef matSortHeader="phone_no"> Phone </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header="phone_no"> Phone </th>
                       <td mat-cell *matCellDef="let element">{{element.phone_no}} </td>
                     </ng-container>
                   
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="contact_name">
-                      <th mat-header-cell *matHeaderCellDef matSortHeader="contact_name"> Contact Name </th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header="contact_name"> Contact Name </th>
                       <td mat-cell *matCellDef="let element">{{element.contact_name}}  </td>
                     </ng-container>
                     <ng-container matColumnDef="setup" class="text-center" >
-                      <th mat-header-cell *matHeaderCellDef matSortHeader="setup"> Setup Mode</th>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header="setup"> Setup Mode</th>
                       <td mat-cell *matCellDef="let element"><mat-slide-toggle color="primary" id="setupmodeid{{element.id}}" (change)="click_setup($event,element.id)" [checked]="element.approval_flag=='S'"></mat-slide-toggle> </td>
                     </ng-container>
                     <ng-container matColumnDef="edit" class="text-center" >
                         <th mat-header-cell *matHeaderCellDef > Manage </th>
                         <td  mat-cell *matCellDef="let element">
                          
-                            <a [hidden]="element.approval_flag!='S'" class="text-center pull-left" id="setup{{element.id}}" (click)="go_details(element.id)">
-                            <i class="fa fa-edit" style="color:blue;cursor:pointer" ></i>
+                            <a [hidden]="element.approval_flag!='S'" class="text-center pull-left editLink" id="setup{{element.id}}" (click)="go_details(element.id)">
+                            <i class="fa fa-edit"></i>
                         </a>
                       </td>
                     </ng-container>
@@ -70,9 +71,13 @@
                               <th mat-header-cell *matHeaderCellDef > Status </th>
                               <td  mat-cell *matCellDef="let element">
                                
-                                <button type="button" class="btn btn-success  btn-sm" *ngIf="element.approval_flag=='A'"><small> Approved</small></button>    
+                                <!-- <button type="button" class="btn btn-success  btn-sm" *ngIf="element.approval_flag=='A'"><small> Approved</small></button>    
                                 <button type="button" class="btn btn-warning  btn-sm" *ngIf="element.approval_flag=='U'"><small>Pending</small></button> 
-                                <button type="button" class="btn btn-primary  btn-sm" *ngIf="element.approval_flag=='S'"><small>Setup</small></button> 
+                                <button type="button" class="btn btn-primary  btn-sm" *ngIf="element.approval_flag=='S'"><small>Setup</small></button>  -->
+
+                                <label class="statusAppro" *ngIf="element.approval_flag=='A'">Approved</label>
+                                <label class="statusPending" *ngIf="element.approval_flag=='U'">Pending</label>
+                                <label class="statusSetup" *ngIf="element.approval_flag=='S'">Setup</label>
                             </td>
                           </ng-container>
                    
@@ -81,7 +86,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   </table>
-                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Select page of users"></mat-paginator>
               <br><br>
               
     
@@ -96,9 +101,6 @@
     <!-- <?php echo file_get_contents("footer.html"); ?>	 -->
     <!-- <app-footer></app-footer> -->
         <!-- </div> -->
-
-     <app-footer></app-footer>
-
         
     </div>
     <!-- <script>var mySidebar=document.getElementById("mySidebar");var overlayBg=document.getElementById("myOverlay");function w3_open(){if(mySidebar.style.display==='block'){mySidebar.style.display='none';overlayBg.style.display="none";}else{mySidebar.style.display='block';overlayBg.style.display="block";}}function w3_close(){mySidebar.style.display="none";overlayBg.style.display="none";}</script>
@@ -110,4 +112,7 @@
     </div>
     </noscript> -->
 </div>
+<app-footer></app-footer>
 <div id="snackbar">{{m}}</div>
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Processing... </p></ngx-spinner>
+      

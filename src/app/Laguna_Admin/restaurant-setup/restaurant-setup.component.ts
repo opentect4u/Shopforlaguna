@@ -8,6 +8,9 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { url_set } from 'src/app/globalvar';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NgxSpinnerService } from "ngx-spinner";
+// import { ImageTransform } from 'ngx-image-cropper';
+import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';//For Image Cropper
 
 
 // import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
@@ -22,7 +25,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   displayedColumns: string[] = ['id','section_name','sec_img'];
   displayedColumns1: string[] = ['id','item_name'];
-  displayedColumns2: string[] = ['id','item_desc','item_price','item_note'];
+  displayedColumns2: string[] = ['id','item_name','item_price'];
  
   // dataSource = ELEMENT_DATA;
   userData:any;
@@ -32,18 +35,21 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  // @ViewChild(MatSort) matsort: MatSort;
 
   @ViewChild(MatPaginator) paginator1!: MatPaginator;
-  @ViewChild(MatSort) sort1!: MatSort;
+  // @ViewChild(MatSort) matsort1: MatSort;
 
 
   @ViewChild(MatPaginator) paginator2!: MatPaginator;
-  @ViewChild(MatSort) sort2!: MatSort;
+  // @ViewChild(MatSort) matsort2: MatSort;
   storevalue: any=[];
   specialData:any;
+  crop_width:any;
+  crop_height:any;
   menufordesc: any;
   back: any;
+  concatdatalength1=0
   top_file:any;
   idforcreatesection:any;
   value_font: boolean=false;
@@ -51,20 +57,34 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   value_Headertitle= true;
   menu_place: any;
   fileUrl: any;
-  constructor(private sanitizer: DomSanitizer,private admin_data:LagunaserviceService,private activatedRoute:ActivatedRoute) { }
+  logo_file1: any;
+  img_cover: any;
+  concatheaderlength=0;
+  concatnoticelength=0;
+  el: any;
+  sectionname:any;
+  constructor(private spinner: NgxSpinnerService, private sanitizer: DomSanitizer,private admin_data:LagunaserviceService,private activatedRoute:ActivatedRoute) { }
  show_tab='tab1'
+ pos_id:any;
  pos:any;
+ hidesection=true;
  reloadval=false;
  get_section_for_item:any;
  tab_el:any;
+ cropround=false;
  logo_img:any;
  z1:any
  createsecval='';
  idata:any;
+ logoname:any;
+ topname:any;
+ covername:any;
+ section:any;
  i_data:any;
  break_cov:any;
  sectionimage:any;
  break_top:any;
+ mncdata:any;
  lunch_cov:any;
  lunch_top:any;
  brunch_cov:any;
@@ -85,9 +105,13 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  datetimeData:any;
  daycheck:any;
  k:any;
+ hs:any;
+ radid:any;
  mid1:any;
  z:any;
+ half_logopath:any;
  spData:any;
+ concatdatalength2=0;
  sec_post_data:any;
  m='';
  itemdesc:any;
@@ -137,8 +161,10 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  setTimedata:any;
  menu_url_data:any;
  menulength:any;
+ ab_us_text:any;
  url_nm:any;
  rad:any;
+ filesection:any;
  item_i:any;
  veh1:any;
  mon:any=0;
@@ -164,6 +190,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  idfordesc:any;
  mail_data:any;
  imgel:any;
+ show_spinner=false;
  concatdata='';
  concatdatalength=0;
  menuchoiceData:any;
@@ -171,8 +198,35 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  coverspin=true;
  topspin=true;
  secspin=true;
+ //Image Cropper
+ scale = 1;
+ transform: ImageTransform = {};
+ showCropper = false;
+ hide=false;
+ valu = true;
+ Zoomout = true;
+ ZoomIn = true;
+ modal = true;
+ croppedImage:any ;
+ Modal:any;
+ additem_menu_el:any;
+ additem_section_el:any;
+ additem_item_el:any;
+ preview_for_section:any;
+ desc_menu_el:any;
+ desc_section_el:any;
+ desc_item_el:any;
+ desc_el:any;
+ desc_price:any;
+ desc_notes:any;
+  modal_close_oncrop:any;
+  bx:any;
+  bx2:any;
+  create_a:any;
+  download_section_zip:any;
+  download_logo_top_cover_zip:any;
   ngOnInit(): void {
-    
+    this.spinner.show();
     // this.daycheck=document.getElementById('1');
     //   this.daycheck.checked=true;
     this.r_id=this.activatedRoute.snapshot.params['id'];
@@ -186,6 +240,8 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
 
     this.menuchoiceData=data;
     this.menuchoiceData=this.menuchoiceData.msg;
+    this.mncdata=this.menuchoiceData[0].menu_id;
+    console.log(this.menuchoiceData)
     // console.log('bkmenu'+this.menuchoiceData[0].menu_id)
     // this.bkmenuid=document.getElementById('bkmenu'+this.menuchoiceData[0].menu_id);
     // console.log(this.bkmenuid)
@@ -194,7 +250,9 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.admin_data.get_menu_url(this.r_id).subscribe(data=>{console.log(data)
       this.menu_url_data=data;
       this.menu_url_data=this.menu_url_data.msg;
+      console.log(this.menu_url_data[0].image);
       this.getimagepath=this.menu_url_data[0].image? this.getimagepath+this.menu_url_data[0].image : this.getimagepath;
+      console.log(this.getimagepath)
       this.imgcheck=this.menu_url_data[0].image ? true : false;
       console.log("imgcheck="+this.imgcheck);
       this.menulength=this.menu_url_data.length;
@@ -202,6 +260,8 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     })
     this.admin_data.get_specific_admin_dashboard(this.r_id).subscribe(data=>{console.log(data)
     this.dashboardData=data;
+    // this.show_spinner=true;
+    this.spinner.hide();
     this.dashboardData=this.dashboardData.msg;
     this.rest_nm=this.dashboardData[0].restaurant_name;
     this.url_nm=this.rest_nm.replace(' ','_');
@@ -216,7 +276,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
 
     this.rest_add=this.dashboardData[0].addr_line1+" "+this.dashboardData[0].addr_line2+" "+this.dashboardData[0].zip+" "+this.dashboardData[0].city+", "+this.dashboardData[0].country
     })
-    this.admin_data.get_special(this.r_id,null).subscribe(data=>{console.log(data)
+    this.admin_data.get_special(this.r_id, null).subscribe(data=>{console.log(data)
     this.specialData=data;
     this.specialData=this.specialData.msg;
     this.sp_menuid=this.specialData[0].menu_id;
@@ -224,7 +284,9 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.sp_back=this.specialData[0].back_color;
     this.sp_font=this.specialData[0].font_color;
     this.sp_head=this.specialData[0].header_title;
+    this.concatheaderlength=this.sp_head.length;
     this.sp_notice=this.specialData[0].notice_content;
+    this.concatnoticelength=this.sp_notice.length;
     })
     this.admin_data.get_about_us(this.r_id).subscribe(data=>{console.log(data)
     this.aboutusData=data;
@@ -232,18 +294,20 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     })
     
   
-    this.admin_data.get_sec_url(1,this.r_id).subscribe(data=>{console.log(data)
+    this.admin_data.get_sec_url(this.mncdata,this.r_id).subscribe(data=>{console.log(data)
       this.secData=data;
       this.secData=this.secData.msg;
+      this.get_sec_img(this.mncdata);
     })
     this.tab_el=document.getElementById('defaultOpen');
     this.tab_el.style.background='#3F51B5'
     this.tab_el.style.color="white";
-   this.admin_data.get_menu_urls(this.r_id).subscribe((data)=>{console.log(data)
+   this.admin_data.get_menu_urls(this.r_id, null).subscribe((data)=>{console.log(data)
    this.menuData=data;
    console.log(this.menuData)
    this.logo_img=this.menuData.logo_dt[0].logo_url;
    this.logopath=this.menuData.logo_dt[0].logo_path;
+   this.half_logopath=this.logopath;
    this.logopath=url_set.api_url+'/'+this.logopath;
   //  const data = 'some text';
   this.imgel=document.createElement('img');
@@ -269,12 +333,14 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     
   }
   gen_code(){
+    this.spinner.show();
     this.getimagepath=url_set.api_url+'/';
-    this.admin_data.get_qrcode({url: this.url1, res_id: this.r_id, img: this.sendpathdata}).subscribe(data=>{console.log(data)
+    this.admin_data.get_qrcode({url: this.url1, res_id: this.r_id, img: this.half_logopath}).subscribe(data=>{console.log(data)
       this.menu_url_data=data;
       console.log({dt: this.menu_url_data});
       
       this.menu_url_data=this.menu_url_data.msg;
+      console.log(this.menu_url_data);
       // this.getimagepath=this.getimagepath+this.menu_url_data[0].image
       // this.imgcheck=this.menu_url_data[0].image ? true : false;
 
@@ -288,6 +354,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
         console.log("imgcheck="+this.imgcheck);
         this.menulength=this.menu_url_data.length;
         console.log("length="+this.menulength)
+        this.spinner.hide();
       })
     })
   }
@@ -302,22 +369,22 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   putdata(v:any){
     this.dataSource= new MatTableDataSource(v);
     this.dataSource.paginator=this.paginator;
-    this.dataSource.sort=this.sort;
+    // this.dataSource.sort=this.matsort;
   }
   putdata2(v:any){
     this.dataSource2= new MatTableDataSource(v);
     this.dataSource2.paginator=this.paginator2;
-    this.dataSource2.sort=this.sort2;
+    // this.dataSource2.sort=this.matsort2;
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    // this.dataSource.sort = this.matsort;
 
     this.dataSource1.paginator = this.paginator1
-    this.dataSource1.sort = this.sort1;
+    // this.dataSource1.sort = this.matsort1;
 
     this.dataSource2.paginator = this.paginator2;
-    this.dataSource2.sort = this.sort2;
+    // this.dataSource2.sort = this.matsort2;
   }
   send_about_us(v:any){
     if(v!=''){
@@ -325,6 +392,10 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.aboutusData1=data;
     if(this.aboutusData1.suc==1)
     {this.m="Updation Successful";
+    this.ab_us_text=document.getElementById('ab_us');
+    this.ab_us_text.value='';
+    this.concatdatalength2=0;
+
     this.myFunction();
     this.admin_data.get_about_us(this.r_id).subscribe(data=>{console.log(data)
       this.aboutusData=data;
@@ -353,8 +424,10 @@ else{
     this.item_i=v2
     this.ide=id;
     this.concatdatalength=this.ide.length
+   
     this.ipr=ip;
     this.ino=inote;
+    this.concatdatalength1=this.ino.length
     this.mid1=mid;
     this.idfordesc=v;
     console.log(this.ide+" "+this.ino+" "+this.ipr)
@@ -378,9 +451,9 @@ else{
 
   }
   update_section(v:any){
-    this.secspin=false;
+    this.spinner.show();
     this.sec_value=v;
-    this.createsecval=''
+    // this.createsecval=''
     for(let i=0;i<this.menuchoiceData.length;i++)
     {
       this.q=document.getElementById('b'+(i+1))
@@ -397,11 +470,11 @@ else{
     "sec_name":this.sec_value,
     "id":this.idforcreatesection
     }
-    this.admin_data.post_section_create(dt,this.sectionimage).subscribe(data=>{console.log(data)
+    this.admin_data.post_section_create(dt,this.img_cover,this.sectionname).subscribe(data=>{console.log(data)
     this.sec_post_data=data;
     if(this.sec_post_data.suc==1)
     {
-    this.secspin=true;
+    this.spinner.hide();
       this.m="Updation Successful";
       // setTimeout(()=>{
       //   location.reload();
@@ -411,24 +484,26 @@ else{
     this.myFunction();
     this.fetchdata();
     setTimeout(()=>{
-      this.show_tab='tab4'
-      this.ngOnInit();
-     this.openCity('tab4');
+      // this.show_tab='tab4'
+      // this.ngOnInit();
+    //  this.openCity('tab4');
      
     },3000)
     this.rad=document.getElementById('b'+this.m_id);
     console.log(this.rad)
-    this.rad.checked=false;
+    // this.rad.checked=false;
     
     }
     else{
-    this.secspin=true;
+    // this.secspin=true;
+    this.spinner.hide()
 
       this.m="Failed to update"
       this.myFunction();
     }
     },error=>{
-      this.secspin=true
+      // this.secspin=true
+      this.spinner.hide()
       this.m="Failed to update"
       this.myFunction();
   
@@ -454,6 +529,7 @@ else{
   store_menu(v:any){
     this.m_id=v;
     console.log(this.m_id)
+    this.hidesection=false;
     // if(this.submit_show==false)
     //  {
     //    this.secval1=document.getElementById('secval');
@@ -464,7 +540,8 @@ else{
     // this.fetchdata(v)
   }
   create_section(v:any){
-    this.secspin=false
+    // this.secspin=false
+    this.spinner.show();
     console.log(this.m_id+" "+v);
     if(v!=''&&this.m_id!=''&&this.m_id!=null&&this.m_id!=undefined){
     var dt={
@@ -473,23 +550,27 @@ else{
     "sec_name":v,
     "id":''
     }
-    this.admin_data.post_section_create(dt,this.sectionimage).subscribe(data=>{console.log(data)
+    this.admin_data.post_section_create(dt,this.img_cover,this.sectionname).subscribe(data=>{console.log(data)
     this.sec_post_data=data;
     if(this.sec_post_data.suc==1)
     {
       this.m="Updation Successful";
     this.myFunction();
-    this.secspin=true;
+
+    // this.secspin=true;
+    this.spinner.hide();
     this.fetchdata()
     }
     else{
+      this.spinner.hide()
       this.m="Failed to update"
-    this.secspin=true;
+    // this.secspin=true;
 
       this.myFunction();
     }
     },error=>{
-    this.secspin=true;
+    // this.secspin=true;
+    this.spinner.hide();
 
       this.m="Failed to update"
       this.myFunction();
@@ -497,7 +578,8 @@ else{
     })
   }
   else{
-    this.secspin=true;
+    // this.secspin=true;
+    this.spinner.hide();
 
     this.m="Sorry! You can't keep an empty field"
       this.myFunction();
@@ -629,7 +711,7 @@ else{
   putdata1(v:any){
     this.dataSource1= new MatTableDataSource(v);
     this.dataSource1.paginator=this.paginator1;
-    this.dataSource1.sort=this.sort1;
+    // this.dataSource1.sort=this.matsort1;
   }
   get_item_select1(v:any){
     this.i_data=v;
@@ -860,7 +942,40 @@ checkbrunchday(e:any,day:any){
   else{}
 }
 pickup_place(v:any){
-  this.menu_place=v
+  this.menu_place=v;
+  console.log(this.menu_place)
+  this.admin_data.get_special(this.r_id, this.menu_place).subscribe(data=>{console.log(data)
+    this.specialData=data;
+    this.specialData=this.specialData.msg;
+    if(this.specialData.length>0){
+      this.sp_menuid=this.specialData[0].menu_id;
+      this.sp_posid=this.specialData[0].position_id;
+      this.sp_back=this.specialData[0].back_color;
+      this.sp_font=this.specialData[0].font_color;
+      this.sp_head=this.specialData[0].header_title;
+      this.sp_notice=this.specialData[0].notice_content;
+    }
+    else
+    {
+      this.sp_menuid=this.specialData[0].menu_id;
+      this.sp_posid='';
+      this.sp_back='';
+      this.sp_font='';
+      this.sp_head='';
+      this.sp_notice='';
+      this.pos_id=document.getElementById('pos');
+      this.pos.value='';
+      this.hs=document.getElementById('headerTitle_special');
+      this.hs.value='';
+      this.bx=document.getElementById('box');
+      this.bx.value='';
+      this.bx2=document.getElementById('box2');
+      this.bx.value='';
+
+    }
+  
+    })
+  
 }
 getposition(e:any){
   this.pos=e
@@ -955,9 +1070,11 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
   //retrieve section image
   get_sec_img(v:any){
   //  alert(v);
+  this.radid=v;
   this.admin_data.get_sec_url(v,this.r_id).subscribe(data=>{console.log(data)
     this.secData=data;
     this.secData=this.secData.msg;
+    console.log(this.secData)
   })
   }
   //opening respective tabs
@@ -1427,17 +1544,19 @@ this.myFunction()}
 )
 }
 update_logo(){
-  this.logospin=false;
-  console.log(this.rest_nm+" "+this.r_id+" "+this.logo_img+" "+this.logo_file);
+  this.spinner.show()
+  console.log(this.rest_nm+" "+this.r_id+" "+this.logo_img+" "+this.img_cover);
   if(this.logo_file!=undefined)
-  this.admin_data.update_logo_service(this.r_id,this.rest_nm,this.logo_img,this.logo_file).subscribe(data=>{console.log(data)
+  this.admin_data.update_logo_service(this.r_id,this.rest_nm,this.logo_img,this.img_cover,this.logoname).subscribe(data=>{console.log(data)
   
-    this.admin_data.get_menu_urls(this.r_id).subscribe((data)=>{console.log(data)
+    this.admin_data.get_menu_urls(this.r_id, null).subscribe((data)=>{console.log(data)
       this.menuData=data;
       this.logo_img=this.menuData.logo_dt[0].logo_url;
       this.logopath=this.menuData.logo_dt[0].logo_path;
+      this.half_logopath=this.logopath
       this.logopath=url_set.api_url+'/'+this.logopath;
-      this.logospin=true;
+      // this.logospin=true;
+      this.spinner.hide();
      //  const data = 'some text';
      this.imgel=document.createElement('img');
      this.imgel.src=this.logopath
@@ -1451,13 +1570,25 @@ update_logo(){
   })
   else
   {
+    this.spinner.hide();
     this.m="Please select an image before you update!";
     this.myFunction();
   }
 }
 upload_logo(e:any){
+  this.cropround=true;
+  this.crop_width=200;
+  this.crop_height=130;
+  console.log(this.crop_width+" "+this.crop_height)
+
+  console.log(this.cropround)
   console.log(e.target.files[0])
+  this.logoname=e.target.files[0].name;
   this.logo_file=e.target.files[0];
+  this.img_cover=e;
+  this.logo_file1=document.getElementById('logo_crop');
+  this.logo_file1.click();
+  console.log("hello")
 }
 update_price_desc(menid:any,sectionid:any,itemid:any,pr:any,de:any,ad:any){
   if(menid!=''&&sectionid!=''&&itemid!=''&&pr!=''&&de!=''){
@@ -1477,6 +1608,7 @@ update_price_desc(menid:any,sectionid:any,itemid:any,pr:any,de:any,ad:any){
     this.m="Updation Successful";
     this.ide='';
     this.concatdatalength=0
+    this.concatdatalength1=0
     this.ino='';
 
     setTimeout(()=>{
@@ -1503,34 +1635,51 @@ update_price_desc(menid:any,sectionid:any,itemid:any,pr:any,de:any,ad:any){
     this.myFunction();
   }
 }
-get_sec_id1(menid:any,id:any,val:any){
+get_sec_id1(menid:any,id:any,val:any,k:any){
   console.log(menid+" "+id+" "+val);
+  this.hidesection=false;
+
   this.submit_show=true;
   this.idforcreatesection=id;
+  this.preview_for_section=k;
   this.z1=document.getElementById('b'+menid)
   this.z1.checked=true;
   this.createsecval=val;
   console.log(this.createsecval)
-  window.scrollTo(0, 0)
+  window.scrollTo(0, 0);
   
 }
 upload_cover(e:any){
   // alert("hello");
-  this.cover_file=e.target.files[0];
-  console.log(this.cover_file)
+ this.crop_width=1800;
+ this.crop_height=2560;
+ console.log(this.crop_width+" "+this.crop_height)
+
+  this.cropround=false
+  console.log(this.cropround)
+
+  this.covername=e.target.files[0].name
+  this.cover_file=e;
+  this.img_cover=this.cover_file
+  console.log(this.cover_file);
+  this.logo_file1=document.getElementById('logo_crop');
+  this.logo_file1.click();
 }
 update_cover(v:any,v_menu:any,v1:any){
-  this.coverspin=false;
+  // this.coverspin=false;
+  this.spinner.show();
   if(this.cover_file!=undefined)
   {console.log(v+" "+this.rest_nm+" "+this.r_id+" "+this.cover_file+" "+v1)
-   this.admin_data.update_cover_service(v,v_menu,this.rest_nm,this.r_id,this.cover_file,v1).subscribe(data=>{console.log(data)
-    this.admin_data.get_menu_urls(this.r_id).subscribe((data)=>{console.log(data)
+   this.admin_data.update_cover_service(v,v_menu,this.rest_nm,this.r_id,this.img_cover,v1,this.covername).subscribe(data=>{console.log(data)
+    this.admin_data.get_menu_urls(this.r_id, null).subscribe((data)=>{console.log(data)
       this.menuData=data;
       this.logo_img=this.menuData.logo_dt[0].logo_url;
       this.logopath=this.menuData.logo_dt[0].logo_path;
+      this.half_logopath=this.logopath
       this.logopath=url_set.api_url+'/'+this.logopath;
      //  const data = 'some text';
-     this.coverspin=true
+    //  this.coverspin=true
+    this.spinner.hide();
      this.imgel=document.createElement('img');
      this.imgel.src=this.logopath
        const blob = new Blob([this.imgel], { type: 'application/octet-stream' });
@@ -1545,25 +1694,41 @@ update_cover(v:any,v_menu:any,v1:any){
    
 }
   else{
+    this.spinner.hide();
     this.m="Please select an image before you update!"
     this.myFunction();
   }
 }
 upload_top(e:any){
-  this.top_file=e.target.files[0];
+  this.cropround=false;
+  this.crop_width=200;
+  this.crop_height=130;
+  console.log(this.crop_width+" "+this.crop_height)
+
+  console.log(this.cropround)
+
+  this.topname=e.target.files[0].name
+  this.top_file=e;
+  this.img_cover=this.top_file;
+  this.logo_file1=document.getElementById('logo_crop');
+  this.logo_file1.click();
+  
 }
 update_top(v:any,vmenu:any,v1:any){
-  this.topspin=false;
+  // this.topspin=false;
+  this.spinner.show()
   if(this.top_file!=undefined)
   {console.log(v+" "+this.rest_nm+" "+this.r_id+" "+this.top_file+" "+v1)
-    this.admin_data.update_top_service(v,vmenu,this.rest_nm,this.r_id,this.top_file,v1).subscribe(data=>{console.log(data)
-      this.admin_data.get_menu_urls(this.r_id).subscribe((data)=>{console.log(data)
+    this.admin_data.update_top_service(v,vmenu,this.rest_nm,this.r_id,this.img_cover,v1,this.topname).subscribe(data=>{console.log(data)
+      this.admin_data.get_menu_urls(this.r_id, null).subscribe((data)=>{console.log(data)
         this.menuData=data;
         this.logo_img=this.menuData.logo_dt[0].logo_url;
         this.logopath=this.menuData.logo_dt[0].logo_path;
+        this.half_logopath=this.logopath
         this.logopath=url_set.api_url+'/'+this.logopath;
        //  const data = 'some text';
-       this.topspin=true;
+      //  this.topspin=true;
+      this.spinner.hide();
        this.imgel=document.createElement('img');
        this.imgel.src=this.logopath
          const blob = new Blob([this.imgel], { type: 'application/octet-stream' });
@@ -1580,18 +1745,36 @@ update_top(v:any,vmenu:any,v1:any){
 }
 
   else{
+    this.spinner.hide();
     this.m="Please select an image before you update!"
     this.myFunction();
   }
   
 }
 section_img_upload(e:any){
-  this.sectionimage=e.target.files[0];
+  this.cropround=false;
+  console.log(this.cropround)
+  this.crop_width=1800;
+  this.crop_height=500;
+  console.log(this.crop_width+" "+this.crop_height)
+  this.sectionname=e.target.files[0].name
+  this.sectionimage=e;
+  this.img_cover=this.sectionimage;
+  this.logo_file1=document.getElementById('logo_crop');
+  this.logo_file1.click();
   console.log(this.sectionimage)
 }
 restrict(e:any){
   this.concatdatalength=e.target.value.length;
   console.log(this.concatdatalength)
+}
+restrict1(e:any){
+  this.concatdatalength1=e.target.value.length;
+  console.log(this.concatdatalength1)
+}
+restrict2(e:any){
+  this.concatdatalength2=e.target.value.length;
+  console.log(this.concatdatalength2)
 }
 isNumberKey(evt:any)
 {
@@ -1602,18 +1785,142 @@ isNumberKey(evt:any)
 
    return true;
 }
-reload_page(v:any){
-  this.show_tab=v
-  if(v=='tab4')
-  this.ngOnInit();
+reload_section(){
+  
+  // if(v=='tab4')
+  // this.ngOnInit();
   this.concatdatalength=0;
-  this.hh=document.getElementById('pickup_place');
-  console.log(this.hh)
-  this.hh.value='';
-  this.pp=document.getElementById('headTitle');
+  this.rad=document.getElementById('b'+this.m_id);
+  console.log(this.rad)
+  this.rad.checked=false;
+  this.pp=document.getElementById('secval');
   this.pp.value='';
+  this.filesection=document.getElementById('files_section');
+  this.filesection.value=null;
 // this.openCity('tab4');  // this.ngOnInit();
    this.submit_show=false;
-  this.openCity(v);
+   this.hidesection=true;
 }
+
+//Image Cropper
+
+zoomOut() {
+  this.scale -= .1;
+  this.transform = {
+    ...this.transform,
+    scale: this.scale
+  };
+}
+
+zoomIn() {
+  this.scale += .1;
+  this.transform = {
+    ...this.transform,
+    scale: this.scale
+  };
+}
+imageLoaded() {
+  console.log("image loaded")
+  this.showCropper = true;
+  this.modal = false;
+  this.hide = false;
+  this.valu = false;
+  this.Zoomout = false;
+  this.ZoomIn = false;
+}
+imageCropped(event: ImageCroppedEvent) {
+  console.log('imagecropped');
+  // event.width=this.crop_width;
+  // event.width=this.crop_height;
+  console.log("width:" + event.width);
+  console.log("height:" + event.height)
+  this.croppedImage = event.base64;
+  this.preview_for_section=this.croppedImage
+  console.log(this.croppedImage);
+}
+cropperReady(sourceImageDimensions: Dimensions) {
+ console.log('Cropper ready', sourceImageDimensions);
+  console.log("cropper ready CROPPED IMAGE:" + this.croppedImage);
+}
+loadImageFailed() {
+  console.log('Load failed');
+}
+click_it(){
+  // this.cover_change=true;
+    this.valu = true;
+    this.img_cover=this.croppedImage;
+    console.log("Cropped Image:" +this.croppedImage);
+    // this.Breakfast_cover_preview=false;
+    this.el.style.display='none'
+}
+close_it(){
+  this.valu=true;
+  this.Modal=document.getElementById('myfile');
+  this.Modal.value=null;
+
+}
+open_crop_modal(){
+  this.el=document.getElementById('id01');
+  this.el.style.display='block'
+
+}
+reset_add_item(){
+  this.additem_item_el=document.getElementById('headTitle_item');
+  this.additem_item_el.value=''
+  this.additem_menu_el=document.getElementById('pickup_place_menu');
+  this.additem_menu_el.value='';
+  this.additem_section_el=document.getElementById('pickup_place_section');
+  this.additem_section_el.value='';
+}
+reset_desc(){
+  this.desc_menu_el=document.getElementById('pickup_place_menu_desc');
+  this.desc_section_el=document.getElementById('pickup_place_section_desc');
+  this.desc_item_el=document.getElementById('pickup_place_item_desc');
+  this.desc_price=document.getElementById('headTitlePrice')
+  this.desc_menu_el.value='';
+  this.desc_section_el.value='';
+  this.desc_item_el.value='';
+  this.desc_price.value=''
+  
+}
+close_modal_on_crop(){
+  this.modal_close_oncrop=document.getElementById('id01');
+  this.modal_close_oncrop.style.display='none'
+}
+restrict_header(e:any){
+  this.concatheaderlength=e.target.value.length;
+}
+restrict_notice(e:any){
+  this.concatnoticelength=e.target.value.length;
+}
+
+download_section(){
+  console.log(this.radid+" "+this.r_id)
+  this.admin_data.downloadsection(this.r_id,this.radid).subscribe(data=>{console.log(data)
+  this.download_section_zip=data;
+  console.log(this.download_section_zip)
+  // this.download_section_zip=this.download_section_zip.msg.data;
+  var a = document.createElement('a');
+var blob = new Blob([this.download_section_zip], {'type':"application/octet-stream"});
+a.href = URL.createObjectURL(blob);
+a.download = this.rest_nm+"_section_images_"+Date.now()+".zip";
+a.click();
+  }  
+  )
+}
+download_top_cover_logo(){
+  console.log(this.r_id);
+  this.admin_data.downloadlogotopcover(this.r_id).subscribe((data:any)=>{console.log(data)
+    this.download_logo_top_cover_zip=data;
+    console.log(this.download_logo_top_cover_zip)
+    // this.download_section_zip=this.download_section_zip.msg.data;
+    var a = document.createElement('a');
+  var blob = new Blob([ this.download_logo_top_cover_zip], {'type':"application/octet-stream"});
+  a.href = URL.createObjectURL(blob);
+  a.download = this.rest_nm+"_logo_top_cover_images_"+Date.now()+".zip";
+  a.click();
+  
+  })
+}
+
 }

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
-
 // import { url } from 'inspector';
 import { url_set } from 'src/app/globalvar';
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
@@ -21,6 +19,13 @@ import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 ]
 })
 export class UserMenuComponent implements OnInit {
+  sp_menuid: any;
+  sp_posid: any;
+  sp_back: any;
+  sp_font: any;
+  sp_notice: any;
+  sp_head: any;
+  greet: any;
 
   constructor(private activatedRoute:ActivatedRoute,private admin_data:LagunaserviceService) { }
   rest_name:any;
@@ -28,7 +33,7 @@ export class UserMenuComponent implements OnInit {
   modalopen:any;
   modalopen1:any;
   modalopen2:any;
-
+  t:any;
   start:any;
   arrayk1:any=[];
   end:any;
@@ -38,10 +43,10 @@ export class UserMenuComponent implements OnInit {
   menuData:any=[];
   sec_array:any=[];
   item_array:any=[];
-  item_array1:any=[];
+  item_array1=[];
   menu_id:any;
   c=1;
-  emptymenu=false;
+  emptymenu:any;
   arrayK:any=[];
   secData:any;
   topimage:any;
@@ -52,6 +57,8 @@ export class UserMenuComponent implements OnInit {
   cov:any;
   keyData:any=[];
   overlapData:any;
+  overlap:any;
+  specialData:any=[];
   ngOnInit(): void {
    
     this.rest_name=this.activatedRoute.snapshot.params['rname'];
@@ -61,6 +68,7 @@ export class UserMenuComponent implements OnInit {
     // this.start=atob(this.start);
     // this.end=atob(this.end);
     // console.log(this.start+" "+this.end)
+
     this.rest_id=atob(this.rest_id);
     this.myArr=this.rest_id.split('/');
     this.rid=this.myArr[0];
@@ -68,6 +76,16 @@ export class UserMenuComponent implements OnInit {
     this.end=this.myArr[2];
     this.menu_id=this.myArr[3];
     console.log(this.menu_id)
+    this.admin_data.get_special(this.rid, this.menu_id).subscribe(data=>{console.log(data)
+      this.specialData=data;
+      this.specialData=this.specialData.msg;
+      this.sp_menuid=this.specialData[0].menu_id;
+      this.sp_posid=this.specialData[0].position_id;
+      this.sp_back=this.specialData[0].back_color;
+      this.sp_font=this.specialData[0].font_color;
+      this.sp_head=this.specialData[0].header_title;
+      this.sp_notice=this.specialData[0].notice_content;
+      })
     var dt={
       "id":this.rid,
       "st_time":this.start,
@@ -82,7 +100,8 @@ if(this.start){
     
     if(this.overlapData.length==1)
     {
-      this.admin_data.get_menu_urls(this.rid).subscribe(data=>{console.log(data)
+      this.overlap=false;
+      this.admin_data.get_menu_urls(this.rid,null).subscribe(data=>{console.log(data)
         this.menuImages=data;
         this.menuImages=this.menuImages.oth_dt;
         for(let i=0;i<this.menuImages.length;i++)
@@ -91,6 +110,8 @@ if(this.start){
           {
             this.topimage=this.menuImages[i].top_image_img? this.url1+'/'+this.menuImages[i].top_image_img : ''
             this.cov=this.menuImages[i].cover_page_img? this.url1+'/'+this.menuImages[i].cover_page_img : ''
+            console.log(this.cov)
+            console.log(this.menuImages[i].cover_page_img)
           }
         }
      }
@@ -119,7 +140,7 @@ if(this.start){
         this.emptymenu=false;
        this.arrayMenu.push(this.menuData)
        // console.log(this.arrayMenu)
-     console.log(this.menuData['AÇAÍ'])
+    //  console.log(this.menuData['AÇAÍ'])
  
      
  
@@ -160,9 +181,12 @@ if(this.start){
      })
     }
     else if(this.overlapData.length>1)
-{this.open_modal2()
-}
+   {
+  this.overlap=true;
+  // this.open_modal2()
+   }
 else{
+  this.overlap=false;
   this.emptymenu=true;
   this.open_menu(this.menu_id,this.start,this.end)
 }
@@ -170,15 +194,19 @@ else{
     })
   }
   else{
+
     this.admin_data.get_menu(this.rid).subscribe(data=>{console.log(data)
       this.menuImages=data;
+      this.greet=this.menuImages.greet
       this.overlapData=this.menuImages.menu_check;
       console.log(this.overlapData);
       
       if(this.overlapData.length == 1){
+        this.overlap=true;
         console.log(this.menuImages.cov_img);
         this.topimage=this.menuImages.top_img? this.url1+'/'+this.menuImages.top_img : ''
-        this.cov=this.menuImages.cov_img? this.url1+'/'+this.menuImages.cov_img : ''
+        this.cov=this.menuImages.cov_img? this.url1+'/'+this.menuImages.cov_img : '';
+        console.log(this.cov)
         if(this.menuImages.length < 1)
           this.emptymenu=true;
         else
@@ -190,10 +218,12 @@ else{
           }
           console.log(this.keyData)
       }else if(this.overlapData.length > 1){
+        this.overlap=true;
         this.open_modal2();
       }
       else
       {this.emptymenu=true;
+        this.overlap=false;
       this.topimage=this.menuImages.top_img? this.url1+'/'+this.menuImages.top_img : ''
         this.cov=this.menuImages.cov_img? this.url1+'/'+this.menuImages.cov_img : ''}
     })
@@ -277,42 +307,81 @@ else{
   open_modal(){
     this.modalopen=document.getElementById('id01')
     this.modalopen.style.display='block'
+    if(this.overlap==true)
+    this.overlap=true;
   }
   modalclose(){
     this.modalopen.style.display='none'
+    if(this.overlap==true)
+    this.overlap=true;
+    console.log(this.overlap)
+    location.reload()
+
   }
   open_modal1(){
     this.modalopen1=document.getElementById('id02')
     this.modalopen1.style.display='block'
+    if(this.overlap==true)
+    this.overlap=true;
   }
   modalclose1(){
     this.modalopen1.style.display='none'
+    if(this.overlap=true)
+    this.overlap=true;
   }
   open_modal2(){
+    // this.overlap=true;
+    console.log(this.overlap)
     this.modalopen2=document.getElementById('id03')
     this.modalopen2.style.display='block'
+   
   }
   modalclose2(){
     this.modalopen2.style.display='none'
+    this.overlap=true;
+    console.log(this.overlap)
+    // this.ngOnInit();
   }
   open_menu(menuid:any,st:any,end:any){
     // this.secData.length=0;
     // this.menuImages.length=0;
+    this.admin_data.get_special(this.rid, menuid).subscribe(data=>{console.log(data)
+      this.specialData=data;
+      this.specialData=this.specialData.msg;
+      this.sp_menuid=this.specialData[0].menu_id;
+      this.sp_posid=this.specialData[0].position_id;
+      this.sp_back=this.specialData[0].back_color;
+      this.sp_font=this.specialData[0].font_color;
+      this.sp_head=this.specialData[0].header_title;
+      this.sp_notice=this.specialData[0].notice_content;
+      })
+    if(this.overlap==true)
+    this.overlap=true;
     this.keyData.length=0;
     this.arrayk1.length=0;
     this.arrayK.length=0;
     console.log(menuid+" "+st+" "+end)
 
-    this.admin_data.get_menu_urls(this.rid).subscribe(data=>{console.log(data)
+    this.admin_data.get_menu_urls(this.rid,null).subscribe(data=>{console.log(data)
       this.menuImages=data;
       this.menuImages=this.menuImages.oth_dt;
       for(let i=0;i<this.menuImages.length;i++)
       {
+      if(this.menu_id){
         if(this.menuImages[i].menu_id==this.menu_id)
         {
           this.topimage=this.menuImages[i].top_image_img? this.url1+'/'+this.menuImages[i].top_image_img : ''
           this.cov=this.menuImages[i].cover_page_img? this.url1+'/'+this.menuImages[i].cover_page_img : ''
         }
+      }
+      else{
+        if(this.menuImages[i].menu_id==menuid)
+        {
+          this.topimage=this.menuImages[i].top_image_img? this.url1+'/'+this.menuImages[i].top_image_img : ''
+          this.cov=this.menuImages[i].cover_page_img? this.url1+'/'+this.menuImages[i].cover_page_img : ''
+        }
+      }
+        
       }
    }
    
@@ -340,7 +409,7 @@ else{
       this.emptymenu=false;
      this.arrayMenu.push(this.menuData)
      // console.log(this.arrayMenu)
-   console.log(this.menuData['AÇAÍ'])
+  //  console.log(this.menuData['AÇAÍ'])
 
    
 

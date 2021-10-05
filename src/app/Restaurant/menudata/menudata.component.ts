@@ -105,13 +105,15 @@ export class MenudataComponent implements OnInit, AfterViewInit{
      
      for(let i=0;i<this.notic.msg.length;i++){
        this.noticeme=1;
-       if(this.notic.msg[i].notice_flag=='Y'){
+      if(this.notify==this.notic.msg[i].menu_id){
+     
+       if(this.notic.msg[i].notice_flag=='Y'){ console.log("ftyf");
          this.notice_check=document.getElementById('noticechecked');
          this.notice_check.checked=true;
          this.color_font=false;
          this.notice_flag='Y';
        }
-       else {
+       else { console.log("ftyf1");
         this.notice_check=document.getElementById('noticechecked');
         this.notice_check.checked=false;
         this.color_font=true;
@@ -157,7 +159,10 @@ export class MenudataComponent implements OnInit, AfterViewInit{
             this.value_background=true;
           
           }
-     }
+       }
+      else{}
+   }
+       
     
    })
 
@@ -236,7 +241,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
     //     console.log(data);
     // })
 
-    this.lagunaserve.get_menu_urls(this.res_id).subscribe(data=>{
+    this.lagunaserve.get_menu_urls(this.res_id,null).subscribe(data=>{
       console.log(data);
       this.showinitialvalue=data;
       console.log(this.showinitialvalue.menu_dt);
@@ -369,8 +374,10 @@ nexttab1(e:any,v7:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
         console.log(data);
         this.success=data
         if(this.success.suc==1){
-            //  this.myFunction();
-            this.router.navigate(['/thankyou'])
+          console.log("adadas");
+          
+             this.myFunction();
+            // this.router.navigate(['/thankyou'])
 
             }
             else{
@@ -470,11 +477,10 @@ pickup_place(event:any){
     }
     else{
       console.log("haisdaids");
-      
       this.notice_check=document.getElementById('noticechecked');
-      this.notice_check.checked=false;
-      this.color_font=true;
-      this.notice_flag='N';
+      this.notice_check.checked=true;
+      this.color_font=false;
+      // this.notice_flag='N';
       this.position_id='';
       this.Header_title=document.getElementById('headTitle');
       this.Header_title.value='';
@@ -501,9 +507,9 @@ pickup_place(event:any){
     console.log("haisdaids");
       
       this.notice_check=document.getElementById('noticechecked');
-      this.notice_check.checked=false;
-      this.color_font=true;
-      this.notice_flag='N';
+      this.notice_check.checked=true;
+      this.color_font=false;
+      // this.notice_flag='N';
       this.position_id='';
       this.Header_title=document.getElementById('headTitle');
       this.Header_title.value='';
@@ -684,5 +690,10 @@ myFunction_foralert() {
   // After 3 seconds, remove the show class from DIV
   setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 5000);
 } 
+//For going to thankyou page
+go_to_thankyou_page(){
+  this.router.navigate(['/thankyou'])
+
+}
 
 }

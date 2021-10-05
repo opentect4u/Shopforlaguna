@@ -310,8 +310,21 @@ breakfast_cover_name:any;
  height:any;
   common_break_menu:any;
   pdfSource:any;
+  show_name:any;
   img_break_section:any;
   show_toast:boolean=true;
+  common_remove_div:any;
+  lunch_Cover:boolean=true;
+  dinner_Cover:boolean=true;
+  break_Cover:boolean=true;
+  brunch_Cover:boolean=true;
+  lunch_Top:boolean=true;
+  dinner_Top:boolean=true;
+  break_Top:boolean=true;
+  brunch_Top:boolean=true;
+ 
+ 
+
 
   constructor(public toastr: ToastrManager,private spinner: NgxSpinnerService,private _data: DataserviceService,private lagunaserve:LagunaserviceService,private http: HttpClient) { 
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
@@ -330,7 +343,7 @@ breakfast_cover_name:any;
    this.arr_brak_check.length=0;
     this.brunch_start='';
     this.brunch_end='';
-    this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
+    this.lagunaserve.get_menu_urls(this.resid,null).subscribe(data=>{
       this.cove_top.length=0;
       console.log(data);
       this.cove_top=data;
@@ -377,8 +390,8 @@ breakfast_cover_name:any;
               console.log("sadasda3");
               if(this.cove_top.menu_dt[i].menu_img!=''){
                 this.Launch_menu_preview=false
-                this.launchmenuimage.push(this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img);
-                this.img_launch_menu.push(this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img);
+                this.launchmenuimage.push({id:this.cove_top.menu_dt[i].id,img_path:this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
+                this.img_launch_menu.push({id:this.cove_top.menu_dt[i].id,img_path:this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
                   
               }
                 // this.launch_cover=this.cove_top.msg[i].cover_page_url;
@@ -406,8 +419,8 @@ breakfast_cover_name:any;
             
             if(this.cove_top.menu_dt[i].menu_img!=''){
               this.Dinner_menu_preview=false
-              this.branchmenuimage.push(this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img);
-              this.img_dinner_menu.push(this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img);
+              this.branchmenuimage.push({id:this.cove_top.menu_dt[i].id,img_path:this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
+              this.img_dinner_menu.push({id:this.cove_top.menu_dt[i].id,img_path:this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
                 
             }
               // this.dinner_cover=this.cove_top.menu_dt[i].cover_page_url;
@@ -434,8 +447,8 @@ breakfast_cover_name:any;
              
             if(this.cove_top.menu_dt[i].menu_img!=''){
               this.Brunch_menu_preview=false
-              this.dinnermenuimage.push(this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img);
-              this.img_brunch_menu.push(this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img);
+              this.dinnermenuimage.push({id:this.cove_top.menu_dt[i].id,img_path:this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
+              this.img_brunch_menu.push({id:this.cove_top.menu_dt[i].id,img_path:this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
                 
             }
           
@@ -473,14 +486,18 @@ breakfast_cover_name:any;
                 
 
                if(this.cove_top.oth_dt[i].cover_page_img!=''){
-              
+      
+
+                this.break_Cover=false;
                  this.Breakfast_cover_preview=false;
                  this.breakfastcoverimage=this.img_showing +'/' +this.cove_top.oth_dt[i].cover_page_img;
                  console.log(this.breakfastcoverimage);
-                 
+               
                  this.img_cover =this.breakfastcoverimage;
                 }
                 if(this.cove_top.oth_dt[i].top_image_img!=''){
+                this.break_Top=false;
+
                      this.Breakfast_top_preview=false;
                  this.breakfasttopimage=this.img_showing +'/' +this.cove_top.oth_dt[i].top_image_img;
                  this.img_top=this.breakfasttopimage;
@@ -511,10 +528,14 @@ breakfast_cover_name:any;
                 this.img_launch_top=this.img_showing +'/' +this.cove_top.oth_dt[i].top_image_img;
                 this.launchtopimage= this.img_launch_top;
                 this.Launch_top_preview=false;
+                this.lunch_Top=false;
+
 
               }
 
               if(this.cove_top.oth_dt[i].cover_page_img!=''){
+                this.lunch_Cover=false;
+
                 this.img_launch_cover=this.img_showing +'/' +this.cove_top.oth_dt[i].cover_page_img;
                 this.launchcoverimage= this.img_launch_cover;
                 this.Launch_cover_preview=false;
@@ -547,14 +568,20 @@ breakfast_cover_name:any;
             if(this.cove_top.oth_dt[i].top_image_img!=''){
               this.img_dinner_top=this.img_showing +'/' +this.cove_top.oth_dt[i].top_image_img;
               this.branchtopimage= this.img_launch_top;
+              this.dinner_Top=false;
               this.Dinner_top_preview=false;
+         
+
 
             }
 
             if(this.cove_top.oth_dt[i].cover_page_img!=''){
               this.img_dinner_cover=this.img_showing +'/' +this.cove_top.oth_dt[i].cover_page_img;
               this.branchcoverimage=  this.img_dinner_cover;
+              this.dinner_Cover=false;
+
               this.Dinner_cover_preview=false;
+
 
             }
               this.dinner_cover=this.cove_top.oth_dt[i].cover_page_url;
@@ -587,6 +614,8 @@ breakfast_cover_name:any;
             if(this.cove_top.oth_dt[i].top_image_img!=''){
               this.img_brunch_top=this.img_showing +'/' +this.cove_top.oth_dt[i].top_image_img;
               this.dinnertopimage= this.img_launch_top;
+              this.brunch_Top=false;
+
               this.Brunch_top_preview=false;
 
             }
@@ -594,6 +623,7 @@ breakfast_cover_name:any;
             if(this.cove_top.oth_dt[i].cover_page_img!=''){
               this.img_brunch_cover=this.img_showing +'/' +this.cove_top.oth_dt[i].cover_page_img;
               this.dinnercoverimage= this.img_dinner_cover;
+              this.brunch_Cover=false;
               this.Brunch_cover_preview=false;
               console.log("asdad")
 
@@ -635,8 +665,8 @@ breakfast_cover_name:any;
           this.menu_sec=this.break_sec.msg[i].sec_url;
           if(this.break_sec.msg[i].sec_img!=''){
             this.Breakfast_section_preview=false;
-            this.img_section_break.push(this.img_showing+ '/' +this.break_sec.msg[i].sec_img);
-            this.breakfastsectionimage.push(this.img_showing+ '/' +this.break_sec.msg[i].sec_img);
+            this.img_section_break.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
+            this.breakfastsectionimage.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
           }
 
            
@@ -659,8 +689,8 @@ breakfast_cover_name:any;
                if(this.break_sec.msg[i].sec_img!='')
                {
                 this.Launch_section_preview=false;
-                 this.img_launch_section.push(this.img_showing+ '/' +this.break_sec.msg[i].sec_img);
-                 this. launchsectionimage.push(this.img_showing+ '/' +this.break_sec.msg[i].sec_img);
+                 this.img_launch_section.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
+                 this. launchsectionimage.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
 
                 
                }
@@ -688,8 +718,8 @@ breakfast_cover_name:any;
         if(this.break_sec.msg[i].sec_img!='')
                {
                 this.Dinner_section_preview=false;
-                 this.img_dinner_section.push(this.img_showing+ '/' +this.break_sec.msg[i].sec_img);
-                 this. branchsectionimage.push(this.img_showing+ '/' +this.break_sec.msg[i].sec_img);
+                 this.img_dinner_section.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
+                 this. branchsectionimage.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
 
                 
                }
@@ -717,8 +747,8 @@ breakfast_cover_name:any;
           if(this.break_sec.msg[i].sec_img!='')
                {
                 this.Brunch_section_preview=false;
-                 this.img_brunch_section.push(this.img_showing+ '/' +this.break_sec.msg[i].sec_img);
-                 this.dinnersectionimage.push(this.img_showing+ '/' +this.break_sec.msg[i].sec_img);
+                 this.img_brunch_section.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
+                 this.dinnersectionimage.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
 
                 
                }
@@ -2327,13 +2357,14 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
     console.log("val:",this.v)
 
     if (e == 'London'){
+     this.tab5=true;
         
       this.brunch_start='';
       this.brunch_end='';
       this.arr_brak_check.length=0;
       this.cove_top.length=0;
       this.break_sec.length=0;
-      this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
+      this.lagunaserve.get_menu_urls(this.resid,null).subscribe(data=>{
         this.cove_top.length=0;
         console.log(data);
         this.cove_top=data;
@@ -3047,6 +3078,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       }
     else if (e == 'Paris'){
          //For Checking approval flag is on or not
+         this.tab5=true;
   
       this.brunch_start='';
       this.brunch_end='';
@@ -3059,7 +3091,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       this.break_sec.length=0;
       this.cove_top.length=0;
 
-      this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
+      this.lagunaserve.get_menu_urls(this.resid,null).subscribe(data=>{
         this.cove_top.length=0;
         console.log(data);
         this.cove_top=data;
@@ -3748,13 +3780,14 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
    
     }
     else if (e == 'Tokyo'){
+      this.tab5=true;
     
       this.break_sec.length=0;
       this.cove_top.length=0;
       this.arr_brak_check.length=0;
       this.brunch_start='';
         this.brunch_end='';
-        this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
+        this.lagunaserve.get_menu_urls(this.resid,null).subscribe(data=>{
           this.cove_top.length=0;
           console.log(data);
           this.cove_top=data;
@@ -4478,12 +4511,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
     else if (e == 'Laguna'){
 
          
-
+     this.tab5=true;
       this.break_sec.length=0;
       this.cove_top.length=0;
       this.arr_brak_check.length=0;
 
-      this.lagunaserve.get_menu_urls(this.resid).subscribe(data=>{
+      this.lagunaserve.get_menu_urls(this.resid,null).subscribe(data=>{
         this.cove_top.length=0;
         console.log(data);
         this.cove_top=data;
@@ -5152,6 +5185,14 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
        
     }
+    else if(e=='Shrewsbury'){
+      this.tab1=true;
+      this.tab2=true;
+      this.tab3=true;
+      this.tab4=true;
+      this.tab5=false;
+
+    }
 
   }
 
@@ -5254,6 +5295,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         formData.append('break_check',this.break_check);
     
         formData.append('restaurant_name',this.res_name);
+      
        for(let img of this.breakfastsectionimage){
          formData.append('section_img', img);
        }
@@ -7096,34 +7138,53 @@ this.storevalue.length=0;
   // }
 
   Breakfast(event: any) {
-    this.breakfast_cover_name=event.target.files[0].name;
+    if(event.target.files[0].size>2097152){
+      this.myFunction_file_Size_error();
+      console.log("asdasd");
+      this.common_break_menu=document.getElementById('mycoverfile');
+      this.common_break_menu.value='';
+    }
+    else{
+     this.breakfast_cover_name=event.target.files[0].name;
     this.common_image = event;
+    this.break_Cover=false;
+
+     console.log(event.target.files[0].size);
     this.width=1800;
     this.height=2560;
   console.log("sadasasas");
   this.Modal=document.getElementById('hid');
   this.Modal.click();
   this.common_value="breakfast_cover";
-
+  
+  }
   
   }
   
   // For breakfasttop image
   changeBreak(event: any) {
     // console.log(event.target.files[0].name);
+    if(event.target.files[0].size>2097152){
+      this.myFunction_file_Size_error();
+      console.log("asdasd");
+      this.common_break_menu=document.getElementById('mytopfile');
+      this.common_break_menu.value='';
+    }
+    else{
      console.log(event.target.files[0].name);
-     this.width=200;
-     this.height=130;
+    
     if(event.target.files.length!=0){
     this.breakfast_top_name=event.target.files[0].name;
-
+    this.width=200;
+    this.height=130;
       this.common_image=event;
       this.Modal=document.getElementById('hid');
       this.Modal.click();
       this.common_value="breakfast_top";
     // this.breakfasttopimage = event.target.files[0];
     // console.log(this.breakfasttopimage);
-    // this.Breakfast_top_preview=false;
+    this.break_Top=false;
+    this.Breakfast_top_preview=false;
     // const reader = new FileReader();
     // reader.onload = () => {
     //   this.img_top= reader.result as string;
@@ -7139,42 +7200,48 @@ this.storevalue.length=0;
       this.Breakfast_top_preview=true;
     }
  console.log(this.breakfasttopimage);
- 
+     }
   }
   //For breakfastmenuimage
   changeBreakmenubreak(event: any) {
-   
+ 
    if (event.target.files.length > 0) {
-      this.multipleImages = event.target.files;
+    this.multipleImages= event.target.files;
+    this.Breakfast_menu_preview=false;
      
-     
-      this.Breakfast_menu_preview=false;
+      
       for (let i = 0; i < event.target.files.length; i++) {
-        const reader = new FileReader();
-          // this.img_menu_break.push({id:'',img_path:this.multipleImages});
-          // var image = document.getElementById('output');
-          // this.img_menu_break.src = URL.createObjectURL(event.target.files[i]);
-          reader.onload = (e:any) => {
+      //   if(event.target.files[i].size>2097152){
+      //    console.log("asasasas");
          
-              console.log(e.target.result);
-              this.img_menu_break.push({id:'',img_path:e.target.result});
-         
-            }
-         
-          reader.readAsDataURL(this.multipleImages[i]);
-        }
-        
-        
-       console.log(this.img_menu_break);
+      
+      //      this.myFunction_file_Size_error();
+      
        
-  
-     console.log( this.multipleImages);
+      //  }
+      //  else{
+      
+
+        this.img_menu_break.push({id:'',img_path:URL.createObjectURL(this.multipleImages[i])});
+
+
+    
+        // }
+        
+      
+        }
+
+
+    
 
     }
     else{
       this.Breakfast_menu_preview=true;
        
     }
+    console.log(this.img_menu_break, this.multipleImages);
+    console.log('LENGTH:' , this.multipleImages.length)
+
 
   }
     // For breakfast section image
@@ -7183,16 +7250,22 @@ this.storevalue.length=0;
     if (event.target.files.length > 0) {
       this.breakfastsectionimage = event.target.files;
       this.Breakfast_section_preview=false;
-
+      
       for (let i = 0; i < event.target.files.length; i++) {
-        const reader = new FileReader();
+    
+      //  if(event.target.files[i].size>2097152){
+      //      this.myFunction_file_Size_error();
+             
+      //  }
+      //  else{
+
+        this.img_section_break.push({id:'',img_path:URL.createObjectURL(this.breakfastsectionimage[i])});
+      //  }
+       
+         
+
   
-        reader.onload = (e: any) => {
-          console.log(e.target.result);
-          this.img_section_break.push(e.target.result);
-        };
-  
-        reader.readAsDataURL(this.breakfastsectionimage[i]);
+       
       }
       
     }
@@ -7205,15 +7278,24 @@ this.storevalue.length=0;
    // Event of launch cover image
   
   changelaunchcoverpage(event: any) {
+    if(event.target.files[0].size>2097152){
+      this.myFunction_file_Size_error();
+      console.log("asdasd");
+      this.common_break_menu=document.getElementById('mylunchcoverfile');
+      this.common_break_menu.value='';
+    }
+    else{
+   
     console.log(event.target.files[0]);
     if(event.target.files.length!=0){
+      this.width=1800;
+      this.height=2560;
        this.lunch_cover_name=event.target.files[0].name;
       this.common_image=event;
       this.Modal=document.getElementById('hid');
       this.Modal.click();
       this.common_value="lunch_cover";
-      this.width=1800;
-      this.height=2560;
+   
       // this.launchcoverimage = event.target.files[0];
       // console.log(this.launchcoverimage);
       // this.Launch_cover_preview=false;
@@ -7229,13 +7311,22 @@ this.storevalue.length=0;
       this.Launch_cover_preview=true;
      
     }
-  
+     
+  }
 
 
   }
    // Event of launch top image
 
   changelaunchtopimage(event: any) {
+    if(event.target.files[0].size>2097152){
+      this.myFunction_file_Size_error();
+      console.log("asdasd");
+      this.common_break_menu=document.getElementById('mylunchtopfile');
+      this.common_break_menu.value='';
+    }
+    else{
+    
     if(event.target.files.length!=0){
       this.lunch_top_name=event.target.files[0].name;
       this.width=200;
@@ -7261,6 +7352,8 @@ this.storevalue.length=0;
       this.Launch_top_preview=true;
 
     }
+      
+  }
   }
    // Event of launch menu image
 
@@ -7270,15 +7363,19 @@ this.storevalue.length=0;
     if(event.target.files.length>0){
       this.launchmenuimage = event.target.files;
       this.Launch_menu_preview=false;
+
+      // this.Launch_menu_preview=false;
       for (let i = 0; i < event.target.files.length; i++) {
-        const reader = new FileReader();
-  
-        reader.onload = (e: any) => {
-          console.log(e.target.result);
-          this.img_launch_menu.push(e.target.result);
-        };
-  
-        reader.readAsDataURL(this.launchmenuimage[i]);
+        //  if(event.target.files[i].size>2097152){
+        //   this.myFunction_file_Size_error();
+             
+        //  }
+        //  else{
+           
+          this.img_launch_menu.push({id:'',img_path:URL.createObjectURL(this.launchmenuimage[i])});
+
+        //  }
+       
       }
        }
     else{
@@ -7293,18 +7390,22 @@ this.storevalue.length=0;
   changelaunchsectionbreak1(event:any){
    console.log(event.target.files);
     if(event.target.files.length>0){
+      // this.Launch_section_preview=false;
       this.launchsectionimage = event.target.files;
       this.Launch_section_preview=false;
 
       for (let i = 0; i < event.target.files.length; i++) {
-        const reader = new FileReader();
-  
-        reader.onload = (e: any) => {
-          console.log(e.target.result);
-          this.img_launch_section.push(e.target.result);
-        };
-  
-        reader.readAsDataURL(this.launchsectionimage[i]);
+      // if(event.target.files[i].size>2097152){
+      //   this.myFunction_file_Size_error();
+
+      // }
+      // else{
+     
+
+        this.img_launch_section.push({id:'',img_path:URL.createObjectURL(this.launchsectionimage[i])});
+
+      // }
+       
       }
 
      }
@@ -7319,15 +7420,17 @@ this.storevalue.length=0;
     if(event.target.files.length>0){
       this.branchsectionimage=event.target.files;
       this.Dinner_section_preview=false;
+      
       for (let i = 0; i < event.target.files.length; i++) {
-        const reader = new FileReader();
+        // if(event.target.files[i].size>2097152){
+        //   this.myFunction_file_Size_error();
   
-        reader.onload = (e: any) => {
-          console.log(e.target.result);
-          this.img_dinner_section.push(e.target.result);
-        };
+        //  }
+        //  else{
+          this.img_dinner_section.push({id:'',img_path:URL.createObjectURL(this.branchsectionimage[i])});
+
+        //  }
   
-        reader.readAsDataURL(this.branchsectionimage[i]);
       }
       
     }
@@ -7343,15 +7446,18 @@ this.storevalue.length=0;
     if(event.target.files.length > 0){
       this.branchmenuimage=event.target.files;
       this.Dinner_menu_preview=false;
+
       for (let i = 0; i < event.target.files.length; i++) {
-        const reader = new FileReader();
-  
-        reader.onload = (e: any) => {
-          console.log(e.target.result);
-          this.img_dinner_menu.push(e.target.result);
-        };
-  
-        reader.readAsDataURL(this.branchmenuimage[i]);
+      //  if(event.target.files[i].size>2097152){
+      //   this.myFunction_file_Size_error();
+
+      //  }
+      //  else{
+
+        this.img_dinner_menu.push({id:'',img_path:URL.createObjectURL(this.branchmenuimage[i])});
+      //  }
+        
+    
       }
 
     }
@@ -7363,6 +7469,13 @@ this.storevalue.length=0;
   }
     // Event of dinner top image
   brunchtopimage(event:any){
+    if(event.target.files[0].size>2097152){
+      this.myFunction_file_Size_error();
+      console.log("asdasd");
+      this.common_break_menu=document.getElementById('mydinnertopfile');
+      this.common_break_menu.value='';
+    }
+    else{
     if(event.target.files.length!=0){
       this.width=200;
       this.height=130;
@@ -7386,21 +7499,29 @@ this.storevalue.length=0;
     this.Dinner_top_preview=true;
 
     }
-
+   }
   }
     // Event of dinner cover image
   brunchcoverimage(event:any){
+    if(event.target.files[0].size>2097152){
+      this.myFunction_file_Size_error();
+      console.log("asdasd");
+      this.common_break_menu=document.getElementById('mydinnercoverfile');
+      this.common_break_menu.value='';
+    }
+    else{
+
     if(event.target.files.length!=0){
      
       this.dinner_cover_name=event.target.files[0].name;
-
+      this.width=1800;
+      this.height=2560;
       this.common_image = event;
       console.log("sadasasas");
       this.Modal=document.getElementById('hid');
       this.Modal.click();
       this.common_value="dinner_cover";
-      this.width=1800;
-      this.height=2560;
+  
     //   this.branchcoverimage=event.target.files[0];
     //  this.Dinner_cover_preview=false;
     //  const reader = new FileReader();
@@ -7415,6 +7536,8 @@ this.storevalue.length=0;
      this.Dinner_cover_preview=true;
       
     }
+    
+  }
   }
    // Event of brunch section image
   changedinnersectionimage(event:any){
@@ -7422,15 +7545,13 @@ this.storevalue.length=0;
       this.dinnersectionimage=event.target.files;
       this.Brunch_section_preview=false;
       for (let i = 0; i < event.target.files.length; i++) {
-        const reader = new FileReader();
-  
-        reader.onload = (e: any) => {
-          console.log(e.target.result);
-          this.img_brunch_section.push(e.target.result);
-        };
-  
-        reader.readAsDataURL(this.dinnersectionimage[i]);
-      }
+      //  if(event.target.files[i].size>2097152){
+
+      //  }
+      //  else{
+        this.img_brunch_section.push({id:'',img_path:URL.createObjectURL(this.dinnersectionimage[i])});
+      //  }
+        }
       
      }
     else{
@@ -7440,16 +7561,23 @@ this.storevalue.length=0;
     // Event of brunch cover image
   dinnerchangecoverimage(event:any){
     // dinnersectionimage:any;
+    if(event.target.files[0].size>2097152){
+      this.myFunction_file_Size_error();
+      console.log("asdasd");
+      this.common_break_menu=document.getElementById('mybrunchcoverfile');
+      this.common_break_menu.value='';
+    }
+    else{
     if(event.target.files.length!=0){
       this.brunch_cover_name=event.target.files[0].name;
 
-      
+      this.width=1800;
+      this.height=2560;
       this.common_image=event;
       this.Modal=document.getElementById('hid');
       this.Modal.click();
       this.common_value="brunch_cover";
-      this.width=1800;
-      this.height=2560;
+     
   // this.dinnercoverimage=event.target.files[0];
   // this.Brunch_cover_preview=false;
   // const reader = new FileReader();
@@ -7462,9 +7590,18 @@ else{
   this.Brunch_cover_preview=true;
 
 }
+    }
   }
     // Event of brunch top image
   dinnerchangetopimage(event:any){
+    if(event.target.files[0].size>2097152){
+      this.myFunction_file_Size_error();
+      console.log("asdasd");
+      this.common_break_menu=document.getElementById('mybrunchtopfile');
+      this.common_break_menu.value='';
+    }
+    else{
+   
     if(event.target.files.length!=0){
       this.width=200;
       this.height=130;
@@ -7487,21 +7624,24 @@ else{
     else{
    this.Brunch_top_preview=true;
    }
+      
+  }
   }
   // Event of brunch menu image
   changedinnermenuimage(event:any){
     if(event.target.files.length>0){
       this.dinnermenuimage=event.target.files;
       this.Brunch_menu_preview=false;
+      
       for (let i = 0; i < event.target.files.length; i++) {
-        const reader = new FileReader();
+        // if(event.target.files[i].size>2097152){
+        //   this.myFunction_file_Size_error();
   
-        reader.onload = (e: any) => {
-          console.log(e.target.result);
-          this.img_brunch_menu.push(e.target.result);
-        };
-  
-        reader.readAsDataURL(this.dinnermenuimage[i]);
+        //  }
+        //  else{
+          this.img_brunch_menu.push({id:'',img_path:URL.createObjectURL(this.dinnermenuimage[i])});
+
+        //  }
       }
 
       
@@ -8661,6 +8801,10 @@ else if(e ==='tuesday'){
   this.launchcoverimage='';
   this.Modal=document.getElementById('mylunchcoverfile');
    this.Modal.value=null;
+  //  this.common_remove_div=document.getElementById('Lunch_Cover');
+  //  this.common_remove_div.className='';
+  this.lunch_Cover=true;
+
   
    }
   
@@ -8670,6 +8814,12 @@ else if(e ==='tuesday'){
     this.img_launch_top='';
     this.Modal=document.getElementById('mylunchtopfile');
     this.Modal.value=null;
+  this.lunch_Top=true;
+
+    // this.common_remove_div=document.getElementById('Lunch_Top');
+    // this.common_remove_div.className='';
+ 
+   
   }
   else if(e=='breakfast_cover'){
     this.Breakfast_cover_preview=true;
@@ -8677,6 +8827,10 @@ else if(e ==='tuesday'){
     this.img_cover='';
     this.Modal=document.getElementById('mycoverfile');
    this.Modal.value=null;
+  this.break_Cover=true;
+
+  //  this.common_remove_div=document.getElementById('break_cover');
+  //  this.common_remove_div.className='';
   }
   else if(e=='breakfast_top'){
     this.breakfasttopimage='';
@@ -8684,6 +8838,11 @@ else if(e ==='tuesday'){
     this.Breakfast_top_preview=true;
     this.Modal=document.getElementById('mytopfile');
    this.Modal.value=null;
+  this.break_Top=true;
+
+  //  this.common_remove_div=document.getElementById('break_top');
+  //  this.common_remove_div.className='';
+  
 
   }
   else if(e=='dinner_cover'){
@@ -8692,6 +8851,10 @@ else if(e ==='tuesday'){
     this.Dinner_cover_preview=true;
     this.Modal=document.getElementById('mydinnercoverfile');
     this.Modal.value=null;
+    this.dinner_Cover=true;
+
+    // this.common_remove_div=document.getElementById('dinner_cov');
+    // this.common_remove_div.className='';
    }
    else if(e=='dinner_top'){
      this.img_dinner_top='';
@@ -8699,6 +8862,11 @@ else if(e ==='tuesday'){
      this.Dinner_top_preview=true;
      this.Modal=document.getElementById('mydinnertopfile');
      this.Modal.value=null;
+  this.dinner_Top=true;
+
+    //  this.common_remove_div=document.getElementById('dinner_top');
+    // this.common_remove_div.className='';
+     
    }
    else if(e=='brunch_cover'){
      this.Brunch_cover_preview=true;
@@ -8707,6 +8875,11 @@ else if(e ==='tuesday'){
      
      this.Modal=document.getElementById('mybrunchcoverfile');
      this.Modal.value=null;
+  this.brunch_Cover=true;
+
+    //  this.common_remove_div=document.getElementById('brunch_cov');
+    //  this.common_remove_div.className='';
+     
    }
    else if(e=='brunch_top'){
      this.img_brunch_top='';
@@ -8715,23 +8888,37 @@ else if(e ==='tuesday'){
      
      this.Modal=document.getElementById('mybrunchtopfile');
      this.Modal.value=null;
+  this.brunch_Top=true;
+
+    //  this.common_remove_div=document.getElementById('brunch_top');
+    //  this.common_remove_div.className='';
+     
    }
  }
  deletemultiple(e:any,index:any,id:any){
-  var x = confirm("Are you sure you want to delete permanently?");
+  if(id > 0){
+  
+var x = confirm("Are you sure you want to delete permanently?");
   if (x){
     console.log(id);
     this.lagunaserve.delete_file(this.resid,id).subscribe(data=>{
       console.log(data);
     })
+ 
   if(e=='lunch_menu'){
     this.img_launch_menu.splice(index,1);
     this.launchmenuimage.splice(index,1);
+    if(this.launchmenuimage.length!=0){
+      this.common_remove_div=document.getElementById('')
+    }  
+    console.log(this.img_launch_menu.length)
    }
   
    else if(e=='breakfast_menu'){
     this.img_menu_break.splice(index,1);
      this.multipleImages.splice(index,1); 
+    console.log(this.img_menu_break.length)
+
    }
   
   else if(e=='dinner_menu'){
@@ -8743,8 +8930,35 @@ else if(e ==='tuesday'){
     this.img_brunch_menu.splice(index,1);
     this.dinnermenuimage.splice(index,1);
   }
-}else{
-  console.log("False");
+}
+}
+else{
+ 
+  if(e=='lunch_menu'){
+    this.img_launch_menu.splice(index,1);
+    this.launchmenuimage.splice(index,1);
+    if(this.launchmenuimage.length!=0){
+      this.common_remove_div=document.getElementById('')
+    }  
+    console.log(this.img_launch_menu.length)
+   }
+  
+   else if(e=='breakfast_menu'){
+    this.img_menu_break.splice(index,1);
+     this.multipleImages.splice(index,1); 
+    console.log(this.img_menu_break.length)
+
+   }
+  
+  else if(e=='dinner_menu'){
+   this.img_dinner_menu.splice(index,1);
+   this.branchmenuimage.splice(index,1);
+  }
+
+  else if(e=='brunch_menu'){
+    this.img_brunch_menu.splice(index,1);
+    this.dinnermenuimage.splice(index,1);
+  }
   
 }
 
@@ -8752,12 +8966,19 @@ else if(e ==='tuesday'){
 
    
  }
- deletemultiplelunchsection(name:any,e:any){
-  
+ deletemultiplelunchsection(name:any,e:any,id:any){
+  if(id > 0){
+  var x = confirm("Are you sure you want to delete permanently?");
+  if (x){
+    console.log(id);
+    this.lagunaserve.delete_file_section(this.resid,id).subscribe(data=>{
+      console.log(data);
+    })
    
    if(name=='lunch_section'){
     this.img_launch_section.splice(e,1);
    this.launchsectionimage.splice(e,1);
+
    }
    else if(name=='dinner_section'){
      this.img_dinner_section.splice(e,1);
@@ -8771,6 +8992,30 @@ else if(e ==='tuesday'){
    else if(name=='brunch_section'){
      this.img_brunch_section.splice(e,1);
      this.dinnersectionimage.splice(e,1);
+   }
+  }
+}
+   else{
+  // console.log("False");
+  if(name=='lunch_section'){
+    this.img_launch_section.splice(e,1);
+   this.launchsectionimage.splice(e,1);
+
+   }
+   else if(name=='dinner_section'){
+     this.img_dinner_section.splice(e,1);
+     this.branchsectionimage.splice(e,1);
+
+   }
+   else if(name=='breakfast_section'){
+     this.img_section_break.splice(e,1);
+     this.breakfastsectionimage.splice(e,1); 
+   }
+   else if(name=='brunch_section'){
+     this.img_brunch_section.splice(e,1);
+     this.dinnersectionimage.splice(e,1);
+   }
+
    }
    
 }
@@ -8913,7 +9158,27 @@ open_crop_modal(){
 openpdf(e:any){
   console.log(e);
   this.img_break_section=e;
+// console.log(e);
+
+ var iframe="<iframe width='100%' height='100%' src='" +this.img_break_section+"' ></iframe>";
+var xx=window.open(iframe,"_blank");
+xx?.document.open();
+xx?.document.write(iframe);
+xx?.document.close();
+// document.location.href=this.img_break_section;
 }
+
+ // For success update snackbar
+ myFunction_file_Size_error() {
+  // Get the snackbar DIV
+  this.x = document.getElementById("snackbar4");
+
+  // Add the "show" class to DIV
+  this.x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
+} 
 }
 
 

@@ -42,8 +42,12 @@
                     <!-- <button class="tablinks" (click)="openCity('tab10')" id="defaultOpen10">QR Codes</button> -->
                 </div>
 
-                <div id="tab1" [hidden]="show_tab!='tab1'" class="tabcontent"><br><br>
+                <div id="tab1" [hidden]="show_tab!='tab1'" class="tabcontent">
                     <div style="overflow-x:auto;">
+                  <!-- <div [hidden]="show_spinner" class="loader"></div> -->
+                  <!-- <div [hidden]="!show_spinner">  -->
+
+                 
                         <table width="100%" cellspacing="15">
                             <tr>
                                 <th scope="col">RESTAURANT NAME</th>
@@ -69,7 +73,7 @@
                             </tr>
                         <!-- </table> -->
                         
-                        <br>
+                       
                         <!-- <table width="100%" cellspacing="15">  -->
                             <tr style="background: white;">
                                 <!-- <th scope="col">RESTAURANT NAME</th>
@@ -96,7 +100,7 @@
                             </tr>
                         <!-- </table> -->
                          
-                        <br>
+                        
                         <!-- <table width="100%" cellspacing="15"> -->
                             <tr>
                                 <!-- <th scope="col">RESTAURANT NAME</th>
@@ -124,7 +128,7 @@
 
                             </tr>
                         </table>
-                    </div><br><br><br>
+                    
                     <div style="overflow-x:auto;">
                         <table width="100%" cellspacing="15">
                             <tr>
@@ -143,6 +147,8 @@
                             </tr>
                         </table> <br>
                     </div>
+                <!-- </div> -->
+                </div>
                     <!-- <div style="overflow-x:auto;">
                         <strong>REPORTS</strong><br><br>
                         <table width="100%" cellspacing="10">
@@ -266,7 +272,7 @@
 
                 <div id="tab2" [hidden]="show_tab!='tab2'" class="tabcontent">
 
-                    <label class="titleCustom"><i class="fa fa-arrow-right"></i> Logo</label>
+                    <label class="titleCustom2">Logo</label>
                     <div class="table-responsive table_responsiveCus">
                         <table class="table">
                             <thead>
@@ -275,7 +281,7 @@
                                     <th scope="col">Logo URL</th> -->
                                     <th scope="col"></th>
                                     <th scope="col"></th>
-                                    <th scope="col">Download </th>
+                                    <th scope="col">Preview</th>
                                     <th scope="col">Upload Logo <br><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label></th>
                                     <!-- <th scope="col">Action</th> -->
                                     <th scope="col"></th>
@@ -296,7 +302,10 @@
 
                                         <a href="{{logopath}}" target="_blank" download><img src="{{logopath}}" height="20" width="20" alt="">
                                         </a>
-                                        <i [hidden]="logospin" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+                                        <!-- <i [hidden]="logospin" class="fa fa-spinner fa-spin" style="font-size:24px"></i> -->
+                                       <!-- <div [hidden]="logospin" class="loader"></div> -->
+                                       <!-- <div [hidden]="coverspin" class="loader"></div> -->
+
 
                                     </td>
                                     <td>
@@ -304,6 +313,7 @@
                                     <!-- <td><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label> -->
 
 
+                                       <button hidden  id="logo_crop" (click)="open_crop_modal()" ></button>
                                         <input type="file" id="myfile" class="uploadField" name="myfile" multiple="" (change)="upload_logo($event)">
                                     </td>
                                     <td class="divFlex"><a href="#" class="edite">
@@ -317,8 +327,8 @@
 
                     </div>
 
-                    <hr>
-                    <label class="titleCustom"><i class="fa fa-arrow-right"></i> Cover Image</label>
+                    
+                    <label class="titleCustom2"> Cover Image</label>
                     <div class="table-responsive table_responsiveCus">
 
                         <table class="table">
@@ -330,7 +340,7 @@
                                      <th scope="col"></th>
                                      <th scope="col"></th>
                                     <!-- <th scope="col">Download Link</th> -->
-                                    <th scope="col">Download </th>
+                                    <th scope="col">Preview </th>
                                     <th scope="col"> Upload Image <br><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label></th>
                                     <!-- <th scope="col">Action</th> -->
                                     <th scope="col"></th>
@@ -338,7 +348,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <i [hidden]="coverspin" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+                                <!-- <i [hidden]="coverspin" class="fa fa-spinner fa-spin" style="font-size:24px"></i> -->
 
                                 <tr *ngFor="let menu of menuData; let i=index"  >
                                     
@@ -374,9 +384,9 @@
                         </table>
 
                     </div>
-                    <hr>
+                   
 
-                    <label class="titleCustom"><i class="fa fa-arrow-right"></i> Top Image</label>
+                    <label class="titleCustom2"> Top Image</label>
                     <div class="table-responsive table_responsiveCus">
                         <table class="table">
                             <thead>
@@ -388,14 +398,14 @@
                                     <th scope="col"></th>
 
                                     <!-- <th scope="col">Download Link</th> -->
-                                    <th scope="col">Download </th>
+                                    <th scope="col">Preview </th>
                                     <th scope="col"> Upload Image <br><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label></th>
                                     <!-- <th scope="col">Action</th> -->
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <i [hidden]="topspin" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+                                <!-- <i [hidden]="topspin" class="fa fa-spinner fa-spin" style="font-size:24px"></i> -->
 
                                 <tr *ngFor="let menu of menuData; let i=index">
                                     <th scope="row" *ngIf="menu.active_flag=='Y'">{{i+1}}</th>
@@ -429,7 +439,7 @@
                              
                             </tbody>
                         </table>
-                    <button class="w3-button w3-green w3-right">Download all <i class="fa fa-download" aria-hidden="true"></i></button>
+                    <button class="w3-button w3-green w3-right" (click)="download_top_cover_logo()">Download all <i class="fa fa-download" aria-hidden="true"></i></button>
 
                     </div>
 
@@ -451,24 +461,24 @@
                         ><input type="radio" (click)="get_sec_img(5)" id="bkmenu" name="bkmenu" value="bkMenu43">
                             Special Menu</label>
                     </div> -->
-                    <div class="row" >
-                        <div class="col-2" *ngFor="let mnc of menuchoiceData; let i=index;">
+                    <ul class="downloadRadio" >
+                        <li *ngFor="let mnc of menuchoiceData; let i=index;">
                             <label class="radioButtonName">
                                 <input type="radio" id="bkmenu{{mnc.menu_id}}" [checked]="i==0" name="bkmenu" value="Breakfast Menu" (click)="get_sec_img(mnc.menu_id)" > {{mnc.menu_name}}
                             </label>
-                        </div>
+                        </li>
                         
                 <!-- <label class="radioButtonName"><input type="radio" (click)="get_sec_img(2)" id="bkmenu" name="bkmenu"
                         value="Lunch  Menu" > Lunch Menu</label> -->
               
-            </div><br>
+                </ul>
                     <div class="table-responsive table_responsiveCus">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">Sl. No.</th>
                                     <th scope="col">URL</th>
-                                    <th scope="col">Download Images </th>
+                                    <th scope="col">Preview </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -480,13 +490,13 @@
                                             class="formCss"> -->
                                         </td>
 
-                                    <td><a [href]="apiurlset+sec.sec_image" target="_blank"><img [src]="apiurlset+sec.sec_image" height="20" width="20"></a>
+                                    <td><a [href]="apiurlset+sec.sec_img" target="_blank"><img [src]="apiurlset+sec.sec_img" height="20" width="20"></a>
                                     </td>
                                 </tr>
                               
                             </tbody>
                         </table>
-                    <button class="w3-button w3-green w3-right">Download all <i class="fa fa-download" aria-hidden="true"></i></button>
+                    <button class="w3-button w3-green w3-right" (click)="download_section()">Download all <i class="fa fa-download" aria-hidden="true"></i></button>
 
                     </div>
 
@@ -576,15 +586,15 @@
                 <div id="tab4" [hidden]="show_tab!='tab4'" class="tabcontent">
 
 
-                    <div class="row">
+                    <ul class="downloadRadio">
                         <!-- <label class="radioButtonName">
                         <input type="radio" id="b1" name="bkmenu" (click)="store_menu(1);" value="1"> Breakfast Menu
                     </label> -->
-                    <div class="col-2" *ngFor="let mnc of menuchoiceData; let i=index;">
+                    <li *ngFor="let mnc of menuchoiceData; let i=index;">
                         <label class="radioButtonName">
                             <input type="radio" id="b{{mnc.menu_id}}" name="bkmenu" value="{{mnc.menu_id}}" (click)="store_menu(mnc.menu_id);" > {{mnc.menu_name}}
                         </label>
-                    </div>
+                    </li>
                         <!-- <label class="radioButtonName"><input type="radio" (click)="store_menu(2);" id="b2" name="bkmenu"
                                value="2"> Lunch Menu</label>
                         <label class="radioButtonName"><input  type="radio" (click)="store_menu(3);" id="b3" name="bkmenu" value="3">
@@ -593,7 +603,8 @@
                             Brunch Menu</label>
                         <label class="radioButtonName"><input  type="radio" (click)="store_menu(5);" id="b5" name="bkmenu" value="5">
                             Special Menu</label> -->
-                    </div>
+                        </ul>
+                <div [hidden]="hidesection">
                     <div class="formTable">
 
 
@@ -615,7 +626,7 @@
 
                                     <label>Upload Section Image <small class="text-muted">(File Types:JPEG/JPG/PNG. Maximum Size: 2MB)</small> </label>
                                     <!--  -->
-                                    <input id='files' (change)="section_img_upload($event)" type='file' multiple />
+                                    <input id='files_section' (change)="section_img_upload($event)" type='file' multiple />
                                     <!-- <output id='result' /> -->
 
 
@@ -628,21 +639,27 @@
 
 
                     </div>
-
-                    <form action="thanks-order.php" target="_self">
-                        <button [hidden]="submit_show"  class="w3-button w3-green" (click)="create_section(section_value.value);section_value.value=''" type="submit">Submit </button>
+                    
+                    <form>
+                        <div class="formBtn">
+                        <button [hidden]="submit_show"  class="w3-button w3-green" (click)="create_section(section_value.value)" type="submit">Submit </button>
                         <button [hidden]="!submit_show" class="w3-button w3-green" (click)="update_section(section_value.value)" type="submit">Update </button> 
                         &nbsp; &nbsp;
-                        <button class="w3-button w3-red" (click)="reload_page('tab4');createsecval='';" type="submit">Reset </button>
+                        <button class="w3-button w3-green reset" (click)="reload_section();createsecval='';" type="submit">Reset </button>
+                    </div>
+                        <div *ngIf="preview_for_section" class="prvImgCustom">
+                            <img src="{{preview_for_section}}" alt="">
+                        </div>
                     </form>
-                    <i [hidden]="secspin" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
-
-                    <br><br>
-                    <mat-form-field appearance="standard">
-                        <mat-label>Filter</mat-label>
-                        <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+                   
+                    <!-- <i [hidden]="secspin" class="fa fa-spinner fa-spin" style="font-size:24px"></i> -->
+                </div>
+                    
+                <mat-form-field appearance="outline" class="fullWidth">
+                        <mat-label>Search </mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Search section" #input>
                       </mat-form-field>
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
     
                        
                         <ng-container matColumnDef="id">
@@ -652,7 +669,7 @@
                       
                       
                         <ng-container matColumnDef="section_name">
-                          <th mat-header-cell *matHeaderCellDef matSortHeader="section_name"> Section </th>
+                          <th mat-header-cell *matHeaderCellDef> Section </th>
                           <td mat-cell *matCellDef="let element">{{element.section_name}} </td>
                         </ng-container>
                       
@@ -673,7 +690,7 @@
                           </ng-container>
                       
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: pointer;" (click)="get_sec_id1(row.menu_id,row.id,row.section_name)" ></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: pointer;" (click)="get_sec_id1(row.menu_id,row.id,row.section_name,apiurlset+row.section_img)" ></tr>
                       </table>
                   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 
@@ -689,7 +706,7 @@
                                 <div class="rowCustomFour">
                                     <div class="fieldSecHalf">
                                         <label>Menu</label>
-                                        <select id="pickup_place" name="pickup_place" class="formCss" #menu_for_item (change)="select_section_with_menu(menu_for_item.value)" ngModel>
+                                        <select id="pickup_place_menu" name="pickup_place" class="formCss" #menu_for_item (change)="select_section_with_menu(menu_for_item.value)" ngModel>
                                             <option value="" selected="selected"  >Select One</option>
                                             <option *ngFor="let mnc of menuchoiceData" [selected]="mid2==mnc.menu_id" value="{{mnc.menu_id}}">{{mnc.menu_name}}</option>
                                             <!-- <option [selected]="mid2=='1'" value="1">Breakfast</option>
@@ -702,7 +719,7 @@
                                     </div>
                                     <div class="fieldSecHalf">
                                         <label>Section</label>
-                                        <select id="pickup_place" #section_item name="pickup_place" class="formCss" (change)="get_section_item(section_item.value)">
+                                        <select id="pickup_place_section" #section_item name="pickup_place" class="formCss" (change)="get_section_item(section_item.value)">
                                             <option value="" selected="selected">Select One</option>
                                             <option *ngFor="let s of get_section_for_item" [selected]="s.id==eid2" value="{{s.id}}">{{s.section_name}}</option>
                                             
@@ -727,7 +744,7 @@
 
                                     <div class="fieldSecFull">
                                         <label>Item</label>
-                                         <input type="text" #itemval id="headTitle" name="headTitle" value="{{i_value}}"
+                                         <input type="text" #itemval id="headTitle_item" name="headTitle" value="{{i_value}}"
                                             class="formCss">
                                         
 
@@ -742,18 +759,19 @@
 
 
                         <form action="thanks-order.php" target="_self">
-                            
-                            <button [hidden]="submit_show2" class="w3-button w3-green" type="submit" (click)="send_item(itemval.value);itemval.value=''">Submit </button>
+                            <div class="formBtn">
+                            <button [hidden]="submit_show2" class="w3-button w3-green" type="submit" (click)="send_item(itemval.value)">Submit </button>
                             <button [hidden]="!submit_show2" class="w3-button w3-green" type="submit" (click)="update_send_item(menu_for_item.value,section_item.value,itemval.value);">Update </button> &nbsp;
                             <!-- <button class="w3-button w3-red" type="submit" (click)="reload_page('tab5')">Reset </button> -->
-                            <button class="w3-button w3-red" type="submit" (click)="mid2='';eid2='';i_value='';submit_show2=false;">Reset </button>
+                            <button class="w3-button w3-green reset" type="submit" (click)="reset_add_item(); mid2='';eid2='';i_value='';submit_show2=false;">Reset </button>
+                        </div>
                         </form>
-<br><br>
+
 
                     </div>
-                    <mat-form-field appearance="standard">
-                        <mat-label>Filter</mat-label>
-                        <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+                    <mat-form-field appearance="outline" class="fullWidth">
+                        <mat-label>Search</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Search items" #input>
                       </mat-form-field>
                     <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
     
@@ -765,7 +783,7 @@
                       
                       
                         <ng-container matColumnDef="item_name">
-                          <th class="d1" mat-header-cell *matHeaderCellDef matSortHeader="item_name"> Item </th>
+                          <th class="d1" mat-header-cell *matHeaderCellDef> Item </th>
                           <td class="d1" mat-cell *matCellDef="let element">{{element.item_name}} </td>
                         </ng-container>
                       
@@ -805,7 +823,7 @@
                             <div class="rowCustomFour">
                                 <div class="fieldSecHalf">
                                     <label>Menu</label>
-                                    <select id="pickup_place" #select_price_menu name="pickup_place" class="formCss" (change)="select_for_desc_menu(select_price_menu.value)">
+                                    <select id="pickup_place_menu_desc" #select_price_menu name="pickup_place" class="formCss" (change)="select_for_desc_menu(select_price_menu.value)">
                                         <option value="" selected="selected">Select One</option>
                                         <option *ngFor="let mnc of menuchoiceData" [selected]="mid1==mnc.menu_id" value="{{mnc.menu_id}}">{{mnc.menu_name}}</option>
                                         <!-- <option [selected]="mid1=='1'" value="1">Breakfast</option>
@@ -820,7 +838,7 @@
                                 <div class="fieldSecHalf">
                                     <label>Section</label>
                                     <!-- <input type="text" id="headTitle" name="headTitle" value="" class="formCss"> -->
-                                    <select id="pickup_place" #section_select_for_item name="pickup_place" class="formCss" (change)="get_item_select(section_select_for_item.value)">
+                                    <select id="pickup_place_section_desc" #section_select_for_item name="pickup_place" class="formCss" (change)="get_item_select(section_select_for_item.value)">
                                         <option value="" selected="selected">Select One</option>
                                         <option [selected]="g.id==secid" *ngFor="let g of get_section_for_item1" value="{{g.id}}">{{g.section_name}}</option>
                                         
@@ -834,7 +852,7 @@
                                 <div class="fieldSecFull">
                                     <label>Items</label>
                                     <!-- <input type="text" id="headTitle" name="headTitle" value="" class="formCss"> -->
-                                    <select id="pickup_place" #item_select (change)="get_item_select1(item_select.value)" name="pickup_place" class="formCss">
+                                    <select id="pickup_place_item_desc" #item_select (change)="get_item_select1(item_select.value)" name="pickup_place" class="formCss">
                                         <option value="" selected="selected">Select One</option>
                                         <option *ngFor="let i of idata" [selected]="i.id==item_i" value="{{i.id}}">{{i.item_name}}</option>
                                         <!-- <option value="breakfast">Top </option>
@@ -845,8 +863,8 @@
                             </div>
                             <div class="rowCustomFour">
                                 <div class="fieldSecFull">
-                                    <label>Price ($)</label>
-                                    <input  #price type="text" id="headTitle" (keypress)="isNumberKey($event)" name="headTitle" value="{{ipr}}" class="formCss">
+                                    <label>Price (in USD)</label>
+                                    <input  #price type="text" id="headTitlePrice" (keypress)="isNumberKey($event)" name="headTitle" value="{{ipr}}" class="formCss">
 
                                 </div>
 
@@ -866,23 +884,24 @@
                         <form class="form-inline" action="">
                             <div class="rowCustomFour">
                                 <div class="fieldSecFull">
-                                    <label for="vehicle2"> Additional Notes</label>
+                                    <label for="vehicle2"> Additional Notes <b>  ({{concatdatalength1}}/150) </b></label>
                                     <textarea #additional id="spclMore" name="spclMore" rows="5" cols="60"
-                                        class="formCssTextArea">{{ino}}</textarea>
+                                    (input)="restrict1($event)" (change)="restrict1($event)" maxlength="150" [(ngModel)]="ino" class="formCssTextArea">{{ino}}</textarea>
                                 </div>
                             </div>
                         </form>
                         <form action="thanks-order.php" target="_self">
+                            <div class="formBtn">
                             <button [hidden]="show_button3" class="w3-button w3-green" type="submit" (click)="submit_price_desc(price.value,desc.value,additional.value);">Submit </button>
                             <button [hidden]="!show_button3" class="w3-button w3-green" type="submit" (click)="update_price_desc(select_price_menu.value,section_select_for_item.value,item_select.value,price.value,desc.value,additional.value);">Update </button> &nbsp;
-                            <button class="w3-button w3-red" type="submit" (click)="secid='';item_i='';mid1='';ipr='';ide='';ino='';show_button3=false;">Reset </button>
-
+                            <button class="w3-button w3-green reset" type="submit" (click)="reset_desc();secid='';item_i='';mid1='';ipr='';ide='';ino='';show_button3=false;">Reset </button>
+                        </div>
                         </form>
                     </div>
-                    <br><br>
-                    <mat-form-field appearance="standard">
-                        <mat-label>Filter</mat-label>
-                        <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+                    
+                    <mat-form-field appearance="outline" class="fullWidth">
+                        <mat-label>Search</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Search items" #input>
                       </mat-form-field>
                     <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
     
@@ -893,25 +912,32 @@
                         </ng-container>
                       
                       
-                        <ng-container matColumnDef="item_desc" >
-                          <th class="d2" mat-header-cell *matHeaderCellDef matSortHeader="item_desc"> Description </th>
+                        <ng-container matColumnDef="item_name" >
+                          <th class="d2" mat-header-cell *matHeaderCellDef > Item </th>
                           <td class="d2" mat-cell *matCellDef="let element" >
                               
                             
                             <p class="nameoverflow mt-3"
               #tooltip="matTooltip"
-                matTooltip="{{element.item_desc}}"
+                matTooltip="{{element.item_name}}"
                 matTooltipClass="custom-tooltip"
-               matTooltipPosition="below">{{element.item_desc}}</p> 
+               matTooltipPosition="below">{{element.item_name}}</p> 
                              </td>
                         </ng-container>
                         <ng-container matColumnDef="item_price">
-                            <th class="d2" mat-header-cell *matHeaderCellDef matSortHeader="item_price"> Price </th>
+                            <th class="d2" mat-header-cell *matHeaderCellDef> Price </th>
                             <td class="d2" mat-cell *matCellDef="let element">{{element.item_price}} </td>
                           </ng-container>
                           <ng-container matColumnDef="item_note">
-                            <th class="d2" mat-header-cell *matHeaderCellDef matSortHeader="item_note"> Note </th>
-                            <td class="d2" mat-cell *matCellDef="let element">{{element.item_note}} </td>
+                            <th class="d2" mat-header-cell *matHeaderCellDef > Note </th>
+                            <td class="d2" mat-cell *matCellDef="let element">
+                                <p class="nameoverflow mt-3"
+                                #tooltip="matTooltip"
+                                  matTooltip=" {{element.item_note}}"
+                                  matTooltipClass="custom-tooltip"
+                                 matTooltipPosition="below"> {{element.item_note}}</p> 
+                                
+                                </td>
                           </ng-container>
                      
                         <!-- <ng-container matColumnDef="edit">
@@ -983,8 +1009,8 @@
                           <form action="">
                               <div class="rowCustomFour">
                           <div class="fieldSecFull">
-                          <label for="headTitle">Header Title:</label>
-                          <input type="text" value="{{sp_head}}"  #head id="headTitle" name="headTitle" value="" class="formCss"></div>
+                          <label for="headTitle">Header Title:  {{concatheaderlength}}/30</label>
+                          <input type="text" (change)="restrict_header($event)" (input)="restrict_header($event)" maxlength="30" value="{{sp_head}}" [(ngModel)]="sp_head" #head id="headTitle_special" name="headTitle" value="" class="formCss"></div>
                           </div>
                           </form>	
                           <form class="form-inline" >
@@ -1018,22 +1044,19 @@
                           <form class="form-inline" action="">
                           <div class="rowCustomFour">
                           <div class="fieldSecFull">
-                          <label for="vehicle2"> Notice Content</label>
-                          <textarea #notice id="spclMore" value="{{sp_notice}}" name="spclMore" rows="5" cols="60" class="formCssTextArea"></textarea>	
+                          <label for="vehicle2"> Notice Content: ({{concatnoticelength}}/100)</label>
+                          <textarea #notice id="spclMore" maxlength="100" [(ngModel)]="sp_notice" (change)="restrict_notice($event)" (input)="restrict_notice($event)" value="{{sp_notice}}" name="spclMore" rows="5" cols="60" class="formCssTextArea"></textarea>	
                           </div>
                           </div>
                           </form>
                           </div>
                   
-                  <br>
-                    
-                    
-                    
-                    
                     
                       <form action="thanks-order.php" target="_self">	
+                        <div class="formBtn">
                       <button class="w3-button w3-green" type="submit" (click)="submit_special(Menu.value,position.value,head.value,code2.value,code4.value,notice.value);">Save & Continue </button>
-                      </form> 
+                    </div>
+                    </form> 
                   
                 </div>
                 <div id="tab8" [hidden]="show_tab!='tab8'" class="tabcontent">
@@ -1042,15 +1065,15 @@
 
 
                         <div class="aboutLeft">
-                            <label class="titleCustom">About Us</label>
-                            <textarea name="introduction" maxlength="500" rows="6" cols="25" class="formCssTextArea"
-                                readonly>{{about_text_readonly}}</textarea>
+                            <label class="titleCustom">About Us </label>
+                            <textarea name="introduction" maxlength="150" rows="6" cols="25" class="formCssTextArea"
+                               readonly>{{about_text_readonly}}</textarea>
 
                         </div>
                         <div class="aboutLeft">
-                            <label class="titleCustom">About Us (update)</label>
-                            <textarea name="introduction" maxlength="500" rows="6" cols="25"
-                                class="formCssTextArea" #about_write_txt></textarea>
+                            <label class="titleCustom">About Us (update) <b>({{concatdatalength2}}/150)</b></label>
+                            <textarea id="ab_us" name="introduction" maxlength="150" rows="6" cols="25"
+                            (input)="restrict2($event)" (change)="restrict2($event)"   class="formCssTextArea" #about_write_txt></textarea>
 
                         </div>
                     </form>
@@ -1060,8 +1083,10 @@
                         immediately</p>
 
                     <form class="form-inline" action="">
-                        <button type="submit" class="btn btn-default" (click)="send_about_us(about_write_txt.value)">SUBMIT</button>
-                        <button type="reset" value="Reset" id="clickreset" (click)="about_write_txt.value=''" style="background-color:#F00">Clear</button>
+                        <div class="formBtn">
+                        <button type="submit" class="w3-button w3-green" (click)="send_about_us(about_write_txt.value)">SUBMIT</button>
+                        <button type="reset" class="w3-button w3-green reset" value="Reset" id="clickreset" (click)="about_write_txt.value='';concatdatalength2=0" class="w3-button w3-green reset">Clear</button>
+                    </div>
                     </form>
                 </div>
 
@@ -1077,41 +1102,44 @@
                             </div>
                     </div>
                     </div>
-                    <hr>
+                   
                     <div class="formTable">
                     <div class="rowCustomFour">
                             <div class="fieldSecFull">
-                            <label><strong> QR Code for Dynamic Menu</strong> </label>
-                            <a  href="{{getimagepath}}" download=""><img src="{{getimagepath}}" class="barcodeImg" alt="Tap the button to generate code"></a>
-                            <button class="w3-button w3-green" type="submit" style="margin-left: 118%; margin-top: -8%;" (click)="gen_code()">Generate QR-Code </button>
+                                <label><strong> QR Code for Dynamic Menu</strong> </label>
+
+                                <img src="{{getimagepath}}" class="barcodeImg" alt="Tap the button to generate code">
+                                <div class="qrCodeArea">
+                                    <i class="fa fa-arrow-down" *ngIf="getimagepath==undefined" style="font-size:48px;color:blue;margin-left:12%;"></i>
+                                    <button class="genarateQrBtn" type="submit" (click)="gen_code()">Generate QR-Code </button>
+                                    </div>
+
+                                <!-- <i class="fa fa-arrow-right" *ngIf="getimagepath==undefined" style="font-size:48px;color:blue;margin-left:12%;"></i>
+                                <p  *ngIf="getimagepath==undefined"> Tap the button to generate code </p>
+                            <button class="w3-button w3-green" type="submit" style="margin-left: 118%; margin-top: -8%;" (click)="gen_code()">Generate QR-Code </button> -->
                         </div>
                     </div>
                     
                     </div>
-                    <hr>
+                  
                     
                     <strong>You can check any amendments by using the menu button below to view that menu. Always refresh the page before checking and clearing your cache memory if you need to.</strong>	
                     <div style="overflow-x:auto;">
                     <!-- <div class="row"> -->
                 <br>
+
+                <div class="qrCodeLink">
+                    <table>
+                      <tr>
+                          <td *ngFor="let mnc of menuchoiceData">{{mnc.menu_name}}</td>
+                      </tr>
+                      <tr>
+                          <td *ngFor="let mnc of menuchoiceData"><button class="viewQrCode" (click)="open_popup_window(mnc.menu_id)">View</button></td>
+                      </tr>
+                  </table>
+              </div>
                     
-                        <div class="row" >
-                            <div class="col-2" *ngFor="let mnc of menuchoiceData">{{mnc.menu_name}}</div><br>
-                            <!-- <th scope="col">Lunch</th>
-                            <th scope="col">Dinner</th>
-                            <th scope="col">Brunch</th>
-                            <th scope="col">Special</th> -->
-                            <!-- </tr>
-                            
-                            <tr  bgcolor="#fff" align="center" *ngFor="let mnc of menuchoiceData"> -->
-                        </div> <br>
-                        <div class="row">
-                            <div class="col-2"  *ngFor="let mnc of menuchoiceData">
-                                <button class="w3-button w3-green" (click)="open_popup_window(mnc.menu_id)">View</button>               
-                            
                         
-                            </div>
-                        </div>
                     
                     <!-- <td><button  class="w3-button w3-green" (click)="open_popup_window(2)"
                     >
@@ -1125,13 +1153,13 @@
                     View</button></td> -->
                     
                     
-                    <br>	
-                <!-- </div>  -->
-                <br>
+                    
                     
                     </div>
+
                     <br>
-                    <button class="w3-button w3-green" type="submit" (click)="send_mail()">Send Mail </button>
+                    <div class="formBtn"><button class="w3-button w3-green" type="submit" (click)="send_mail()">Send Mail </button></div>
+                    
                     </div>
 
                 
@@ -1144,8 +1172,6 @@
         <!-- <?php echo file_get_contents("footer.html"); ?>	 -->
 
         <!-- Footer -->
-        <app-footer></app-footer>
-
     </div>
 
     <div id="snackbar">{{m}}</div>
@@ -1163,3 +1189,114 @@
 
 
 </div>
+<app-footer></app-footer>
+
+
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+  
+      <div class="modal-dialog">
+  
+        <div class="modal-content">
+  
+          
+  
+          <div class="modal-body">
+        <div class="row">
+            <div class="col-2 text-center">
+                <i class="fa fa-minus-circle fa-2x " type="button" [hidden]="ZoomIn"  (click)="zoomOut()"></i>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-plus-circle fa-2x " type="button" [hidden]="Zoomout" (click)="zoomIn()"></i>
+            </div>
+            <div class="col-2">
+                <button class="float-right" (click)="close_modal_on_crop()">&times;</button>
+            </div>
+        </div>
+           
+            <image-cropper [hidden]="hide" [imageChangedEvent]="img_cover"
+            [maintainAspectRatio]="true" 
+          
+            [onlyScaleDown]="false" 
+           
+            [cropperMaxWidth]="crop_width"
+            [cropperMaxHeight]="crop_height"
+            
+            
+            (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady($event)"
+            (loadImageFailed)="loadImageFailed()"
+            [style.display]="showCropper ? null: 'none'" [transform]="transform">
+          </image-cropper>
+  
+          </div>
+          <footer class="w3-container w3-right">
+            <button class="btn btn-danger"   
+            (click)="click_it()">Save</button>
+          </footer>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  </div>
+<!-- 
+<div class="modal" id="mymodal" [hidden]="valu" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+    
+        <div class="modal-header">
+          <h4 class="modal-title" >Adjust
+            Image</h4>
+  
+      
+            <i class="fa fa-times-circle fa-2x" type="button"  (click)="close_it()" ></i>
+             <button  class="close btn btn-primary" >&times;</button> 
+  
+        </div>
+  
+  
+        <div class="modal-body">
+   
+
+    <image-cropper [hidden]="hide" [imageChangedEvent]="img_cover"
+    [maintainAspectRatio]="true" 
+  
+    [onlyScaleDown]="true" 
+    [croppeMaxHeight]="crop_height"
+   
+    [cropperMaxWidth]="crop_width"
+    [roundCropper]="cropround"
+    [canvasRotation]="2"
+    (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady($event)"
+    (loadImageFailed)="loadImageFailed()"
+    [style.display]="showCropper ? null: 'none'" [transform]="transform">
+  </image-cropper>
+
+         
+          
+          
+          <br>
+          <div class="row">
+         <div class="col-4 text-center"></div>
+  
+         <div class="col-2 text-center">
+            <i class="fa fa-plus-circle fa-2x " type="button" [hidden]="ZoomIn"  (click)="zoomOut()"></i>
+        </div>
+        <div class="col-2">
+            <i class="fa fa-minus-circle fa-2x " type="button" [hidden]="Zoomout" (click)="zoomIn()"></i>
+        </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+        
+          <button class="btn btn-danger"   
+           (click)="click_it()">Save</button>
+              </div>
+  
+      </div>
+    </div>
+    </div> -->
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Processing... </p></ngx-spinner>

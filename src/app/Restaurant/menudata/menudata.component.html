@@ -30,7 +30,13 @@
         </header>
 
         <div class="w3-container w3-white w3-padding-24">
-               <h3 class="text-danger text-center" [hidden]="show_toast">As aming is setting your order, you can not modified</h3>
+               <!-- <h3 class="text-danger text-center" [hidden]="show_toast">As aming is setting your order, you can not modified</h3> -->
+
+
+               <div class="alert alert-danger text-center" role="alert"  [hidden]="show_toast">
+                <strong>Setup mode is on.</strong>
+                <p>Admin is setting up your menu,you can not modify</p> 
+              </div>
 
             <div class="w3-cell-row">
                 <div class="w3-container w3-full w3-cell w3-mobile">
@@ -104,13 +110,7 @@
                                         <label>Menu</label>
                                         <select id="pickup_place" [disabled]="color_font" name="pickup_place" id="menuselect" class="formCss" #Menu
                                             (change)="pickup_place(Menu.value)">
-                                            <!--
-                                            <option value="0" [hidden]="allmenus" [selected]="this.notice_select=='0'">ALL Menus</option>
-                                            <option value="1"  [hidden]="breakfast" [selected]="this.notice_select=='1'">Breakfast</option>
-                                            <option value="2" [hidden]="launch" [selected]="this.notice_select=='2'">Lunch</option>
-                                            <option value="3" [hidden]="dinner" [selected]="this.notice_select=='3'">Dinner</option>
-                                            <option value="4" [hidden]="brunch" [selected]="this.notice_select=='4'">Brunch</option>
-                                            <option value="5" [selected]="this.menu_id=='5'">Specials</option> -->
+                                           
                                             <option value="" selected="selected">Select One</option>
                                             <option *ngFor="let n of notice_select" [selected]="notify==n.menu_id" [hidden]="n.active_flag=='N'" value="{{n.menu_id}}">{{n.menu_name}}</option>
                                         </select>
@@ -144,13 +144,13 @@
                             <form class="form-inline" >
                                 <div class="rowCustomFour">
                                     <div class="fieldSecHalf">
-                                        <label for="favcolor">Select your font color:</label>
+                                        <label for="favcolor">Select your front color:</label>
                                         <input type="color" [disabled]="color_font" id="colorPicker" class="colorPickerCustom" name="favcolor"
                                         value="{{font_color}}" #code1 (change)="changecolor($event,'back')">
                                     </div>
 
                                     <div class="fieldSecHalf">
-                                        <label for="code">Enter Code:</label>
+                                        <label for="code">Color Code:</label>
                                         <input type="text" [disabled]="color_font" id="box" name="code1" class="formCss" #code2
                                         value="{{font_color}}"
                                         (change)="checkvalidity($event)">
@@ -166,7 +166,7 @@
                                             #code3 (change)="changecolor($event,'font')">
                                     </div>
                                     <div class="fieldSecHalf">
-                                        <label for="code">Enter Code:</label>
+                                        <label for="code">Color Code:</label>
                                         <input type="text" [disabled]="color_font"  id="box2" name="code" value="{{back_color}}" class="formCss" #code4  (change)="checkvalidity($event)">
                                     </div>
                                 </div>
@@ -183,6 +183,11 @@
                                 </div>
                             </form>
                         </div>
+               
+
+
+
+
 
                         <br>
 
@@ -190,12 +195,24 @@
 
 
 
-                        <form >
-                            <button class="w3-button w3-green"
+                        <div class="row">
+                            <div class="col-5">
+                                <button class="w3-button w3-green float-left"
                             
                             [disabled]="value_position || value_Headertitle ||value_font||value_background  || value_text"
-                                (click)="nexttab1('about',Menu.value,title.value,code1.value,code2.value,code3.value,code4.value,notice.value)">Save & Continue </button>
-                        </form>
+                                (click)="nexttab1('about',Menu.value,title.value,code1.value,code2.value,code3.value,code4.value,notice.value)">Save</button>
+                           
+                            <!-- <div class="col-6 float-start"> -->
+                                <button class="w3-button w3-green float-end"
+                            
+                          
+                                (click)="go_to_thankyou_page()">Continue</button>
+                            <!-- </div> -->
+                        </div>
+                            
+
+                              
+                        </div>
 
 
                     </div>
@@ -240,6 +257,6 @@
 
 <div id="snackbar">Successfully Inserted</div>
 <div id="snackbar1">Successfully Updated</div>
-<div id="snackbar2"><i class="fa fa-warning" style="font-size:15px;color:white;padding-right:5px"></i>Please select the check box to proceed further</div>
+<div id="snackbar2" [hidden]="!show_toast"><i class="fa fa-warning" style="font-size:15px;color:white;padding-right:5px"></i>Please select the check box to proceed further</div>
 
 

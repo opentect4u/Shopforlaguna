@@ -47,8 +47,9 @@ PostWIndowCling(dt:any){//For windowcling Api Post in Admin Order setup Page
 GetWindowCling(){//For windowcling Api get in Admin Order setup Page
   return this.http.get(this.holder_Url);
 }
-get_menu_urls(id:any){//api to retireve urls for cover and top urls
-  return this.http.get(url_set.api_url+'/menu_setup?id='+id)
+get_menu_urls(res_id:any, m_id: any){//api to retireve urls for cover and top urls
+  var menu_id = m_id > 0 ? m_id : '';
+  return this.http.get(url_set.api_url+'/section_image?id='+res_id + '&menu_id=' + menu_id)
 }
 //api to retrieve section urls
 get_sec_url(menu_id:any,res_id:any){
@@ -77,13 +78,23 @@ post_date_time(dt:any){
   return this.http.post(url_set.api_url+'/date_time',dt);
 }
 //create section
-post_section_create(dt:any,file:any){
+// post_section_create(dt:any,file:any){
+//   const formdata=new FormData();
+//   formdata.append('restaurant_id',dt.restaurant_id);
+//   formdata.append('menu_id',dt.menu_id);
+//   formdata.append('sec_name',dt.sec_name);
+//   formdata.append('sec_img',file);
+//   formdata.append('id',dt.id > 0 ? dt.id : 0);
+//   return this.http.post(url_set.api_url+'/section',formdata);
+// }
+post_section_create(dt:any,file:any,filename:any){
   const formdata=new FormData();
   formdata.append('restaurant_id',dt.restaurant_id);
   formdata.append('menu_id',dt.menu_id);
   formdata.append('sec_name',dt.sec_name);
   formdata.append('sec_img',file);
-  formdata.append('id',dt.id > 0 ? dt.id : 0);
+  formdata.append('id',dt.id > 0 ? dt.id :0);
+  formdata.append('filename',filename)
   return this.http.post(url_set.api_url+'/section',formdata);
 }
 get_section_data(res_id:any,menu_id:any){
@@ -155,34 +166,68 @@ get_menu_on_choice(v:any){
 //   return this.http.post(url_set.api_url+'/testing',formdata)
 // }
 
-update_logo_service(id:any,name:any,url:any,img_file:any){
+// update_logo_service(id:any,name:any,url:any,img_file:any){
+//   const formdata=new FormData();
+//   formdata.append('restaurant_id',id);
+//   formdata.append('restaurant_name',name);
+//   formdata.append('logo',url)
+//   formdata.append('logo_img',img_file)
+//   return this.http.post(url_set.api_url+'/logo',formdata)
+// }
+
+update_logo_service(id:any,name:any,url:any,img_file:any,filename:any){
   const formdata=new FormData();
   formdata.append('restaurant_id',id);
   formdata.append('restaurant_name',name);
   formdata.append('logo',url)
-  formdata.append('logo_img',img_file)
+  formdata.append('logo_img',img_file);
+  formdata.append('filename',filename);
   return this.http.post(url_set.api_url+'/logo',formdata)
 }
-update_cover_service(menuid:any,vmenu:any,name:any,restaurantid:any,coverfile:any,url:any){
- const formdata=new FormData();
- formdata.append('id',menuid);
- formdata.append('menu_id',vmenu)
- formdata.append('restaurant_id',restaurantid);
- formdata.append('restaurant_name',name);
- formdata.append('cov_url',url)
- formdata.append('cov_img',coverfile)
- return this.http.post(url_set.api_url+'/cover_save',formdata)
-}
-update_top_service(menuid:any,vmenu:any,name:any,restaurantid:any,topfile:any,url:any){
+
+update_cover_service(menuid:any,vmenu:any,name:any,restaurantid:any,coverfile:any,url:any,filename:any){
+  const formdata=new FormData();
+  formdata.append('id',menuid);
+  formdata.append('menu_id',vmenu)
+  formdata.append('restaurant_id',restaurantid);
+  formdata.append('restaurant_name',name);
+  formdata.append('cov_url',url)
+  formdata.append('cov_img',coverfile);
+  formdata.append('filename',filename)
+  return this.http.post(url_set.api_url+'/cover_save',formdata)
+ }
+// update_cover_service(menuid:any,vmenu:any,name:any,restaurantid:any,coverfile:any,url:any){
+//  const formdata=new FormData();
+//  formdata.append('id',menuid);
+//  formdata.append('menu_id',vmenu)
+//  formdata.append('restaurant_id',restaurantid);
+//  formdata.append('restaurant_name',name);
+//  formdata.append('cov_url',url)
+//  formdata.append('cov_img',coverfile)
+//  return this.http.post(url_set.api_url+'/cover_save',formdata)
+// }
+
+update_top_service(menuid:any,vmenu:any,name:any,restaurantid:any,topfile:any,url:any,filename:any){
   const formdata=new FormData();
  formdata.append('id',menuid);
  formdata.append('menu_id',vmenu)
  formdata.append('restaurant_id',restaurantid);
  formdata.append('restaurant_name',name);
  formdata.append('top_url',url)
- formdata.append('top_img',topfile)
+ formdata.append('top_img',topfile);
+ formdata.append('filename',filename)
  return this.http.post(url_set.api_url+'/top_save',formdata)
 }
+// update_top_service(menuid:any,vmenu:any,name:any,restaurantid:any,topfile:any,url:any){
+//   const formdata=new FormData();
+//  formdata.append('id',menuid);
+//  formdata.append('menu_id',vmenu)
+//  formdata.append('restaurant_id',restaurantid);
+//  formdata.append('restaurant_name',name);
+//  formdata.append('top_url',url)
+//  formdata.append('top_img',topfile)
+//  return this.http.post(url_set.api_url+'/top_save',formdata)
+// }
 
 //For check whether the setup mode is on or not?
 checkactivity(v:any){
@@ -194,7 +239,7 @@ get_menu_by_time(dt:any){
 }
 
 check_menu_overlap(dt:any){
-  return this.http.get(url_set.api_url+'/check_menu?id='+ dt.id + '&st_time=' + dt.st_time + '&end_time=' + dt.end_time);
+  return this.http.get(url_set.api_url+'/check_menu?id='+ dt.id + '&st_time=' + dt.st_time + '&end_time=' + dt.end_time+'&menu_id='+dt.menu_id);
 
 }
 get_menu(v:any){
@@ -202,13 +247,40 @@ get_menu(v:any){
 
 }
 
-// For deleting permanent image
+// For deleting Menu pdf permanently 
 delete_file(e:any,e1:any){
   const formdata=new FormData();
   formdata.append('res_id',e);
   formdata.append('id',e1);
   return this.http.get(url_set.api_url+'/del_menu?id=' + e1 + '&res_id=' + e)
 }
+// For deleting section pdf permanently 
+delete_file_section(e:any,e1:any){
+  const formdata=new FormData();
+  formdata.append('res_id',e);
+  formdata.append('id',e1);
+  return this.http.get(url_set.api_url+'/del_sec?id=' + e1 + '&res_id=' + e)
+}
+//For Retriving data in order page
+get_selectedd_order(dt:any){
+  return this.http.get(url_set.api_url+'/order_dtls?id=' +dt);
+}
+
+pay_email(res_id:any,encode_data:any){
+  // const formdata=new FormData();
+  // formdata.append('restaurant_id',res_id);
+  // formdata.append('en_dt',encode_data);
+  return this.http.get(url_set.api_url+'/pay_email?id=' +res_id +'&en_dt=' +encode_data);
+}
+downloadsection(restid:any,menuid:any){
+  console.log(restid+" "+menuid)
+  return this.http.get(url_set.api_url+'/download_section?id='+restid+'&menu_id='+menuid,{responseType:'arraybuffer'})
+}
+downloadlogotopcover(restid:any){
+  return this.http.get(url_set.api_url+'/download_cov?id='+restid,{responseType:'arraybuffer'})
+
+}
+
 
  
 }
