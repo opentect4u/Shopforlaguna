@@ -151,7 +151,7 @@
 
                                     <div class="fieldSecHalf">
                                         <label for="code">Color Code:</label>
-                                        <input type="text" [disabled]="color_font" id="box" name="code1" class="formCss" #code2
+                                        <input type="text" readonly id="box" name="code1" class="formCss" #code2
                                         value="{{font_color}}"
                                         (change)="checkvalidity($event)">
                                     </div>
@@ -167,7 +167,7 @@
                                     </div>
                                     <div class="fieldSecHalf">
                                         <label for="code">Color Code:</label>
-                                        <input type="text" [disabled]="color_font"  id="box2" name="code" value="{{back_color}}" class="formCss" #code4  (change)="checkvalidity($event)">
+                                        <input type="text" readonly  id="box2" name="code" value="{{back_color}}" class="formCss" #code4  (change)="checkvalidity($event)">
                                     </div>
                                 </div>
                             </form>

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent implements OnInit {
-   res_id:any=localStorage.getItem('rest_id');
+   res_id:any=localStorage.getItem('encoded_data');
   constructor(private router:Router) { }
 
   ngOnInit(): void {

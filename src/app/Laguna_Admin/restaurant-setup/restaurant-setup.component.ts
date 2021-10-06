@@ -1910,7 +1910,7 @@ a.click();
 }
 download_top_cover_logo(){
   console.log(this.r_id);
-  this.admin_data.downloadlogotopcover(this.r_id).subscribe((data:any)=>{console.log(data)
+  this.admin_data.downloadlogotopcover(this.r_id).subscribe(data=>{console.log(data)
     this.download_logo_top_cover_zip=data;
     console.log(this.download_logo_top_cover_zip)
     // this.download_section_zip=this.download_section_zip.msg.data;

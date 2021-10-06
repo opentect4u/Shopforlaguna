@@ -1,5 +1,5 @@
 /* router-outlet{display:none;} */
-.mainContainer{display: grid; flex: 1 0 auto; align-items: center; height: 100%; background-image: url("/assets/img/bg-min.jpg");} 
+.mainContainer{display: grid; flex: 1 0 auto; align-items: center; height: 100%; background-image: url("/assets/img/adminBg-min.jpg");} 
 	
 form {border: 3px solid #000000;
 	}

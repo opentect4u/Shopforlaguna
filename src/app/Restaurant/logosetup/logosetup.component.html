@@ -52,14 +52,17 @@
                 </div>
                 <div class="col-5">
                   <button hidden (click)="openmodal()" id="hid">Open Modal</button>
-                 <label for="logo"><strong>Logo File (Upload your logo which needs to be in JPG or PNG format):</strong></label><br>
+                 <label for="logo"><strong>Select File:</strong></label><br>
 
                   <label for="myfile">Select files:</label>
                   <input type="file" id="myfile"
+                  accept=".jpeg,.jpg,.png"
                  
                   [disabled]="break_button"  (change)="selectimage($event)">
                   <!-- <i type="button" [hidden]="logo_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"  data-bs-toggle="modal" data-bs-target="#myModal"></i> -->
-                  <br>  <br>  <div class="container1">
+                  <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
+                 
+                   <div class="container1">
                   <div class="img-wrap rounded p-1" [hidden]="logo_preview">
                       <a class="close" (click)="deletephoto('logo_setup')"  [hidden]="!show_toast">&times;</a>
                    
@@ -72,7 +75,7 @@
                   <label for="logo2"> <strong>Or Logo Url:
                     <i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                 #tooltip="matTooltip"
-                            matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                            matTooltip="You can either upload a logo or prove a url below"
                    ></i>
                   </strong></label>
                   <!-- <p>Please provide a url/website address where we can collect your logo.</p> -->
@@ -129,7 +132,7 @@
 </div>
 
 <div id="snackbar">Something Went Wrong Please Try After Sometime</div>
-<div id="snackbar1"><i class="fa fa-warning p-1"></i><span>File Size Can't be greater than 2MB</span></div>
+<div id="snackbar1"><i class="fa fa-warning p-1"></i><span>please provide valid file format within given size</span></div>
 
 
 <!-- For the image of dinner Section -->

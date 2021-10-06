@@ -28,6 +28,7 @@
       <button class="tablinks" (click)="opencity('promo')" id="defaultpromo">Promo & Calendar</button>
       <button class="tablinks" (click)="opencity('signholder')" id="defaultsign">Sign Holder</button>
       <button class="tablinks" (click)="opencity('window')" id="defaultwindow">Window Cling</button>
+      <button class="tablinks" (click)="opencity('stockimage')" id="defaultstock">Stock Images</button>
     
     </div>
     
@@ -41,7 +42,7 @@
         <th scope="col">Special Menu</th>
         <th scope="col">Set Up Fee</th>
         <th scope="col">Monthly Fee</th>
-        <!-- <th scope="col">Description </th> -->
+        <th scope="col">Description </th>
         <th scope="col">Action </th>
         </tr>
             
@@ -58,17 +59,15 @@
         </select>	
         </td>
         <td>
-            <input type="radio" id="yes_stnd" name="specialMenustd" value="Y"> <label for="yes_stnd" class="m-1">Yes</label> 
-            <input type="radio" id="no_stnd" name="specialMenustd" value="N"> <label for="No_stnd" class="m-1">No</label>
+            <input type="radio" id="yes_stnd" name="specialMenuStd" value="Y"> <label for="yes_stnd" class="m-1">Yes</label> 
+            <input type="radio" id="no_stnd" name="specialMenuStd" value="N"> <label for="No_stnd" class="m-1">No</label>
         </td>
         <td><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Amount" required="" name="setUpFee" #amm1 (keypress)="preventNonNumericalInput($event)" value="{{this.stndpackage_setupfee}}"></td>
         <td><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Amount" required="" name="monthlyFee" #amm2 (keypress)="preventNonNumericalInput($event)" value="{{this.stndpacakge__monthlyfee}}"></td>
-        <!-- <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #desc value={{this.stndpackage_desc}}></textarea></td> -->
+        <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #desc value={{this.stndpackage_desc}}></textarea></td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
-          <button type="submit" class="btn btn-default saveCustom" (click)="submit(opt.value,sl_no.value,amm1.value,amm2.value)">Save</button></td>
-
-            <!-- <button type="submit" class="btn btn-default saveCustom" (click)="submit(opt.value,sl_no.value,amm1.value,amm2.value,desc.value)">Save</button></td> -->
+            <button type="submit" class="btn btn-default saveCustom" (click)="submit(opt.value,sl_no.value,amm1.value,amm2.value,desc.value)">Save</button></td>
         </tr>
             
         <tr align="center">
@@ -88,12 +87,10 @@
         </td>
         <td><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Amount" required="" name="setUpFee"  #amm1stndplus (keypress)="preventNonNumericalInput($event)" value={{this.stndpluspacakge_setupfee}}></td>
         <td><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Amount" required="" name="monthlyFee"  #amm2stndplus (keypress)="preventNonNumericalInput($event)" value={{this.stndpluspackage_monthlyfee}}></td>
-        <!-- <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #descstndplus value={{this.stndpluspacakge_desc}}></textarea></td> -->
+        <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #descstndplus value={{this.stndpluspacakge_desc}}></textarea></td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
-          <button (click)="submitstndplus(optstndplus.value,sl_nostndplus.value,amm1stndplus.value,amm2stndplus.value)" type="submit" class="btn btn-default saveCustom">Save</button></td>
-
-          <!-- <button (click)="submitstndplus(optstndplus.value,sl_nostndplus.value,amm1stndplus.value,amm2stndplus.value,descstndplus.value)" type="submit" class="btn btn-default saveCustom">Save</button></td> -->
+          <button (click)="submitstndplus(optstndplus.value,sl_nostndplus.value,amm1stndplus.value,amm2stndplus.value,descstndplus.value)" type="submit" class="btn btn-default saveCustom">Save</button></td>
         </tr>
             
         <tr align="center">
@@ -113,12 +110,10 @@
         </td>
         <td><input class="w3-input w3-padding-16 w3-border" #amm1premium type="text" placeholder="Amount" required="" name="setUpFee" (keypress)="preventNonNumericalInput($event)" value={{this.premiumpacakge_setupfee}}></td>
         <td><input class="w3-input w3-padding-16 w3-border" #amm2premium type="text" placeholder="Amount" required="" name="monthlyFee" (keypress)="preventNonNumericalInput($event)" value={{this.premiumpacakge_monthlyfee}}></td>
-        <!-- <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #descpremium value={{this.premiumpacakge_des}}></textarea></td> -->
+        <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #descpremium value={{this.premiumpacakge_des}}></textarea></td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
-          <button type="submit" class="btn btn-default saveCustom" (click)="submitpremium(opspremium.value,slpremium.value,amm1premium.value,amm2premium.value)">Save</button></td>
-
-            <!-- <button type="submit" class="btn btn-default saveCustom" (click)="submitpremium(opspremium.value,slpremium.value,amm1premium.value,amm2premium.value,descpremium.value)">Save</button></td> -->
+            <button type="submit" class="btn btn-default saveCustom" (click)="submitpremium(opspremium.value,slpremium.value,amm1premium.value,amm2premium.value,descpremium.value)">Save</button></td>
         </tr>
             
         </table> <br>
@@ -140,11 +135,11 @@
         <td>1 <input type="hidden" name="" value="4" #birth></td>
         <td>Birthday/Anniversary </td>
         <td>
-            <input type="radio" id="yes_birth" name="specialMenuStd1" value="y" (change)="verify('y')"> <label for="yes" class="m-1">Yes</label> 
+            <input type="radio" id="yes_birth" [checked]="true" name="specialMenuStd1" value="y" (change)="verify('y')"> <label for="yes" class="m-1">Yes</label> 
             <input type="radio" id="no_birth" name="specialMenuStd1" value="n" (change)="verify('n')"> <label for="No">No</label>
         </td>
         <td>
-            <input class="w3-input w3-padding-16 w3-border" id="birthday" type="text" value="{{this.promo_Birthdayprice}}" (keypress)="preventNonNumericalInput($event)" placeholder="Price" required="" name="price" #Price [readonly]="promo1">
+            <input class="w3-input w3-padding-16 w3-border" type="text" value="{{this.promo_Birthdayprice}}" (keypress)="preventNonNumericalInput($event)" placeholder="Price" required="" name="price" #Price [readonly]="promo1">
         </td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
@@ -156,11 +151,11 @@
         <td>2 <input type="hidden" name="" value="5" #sent></td>
         <td>Entertainment / Event Calendar </td>
         <td>
-            <input type="radio" id="yes_calend"  name="specialMenu1" value="yes" (change)="verifytre('yes')"> <label for="yes" class="m-1">Yes</label> 
+            <input type="radio" id="yes_calend" [checked]="true" name="specialMenu1" value="yes" (change)="verifytre('yes')"> <label for="yes" class="m-1">Yes</label> 
             <input type="radio" id="no_calend" name="specialMenu1" value="no" (change)="verifytre('no')"> <label for="No">No</label>
         </td>
         <td>
-            <input class="w3-input w3-padding-16 w3-border" id="Event"  value="{{this.promo_EventCalendarprice}}" type="text" placeholder="Price" (keypress)="preventNonNumericalInput($event)" required="" name="price" #price [readonly]="promo2">
+            <input class="w3-input w3-padding-16 w3-border"  value="{{this.promo_EventCalendarprice}}" type="text" placeholder="Price" (keypress)="preventNonNumericalInput($event)" required="" name="price" #price [readonly]="promo2">
         </td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
@@ -179,8 +174,6 @@
         <tr>
         <th scope="col">Sl No</th>
         <th scope="col">Name</th>
-        <th scope="col">Free</th>
-
         <th scope="col">Size</th>
         <th scope="col">Per Holder Price</th>
         <th scope="col">Action</th>
@@ -189,13 +182,9 @@
         <tr align="center">
         <td>1 <input type="hidden" name="" value="6" #tabletop></td>
         <td>Tabletop Sign Holder</td>
-        <td>
-          <input type="radio" id="yes_signholder1"  name="specialMenuStd" value="y_window" (change)="check($event)"> <label for="yes" class="m-1">Yes</label> 
-          <input type="radio" id="no_signholder1" name="specialMenuStd" value="n_clicng" (change)="check($event)"> <label for="No">No</label>
-        </td>
         <td> 5" x 7"</td>
         <td>
-            <input class="w3-input w3-padding-16 w3-border" id="tabletop" [disabled]="Tabletop" type="text" placeholder="Price" required="" name="price" #text1 value="{{this.signholder_price1}}"  (keypress)="preventNonNumericalInput($event)">
+            <input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Price" required="" name="price" #text1 value="{{this.signholder_price1}}"  (keypress)="preventNonNumericalInput($event)">
         </td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button> -->
@@ -207,13 +196,9 @@
         <tr align="center">
         <td>2 <input type="hidden" name="" value="7" #wallmount></td>
         <td>Wall Mount Sign Holder </td>
-        <td>
-          <input type="radio" id="yes_signholder2"  name="specialMenuStd_top" value="y_table" (change)="check($event)"> <label for="yes" class="m-1">Yes</label> 
-          <input type="radio" id="no_signholder2" name="specialMenuStd_top" value="n_top"  (change)="check($event)"> <label for="No">No</label>
-        </td>
         <td> 5" x 7"</td>
         <td>
-            <input class="w3-input w3-padding-16 w3-border" id="wallmount2" [disabled]="signholder2" type="text" placeholder="Price" required="" name="price" value="{{this.signholder_price2}}"  #text2 (keypress)="preventNonNumericalInput($event)">
+            <input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Price" required="" name="price" value="{{this.signholder_price2}}"  #text2 (keypress)="preventNonNumericalInput($event)">
         </td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button> -->
@@ -225,13 +210,9 @@
         <tr align="center">
         <td>3 <input type="hidden" name="" value="8" #wallmount1></td>
         <td>Wall Mount Sign Holder</td>
-        <td>
-          <input type="radio" id="yes_wall"  name="SpecialMenuStd1"  (change)="check($event)" value="YES"> <label for="yes" class="m-1">Yes</label> 
-          <input type="radio" id="no_mount"  name="SpecialMenuStd1" (change)="check($event)"  value="NO"> <label for="No">No</label>
-        </td>
         <td>8.5" x 11"</td>
         <td>
-            <input class="w3-input w3-padding-16 w3-border" id="wall" [disabled]="wall2"   type="text" placeholder="Price" required="" name="price" #text3 value="{{this.signholder_price3}}" (keypress)="preventNonNumericalInput($event)">
+            <input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Price" required="" name="price" #text3 value="{{this.signholder_price3}}" (keypress)="preventNonNumericalInput($event)">
         </td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
@@ -252,7 +233,6 @@
         <tr>
         <th scope="col">Sl No</th>
         <th scope="col">Name</th>
-        <th scope="col">Free</th>
         <th scope="col">Size</th>
         <th scope="col">Per Holder Price</th>
         <th scope="col">Action</th>
@@ -261,13 +241,9 @@
         <tr align="center">
         <td>1 <input type="hidden" name="" value="9" #window></td>
         <td>Window Clings </td>
-        <td>
-          <input type="radio" id="yes_last"  name="specialMenuSt" value="y_last" (change)="check($event)"> <label for="yes" class="m-1">Yes</label> 
-          <input type="radio" id="no_end" name="specialMenuSt" value="n_end" (change)="check($event)"> <label for="No">No</label>
-        </td>
         <td> 6" x 10" </td>
         <td>
-            <input class="w3-input w3-padding-16 w3-border" id="window_cling" [disabled]="window_no" type="text" placeholder="Price" required="" name="price" #TEXT value={{this.windowcling_price}}>
+            <input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Price" required="" name="price" #TEXT value={{this.windowcling_price}}>
         </td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
@@ -281,9 +257,99 @@
         </table> <br>
         </div>
         </div>
-            
-    
+        <div id="stock" class="tabcontent" [hidden]="stockimage">	
+          <div style="overflow-x:auto;">
+          <strong>Upload a stock image for special menu</strong>
+          <form>
+            <div class="rowCustomFour">
+                <div class="fieldSecHalf">
+                    <label>Category</label>
+                    <select id="pickup_place" #cat_name name="pickup_place" (change)="cat_select()" class="formCss">
+                        <option value="" selected="selected">Select One</option>
+                        <option *ngFor="let c of catData" value="{{c.id}}">{{c.name}}</option>
+                        <!-- <option value="1">Breakfast</option>
+                        <option value="2">Lunch</option>
+                        <option value="3">Dinner</option>
+                        <option value="4">Brunch</option>
+                        <option value="5">Special</option> -->
+                    </select>
+
+                </div>
+
+
+
             </div>
+        </form>
+        
+              
+        <button hidden  id="logo_crop" (click)="open_crop_modal()" ></button>
+                  <div class="stockDiv">
+                    <input type="file"  #stock_name id="headTitle" id=stockval name="headTitle" (change)="stock_image_change($event)">
+
+                  </div>
+                  <div class="stockDiv">
+                    <button type="submit" class="btn btn-default saveCustom" (click)="submit_stock_image(cat_name.value)">Submit</button>
+
+                  </div>
+
+             
+                  <div  class="prvImgCustom">
+                    <div class="rowCustomFour">
+                      <div class="fieldSecHalf">
+                        <div class="row">
+                          <div class="col-4">
+                            <select id="pickup_place" #cat name="pickup_place_stock" (change)="pic_select(cat.value)" class="formCss">
+                              <option value="" selected>Show all</option>
+                              <option *ngFor="let c of catData" value="{{c.id}}">{{c.name}}</option>
+                             
+                          </select>
+                          </div>
+                          <!-- <label>Category</label> -->
+                         
+                        </div>
+                         
+          
+                      </div>
+          
+          
+          
+                  </div>
+                  <div >
+                    <div class="thumImgContainer" (mouseenter)="show_cross()" (mouseleave)="hide_cross()" *ngIf="imageData.length!=0">
+                     
+                        <div class="thumImgSm" *ngFor="let i of imageData" >
+                          <span class="close" (click)="deleteImg(i.id);openDeleteModal();">&times;</span>
+                        <img [src]="url1+i.img_path" class="stockimgPrev " height="100" width="100" alt="" (click)="open_preview_modal(url1+i.img_path)">
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="row" *ngIf="imageData.length==0">
+                      <div class="col-4"></div>
+                      <div class="col-6 mb-4" >
+                      <!-- <img [src]="url1+i.img_path" class="stockimgPrev" height="100" width="100" alt="" (click)="open_preview_modal(url1+i.img_path)"> -->
+                       <strong>
+                        There are no images under this category.
+                       </strong>  
+                      </div>
+                      <div class="col-2"></div>
+                  </div>
+                    
+                    
+                    <br>
+                  </div>
+                    <!-- <img alt=""> -->
+                </div>
+         
+          </div>
+         
+    
+        </div> 
+       
+      
+      </div>
     
           </div>
           
@@ -345,4 +411,188 @@
                   overlayBg.style.display = "none";
                 }
                 </script> -->
-  <div id="snackbar">{{stand}}</div>
+
+                <div id="snackbar">{{m}}</div>
+
+
+                <!-- <div id="id01" class="w3-modal">
+                <div class="w3-modal-content">
+              
+                  <div class="modal-dialog">
+              
+                    <div class="modal-content">
+              
+                      
+              
+                      <div class="modal-body">
+                    <div class="row">
+                        <div class="col-2 text-center">
+                            <i class="fa fa-minus-circle fa-2x " type="button" [hidden]="ZoomIn"  (click)="zoomOut()"></i>
+                        </div>
+                        <div class="col-9">
+                            <i class="fa fa-plus-circle fa-2x " type="button" [hidden]="Zoomout" (click)="zoomIn()"></i>
+                        </div>
+                        <div class="col-1">
+                            <button class="cropCloseBtn" (click)="close_modal_on_crop()">&times;</button>
+                        </div>
+                    </div>
+                       
+                        <image-cropper [hidden]="hide" [imageChangedEvent]="img_cover"
+                        [maintainAspectRatio]="true" 
+                      
+                        [onlyScaleDown]="false" 
+                       
+                        [cropperMaxWidth]="crop_width"
+                        [cropperMaxHeight]="crop_height"
+                        
+                        
+                        (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                        (cropperReady)="cropperReady($event)"
+                        (loadImageFailed)="loadImageFailed()"
+                        [style.display]="showCropper ? null: 'none'" [transform]="transform">
+                      </image-cropper>
+              
+                      </div>
+                      <footer class="w3-container w3-right">
+                        <button class="btn btn-danger" style="margin-left: 45%;"  
+                        (click)="click_it()">Save</button>
+                      </footer>
+              
+                    </div>
+              
+                  </div>
+              
+                </div>
+              </div> -->
+             
+              <div id="id01" class="w3-modal">
+                <div class="w3-modal-content cropModulContent">
+              
+                  <div class="modal-dialog">
+              
+                    <div class="modal-content modal_contentCustom">
+              
+                      
+              
+                      <div class="modal-body">
+                    <!-- <div class="row">
+                        <div class="col-2 text-center">
+                            <i class="fa fa-minus-circle fa-2x " type="button" [hidden]="ZoomIn"  (click)="zoomOut()"></i>
+                        </div>
+                        <div class="col-2">
+                            <i class="fa fa-plus-circle fa-2x " type="button" [hidden]="Zoomout" (click)="zoomIn()"></i>
+                        </div>
+                        <div class="col-2">
+                            <button class="float-right" (click)="close_modal_on_crop()">&times;</button>
+                        </div>
+                    </div> -->
+            
+                    <ul class="cropBtnTop">
+                        <li><i class="fa fa-minus-circle fa-2x " type="button" [hidden]="ZoomIn"  (click)="zoomOut()"></i></li>
+            <li>                <i class="fa fa-plus-circle fa-2x " type="button" [hidden]="Zoomout" (click)="zoomIn()"></i></li>
+                    <li>                <button class="cropCloseBtn" (click)="close_modal_on_crop()">&times;</button></li>
+                    
+            </ul>
+            
+                       
+                        <image-cropper [hidden]="hide" [imageChangedEvent]="img_cover"
+                        [maintainAspectRatio]="true" 
+                      
+                        [onlyScaleDown]="false" 
+                       
+                        [cropperMaxWidth]="crop_width"
+                        [cropperMaxHeight]="crop_height"
+                        
+                        
+                        (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                        (cropperReady)="cropperReady($event)"
+                        (loadImageFailed)="loadImageFailed()"
+                        [style.display]="showCropper ? null: 'none'" [transform]="transform">
+                      </image-cropper>
+              
+                      </div>
+                      <footer class="w3-container w3-right cropFooter">
+                        <button class="btn btn-danger"   
+                        (click)="click_it()">Save</button>
+                      </footer>
+              
+                    </div>
+              
+                  </div>
+              
+                </div>
+              </div>
+              <div id="id02" class="w3-modal">
+                <div class="w3-modal-content">
+              
+                  <!-- <div class="modal-dialog"> -->
+              
+                    <div class="modal-content">
+              
+                     
+              
+                      <div class="modal-body">
+                    <div class="row">
+                      <div class="col-2 text-center">
+                        <!-- <i class="fa fa-minus-circle fa-2x " type="button" [hidden]="ZoomIn"  (click)="zoomOut()"></i> -->
+                    </div>
+                    <div class="col-9">
+                        <!-- <i class="fa fa-plus-circle fa-2x " type="button" [hidden]="Zoomout" (click)="zoomIn()"></i> -->
+                    </div>
+                        <div class="col-1">
+                          <ul class="cropBtnTop">
+                            <!-- <button class="pull-right shiftEnd" >&times;</button> -->
+                    <li>  <button class="cropCloseBtn" (click)="close_preview_modal()">&times;</button></li>
+                          </ul>
+
+                            <!-- <i class="fa fa-times-circle fa-2x" type="button" (click)="close_preview_modal()" aria-hidden="true"></i> -->
+                        </div>
+                    </div>
+                       
+                       
+                      </div>
+                      <div class="text-center mb-3">
+                        <img src="{{previewImg}}" height="300" width="300" alt="">
+
+                      </div>
+                     
+                    </div>
+              
+                  <!-- </div> -->
+              
+                </div>
+              </div>
+              <div id="id03" class="w3-modal">
+                <div class="w3-modal-content cropModulContent rounded">
+              
+                  <!-- <div class="modal-dialog"> -->
+              
+                    <!-- <div class="modal-content"> -->
+              
+                     
+              
+                      <div class="modal-body text-center">
+                      Are you sure you want to delete? 
+                      <button type="submit" class="btn btn-default saveCustom" (click)="closeDeleteModal()">No</button>
+ &nbsp; <button type="submit" class="btn btn-default saveCustom" (click)="delete_stock_image();closeDeleteModal();">Yes</button>
+                      
+                      <!-- <div class="row">
+                         <div class="col-6">
+                          
+
+                         </div>
+                         <div class="col-6">
+                          
+
+                         </div>
+                       </div> -->
+                       
+                      </div>
+                      
+                     
+                    <!-- </div> -->
+              
+                  <!-- </div> -->
+              
+                </div>
+              </div>

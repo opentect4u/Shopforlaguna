@@ -174,6 +174,17 @@ export class MenuSetupComponent implements OnInit {
   sat:any=0;
   sun:any=0;
   every:any;
+  
+  mon_special:any=0;;
+  tue_special:any=0;
+  wed_special:any=0;
+  thu_special:any=0;
+  fri_special:any=0;
+  sat_special:any=0;
+  sun_special:any=0;
+
+
+
   error_msg:any="Please Update your package";
   //For Paris
   mon_launch:any=0;;
@@ -278,6 +289,7 @@ export class MenuSetupComponent implements OnInit {
  design:any;
   brunch_button:boolean=false;
  img_showing=url_set.api_url;
+ img_url=url_set.api_url+'/stock/';
  id:any;
  load_section:any;
  res_name:any=localStorage.getItem('Restaurant_name');
@@ -291,7 +303,7 @@ dinner_top_name:any;
 dinner_cover_name:any;
 breakfast_top_name:any;
 breakfast_cover_name:any;
-
+enable_exclusive:boolean=true;
 
 //Image Cropper
  scale = 1;
@@ -322,10 +334,26 @@ breakfast_cover_name:any;
   dinner_Top:boolean=true;
   break_Top:boolean=true;
   brunch_Top:boolean=true;
- 
- 
-
-
+   
+  Special_menu:any;
+  special_url:any=''
+  category_name:any=[];
+  stock_img:any=[];
+  special_img:any=[];
+  img_special:any=[];
+  special_check:any;
+  special_section_preview:boolean=true;
+  special_disabled:boolean=false;
+  enable_days:boolean=true; 
+  special:any=5;
+  exclusive:any;
+  week:any;
+  exclusive_specific_date:any;
+  break_Special=0;
+  lunch_special=0;
+  dinner_Special=0;
+  brunch_Special=0;
+  date_time:any;
   constructor(public toastr: ToastrManager,private spinner: NgxSpinnerService,private _data: DataserviceService,private lagunaserve:LagunaserviceService,private http: HttpClient) { 
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
@@ -333,7 +361,21 @@ breakfast_cover_name:any;
   ngOnInit(): void {
 
    console.log(this.v);
-   
+  //  For getting category Id
+   this.lagunaserve.get_category_list().subscribe(data=>{
+     console.log(data);
+     this.category_name=data;
+     this.category_name=this.category_name.msg;
+   })
+    //  For getting Image on load
+    this.lagunaserve.getspecial_image(null).subscribe(data=>{
+      console.log(data);
+      this.stock_img=data;
+      
+      this.stock_img=this.stock_img.msg;
+      console.log(this.stock_img);
+      
+    })
   
     if("value" in localStorage){
       this.v=localStorage.getItem('value');
@@ -491,6 +533,7 @@ breakfast_cover_name:any;
                 this.break_Cover=false;
                  this.Breakfast_cover_preview=false;
                  this.breakfastcoverimage=this.img_showing +'/' +this.cove_top.oth_dt[i].cover_page_img;
+                 this.breakfast_cover_name=this.cove_top.oth_dt[i].cover_page_img;
                  console.log(this.breakfastcoverimage);
                
                  this.img_cover =this.breakfastcoverimage;
@@ -501,6 +544,7 @@ breakfast_cover_name:any;
                      this.Breakfast_top_preview=false;
                  this.breakfasttopimage=this.img_showing +'/' +this.cove_top.oth_dt[i].top_image_img;
                  this.img_top=this.breakfasttopimage;
+                 this.breakfast_top_name=this.cove_top.oth_dt[i].top_image_img;
                }
                
                  
@@ -529,6 +573,7 @@ breakfast_cover_name:any;
                 this.launchtopimage= this.img_launch_top;
                 this.Launch_top_preview=false;
                 this.lunch_Top=false;
+                this.lunch_top_name=this.cove_top.oth_dt[i].top_image_img;
 
 
               }
@@ -539,6 +584,7 @@ breakfast_cover_name:any;
                 this.img_launch_cover=this.img_showing +'/' +this.cove_top.oth_dt[i].cover_page_img;
                 this.launchcoverimage= this.img_launch_cover;
                 this.Launch_cover_preview=false;
+                this.lunch_cover_name=this.cove_top.oth_dt[i].cover_page_img;
 
               }
                 this.launch_cover=this.cove_top.oth_dt[i].cover_page_url;
@@ -570,7 +616,7 @@ breakfast_cover_name:any;
               this.branchtopimage= this.img_launch_top;
               this.dinner_Top=false;
               this.Dinner_top_preview=false;
-         
+              this.dinner_top_name=this.cove_top.oth_dt[i].top_image_img;
 
 
             }
@@ -581,7 +627,7 @@ breakfast_cover_name:any;
               this.dinner_Cover=false;
 
               this.Dinner_cover_preview=false;
-
+              this.dinner_cover_name=this.cove_top.oth_dt[i].cover_page_img;
 
             }
               this.dinner_cover=this.cove_top.oth_dt[i].cover_page_url;
@@ -617,7 +663,7 @@ breakfast_cover_name:any;
               this.brunch_Top=false;
 
               this.Brunch_top_preview=false;
-
+              this.brunch_top_name=this.cove_top.oth_dt[i].top_image_img;
             }
 
             if(this.cove_top.oth_dt[i].cover_page_img!=''){
@@ -625,7 +671,8 @@ breakfast_cover_name:any;
               this.dinnercoverimage= this.img_dinner_cover;
               this.brunch_Cover=false;
               this.Brunch_cover_preview=false;
-              console.log("asdad")
+              this.brunch_cover_name=this.cove_top.oth_dt[i].cover_page_img;
+         
 
             }
             
@@ -2357,6 +2404,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
     console.log("val:",this.v)
 
     if (e == 'London'){
+      this.Special_menu = document.getElementById('defaultOpen4');
+     
+      this.Special_menu.style.background = '#f1f1f1';
+      this.Special_menu.style.color = 'black';
      this.tab5=true;
         
       this.brunch_start='';
@@ -3077,6 +3128,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        }
       }
     else if (e == 'Paris'){
+      this.Special_menu = document.getElementById('defaultOpen4');
+     
+      this.Special_menu.style.background = '#f1f1f1';
+      this.Special_menu.style.color = 'black';
          //For Checking approval flag is on or not
          this.tab5=true;
   
@@ -3780,6 +3835,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
    
     }
     else if (e == 'Tokyo'){
+      this.Special_menu = document.getElementById('defaultOpen4');
+     
+      this.Special_menu.style.background = '#f1f1f1';
+      this.Special_menu.style.color = 'black';
       this.tab5=true;
     
       this.break_sec.length=0;
@@ -4509,7 +4568,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
      
     }
     else if (e == 'Laguna'){
-
+      this.Special_menu = document.getElementById('defaultOpen4');
+     
+      this.Special_menu.style.background ='#f1f1f1';
+      this.Special_menu.style.color = 'black';
          
      this.tab5=true;
       this.break_sec.length=0;
@@ -5191,6 +5253,33 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       this.tab3=true;
       this.tab4=true;
       this.tab5=false;
+      // this.paris = document.getElementById('Laguna');
+      // this.paris.style.color = 'black';
+      // this.paris.style.background = '#f1f1f1';
+      this.PACK = document.getElementById('defaultOpen2');
+ 
+      this.PACK.style.background = '#f1f1f1';
+      this.PACK.style.color = 'black';
+      this.BIRTH = document.getElementById('defaultOpen1');
+    
+      this.BIRTH.style.background = '#f1f1f1';
+      this.BIRTH.style.color = 'black';
+      this.ENTER = document.getElementById('defaultOpen');
+    
+      this.ENTER.style.background = '#f1f1f1';
+      this.ENTER.style.color = 'black';
+  
+
+      this.WALL = document.getElementById('defaultOpen3');
+     
+      this.WALL.style.background = '#f1f1f1';
+      this.WALL.style.color = 'black';
+      this.Special_menu=document.getElementById('Shrewsbury');
+      this.Special_menu.className="active tabcontent"
+      this.Special_menu = document.getElementById('defaultOpen4');
+     
+      this.Special_menu.style.background = '#00477e';
+      this.Special_menu.style.color = 'white';
 
     }
 
@@ -5277,8 +5366,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
      if(this.v==1){
        
        this.v=0;
+      
+       
        const formData = new FormData();
-          
+       const notBase64 = /[^A-Z0-9+\/=]/i;
+       this.breakfastcoverimage = notBase64.test(this.breakfastcoverimage) ? '' : this.breakfastcoverimage;
+       console.log({tes: notBase64.test(this.breakfastcoverimage)});
        formData.append('coverurl', COVERPAGEURL);
        formData.append('cov_filename', this.breakfast_cover_name);
        formData.append('top_filename', this.breakfast_top_name);
@@ -5332,7 +5425,9 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
      else if(this.v==2){
        this.v==1;
        const formData = new FormData();
-          
+       const notBase64 = /[^A-Z0-9+\/=]/i;
+       this.breakfastcoverimage = notBase64.test(this.breakfastcoverimage) ? this.breakfastcoverimage : '';
+       console.log({tes: notBase64.test(this.breakfastcoverimage)});
        formData.append('coverurl', COVERPAGEURL);
        formData.append('topurl', TOPIMAGEURL);
        formData.append('cov_filename', this.breakfast_cover_name);
@@ -5385,16 +5480,20 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
      
     
        if(localStorage.getItem('breakfast')==''){
+
+        // var regexBase64 = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+        var breakfast_cover_image =  this.breakfastcoverimage.length > 1000 ? this.breakfastcoverimage : '';
+        console.log({dt: this.breakfastcoverimage.length});
+        
        
         const formData = new FormData();
-        
         formData.append('coverurl', COVERPAGEURL);
         formData.append('topurl', TOPIMAGEURL);
         formData.append('cov_filename', this.breakfast_cover_name);
        formData.append('top_filename', this.breakfast_top_name);
         formData.append('MenuUrl', MENUURL);
         formData.append('SectionUrl',SECTIONURL);
-        formData.append('cov_img',this.breakfastcoverimage);
+        formData.append('cov_img',breakfast_cover_image);
         formData.append('top_img', this.breakfasttopimage);
  
          formData.append('restaurant_id',this.resid);
@@ -5633,8 +5732,11 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       else {
         this.v=3
         this.storevalue.length=0;
-  
+     
         const formData = new FormData();
+        const notBase64 = /[^A-Z0-9+\/=]/i;
+        this.breakfastcoverimage = notBase64.test(this.breakfastcoverimage) ? this.breakfastcoverimage : '';
+        console.log({tes: notBase64.test(this.breakfastcoverimage)});
           // formData.append('file', this.breakfastcoverimage);
           formData.append('coverurl', COVERPAGEURL);
           formData.append('topurl', TOPIMAGEURL);
@@ -6168,6 +6270,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
 // Fot Submitting data of Launch Tab
   opennextab1(e: any, v1: any, v2: any,v4:any,v5:any,v6:any,v7:any,v8:any) {
+    console.log(this.lunch_cover_name, this.lunch_top_name);
+    
     this.spinner.show();
  if(this.launch_check=='N'){
   localStorage.setItem('launch','active');
@@ -7138,7 +7242,9 @@ this.storevalue.length=0;
   // }
 
   Breakfast(event: any) {
-    if(event.target.files[0].size>2097152){
+    console.log(event,event.target.files[0].name,event.target.files[0].type);
+   
+    if(event.target.files[0].size>2097152 ){
       this.myFunction_file_Size_error();
       console.log("asdasd");
       this.common_break_menu=document.getElementById('mycoverfile');
@@ -7148,8 +7254,8 @@ this.storevalue.length=0;
      this.breakfast_cover_name=event.target.files[0].name;
     this.common_image = event;
     this.break_Cover=false;
+    // this.breakfastcoverimage=event.target.files[0];
 
-     console.log(event.target.files[0].size);
     this.width=1800;
     this.height=2560;
   console.log("sadasasas");
@@ -7163,16 +7269,14 @@ this.storevalue.length=0;
   
   // For breakfasttop image
   changeBreak(event: any) {
-    // console.log(event.target.files[0].name);
-    if(event.target.files[0].size>2097152){
+    console.log(event.target.files[0].name,event.target.files[0].type);
+    if(event.target.files[0].size>2097152 ){
       this.myFunction_file_Size_error();
       console.log("asdasd");
       this.common_break_menu=document.getElementById('mytopfile');
       this.common_break_menu.value='';
     }
     else{
-     console.log(event.target.files[0].name);
-    
     if(event.target.files.length!=0){
     this.breakfast_top_name=event.target.files[0].name;
     this.width=200;
@@ -7181,7 +7285,7 @@ this.storevalue.length=0;
       this.Modal=document.getElementById('hid');
       this.Modal.click();
       this.common_value="breakfast_top";
-    // this.breakfasttopimage = event.target.files[0];
+    this.breakfasttopimage = event.target.files[0];
     // console.log(this.breakfasttopimage);
     this.break_Top=false;
     this.Breakfast_top_preview=false;
@@ -7296,7 +7400,7 @@ this.storevalue.length=0;
       this.Modal.click();
       this.common_value="lunch_cover";
    
-      // this.launchcoverimage = event.target.files[0];
+      this.launchcoverimage = event.target.files[0];
       // console.log(this.launchcoverimage);
       // this.Launch_cover_preview=false;
       // const reader = new FileReader();
@@ -7319,7 +7423,7 @@ this.storevalue.length=0;
    // Event of launch top image
 
   changelaunchtopimage(event: any) {
-    if(event.target.files[0].size>2097152){
+    if(event.target.files[0].size>2097152 ||event.target.files[0].type=='jpg' || event.target.files[0].type=='jpeg' || event.target.files[0].type=='png' ){
       this.myFunction_file_Size_error();
       console.log("asdasd");
       this.common_break_menu=document.getElementById('mylunchtopfile');
@@ -7469,7 +7573,7 @@ this.storevalue.length=0;
   }
     // Event of dinner top image
   brunchtopimage(event:any){
-    if(event.target.files[0].size>2097152){
+    if(event.target.files[0].size>2097152 ||event.target.files[0].type=='jpg' || event.target.files[0].type=='jpeg' || event.target.files[0].type=='png' ){
       this.myFunction_file_Size_error();
       console.log("asdasd");
       this.common_break_menu=document.getElementById('mydinnertopfile');
@@ -7503,7 +7607,7 @@ this.storevalue.length=0;
   }
     // Event of dinner cover image
   brunchcoverimage(event:any){
-    if(event.target.files[0].size>2097152){
+    if(event.target.files[0].size>2097152 ||event.target.files[0].type=='jpg' || event.target.files[0].type=='jpeg' || event.target.files[0].type=='png' ){
       this.myFunction_file_Size_error();
       console.log("asdasd");
       this.common_break_menu=document.getElementById('mydinnercoverfile');
@@ -7561,7 +7665,7 @@ this.storevalue.length=0;
     // Event of brunch cover image
   dinnerchangecoverimage(event:any){
     // dinnersectionimage:any;
-    if(event.target.files[0].size>2097152){
+    if(event.target.files[0].size>2097152 ||event.target.files[0].type=='jpg' || event.target.files[0].type=='jpeg' || event.target.files[0].type=='png' ){
       this.myFunction_file_Size_error();
       console.log("asdasd");
       this.common_break_menu=document.getElementById('mybrunchcoverfile');
@@ -7594,7 +7698,7 @@ else{
   }
     // Event of brunch top image
   dinnerchangetopimage(event:any){
-    if(event.target.files[0].size>2097152){
+    if(event.target.files[0].size>2097152 ||event.target.files[0].type=='jpg' || event.target.files[0].type=='jpeg' || event.target.files[0].type=='png' ){
       this.myFunction_file_Size_error();
       console.log("asdasd");
       this.common_break_menu=document.getElementById('mybrunchtopfile');
@@ -8993,6 +9097,12 @@ else{
      this.img_brunch_section.splice(e,1);
      this.dinnersectionimage.splice(e,1);
    }
+   else if(name=='special_section'){
+    this.img_special.splice(e,1);
+    this.special_img.splice(e,1);
+  console.log("special1");
+
+   }
   }
 }
    else{
@@ -9015,8 +9125,16 @@ else{
      this.img_brunch_section.splice(e,1);
      this.dinnersectionimage.splice(e,1);
    }
-
+   else if(name=='special_section'){
+    this.img_special.splice(e,1);
+    this.special_img.splice(e,1);
+  console.log("special");
+  
+  
    }
+   }
+   console.log(this.special_img);
+   
    
 }
 
@@ -9068,7 +9186,7 @@ click_it(e:any){
     this.valu = true;
     if(e=='breakfast_cover'){
     this.img_cover=this.croppedImage;
-    this.breakfastcoverimage=this.img_cover 
+    this.breakfastcoverimage=this.img_cover;
    this.Breakfast_cover_preview=false;   
     }
     else if(e=='breakfast_top'){
@@ -9179,6 +9297,319 @@ xx?.document.close();
   // After 3 seconds, remove the show class from DIV
   setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
 } 
+//For checking null of special url
+check_special(){
+ console.log(this.special_url);
+ 
+}
+//For getting special image
+getstock_imege(event:any){
+  if(event.target.files.length>0){
+   for (let i = 0; i < event.target.files.length; i++) {
+    this.special_img=event.target.files;
+    this.img_special.push({id:'',img_path:URL.createObjectURL(event.target.files[i])});
+    this.special_section_preview=false;
+  }
+  }
+  else{
+    this.special_section_preview=true;
+
+  }
+ console.log(this.special_img,this.img_special);
+ 
+}
+// For Selecting the image base on category id
+getStockimageonselectcategory(e:any){
+  console.log(e);
+  
+  //  For getting Image on load
+  this.lagunaserve.getspecial_image(e).subscribe(data=>{
+    console.log(data);
+    this.stock_img=data;
+    this.stock_img=this.stock_img.msg;
+  })
+}
+// For disabled or enable the field base on special menu checkvalue
+enableordisablefields(event:any){
+if(event.target.ckeched){
+  console.log("checked");
+ this.special_check='Y';
+  // this.special_disabled=false;
+}
+else {
+ this.special_check='N';
+//  this.special_disabled=true;
+}
+}
+//For submitting final data
+save_special(){
+  // this.storevalue.length=0;
+  console.log(this.resid,this.special);
+  this.spinner.show();
+  console.log(this.special_url,this.special_img);
+  const formdata=new FormData();
+  formdata.append('special_url',this.special_url);
+  for(let img of this.special_img){
+    formdata.append('special_img',img);
+  }
+  formdata.append('restaurant_id',this.resid);
+  formdata.append('menu_id',this.special);
+  formdata.append('break_check','Y');
+  formdata.append('regular_menu_flag',this.exclusive);
+  formdata.append('day_flag',this.week);
+  this.storevalue.push({
+    "reg_menu_id":[{"menu_id":this.break_Special},{"menu_id":this.lunch_special},{"menu_id":this.dinner_Special},{"menu_id":this.brunch_Special}] ,  
+    "month_day": [{"dt": this.mon_special},{"dt":this.tue_special},{"dt":this.wed_special},{"dt":this.thu_special},{"dt":this.fri_special},{"dt":this.sat_special},{"dt":this.sun_special}]
+  })
+
+  this.http.post<any>(this.url_reg+'/special_save', formdata,this.storevalue).subscribe(data=>{
+  console.log(data);
+  this.spinner.hide();
+
+    })
+  
+}
+enable_exclusive_inaddition(event:any){
+  if(event.target.check){
+    this.enable_exclusive=false;
+    this.exclusive='E';
+  }
+  else{
+    this.exclusive='';
+    
+    this.enable_exclusive=true;
+  }
+  
+}
+enable_everyweek(event:any,e:any){
+  if(e=='every_week'){
+  
+  if(event.target.checked){
+    this.enable_days=false;
+    this.week='E';
+  }
+  else{
+    this.week='';
+    this.enable_days=true;
+  }
+    
+}
+else{
+   if(event.target.checked){
+    this.enable_days=true;
+    this.week='S';
+   }
+   else{
+    this.week='';
+
+   }
+
+  
+}
+}
+// For checking checkbox below the specific date
+checkregularid(event:any,e:any){
+  if(e=='breakfast'){
+    if(event.target.checked){
+      this.break_Special=1;
+    }
+    else{
+      this.break_Special=0;
+
+    }
+    
+  }
+  else if(e=='lunch'){
+    if(event.target.checked){
+    this.lunch_special=2
+    }
+    else{
+    this.lunch_special=0
+
+    }
+  }
+  else if(e=='dinner'){
+    if(event.target.checked){
+      this.dinner_Special=3;
+    }
+    else{
+      this.dinner_Special=0;
+
+    }
+  }
+  else if(e=='brunch'){
+    if(event.target.checked){
+        this.brunch_Special=4;
+    }
+    else{
+      this.brunch_Special=0;
+   }
+   }
+}
+
+//for checking day
+checkspecialday(event:any,e:any){
+  if(e=='monday'){
+    this.mon_check=document.getElementById('vehicle_s2');
+
+  if(event.target.checked){
+    this.mon_special=2;
+    console.log(this.mon_special);
+  }
+  else{
+    this.mon_special=0;
+
+  }
+
+  // else{
+  //   this.mon_special=0;
+  //   this.every=document.getElementById('vehicle_s2');
+  //   this.every.checked=false;
+  // }
+
+}
+else if(e=='tuesday'){
+  
+  console.log("this.mon");
+  this.tue_check=document.getElementById('vehicle_s3');
+  if(event.target.checked){
+    this.tue_special=3;
+  }
+  else{
+    this.tue_special=0;
+
+  }
+
+  // else{
+  //   this.tue=0;
+  //   this.every=document.getElementById('vehicle_s3');
+  //   this.every.checked=false;
+  // }
+}
+ else if(e=='wednesday'){
+
+  console.log(".mon");
+  this.wed_check=document.getElementById('vehicle_s4');
+  if(event.target.checked){
+    this.wed_special=4;
+  }
+  else{
+    this.wed_special=0;
+
+    // this.wed=0;
+    // this.every=document.getElementById('vehicle1');
+    // this.every.checked=false;
+  }
+}
+ else if(e=='thursday'){
+
+
+  this.thu_check=document.getElementById('vehicle_s5');
+  if(event.target.checked){
+    this.thu_special=5
+  }
+  else{
+    this.thu_special=0;
+    // this.every=document.getElementById('vehicle1');
+    // this.every.checked=false;
+  }
+}
+else if(e=='friday'){
+ 
+  console.log(".mon");
+  this.fri_check=document.getElementById('vehicle_s6');
+  if(event.target.checked){
+    this.fri_special=6;
+  }
+  else{
+    this.fri_special=0;
+    // this.every=document.getElementById('vehicle1');
+    // this.every.checked=false;
+  }
+}
+ else if(e=='sat'){
+
+
+ this.sat_check=document.getElementById('vehicle_s7');
+ if(event.target.checked){
+  this.sat_special=7;
+ }
+ else{
+   this.sat_special=0;
+  //  this.every=document.getElementById('vehicle1');
+  //  this.every.checked=false;
+ }
+
+}
+else if(e=='sun'){
+   
+  console.log(".mon");
+  this.sun_check=document.getElementById('vehicle_s8');
+  if(event.target.checked){
+           this.sun_special=8;
+  }
+  else{
+    this.sun_special=0;
+    // this.every=document.getElementById('vehicle1');
+    // this.every.checked=false;
+  }
+
+}
+// else if(e=='everyday'){
+//   this.every=document.getElementById('vehicle1');
+//   if(event.target.checked){
+//     console.log("asdsadad")
+
+//   this.mon_check=document.getElementById('vehicle2');
+//   this.mon_check.checked=true;
+//   this.tue_check=document.getElementById('vehicle3');
+//   this.tue_check.checked=true;
+//   this.wed_check=document.getElementById('vehicle4');
+//   this.wed_check.checked=true;
+//   this.thu_check=document.getElementById('vehicle5');
+//   this.thu_check.checked=true;
+//   this.fri_check=document.getElementById('vehicle6');
+//   this.fri_check.checked=true;
+//   this.sat_check=document.getElementById('vehicle7');
+//   this.sat_check.checked=true;
+//   this.sun_check=document.getElementById('vehicle8');
+//   this.sun_check.checked=true;
+//   this.mon=2;
+//   this.tue=3;
+//   this.wed=4;
+//   this.thu=5;
+//   this.fri=6;
+//   this.sat=7;
+//   this.sun=8
+//   }
+//    else{
+//     console.log("asdsadadfailed")
+//     this.mon_check=document.getElementById('vehicle2');
+//     this.mon_check.checked=false;
+//     this.tue_check=document.getElementById('vehicle3');
+//     this.tue_check.checked=false;
+//     this.wed_check=document.getElementById('vehicle4');
+//     this.wed_check.checked=false;
+//     this.thu_check=document.getElementById('vehicle5');
+//     this.thu_check.checked=false;
+//     this.fri_check=document.getElementById('vehicle6');
+//     this.fri_check.checked=false;
+//     this.sat_check=document.getElementById('vehicle7');
+//     this.sat_check.checked=false;
+//     this.sun_check=document.getElementById('vehicle8');
+//     this.sun_check.checked=false;
+//     this.mon=0;
+//     this.tue=0;
+//     this.wed=0;
+//     this.thu=0;
+//     this.fri=0;
+//     this.sat=0;
+//     this.sun=0;
+//    }
+
+// }
+console.log(this.mon_special,this.tue_special,this.wed_special,this.thu_special,this.fri_special,this.sat_special,this.sun_special)
+}
 }
 
 

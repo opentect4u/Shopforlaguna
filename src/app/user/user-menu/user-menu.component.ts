@@ -25,8 +25,7 @@ export class UserMenuComponent implements OnInit {
   sp_font: any;
   sp_notice: any;
   sp_head: any;
-  greet: any;
-
+  greet:any;
   constructor(private activatedRoute:ActivatedRoute,private admin_data:LagunaserviceService) { }
   rest_name:any;
   rest_id:any;
@@ -75,6 +74,7 @@ export class UserMenuComponent implements OnInit {
     this.start=this.myArr[1];
     this.end=this.myArr[2];
     this.menu_id=this.myArr[3];
+    this.greet=this.menu_id==1?'Good Morning':(this.menu_id==2?'Good Afternoon':'Good Evening')
     console.log(this.menu_id)
     this.admin_data.get_special(this.rid, this.menu_id).subscribe(data=>{console.log(data)
       this.specialData=data;
@@ -101,7 +101,7 @@ if(this.start){
     if(this.overlapData.length==1)
     {
       this.overlap=false;
-      this.admin_data.get_menu_urls(this.rid,null).subscribe(data=>{console.log(data)
+      this.admin_data.get_menu_urls(this.rid, this.menu_id).subscribe(data=>{console.log(data)
         this.menuImages=data;
         this.menuImages=this.menuImages.oth_dt;
         for(let i=0;i<this.menuImages.length;i++)
@@ -183,7 +183,22 @@ if(this.start){
     else if(this.overlapData.length>1)
    {
   this.overlap=true;
-  // this.open_modal2()
+  this.admin_data.get_menu_urls(this.rid, this.menu_id).subscribe(data=>{console.log(data)
+    this.menuImages=data;
+    this.menuImages=this.menuImages.logo_dt;
+    console.log(this.menuImages)
+  
+        this.topimage=this.url1+'/'+this.menuImages[0].logo_path
+        console.log(this.topimage);
+        // this.cov=this.menuImages[i].cover_page_img? this.url1+'/'+this.menuImages[i].cover_page_img : ''
+        // console.log(this.cov)
+        // console.log(this.menuImages[i].cover_page_img)
+      
+    
+ }
+ 
+ )
+  this.open_modal2()
    }
 else{
   this.overlap=false;
@@ -197,12 +212,24 @@ else{
 
     this.admin_data.get_menu(this.rid).subscribe(data=>{console.log(data)
       this.menuImages=data;
-      this.greet=this.menuImages.greet
+      this.greet=this.menuImages.greet;
       this.overlapData=this.menuImages.menu_check;
       console.log(this.overlapData);
       
       if(this.overlapData.length == 1){
-        this.overlap=true;
+        this.overlap=false;
+
+        this.admin_data.get_special(this.rid, this.overlapData[0].menu_id).subscribe(data=>{console.log(data)
+          this.specialData=data;
+          this.specialData=this.specialData.msg;
+          this.sp_menuid=this.specialData[0].menu_id;
+          this.sp_posid=this.specialData[0].position_id;
+          this.sp_back=this.specialData[0].back_color;
+          this.sp_font=this.specialData[0].font_color;
+          this.sp_head=this.specialData[0].header_title;
+          this.sp_notice=this.specialData[0].notice_content;
+          })
+
         console.log(this.menuImages.cov_img);
         this.topimage=this.menuImages.top_img? this.url1+'/'+this.menuImages.top_img : ''
         this.cov=this.menuImages.cov_img? this.url1+'/'+this.menuImages.cov_img : '';
@@ -219,6 +246,21 @@ else{
           console.log(this.keyData)
       }else if(this.overlapData.length > 1){
         this.overlap=true;
+        this.admin_data.get_menu_urls(this.rid, null).subscribe(data=>{console.log(data)
+          this.menuImages=data;
+          this.menuImages=this.menuImages.logo_dt;
+          console.log(this.menuImages)
+        
+              this.topimage=this.url1+'/'+this.menuImages[0].logo_path
+              console.log(this.topimage);
+              // this.cov=this.menuImages[i].cover_page_img? this.url1+'/'+this.menuImages[i].cover_page_img : ''
+              // console.log(this.cov)
+              // console.log(this.menuImages[i].cover_page_img)
+            
+          
+       }
+       
+       )
         this.open_modal2();
       }
       else
@@ -315,7 +357,7 @@ else{
     if(this.overlap==true)
     this.overlap=true;
     console.log(this.overlap)
-    location.reload()
+    // location.reload()
 
   }
   open_modal1(){
@@ -345,6 +387,8 @@ else{
   open_menu(menuid:any,st:any,end:any){
     // this.secData.length=0;
     // this.menuImages.length=0;
+    this.greet=menuid==1?'Good Morning':(menuid==2?'Good Afternoon':'Good Evening')
+
     this.admin_data.get_special(this.rid, menuid).subscribe(data=>{console.log(data)
       this.specialData=data;
       this.specialData=this.specialData.msg;
@@ -361,18 +405,20 @@ else{
     this.arrayk1.length=0;
     this.arrayK.length=0;
     console.log(menuid+" "+st+" "+end)
-
-    this.admin_data.get_menu_urls(this.rid,null).subscribe(data=>{console.log(data)
+  
+    this.admin_data.get_menu_urls(this.rid, menuid).subscribe(data=>{console.log(data)
       this.menuImages=data;
       this.menuImages=this.menuImages.oth_dt;
-      for(let i=0;i<this.menuImages.length;i++)
-      {
+      let i=0;
+      // for(let i=0;i<this.menuImages.length;i++)
+      // {
       if(this.menu_id){
-        if(this.menuImages[i].menu_id==this.menu_id)
-        {
+      //   if(this.menuImages[i].menu_id==this.menu_id)
+      //   {
           this.topimage=this.menuImages[i].top_image_img? this.url1+'/'+this.menuImages[i].top_image_img : ''
           this.cov=this.menuImages[i].cover_page_img? this.url1+'/'+this.menuImages[i].cover_page_img : ''
-        }
+          console.log(this.cov);
+      //   }
       }
       else{
         if(this.menuImages[i].menu_id==menuid)
@@ -383,7 +429,7 @@ else{
       }
         
       }
-   }
+  //  }
    
    )
   this.admin_data.get_section_data(this.rid,menuid).subscribe(data=>{console.log(data)

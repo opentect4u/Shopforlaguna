@@ -47,9 +47,13 @@ PostWIndowCling(dt:any){//For windowcling Api Post in Admin Order setup Page
 GetWindowCling(){//For windowcling Api get in Admin Order setup Page
   return this.http.get(this.holder_Url);
 }
+// get_menu_urls(res_id:any, m_id: any){
+//   var menu_id = m_id > 0 ? m_id : '';
+//   return this.http.get(url_set.api_url+'/section_image?id='+res_id + '&menu_id=' + menu_id)
+// }
 get_menu_urls(res_id:any, m_id: any){//api to retireve urls for cover and top urls
   var menu_id = m_id > 0 ? m_id : '';
-  return this.http.get(url_set.api_url+'/section_image?id='+res_id + '&menu_id=' + menu_id)
+  return this.http.get(url_set.api_url+'/menu_setup?id='+res_id + '&menu_id=' + menu_id)
 }
 //api to retrieve section urls
 get_sec_url(menu_id:any,res_id:any){
@@ -280,7 +284,34 @@ downloadlogotopcover(restid:any){
   return this.http.get(url_set.api_url+'/download_cov?id='+restid,{responseType:'arraybuffer'})
 
 }
+//For Getting special Image
+getspecial_image(cat_id:any){
+  var id = cat_id ? cat_id : '';
+  return this.http.get(url_set.api_url+'/stock_img?cat_id=' +id);
+}
+//For getting Category Id
+get_category_list(){
+  return this.http.get(url_set.api_url+'/category_list');
+}
+// get_category_list() {
+//   return this.http.get(url_set.api_url + '/category_list')
+// }
+uploadStockImage(id: any, file: any, filename: any) {
+  const formdata = new FormData();
+  formdata.append('stock_img', file);
+  formdata.append('stock_filename', filename);
+  formdata.append('cat_id', id);
+  return this.http.post(url_set.api_url + "/stock_img", formdata);
 
+}
+getStockImages(v: any) {
+  return this.http.get(url_set.api_url + "/stock_img?cat_id=" + v);
+
+}
+deleteStockImages(v: any) {
+  return this.http.get(url_set.api_url + '/del_stock_img?id=' + v)
+
+}
 
  
 }

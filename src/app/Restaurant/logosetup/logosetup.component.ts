@@ -141,7 +141,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
      
   }
   selectimage(event:any){
-   if(event.target.files[0].size>2097152){
+   if(event.target.files[0].size>2097152 ||event.target.files[0].type=='jpg' || event.target.files[0].type=='jpeg' || event.target.files[0].type=='png' ){
    this.common_size_check=document.getElementById('myfile');
    this.common_size_check.value='';
    this.myFunction_for_size();

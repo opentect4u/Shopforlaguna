@@ -1193,16 +1193,16 @@
 
 
 <div id="id01" class="w3-modal">
-    <div class="w3-modal-content">
+    <div class="w3-modal-content cropModulContent">
   
       <div class="modal-dialog">
   
-        <div class="modal-content">
+        <div class="modal-content modal_contentCustom">
   
           
   
           <div class="modal-body">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-2 text-center">
                 <i class="fa fa-minus-circle fa-2x " type="button" [hidden]="ZoomIn"  (click)="zoomOut()"></i>
             </div>
@@ -1212,7 +1212,15 @@
             <div class="col-2">
                 <button class="float-right" (click)="close_modal_on_crop()">&times;</button>
             </div>
-        </div>
+        </div> -->
+
+        <ul class="cropBtnTop">
+            <li><i class="fa fa-minus-circle fa-2x " type="button" [hidden]="ZoomIn"  (click)="zoomOut()"></i></li>
+<li>                <i class="fa fa-plus-circle fa-2x " type="button" [hidden]="Zoomout" (click)="zoomIn()"></i></li>
+        <li>                <button class="cropCloseBtn" (click)="close_modal_on_crop()">&times;</button></li>
+        
+</ul>
+
            
             <image-cropper [hidden]="hide" [imageChangedEvent]="img_cover"
             [maintainAspectRatio]="true" 
@@ -1230,7 +1238,7 @@
           </image-cropper>
   
           </div>
-          <footer class="w3-container w3-right">
+          <footer class="w3-container w3-right cropFooter">
             <button class="btn btn-danger"   
             (click)="click_it()">Save</button>
           </footer>

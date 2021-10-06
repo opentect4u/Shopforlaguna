@@ -48,7 +48,7 @@
                         <button class="tablinks" [disabled]="parisdefault" (click)="openCity('Paris','2')"  id="defaultOpen1">Lunch</button>
                         <button class="tablinks" [disabled]="tokyodefault" (click)="openCity('Tokyo','3')"  id="defaultOpen2">Dinner</button>
                         <button class="tablinks" [disabled]="lagunadefault" (click)="openCity('Laguna','4')"  id="defaultOpen3">Brunch</button>
-                        <button class="tablinks" (click)="openCity('Shrewsbury','5')"   id="defaultOpen4">Specials</button>
+                        <button class="tablinks" (click)="openCity('Shrewsbury','5')" hidden  id="defaultOpen4">Specials</button>
                     
                      <strong></strong>
                     </div>
@@ -84,9 +84,10 @@
                                 <!-- <input type="file" id="myfile" name="myfile" [disabled]="b_url"  (change)="Breakfast($event)"> -->
                               <!-- <i type="button" [hidden]="Breakfast_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal"></i> -->
                               <input
-                             [(ngModel)]="show_name"
+                         
                               name="show_name"
                               type="file" id="mycoverfile" 
+                              accept=".jpeg,.jpg,.png"
                                [disabled]="b_url"  (change)="Breakfast($event)"
                               >
                             
@@ -106,7 +107,7 @@
                               <label for="" class="fieldTitle">Your Web Site Address/URL: 
                                 <i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                 #tooltip="matTooltip"
-                            matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                            matTooltip="You can either upload files or provide a url below"
   ></i>
                                 <!-- Or, we can collect a photo found on your web site and add it as your background
                             Breakfast menu image. -->
@@ -145,7 +146,10 @@
                               <label for="menuImg" class="fieldTitle"> Select file:</label>
                             <form>
                                 <!-- <label for="myfile">Upload 1 Breakfast JPG or PNG images:</label><br> -->
-                                <input type="file" id="mytopfile" name="myfile" [disabled]="b_url"  (change)="changeBreak($event)">
+                                <input type="file"
+                              accept=".jpeg,.jpg,.png"
+                                
+                                id="mytopfile" name="myfile" [disabled]="b_url"  (change)="changeBreak($event)">
                                 <!-- <i type="button" [hidden]="Breakfast_top_preview"  class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal1"></i> -->
                                
                                 <!-- <br><br> -->
@@ -164,7 +168,7 @@
                             <div class="col-5">
                               <label for="menuImg" class="fieldTitle"> Your Web Site Address/URL: <i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                 #tooltip="matTooltip"
-                                 matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                                 matTooltip="You can either upload files or provide a url below"
                                 ></i>
                                 <!-- Or, we can collect a photo found on your web site and add it to the top of your
                             Breakfast menu: -->
@@ -200,10 +204,10 @@
                               Upload a PDF file of your Breakfast menu.<br>
                               Please be sure to include your Kids, Desert and Beverage menus, if you have one.</div>
                             <div class="col-5">
-                              <label for="menuImg" class="fieldTitle">Select files</label>
+                              <label for="menuImg" class="fieldTitle">Select files:</label>
                             <input type="file" [disabled]="b_url" id="myfile" name="myfile" multiple="multiple"  accept=".pdf" (change)="changeBreakmenubreak($event)">
                             <!-- <i type="button" [hidden]="Breakfast_menu_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal2"></i> -->
-                            <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
+                            <p style="font-style: italic">(File format: .pdf maximum size: 2MB)</p>
                             
                             <div class="container1">
                             <div class="img-wrap rounded" [hidden]="Breakfast_menu_preview" *ngFor="let u of img_menu_break;let i=index">
@@ -215,7 +219,7 @@
                             <div class="col-5">
                               <label for="menuImg" class="fieldTitle">Your Web Site Address/URL:<i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                 #tooltip="matTooltip"
-                                matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                                matTooltip="You can either upload files or provide a url below"
                                 ></i>
                                 <!-- Or, please provide a web site address/url where we can collect your menu content: -->
                               </label>
@@ -245,11 +249,11 @@
                                     Please be sure to include your Kids, Desert and Beverage menus, if you have one.<br>
                                   </div>
                                   <div class="col-5">
-                                    <label for="menuImg" class="fieldTitle">Select files</label>
+                                    <label for="menuImg" class="fieldTitle">Select files:</label>
                                     <input type="file" [disabled]="b_url" id="myfile" name="myfile[]" multiple accept=".pdf"
                                         (change)="changeBreakmenubreak1($event)">
                                    <!-- <i type="button" [hidden]="Breakfast_section_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal3"></i> -->
-                                  <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
+                                  <p style="font-style: italic">(File format: .pdf maximum size: 2MB)</p>
                                    
                                    <div class="container1">
                                    <div class="img-wrap rounded" [hidden]="Breakfast_section_preview" *ngFor="let u of img_section_break;let i=index">
@@ -265,7 +269,7 @@
                                    
                                     <label for="menuImg" class="fieldTitle"> Your Web Site Address/URL: <i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                       #tooltip="matTooltip"
-                                      matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                                      matTooltip="You can either upload files or provide a url below"
                                       ></i>
                                       <!-- Or, please provide a web site address/url where we can collect your menu content: -->
                                     </label>
@@ -399,7 +403,7 @@
                             </div>
                             <div class="col-5">
                               <form>
-                                <label for="myfile" class="fieldTitle">Select file/s:</label>
+                                <label for="myfile" class="fieldTitle">Select file:</label>
                                 <input type="file" 
                                 [disabled]="lcc_url"
                                 
@@ -422,7 +426,7 @@
                             <div class="col-5">
                               <label for="" class="fieldTitle">Your Web Site Address/URL: <i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                 #tooltip="matTooltip"
-                                matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                                matTooltip="You can either upload files or provide a url below"
                               ></i>
                                 <!-- Or, we can collect a photo found on your web site and add it as your background
                               Lunch menu image. -->
@@ -458,7 +462,7 @@
                               This image will be added to the top of your Lunch menu.
                             </div>
                             <div class="col-5">
-                              <label for="menuImg" class="fieldTitle">Photo File (Upload 1 Lunch JPG or PNG images):</label>
+                              <label for="menuImg" class="fieldTitle">Select file:</label>
                               <form>
                                   <!-- <label for="myfile" >Upload 1 Lunch JPG or PNG images:</label> -->
                                   <!-- <br> -->
@@ -482,7 +486,7 @@
                               <label for="menuImg" class="fieldTitle"> Your Web Site Address/URL:
                                 <i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                 #tooltip="matTooltip"
-                                 matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                                 matTooltip="You can either upload files or provide a url below"
                                 ></i>
                               </label>
                               <!-- Or, we can collect a photo found on your web site and add it to the top of your Lunch
@@ -521,12 +525,12 @@
                                 Please be sure to include your Kids, Desert and Beverage menus, if you have one.<br>
                             </div>
                             <div class="col-5">
-                              <label for="menuImg" class="fieldTitle"> File (you can add multiple files)</label>
+                              <label for="menuImg" class="fieldTitle"> Select files:</label>
                             <input type="file"   [disabled]="lcc_url" id="myfile" name="myfile" multiple accept=".pdf" (change)="changelaunchtmenuimage($event)">
                             <!-- <br><br> -->
                           <!-- </form> -->
                             <!-- <i type="button" [hidden]="Launch_menu_preview"  data-bs-toggle="modal" data-bs-target="#myModal6" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
-                            <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
+                            <p style="font-style: italic">(File format: .pdf maximum size: 2MB)</p>
                            
                             <div class="container1">
                             <div class="img-wrap rounded" [hidden]="Launch_menu_preview" *ngFor="let u of img_launch_menu; let i=index">
@@ -546,7 +550,7 @@
                               <label for="menuImg" class="fieldTitle"> <strong>Your Web Site Address/URL:
                                 <i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                 #tooltip="matTooltip"
-                               matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                               matTooltip="You can either upload files or provide a url below"
                               ></i>
                               </strong></label>
                               <!-- Or, please provide a web site address/url where we can collect your menu content: -->
@@ -574,11 +578,11 @@
                                   Please be sure to include your Kids, Desert and Beverage menus, if you have one.<br>
                                 </div>
                                 <div class="col-5">
-                                  <label for="menuImg" class="fieldTitle">File (you can add multiple files)</label>
+                                  <label for="menuImg" class="fieldTitle">Select files:</label>
                                   <input type="file" accept=".pdf"  [disabled]="lcc_url" id="myfile_section" name="myfile" multiple
                                       (change)="changelaunchsectionbreak1($event)">
                                   <!-- <i type="button" [hidden]="Launch_section_preview" class="fa fa-picture-o fa-2x" data-bs-toggle="modal" data-bs-target="#myModal7" aria-hidden="true"></i> -->
-                            <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
+                            <p style="font-style: italic">(File format: .pdf maximum size: 2MB)</p>
                                 
                                     <div class="container1">
                                        <div class="img-wrap  rounded" [hidden]="Launch_section_preview" *ngFor="let u of img_launch_section;let i=index">
@@ -598,7 +602,7 @@
                              
                                     <label for="menuImg" class="fieldTitle"> Your Web Site Address/URL:<i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                       #tooltip="matTooltip"
-                                       matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                                       matTooltip="You can either upload files or provide a url below"
                                       ></i>
                                       <!-- Or, please provide a web site address/url where we can collect your menu content: -->
                                     </label>
@@ -790,7 +794,7 @@
                             </div>
                             <div class="col-5">
                               <form>
-                                <label for="myfile" class="fieldTitle">Select file/s:</label>
+                                <label for="myfile" class="fieldTitle">Select file:</label>
                                 <input type="file" id="mydinnercoverfile" name="myfile" [disabled]="d_url"  (change)="brunchcoverimage($event)">
                               </form>  <!-- <i type="butoon" [hidden]="Dinner_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal8"></i> -->
                             <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
@@ -806,7 +810,7 @@
                             <div class="col-5">
                               <label for="" class="fieldTitle">Your Web Site Address/URL: <i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                 #tooltip="matTooltip"
-                               matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                               matTooltip="You can either upload files or provide a url below"
                                 ></i>
                                 <!-- Or, we can collect a photo found on your web site and add it as your background
                               Dinner menu image.-->
@@ -841,7 +845,7 @@
                             </div>
 
                             <div class="col-5">
-                              <label for="menuImg" class="fieldTitle">Photo File (Upload 1 Dinner JPG or PNG images):</label>
+                              <label for="menuImg" class="fieldTitle">Select file:</label>
                               <form>
                                   <!-- <label for="myfile" ></label><br> -->
                                   <input type="file" id="mydinnertopfile" name="myfile" [disabled]="d_url"  (change)="brunchtopimage($event)">
@@ -861,7 +865,7 @@
                             <div class="col-5">
                               <label for="menuImg" class="fieldTitle"> Your Web Site Address/URL:<i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                 #tooltip="matTooltip"
-                               matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                               matTooltip="You can either upload files or provide a url below"
                                 ></i></label>
                               <!-- Or, we can collect a photo found on your web site and add it to the top of your
                                Dinner menu: -->
@@ -898,12 +902,12 @@
                                 <form>
                          
                                   <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
-                                  <label for="menuImg" class="fieldTitle">File (you can add multiple files)</label>
+                                  <label for="menuImg" class="fieldTitle">Select files:</label>
                                   <input type="file" [disabled]="d_url" id="myfile" name="myfile" accept=".pdf" multiple (change)="changebrunchmenubreak1($event)">
                                 </form> <!-- <i type="button" [hidden]="Dinner_menu_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" 
                                   data-bs-toggle="modal" data-bs-target="#myModal10"
                                  ></i> --> 
-                            <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
+                            <p style="font-style: italic">(File format: .pdf maximum size: 2MB)</p>
                                
                                  <div class="container1">
                                   
@@ -920,7 +924,7 @@
                               <div class="col-5">
                                 <label for="menuImg" class="fieldTitle"> Your Web Site Address/URL:<i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                   #tooltip="matTooltip"
-                                 matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                                 matTooltip="You can either upload files or provide a url below"
                                   ></i></label>
                                 Or, please provide a web site address/url where we can collect your menu content:
                                  <form>
@@ -953,11 +957,11 @@
                                     Please be sure to include your Kids, Desert and Beverage menus, if you have one.<br>
                                   </div>
                                   <div class="col-5">
-                                    <label for="menuImg" class="fieldTitle">File (you can add multiple files)</label>
+                                    <label for="menuImg" class="fieldTitle">Select files:</label>
                                     <input type="file" accept=".pdf"  [disabled]="d_url" id="myfile" name="myfile[]" multiple
                                         (change)="changebrunchsectionbreak1($event)">
                              <!-- <i type="button"   data-bs-toggle="modal" data-bs-target="#myModal11" [hidden]="Dinner_section_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
-                            <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
+                            <p style="font-style: italic">(File format: .pdf maximum size: 2MB)</p>
                               
                                         <div class="container1">
                                         <div class="img-wrap rounded" [hidden]="Dinner_section_preview"    *ngFor="let u of img_dinner_section;let i=index">
@@ -975,7 +979,7 @@
                                     <!-- <br><br> -->
                                     <label for="menuImg" class="fieldTitle">Your Web Site Address/URL:<i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                       #tooltip="matTooltip"
-                                     matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                                     matTooltip="You can either upload files or provide a url below"
                                       ></i></label>
                                     <!-- Or, please provide a web site address/url where we can collect your menu content: -->
                                     <form>
@@ -1154,7 +1158,7 @@
                             </div>
                             <div class="col-5">
                               <form>
-                                <label for="myfile" class="fieldTitle">Select file/s:</label>
+                                <label for="myfile" class="fieldTitle">Select file:</label>
                                 <input type="file" [disabled]="br_url" id="mybrunchcoverfile" name="myfile[]" (change)="dinnerchangecoverimage($event)">
                                 <!-- <i data-bs-toggle="modal" data-bs-target="#myModal12" type="button" [hidden]="Brunch_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
   
@@ -1175,7 +1179,7 @@
                             <div class="col-5">
                               <label for="myfile" class="fieldTitle">Your Web Site Address/URL:<i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                 #tooltip="matTooltip"
-                               matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                               matTooltip="You can either upload files or provide a url below"
                                 ></i></label>
 
                               <!-- Or if you would like us to select an image for you, please provide a web site
@@ -1208,7 +1212,7 @@
                           
                             <div class="col-5">
                                <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
-                            <label for="menuImg" class="fieldTitle"> <strong>Photo File(Upload 1 Brunch JPG or PNG images):</strong></label>
+                            <label for="menuImg" class="fieldTitle"> <strong>Select file:</strong></label>
                             <form>
                                 <!-- <label for="myfile"></label><br> -->
                                 <input type="file" [disabled]="br_url" id="mybrunchtopfile" name="myfile[]" (change)="dinnerchangetopimage($event)">
@@ -1227,7 +1231,7 @@
                                  <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
                                  <label for="menuImg" class="fieldTitle"> Your Web Site Address/URL:<i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                   #tooltip="matTooltip"
-                                 matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                                 matTooltip="You can either upload files or provide a url below"
                                   ></i></label><br>
                                  Or, we can collect a photo found on your web site and add it to the top of your
                                  Brunch menu:
@@ -1263,10 +1267,10 @@
                             </div>
                             <div class="col-5">
                                <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> -->
-                            <label for="menuImg" class="fieldTitle"> File (you can add multiple files)</label>
+                            <label for="menuImg" class="fieldTitle"> Select files:</label>
                             <input type="file" accept=".pdf" [disabled]="br_url" id="myfile" name="myfile" multiple (change)="changedinnermenuimage($event)">
                             <!-- <i data-bs-toggle="modal" data-bs-target="#myModal14" type="button" [hidden]="Brunch_menu_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
-                            <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
+                            <p style="font-style: italic">(File format: .pdf maximum size: 2MB)</p>
                      
                             <div class="container1">
 
@@ -1286,7 +1290,7 @@
                             <label for="menuImg" class="fieldTitle">Your Web Site Address/URL:
                               <i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                 #tooltip="matTooltip"
-                               matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                               matTooltip="You can either upload files or provide a url below"
                                 ></i>
                             </label><br>
                             Or, please provide a web site address/url where we can collect your menu content:
@@ -1319,11 +1323,11 @@
                                     Please be sure to include your Kids, Desert and Beverage menus, if you have one.<br>
                                   </div>
                                   <div class="col-5">
-                                    <label for="menuImg" class="fieldTitle">File (you can add multiple files)</label><br>
+                                    <label for="menuImg" class="fieldTitle">Select files:</label><br>
                                     <input type="file" accept=".pdf" [disabled]="br_url" id="myfile" name="myfile[]" multiple
                                         (change)="changedinnersectionimage($event)">
                                      <!-- <i data-bs-toggle="modal" data-bs-target="#myModal15" type="button" [hidden]="Brunch_section_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
-                            <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
+                            <p style="font-style: italic">(File format: .pdf maximum size: 2MB)</p>
                                         
                                         <!-- <br><br> -->
                                         <div class="container1">
@@ -1340,7 +1344,7 @@
                                     <!-- <br><br> -->
                                     <label for="menuImg" > <strong>Your Web Site Address/URL:<i class="fa fa-info-circle tooltipCustom" aria-hidden="true" 
                                       #tooltip="matTooltip"
-                                     matTooltip="we can collect a photo found on your web site and add it as your background Breakfast menu image"
+                                     matTooltip="You can either upload files or provide a url below"
                                       ></i></strong></label><br>
                                     <!-- Or, please provide a web site address/url where we can collect your menu content: -->
                                     <form>
@@ -1687,8 +1691,9 @@
 
                     <div id="Shrewsbury" class="tabcontent"  [hidden]="tab5">
                       <label class="titleCustom" for="bkmenu">
-                          <input type="checkbox" id="bkmenu" name="bkmenu"
-                              value="bkMenu">
+                          <input type="checkbox" id="special_bkmenu" name="special"
+                              value="Special" (changge)="enableordisablefields($event)">
+                              <input hidden [(ngModel)]="special"> 
                           <strong>Specials Menu</strong></label>
                       After we set-up your platform the first time, you can then browse and change photos and edit
                       your menu items and pricing, as needed. The Cover Image is non-editable.<br>
@@ -1696,15 +1701,25 @@
                       please skip this area. You can always add a Specials menu from your back office, 24/7.<br> <br>
 
                        
-                      <div class="secDifer">
+                      <div class="secDifer" >
                           <label class="titleCustom"><strong>MENU:</strong></label>
                           Upload a PDF file of your Specials menu.
 
                           <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> <label for="menuImg"> <strong>File</strong></label><br> -->
                           <form>
-                              <label for="myfile" class="fieldTitle">Select file/s:</label>
-                              <input type="file" id="myfile" name="myfile" multiple>
+                              <label for="myfile" class="fieldTitle">Select files:</label>
+                              <input   type="file" id="myfile" name="myfile" accept=".pdf" multiple (change)="getstock_imege($event)">
                           </form>
+
+                          <div class="container1">
+                            <div class="img-wrap rounded" [hidden]="special_section_preview" *ngFor="let u of img_special;let i=index">
+                             <span class="close" (click)="deletemultiplelunchsection('special_section',i,u.id)" [hidden]="!show_toast">&times;</span>
+                             <!-- <span class="close">&times;</span> -->
+                          
+                             <a  (click)="openpdf(u.img_path)"><i type="button" class="fa fa-file-pdf-o"></i></a>
+                         </div>
+                       </div>
+
                           <!-- <br>
                           <form>
                           <input type="checkbox" id="menuImg" name="menuImg" value="menuImg">
@@ -1712,7 +1727,7 @@
                           </form> -->
                           Or, please provide a web site address/url where we can collect your menu content:
                           <form>
-                              <input type="text" id="url" name="url" value=""
+                              <input   type="text" id="url" name="url" [(ngModel)]="special_url" (change)="check_special()"
                                   size="28" placeholder="Enter the URL">
                           </form>
                           <p style="font-style: italic">If we cannot collect the content from your web site, we will
@@ -1724,12 +1739,12 @@
                               (per the below, if you would like your SPECIALS menu to display WITH your normally
                               scheduled menu, a "pop-up" will display.)</p>
 
-                              <button  data-bs-toggle="modal" data-bs-target="#myModal21" class="btn btn-primary">Click</button>
+                              <button    data-bs-toggle="modal" data-bs-target="#myModal21" class="btn btn-primary" >Select Image</button>
 
                               
                       </div>
 
-                      <div class="secDifer">
+                      <div class="secDifer" >
                           <label class="titleCustom"><strong>DISPLAY DAY &amp; TIMES:</strong></label>
                           When you select your <strong>SPECIALS</strong> menu's day/times, a new TAB will display at
                           the top of your menu platform to alert your customers that a Specials menu is available. 
@@ -1751,9 +1766,9 @@
                           <strong>SPECIALS</strong> menu at a time, please complete one (and submit), then start
                           another. Always do one at a time.
                           </div>
-                          <div class="secDifer">
-                            <label for="exclusively" class="titleCustom">
-                              <input type="radio" id="exclusively" name="inAddition" value="Exclusively"> EXCLUSIVELY</label>
+                          <div class="secDifer" >
+                            <label for="exclusively"  class="titleCustom">
+                              <input type="radio"  id="exclusively" name="inAddition" value="Exclusively" (change)="enable_exclusive_inaddition($event)"> EXCLUSIVELY</label>
 
                           If you would like your <strong>SPECIALS</strong> menu to display
                           <strong>EXCLUSIVELY</strong> (your "normally scheduled" menus <strong>will not</strong>
@@ -1763,31 +1778,31 @@
                        
 
                           <!-- <label for="everyWeekId" class="fieldTitle"><input type="radio" id="everyWeekId" name="everyWeek" value="EVERY WEEK"> EVERY WEEK</label>     -->
-                          <label for="everyWeek" class="fieldTitle"><input type="radio" id="everyWeek" name="everySpecificWeek" value="EVERY WEEK"> EVERY WEEK</label>
+                          <label   for="everyWeek"  [disabled]="enable_exclusive"  class="fieldTitle"><input type="radio" id="everyWeek" name="everySpecificWeek" (change)="enable_everyweek($event,'every_week')" > EVERY WEEK</label>
                           
-                          <div class="row">
+                          <div class="row" >
                             <div class="col-5">
                              <form >
-                                 <input type="checkbox" [disabled]="b_url" id="vehicle1"  name="vehicle"  (change)="checkday($event,'everyday')">
+                                 <input type="checkbox"  id="vehicle_se"  name="vehicle"  (change)="checkspecialday($event,'everyday')">
                                  <label for="vehicle1" class="m-2"> Every Day</label><br>
                              </form>
  
                              <form class="form-inline" >
-                                 <input type="checkbox" [disabled]="b_url"  (change)="checkday($event,'monday')" name="vehicle2" id="vehicle2" >
+                                 <input type="checkbox"  [disabled]="enable_days"   (change)="checkspecialday($event,'monday')" name="vehicle2" id="vehicle_s2"  >
                                  <label for="vehicle2"> Monday</label><br>
-                                 <input type="checkbox" [disabled]="b_url"  (change)="checkday($event,'tuesday')" name="vehicle3" id="vehicle3" >
+                                 <input type="checkbox"  [disabled]="enable_days"    (change)="checkspecialday($event,'tuesday')" name="vehicle3" id="vehicle_s3"  >
                                  <label for="vehicle3"> Tuesday</label><br>
-                                 <input type="checkbox"  [disabled]="b_url" (change)="checkday($event,'wednesday')" name="vehicle1" id="vehicle4" >
+                                 <input type="checkbox"   [disabled]="enable_days"   (change)="checkspecialday($event,'wednesday')" name="vehicle1" id="vehicle_s4"  >
                                  <label for="vehicle1"> Wednesday</label><br>
                              </form>
                              <form class="form-inline" >
-                                 <input type="checkbox" [disabled]="b_url" (change)="checkday($event,'thursday')" name="vehicle2" id="vehicle5" >
+                                 <input type="checkbox"  [disabled]="enable_days"  (change)="checkspecialday($event,'thursday')" name="vehicle2" id="vehicle_s5" >
                                  <label for="vehicle2"> Thursday</label><br>
-                                 <input type="checkbox"  [disabled]="b_url" (change)="checkday($event,'friday')" name="vehicle3" id="vehicle6" >
+                                 <input type="checkbox"  [disabled]="enable_days"   (change)="checkspecialday($event,'friday')" name="vehicle3" id="vehicle_s6" >
                                  <label for="vehicle3"> Friday</label><br>
-                                 <input type="checkbox"  [disabled]="b_url" (change)="checkday($event,'sat')" name="vehicle1" id="vehicle7" >
+                                 <input type="checkbox"  [disabled]="enable_days"  (change)="checkspecialday($event,'sat')" name="vehicle1" id="vehicle_s7" >
                                  <label for="vehicle1"> Saturday</label><br>
-                                 <input type="checkbox"  [disabled]="b_url" (change)="checkday($event,'sun')" name="vehicle2" id="vehicle8" >
+                                 <input type="checkbox"   [disabled]="enable_days"  (change)="checkspecialday($event,'sun')" name="vehicle2" id="vehicle_s8" >
                                  <label for="vehicle2"> Sunday</label><br>
                              </form>
  
@@ -1796,42 +1811,41 @@
                              <form class="form-inline" action="">
                                  <label for="selfcling">Start Time:</label>
                                  <input type="time"
-                                 [disabled]="b_url"
-                                  (change)="checkbreakend($event,'start')"
-                                 id="start" name="selfcling" value="{{breakfast_start}}" size="4" #START_break ><br><br>
+                                  
+                                
+                                 id="start" name="selfcling" size="4"  ><br><br>
                                  <label for="selfcling">End Time:</label>
                                  <input type="time" 
-                                 [disabled]="b_url"
-                                 value="{{breakfast_end}}"
-                                  (change)="checkbreakend($event,'end')"
-                                 id="end" name="selfcling"  size="4" #END_break >
+                                  
+                                  
+                                 id="end" name="selfcling"  size="4"  >
                              </form>
                             </div>
                             <div class="col-2"></div>
                          </div>
              <!-- <label for="specificdateId" class="fieldTitle"><input type="radio" id="specificdateId" name="everyWeek" value="SPECIFIC DATE"> SPECIFIC DATE</label> -->
-             <label for="specificWeek" class="fieldTitle"><input type="radio" id="specificWeek" name="everySpecificWeek" value="SPECIFIC DATE"> SPECIFIC DATE</label> 
+             <label for="specificWeek" class="fieldTitle"  ><input type="radio" id="specificWeek" name="everySpecificWeek" value="SPECIFIC DATE" (change)="enable_everyweek($event,'specific_date')"> SPECIFIC DATE</label> 
                                Select the specific
                               date that you would like your <strong>SPECIALS</strong> menu to display<br>
 
-                              <input type="date" id="special" name="special">
+                              <input   type="date" id="special" name="special" >
                           <br>
                           TIME: Select the normally scheduled menu that your SPECIALS menu will display with:
 
                           <form class="form-inline" action="">
-                              <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                              <input type="checkbox" id="breakfast" (change)="checkregularid($event,'break')">
                               <label for="vehicle2"> Breakfast</label><br>
-                              <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                              <input type="checkbox" id="lunch" (change)="checkregularid($event,'lunch')">
                               <label for="vehicle3"> Lunch</label><br>
-                              <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                              <input type="checkbox" id="dinner"   (change)="checkregularid($event,'dinner')">
                               <label for="vehicle1"> Dinner</label><br>
-                              <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                              <input type="checkbox" id="brunch"  (change)="checkregularid($event,'brunch')">
                               <label for="vehicle2"> Brunch</label><br>
                           </form>
                       </div>
 
 
-                      <div class="secDifer">
+                      <div class="secDifer" >
                           <label for="inAddition" class="titleCustom">
                             <input type="radio" id="inAddition" name="inAddition" value="In Addition">
                               IN ADDITION</label>
@@ -1848,26 +1862,26 @@
                           <div class="row">
                             <div class="col-5">
                              <form >
-                                 <input type="checkbox" [disabled]="b_url" id="vehicle1"  name="vehicle"  (change)="checkday($event,'everyday')">
+                                 <input type="checkbox"   id="special_everyday"  name="vehicle"  >
                                  <label for="vehicle1" class="m-2"> Every Day</label><br>
                              </form>
  
                              <form class="form-inline" >
-                                 <input type="checkbox" [disabled]="b_url"  (change)="checkday($event,'monday')" name="vehicle2" id="vehicle2" >
+                                 <input type="checkbox"    name="vehicle2" id="special_monday">
                                  <label for="vehicle2"> Monday</label><br>
-                                 <input type="checkbox" [disabled]="b_url"  (change)="checkday($event,'tuesday')" name="vehicle3" id="vehicle3" >
+                                 <input type="checkbox"     name="vehicle3" id="special_tue">
                                  <label for="vehicle3"> Tuesday</label><br>
-                                 <input type="checkbox"  [disabled]="b_url" (change)="checkday($event,'wednesday')" name="vehicle1" id="vehicle4" >
+                                 <input type="checkbox"   name="vehicle1" id="special_wednesday" >
                                  <label for="vehicle1"> Wednesday</label><br>
                              </form>
                              <form class="form-inline" >
-                                 <input type="checkbox" [disabled]="b_url" (change)="checkday($event,'thursday')" name="vehicle2" id="vehicle5" >
+                                 <input type="checkbox"   name="vehicle2" id="special_thursday" >
                                  <label for="vehicle2"> Thursday</label><br>
-                                 <input type="checkbox"  [disabled]="b_url" (change)="checkday($event,'friday')" name="vehicle3" id="vehicle6" >
+                                 <input type="checkbox"   name="vehicle3" id="special_thursday">
                                  <label for="vehicle3"> Friday</label><br>
-                                 <input type="checkbox"  [disabled]="b_url" (change)="checkday($event,'sat')" name="vehicle1" id="vehicle7" >
+                                 <input type="checkbox"    name="vehicle1" id="special_saturday" >
                                  <label for="vehicle1"> Saturday</label><br>
-                                 <input type="checkbox"  [disabled]="b_url" (change)="checkday($event,'sun')" name="vehicle2" id="vehicle8" >
+                                 <input type="checkbox"    name="vehicle2" id="special_sunday" >
                                  <label for="vehicle2"> Sunday</label><br>
                              </form>
  
@@ -1876,46 +1890,46 @@
                              <form class="form-inline" action="">
                                  <label for="selfcling">Start Time:</label>
                                  <input type="time"
-                                 [disabled]="b_url"
+                                  
                                   (change)="checkbreakend($event,'start')"
-                                 id="start" name="selfcling" value="{{breakfast_start}}" size="4" #START_break ><br><br>
+                                 id="start" name="selfcling" size="4"  ><br><br>
                                  <label for="selfcling">End Time:</label>
                                  <input type="time" 
-                                 [disabled]="b_url"
-                                 value="{{breakfast_end}}"
+                                  
+                                 
                                   (change)="checkbreakend($event,'end')"
-                                 id="end" name="selfcling"  size="4" #END_break >
+                                 id="end" name="selfcling"  size="4"  >
                              </form>
                             </div>
                             <div class="col-2"></div>
                          </div>
 
 
-                         <label for="specificWeekAddi" class="fieldTitle"><input type="radio" id="specificWeekAddi" name="everySpecificWeekAddi" value="SPECIFIC DATE In Addition"> SPECIFIC DATE</label>
+                         <label for="specificWeekAddi"   class="fieldTitle"><input type="radio" id="specificWeekAddi" name="everySpecificWeekAddi" value="SPECIFIC DATE In Addition"> SPECIFIC DATE</label>
                           <form >
                                Select the specific
                               date that you would like your <strong>SPECIALS</strong> menu to display
                               <br>Date for Specials Menu:<br>
-                              <input type="date" id="special" name="special">
+                              <input type="date" id="special" name="special" [(ngModel)]="date_time">
                           </form>
                           <strong>TIME:</strong> Select the normally scheduled menu that your SPECIALS menu will
                           display with:<br>
 
                           <form class="form-inline" action="">
-                              <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                              <input type="checkbox"   id="specials_breakfast" name="vehicle2" value="Car">
                               <label for="vehicle2"> Breakfast</label><br>
-                              <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                              <input type="checkbox"   id="specials_lunch" name="vehicle3" value="Boat">
                               <label for="vehicle3"> Lunch</label><br>
-                              <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                              <input type="checkbox"   id="specials_dinner" name="vehicle1" value="Bike">
                               <label for="vehicle1"> Dinner</label><br>
-                              <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                              <input type="checkbox"   id="specials_brunch"  name="vehicle2" value="Car">
                               <label for="vehicle2"> Brunch</label><br>
                           </form><br>
                       </div>
-                      <button class="w3-button w3-green" type="submit">Previous</button> 
-                      <button
-                          class="w3-button w3-green m-1" type="submit"
-                          >Next & Continue</button>
+                      <!-- <button class="w3-button w3-green" type="submit">Previous</button>  -->
+                      <button  
+                          class="w3-button w3-green m-1" type="submit" (click)="save_special()"
+                          >Save</button>
                   </div>
                  
                     <br><br><br>
@@ -1964,7 +1978,7 @@
 <div id="snackbar1">{{error_msg}}</div>
 <div id="snackbar2">{{for_timing_problem}}</div>
 <div id="snackbar3">Successfully Updated</div>
-<div id="snackbar4"><i class="fa fa-warning p-1"></i><span>File size can't be greater than 2MB</span></div>
+<div id="snackbar4"><i class="fa fa-warning p-1"></i><span>Please provide valid file format within given size</span></div>
 
 <!-- For Image Cropper -->
 
@@ -2552,6 +2566,107 @@
 
   </div>
 </div>
+<!-- For the image of dinner Section -->
+<div class="modal fade in" id="myModal21">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="main_Brouse mainImgBrowse">
+          <div class="titleImgBrowse">
+            <h2>Title</h2>
+            <div id="myBtnContainer" class="dropDownImg">
+            <select #cats (change)="getStockimageonselectcategory(cats.value)">
+              <option *ngFor="let cat of category_name" value="{{cat.id}}">{{cat.name}}</option>
+            <!-- <option onclick="filterSelection('all')"> Show all</option>
+            <option onclick="filterSelection('nature')"> Nature</option>
+            <option onclick="filterSelection('cars')"> Cars</option>
+            <option onclick="filterSelection('people')"> People</option> -->
+            </select>
+          <!--
+            <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+            <button class="btn" onclick="filterSelection('nature')"> Nature</button>
+            <button class="btn" onclick="filterSelection('cars')"> Cars</button>
+            <button class="btn" onclick="filterSelection('people')"> People</button>
+          -->
+          </div>
+            </div>
+          
+          
+          
+          
+          <!-- Portfolio Gallery Grid -->
+          <div class="row_Brouse">
+            <!-- class="column_Brouse nature" -->
+            <div  class="column_Brouse nature"   *ngFor="let stock of stock_img">
+              <div class="content_Brouse" >
+                
+                <!-- <img src="/assets/images/mountains.jpg" alt="Mountains" style="width:100%"> -->
+                <img [src]="img_url + stock.img_path" alt="">
+              </div>
+            </div>
+            <!-- <div class="column_Brouse nature">
+              <div class="content_Brouse">
+              <img src="/assets/images/lights.jpg" alt="Lights" style="width:100%">
+              </div>
+            </div>
+            <div class="column_Brouse nature">
+              <div class="content_Brouse">
+              <img src="/assets/images/nature.jpg" alt="Nature" style="width:100%">
+              </div>
+            </div>
+            
+            <div class="column_Brouse cars">
+              <div class="content_Brouse">
+                <img src="/assets/images/cars1.jpg" alt="Car" style="width:100%">
+              </div>
+            </div>
+            <div class="column_Brouse cars">
+              <div class="content_Brouse">
+              <img src="/assets/images/cars2.jpg" alt="Car" style="width:100%">
+              </div>
+            </div>
+            <div class="column_Brouse cars">
+              <div class="content_Brouse">
+              <img src="/assets/images/cars3.jpg" alt="Car" style="width:100%">
+              </div>
+            </div>
+          
+            <div class="column_Brouse people">
+              <div class="content_Brouse">
+                <img src="/assets/images/people1.jpg" alt="Car" style="width:100%">
+              </div>
+            </div>
+            <div class="column_Brouse people">
+              <div class="content_Brouse">
+              <img src="/assets/images/people2.jpg" alt="Car" style="width:100%">
+              </div>
+            </div>
+            <div class="column_Brouse people">
+              <div class="content_Brouse">
+              <img src="/assets/images/people3.jpg" alt="Car" style="width:100%">
+              </div>
+            </div> -->
+          <!-- END GRID -->
+          </div>
+          
+          <!-- END MAIN -->
+          </div>
+      </div>
+      
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+       </div>
+    </div>
+</div>
+
 
 
 
