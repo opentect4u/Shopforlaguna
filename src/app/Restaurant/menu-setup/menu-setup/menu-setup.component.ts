@@ -2235,9 +2235,9 @@ enable_exclusive:boolean=true;
         this.design=document.getElementById('tokyo');
         this.design.className='tabcontent m-1';
         this.tab1=true;
-        this.tab2=false;
+        this.tab2=true;
   
-        this.tab3=true;
+        this.tab3=false;
   
         this.tab4=true;
 
@@ -2404,11 +2404,11 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
     console.log("val:",this.v)
 
     if (e == 'London'){
-      this.Special_menu = document.getElementById('defaultOpen4');
+      // this.Special_menu = document.getElementById('defaultOpen4');
      
-      this.Special_menu.style.background = '#f1f1f1';
-      this.Special_menu.style.color = 'black';
-     this.tab5=true;
+      // this.Special_menu.style.background = '#f1f1f1';
+      // this.Special_menu.style.color = 'black';
+    //  this.tab5=true;
         
       this.brunch_start='';
       this.brunch_end='';
@@ -5369,9 +5369,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       
        
        const formData = new FormData();
-       const notBase64 = /[^A-Z0-9+\/=]/i;
-       this.breakfastcoverimage = notBase64.test(this.breakfastcoverimage) ? '' : this.breakfastcoverimage;
-       console.log({tes: notBase64.test(this.breakfastcoverimage)});
+     
        formData.append('coverurl', COVERPAGEURL);
        formData.append('cov_filename', this.breakfast_cover_name);
        formData.append('top_filename', this.breakfast_top_name);
@@ -5423,11 +5421,9 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
  
      }
      else if(this.v==2){
-       this.v==1;
+       this.v=1;
        const formData = new FormData();
-       const notBase64 = /[^A-Z0-9+\/=]/i;
-       this.breakfastcoverimage = notBase64.test(this.breakfastcoverimage) ? this.breakfastcoverimage : '';
-       console.log({tes: notBase64.test(this.breakfastcoverimage)});
+     
        formData.append('coverurl', COVERPAGEURL);
        formData.append('topurl', TOPIMAGEURL);
        formData.append('cov_filename', this.breakfast_cover_name);
@@ -5481,9 +5477,6 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
     
        if(localStorage.getItem('breakfast')==''){
 
-        // var regexBase64 = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-        var breakfast_cover_image =  this.breakfastcoverimage.length > 1000 ? this.breakfastcoverimage : '';
-        console.log({dt: this.breakfastcoverimage.length});
         
        
         const formData = new FormData();
@@ -5493,7 +5486,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        formData.append('top_filename', this.breakfast_top_name);
         formData.append('MenuUrl', MENUURL);
         formData.append('SectionUrl',SECTIONURL);
-        formData.append('cov_img',breakfast_cover_image);
+        formData.append('cov_img',this.breakfastcoverimage);
         formData.append('top_img', this.breakfasttopimage);
  
          formData.append('restaurant_id',this.resid);
@@ -5734,9 +5727,9 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         this.storevalue.length=0;
      
         const formData = new FormData();
-        const notBase64 = /[^A-Z0-9+\/=]/i;
-        this.breakfastcoverimage = notBase64.test(this.breakfastcoverimage) ? this.breakfastcoverimage : '';
-        console.log({tes: notBase64.test(this.breakfastcoverimage)});
+        // const notBase64 = /[^A-Z0-9+\/=]/i;
+        // this.breakfastcoverimage = notBase64.test(this.breakfastcoverimage) ? this.breakfastcoverimage : '';
+        // console.log({tes: notBase64.test(this.breakfastcoverimage)});
           // formData.append('file', this.breakfastcoverimage);
           formData.append('coverurl', COVERPAGEURL);
           formData.append('topurl', TOPIMAGEURL);
@@ -6888,7 +6881,7 @@ else{
     
      this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
       console.log(data);
-      this.spinner.show();
+      this.spinner.hide();
     })
      }
      else if(this.v==2){
@@ -6940,6 +6933,8 @@ else{
     
      this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
       console.log(data);
+      this.spinner.hide();
+
     })
      }
      this.myFunction_update();
@@ -7200,9 +7195,10 @@ this.storevalue.length=0;
     
      this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
       console.log(data);
+  this.spinner.hide();
+
     })
 
-  this.spinner.hide();
 
   }
   else{
@@ -7266,6 +7262,8 @@ this.storevalue.length=0;
   }
   
   }
+
+
   
   // For breakfasttop image
   changeBreak(event: any) {
@@ -7573,7 +7571,7 @@ this.storevalue.length=0;
   }
     // Event of dinner top image
   brunchtopimage(event:any){
-    if(event.target.files[0].size>2097152 ||event.target.files[0].type=='jpg' || event.target.files[0].type=='jpeg' || event.target.files[0].type=='png' ){
+    if(event.target.files[0].size>2097152 ){
       this.myFunction_file_Size_error();
       console.log("asdasd");
       this.common_break_menu=document.getElementById('mydinnertopfile');
@@ -7607,7 +7605,7 @@ this.storevalue.length=0;
   }
     // Event of dinner cover image
   brunchcoverimage(event:any){
-    if(event.target.files[0].size>2097152 ||event.target.files[0].type=='jpg' || event.target.files[0].type=='jpeg' || event.target.files[0].type=='png' ){
+    if(event.target.files[0].size>2097152){
       this.myFunction_file_Size_error();
       console.log("asdasd");
       this.common_break_menu=document.getElementById('mydinnercoverfile');
@@ -7665,7 +7663,7 @@ this.storevalue.length=0;
     // Event of brunch cover image
   dinnerchangecoverimage(event:any){
     // dinnersectionimage:any;
-    if(event.target.files[0].size>2097152 ||event.target.files[0].type=='jpg' || event.target.files[0].type=='jpeg' || event.target.files[0].type=='png' ){
+    if(event.target.files[0].size>2097152  ){
       this.myFunction_file_Size_error();
       console.log("asdasd");
       this.common_break_menu=document.getElementById('mybrunchcoverfile');
@@ -9184,10 +9182,37 @@ click_it(e:any){
   this.common_for_all=document.getElementById('id01');
   this.common_for_all.style.display='none';
     this.valu = true;
+    // console.log('encoede::' +encodeURIComponent(this.croppedImage));
+    
     if(e=='breakfast_cover'){
-    this.img_cover=this.croppedImage;
+      // console.log({crop_img: this.croppedImage});
+      // var dt = this.croppedImage.replace(/^data:image\/png;base64,/, "");
+      // dt += dt.replace('+', ' ');
+      // console.log({dt});
+      // var blob = new Blob([dt], {type: 'image/png'});
+      // var file = new File([blob], this.breakfast_cover_name);
+      // console.log({file});
+
+      const base64 = this.croppedImage;
+      const imageName = this.breakfast_cover_name;
+      const imageBlob = this.dataURItoBlob(base64);
+      const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+      console.log({imageFile, imageBlob});
+      
+      
+      
+    this.img_cover=imageFile;
+    const reader=new FileReader();
+    reader.onload = () => {
+      this.img_cover = reader.result as string;
+ 
+    }
+    reader.readAsDataURL(this.img_cover)
+    // this.img_cover=this.croppedImage;
     this.breakfastcoverimage=this.img_cover;
-   this.Breakfast_cover_preview=false;   
+   this.Breakfast_cover_preview=false; 
+   console.log(this.breakfastcoverimage);
+     
     }
     else if(e=='breakfast_top'){
       this.img_top=this.croppedImage;
@@ -9195,8 +9220,21 @@ click_it(e:any){
       this.Breakfast_top_preview=false;
     }
     else if(e=='lunch_cover'){
-      this.img_launch_cover=this.croppedImage;
-      this.launchcoverimage=this.croppedImage;
+      const base64 = this.croppedImage;
+      const imageName =this.lunch_cover_name;
+      const imageBlob = this.dataURItoBlob(base64);
+      const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+      console.log({imageFile, imageBlob});
+      this.img_launch_cover=imageFile;
+
+      const reader=new FileReader();
+      reader.onload = () => {
+        this.img_launch_cover = reader.result as string;
+   
+      }
+      reader.readAsDataURL(this.img_launch_cover)
+      
+      this.launchcoverimage=this.img_launch_cover;
       this.Launch_cover_preview=false;
     }
     else if(e=='lunch_top'){
@@ -9206,8 +9244,23 @@ click_it(e:any){
      
     }
     else if(e=='dinner_cover'){
-     this.img_dinner_cover=this.croppedImage;
-     this.branchcoverimage=this.croppedImage;
+
+      const base64 = this.croppedImage;
+      const imageName = this.dinner_cover_name;
+      const imageBlob = this.dataURItoBlob(base64);
+      const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+      console.log({imageFile, imageBlob});
+      this.img_dinner_cover=imageFile;
+
+      const reader=new FileReader();
+      reader.onload = () => {
+        this.img_dinner_cover = reader.result as string;
+   
+      }
+      reader.readAsDataURL( this.img_dinner_cover)
+      
+    //  this.img_dinner_cover=this.croppedImage;
+     this.branchcoverimage= this.img_dinner_cover;
      this.Dinner_cover_preview=false;
     }
     else if(e=='dinner_top'){
@@ -9216,8 +9269,21 @@ click_it(e:any){
      this.Dinner_top_preview=false;
     }
     else if(e=='brunch_cover'){
-      this.img_brunch_cover=this.croppedImage;
-      this.dinnercoverimage=this.croppedImage;
+      const base64 = this.croppedImage;
+      const imageName = this.brunch_cover_name;
+      const imageBlob = this.dataURItoBlob(base64);
+      const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+      console.log({imageFile, imageBlob});
+      this.img_brunch_cover=imageFile;
+
+      const reader=new FileReader();
+      reader.onload = () => {
+        this.img_brunch_cover = reader.result as string;
+   
+      }
+      reader.readAsDataURL(this.img_brunch_cover)
+      // this.img_brunch_cover=this.croppedImage;
+      this.dinnercoverimage=this.img_brunch_cover;
       this.Brunch_cover_preview=false;
     }
     else if(e=='brunch_top'){
@@ -9228,6 +9294,22 @@ click_it(e:any){
     }
 
 }
+
+dataURItoBlob(dataURI:any) {
+  var byteString = atob(dataURI.toString().split(',')[1]);
+
+        //var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        var blob = new Blob([ab], { type: 'image/png' }); //or mimeString if you want
+        return blob;
+}
+
+
 close_it(e:any){
   this.valu=true;
   this.common_for_all=document.getElementById('id01');

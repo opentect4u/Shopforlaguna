@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataserviceService } from '../../service/dataservice.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -12,7 +13,7 @@ export class RegistrationComponent implements OnInit {
   // v = 'test';
   click:any;
   rest:any;
-  constructor(private _data:DataserviceService,private router:Router,public toastr: ToastrManager) { }
+  constructor(private spinner: NgxSpinnerService,private _data:DataserviceService,private router:Router,public toastr: ToastrManager) { }
    regData:any;
    email_data:any;
    invalid_data=true;
@@ -91,7 +92,7 @@ export class RegistrationComponent implements OnInit {
   }
   // function for sending registration data
   regSubmit(v:any){
-   
+   this.spinner.show();
     console.log(v);
     this._data.submit_reg(v).subscribe((dt) => {
       console.log(dt);
@@ -99,6 +100,8 @@ export class RegistrationComponent implements OnInit {
       if(this.regData.suc==1){
         console.log(this.regData.id);
         localStorage.setItem('encoded_data',this.regData.id);
+        this.spinner.hide();
+
       this.router.navigate(['/order',this.regData.id])
       this.rest=atob(this.regData.id);
         this.rest=this.rest.split('/');

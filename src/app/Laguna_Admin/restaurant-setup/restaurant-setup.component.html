@@ -692,7 +692,7 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: pointer;" (click)="get_sec_id1(row.menu_id,row.id,row.section_name,apiurlset+row.section_img)" ></tr>
                       </table>
-                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                  <mat-paginator #MatPaginator1 [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 
                 </div>
 
@@ -810,7 +810,7 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns1;" (click)="update_add_item(row.menu_id,row.section_id,row.item_name,row.id)" style="cursor: pointer;"></tr>
                       </table>
-                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                  <mat-paginator #MatPaginator2 [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
                     
                 </div>
 
@@ -962,7 +962,7 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns2;" (click)="get_sec_id(row.menu_id,row.id,row.section_id,row.item_id,row.item_desc,row.item_price,row.item_note)" style="cursor: pointer;"></tr>
                       </table>
-                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"   showFirstLastButtons  aria-label="Select page of users"></mat-paginator>
+                  <mat-paginator #MatPaginator3 [pageSizeOptions]="[5, 10, 25, 100]"   showFirstLastButtons  aria-label="Select page of users"></mat-paginator>
 
                 </div>
                 <div id="tab7" [hidden]="show_tab!='tab7'" class="tabcontent">

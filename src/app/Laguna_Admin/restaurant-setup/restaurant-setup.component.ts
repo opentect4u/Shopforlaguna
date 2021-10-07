@@ -34,14 +34,14 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   dataSource2= new MatTableDataSource();
 
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('MatPaginator2',{static:true}) MatPaginator2!: MatPaginator;
   // @ViewChild(MatSort) matsort: MatSort;
 
-  @ViewChild(MatPaginator) paginator1!: MatPaginator;
+  @ViewChild('MatPaginator1',{static:true}) MatPaginator1!: MatPaginator;
   // @ViewChild(MatSort) matsort1: MatSort;
 
 
-  @ViewChild(MatPaginator) paginator2!: MatPaginator;
+  @ViewChild('MatPaginator3',{static:true}) MatPaginator3!: MatPaginator;
   // @ViewChild(MatSort) matsort2: MatSort;
   storevalue: any=[];
   specialData:any;
@@ -368,22 +368,22 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   }
   putdata(v:any){
     this.dataSource= new MatTableDataSource(v);
-    this.dataSource.paginator=this.paginator;
+    this.dataSource.paginator=this.MatPaginator1;
     // this.dataSource.sort=this.matsort;
   }
   putdata2(v:any){
     this.dataSource2= new MatTableDataSource(v);
-    this.dataSource2.paginator=this.paginator2;
+    this.dataSource2.paginator=this.MatPaginator3;
     // this.dataSource2.sort=this.matsort2;
   }
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator = this.MatPaginator1;
     // this.dataSource.sort = this.matsort;
 
-    this.dataSource1.paginator = this.paginator1
+    this.dataSource1.paginator = this.MatPaginator2
     // this.dataSource1.sort = this.matsort1;
 
-    this.dataSource2.paginator = this.paginator2;
+    this.dataSource2.paginator = this.MatPaginator3;
     // this.dataSource2.sort = this.matsort2;
   }
   send_about_us(v:any){
@@ -710,7 +710,7 @@ else{
   }
   putdata1(v:any){
     this.dataSource1= new MatTableDataSource(v);
-    this.dataSource1.paginator=this.paginator1;
+    this.dataSource1.paginator=this.MatPaginator2;
     // this.dataSource1.sort=this.matsort1;
   }
   get_item_select1(v:any){
@@ -1070,6 +1070,7 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
   //retrieve section image
   get_sec_img(v:any){
   //  alert(v);
+  this.m_id=v;
   this.radid=v;
   this.admin_data.get_sec_url(v,this.r_id).subscribe(data=>{console.log(data)
     this.secData=data;
@@ -1519,6 +1520,8 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
  applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
+  this.dataSource1.filter = filterValue.trim().toLowerCase();
+  this.dataSource2.filter = filterValue.trim().toLowerCase();
 
   if (this.dataSource.paginator) {
     this.dataSource.paginator.firstPage();
@@ -1792,6 +1795,7 @@ reload_section(){
   this.concatdatalength=0;
   this.rad=document.getElementById('b'+this.m_id);
   console.log(this.rad)
+  if(this.rad)
   this.rad.checked=false;
   this.pp=document.getElementById('secval');
   this.pp.value='';

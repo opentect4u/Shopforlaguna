@@ -244,28 +244,37 @@ export class OrderPageComponent implements OnInit {
      if(this.catch_selected_order.msg[0].event_calendar=='Y'){
      this.entertainment=document.getElementById('option2a');
      this.entertainment.checked=true;
+     this.op2='Y';
 
      }
      else{
       this.entertainment=document.getElementById('option2a');
       this.entertainment.checked=false;
+     this.op2='N';
+
      }
      if(this.catch_selected_order.msg[0].birth_calendar_flag=='Y'){
       this.birthday=document.getElementById('option1a');
       this.birthday.checked=true;
+      this.op1='Y';
      }
     else{
       this.birthday=document.getElementById('option1a');
       this.birthday.checked=false;
+      this.op1='N';
+
     }
+    
      if(this.catch_selected_order.msg[0].package_id==1){
       console.log("package1");
-      
+   this.pkg=this.catch_selected_order.msg[0].package_id;
        this.standard=true;
        this.enable_next=false;
      }
      if(this.catch_selected_order.msg[0].package_id==2){
       console.log("package2");
+      this.pkg=this.catch_selected_order.msg[0].package_id;
+
 
       this.standardplus=true;
       this.enable_next=false;
@@ -274,6 +283,7 @@ export class OrderPageComponent implements OnInit {
      }
      if(this.catch_selected_order.msg[0].package_id==3){
       console.log("package3");
+      this.pkg=this.catch_selected_order.msg[0].package_id;
 
       this.premium=true;
       this.enable_next=false;
@@ -281,9 +291,13 @@ export class OrderPageComponent implements OnInit {
 
      }
     this.Tabletop_Sign_Holder=this.catch_selected_order.msg[0].table_top_6;
+     this.tbl=this.Tabletop_Sign_Holder;
     this.Wall_Mount_Sign_Holder1=this.catch_selected_order.msg[0].table_top_7;
-    this.Wall_Mount_Sign_Holder2=this.catch_selected_order.msg[0].table_top_8;
+    this.wall=this.Wall_Mount_Sign_Holder1
+    this.Wall_Mount_Sign_Holder2=this.catch_selected_order.msg[0].table_top_8; 
+    this.wall2=this.Wall_Mount_Sign_Holder2;
     this.Window_Clings=this.catch_selected_order.msg[0].window_cling_9;
+    this.self= this.Window_Clings;
      }
    })
           

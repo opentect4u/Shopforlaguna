@@ -57,12 +57,6 @@ export class PaymentPageComponent implements OnInit {
         localStorage.setItem('Restaurant_id',this.success.res.id);
         localStorage.setItem('Restaurant_email',this.success.res.email);
         localStorage.setItem('Restaurant_name',this.success.res.restaurant_name);
-
-    
-
-
-     
-      
        this.myFunction();
        setTimeout(() => {
         this.router.navigate(['/menu_setup']);
