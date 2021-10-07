@@ -41,7 +41,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
   value_background=true;
  value_text=true;
  color_font=true;
-  
+
   valid_aboutus:any;
   disabled_about:boolean=true;;
   notice:any
@@ -88,25 +88,25 @@ export class MenudataComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
 
- 
-   
+
+
     this.lagunaserve.get_menu_on_choice(this.res_id).subscribe(data=>{
       console.log(data);
       this.notice_select=data;
-    
+
       this.notice_select=this.notice_select.msg;
-      })    
-    
+      })
+
    this.lagunaserve.get_special(this.res_id,null).subscribe(data=>{
      console.log(data);
      this.notic=data;
      this.notify=this.notic.msg[0].menu_id;
      console.log( this.notify);
-     
+
      for(let i=0;i<this.notic.msg.length;i++){
        this.noticeme=1;
       if(this.notify==this.notic.msg[i].menu_id){
-     
+
        if(this.notic.msg[i].notice_flag=='Y'){ console.log("ftyf");
          this.notice_check=document.getElementById('noticechecked');
          this.notice_check.checked=true;
@@ -120,7 +120,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
         this.notice_flag='N';
 
        }
-      
+
        this.position_id=this.notic.msg[i].position_id;
        this.position=this.position_id;
        if(this.position_id!=''){
@@ -142,7 +142,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
        }
        else{
         this.value_text=true;
-         
+
        }
        this.font_color=this.notic.msg[i].font_color;
        if(this.font_color!=''){
@@ -157,13 +157,13 @@ export class MenudataComponent implements OnInit, AfterViewInit{
           }
           else{
             this.value_background=true;
-          
+
           }
        }
       else{}
    }
-       
-    
+
+
    })
 
      this.lagunaserve.get_about_us(this.res_id).subscribe(data=>{
@@ -185,7 +185,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
          this.t1='';
          this.v=0;
 
-         
+
          }
        }
        //For Checking approval flag is on or not
@@ -194,14 +194,14 @@ export class MenudataComponent implements OnInit, AfterViewInit{
               this.check=data;
               if(this.check.msg[0].approval_flag=='U'){
                 this.show_toast=true;
-               
+
               }
               else{
                 // this.toastr.warningToastr('Set up mode is on , you can not update or insert','Alert!!',{
                 //   dismiss:'click',
                 //    maxShown:'1',
                 //    toastTimeout:'5000'
-   
+
 
                 // })
                 this.show_toast=false;
@@ -209,19 +209,20 @@ export class MenudataComponent implements OnInit, AfterViewInit{
                 this.disabled_about=true;
                 this.color_font=true;
                 this.value_position=true;
-               
+
               }
             })
-          
+
      })
-  
+
     this.aboutus=document.getElementById('defaultOpen');
     this.aboutus.className='active';
 
     this.aboutus.style.background='#00477e';
     this.aboutus.style.color='white';
 
-  
+
+
   }
   openCity(e:any){
     if(e=='aboutUs'){
@@ -276,8 +277,8 @@ export class MenudataComponent implements OnInit, AfterViewInit{
     this.notice.style.background='#f1f1f1';
     this.notice.style.color='black';
      }
-   }  
-   
+   }
+
 }
 nexttab(e:any,e1:any){
   console.log(this.v)
@@ -293,7 +294,7 @@ nexttab(e:any,e1:any){
          this.success=data;
          if(this.success.suc==1){
           this.myFunction_update();
-         
+
       }
       else{
 
@@ -302,7 +303,7 @@ nexttab(e:any,e1:any){
 
   }
   else{
- 
+
    if(e=='notices'){
     this.v=1;
     this.abut=false;
@@ -315,34 +316,34 @@ nexttab(e:any,e1:any){
          console.log(data);
          this.success=data;
          if(this.success.suc==1){
-          this.myFunction();
-         
+          // this.myFunction();
+
       }
       else{
 
       }
        })
 
-      
+
     }
-       
+
   }
     // For Change the color of active tab
-     
-   
+
+
     this.aboutus=document.getElementById('defaultOpen1');
     this.aboutus.style.background='#00477e';
     this.aboutus.style.color='white';
     this.notice=document.getElementById('defaultOpen');
     this.notice.style.background='#f1f1f1';
     this.notice.style.color='black';
-    
+
 }
 nexttab1(e:any,v7:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
   console.log(v7,this.position,v1,v3,v5,v6,this.res_id,this.notice_flag);
-  
+
   if(this.noticeme==1){
-  
+
 
       this.abut=false;
       this.not=false;
@@ -355,14 +356,14 @@ nexttab1(e:any,v7:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
               //  this.myFunction();
               // this.router.navigate(['/thankyou'])
               this.myFunction_update();
-  
+
               }
               else{
-  
+
               }
-          
+
       })
-   
+
   }
   else{
  if(e=='about'){
@@ -375,7 +376,7 @@ nexttab1(e:any,v7:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
         this.success=data
         if(this.success.suc==1){
           console.log("adadas");
-          
+
              this.myFunction();
             // this.router.navigate(['/thankyou'])
 
@@ -383,10 +384,10 @@ nexttab1(e:any,v7:any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any){
             else{
 
             }
-        
+
     })
   }
-  
+
   }
 }
 pickup_place(event:any){
@@ -395,11 +396,11 @@ pickup_place(event:any){
   console.log(this.menu)
  if(this.menu!=''){
    this.value_menu=false;
-   
- 
+
+
  this.lagunaserve.get_special(this.res_id,this.menu).subscribe(data=>{
    console.log(data);
-   
+
   this.notic=data;
   if(this.notic.msg.length > 0)
   {for(let i=0;i<this.notic.msg.length;i++){
@@ -421,7 +422,7 @@ pickup_place(event:any){
        this.notice_flag='N';
 
       }
-     
+
       this.position_id=this.notic.msg[i].position_id;
       this.position=this.position_id;
       if(this.position_id!=''){
@@ -437,7 +438,7 @@ pickup_place(event:any){
         this.Header_title.value= this.header_title;
       }
       else{
-       
+
         this.value_Headertitle=true;
       }
       this.notice_content=this.notic.msg[i].notice_content;
@@ -449,7 +450,7 @@ pickup_place(event:any){
       else{
 
        this.value_text=true;
-        
+
       }
       this.font_color=this.notic.msg[i].font_color;
       if(this.font_color!=''){
@@ -472,7 +473,7 @@ pickup_place(event:any){
          }
          else{
            this.value_background=true;
-         
+
          }
     }
     else{
@@ -499,13 +500,13 @@ pickup_place(event:any){
       this.color_Back=document.getElementById('colorPicker2');
      this.color_Back.value='';
      this.value_font=true;
-    
-      
+
+
     }
   }}else{
     console.log('Elaseeesss');
     console.log("haisdaids");
-      
+
       this.notice_check=document.getElementById('noticechecked');
       this.notice_check.checked=true;
       this.color_font=false;
@@ -528,8 +529,8 @@ pickup_place(event:any){
       this.color_Back=document.getElementById('colorPicker2');
      this.color_Back.value='';
      this.value_font=true;
-    
-    
+
+
   }
  })
 }
@@ -571,11 +572,11 @@ checknotice(event:any){
   if(event.target.checked){
     this.notice_flag='Y';
     this.color_font=false;
- 
+
   }
   else
   {
-  
+
     this.notice_flag='N';
     this.color_font=true;
   }
@@ -590,7 +591,7 @@ myFunction() {
 
   // After 3 seconds, remove the show class from DIV
   setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
-} 
+}
 
 
 myFunction_update() {
@@ -609,36 +610,36 @@ prevent_null(event:any){
   this.role=event.target.value.length;
 
     if(event.target.id=='about'){
-       
- 
+
+
       if(this.val == ''){
         console.log("adsasda1")
         this.disabled_about=true;
       }
-      
+
       else{
         console.log("adsasda")
         this.disabled_about=false;
       }
- 
- 
+
+
     }
 else {
      this.disabld=true;
-      
+
 }
 }
 checkvalidity(event:any){
   console.log(event);
- 
+
   if(event.target.id=='headTitle'){
-    
+
     if(event.target.value!=''){
       this.value_Headertitle=false;
       }
       else{
       this.value_Headertitle=true;
-        
+
       }
   }
   else if(event.target.id=='box'){
@@ -647,7 +648,7 @@ checkvalidity(event:any){
       }
       else{
       this.value_font=true;
-        
+
       }
   }
   else if(event.target.id=='box2'){
@@ -656,7 +657,7 @@ checkvalidity(event:any){
       }
       else{
       this.value_background=true;
-        
+
       }
   }
   else if(event.target.id=='spclMore'){
@@ -665,10 +666,10 @@ checkvalidity(event:any){
       }
       else{
       this.value_text=true;
-        
+
       }
   }
- 
+
 }
 see_validation(){
   if(this.color_font==true){
@@ -689,7 +690,7 @@ myFunction_foralert() {
 
   // After 3 seconds, remove the show class from DIV
   setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 5000);
-} 
+}
 //For going to thankyou page
 go_to_thankyou_page(){
   this.router.navigate(['/thankyou'])

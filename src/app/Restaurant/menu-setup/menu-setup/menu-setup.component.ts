@@ -32,13 +32,13 @@ export class MenuSetupComponent implements OnInit {
   Dinner_top_preview:boolean=true;
   Dinner_menu_preview:boolean=true;
   Dinner_section_preview:boolean=true;
- 
+
   Brunch_check:boolean=false;
   Brunch_cover_preview:boolean=true;
   Brunch_top_preview:boolean=true;
   Brunch_menu_preview:boolean=true;
   Brunch_section_preview:boolean=true;
- 
+
 
 
   Show:boolean=true;
@@ -174,7 +174,7 @@ export class MenuSetupComponent implements OnInit {
   sat:any=0;
   sun:any=0;
   every:any;
-  
+
   mon_special:any=0;;
   tue_special:any=0;
   wed_special:any=0;
@@ -194,7 +194,7 @@ export class MenuSetupComponent implements OnInit {
   fri_launch:any=0;
   sat_launch:any=0;
   sun_launch:any=0;
-  
+
   // For Tokyo
   mon_dinner:any=0;;
   tue_dinner:any=0;
@@ -203,7 +203,7 @@ export class MenuSetupComponent implements OnInit {
   fri_dinner:any=0;
   sat_dinner:any=0;
   sun_dinner:any=0;
-  
+
   // For Laguna
   mon_brunch:any=0;;
   tue_brunch:any=0;
@@ -230,14 +230,14 @@ export class MenuSetupComponent implements OnInit {
 
    brunch_start:any;
    brunch_end:any;
-  
+
   breakfastcoverimage: any;
   breakfasttopimage: any;
   breakfastmenuimage: any;
-  breakfastsectionimage:any=[]; 
+  breakfastsectionimage:any=[];
 
   v:any=0;
- 
+
   launchcoverimage: any;
   launchtopimage: any;
   launchmenuimage: any=[];
@@ -269,7 +269,7 @@ export class MenuSetupComponent implements OnInit {
   img_dinner_top:any;
   img_dinner_menu:any=[];
   img_dinner_section:any=[];
-  
+
   img_brunch_cover:any;
   img_brunch_top:any;
   img_brunch_menu:any=[];
@@ -334,7 +334,7 @@ enable_exclusive:boolean=true;
   dinner_Top:boolean=true;
   break_Top:boolean=true;
   brunch_Top:boolean=true;
-   
+
   Special_menu:any;
   special_url:any=''
   category_name:any=[];
@@ -344,7 +344,7 @@ enable_exclusive:boolean=true;
   special_check:any;
   special_section_preview:boolean=true;
   special_disabled:boolean=false;
-  enable_days:boolean=true; 
+  enable_days:boolean=true;
   special:any=5;
   exclusive:any;
   week:any;
@@ -354,7 +354,7 @@ enable_exclusive:boolean=true;
   dinner_Special=0;
   brunch_Special=0;
   date_time:any;
-  constructor(public toastr: ToastrManager,private spinner: NgxSpinnerService,private _data: DataserviceService,private lagunaserve:LagunaserviceService,private http: HttpClient) { 
+  constructor(public toastr: ToastrManager,private spinner: NgxSpinnerService,private _data: DataserviceService,private lagunaserve:LagunaserviceService,private http: HttpClient) {
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 
@@ -371,16 +371,16 @@ enable_exclusive:boolean=true;
     this.lagunaserve.getspecial_image(null).subscribe(data=>{
       console.log(data);
       this.stock_img=data;
-      
+
       this.stock_img=this.stock_img.msg;
       console.log(this.stock_img);
-      
+
     })
-  
+
     if("value" in localStorage){
       this.v=localStorage.getItem('value');
   } else {
-    
+
    }
    this.arr_brak_check.length=0;
     this.brunch_start='';
@@ -391,29 +391,29 @@ enable_exclusive:boolean=true;
       this.cove_top=data;
       // if(this.cove_top.length!=0){
 
-      
+
       for(let i=0;i<this.cove_top.menu_dt.length;i++){
         // console.log(this.cove_top.menu_dt[i].menu_id);
         if(this.cove_top.menu_dt.length!=0){
           if(this.cove_top.menu_dt[i].menu_id==1){
-                
+
             console.log("sadasda1");
-             
+
                 //  this.break_cover=this.cove_top.msg[i].cover_page_url;
                 //  this.break_top=this.cove_top.msg[i].top_img_url;
                 if(this.cove_top.menu_dt[i].menu_img!=''){
                   this.Breakfast_menu_preview=false
                  this.img_menu_break.push({id: this.cove_top.menu_dt[i].id, img_path: this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
                     this.multipleImages.push(this.cove_top.menu_dt[i].menu_img);
-                    
+
                 }
 
-                
+
                  this.break_menu=this.cove_top.menu_dt[i].menu_url;
-              
+
                  console.log(this.break_menu);
-                
-             
+
+
                if(this.cove_top.menu_dt[i].active_flag=='Y'){
                   this.check_break=document.getElementById('bkmenu');
                   this.check_break.checked=true;
@@ -434,14 +434,14 @@ enable_exclusive:boolean=true;
                 this.Launch_menu_preview=false
                 this.launchmenuimage.push({id:this.cove_top.menu_dt[i].id,img_path:this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
                 this.img_launch_menu.push({id:this.cove_top.menu_dt[i].id,img_path:this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
-                  
+
               }
                 // this.launch_cover=this.cove_top.msg[i].cover_page_url;
                 // this.launch_top=this.cove_top.msg[i].top_img_url;
                 this.launch_menu=this.cove_top.menu_dt[i].menu_url;
                 // console.log(this.launch_top,this.launch_cover);
-         
-            
+
+
               if(this.cove_top.menu_dt[i].active_flag=='Y'){
                 this.check_launch=document.getElementById('paris');
                 this.check_launch.checked=true;
@@ -458,12 +458,12 @@ enable_exclusive:boolean=true;
            }
            else if(this.cove_top.menu_dt[i].menu_id==3){
             console.log("sadasda2");
-            
+
             if(this.cove_top.menu_dt[i].menu_img!=''){
               this.Dinner_menu_preview=false
               this.branchmenuimage.push({id:this.cove_top.menu_dt[i].id,img_path:this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
               this.img_dinner_menu.push({id:this.cove_top.menu_dt[i].id,img_path:this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
-                
+
             }
               // this.dinner_cover=this.cove_top.menu_dt[i].cover_page_url;
               // this.dinner_top=this.cove_top.menu_dt[i].top_img_url;
@@ -486,14 +486,14 @@ enable_exclusive:boolean=true;
 
             console.log("sadasda4");
 
-             
+
             if(this.cove_top.menu_dt[i].menu_img!=''){
               this.Brunch_menu_preview=false
               this.dinnermenuimage.push({id:this.cove_top.menu_dt[i].id,img_path:this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
               this.img_brunch_menu.push({id:this.cove_top.menu_dt[i].id,img_path:this.img_showing+"/"+this.cove_top.menu_dt[i].menu_img});
-                
+
             }
-          
+
               this.brunch_menu=this.cove_top.menu_dt[i].menu_url;
 
             if(this.cove_top.menu_dt[i].active_flag=='Y'){
@@ -511,31 +511,31 @@ enable_exclusive:boolean=true;
            }
          }
         }
-       
+
 
 
       }
       for(let i=0;i<this.cove_top.oth_dt.length;i++){
         console.log(this.cove_top.oth_dt[i].active_flag);
-        
+
         if(this.cove_top.oth_dt.length!=0){
           if(this.cove_top.oth_dt[i].menu_id==1){
-                
+
             console.log("sadasda1");
-             
+
                  this.break_cover=this.cove_top.oth_dt[i].cover_page_url;
                  this.break_top=this.cove_top.oth_dt[i].top_img_url;
-                
+
 
                if(this.cove_top.oth_dt[i].cover_page_img!=''){
-      
+
 
                 this.break_Cover=false;
                  this.Breakfast_cover_preview=false;
                  this.breakfastcoverimage=this.img_showing +'/' +this.cove_top.oth_dt[i].cover_page_img;
                  this.breakfast_cover_name=this.cove_top.oth_dt[i].cover_page_img;
                  console.log(this.breakfastcoverimage);
-               
+
                  this.img_cover =this.breakfastcoverimage;
                 }
                 if(this.cove_top.oth_dt[i].top_image_img!=''){
@@ -546,12 +546,12 @@ enable_exclusive:boolean=true;
                  this.img_top=this.breakfasttopimage;
                  this.breakfast_top_name=this.cove_top.oth_dt[i].top_image_img;
                }
-               
-                 
+
+
                 //  this.break_menu=this.cove_top.menu_dt[i].menu_url;
-                
-                
-             
+
+
+
                if(this.cove_top.oth_dt[i].active_flag=='Y'){
                   this.check_break=document.getElementById('bkmenu');
                   this.check_break.checked=true;
@@ -566,7 +566,7 @@ enable_exclusive:boolean=true;
                }
             }
             else if(this.cove_top.oth_dt[i].menu_id==2){
-             
+
               console.log("sadasda3");
               if(this.cove_top.oth_dt[i].top_image_img!=''){
                 this.img_launch_top=this.img_showing +'/' +this.cove_top.oth_dt[i].top_image_img;
@@ -589,9 +589,9 @@ enable_exclusive:boolean=true;
               }
                 this.launch_cover=this.cove_top.oth_dt[i].cover_page_url;
                 this.launch_top=this.cove_top.oth_dt[i].top_img_url;
-               
 
-            
+
+
               if(this.cove_top.oth_dt[i].active_flag=='Y'){
                 this.check_launch=document.getElementById('paris');
                 this.check_launch.checked=true;
@@ -610,10 +610,13 @@ enable_exclusive:boolean=true;
             console.log("sadasda2");
 
 
-         
+
             if(this.cove_top.oth_dt[i].top_image_img!=''){
               this.img_dinner_top=this.img_showing +'/' +this.cove_top.oth_dt[i].top_image_img;
-              this.branchtopimage= this.img_launch_top;
+              // this.branchtopimage= this.img_launch_top;
+              this.branchtopimage=this.img_dinner_top;
+
+
               this.dinner_Top=false;
               this.Dinner_top_preview=false;
               this.dinner_top_name=this.cove_top.oth_dt[i].top_image_img;
@@ -623,7 +626,7 @@ enable_exclusive:boolean=true;
 
             if(this.cove_top.oth_dt[i].cover_page_img!=''){
               this.img_dinner_cover=this.img_showing +'/' +this.cove_top.oth_dt[i].cover_page_img;
-              this.branchcoverimage=  this.img_dinner_cover;
+              this.branchcoverimage=this.img_dinner_cover;
               this.dinner_Cover=false;
 
               this.Dinner_cover_preview=false;
@@ -635,7 +638,7 @@ enable_exclusive:boolean=true;
               // this.dinner_menu=this.cove_top.oth_dt[i].menu_url;
             if(this.cove_top.oth_dt[i].active_flag=='Y'){
               console.log('tokyo');
-              
+
               this.check_dinner=document.getElementById('tokyo');
               this.check_dinner.checked=true;
               this.brunch_check='Y';
@@ -648,18 +651,18 @@ enable_exclusive:boolean=true;
             this.check_dinner.checked=false;
             this.brunch_check='N';
             this.d_url=true;
-            
+
 
            }
            }
            else if(this.cove_top.oth_dt[i].menu_id==4){
 
             console.log("sadasda4");
-           
+
 
             if(this.cove_top.oth_dt[i].top_image_img!=''){
               this.img_brunch_top=this.img_showing +'/' +this.cove_top.oth_dt[i].top_image_img;
-              this.dinnertopimage= this.img_launch_top;
+              this.dinnertopimage= this.img_brunch_top;
               this.brunch_Top=false;
 
               this.Brunch_top_preview=false;
@@ -668,17 +671,17 @@ enable_exclusive:boolean=true;
 
             if(this.cove_top.oth_dt[i].cover_page_img!=''){
               this.img_brunch_cover=this.img_showing +'/' +this.cove_top.oth_dt[i].cover_page_img;
-              this.dinnercoverimage= this.img_dinner_cover;
+              this.dinnercoverimage= this.img_brunch_cover;
               this.brunch_Cover=false;
               this.Brunch_cover_preview=false;
               this.brunch_cover_name=this.cove_top.oth_dt[i].cover_page_img;
-         
+
 
             }
-            
+
               this.brunch_cover=this.cove_top.oth_dt[i].cover_page_url;
               this.brunch_top=this.cove_top.oth_dt[i].top_img_url;
-              
+
              if(this.cove_top.oth_dt[i].active_flag=='Y'){
               this.check_brunch=document.getElementById('laguna');
               this.check_brunch.checked=true;
@@ -694,13 +697,13 @@ enable_exclusive:boolean=true;
            }
          }
 
-        
+
         }
-      }  
-   
+      }
+
       console.log( this.multipleImages);
       console.log( this.img_menu_break);
-    
+
     })
     //For breakfast section url
     this.lagunaserve.get_sec_url('1',this.resid).subscribe(data=>{
@@ -716,11 +719,11 @@ enable_exclusive:boolean=true;
             this.breakfastsectionimage.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
           }
 
-           
+
 
          }
       }
-      
+
 
     })
     //For launch section url
@@ -729,7 +732,7 @@ enable_exclusive:boolean=true;
       this.break_sec=data
       if(this.break_sec.msg.length!=0){
 
-      
+
       for(let i=0;i<this.break_sec.msg.length;i++)
       {
            if(this.break_sec.msg[i].menu_id==2){
@@ -739,17 +742,17 @@ enable_exclusive:boolean=true;
                  this.img_launch_section.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
                  this. launchsectionimage.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
 
-                
+
                }
-         
+
           if(this.break_sec.msg[i].sec_url!=''){
           this.launch_sec=this.break_sec.msg[i].sec_url
          }
          else{
           this.launch_sec="";
-           
+
          }
-        } 
+        }
       }
     }
 
@@ -761,14 +764,14 @@ enable_exclusive:boolean=true;
       if(this.break_sec.msg.length!=0){
       for(let i=0;i<this.break_sec.msg.length;i++)
       {
-        
+
         if(this.break_sec.msg[i].sec_img!='')
                {
                 this.Dinner_section_preview=false;
                  this.img_dinner_section.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
                  this. branchsectionimage.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
 
-                
+
                }
         if(this.break_sec.msg[i].sec_url!=''){
           this.dinner_sec=this.break_sec.msg[i].sec_url
@@ -787,7 +790,7 @@ enable_exclusive:boolean=true;
       this.break_sec=data
       if(this.break_sec.msg.length!=0){
 
-        
+
       for(let i=0;i<this.break_sec.msg.length;i++)
       {
         if(this.break_sec.msg[i].sec_url!=''){
@@ -797,7 +800,7 @@ enable_exclusive:boolean=true;
                  this.img_brunch_section.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
                  this.dinnersectionimage.push({id:this.break_sec.msg[i].id,img_path:this.img_showing+ '/' +this.break_sec.msg[i].sec_img});
 
-                
+
                }
           this.brunch_sec=this.break_sec.msg[i].sec_url
          }
@@ -824,7 +827,7 @@ enable_exclusive:boolean=true;
     this.PACK.style.background = '#00477e;';
     this.PACK.style.color = 'white';
      }
-   
+
      if(localStorage.getItem('No_of_menu')=='O'){
        //If Select only breakfast
       if(breakfast==''){
@@ -833,7 +836,7 @@ enable_exclusive:boolean=true;
           console.log(data);
         if(this.arr_brak_check.msg.length!=0){
 
-        
+
           this.breakfast_start=this.arr_brak_check.msg[0].start_time;
           this.breakfast_end=this.arr_brak_check.msg[0].end_time;
           this.brunch_start= this.breakfast_start;
@@ -844,37 +847,37 @@ enable_exclusive:boolean=true;
               this.mon_check=document.getElementById('vehicle2');
               this.mon_check.checked=true;
               this.mon=2;
-             
+
             }
             if(this.arr_brak_check.msg[i].month_day==3){
               this.tue_check=document.getElementById('vehicle3');
               this.tue_check.checked=true;
               this.tue=3;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==4){
               this.wed_check=document.getElementById('vehicle4');
               this.wed_check.checked=true;
               this.wed=4;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==5){
               this.thu_check=document.getElementById('vehicle5');
               this.thu_check.checked=true;
               this.thu=5;
-              
+
             }
              if(this.arr_brak_check.msg[i].month_day==6){
               this.fri_check=document.getElementById('vehicle6');
               this.fri_check.checked=true;
               this.fri=6;
-              
+
             }
           if(this.arr_brak_check.msg[i].month_day==7){
               this.sat_check=document.getElementById('vehicle7');
               this.sat_check.checked=true;
               this.sat=7;
-              
+
             }
              if(this.arr_brak_check.msg[i].month_day==8){
               this.sun_check=document.getElementById('vehicle8');
@@ -915,7 +918,7 @@ enable_exclusive:boolean=true;
         this.lagunadefault=true;
         this.tokyodefault=true;
         this.parisdefault=true;
-    
+
         this.coc=document.getElementById('defaultOpen');
         this.coc.className='active';
         this.coc.style.background = '#00477e;';
@@ -929,7 +932,7 @@ enable_exclusive:boolean=true;
 
         this.tab4=true;
 
-        
+
       }
        //If Select only launch
 
@@ -946,37 +949,37 @@ enable_exclusive:boolean=true;
               this.mon_check=document.getElementById('vehicle22');
               this.mon_check.checked=true;
               this.mon_launch=2;
-             
+
             }
             if(this.arr_brak_check.msg[i].month_day==3){
               this.tue_check=document.getElementById('vehicle32');
               this.tue_check.checked=true;
               this.tue_launch=3;
-             
+
             }
             if(this.arr_brak_check.msg[i].month_day==4){
               this.wed_check=document.getElementById('vehicle42');
               this.wed_check.checked=true;
               this.wed_launch=4;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==5){
               this.thu_check=document.getElementById('vehicle52');
               this.thu_check.checked=true;
               this.thu_launch=5;
-              
+
             }
             if(this.arr_brak_check.msg[i].month_day==6){
               this.fri_check=document.getElementById('vehicle62');
               this.fri_check.checked=true;
               this.fri_launch=6;
-              
+
             }
           if(this.arr_brak_check.msg[i].month_day==7){
               this.sat_check=document.getElementById('vehicle72');
               this.sat_check.checked=true;
               this.sat_launch=7;
-              
+
             }
            if(this.arr_brak_check.msg[i].month_day==8){
               this.sun_check=document.getElementById('vehicle82');
@@ -1019,9 +1022,9 @@ enable_exclusive:boolean=true;
         this.coc.style.color = 'white';
         this.londondefault=true;
         this.lagunadefault=true;
-  
+
         this.tokyodefault=true;
-  
+
         this.parisdefault=false;
         this.tab1=true;
         this.tab2=false;
@@ -1046,37 +1049,37 @@ enable_exclusive:boolean=true;
               this.mon_check=document.getElementById('vehicle23');
               this.mon_check.checked=true;
               this.mon_dinner=2;
-             
+
             }
           if(this.arr_brak_check.msg[i].month_day==3){
               this.tue_check=document.getElementById('vehicle33');
               this.tue_check.checked=true;
               this.tue_dinner=3;
-             
+
             }
           if(this.arr_brak_check.msg[i].month_day==4){
               this.wed_check=document.getElementById('vehicle43');
               this.wed_check.checked=true;
               this.wed_dinner=4;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==5){
               this.thu_check=document.getElementById('vehicle53');
               this.thu_check.checked=true;
               this.thu_dinner=5;
-              
+
             }
          if(this.arr_brak_check.msg[i].month_day==6){
               this.fri_check=document.getElementById('vehicle63');
               this.fri_check.checked=true;
               this.fri_dinner=6;
-              
+
             }
             if(this.arr_brak_check.msg[i].month_day==7){
               this.sat_check=document.getElementById('vehicle73');
               this.sat_check.checked=true;
               this.sat_dinner=7;
-              
+
             }
          if(this.arr_brak_check.msg[i].month_day==8){
               this.sun_check=document.getElementById('vehicle83');
@@ -1143,37 +1146,37 @@ enable_exclusive:boolean=true;
               this.mon_check=document.getElementById('vehicle24');
               this.mon_check.checked=true;
               this.mon_brunch=2;
-             
+
             }
              if(this.arr_brak_check.msg[i].month_day==3){
               this.tue_check=document.getElementById('vehicle34');
               this.tue_check.checked=true;
               this.tue_brunch=3;
-             
+
             }
              if(this.arr_brak_check.msg[i].month_day==4){
               this.wed_check=document.getElementById('vehicle44');
               this.wed_check.checked=true;
               this.wed_brunch=4;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==5){
               this.thu_check=document.getElementById('vehicle54');
               this.thu_check.checked=true;
               this.thu_brunch=5;
-              
+
             }
              if(this.arr_brak_check.msg[i].month_day==6){
               this.fri_check=document.getElementById('vehicle64');
               this.fri_check.checked=true;
               this.fri_brunch=6;
-              
+
             }
             if(this.arr_brak_check.msg[i].month_day==7){
               this.sat_check=document.getElementById('vehicle74');
               this.sat_check.checked=true;
               this.sat_brunch=7;
-              
+
             }
            if(this.arr_brak_check.msg[i].month_day==8){
               this.sun_check=document.getElementById('vehicle84');
@@ -1228,7 +1231,7 @@ enable_exclusive:boolean=true;
       }
      }
     if(localStorage.getItem('No_of_menu')=='T'){
-      
+
     //If Select only breakfast
       if(breakfast==''){
         console.log("sdas");
@@ -1237,7 +1240,7 @@ enable_exclusive:boolean=true;
           console.log(data);
         if(this.arr_brak_check.msg.length!=0){
 
-        
+
           this.breakfast_start=this.arr_brak_check.msg[0].start_time;
           this.breakfast_end=this.arr_brak_check.msg[0].end_time;
           this.brunch_start= this.breakfast_start;
@@ -1248,37 +1251,37 @@ enable_exclusive:boolean=true;
               this.mon_check=document.getElementById('vehicle2');
               this.mon_check.checked=true;
               this.mon=2;
-             
+
             }
             if(this.arr_brak_check.msg[i].month_day==3){
               this.tue_check=document.getElementById('vehicle3');
               this.tue_check.checked=true;
               this.tue=3;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==4){
               this.wed_check=document.getElementById('vehicle4');
               this.wed_check.checked=true;
               this.wed=4;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==5){
               this.thu_check=document.getElementById('vehicle5');
               this.thu_check.checked=true;
               this.thu=5;
-              
+
             }
              if(this.arr_brak_check.msg[i].month_day==6){
               this.fri_check=document.getElementById('vehicle6');
               this.fri_check.checked=true;
               this.fri=6;
-              
+
             }
           if(this.arr_brak_check.msg[i].month_day==7){
               this.sat_check=document.getElementById('vehicle7');
               this.sat_check.checked=true;
               this.sat=7;
-              
+
             }
              if(this.arr_brak_check.msg[i].month_day==8){
               this.sun_check=document.getElementById('vehicle8');
@@ -1319,7 +1322,7 @@ enable_exclusive:boolean=true;
         // this.parisdefault=true;
         this.coc=document.getElementById('defaultOpen');
         this.coc.className='active';
-       
+
         this.coc.style.background = '#00477e;';
         this.coc.style.color = 'white';
         this.design=document.getElementById('London');
@@ -1331,7 +1334,7 @@ enable_exclusive:boolean=true;
 
         this.tab4=true;
 
-        
+
       }
        //If Select only launch
 
@@ -1350,37 +1353,37 @@ enable_exclusive:boolean=true;
               this.mon_check=document.getElementById('vehicle22');
               this.mon_check.checked=true;
               this.mon_launch=2;
-             
+
             }
             if(this.arr_brak_check.msg[i].month_day==3){
               this.tue_check=document.getElementById('vehicle32');
               this.tue_check.checked=true;
               this.tue_launch=3;
-             
+
             }
             if(this.arr_brak_check.msg[i].month_day==4){
               this.wed_check=document.getElementById('vehicle42');
               this.wed_check.checked=true;
               this.wed_launch=4;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==5){
               this.thu_check=document.getElementById('vehicle52');
               this.thu_check.checked=true;
               this.thu_launch=5;
-              
+
             }
             if(this.arr_brak_check.msg[i].month_day==6){
               this.fri_check=document.getElementById('vehicle62');
               this.fri_check.checked=true;
               this.fri_launch=6;
-              
+
             }
           if(this.arr_brak_check.msg[i].month_day==7){
               this.sat_check=document.getElementById('vehicle72');
               this.sat_check.checked=true;
               this.sat_launch=7;
-              
+
             }
            if(this.arr_brak_check.msg[i].month_day==8){
               this.sun_check=document.getElementById('vehicle82');
@@ -1423,9 +1426,9 @@ enable_exclusive:boolean=true;
         this.coc.style.color = 'white';
         // this.londondefault=true;
         // this.lagunadefault=true;
-  
+
         // this.tokyodefault=true;
-  
+
         this.parisdefault=false;
         this.tab1=true;
         this.tab2=false;
@@ -1452,37 +1455,37 @@ enable_exclusive:boolean=true;
               this.mon_check=document.getElementById('vehicle23');
               this.mon_check.checked=true;
               this.mon_dinner=2;
-             
+
             }
           if(this.arr_brak_check.msg[i].month_day==3){
               this.tue_check=document.getElementById('vehicle33');
               this.tue_check.checked=true;
               this.tue_dinner=3;
-             
+
             }
           if(this.arr_brak_check.msg[i].month_day==4){
               this.wed_check=document.getElementById('vehicle43');
               this.wed_check.checked=true;
               this.wed_dinner=4;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==5){
               this.thu_check=document.getElementById('vehicle53');
               this.thu_check.checked=true;
               this.thu_dinner=5;
-              
+
             }
          if(this.arr_brak_check.msg[i].month_day==6){
               this.fri_check=document.getElementById('vehicle63');
               this.fri_check.checked=true;
               this.fri_dinner=6;
-              
+
             }
             if(this.arr_brak_check.msg[i].month_day==7){
               this.sat_check=document.getElementById('vehicle73');
               this.sat_check.checked=true;
               this.sat_dinner=7;
-              
+
             }
          if(this.arr_brak_check.msg[i].month_day==8){
               this.sun_check=document.getElementById('vehicle83');
@@ -1551,37 +1554,37 @@ enable_exclusive:boolean=true;
               this.mon_check=document.getElementById('vehicle24');
               this.mon_check.checked=true;
               this.mon_brunch=2;
-             
+
             }
              if(this.arr_brak_check.msg[i].month_day==3){
               this.tue_check=document.getElementById('vehicle34');
               this.tue_check.checked=true;
               this.tue_brunch=3;
-             
+
             }
              if(this.arr_brak_check.msg[i].month_day==4){
               this.wed_check=document.getElementById('vehicle44');
               this.wed_check.checked=true;
               this.wed_brunch=4;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==5){
               this.thu_check=document.getElementById('vehicle54');
               this.thu_check.checked=true;
               this.thu_brunch=5;
-              
+
             }
              if(this.arr_brak_check.msg[i].month_day==6){
               this.fri_check=document.getElementById('vehicle64');
               this.fri_check.checked=true;
               this.fri_brunch=6;
-              
+
             }
             if(this.arr_brak_check.msg[i].month_day==7){
               this.sat_check=document.getElementById('vehicle74');
               this.sat_check.checked=true;
               this.sat_brunch=7;
-              
+
             }
            if(this.arr_brak_check.msg[i].month_day==8){
               this.sun_check=document.getElementById('vehicle84');
@@ -1636,7 +1639,7 @@ enable_exclusive:boolean=true;
       // else if(this.v==2){}
       //IF select breakfast && launch
     if(breakfast=='' && launch==''){
- 
+
     this.coc=document.getElementById('defaultOpen');
     this.coc.className='active';
     this.coc.style.background = '#00477e;';
@@ -1654,51 +1657,51 @@ enable_exclusive:boolean=true;
 
       this.tab4=true;
     this.lagunaserve.get_set_time('1',this.resid).subscribe((data:any)=>{
-   
+
       this.arr_brak_check=data;
       this.breakfast_start=this.arr_brak_check.msg[0].start_time;
       this.breakfast_end=this.arr_brak_check.msg[0].end_time;
       this.brunch_start= this.breakfast_start;
           this.brunch_end=this.breakfast_end;
 
-      
-      
+
+
       for(let i=0;i<this.arr_brak_check.msg.length;i++){
           if(this.arr_brak_check.msg[i].month_day==2){
             this.mon_check=document.getElementById('vehicle2');
             this.mon_check.checked=true;
             this.mon=2;
-           
+
           }
            if(this.arr_brak_check.msg[i].month_day==3){
             this.tue_check=document.getElementById('vehicle3');
             this.tue_check.checked=true;
             this.tue=3;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==4){
             this.wed_check=document.getElementById('vehicle4');
             this.wed_check.checked=true;
             this.wed=4;
-           
+
           }
          if(this.arr_brak_check.msg[i].month_day==5){
             this.thu_check=document.getElementById('vehicle5');
             this.thu_check.checked=true;
             this.thu=5;
-            
+
           }
           if(this.arr_brak_check.msg[i].month_day==6){
             this.fri_check=document.getElementById('vehicle6');
             this.fri_check.checked=true;
             this.fri=6;
-            
+
           }
          if(this.arr_brak_check.msg[i].month_day==7){
             this.sat_check=document.getElementById('vehicle7');
             this.sat_check.checked=true;
             this.sat=7;
-            
+
           }
          if(this.arr_brak_check.msg[i].month_day==8){
             this.sun_check=document.getElementById('vehicle8');
@@ -1733,19 +1736,19 @@ enable_exclusive:boolean=true;
            }
       }
     })
-    
+
 
     }
       //IF select breakfast && dinner
 
     if(breakfast=='' && dinner==''){
-  
+
       this.lagunaserve.get_set_time('1',this.resid).subscribe(data=>{
         console.log(data);
         this.arr_brak_check=data;
         if(this.arr_brak_check.msg.length!=0){
 
-       
+
         this.breakfast_start=this.arr_brak_check.msg[0].start_time;
         this.breakfast_end=this.arr_brak_check.msg[0].end_time;
         this.brunch_start= this.breakfast_start;
@@ -1756,37 +1759,37 @@ enable_exclusive:boolean=true;
             this.mon_check=document.getElementById('vehicle2');
             this.mon_check.checked=true;
             this.mon=2;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==3){
             this.tue_check=document.getElementById('vehicle3');
             this.tue_check.checked=true;
             this.tue=3;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==4){
             this.wed_check=document.getElementById('vehicle4');
             this.wed_check.checked=true;
             this.wed=4;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==5){
             this.thu_check=document.getElementById('vehicle5');
             this.thu_check.checked=true;
             this.thu=5;
-            
+
           }
         if(this.arr_brak_check.msg[i].month_day==6){
             this.fri_check=document.getElementById('vehicle6');
             this.fri_check.checked=true;
             this.fri=6;
-            
+
           }
           if(this.arr_brak_check.msg[i].month_day==7){
             this.sat_check=document.getElementById('vehicle7');
             this.sat_check.checked=true;
             this.sat=7;
-            
+
           }
           if(this.arr_brak_check.msg[i].month_day==8){
             this.sun_check=document.getElementById('vehicle8');
@@ -1831,7 +1834,7 @@ enable_exclusive:boolean=true;
       this.lagunadefault=true;
       this.tokyodefault=false;
       this.parisdefault=true;
-    
+
       this.tab1=false;
       this.tab2=true;
 
@@ -1839,7 +1842,7 @@ enable_exclusive:boolean=true;
 
       this.tab4=true;
 
-     
+
 
         this.tab4=true;
     }
@@ -1848,49 +1851,49 @@ enable_exclusive:boolean=true;
   if(breakfast=='' && brunch==''){
 
       this.lagunaserve.get_set_time('1',this.resid).subscribe(data=>{
-         
+
         this.arr_brak_check=data;
         this.breakfast_start=this.arr_brak_check.msg[0].start_time;
           this.breakfast_end=this.arr_brak_check.msg[0].end_time;
           this.brunch_start= this.breakfast_start;
           this.brunch_end=this.breakfast_end;
-      
+
         for(let i=0;i<this.arr_brak_check.msg.length;i++){
           if(this.arr_brak_check.msg[i].month_day==2){
             this.mon_check=document.getElementById('vehicle2');
             this.mon_check.checked=true;
             this.mon=2;
-           
+
           }
           else if(this.arr_brak_check.msg[i].month_day==3){
             this.tue_check=document.getElementById('vehicle3');
             this.tue_check.checked=true;
             this.tue=3;
-           
+
           }
           else if(this.arr_brak_check.msg[i].month_day==4){
             this.wed_check=document.getElementById('vehicle4');
             this.wed_check.checked=true;
             this.wed=4;
-           
+
           }
           else if(this.arr_brak_check.msg[i].month_day==5){
             this.thu_check=document.getElementById('vehicle5');
             this.thu_check.checked=true;
             this.thu=5;
-            
+
           }
           else if(this.arr_brak_check.msg[i].month_day==6){
             this.fri_check=document.getElementById('vehicle6');
             this.fri_check.checked=true;
             this.fri=6;
-            
+
           }
           else if(this.arr_brak_check.msg[i].month_day==7){
             this.sat_check=document.getElementById('vehicle7');
             this.sat_check.checked=true;
             this.sat=7;
-            
+
           }
           else if(this.arr_brak_check.msg[i].month_day==8){
             this.sun_check=document.getElementById('vehicle8');
@@ -1940,10 +1943,10 @@ enable_exclusive:boolean=true;
       this.tab3=true;
 
       this.tab4=true;
-      
-        
 
-        
+
+
+
     }
       //IF select launch && brunch
 
@@ -1961,37 +1964,37 @@ enable_exclusive:boolean=true;
             this.mon_check=document.getElementById('vehicle22');
             this.mon_check.checked=true;
             this.mon_launch=2;
-           
+
           }
         if(this.arr_brak_check.msg[i].month_day==3){
             this.tue_check=document.getElementById('vehicle32');
             this.tue_check.checked=true;
             this.tue_launch=3;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==4){
             this.wed_check=document.getElementById('vehicle42');
             this.wed_check.checked=true;
             this.wed_launch=4;
-           
+
           }
            if(this.arr_brak_check.msg[i].month_day==5){
             this.thu_check=document.getElementById('vehicle52');
             this.thu_check.checked=true;
             this.thu_launch=5;
-            
+
           }
            if(this.arr_brak_check.msg[i].month_day==6){
             this.fri_check=document.getElementById('vehicle62');
             this.fri_check.checked=true;
             this.fri_launch=6;
-            
+
           }
            if(this.arr_brak_check.msg[i].month_day==7){
             this.sat_check=document.getElementById('vehicle72');
             this.sat_check.checked=true;
             this.sat_launch=7;
-            
+
           }
           if(this.arr_brak_check.msg[i].month_day==8){
             this.sun_check=document.getElementById('vehicle82');
@@ -2043,7 +2046,7 @@ enable_exclusive:boolean=true;
 
       this.tab4=true;
 
-   
+
     }
       //IF select dinner && launch
 
@@ -2058,7 +2061,7 @@ enable_exclusive:boolean=true;
       this.lagunadefault=true;
       this.tokyodefault=false;
       this.parisdefault=false;
-     
+
       this.tab1=true;
       this.tab2=false;
 
@@ -2076,37 +2079,37 @@ enable_exclusive:boolean=true;
             this.mon_check=document.getElementById('vehicle22');
             this.mon_check.checked=true;
             this.mon_launch=2;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==3){
             this.tue_check=document.getElementById('vehicle32');
             this.tue_check.checked=true;
             this.tue_launch=3;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==4){
             this.wed_check=document.getElementById('vehicle42');
             this.wed_check.checked=true;
             this.wed_launch=4;
-           
+
           }
            if(this.arr_brak_check.msg[i].month_day==5){
             this.thu_check=document.getElementById('vehicle52');
             this.thu_check.checked=true;
             this.thu_launch=5;
-            
+
           }
            if(this.arr_brak_check.msg[i].month_day==6){
             this.fri_check=document.getElementById('vehicle62');
             this.fri_check.checked=true;
             this.fri_launch=6;
-            
+
           }
            if(this.arr_brak_check.msg[i].month_day==7){
             this.sat_check=document.getElementById('vehicle72');
             this.sat_check.checked=true;
             this.sat_launch=7;
-            
+
           }
            if(this.arr_brak_check.msg[i].month_day==8){
             this.sun_check=document.getElementById('vehicle82');
@@ -2141,7 +2144,7 @@ enable_exclusive:boolean=true;
            }
     }
       })
-     
+
     }
       //IF select dinner && brunch
 
@@ -2158,37 +2161,37 @@ enable_exclusive:boolean=true;
             this.mon_check=document.getElementById('vehicle23');
             this.mon_check.checked=true;
             this.mon_dinner=2;
-           
+
           }
        if(this.arr_brak_check.msg[i].month_day==3){
             this.tue_check=document.getElementById('vehicle33');
             this.tue_check.checked=true;
             this.tue_dinner=3;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==4){
             this.wed_check=document.getElementById('vehicle43');
             this.wed_check.checked=true;
             this.wed_dinner=4;
-           
+
           }
         if(this.arr_brak_check.msg[i].month_day==5){
             this.thu_check=document.getElementById('vehicle53');
             this.thu_check.checked=true;
             this.thu_dinner=5;
-            
+
           }
          if(this.arr_brak_check.msg[i].month_day==6){
             this.fri_check=document.getElementById('vehicle63');
             this.fri_check.checked=true;
             this.fri_dinner=6;
-            
+
           }
          if(this.arr_brak_check.msg[i].month_day==7){
             this.sat_check=document.getElementById('vehicle73');
             this.sat_check.checked=true;
             this.sat_dinner=7;
-            
+
           }
          if(this.arr_brak_check.msg[i].month_day==8){
             this.sun_check=document.getElementById('vehicle83');
@@ -2236,12 +2239,12 @@ enable_exclusive:boolean=true;
         this.design.className='tabcontent m-1';
         this.tab1=true;
         this.tab2=true;
-  
+
         this.tab3=false;
-  
+
         this.tab4=true;
 
-       
+
     }
     }
     if(localStorage.getItem('No_of_menu')=='U')
@@ -2270,7 +2273,7 @@ enable_exclusive:boolean=true;
     this.tokyodefault=false;
     this.parisdefault=false;
       this.lagunaserve.get_set_time('1',this.resid).subscribe((data:any)=>{
-     
+
         console.log(data);
         this.arr_brak_check=data;
         this.breakfast_start=this.arr_brak_check.msg[0].start_time;
@@ -2283,37 +2286,37 @@ enable_exclusive:boolean=true;
               this.mon_check=document.getElementById('vehicle2');
               this.mon_check.checked=true;
               this.mon=2;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==3){
               this.tue_check=document.getElementById('vehicle3');
               this.tue_check.checked=true;
               this.tue=3;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==4){
               this.wed_check=document.getElementById('vehicle4');
               this.wed_check.checked=true;
               this.wed=4;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==5){
               this.thu_check=document.getElementById('vehicle5');
               this.thu_check.checked=true;
               this.thu=5;
-              
+
             }
            if(this.arr_brak_check.msg[i].month_day==6){
               this.fri_check=document.getElementById('vehicle6');
               this.fri_check.checked=true;
               this.fri=6;
-              
+
             }
            if(this.arr_brak_check.msg[i].month_day==7){
               this.sat_check=document.getElementById('vehicle7');
               this.sat_check.checked=true;
               this.sat=7;
-              
+
             }
            if(this.arr_brak_check.msg[i].month_day==8){
               this.sun_check=document.getElementById('vehicle8');
@@ -2347,9 +2350,9 @@ enable_exclusive:boolean=true;
              }
         }
       })
-    
-   
-    
+
+
+
     }
 //For Checking approval flag is on or not
 this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
@@ -2357,7 +2360,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   this.check=data;
   if(this.check.msg[0].approval_flag=='U'){
     this.show_toast=true;
-   
+
 
   }
   else{
@@ -2385,7 +2388,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       this.lagunadefault=false;
 
     }
-   
+
     this.b_url=true;
     this.lcc_url=true;
     this.d_url=true;
@@ -2400,16 +2403,16 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 }
   //For changing the tab
   openCity(e: any,v1:any) {
-    
+
     console.log("val:",this.v)
 
     if (e == 'London'){
       // this.Special_menu = document.getElementById('defaultOpen4');
-     
+
       // this.Special_menu.style.background = '#f1f1f1';
       // this.Special_menu.style.color = 'black';
     //  this.tab5=true;
-        
+
       this.brunch_start='';
       this.brunch_end='';
       this.arr_brak_check.length=0;
@@ -2420,20 +2423,20 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         console.log(data);
         this.cove_top=data;
         // if(this.cove_top.length!=0){
-  
-        
+
+
         for(let i=0;i<this.cove_top.menu_dt.length;i++){
           // console.log(this.cove_top.menu_dt[i].menu_id);
           if(this.cove_top.menu_dt.length!=0){
             if(this.cove_top.menu_dt[i].menu_id==1){
-                  
+
               console.log("sadasda1");
-               
-                 
+
+
                    this.break_menu=this.cove_top.menu_dt[i].menu_url;
                    console.log(this.break_menu);
-                  
-               
+
+
                  if(this.cove_top.menu_dt[i].active_flag=='Y'){
                     this.check_break=document.getElementById('bkmenu');
                     this.check_break.checked=true;
@@ -2448,18 +2451,18 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                  }
               }
             }
-      
-            
-  
+
+
+
         }
         for(let i=0;i<this.cove_top.oth_dt.length;i++){
         if(this.cove_top.oth_dt.length!=0){
           if(this.cove_top.oth_dt[i].menu_id==1){
-         
+
                  this.break_cover=this.cove_top.oth_dt[i].cover_page_url;
                  this.break_top=this.cove_top.oth_dt[i].top_img_url;
                  console.log(this.break_cover, this.break_top);
-                 
+
                  this.break_menu=this.cove_top.menu_dt[i].menu_url;
               // if(this.cove_top.oth_dt[i].active_flag=='Y'){
               //     this.check_break=document.getElementById('bkmenu');
@@ -2474,9 +2477,9 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               //   this.b_url=true
               //  }
             }
-            
 
-        
+
+
         }
       }
 
@@ -2486,24 +2489,24 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
     console.log(data);
     this.check=data;
     if(this.check.msg[0].approval_flag=='U'){
-    
+
     }
     else{
       if(localStorage.getItem('breakfast')==''){
         this.londondefault=false;
-  
+
       }
       if(localStorage.getItem('launch')==''){
         this.parisdefault=false;
-  
+
       }
       if(localStorage.getItem('dinner')==''){
         this.tokyodefault=false;
-  
+
       }
       if(localStorage.getItem('brunch')==''){
         this.lagunadefault=false;
-  
+
       }
       this.b_url=true;
       this.lcc_url=true;
@@ -2514,36 +2517,36 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       this.dinner_button=true;
       this.brunch_button=true;
       console.log(this.b_url,this.lcc_url,this.d_url,this.br_url)
-  
+
     }
   })
       })
-    
+
 
       this.lagunaserve.get_sec_url('1',this.resid).subscribe(data=>{
         console.log(data);
         this.break_sec=data
         if(this.break_sec.msg.length!=0){
 
-       
+
         for(let i=0;i<this.break_sec.msg.length;i++)
         {
-        
+
             if(this.break_sec.msg[i].sec_url!=''){
                  this.menu_sec=this.break_sec.msg[i].sec_url
-              
-            
+
+
            }
            else{
             this.menu_sec="";
            }
         }
-        
+
       }
       })
        if((localStorage.getItem('No_of_menu')=='O')){
         if((localStorage.getItem('No_of_menu')=='O')&&(this.v==1)){
-         
+
             if(localStorage.getItem('breakfast')==''){
               this.tab1 = false;
               this.tab2 = true;
@@ -2560,9 +2563,9 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               // this.PACK.className = 'active';
               this.BIRTH.style.background = '#f1f1f1';
               this.BIRTH.style.color = 'black';
-           
-          
-      
+
+
+
               this.ENTER = document.getElementById('defaultOpen3');
               // this.PACK.className = 'active';
               this.ENTER.style.background = '#f1f1f1';
@@ -2571,14 +2574,14 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                 // this.PACK.className = 'active';
                 this.WALL.style.background = '#00477e';
                 this.WALL.style.color = 'white';
-    
+
                 //For Getting the value of day and time
-    
+
                 this.lagunaserve.get_set_time(v1,this.resid).subscribe((data:any)=>{
                   this.arr_brak_check=data;
                   if(this.arr_brak_check.msg.length!=0){
-    
-                  
+
+
                   this.breakfast_start=this.arr_brak_check.msg[0].start_time;
                   this.breakfast_end=this.arr_brak_check.msg[0].end_time;
                   this.brunch_start=this.breakfast_start;
@@ -2588,37 +2591,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                       this.mon_check=document.getElementById('vehicle2');
                       this.mon_check.checked=true;
                       this.mon=2;
-                     
+
                     }
                     if(this.arr_brak_check.msg[i].month_day==3){
                       this.tue_check=document.getElementById('vehicle3');
                       this.tue_check.checked=true;
                       this.tue=3;
-                     
+
                     }
                     if(this.arr_brak_check.msg[i].month_day==4){
                       this.wed_check=document.getElementById('vehicle4');
                       this.wed_check.checked=true;
                       this.wed=4;
-                     
+
                     }
                 if(this.arr_brak_check.msg[i].month_day==5){
                       this.thu_check=document.getElementById('vehicle5');
                       this.thu_check.checked=true;
                       this.thu=5;
-                      
+
                     }
                     if(this.arr_brak_check.msg[i].month_day==6){
                       this.fri_check=document.getElementById('vehicle6');
                       this.fri_check.checked=true;
                       this.fri=6;
-                      
+
                     }
                     if(this.arr_brak_check.msg[i].month_day==7){
                       this.sat_check=document.getElementById('vehicle7');
                       this.sat_check.checked=true;
                       this.sat=7;
-                      
+
                     }
                   if(this.arr_brak_check.msg[i].month_day==8){
                       this.sun_check=document.getElementById('vehicle8');
@@ -2628,7 +2631,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                     if(this.arr_brak_check.msg.length==7) {
                       this.every=document.getElementById('vehicle1');
                       this.every.checked=true;
-    
+
                       this.mon_check=document.getElementById('vehicle2');
                       this.mon_check.checked=true;
                       this.tue_check=document.getElementById('vehicle3');
@@ -2652,18 +2655,18 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                       this.sun=8;
                      }
                 }
-              } 
+              }
             })
             }
             else{
             this. myFunction_forerror();
-                
+
             }
           //Snackbar
-           
+
         }
         else if(localStorage.getItem('No_of_menu')=='O'&&this.v!=1){
-                  
+
           this.tab1 = false;
           this.tab2 = true;
           this.tab3 = true;
@@ -2679,9 +2682,9 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           // this.PACK.className = 'active';
           this.BIRTH.style.background = '#f1f1f1';
           this.BIRTH.style.color = 'black';
-       
-      
-  
+
+
+
           this.ENTER = document.getElementById('defaultOpen3');
           // this.PACK.className = 'active';
           this.ENTER.style.background = '#f1f1f1';
@@ -2697,7 +2700,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               this.arr_brak_check=data;
               if(this.arr_brak_check.msg.length!=0){
 
-              
+
               this.breakfast_start=this.arr_brak_check.msg[0].start_time;
               this.breakfast_end=this.arr_brak_check.msg[0].end_time;
               this.brunch_start=this.breakfast_start;
@@ -2707,37 +2710,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                   this.mon_check=document.getElementById('vehicle2');
                   this.mon_check.checked=true;
                   this.mon=2;
-                 
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==3){
                   this.tue_check=document.getElementById('vehicle3');
                   this.tue_check.checked=true;
                   this.tue=3;
-                 
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==4){
                   this.wed_check=document.getElementById('vehicle4');
                   this.wed_check.checked=true;
                   this.wed=4;
-                 
+
                 }
             if(this.arr_brak_check.msg[i].month_day==5){
                   this.thu_check=document.getElementById('vehicle5');
                   this.thu_check.checked=true;
                   this.thu=5;
-                  
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==6){
                   this.fri_check=document.getElementById('vehicle6');
                   this.fri_check.checked=true;
                   this.fri=6;
-                  
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==7){
                   this.sat_check=document.getElementById('vehicle7');
                   this.sat_check.checked=true;
                   this.sat=7;
-                  
+
                 }
               if(this.arr_brak_check.msg[i].month_day==8){
                   this.sun_check=document.getElementById('vehicle8');
@@ -2771,13 +2774,13 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                   this.sun=8;
                  }
             }
-          } 
+          }
         })
 
-          
-  
+
+
         }
-       
+
        }
        else if(localStorage.getItem('No_of_menu')=='T'){
         if((localStorage.getItem('No_of_menu')=='T')&&(this.v==2)){
@@ -2799,9 +2802,9 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             // this.PACK.className = 'active';
             this.BIRTH.style.background = '#f1f1f1';
             this.BIRTH.style.color = 'black';
-         
-        
-    
+
+
+
             this.ENTER = document.getElementById('defaultOpen3');
             // this.PACK.className = 'active';
             this.ENTER.style.background = '#f1f1f1';
@@ -2810,14 +2813,14 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               // this.PACK.className = 'active';
               this.WALL.style.background = '#00477e';
               this.WALL.style.color = 'white';
-  
+
               //For Getting the value of day and time
-  
+
               this.lagunaserve.get_set_time(v1,this.resid).subscribe((data:any)=>{
                 this.arr_brak_check=data;
                 if(this.arr_brak_check.msg.length!=0){
-  
-                
+
+
                 this.breakfast_start=this.arr_brak_check.msg[0].start_time;
                 this.breakfast_end=this.arr_brak_check.msg[0].end_time;
                 this.brunch_start=this.breakfast_start;
@@ -2827,37 +2830,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                     this.mon_check=document.getElementById('vehicle2');
                     this.mon_check.checked=true;
                     this.mon=2;
-                   
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==3){
                     this.tue_check=document.getElementById('vehicle3');
                     this.tue_check.checked=true;
                     this.tue=3;
-                   
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==4){
                     this.wed_check=document.getElementById('vehicle4');
                     this.wed_check.checked=true;
                     this.wed=4;
-                   
+
                   }
               if(this.arr_brak_check.msg[i].month_day==5){
                     this.thu_check=document.getElementById('vehicle5');
                     this.thu_check.checked=true;
                     this.thu=5;
-                    
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==6){
                     this.fri_check=document.getElementById('vehicle6');
                     this.fri_check.checked=true;
                     this.fri=6;
-                    
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==7){
                     this.sat_check=document.getElementById('vehicle7');
                     this.sat_check.checked=true;
                     this.sat=7;
-                    
+
                   }
                 if(this.arr_brak_check.msg[i].month_day==8){
                     this.sun_check=document.getElementById('vehicle8');
@@ -2867,7 +2870,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                   if(this.arr_brak_check.msg.length==7) {
                     this.every=document.getElementById('vehicle1');
                     this.every.checked=true;
-  
+
                     this.mon_check=document.getElementById('vehicle2');
                     this.mon_check.checked=true;
                     this.tue_check=document.getElementById('vehicle3');
@@ -2891,22 +2894,26 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                     this.sun=8;
                    }
               }
-            } 
+            }
           })
           }
           else{
           this. myFunction_forerror();
-              
+
           }
         //Snackbar
         }
         else if((localStorage.getItem('No_of_menu')=='T')&&(this.v!=2)){
-          
+
           this.tab1 = false;
           this.tab2 = true;
           this.tab3 = true;
           this.tab4 = true;
           this.tab5 = true;
+          // this.lagunadefault=false;
+          // this.parisdefault=false;
+          // this.tokyodefault=false;
+          // this.londondefault=false;
           this.paris = document.getElementById('London');
           this.paris.className = 'active  tabcontent m-1';
           this.PACK = document.getElementById('defaultOpen2');
@@ -2917,9 +2924,9 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           // this.PACK.className = 'active';
           this.BIRTH.style.background = '#f1f1f1';
           this.BIRTH.style.color = 'black';
-       
-      
-  
+
+
+
           this.ENTER = document.getElementById('defaultOpen3');
           // this.PACK.className = 'active';
           this.ENTER.style.background = '#f1f1f1';
@@ -2932,7 +2939,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               this.arr_brak_check=data;
               if(this.arr_brak_check.msg.length!=0){
 
-             
+
               this.breakfast_start=this.arr_brak_check.msg[0].start_time;
               this.breakfast_end=this.arr_brak_check.msg[0].end_time;
               this.brunch_start=this.breakfast_start;
@@ -2942,37 +2949,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                   this.mon_check=document.getElementById('vehicle2');
                   this.mon_check.checked=true;
                   this.mon=2;
-                 
+
                 }
                if(this.arr_brak_check.msg[i].month_day==3){
                   this.tue_check=document.getElementById('vehicle3');
                   this.tue_check.checked=true;
                   this.tue=3;
-                 
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==4){
                   this.wed_check=document.getElementById('vehicle4');
                   this.wed_check.checked=true;
                   this.wed=4;
-                 
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==5){
                   this.thu_check=document.getElementById('vehicle5');
                   this.thu_check.checked=true;
                   this.thu=5;
-                  
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==6){
                   this.fri_check=document.getElementById('vehicle6');
                   this.fri_check.checked=true;
                   this.fri=6;
-                  
+
                 }
               if(this.arr_brak_check.msg[i].month_day==7){
                   this.sat_check=document.getElementById('vehicle7');
                   this.sat_check.checked=true;
                   this.sat=7;
-                  
+
                 }
               if(this.arr_brak_check.msg[i].month_day==8){
                   this.sun_check=document.getElementById('vehicle8');
@@ -3008,15 +3015,15 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             }
           }
             })
-            
-           
-  
+
+
+
         }
-        
+
        }
        else if(localStorage.getItem('No_of_menu')=='U'){
-    
-      
+
+
         this.tab1 = false;
         this.tab2 = true;
         this.tab3 = true;
@@ -3025,15 +3032,15 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         this.paris = document.getElementById('London');
         this.paris.className = 'active  tabcontent m-1';
         this.PACK = document.getElementById('defaultOpen2');
-        
+
         this.PACK.style.background = '#f1f1f1';
         this.PACK.style.color = 'black';
         this.BIRTH = document.getElementById('defaultOpen1');
- 
+
         this.BIRTH.style.background = '#f1f1f1';
         this.BIRTH.style.color = 'black';
-     
-    
+
+
 
         this.ENTER = document.getElementById('defaultOpen3');
         // this.PACK.className = 'active';
@@ -3047,7 +3054,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             this.arr_brak_check=data;
             if(this.arr_brak_check.msg.length!=0){
 
-           
+
             this.breakfast_start=this.arr_brak_check.msg[0].start_time;
               this.breakfast_end=this.arr_brak_check.msg[0].end_time;
               this.brunch_start=this.breakfast_start;
@@ -3057,37 +3064,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                 this.mon_check=document.getElementById('vehicle2');
                 this.mon_check.checked=true;
                 this.mon=2;
-               
+
               }
               if(this.arr_brak_check.msg[i].month_day==3){
                 this.tue_check=document.getElementById('vehicle3');
                 this.tue_check.checked=true;
                 this.tue=3;
-               
+
               }
             if(this.arr_brak_check.msg[i].month_day==4){
                 this.wed_check=document.getElementById('vehicle4');
                 this.wed_check.checked=true;
                 this.wed=4;
-               
+
               }
             if(this.arr_brak_check.msg[i].month_day==5){
                 this.thu_check=document.getElementById('vehicle5');
                 this.thu_check.checked=true;
                 this.thu=5;
-                
+
               }
             if(this.arr_brak_check.msg[i].month_day==6){
                 this.fri_check=document.getElementById('vehicle6');
                 this.fri_check.checked=true;
                 this.fri=6;
-                
+
               }
             if(this.arr_brak_check.msg[i].month_day==7){
                 this.sat_check=document.getElementById('vehicle7');
                 this.sat_check.checked=true;
                 this.sat=7;
-                
+
               }
             if(this.arr_brak_check.msg[i].month_day==8){
                 this.sun_check=document.getElementById('vehicle8');
@@ -3123,22 +3130,22 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           }
         }
           })
-          
-        
+
+
        }
       }
     else if (e == 'Paris'){
       this.Special_menu = document.getElementById('defaultOpen4');
-     
+
       this.Special_menu.style.background = '#f1f1f1';
       this.Special_menu.style.color = 'black';
          //For Checking approval flag is on or not
          this.tab5=true;
-  
+
       this.brunch_start='';
       this.brunch_end='';
       this.arr_brak_check.length=0;
-     
+
 
       console.log(this.v);
 
@@ -3151,22 +3158,22 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         console.log(data);
         this.cove_top=data;
         // if(this.cove_top.length!=0){
-  
-        
+
+
         for(let i=0;i<this.cove_top.menu_dt.length;i++){
           // console.log(this.cove_top.menu_dt[i].menu_id);
           if(this.cove_top.menu_dt.length!=0){
-         
+
               if(this.cove_top.menu_dt[i].menu_id==2){
-  
+
                 console.log("sadasda3");
-               
+
                   // this.launch_cover=this.cove_top.msg[i].cover_page_url;
                   // this.launch_top=this.cove_top.msg[i].top_img_url;
                   this.launch_menu=this.cove_top.menu_dt[i].menu_url;
                   // console.log(this.launch_top,this.launch_cover);
-  
-              
+
+
                 if(this.cove_top.menu_dt[i].active_flag=='Y'){
                   this.check_launch=document.getElementById('paris');
                   this.check_launch.checked=true;
@@ -3178,20 +3185,20 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                 this.check_launch.checked=false;
                 this.launch_check='N';
                 this.lcc_url=true;
-  
+
                }
              }
-             
-  
+
+
           }
         }
         for(let i=0;i<this.cove_top.oth_dt.length;i++){
          if(this.cove_top.oth_dt.length!=0){
-           
+
              if(this.cove_top.oth_dt[i].menu_id==2){
-  
+
                 console.log("sadasda3");
-               
+
                   this.launch_cover=this.cove_top.oth_dt[i].cover_page_url;
                   this.launch_top=this.cove_top.oth_dt[i].top_img_url;
               //   if(this.cove_top.oth_dt[i].active_flag=='Y'){
@@ -3205,36 +3212,36 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               //   this.check_launch.checked=false;
               //   this.launch_check='N';
               //   this.lcc_url=true;
-  
+
               //  }
             }
-          }  
-        
+          }
+
         }
-      
+
                 //For Checking approval flag is on or not
                 this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                   console.log(data);
                   this.check=data;
                   if(this.check.msg[0].approval_flag=='U'){
-                  
+
                   }
                   else{
                     if(localStorage.getItem('breakfast')==''){
                       this.londondefault=false;
-                
+
                     }
                     if(localStorage.getItem('launch')==''){
                       this.parisdefault=false;
-                
+
                     }
                     if(localStorage.getItem('dinner')==''){
                       this.tokyodefault=false;
-                
+
                     }
                     if(localStorage.getItem('brunch')==''){
                       this.lagunadefault=false;
-                
+
                     }
                     this.b_url=true;
                     this.lcc_url=true;
@@ -3245,31 +3252,31 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                     this.dinner_button=true;
                     this.brunch_button=true;
                     console.log(this.b_url,this.lcc_url,this.d_url,this.br_url)
-                
+
                   }
                 })
       })
-       
+
       this.lagunaserve.get_sec_url(v1,this.resid).subscribe(data=>{
         console.log(data);
         this.break_sec=data
         if(this.break_sec.msg.length!=0){
 
-        
+
         for(let i=0;i<this.break_sec.msg.length;i++)
         {
-          
+
             if(this.break_sec.msg[i].sec_url!=''){
             this.launch_sec=this.break_sec.msg[i].sec_url
            }
            else{
             this.launch_sec="";
-             
+
            }
-            
+
         }
       }
-  
+
       })
 
      if(localStorage.getItem('No_of_menu')=='O'){
@@ -3287,12 +3294,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        // this.PACK.className = 'active';
        this.PACK.style.background = '#f1f1f1';
        this.PACK.style.color = 'black';
-     
+
        this.BIRTH = document.getElementById('defaultOpen');
        // this.PACK.className = 'active';
        this.BIRTH.style.background = '#f1f1f1';
        this.BIRTH.style.color = 'black';
-   
+
 
        this.ENTER = document.getElementById('defaultOpen3');
        // this.PACK.className = 'active';
@@ -3315,37 +3322,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             this.mon_check=document.getElementById('vehicle22');
             this.mon_check.checked=true;
             this.mon_launch=2;
-           
+
           }
            if(this.arr_brak_check.msg[i].month_day==3){
             this.tue_check=document.getElementById('vehicle32');
             this.tue_check.checked=true;
             this.tue_launch=3;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==4){
             this.wed_check=document.getElementById('vehicle42');
             this.wed_check.checked=true;
             this.wed_launch=4;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==5){
             this.thu_check=document.getElementById('vehicle52');
             this.thu_check.checked=true;
             this.thu_launch=5;
-            
+
           }
           if(this.arr_brak_check.msg[i].month_day==6){
             this.fri_check=document.getElementById('vehicle62');
             this.fri_check.checked=true;
             this.fri_launch=6;
-            
+
           }
            if(this.arr_brak_check.msg[i].month_day==7){
             this.sat_check=document.getElementById('vehicle72');
             this.sat_check.checked=true;
             this.sat_launch=7;
-            
+
           }
          if(this.arr_brak_check.msg[i].month_day==8){
             this.sun_check=document.getElementById('vehicle82');
@@ -3381,7 +3388,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   }
 
       })
-          
+
         }
         else{
         this. myFunction_forerror();
@@ -3390,7 +3397,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
       }
      else if((localStorage.getItem('No_of_menu')=='O')&&(this.v!=1)){
-      
+
        this.tab1 = true;
        this.tab2 = false;
        this.tab3 = true;
@@ -3401,12 +3408,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        // this.PACK.className = 'active';
        this.PACK.style.background = '#f1f1f1';
        this.PACK.style.color = 'black';
-     
+
        this.BIRTH = document.getElementById('defaultOpen');
        // this.PACK.className = 'active';
        this.BIRTH.style.background = '#f1f1f1';
        this.BIRTH.style.color = 'black';
-   
+
 
        this.ENTER = document.getElementById('defaultOpen3');
        // this.PACK.className = 'active';
@@ -3429,37 +3436,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             this.mon_check=document.getElementById('vehicle22');
             this.mon_check.checked=true;
             this.mon_launch=2;
-           
+
           }
            if(this.arr_brak_check.msg[i].month_day==3){
             this.tue_check=document.getElementById('vehicle32');
             this.tue_check.checked=true;
             this.tue_launch=3;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==4){
             this.wed_check=document.getElementById('vehicle42');
             this.wed_check.checked=true;
             this.wed_launch=4;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==5){
             this.thu_check=document.getElementById('vehicle52');
             this.thu_check.checked=true;
             this.thu_launch=5;
-            
+
           }
           if(this.arr_brak_check.msg[i].month_day==6){
             this.fri_check=document.getElementById('vehicle62');
             this.fri_check.checked=true;
             this.fri_launch=6;
-            
+
           }
            if(this.arr_brak_check.msg[i].month_day==7){
             this.sat_check=document.getElementById('vehicle72');
             this.sat_check.checked=true;
             this.sat_launch=7;
-            
+
           }
          if(this.arr_brak_check.msg[i].month_day==8){
             this.sun_check=document.getElementById('vehicle82');
@@ -3495,9 +3502,9 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   }
 
       })
-      
+
      }
-   
+
      }
     else if(localStorage.getItem('No_of_menu')=='T'){
      if((localStorage.getItem('No_of_menu')=='T')&&(this.v==2)){
@@ -3516,12 +3523,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        // this.PACK.className = 'active';
        this.PACK.style.background = '#f1f1f1';
        this.PACK.style.color = 'black';
-     
+
        this.BIRTH = document.getElementById('defaultOpen');
        // this.PACK.className = 'active';
        this.BIRTH.style.background = '#f1f1f1';
        this.BIRTH.style.color = 'black';
-   
+
 
        this.ENTER = document.getElementById('defaultOpen3');
        // this.PACK.className = 'active';
@@ -3544,37 +3551,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             this.mon_check=document.getElementById('vehicle22');
             this.mon_check.checked=true;
             this.mon_launch=2;
-           
+
           }
            if(this.arr_brak_check.msg[i].month_day==3){
             this.tue_check=document.getElementById('vehicle32');
             this.tue_check.checked=true;
             this.tue_launch=3;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==4){
             this.wed_check=document.getElementById('vehicle42');
             this.wed_check.checked=true;
             this.wed_launch=4;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==5){
             this.thu_check=document.getElementById('vehicle52');
             this.thu_check.checked=true;
             this.thu_launch=5;
-            
+
           }
           if(this.arr_brak_check.msg[i].month_day==6){
             this.fri_check=document.getElementById('vehicle62');
             this.fri_check.checked=true;
             this.fri_launch=6;
-            
+
           }
            if(this.arr_brak_check.msg[i].month_day==7){
             this.sat_check=document.getElementById('vehicle72');
             this.sat_check.checked=true;
             this.sat_launch=7;
-            
+
           }
          if(this.arr_brak_check.msg[i].month_day==8){
             this.sun_check=document.getElementById('vehicle82');
@@ -3610,7 +3617,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   }
 
       })
-          
+
         }
         else{
         this. myFunction_forerror();
@@ -3629,13 +3636,13 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           // this.PACK.className = 'active';
           this.PACK.style.background = '#f1f1f1';
           this.PACK.style.color = 'black';
-        
+
           this.BIRTH = document.getElementById('defaultOpen');
           // this.PACK.className = 'active';
           this.BIRTH.style.background = '#f1f1f1';
           this.BIRTH.style.color = 'black';
-      
-  
+
+
           this.ENTER = document.getElementById('defaultOpen3');
           // this.PACK.className = 'active';
           this.ENTER.style.background = '#f1f1f1';
@@ -3659,37 +3666,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                 this.mon_check=document.getElementById('vehicle22');
                 this.mon_check.checked=true;
                 this.mon_launch=2;
-               
+
               }
                if(this.arr_brak_check.msg[i].month_day==3){
                 this.tue_check=document.getElementById('vehicle32');
                 this.tue_check.checked=true;
                 this.tue_launch=3;
-               
+
               }
                if(this.arr_brak_check.msg[i].month_day==4){
                 this.wed_check=document.getElementById('vehicle42');
                 this.wed_check.checked=true;
                 this.wed_launch=4;
-               
+
               }
             if(this.arr_brak_check.msg[i].month_day==5){
                 this.thu_check=document.getElementById('vehicle52');
                 this.thu_check.checked=true;
                 this.thu_launch=5;
-                
+
               }
                if(this.arr_brak_check.msg[i].month_day==6){
                 this.fri_check=document.getElementById('vehicle62');
                 this.fri_check.checked=true;
                 this.fri_launch=6;
-                
+
               }
               if(this.arr_brak_check.msg[i].month_day==7){
                 this.sat_check=document.getElementById('vehicle72');
                 this.sat_check.checked=true;
                 this.sat_launch=7;
-                
+
               }
              if(this.arr_brak_check.msg[i].month_day==8){
                 this.sun_check=document.getElementById('vehicle82');
@@ -3724,7 +3731,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         }
       }
           })
-         
+
         }
       }
       else if(localStorage.getItem('No_of_menu')=='U'){
@@ -3735,22 +3742,22 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         this.paris = document.getElementById('Paris');
         this.paris.className = 'active  tabcontent m-1';
         this.PACK = document.getElementById('defaultOpen2');
-      
+
         this.PACK.style.background = '#f1f1f1';
         this.PACK.style.color = 'black';
-      
+
         this.BIRTH = document.getElementById('defaultOpen');
-      
+
         this.BIRTH.style.background = '#f1f1f1';
         this.BIRTH.style.color = 'black';
-    
+
 
         this.ENTER = document.getElementById('defaultOpen3');
-    
+
         this.ENTER.style.background = '#f1f1f1';
         this.ENTER.style.color = 'black';
         this.WALL = document.getElementById('defaultOpen1');
-        
+
         this.WALL.style.background = '#00477e';
         this.WALL.style.color = 'white';
         this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
@@ -3765,37 +3772,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               this.mon_check=document.getElementById('vehicle22');
               this.mon_check.checked=true;
               this.mon_launch=2;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==3){
               this.tue_check=document.getElementById('vehicle32');
               this.tue_check.checked=true;
               this.tue_launch=3;
-             
+
             }
            if(this.arr_brak_check.msg[i].month_day==4){
               this.wed_check=document.getElementById('vehicle42');
               this.wed_check.checked=true;
               this.wed_launch=4;
-             
+
             }
             if(this.arr_brak_check.msg[i].month_day==5){
               this.thu_check=document.getElementById('vehicle52');
               this.thu_check.checked=true;
               this.thu_launch=5;
-              
+
             }
             if(this.arr_brak_check.msg[i].month_day==6){
               this.fri_check=document.getElementById('vehicle62');
               this.fri_check.checked=true;
               this.fri_launch=6;
-              
+
             }
            if(this.arr_brak_check.msg[i].month_day==7){
               this.sat_check=document.getElementById('vehicle72');
               this.sat_check.checked=true;
               this.sat_launch=7;
-              
+
             }
            if(this.arr_brak_check.msg[i].month_day==8){
               this.sun_check=document.getElementById('vehicle82');
@@ -3832,15 +3839,15 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         })
       }
 
-   
+
     }
     else if (e == 'Tokyo'){
       this.Special_menu = document.getElementById('defaultOpen4');
-     
+
       this.Special_menu.style.background = '#f1f1f1';
       this.Special_menu.style.color = 'black';
       this.tab5=true;
-    
+
       this.break_sec.length=0;
       this.cove_top.length=0;
       this.arr_brak_check.length=0;
@@ -3851,8 +3858,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           console.log(data);
           this.cove_top=data;
           // if(this.cove_top.length!=0){
-    
-          
+
+
           for(let i=0;i<this.cove_top.menu_dt.length;i++){
             // console.log(this.cove_top.menu_dt[i].menu_id);
             if(this.cove_top.menu_dt.length!=0){
@@ -3872,11 +3879,11 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                 this.check_dinner.checked=false;
                 this.brunch_check='N';
                 this.d_url=true;
-    
+
                }
                }
-              
-    
+
+
             }
            }
            for(let i=0;i<this.cove_top.oth_dt.length;i++){
@@ -3897,12 +3904,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               //   this.check_dinner.checked=false;
               //   this.brunch_check='N';
               //   this.d_url=true;
-    
+
               //  }
                }
-               
-    
-            
+
+
+
             }
            }
                 //For Checking approval flag is on or not
@@ -3910,24 +3917,24 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
     console.log(data);
     this.check=data;
     if(this.check.msg[0].approval_flag=='U'){
-    
+
     }
     else{
       if(localStorage.getItem('breakfast')==''){
         this.londondefault=false;
-  
+
       }
       if(localStorage.getItem('launch')==''){
         this.parisdefault=false;
-  
+
       }
       if(localStorage.getItem('dinner')==''){
         this.tokyodefault=false;
-  
+
       }
       if(localStorage.getItem('brunch')==''){
         this.lagunadefault=false;
-  
+
       }
       this.b_url=true;
       this.lcc_url=true;
@@ -3938,7 +3945,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       this.dinner_button=true;
       this.brunch_button=true;
       console.log(this.b_url,this.lcc_url,this.d_url,this.br_url)
-  
+
     }
   })
         })
@@ -3958,11 +3965,11 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
            }
         }
       }
-  
+
       })
- 
-    
-     
+
+
+
         if(localStorage.getItem('No_of_menu')=='O'){
           if((localStorage.getItem('No_of_menu')=='O')&&(this.v==1)){
           //Snack Bar
@@ -3974,30 +3981,30 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             this.tab4 = true;
             this.paris = document.getElementById('Tokyo');
             this.paris.className = 'active  tabcontent m-1';
-            
+
             this.PACK = document.getElementById('defaultOpen1');
-       
+
             this.PACK.style.background = '#f1f1f1';
             this.PACK.style.color = 'black';
             this.BIRTH = document.getElementById('defaultOpen');
-     
+
             this.BIRTH.style.background = '#f1f1f1';
             this.BIRTH.style.color = 'black';
-        
-    
+
+
             this.ENTER = document.getElementById('defaultOpen3');
-    
+
             this.ENTER.style.background = '#f1f1f1';
             this.ENTER.style.color = 'black';
             this.WALL = document.getElementById('defaultOpen2');
-    
+
             this.WALL.style.background = '#00477e';
             this.WALL.style.color = 'white';
             this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
               this.arr_brak_check=data;
               if(this.arr_brak_check.msg.length!=0){
 
-              
+
               this.dinner_start=this.arr_brak_check.msg[0].start_time;
               this.dinner_end=this.arr_brak_check.msg[0].end_time;
               // this.brunch_start=this.dinner_start;
@@ -4007,37 +4014,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                   this.mon_check=document.getElementById('vehicle23');
                   this.mon_check.checked=true;
                   this.mon_dinner=2;
-                 
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==3){
                   this.tue_check=document.getElementById('vehicle33');
                   this.tue_check.checked=true;
                   this.tue_dinner=3;
-                 
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==4){
                   this.wed_check=document.getElementById('vehicle43');
                   this.wed_check.checked=true;
                   this.wed_dinner=4;
-                 
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==5){
                   this.thu_check=document.getElementById('vehicle53');
                   this.thu_check.checked=true;
                   this.thu_dinner=5;
-                  
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==6){
                   this.fri_check=document.getElementById('vehicle63');
                   this.fri_check.checked=true;
                   this.fri_dinner=6;
-                  
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==7){
                   this.sat_check=document.getElementById('vehicle73');
                   this.sat_check.checked=true;
                   this.sat_dinner=7;
-                  
+
                 }
                if(this.arr_brak_check.msg[i].month_day==8){
                   this.sun_check=document.getElementById('vehicle83');
@@ -4072,7 +4079,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           }
         }
             })
-      
+
           }
           else{
           this. myFunction_forerror();
@@ -4087,30 +4094,30 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             this.tab4 = true;
             this.paris = document.getElementById('Tokyo');
             this.paris.className = 'active  tabcontent m-1';
-            
+
             this.PACK = document.getElementById('defaultOpen1');
-       
+
             this.PACK.style.background = '#f1f1f1';
             this.PACK.style.color = 'black';
             this.BIRTH = document.getElementById('defaultOpen');
-     
+
             this.BIRTH.style.background = '#f1f1f1';
             this.BIRTH.style.color = 'black';
-        
-    
+
+
             this.ENTER = document.getElementById('defaultOpen3');
-    
+
             this.ENTER.style.background = '#f1f1f1';
             this.ENTER.style.color = 'black';
             this.WALL = document.getElementById('defaultOpen2');
-    
+
             this.WALL.style.background = '#00477e';
             this.WALL.style.color = 'white';
             this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
               this.arr_brak_check=data;
               if(this.arr_brak_check.msg.length!=0){
 
-              
+
               this.dinner_start=this.arr_brak_check.msg[0].start_time;
               this.dinner_end=this.arr_brak_check.msg[0].end_time;
               // this.brunch_start=this.dinner_start;
@@ -4120,37 +4127,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                   this.mon_check=document.getElementById('vehicle23');
                   this.mon_check.checked=true;
                   this.mon_dinner=2;
-                 
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==3){
                   this.tue_check=document.getElementById('vehicle33');
                   this.tue_check.checked=true;
                   this.tue_dinner=3;
-                 
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==4){
                   this.wed_check=document.getElementById('vehicle43');
                   this.wed_check.checked=true;
                   this.wed_dinner=4;
-                 
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==5){
                   this.thu_check=document.getElementById('vehicle53');
                   this.thu_check.checked=true;
                   this.thu_dinner=5;
-                  
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==6){
                   this.fri_check=document.getElementById('vehicle63');
                   this.fri_check.checked=true;
                   this.fri_dinner=6;
-                  
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==7){
                   this.sat_check=document.getElementById('vehicle73');
                   this.sat_check.checked=true;
                   this.sat_dinner=7;
-                  
+
                 }
                if(this.arr_brak_check.msg[i].month_day==8){
                   this.sun_check=document.getElementById('vehicle83');
@@ -4185,7 +4192,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           }
         }
             })
-      
+
           }
         }
         else if(localStorage.getItem('No_of_menu')=='T')
@@ -4201,30 +4208,30 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               this.tab4 = true;
               this.paris = document.getElementById('Tokyo');
               this.paris.className = 'active  tabcontent m-1';
-              
+
               this.PACK = document.getElementById('defaultOpen1');
-         
+
               this.PACK.style.background = '#f1f1f1';
               this.PACK.style.color = 'black';
               this.BIRTH = document.getElementById('defaultOpen');
-       
+
               this.BIRTH.style.background = '#f1f1f1';
               this.BIRTH.style.color = 'black';
-          
-      
+
+
               this.ENTER = document.getElementById('defaultOpen3');
-      
+
               this.ENTER.style.background = '#f1f1f1';
               this.ENTER.style.color = 'black';
               this.WALL = document.getElementById('defaultOpen2');
-      
+
               this.WALL.style.background = '#00477e';
               this.WALL.style.color = 'white';
               this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
                 this.arr_brak_check=data;
                 if(this.arr_brak_check.msg.length!=0){
-  
-                
+
+
                 this.dinner_start=this.arr_brak_check.msg[0].start_time;
                 this.dinner_end=this.arr_brak_check.msg[0].end_time;
                 // this.brunch_start=this.dinner_start;
@@ -4234,37 +4241,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                     this.mon_check=document.getElementById('vehicle23');
                     this.mon_check.checked=true;
                     this.mon_dinner=2;
-                   
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==3){
                     this.tue_check=document.getElementById('vehicle33');
                     this.tue_check.checked=true;
                     this.tue_dinner=3;
-                   
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==4){
                     this.wed_check=document.getElementById('vehicle43');
                     this.wed_check.checked=true;
                     this.wed_dinner=4;
-                   
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==5){
                     this.thu_check=document.getElementById('vehicle53');
                     this.thu_check.checked=true;
                     this.thu_dinner=5;
-                    
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==6){
                     this.fri_check=document.getElementById('vehicle63');
                     this.fri_check.checked=true;
                     this.fri_dinner=6;
-                    
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==7){
                     this.sat_check=document.getElementById('vehicle73');
                     this.sat_check.checked=true;
                     this.sat_dinner=7;
-                    
+
                   }
                  if(this.arr_brak_check.msg[i].month_day==8){
                     this.sun_check=document.getElementById('vehicle83');
@@ -4299,13 +4306,13 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             }
           }
               })
-        
+
             }
             else{
             this. myFunction_forerror();
-  
+
             }
-  
+
 
 
             }
@@ -4314,25 +4321,29 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               this.tab2 = true;
               this.tab3 = false;
               this.tab4 = true;
+              // this.lagunadefault=false;
+              // this.parisdefault=false;
+              // this.tokyodefault=false;
+              // this.londondefault=false;
               this.paris = document.getElementById('Tokyo');
               this.paris.className = 'active';
-              
+
               this.PACK = document.getElementById('defaultOpen1');
-         
+
               this.PACK.style.background = '#f1f1f1';
               this.PACK.style.color = 'black';
               this.BIRTH = document.getElementById('defaultOpen');
-       
+
               this.BIRTH.style.background = '#f1f1f1';
               this.BIRTH.style.color = 'black';
-          
-      
+
+
               this.ENTER = document.getElementById('defaultOpen3');
-      
+
               this.ENTER.style.background = '#f1f1f1';
               this.ENTER.style.color = 'black';
               this.WALL = document.getElementById('defaultOpen2');
-      
+
               this.WALL.style.background = '#00477e';
               this.WALL.style.color = 'white';
               this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
@@ -4340,7 +4351,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               console.log(data);
               if(this.arr_brak_check.msg.length!=0){
 
-              
+
               this.dinner_start=this.arr_brak_check.msg[0].start_time;
               this.dinner_end=this.arr_brak_check.msg[0].end_time;
               // this.brunch_start=this.dinner_start;
@@ -4350,37 +4361,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                     this.mon_check=document.getElementById('vehicle23');
                     this.mon_check.checked=true;
                     this.mon_dinner=2;
-                   
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==3){
                     this.tue_check=document.getElementById('vehicle33');
                     this.tue_check.checked=true;
                     this.tue_dinner=3;
-                   
+
                   }
                    if(this.arr_brak_check.msg[i].month_day==4){
                     this.wed_check=document.getElementById('vehicle43');
                     this.wed_check.checked=true;
                     this.wed_dinner=4;
-                   
+
                   }
                    if(this.arr_brak_check.msg[i].month_day==5){
                     this.thu_check=document.getElementById('vehicle53');
                     this.thu_check.checked=true;
                     this.thu_dinner=5;
-                    
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==6){
                     this.fri_check=document.getElementById('vehicle63');
                     this.fri_check.checked=true;
                     this.fri_dinner=6;
-                    
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==7){
                     this.sat_check=document.getElementById('vehicle73');
                     this.sat_check.checked=true;
                     this.sat_dinner=7;
-                    
+
                   }
                   if(this.arr_brak_check.msg[i].month_day==8){
                     this.sun_check=document.getElementById('vehicle83');
@@ -4415,7 +4426,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             }
           }
               })
-        
+
             }
          }
          else if(localStorage.getItem('No_of_menu')=='U'){
@@ -4425,30 +4436,30 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           this.tab4 = true;
           this.paris = document.getElementById('Tokyo');
           this.paris.className = 'active  tabcontent m-1';
-          
+
           this.PACK = document.getElementById('defaultOpen1');
-     
+
           this.PACK.style.background = '#f1f1f1';
           this.PACK.style.color = 'black';
           this.BIRTH = document.getElementById('defaultOpen');
-   
+
           this.BIRTH.style.background = '#f1f1f1';
           this.BIRTH.style.color = 'black';
-      
-  
+
+
           this.ENTER = document.getElementById('defaultOpen3');
-  
+
           this.ENTER.style.background = '#f1f1f1';
           this.ENTER.style.color = 'black';
           this.WALL = document.getElementById('defaultOpen2');
-  
+
           this.WALL.style.background = '#00477e';
           this.WALL.style.color = 'white';
           this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
             this.arr_brak_check=data;
             if(this.arr_brak_check.msg.length!=0){
 
-           
+
             this.dinner_start=this.arr_brak_check.msg[0].start_time;
             this.dinner_end=this.arr_brak_check.msg[0].end_time;
             // this.brunch_start=this.dinner_start;
@@ -4458,37 +4469,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                 this.mon_check=document.getElementById('vehicle23');
                 this.mon_check.checked=true;
                 this.mon_dinner=2;
-               
+
               }
              if(this.arr_brak_check.msg[i].month_day==3){
                 this.tue_check=document.getElementById('vehicle33');
                 this.tue_check.checked=true;
                 this.tue_dinner=3;
-               
+
               }
               if(this.arr_brak_check.msg[i].month_day==4){
                 this.wed_check=document.getElementById('vehicle43');
                 this.wed_check.checked=true;
                 this.wed_dinner=4;
-               
+
               }
              if(this.arr_brak_check.msg[i].month_day==5){
                 this.thu_check=document.getElementById('vehicle53');
                 this.thu_check.checked=true;
                 this.thu_dinner=5;
-                
+
               }
               if(this.arr_brak_check.msg[i].month_day==6){
                 this.fri_check=document.getElementById('vehicle63');
                 this.fri_check.checked=true;
                 this.fri_dinner=6;
-                
+
               }
              if(this.arr_brak_check.msg[i].month_day==7){
                 this.sat_check=document.getElementById('vehicle73');
                 this.sat_check.checked=true;
                 this.sat_dinner=7;
-                
+
               }
              if(this.arr_brak_check.msg[i].month_day==8){
                 this.sun_check=document.getElementById('vehicle83');
@@ -4523,9 +4534,9 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         }
       }
           })
-    
+
          }
-      
+
 
          //For Checking approval flag is on or not
      //For Checking approval flag is on or not
@@ -4533,7 +4544,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   console.log(data);
   this.check=data;
   if(this.check.msg[0].approval_flag=='U'){
-  
+
   }
   else{
     if(localStorage.getItem('breakfast')==''){
@@ -4565,14 +4576,14 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   }
 })
 
-     
+
     }
     else if (e == 'Laguna'){
       this.Special_menu = document.getElementById('defaultOpen4');
-     
+
       this.Special_menu.style.background ='#f1f1f1';
       this.Special_menu.style.color = 'black';
-         
+
      this.tab5=true;
       this.break_sec.length=0;
       this.cove_top.length=0;
@@ -4583,18 +4594,18 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         console.log(data);
         this.cove_top=data;
         // if(this.cove_top.length!=0){
-  
-        
+
+
         for(let i=0;i<this.cove_top.menu_dt.length;i++){
-         
+
           if(this.cove_top.menu_dt.length!=0){
             if(this.cove_top.menu_dt[i].menu_id==4){
-  
+
               console.log("sadasda4");
-              
+
                 this.brunch_menu=this.cove_top.menu_dt[i].menu_url;
-  
-              
+
+
               if(this.cove_top.menu_dt[i].active_flag=='Y'){
                 this.check_brunch=document.getElementById('laguna');
                 this.check_brunch.checked=true;
@@ -4606,21 +4617,21 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               this.check_brunch.checked=false;
               this.dinner_check='N';
               this.br_url=true;
-  
+
              }
            }
-  
+
           }
         }
         for(let i=0;i<this.cove_top.oth_dt.length;i++){
          if(this.cove_top.oth_dt.length!=0){
             if(this.cove_top.oth_dt[i].menu_id==4){
-  
+
               console.log("sadasda4");
-         
+
                 this.brunch_cover=this.cove_top.oth_dt[i].cover_page_url;
                 this.brunch_top=this.cove_top.oth_dt[i].top_img_url;
-               
+
             //   if(this.cove_top.oth_dt[i].active_flag=='Y'){
             //     this.check_brunch=document.getElementById('laguna');
             //     this.check_brunch.checked=true;
@@ -4632,36 +4643,36 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             //   this.check_brunch.checked=false;
             //   this.dinner_check='N';
             //   this.br_url=true;
-  
+
             //  }
            }
-  
+
           }
           }
-            
+
           //For Checking approval flag is on or not
           this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             console.log(data);
             this.check=data;
             if(this.check.msg[0].approval_flag=='U'){
-            
+
             }
             else{
               if(localStorage.getItem('breakfast')==''){
                 this.londondefault=false;
-          
+
               }
               if(localStorage.getItem('launch')==''){
                 this.parisdefault=false;
-          
+
               }
               if(localStorage.getItem('dinner')==''){
                 this.tokyodefault=false;
-          
+
               }
               if(localStorage.getItem('brunch')==''){
                 this.lagunadefault=false;
-          
+
               }
               this.b_url=true;
               this.lcc_url=true;
@@ -4672,19 +4683,19 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               this.dinner_button=true;
               this.brunch_button=true;
               console.log(this.b_url,this.lcc_url,this.d_url,this.br_url)
-          
+
             }
           })
-        
-      
+
+
       })
-     
+
       this.lagunaserve.get_sec_url(v1,this.resid).subscribe(data=>{
         console.log(data);
         this.break_sec=data
         if(this.break_sec.msg.length!=0){
 
-        
+
         for(let i=0;i<this.break_sec.msg.length;i++)
         {
           if(this.break_sec.msg[i].sec_url!=''){
@@ -4696,10 +4707,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
            }
         }
       }
-  
+
       })
       console.log(this.v);
-     
+
       if(localStorage.getItem('No_of_menu')=='O'){
           if((localStorage.getItem('No_of_menu')=='O')&&(this.v==1)){
             //Snackbar
@@ -4708,25 +4719,25 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             this.tab2 = true;
             this.tab3 = true;
             this.tab4 = false;
-          
+
             this.paris = document.getElementById('Laguna');
             this.paris.className = 'active  tabcontent m-1';
             this.PACK = document.getElementById('defaultOpen2');
-       
+
             this.PACK.style.background = '#f1f1f1';
             this.PACK.style.color = 'black';
             this.BIRTH = document.getElementById('defaultOpen1');
-          
+
             this.BIRTH.style.background = '#f1f1f1';
             this.BIRTH.style.color = 'black';
             this.ENTER = document.getElementById('defaultOpen');
-          
+
             this.ENTER.style.background = '#f1f1f1';
             this.ENTER.style.color = 'black';
-        
-    
+
+
             this.WALL = document.getElementById('defaultOpen3');
-           
+
             this.WALL.style.background = '#00477e';
             this.WALL.style.color = 'white';
             this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
@@ -4741,37 +4752,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                   this.mon_check=document.getElementById('vehicle24');
                   this.mon_check.checked=true;
                   this.mon_brunch=2;
-                 
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==3){
                   this.tue_check=document.getElementById('vehicle34');
                   this.tue_check.checked=true;
                   this.tue_brunch=3;
-                 
+
                 }
                 if(this.arr_brak_check.msg[i].month_day==4){
                   this.wed_check=document.getElementById('vehicle44');
                   this.wed_check.checked=true;
                   this.wed_brunch=4;
-                 
+
                 }
               if(this.arr_brak_check.msg[i].month_day==5){
                   this.thu_check=document.getElementById('vehicle54');
                   this.thu_check.checked=true;
                   this.thu_brunch=5;
-                  
+
                 }
              if(this.arr_brak_check.msg[i].month_day==6){
                   this.fri_check=document.getElementById('vehicle64');
                   this.fri_check.checked=true;
                   this.fri_brunch=6;
-                  
+
                 }
              if(this.arr_brak_check.msg[i].month_day==7){
                   this.sat_check=document.getElementById('vehicle74');
                   this.sat_check.checked=true;
                   this.sat_brunch=7;
-                  
+
                 }
               if(this.arr_brak_check.msg[i].month_day==8){
                   this.sun_check=document.getElementById('vehicle84');
@@ -4810,7 +4821,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
            }
            else{
            this. myFunction_forerror();
-              
+
            }
 
           }
@@ -4819,25 +4830,25 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           this.tab2 = true;
           this.tab3 = true;
           this.tab4 = false;
-        
+
           this.paris = document.getElementById('Laguna');
           this.paris.className = 'active  tabcontent m-1';
           this.PACK = document.getElementById('defaultOpen2');
-     
+
           this.PACK.style.background = '#f1f1f1';
           this.PACK.style.color = 'black';
           this.BIRTH = document.getElementById('defaultOpen1');
-        
+
           this.BIRTH.style.background = '#f1f1f1';
           this.BIRTH.style.color = 'black';
           this.ENTER = document.getElementById('defaultOpen');
-        
+
           this.ENTER.style.background = '#f1f1f1';
           this.ENTER.style.color = 'black';
-      
-  
+
+
           this.WALL = document.getElementById('defaultOpen3');
-         
+
           this.WALL.style.background = '#00477e';
           this.WALL.style.color = 'white';
           this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
@@ -4852,37 +4863,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                 this.mon_check=document.getElementById('vehicle24');
                 this.mon_check.checked=true;
                 this.mon_brunch=2;
-               
+
               }
               if(this.arr_brak_check.msg[i].month_day==3){
                 this.tue_check=document.getElementById('vehicle34');
                 this.tue_check.checked=true;
                 this.tue_brunch=3;
-               
+
               }
               if(this.arr_brak_check.msg[i].month_day==4){
                 this.wed_check=document.getElementById('vehicle44');
                 this.wed_check.checked=true;
                 this.wed_brunch=4;
-               
+
               }
             if(this.arr_brak_check.msg[i].month_day==5){
                 this.thu_check=document.getElementById('vehicle54');
                 this.thu_check.checked=true;
                 this.thu_brunch=5;
-                
+
               }
            if(this.arr_brak_check.msg[i].month_day==6){
                 this.fri_check=document.getElementById('vehicle64');
                 this.fri_check.checked=true;
                 this.fri_brunch=6;
-                
+
               }
            if(this.arr_brak_check.msg[i].month_day==7){
                 this.sat_check=document.getElementById('vehicle74');
                 this.sat_check.checked=true;
                 this.sat_brunch=7;
-                
+
               }
             if(this.arr_brak_check.msg[i].month_day==8){
                 this.sun_check=document.getElementById('vehicle84');
@@ -4927,25 +4938,25 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           this.tab2 = true;
           this.tab3 = true;
           this.tab4 = false;
-        
+
           this.paris = document.getElementById('Laguna');
           this.paris.className = 'active  tabcontent m-1';
           this.PACK = document.getElementById('defaultOpen2');
-     
+
           this.PACK.style.background = '#f1f1f1';
           this.PACK.style.color = 'black';
           this.BIRTH = document.getElementById('defaultOpen1');
-        
+
           this.BIRTH.style.background = '#f1f1f1';
           this.BIRTH.style.color = 'black';
           this.ENTER = document.getElementById('defaultOpen');
-        
+
           this.ENTER.style.background = '#f1f1f1';
           this.ENTER.style.color = 'black';
-      
-  
+
+
           this.WALL = document.getElementById('defaultOpen3');
-         
+
           this.WALL.style.background = '#00477e';
           this.WALL.style.color = 'white';
           this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
@@ -4960,37 +4971,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
                 this.mon_check=document.getElementById('vehicle24');
                 this.mon_check.checked=true;
                 this.mon_brunch=2;
-               
+
               }
               if(this.arr_brak_check.msg[i].month_day==3){
                 this.tue_check=document.getElementById('vehicle34');
                 this.tue_check.checked=true;
                 this.tue_brunch=3;
-               
+
               }
               if(this.arr_brak_check.msg[i].month_day==4){
                 this.wed_check=document.getElementById('vehicle44');
                 this.wed_check.checked=true;
                 this.wed_brunch=4;
-               
+
               }
             if(this.arr_brak_check.msg[i].month_day==5){
                 this.thu_check=document.getElementById('vehicle54');
                 this.thu_check.checked=true;
                 this.thu_brunch=5;
-                
+
               }
            if(this.arr_brak_check.msg[i].month_day==6){
                 this.fri_check=document.getElementById('vehicle64');
                 this.fri_check.checked=true;
                 this.fri_brunch=6;
-                
+
               }
            if(this.arr_brak_check.msg[i].month_day==7){
                 this.sat_check=document.getElementById('vehicle74');
                 this.sat_check.checked=true;
                 this.sat_brunch=7;
-                
+
               }
             if(this.arr_brak_check.msg[i].month_day==8){
                 this.sun_check=document.getElementById('vehicle84');
@@ -5029,41 +5040,41 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
          }
          else{
          this. myFunction_forerror();
-            
+
          }
-        
+
       }
      else if((localStorage.getItem('No_of_menu')=='T')&&(this.v!=2)){
       this.tab1 = true;
       this.tab2 = true;
       this.tab3 = true;
       this.tab4 = false;
-    
+
       this.paris = document.getElementById('Laguna');
       this.paris.className = 'active  tabcontent m-1';
       this.PACK = document.getElementById('defaultOpen2');
- 
+
       this.PACK.style.background = '#f1f1f1';
       this.PACK.style.color = 'black';
       this.BIRTH = document.getElementById('defaultOpen1');
-    
+
       this.BIRTH.style.background = '#f1f1f1';
       this.BIRTH.style.color = 'black';
       this.ENTER = document.getElementById('defaultOpen');
-    
+
       this.ENTER.style.background = '#f1f1f1';
       this.ENTER.style.color = 'black';
-  
+
 
       this.WALL = document.getElementById('defaultOpen3');
-     
+
       this.WALL.style.background = '#00477e';
       this.WALL.style.color = 'white';
       this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
         this.arr_brak_check=data;
         console.log(data);
         if( this.arr_brak_check.msg.length!=0){
-       
+
         this.Brunch_start=this.arr_brak_check.msg[0].start_time;
         this.Brunch_end=this.arr_brak_check.msg[0].end_time;
         // this.brunch_start=this.Brunch_start;
@@ -5073,37 +5084,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             this.mon_check=document.getElementById('vehicle24');
             this.mon_check.checked=true;
             this.mon_brunch=2;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==3){
             this.tue_check=document.getElementById('vehicle34');
             this.tue_check.checked=true;
             this.tue_brunch=3;
-           
+
           }
           if(this.arr_brak_check.msg[i].month_day==4){
             this.wed_check=document.getElementById('vehicle44');
             this.wed_check.checked=true;
             this.wed_brunch=4;
-           
+
           }
         if(this.arr_brak_check.msg[i].month_day==5){
             this.thu_check=document.getElementById('vehicle54');
             this.thu_check.checked=true;
             this.thu_brunch=5;
-            
+
           }
           if(this.arr_brak_check.msg[i].month_day==6){
             this.fri_check=document.getElementById('vehicle64');
             this.fri_check.checked=true;
             this.fri_brunch=6;
-            
+
           }
          if(this.arr_brak_check.msg[i].month_day==7){
             this.sat_check=document.getElementById('vehicle74');
             this.sat_check.checked=true;
             this.sat_brunch=7;
-            
+
           }
        if(this.arr_brak_check.msg[i].month_day==8){
             this.sun_check=document.getElementById('vehicle84');
@@ -5136,10 +5147,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
             this.sun_brunch=8;
            }
     }
-       
+
   }
       })
-  
+
      }
        }
        else if(localStorage.getItem('No_of_menu')=='U'){
@@ -5147,25 +5158,25 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         this.tab2 = true;
         this.tab3 = true;
         this.tab4 = false;
-      
+
         this.paris = document.getElementById('Laguna');
         this.paris.className = 'active  tabcontent m-1';
         this.PACK = document.getElementById('defaultOpen2');
-   
+
         this.PACK.style.background = '#f1f1f1';
         this.PACK.style.color = 'black';
         this.BIRTH = document.getElementById('defaultOpen1');
-      
+
         this.BIRTH.style.background = '#f1f1f1';
         this.BIRTH.style.color = 'black';
         this.ENTER = document.getElementById('defaultOpen');
-      
+
         this.ENTER.style.background = '#f1f1f1';
         this.ENTER.style.color = 'black';
-    
-  
+
+
         this.WALL = document.getElementById('defaultOpen3');
-       
+
         this.WALL.style.background = '#00477e';
         this.WALL.style.color = 'white';
         this.lagunaserve.get_set_time(v1,this.resid).subscribe(data=>{
@@ -5179,37 +5190,37 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
               this.mon_check=document.getElementById('vehicle24');
               this.mon_check.checked=true;
               this.mon_brunch=2;
-             
+
             }
           if(this.arr_brak_check.msg[i].month_day==3){
               this.tue_check=document.getElementById('vehicle34');
               this.tue_check.checked=true;
               this.tue_brunch=3;
-             
+
             }
              if(this.arr_brak_check.msg[i].month_day==4){
               this.wed_check=document.getElementById('vehicle44');
               this.wed_check.checked=true;
               this.wed_brunch=4;
-             
+
             }
           if(this.arr_brak_check.msg[i].month_day==5){
               this.thu_check=document.getElementById('vehicle54');
               this.thu_check.checked=true;
               this.thu_brunch=5;
-              
+
             }
          if(this.arr_brak_check.msg[i].month_day==6){
               this.fri_check=document.getElementById('vehicle64');
               this.fri_check.checked=true;
               this.fri_brunch=6;
-              
+
             }
           if(this.arr_brak_check.msg[i].month_day==7){
               this.sat_check=document.getElementById('vehicle74');
               this.sat_check.checked=true;
               this.sat_brunch=7;
-              
+
             }
             if(this.arr_brak_check.msg[i].month_day==8){
               this.sun_check=document.getElementById('vehicle84');
@@ -5245,7 +5256,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         })
        }
 
-       
+
     }
     else if(e=='Shrewsbury'){
       this.tab1=true;
@@ -5257,27 +5268,27 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       // this.paris.style.color = 'black';
       // this.paris.style.background = '#f1f1f1';
       this.PACK = document.getElementById('defaultOpen2');
- 
+
       this.PACK.style.background = '#f1f1f1';
       this.PACK.style.color = 'black';
       this.BIRTH = document.getElementById('defaultOpen1');
-    
+
       this.BIRTH.style.background = '#f1f1f1';
       this.BIRTH.style.color = 'black';
       this.ENTER = document.getElementById('defaultOpen');
-    
+
       this.ENTER.style.background = '#f1f1f1';
       this.ENTER.style.color = 'black';
-  
+
 
       this.WALL = document.getElementById('defaultOpen3');
-     
+
       this.WALL.style.background = '#f1f1f1';
       this.WALL.style.color = 'black';
       this.Special_menu=document.getElementById('Shrewsbury');
       this.Special_menu.className="active tabcontent"
       this.Special_menu = document.getElementById('defaultOpen4');
-     
+
       this.Special_menu.style.background = '#00477e';
       this.Special_menu.style.color = 'white';
 
@@ -5364,12 +5375,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
     if(this.break_check=='N'){
      localStorage.setItem('breakfast','active');
      if(this.v==1){
-       
+
        this.v=0;
-      
-       
+
+
        const formData = new FormData();
-     
+
        formData.append('coverurl', COVERPAGEURL);
        formData.append('cov_filename', this.breakfast_cover_name);
        formData.append('top_filename', this.breakfast_top_name);
@@ -5384,16 +5395,16 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         formData.append('restaurant_id',this.resid);
         formData.append('menu_id',hidevalue);
         formData.append('break_check',this.break_check);
-    
+
         formData.append('restaurant_name',this.res_name);
-      
+
        for(let img of this.breakfastsectionimage){
          formData.append('section_img', img);
        }
        for (let img of this.multipleImages) {
          formData.append('menu_img', img);
        }
-       
+
        console.log(this.multipleImages)
        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
          (res) => console.log(res),
@@ -5401,7 +5412,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        );
          this.storevalue.length=0;
        this.storevalue.push({
-       
+
        "restaurant_id":this.resid,
        "menu_id":hidevalue,
        "break_check":this.break_check,
@@ -5410,20 +5421,21 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
      });
          console.log(this.storevalue);
-    
+
          this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
         this.spinner.hide();
-      })
-    
         this.myFunction_update();
-  
- 
+
+      })
+
+
+
      }
      else if(this.v==2){
        this.v=1;
        const formData = new FormData();
-     
+
        formData.append('coverurl', COVERPAGEURL);
        formData.append('topurl', TOPIMAGEURL);
        formData.append('cov_filename', this.breakfast_cover_name);
@@ -5436,7 +5448,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         formData.append('restaurant_id',this.resid);
         formData.append('menu_id',hidevalue);
         formData.append('break_check',this.break_check);
-    
+
         formData.append('restaurant_name',this.res_name);
        for(let img of this.breakfastsectionimage){
          formData.append('section_img', img);
@@ -5444,7 +5456,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        for (let img of this.multipleImages) {
          formData.append('menu_img', img);
        }
-       
+
        console.log(this.multipleImages)
        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
          (res) => console.log(res),
@@ -5452,7 +5464,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        );
          this.storevalue.length=0;
        this.storevalue.push({
-       
+
        "restaurant_id":this.resid,
        "menu_id":hidevalue,
        "break_check":this.break_check,
@@ -5461,24 +5473,25 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
      });
          console.log(this.storevalue);
-    
+
          this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
         this.spinner.hide();
-      })
-      
         this.myFunction_update();
+
+      })
+
      }
    }
    else{
     if(v1<v2){
- 
-     
-    
+
+
+
        if(localStorage.getItem('breakfast')==''){
 
-        
-       
+
+
         const formData = new FormData();
         formData.append('coverurl', COVERPAGEURL);
         formData.append('topurl', TOPIMAGEURL);
@@ -5488,23 +5501,23 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         formData.append('SectionUrl',SECTIONURL);
         formData.append('cov_img',this.breakfastcoverimage);
         formData.append('top_img', this.breakfasttopimage);
- 
+
          formData.append('restaurant_id',this.resid);
          formData.append('menu_id',hidevalue);
          formData.append('break_check',this.break_check);
-   
+
          formData.append('restaurant_name',this.res_name);
-  
-  
-        
-  
+
+
+
+
         for(let img of this.breakfastsectionimage){
           formData.append('section_img', img);
         }
         for (let img of this.multipleImages) {
           formData.append('menu_img', img);
         }
-        
+
         console.log(this.multipleImages)
         this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
           (res) => console.log(res),
@@ -5512,7 +5525,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         );
         this.storevalue.length=0;
         this.storevalue.push({
-        
+
         "restaurant_id":this.resid,
         "menu_id":hidevalue,
         "break_check":this.break_check,
@@ -5521,15 +5534,16 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
       });
           console.log(this.storevalue);
-     
+
           this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
          console.log(data);
          this.spinner.hide();
-       })
-  
+         this.myFunction_update();
 
-            this.myFunction_update();
-  
+       })
+
+
+
       }
       else{
       console.log(this.v);
@@ -5539,7 +5553,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           this.v=1;
           this.storevalue.length=0;
           const formData = new FormData();
- 
+
           formData.append('coverurl', COVERPAGEURL);
           formData.append('topurl', TOPIMAGEURL);
           formData.append('cov_filename', this.breakfast_cover_name);
@@ -5548,23 +5562,23 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           formData.append('SectionUrl',SECTIONURL);
           formData.append('cov_img',this.breakfastcoverimage);
           formData.append('top_img', this.breakfasttopimage);
-   
+
            formData.append('restaurant_id',this.resid);
            formData.append('menu_id',hidevalue);
            formData.append('break_check',this.break_check);
-       
+
            formData.append('restaurant_name',this.res_name);
-    
-    
-          
-    
+
+
+
+
           for(let img of this.breakfastsectionimage){
             formData.append('section_img', img);
           }
           for (let img of this.multipleImages) {
             formData.append('menu_img', img);
           }
-          
+
           console.log(this.multipleImages)
           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
             (res) => console.log(res),
@@ -5574,7 +5588,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
           this.storevalue.length=0;
           this.storevalue.push({
-          
+
           "restaurant_id":this.resid,
           "menu_id":hidevalue,
           "break_check":this.break_check,
@@ -5583,31 +5597,32 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
         });
             console.log(this.storevalue);
-       
+
             this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
            console.log(data);
            this.spinner.hide();
+           this.myFunction();
+
          })
-    
-              this.myFunction();
-            
-  
-     
-  
-      
+
+
+
+
+
+
         }
         else{
-         
+
           this. myFunction_forerror();
-  
+
         }
       }
-      else if(localStorage.getItem('No_of_menu')=='T'){  
+      else if(localStorage.getItem('No_of_menu')=='T'){
         if(this.v==0){
           this.v=1;
           this.storevalue.length=0;
           const formData = new FormData();
-       
+
           formData.append('coverurl', COVERPAGEURL);
           formData.append('topurl', TOPIMAGEURL);
           formData.append('cov_filename', this.breakfast_cover_name);
@@ -5616,23 +5631,23 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           formData.append('SectionUrl',SECTIONURL);
           formData.append('cov_img',this.breakfastcoverimage);
           formData.append('top_img', this.breakfasttopimage);
-        
+
            formData.append('restaurant_id',this.resid);
            formData.append('menu_id',hidevalue);
            formData.append('break_check',this.break_check);
-     
+
            formData.append('restaurant_name',this.res_name);
-    
-    
-          
-    
+
+
+
+
           for(let img of this.breakfastsectionimage){
             formData.append('section_img', img);
           }
           for (let img of this.multipleImages) {
             formData.append('menu_img', img);
           }
-          
+
           console.log(this.multipleImages)
           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
             (res) => console.log(res),
@@ -5641,7 +5656,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
           this.storevalue.length=0;
           this.storevalue.push({
-          
+
           "restaurant_id":this.resid,
           "menu_id":hidevalue,
           "break_check":this.break_check,
@@ -5650,19 +5665,20 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
         });
             console.log(this.storevalue);
-       
+
             this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
            console.log(data);
            this.spinner.hide();
+           this.myFunction();
+
          })
-    
-              this.myFunction();
+
         }
         else if(this.v==1){
           this.v=2;
           this.storevalue.length=0;
           const formData = new FormData();
-          
+
           formData.append('coverurl', COVERPAGEURL);
           formData.append('topurl', TOPIMAGEURL);
           formData.append('cov_filename', this.breakfast_cover_name);
@@ -5671,23 +5687,23 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           formData.append('SectionUrl',SECTIONURL);
           formData.append('cov_img',this.breakfastcoverimage);
           formData.append('top_img', this.breakfasttopimage);
-   
+
            formData.append('restaurant_id',this.resid);
            formData.append('menu_id',hidevalue);
            formData.append('break_check',this.break_check);
-       
+
            formData.append('restaurant_name',this.res_name);
-    
-    
-          
-    
+
+
+
+
           for(let img of this.breakfastsectionimage){
             formData.append('section_img', img);
           }
           for (let img of this.multipleImages) {
             formData.append('menu_img', img);
           }
-          
+
           console.log(this.multipleImages)
           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
             (res) => console.log(res),
@@ -5696,7 +5712,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
           this.storevalue.length=0;
           this.storevalue.push({
-          
+
           "restaurant_id":this.resid,
           "menu_id":hidevalue,
           "break_check":this.break_check,
@@ -5705,27 +5721,28 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
         });
             console.log(this.storevalue);
-       
+
             this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
            console.log(data);
            this.spinner.hide();
+           this.myFunction();
+
          })
-    
-              this.myFunction();
-            
-      
-  
+
+
+
+
         }
         else{
           //snackbar
           this. myFunction_forerror();
-  
+
         }
       }
       else {
         this.v=3
         this.storevalue.length=0;
-     
+
         const formData = new FormData();
         // const notBase64 = /[^A-Z0-9+\/=]/i;
         // this.breakfastcoverimage = notBase64.test(this.breakfastcoverimage) ? this.breakfastcoverimage : '';
@@ -5746,17 +5763,17 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           //  formData.append("start_time",this.brunch_start);
           //  formData.append('end_time',this.brunch_end);
            formData.append('restaurant_name',this.res_name);
-    
-    
-          
-    
+
+
+
+
           for(let img of this.breakfastsectionimage){
             formData.append('section_img', img);
           }
           for (let img of this.multipleImages) {
             formData.append('menu_img', img);
           }
-          
+
           console.log(this.multipleImages)
           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
             (res) => console.log(res),
@@ -5766,7 +5783,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
           this.storevalue.length=0;
           this.storevalue.push({
-          
+
           "restaurant_id":this.resid,
           "menu_id":hidevalue,
           "break_check":this.break_check,
@@ -5775,29 +5792,30 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           "month_day": [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thu},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}]
         });
             console.log(this.storevalue);
-       
+
             this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
            console.log(data);
            this.spinner.hide();
+           this.myFunction();
+
          })
-    
-              this.myFunction();
+
           }
-          
+
        }
-      
-     
-  
-      
+
+
+
+
      }
      else{
        this.myFunction_fortime()
      }
    }
-  
+
     localStorage.setItem('value',this.v)
-  
-  
+
+
 
   }
 
@@ -5806,7 +5824,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
     this.spinner.show();
 
     console.log(this.brunch_check);
-    
+
   if(this.brunch_check=='N'){
     localStorage.setItem('dinner','active');
 
@@ -5826,11 +5844,11 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        formData.append('restaurant_id',this.resid);
        formData.append('menu_id',v5);
        formData.append('break_check',this.brunch_check);
-  
+
        formData.append('restaurant_name',this.res_name);
 
 
-      
+
 
       for(let img1 of this.branchsectionimage){
         formData.append('section_img', img1);
@@ -5847,21 +5865,22 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
       this.storevalue.length=0;
       this.storevalue.push({
-           
+
             "restaurant_id":this.resid,
             "menu_id":v5,
             "break_check":this.brunch_check,
             "start_time":v6,
         "end_time":v7,
         "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
-  
+
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
         this.spinner.hide();
+        this.myFunction_update();
+
       })
-  
-          this.myFunction_update();
+
     }
     else if(this.v==2){
       this.v=1;
@@ -5879,11 +5898,11 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        formData.append('restaurant_id',this.resid);
        formData.append('menu_id',v5);
        formData.append('break_check',this.brunch_check);
-  
+
        formData.append('restaurant_name',this.res_name);
 
 
-      
+
 
       for(let img1 of this.branchsectionimage){
         formData.append('section_img', img1);
@@ -5900,27 +5919,28 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
       this.storevalue.length=0;
       this.storevalue.push({
-           
+
             "restaurant_id":this.resid,
             "menu_id":v5,
             "break_check":this.brunch_check,
             "start_time":v6,
         "end_time":v7,
         "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
-  
+
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
         this.spinner.hide();
+        this.myFunction_update();
+
       })
-  
-          this.myFunction_update();
+
     }
   }
   else{
     if(v6<v7){
-    
- 
+
+
     if( localStorage.getItem('dinner')==''){
       this.storevalue.length=0;
       const formData = new FormData();
@@ -5937,12 +5957,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
          formData.append('restaurant_id',this.resid);
          formData.append('menu_id',v5);
          formData.append('break_check',this.brunch_check);
-    
+
          formData.append('restaurant_name',this.res_name);
-  
-  
-        
-  
+
+
+
+
         for(let img1 of this.branchsectionimage){
           formData.append('section_img', img1);
         }
@@ -5957,27 +5977,28 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         );
         this.storevalue.length=0;
       this.storevalue.push({
-           
+
             "restaurant_id":this.resid,
             "menu_id":v5,
             "break_check":this.brunch_check,
             "start_time":v6,
         "end_time":v7,
         "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
-  
+
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
         this.spinner.hide();
+        this.myFunction_update();
+
       })
 
             // this.myFunction();
-            this.myFunction_update();
-          
 
 
 
-    
+
+
     }
     else{
     localStorage.setItem('dinner','');
@@ -6005,18 +6026,18 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         //  formData.append("start_time",this.brunch_start);
         //  formData.append('end_time',this.brunch_end);
          formData.append('restaurant_name',this.res_name);
-  
-  
-        
-  
+
+
+
+
          for(let img1 of this.branchsectionimage){
           formData.append('section_img', img1);
         }
         for (let img of this.branchmenuimage) {
           formData.append('menu_img', img);
         }
-        
-        
+
+
         console.log(this.multipleImages)
         this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
           (res) => console.log(res),
@@ -6024,23 +6045,24 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         );
         this.storevalue.length=0;
       this.storevalue.push({
-           
+
             "restaurant_id":this.resid,
             "menu_id":v5,
             "break_check":this.brunch_check,
             "start_time":v6,
         "end_time":v7,
         "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
-  
+
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
         this.spinner.hide();
+        this.myFunction();
+
       })
 
-            this.myFunction();
-          
-      
+
+
       }
       else{
         //SnackBar
@@ -6054,7 +6076,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
            this.storevalue.length=0;
 
            const formData = new FormData();
-     
+
            formData.append('coverurl', v4);
            formData.append('topurl',  v3);
            formData.append('MenuUrl', v2);
@@ -6063,23 +6085,23 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
            formData.append('top_filename', this.dinner_top_name);
            formData.append('cov_img',this.branchcoverimage);
            formData.append('top_img', this.branchtopimage);
-        
+
             formData.append('restaurant_id',this.resid);
             formData.append('menu_id',v5);
             formData.append('break_check',this.brunch_check);
-     
+
             formData.append('restaurant_name',this.res_name);
-     
-     
-           
-     
+
+
+
+
             for(let img1 of this.branchsectionimage){
               formData.append('section_img', img1);
             }
             for (let img of this.branchmenuimage) {
               formData.append('menu_img', img);
             }
-           
+
            console.log(this.multipleImages)
            this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
              (res) => console.log(res),
@@ -6087,31 +6109,32 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
            );
            this.storevalue.length=0;
       this.storevalue.push({
-           
+
             "restaurant_id":this.resid,
             "menu_id":v5,
             "break_check":this.brunch_check,
             "start_time":v6,
         "end_time":v7,
         "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
-  
+
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
         this.spinner.hide();
+        this.myFunction();
+
       })
 
-               this.myFunction();
-             
-    
-             
+
+
+
          }
          else if(this.v==1){
            this.v=2;
            this.storevalue.length=0;
 
            const formData = new FormData();
-          
+
            formData.append('coverurl', v4);
            formData.append('topurl',  v3);
            formData.append('MenuUrl', v2);
@@ -6120,23 +6143,23 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
            formData.append('top_filename', this.dinner_top_name);
            formData.append('cov_img',this.branchcoverimage);
            formData.append('top_img', this.branchtopimage);
-          
+
             formData.append('restaurant_id',this.resid);
             formData.append('menu_id',v5);
             formData.append('break_check',this.brunch_check);
-   
+
             formData.append('restaurant_name',this.res_name);
-     
-     
-           
-     
+
+
+
+
            for(let img of this.breakfastsectionimage){
              formData.append('section_img', img);
            }
            for (let img of this.branchmenuimage) {
              formData.append('menu_img', img);
            }
-           
+
            console.log(this.multipleImages)
            this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
              (res) => console.log(res),
@@ -6145,25 +6168,26 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
            this.storevalue.length=0;
       this.storevalue.push({
-           
+
             "restaurant_id":this.resid,
             "menu_id":v5,
             "break_check":this.brunch_check,
             "start_time":v6,
         "end_time":v7,
         "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
-  
+
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
         this.spinner.hide();
+        this.myFunction();
+
       })
 
-               this.myFunction();
-             
-          
-              
-             
+
+
+
+
          }
          else {
           this. myFunction_forerror();
@@ -6176,7 +6200,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        this.storevalue.length=0;
 
        const formData = new FormData();
-    
+
        formData.append('coverurl', v4);
        formData.append('topurl',  v3);
        formData.append('MenuUrl', v2);
@@ -6191,17 +6215,17 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         formData.append('break_check',this.brunch_check);
 
         formData.append('restaurant_name',this.res_name);
- 
- 
-       
- 
+
+
+
+
         for(let img1 of this.branchsectionimage){
           formData.append('section_img', img1);
         }
         for (let img of this.branchmenuimage) {
           formData.append('menu_img', img);
         }
-       
+
        console.log(this.multipleImages)
        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
          (res) => console.log(res),
@@ -6210,48 +6234,46 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
        this.storevalue.length=0;
       this.storevalue.push({
-           
+
             "restaurant_id":this.resid,
             "menu_id":v5,
             "break_check":this.brunch_check,
             "start_time":v6,
         "end_time":v7,
         "month_day": [{"dt": this.mon_dinner},{"dt":this.tue_dinner},{"dt":this.wed_dinner},{"dt":this.thu_dinner},{"dt":this.fri_dinner},{"dt":this.sat_dinner},{"dt":this.sun_dinner}]
-  
+
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
         this.spinner.hide();
-      })
+        this.myFunction();
 
-           this.myFunction();
-         
-      
-           console.log(this.storevalue);
-         
+      })
+console.log(this.storevalue);
+
     }
       }
 
-      
+
      }
     else{
       this.myFunction_fortime();
     }
   }
-    
-  
-    localStorage.setItem('value',this.v)
-  
 
-   
-  
+
+    localStorage.setItem('value',this.v)
+
+
+
+
   }
 
   launchchaked(event:any){
        if(event.target.checked){
          this.launch_check='Y';
          this.lcc_url=false;
-        
+
        }
        else{
         this.launch_check='N';
@@ -6264,14 +6286,14 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 // Fot Submitting data of Launch Tab
   opennextab1(e: any, v1: any, v2: any,v4:any,v5:any,v6:any,v7:any,v8:any) {
     console.log(this.lunch_cover_name, this.lunch_top_name);
-    
+
     this.spinner.show();
  if(this.launch_check=='N'){
   localStorage.setItem('launch','active');
 
     if(this.v==1){
       this.v=0;
-      
+
       const formData = new FormData();
       // formData.append('file', this.breakfastcoverimage);
       formData.append('coverurl', v1);
@@ -6291,7 +6313,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        formData.append('restaurant_name',this.res_name);
 
 
-      
+
 
       for(let img1 of this.launchsectionimage){
         formData.append('section_img', img1);
@@ -6299,7 +6321,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       for (let img of this.launchmenuimage) {
         formData.append('menu_img', img);
       }
-      
+
       console.log(this.launchmenuimage)
       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
         (res) => console.log(res),
@@ -6307,7 +6329,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       );
       this.storevalue.length=0;
       this.storevalue.push({
-      
+
       "restaurant_id":this.resid,
       "menu_id":v6,
       "break_check":this.launch_check,
@@ -6321,14 +6343,15 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
 console.log(data);
 this.spinner.hide();
+this.myFunction_update();
 
 })
 
-   
+
     }
     else if(this.v==2){
       this.v=1;
-      
+
       const formData = new FormData();
       // formData.append('file', this.breakfastcoverimage);
       formData.append('coverurl', v1);
@@ -6348,7 +6371,7 @@ this.spinner.hide();
        formData.append('restaurant_name',this.res_name);
 
 
-      
+
 
       for(let img1 of this.launchsectionimage){
         formData.append('section_img', img1);
@@ -6356,7 +6379,7 @@ this.spinner.hide();
       for (let img of this.launchmenuimage) {
         formData.append('menu_img', img);
       }
-      
+
       console.log(this.launchmenuimage)
       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
         (res) => console.log(res),
@@ -6364,7 +6387,7 @@ this.spinner.hide();
       );
       this.storevalue.length=0;
       this.storevalue.push({
-      
+
       "restaurant_id":this.resid,
       "menu_id":v6,
       "break_check":this.launch_check,
@@ -6378,19 +6401,20 @@ this.spinner.hide();
   this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
 console.log(data);
 this.spinner.hide();
+this.myFunction_update();
+
 })
     }
-    this.myFunction_update();
  }
  else{
- 
+
 if(v7<v8){
    console.log("spinner");
 
- 
+
 
       if(localStorage.getItem('launch')==''){
-     
+
 
       const formData = new FormData();
       // formData.append('file', this.breakfastcoverimage);
@@ -6411,7 +6435,7 @@ if(v7<v8){
        formData.append('restaurant_name',this.res_name);
 
 
-      
+
 
       for(let img1 of this.launchsectionimage){
         formData.append('section_img', img1);
@@ -6419,7 +6443,7 @@ if(v7<v8){
       for (let img of this.launchmenuimage) {
         formData.append('menu_img', img);
       }
-      
+
       console.log(this.launchmenuimage)
       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
         (res) => console.log(res),
@@ -6428,7 +6452,7 @@ if(v7<v8){
 
       this.storevalue.length=0;
       this.storevalue.push({
-      
+
       "restaurant_id":this.resid,
       "menu_id":v6,
       "break_check":this.launch_check,
@@ -6442,16 +6466,16 @@ if(v7<v8){
   this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
 console.log(data);
 this.spinner.hide();
+this.myFunction_update();
 
 })
 
           // this.myFunction();
-          this.myFunction_update();
-        
-   
+
+
         this.success=0;
         console.log(this.storevalue);
-      
+
     }
     else{
      localStorage.setItem('launch','');
@@ -6477,17 +6501,17 @@ this.spinner.hide();
             // formData.append("start_time",this.brunch_start);
             // formData.append('end_time',this.brunch_end);
             formData.append('restaurant_name',this.res_name);
-     
-     
-           
-     
+
+
+
+
            for(let img of this.launchsectionimage){
              formData.append('section_img', img);
            }
            for (let img of this.launchmenuimage) {
              formData.append('menu_img', img);
            }
-           
+
            console.log(this.multipleImages)
            this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
              (res) => console.log(res),
@@ -6495,24 +6519,24 @@ this.spinner.hide();
            );
            this.storevalue.length=0;
            this.storevalue.push({
-           
+
            "restaurant_id":this.resid,
            "menu_id":v6,
            "break_check":this.launch_check,
            "start_time":v7,
        "end_time":v8,
        "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
- 
+
          });
        console.log(this.storevalue);
-     
+
        this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
      console.log(data);
    this.spinner.hide();
- 
+   this.myFunction();
+
    })
- 
-               this.myFunction();
+
       //      this.storevalue.push({
       //     "coverurl": v1,
       //     "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
@@ -6531,10 +6555,10 @@ this.spinner.hide();
         //   this.success=data;
         //   if(this.success.suc==1){
         //     this.myFunction();
-          
+
         //   }
         // })
-       
+
       }
       else{
    //Snackbar
@@ -6563,17 +6587,17 @@ this.spinner.hide();
             // formData.append("start_time",this.brunch_start);
             // formData.append('end_time',this.brunch_end);
             formData.append('restaurant_name',this.res_name);
-     
-     
-           
-     
+
+
+
+
            for(let img of this.launchsectionimage){
              formData.append('section_img', img);
            }
            for (let img of this.launchmenuimage) {
              formData.append('menu_img', img);
            }
-           
+
            console.log(this.multipleImages)
            this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
              (res) => console.log(res),
@@ -6581,24 +6605,24 @@ this.spinner.hide();
            );
            this.storevalue.length=0;
            this.storevalue.push({
-           
+
            "restaurant_id":this.resid,
            "menu_id":v6,
            "break_check":this.launch_check,
            "start_time":v7,
        "end_time":v8,
        "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
- 
+
          });
        console.log(this.storevalue);
-     
+
        this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
      console.log(data);
    this.spinner.hide();
- 
+   this.myFunction();
+
    })
- 
-               this.myFunction();
+
       //      this.storevalue.push({
       //     "coverurl": v1,
       //     "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
@@ -6617,10 +6641,10 @@ this.spinner.hide();
         //   this.success=data;
         //   if(this.success.suc==1){
         //     this.myFunction();
-           
+
         //   }
         // })
-        
+
           }
           else if(this.v==1){
              this.v=2;
@@ -6642,17 +6666,17 @@ this.spinner.hide();
               // formData.append("start_time",this.brunch_start);
               // formData.append('end_time',this.brunch_end);
               formData.append('restaurant_name',this.res_name);
-       
-       
-             
-       
+
+
+
+
              for(let img of this.launchsectionimage){
                formData.append('section_img', img);
              }
              for (let img of this.launchmenuimage) {
                formData.append('menu_img', img);
              }
-             
+
              console.log(this.multipleImages)
              this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
                (res) => console.log(res),
@@ -6660,24 +6684,24 @@ this.spinner.hide();
              );
              this.storevalue.length=0;
              this.storevalue.push({
-             
+
              "restaurant_id":this.resid,
              "menu_id":v6,
              "break_check":this.launch_check,
              "start_time":v7,
          "end_time":v8,
          "month_day": [{"dt": this.mon_launch},{"dt":this.tue_launch},{"dt":this.wed_launch},{"dt":this.thu_launch},{"dt":this.fri_launch},{"dt":this.sat_launch},{"dt":this.sun_launch}]
-   
+
            });
          console.log(this.storevalue);
-       
+
          this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
        console.log(data);
      this.spinner.hide();
-   
+     this.myFunction();
+
      })
-   
-                 this.myFunction();
+
       //     this.storevalue.push({
       //     "coverurl": v1,
       //     "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
@@ -6696,10 +6720,10 @@ this.spinner.hide();
         //   this.success=data;
         //   if(this.success.suc==1){
         //     this.myFunction();
-            
+
         //   }
         // })
-       
+
           }
          else{
              //SnackBar
@@ -6728,7 +6752,7 @@ this.spinner.hide();
        formData.append('restaurant_name',this.res_name);
 
 
-      
+
 
       for(let img of this.launchsectionimage){
         formData.append('section_img', img);
@@ -6736,7 +6760,7 @@ this.spinner.hide();
       for (let img of this.launchmenuimage) {
         formData.append('menu_img', img);
       }
-      
+
       console.log(this.multipleImages)
       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
         (res) => console.log(res),
@@ -6744,7 +6768,7 @@ this.spinner.hide();
       );
       this.storevalue.length=0;
       this.storevalue.push({
-      
+
       "restaurant_id":this.resid,
       "menu_id":v6,
       "break_check":this.launch_check,
@@ -6758,10 +6782,10 @@ this.spinner.hide();
   this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
 console.log(data);
 this.spinner.hide();
+this.myFunction();
 
 })
 
-          this.myFunction();
   //     this.storevalue.push({
   //     "coverurl": v1,
   //     "topurl": v2,"MenuUrl":v4,"SectionUrl":v5,
@@ -6780,14 +6804,14 @@ this.spinner.hide();
     //   this.success=data;
     //   if(this.success.suc==1){
     //     this.myFunction();
-       
+
     //   }
     // })
-    
+
     }
-     
-  } 
- 
+
+  }
+
 }
 else{
   this.myFunction_fortime();
@@ -6808,11 +6832,11 @@ else{
     else{
      this.brunch_check='N';
      this.d_url=true;
-     
+
     }
   }
   checkdinner(event:any){
-     
+
     if(event.target.checked){
       this.dinner_check='Y';
       this.br_url=false;
@@ -6827,11 +6851,11 @@ else{
   // For Submitting the data of Brunch
  opennextab3(e: any,v1:any,v2:any,v3:any,v4:any,v5:any,v6:any,v7:any) {
   this.spinner.show();
-  console.log(this.v,e,v1,v2,v3,v4,v5,v6,v7);
+  // console.log(this.v,e,v1,v2,v3,v4,v5,v6,v7);
 
   if(this.dinner_check=='N'){
    localStorage.setItem('brunch','active');
-   
+
     if(this.v==1){
       this.v=0;
       // this.storevalue.length=0;
@@ -6854,7 +6878,7 @@ else{
      formData.append('restaurant_name',this.res_name);
 
 
-    
+
 
     for(let img of this.dinnersectionimage){
       formData.append('section_img', img);
@@ -6862,7 +6886,7 @@ else{
     for (let img of this.dinnermenuimage) {
       formData.append('menu_img', img);
     }
-    
+
     console.log(this.multipleImages)
 
     this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
@@ -6878,10 +6902,12 @@ else{
           "end_time":v7,
           "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]});
      console.log(this.storevalue);
-    
+
      this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
       console.log(data);
       this.spinner.hide();
+     this.myFunction_update();
+
     })
      }
      else if(this.v==2){
@@ -6906,7 +6932,7 @@ else{
      formData.append('restaurant_name',this.res_name);
 
 
-    
+
 
     for(let img of this.dinnersectionimage){
       formData.append('section_img', img);
@@ -6914,7 +6940,7 @@ else{
     for (let img of this.dinnermenuimage) {
       formData.append('menu_img', img);
     }
-    
+
     console.log(this.multipleImages)
 
     this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
@@ -6930,18 +6956,18 @@ else{
           "end_time":v7,
           "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]});
      console.log(this.storevalue);
-    
+
      this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
       console.log(data);
       this.spinner.hide();
+      this.myFunction_update();
 
     })
      }
-     this.myFunction_update();
   }
   else{
  if(v6<v7){
-   console.log("spinner");
+
    if(localStorage.getItem('brunch')==''){
     // this.storevalue.length=0;
     const formData = new FormData();
@@ -6963,7 +6989,7 @@ else{
      formData.append('restaurant_name',this.res_name);
 
 
-    
+
 
     for(let img of this.dinnersectionimage){
       formData.append('section_img', img);
@@ -6971,16 +6997,32 @@ else{
     for (let img of this.dinnermenuimage) {
       formData.append('menu_img', img);
     }
-    
+
     console.log(this.multipleImages)
 
     this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
+
+    this.storevalue.length=0;
+     this.storevalue.push({
+         "restaurant_id":this.resid,
+          "menu_id":v5,
+          "break_check":this.dinner_check,
+          "start_time":v6,
+          "end_time":v7,
+          "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]});
+     console.log(this.storevalue);
+
+     this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
+      console.log(data);
+  this.spinner.hide();
+  this.myFunction_update();
+
+    })
         // this.myFunction();
-        this.myFunction_update();
-      
+
   }
   else{
   localStorage.setItem('brunch','');
@@ -7009,7 +7051,7 @@ else{
      formData.append('restaurant_name',this.res_name);
 
 
-    
+
 
     for(let img of this.dinnersectionimage){
       formData.append('section_img', img);
@@ -7017,13 +7059,30 @@ else{
     for (let img of this.dinnermenuimage) {
       formData.append('menu_img', img);
     }
-    
+
     console.log(this.multipleImages)
     this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
-        this.myFunction();
+
+    this.storevalue.length=0;
+     this.storevalue.push({
+         "restaurant_id":this.resid,
+          "menu_id":v5,
+          "break_check":this.dinner_check,
+          "start_time":v6,
+          "end_time":v7,
+          "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]});
+     console.log(this.storevalue);
+
+     this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
+      console.log(data);
+  this.spinner.hide();
+  this.myFunction();
+
+    })
+
         //  this.storevalue.push({
         //   "coverurl": v3,
         //   "topurl": v2,"MenuUrl":v1,"SectionUrl":v4,
@@ -7042,10 +7101,10 @@ else{
         //   this.success=data;
         //   if(this.success.suc==1){
         //     this.myFunction();
-          
+
         //   }
         // })
-       
+
        }
        else if(this.v==1){
          //snackBar
@@ -7076,7 +7135,7 @@ else{
      formData.append('restaurant_name',this.res_name);
 
 
-    
+
 
     for(let img of this.dinnersectionimage){
       formData.append('section_img', img);
@@ -7084,16 +7143,31 @@ else{
     for (let img of this.dinnermenuimage) {
       formData.append('menu_img', img);
     }
-    
+
     console.log(this.multipleImages)
     this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
-        this.myFunction();
-    
-     
-      }
+
+
+    this.storevalue.length=0;
+    this.storevalue.push({
+        "restaurant_id":this.resid,
+         "menu_id":v5,
+         "break_check":this.dinner_check,
+         "start_time":v6,
+         "end_time":v7,
+         "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]});
+    console.log(this.storevalue);
+
+    this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
+     console.log(data);
+ this.spinner.hide();
+ this.myFunction();
+
+   })
+  }
       else if(this.v==1){
         this.v=2;
         this.storevalue.length=0;
@@ -7116,7 +7190,7 @@ else{
      formData.append('restaurant_name',this.res_name);
 
 
-    
+
 
     for(let img of this.dinnersectionimage){
       formData.append('section_img', img);
@@ -7124,16 +7198,31 @@ else{
     for (let img of this.dinnermenuimage) {
       formData.append('menu_img', img);
     }
-    
+
     console.log(this.multipleImages)
     this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
-        this.myFunction();
-      
-      
-      }
+
+
+    this.storevalue.length=0;
+    this.storevalue.push({
+        "restaurant_id":this.resid,
+         "menu_id":v5,
+         "break_check":this.dinner_check,
+         "start_time":v6,
+         "end_time":v7,
+         "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]});
+    console.log(this.storevalue);
+
+    this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
+     console.log(data);
+ this.spinner.hide();
+ this.myFunction();
+
+   })
+ }
       else{
         //Snackbar
         this. myFunction_forerror();
@@ -7162,7 +7251,7 @@ else{
      formData.append('restaurant_name',this.res_name);
 
 
-    
+
 
     for(let img of this.dinnersectionimage){
       formData.append('section_img', img);
@@ -7170,74 +7259,87 @@ else{
     for (let img of this.dinnermenuimage) {
       formData.append('menu_img', img);
     }
-    
+
     console.log(this.multipleImages)
     this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
-        this.myFunction();
-     
-    
+
+    this.storevalue.length=0;
+    this.storevalue.push({
+        "restaurant_id":this.resid,
+         "menu_id":v5,
+         "break_check":this.dinner_check,
+         "start_time":v6,
+         "end_time":v7,
+         "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]});
+    console.log(this.storevalue);
+
+    this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
+     console.log(data);
+ this.spinner.hide();
+ this.myFunction();
+
+   })
+
     }
   }
-this.storevalue.length=0;
-     this.storevalue.push({
-         "restaurant_id":this.resid,
-          "menu_id":v5,
-          "break_check":this.dinner_check,
-          "start_time":v6,
-          "end_time":v7,
-          "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]});
-     console.log(this.storevalue);
-    
-     this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
-      console.log(data);
-  this.spinner.hide();
+// this.storevalue.length=0;
+//      this.storevalue.push({
+//          "restaurant_id":this.resid,
+//           "menu_id":v5,
+//           "break_check":this.dinner_check,
+//           "start_time":v6,
+//           "end_time":v7,
+//           "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]});
+//      console.log(this.storevalue);
 
-    })
+//      this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
+//       console.log(data);
+//   this.spinner.hide();
+
+//     })
 
 
   }
   else{
    this.myFunction_fortime();
   }
-}
+   }
 
   localStorage.setItem('value',this.v)
-  
-
-  }
+}
 
   // For breakfastcoverimage
   // Breakfast(event: any) {
   //   console.log(event)
 
   //   if(event.target.files.length!=0){
-    
+
   //   console.log(event.target.files[0].name);
   //   this.breakfastcoverimage = event.target.files[0];
   //   const reader = new FileReader();
   //   reader.onload = () => {
   //     this.img_cover = reader.result as string;
- 
+
   //   }
- 
+
   //   reader.readAsDataURL(this.breakfastcoverimage)
   //   this.Breakfast_cover_preview=false;
   //  }
   //  else{
   //   this.Breakfast_cover_preview=true;
-      
+
   //  }
 
-   
-   
+
+
   // }
 
   Breakfast(event: any) {
     console.log(event,event.target.files[0].name,event.target.files[0].type);
-   
+
     if(event.target.files[0].size>2097152 ){
       this.myFunction_file_Size_error();
       console.log("asdasd");
@@ -7256,13 +7358,13 @@ this.storevalue.length=0;
   this.Modal=document.getElementById('hid');
   this.Modal.click();
   this.common_value="breakfast_cover";
-  
+
   }
-  
+
   }
 
 
-  
+
   // For breakfasttop image
   changeBreak(event: any) {
     console.log(event.target.files[0].name,event.target.files[0].type);
@@ -7284,17 +7386,17 @@ this.storevalue.length=0;
     this.breakfasttopimage = event.target.files[0];
     // console.log(this.breakfasttopimage);
     this.break_Top=false;
-    this.Breakfast_top_preview=false;
+    // this.Breakfast_top_preview=false;
     // const reader = new FileReader();
     // reader.onload = () => {
     //   this.img_top= reader.result as string;
 
-    
- 
+
+
     // reader.readAsDataURL(this.breakfasttopimage)
-     
+
     // }
-   
+
     }
     else{
       this.Breakfast_top_preview=true;
@@ -7304,40 +7406,40 @@ this.storevalue.length=0;
   }
   //For breakfastmenuimage
   changeBreakmenubreak(event: any) {
- 
+
    if (event.target.files.length > 0) {
     this.multipleImages= event.target.files;
     this.Breakfast_menu_preview=false;
-     
-      
+
+
       for (let i = 0; i < event.target.files.length; i++) {
       //   if(event.target.files[i].size>2097152){
       //    console.log("asasasas");
-         
-      
+
+
       //      this.myFunction_file_Size_error();
-      
-       
+
+
       //  }
       //  else{
-      
+
 
         this.img_menu_break.push({id:'',img_path:URL.createObjectURL(this.multipleImages[i])});
 
 
-    
+
         // }
-        
-      
+
+
         }
 
 
-    
+
 
     }
     else{
       this.Breakfast_menu_preview=true;
-       
+
     }
     console.log(this.img_menu_break, this.multipleImages);
     console.log('LENGTH:' , this.multipleImages.length)
@@ -7350,33 +7452,33 @@ this.storevalue.length=0;
     if (event.target.files.length > 0) {
       this.breakfastsectionimage = event.target.files;
       this.Breakfast_section_preview=false;
-      
+
       for (let i = 0; i < event.target.files.length; i++) {
-    
+
       //  if(event.target.files[i].size>2097152){
       //      this.myFunction_file_Size_error();
-             
+
       //  }
       //  else{
 
         this.img_section_break.push({id:'',img_path:URL.createObjectURL(this.breakfastsectionimage[i])});
       //  }
-       
-         
 
-  
-       
+
+
+
+
       }
-      
+
     }
     else{
       this.Breakfast_section_preview=true;
-      
+
     }
 
   }
    // Event of launch cover image
-  
+
   changelaunchcoverpage(event: any) {
     if(event.target.files[0].size>2097152){
       this.myFunction_file_Size_error();
@@ -7385,7 +7487,7 @@ this.storevalue.length=0;
       this.common_break_menu.value='';
     }
     else{
-   
+
     console.log(event.target.files[0]);
     if(event.target.files.length!=0){
       this.width=1800;
@@ -7395,23 +7497,23 @@ this.storevalue.length=0;
       this.Modal=document.getElementById('hid');
       this.Modal.click();
       this.common_value="lunch_cover";
-   
+
       this.launchcoverimage = event.target.files[0];
       // console.log(this.launchcoverimage);
       // this.Launch_cover_preview=false;
       // const reader = new FileReader();
       // reader.onload = () => {
       //   this.img_launch_cover = reader.result as string;
-   
+
       // }
-   
+
       // reader.readAsDataURL(this.launchcoverimage)
     }
     else{
       this.Launch_cover_preview=true;
-     
+
     }
-     
+
   }
 
 
@@ -7426,7 +7528,7 @@ this.storevalue.length=0;
       this.common_break_menu.value='';
     }
     else{
-    
+
     if(event.target.files.length!=0){
       this.lunch_top_name=event.target.files[0].name;
       this.width=200;
@@ -7436,23 +7538,24 @@ this.storevalue.length=0;
       this.Modal=document.getElementById('hid');
       this.Modal.click();
       this.common_value="lunch_top";
+      this.lunch_Top=false;
     // console.log(event.target.files[0]);
     // this.launchtopimage = event.target.files[0];
     // this.Launch_top_preview=false;
-   
+
     // const reader = new FileReader();
     // reader.onload = () => {
     //   this.img_launch_top = reader.result as string;
- 
+
     // }
- 
+
     // reader.readAsDataURL(this.launchtopimage)
     }
     else{
       this.Launch_top_preview=true;
 
     }
-      
+
   }
   }
    // Event of launch menu image
@@ -7468,21 +7571,21 @@ this.storevalue.length=0;
       for (let i = 0; i < event.target.files.length; i++) {
         //  if(event.target.files[i].size>2097152){
         //   this.myFunction_file_Size_error();
-             
+
         //  }
         //  else{
-           
+
           this.img_launch_menu.push({id:'',img_path:URL.createObjectURL(this.launchmenuimage[i])});
 
         //  }
-       
+
       }
        }
     else{
       this.Launch_menu_preview=true;
     }
     console.log( this.launchmenuimage);
-    
+
 
   }
    // Event of launch section image
@@ -7500,19 +7603,19 @@ this.storevalue.length=0;
 
       // }
       // else{
-     
+
 
         this.img_launch_section.push({id:'',img_path:URL.createObjectURL(this.launchsectionimage[i])});
 
       // }
-       
+
       }
 
      }
     else{
       this.Launch_section_preview=true;
     }
-   
+
   }
    // Event of dinner section image
   changebrunchsectionbreak1(event:any){
@@ -7520,23 +7623,23 @@ this.storevalue.length=0;
     if(event.target.files.length>0){
       this.branchsectionimage=event.target.files;
       this.Dinner_section_preview=false;
-      
+
       for (let i = 0; i < event.target.files.length; i++) {
         // if(event.target.files[i].size>2097152){
         //   this.myFunction_file_Size_error();
-  
+
         //  }
         //  else{
           this.img_dinner_section.push({id:'',img_path:URL.createObjectURL(this.branchsectionimage[i])});
 
         //  }
-  
+
       }
-      
+
     }
     else{
       this.Dinner_section_preview=true;
-            
+
     }
     console.log(this.branchsectionimage)
   }
@@ -7556,16 +7659,16 @@ this.storevalue.length=0;
 
         this.img_dinner_menu.push({id:'',img_path:URL.createObjectURL(this.branchmenuimage[i])});
       //  }
-        
-    
+
+
       }
 
     }
     else{
       this.Dinner_menu_preview=true;
-     
+
     }
-   
+
   }
     // Event of dinner top image
   brunchtopimage(event:any){
@@ -7590,9 +7693,9 @@ this.storevalue.length=0;
     // const reader = new FileReader();
     // reader.onload = () => {
     //   this.img_dinner_top= reader.result as string;
- 
+
     // }
- 
+
     // reader.readAsDataURL(this.branchtopimage)
     }
     else{
@@ -7612,7 +7715,7 @@ this.storevalue.length=0;
     else{
 
     if(event.target.files.length!=0){
-     
+
       this.dinner_cover_name=event.target.files[0].name;
       this.width=1800;
       this.height=2560;
@@ -7621,22 +7724,22 @@ this.storevalue.length=0;
       this.Modal=document.getElementById('hid');
       this.Modal.click();
       this.common_value="dinner_cover";
-  
+
     //   this.branchcoverimage=event.target.files[0];
     //  this.Dinner_cover_preview=false;
     //  const reader = new FileReader();
     //  reader.onload = () => {
     //    this.img_dinner_cover= reader.result as string;
-  
+
     //  }
-  
+
     //  reader.readAsDataURL(this.branchcoverimage)
     }
     else{
      this.Dinner_cover_preview=true;
-      
+
     }
-    
+
   }
   }
    // Event of brunch section image
@@ -7652,7 +7755,7 @@ this.storevalue.length=0;
         this.img_brunch_section.push({id:'',img_path:URL.createObjectURL(this.dinnersectionimage[i])});
       //  }
         }
-      
+
      }
     else{
       this.Brunch_section_preview=true;
@@ -7677,7 +7780,7 @@ this.storevalue.length=0;
       this.Modal=document.getElementById('hid');
       this.Modal.click();
       this.common_value="brunch_cover";
-     
+
   // this.dinnercoverimage=event.target.files[0];
   // this.Brunch_cover_preview=false;
   // const reader = new FileReader();
@@ -7701,7 +7804,7 @@ else{
       this.common_break_menu.value='';
     }
     else{
-   
+
     if(event.target.files.length!=0){
       this.width=200;
       this.height=130;
@@ -7716,15 +7819,15 @@ else{
   //       const reader = new FileReader();
   //       reader.onload = () => {
   //         this.img_brunch_top= reader.result as string;
-     
+
   //       }
-     
+
   //       reader.readAsDataURL(this.dinnertopimage)
     }
     else{
    this.Brunch_top_preview=true;
    }
-      
+
   }
   }
   // Event of brunch menu image
@@ -7732,11 +7835,11 @@ else{
     if(event.target.files.length>0){
       this.dinnermenuimage=event.target.files;
       this.Brunch_menu_preview=false;
-      
+
       for (let i = 0; i < event.target.files.length; i++) {
         // if(event.target.files[i].size>2097152){
         //   this.myFunction_file_Size_error();
-  
+
         //  }
         //  else{
           this.img_brunch_menu.push({id:'',img_path:URL.createObjectURL(this.dinnermenuimage[i])});
@@ -7744,11 +7847,11 @@ else{
         //  }
       }
 
-      
+
     }
     else{
       this.Brunch_menu_preview=true;
-     
+
     }
   }
   // For Breakfastmenu display day and time
@@ -7765,10 +7868,10 @@ else{
         this.every=document.getElementById('vehicle1');
         this.every.checked=false;
       }
-    
+
     }
   else if(e=='tuesday'){
-      
+
       console.log("this.mon");
       this.tue_check=document.getElementById('vehicle3');
       if(event.target.checked){
@@ -7781,7 +7884,7 @@ else{
       }
     }
      else if(e=='wednesday'){
- 
+
       console.log(".mon");
       this.wed_check=document.getElementById('vehicle4');
       if(event.target.checked){
@@ -7794,7 +7897,7 @@ else{
       }
     }
      else if(e=='thursday'){
-    
+
       console.log(".mon");
       this.thu_check=document.getElementById('vehicle5');
       if(event.target.checked){
@@ -7807,7 +7910,7 @@ else{
       }
     }
     else if(e=='friday'){
-     
+
       console.log(".mon");
       this.fri_check=document.getElementById('vehicle6');
       if(event.target.checked){
@@ -7820,7 +7923,7 @@ else{
       }
     }
      else if(e=='sat'){
- 
+
      console.log(".mon");
      this.sat_check=document.getElementById('vehicle7');
      if(event.target.checked){
@@ -7834,7 +7937,7 @@ else{
 
     }
    else if(e=='sun'){
-       
+
       console.log(".mon");
       this.sun_check=document.getElementById('vehicle8');
       if(event.target.checked){
@@ -7851,7 +7954,7 @@ else{
       this.every=document.getElementById('vehicle1');
       if(event.target.checked){
         console.log("asdsadad")
-  
+
       this.mon_check=document.getElementById('vehicle2');
       this.mon_check.checked=true;
       this.tue_check=document.getElementById('vehicle3');
@@ -7904,7 +8007,7 @@ else{
   }
 //For Launch day time check
   checkeveday(event:any,e:any){
-    
+
     if(e ==='monday'){
         this.mon_check=document.getElementById('vehicle22');
 
@@ -7917,10 +8020,10 @@ else{
         this.every=document.getElementById('vehicle12');
         this.every.checked=false;
       }
-    
+
     }
   else if(e ==='tuesday'){
-      
+
       console.log("this.mon");
       this.tue_check=document.getElementById('vehicle32');
       if(event.target.checked){
@@ -7933,7 +8036,7 @@ else{
       }
     }
      else if(e ==='wednesday'){
- 
+
       console.log(".mon");
       this.wed_check=document.getElementById('vehicle42');
       if(event.target.checked){
@@ -7946,7 +8049,7 @@ else{
       }
     }
      else if(e==='thursday'){
-    
+
       console.log(".mon");
       this.thu_check=document.getElementById('vehicle52');
       if(event.target.checked){
@@ -7959,7 +8062,7 @@ else{
       }
     }
     else if(e==='friday'){
-     
+
       console.log(".mon");
       this.fri_check=document.getElementById('vehicle62');
       if(event.target.checked){
@@ -7972,7 +8075,7 @@ else{
       }
     }
      else if(e==='sat'){
- 
+
      console.log(".mon");
      this.sat_check=document.getElementById('vehicle72');
      if(event.target.checked){
@@ -7986,7 +8089,7 @@ else{
 
     }
    else if(e==='sun'){
-       
+
       console.log(".mon");
       this.sun_check=document.getElementById('vehicle82');
       if(event.target.checked){
@@ -8003,7 +8106,7 @@ else{
       this.every=document.getElementById('vehicle12');
       if(event.target.checked){
         console.log("asdsadad")
-  
+
       this.mon_check=document.getElementById('vehicle22');
       this.mon_check.checked=true;
       this.tue_check=document.getElementById('vehicle32');
@@ -8069,10 +8172,10 @@ else{
         this.every=document.getElementById('vehicle1');
         this.every.checked=false;
       }
-    
+
     }
  if(e=='tuesday'){
-      
+
       console.log("this.mon");
       this.tue_check=document.getElementById('vehicle3');
       if(this.tue_check.checked){
@@ -8085,7 +8188,7 @@ else{
       }
     }
     if(e=='wednesday'){
- 
+
       console.log(".mon");
       this.wed_check=document.getElementById('vehicle4');
       if(this.wed_check.checked){
@@ -8098,7 +8201,7 @@ else{
       }
     }
      if(e=='thursday'){
-    
+
       console.log(".mon");
       this.thu_check=document.getElementById('vehicle5');
       if(this.thu_check.checked){
@@ -8111,7 +8214,7 @@ else{
       }
     }
    if(e=='friday'){
-     
+
       console.log(".mon");
       this.fri_check=document.getElementById('vehicle6');
       if(this.fri_check.checked){
@@ -8124,7 +8227,7 @@ else{
       }
     }
     if(e=='sat'){
- 
+
      console.log(".mon");
      this.sat_check=document.getElementById('vehicle7');
      if(this.sat_check.checked){
@@ -8155,7 +8258,7 @@ else{
       this.every=document.getElementById('vehicle1');
       if(this.every.checked){
 
-  
+
       this.mon_check=document.getElementById('vehicle2');
       this.mon_check.checked=true;
       this.tue_check=document.getElementById('vehicle3');
@@ -8219,10 +8322,10 @@ else{
       this.every=document.getElementById('vehicle13');
       this.every.checked=false;
     }
-  
+
   }
 else if(e ==='tuesday'){
-    
+
     console.log("this.mon");
     this.tue_check=document.getElementById('vehicle33');
     if(event.target.checked){
@@ -8248,7 +8351,7 @@ else if(e ==='tuesday'){
     }
   }
    else if(e==='thursday'){
-  
+
     console.log(".mon");
     this.thu_check=document.getElementById('vehicle53');
     if(event.target.checked){
@@ -8261,7 +8364,7 @@ else if(e ==='tuesday'){
     }
   }
   else if(e==='friday'){
-   
+
     console.log(".mon");
     this.fri_check=document.getElementById('vehicle63');
     if(event.target.checked){
@@ -8288,7 +8391,7 @@ else if(e ==='tuesday'){
 
   }
  else if(e==='sun'){
-     
+
     console.log(".mon");
     this.sun_check=document.getElementById('vehicle83');
     if(event.target.checked){
@@ -8370,10 +8473,10 @@ else if(e ==='tuesday'){
       this.every=document.getElementById('vehicle14');
       this.every.checked=false;
     }
-  
+
   }
 else if(e ==='tuesday'){
-    
+
     console.log("this.mon");
     this.tue_check=document.getElementById('vehicle34');
     if(event.target.checked){
@@ -8399,7 +8502,7 @@ else if(e ==='tuesday'){
     }
   }
    else if(e==='thursday'){
-  
+
     console.log(".mon");
     this.thu_check=document.getElementById('vehicle54');
     if(event.target.checked){
@@ -8412,7 +8515,7 @@ else if(e ==='tuesday'){
     }
   }
   else if(e==='friday'){
-   
+
     console.log(".mon");
     this.fri_check=document.getElementById('vehicle64');
     if(event.target.checked){
@@ -8439,7 +8542,7 @@ else if(e ==='tuesday'){
 
   }
  else if(e==='sun'){
-     
+
     console.log(".mon");
     this.sun_check=document.getElementById('vehicle84');
     if(event.target.checked){
@@ -8512,13 +8615,13 @@ else if(e ==='tuesday'){
   myFunction() {
     // Get the snackbar DIV
     this.x = document.getElementById("snackbar");
-  
+
     // Add the "show" class to DIV
     this.x.className = "show";
-  
+
     // After 3 seconds, remove the show class from DIV
     setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
-  } 
+  }
 
 
 
@@ -8526,36 +8629,36 @@ else if(e ==='tuesday'){
   myFunction_update() {
     // Get the snackbar DIV
     this.x = document.getElementById("snackbar3");
-  
+
     // Add the "show" class to DIV
     this.x.className = "show";
-  
+
     // After 3 seconds, remove the show class from DIV
     setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
-  } 
+  }
    // For Error snackbar
    myFunction_forerror() {
     // Get the snackbar DIV
     this.x = document.getElementById("snackbar1");
-  
+
     // Add the "show" class to DIV
     this.x.className = "show";
-  
+
     // After 3 seconds, remove the show class from DIV
     setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
-  } 
+  }
 
     // For Timing Error snackbar
     myFunction_fortime() {
       // Get the snackbar DIV
       this.x = document.getElementById("snackbar2");
-    
+
       // Add the "show" class to DIV
       this.x.className = "show";
-    
+
       // After 3 seconds, remove the show class from DIV
       setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 5000);
-    } 
+    }
   //Previous button
   goprev(e:any){
     if(e=='paris'){
@@ -8599,7 +8702,7 @@ else if(e ==='tuesday'){
         }
     }
     else if(event.target.id=="url_top"){
-             
+
       if(event.target.value==''){
         this.launch_url=true;
         this.bt_url=true;
@@ -8634,7 +8737,7 @@ else if(e ==='tuesday'){
     }
       //For Checking null in Launch Tab
     else if(e=='lc_url'){
-      
+
       if(event.target.value==''){
          this.lc_url=true;
       }
@@ -8648,53 +8751,53 @@ else if(e ==='tuesday'){
       }
       else{
         this.ls_url=false;
-       
+
       }
     }
-  
+
     else if(e=='lm_url'){
       if(event.target.value==''){
         this.lm_url=true;
       }
       else{
         this.lm_url=false;
-      
+
       }
     }
     else if(e=='lt_url'){
       if(event.target.value==''){
         this.lt_url=true;
-         
+
       }
       else{
         this.lt_url=false;
-        
+
       }
     }
     else if(e=='lstart'){
       if(event.target.value==''){
         this.lend_url=true;
-         
+
       }
       else{
         this.lend_url=false;
-     
+
       }
     }
     else if(e=='lend'){
       if(event.target.value==''){
       this.lstart_url=true;
-         
+
       }
       else{
         this.lstart_url=false;
 
-     
+
       }
     }
      //For Checking null in dinner Tab
      else if(e=='dc_url'){
-      
+
       if(event.target.value==''){
          this.dc_url=true;
       }
@@ -8708,53 +8811,53 @@ else if(e ==='tuesday'){
       }
       else{
         this.ds_url=false;
-       
+
       }
     }
-  
+
     else if(e=='dm_url'){
       if(event.target.value==''){
         this.dm_url=true;
       }
       else{
         this.dm_url=false;
-      
+
       }
     }
     else if(e=='dt_url'){
       if(event.target.value==''){
         this.dt_url=true;
-         
+
       }
       else{
         this.dt_url=false;
-        
+
       }
     }
     else if(e=='dstart'){
       if(event.target.value==''){
         this.dend_url=true;
-         
+
       }
       else{
         this.dend_url=false;
-     
+
       }
     }
     else if(e=='dend'){
       if(event.target.value==''){
       this.dstart_url=true;
-         
+
       }
       else{
         this.dstart_url=false;
 
-     
+
       }
     }
    //For checking null in Brunch tab
    else if(e=='brs_url'){
-      
+
     if(event.target.value==''){
        this.brs_url=true;
     }
@@ -8768,7 +8871,7 @@ else if(e ==='tuesday'){
     }
     else{
       this.brc_url=false;
-     
+
     }
   }
 
@@ -8778,50 +8881,50 @@ else if(e ==='tuesday'){
     }
     else{
       this.brt_url=false;
-    
+
     }
   }
   else if(e=='brm_url'){
     if(event.target.value==''){
       this.brm_url=true;
-       
+
     }
     else{
       this.brm_url=false;
-      
+
     }
   }
- 
-    
+
+
   }
-  //For setting brunch start time 
+  //For setting brunch start time
   checkstart(e:any){
     if(e.target.value!=''){
       this.brunch_start=e.target.value;
       this.brstart_url=false;
-         
+
       }
       else{
       this.brstart_url=true;
-         
+
       }
-   
-     
+
+
   console.log(this.brunch_start);
 
 }
-  //For setting brunch end time 
+  //For setting brunch end time
   checksend(e:any){
       if(e.target.value!=''){
       this.brunch_end=e.target.value;
       this.brend_url=false;
-         
+
       }
       else{
       this.brend_url=true;
-         
+
       }
-    
+
   console.log(  this.brunch_end);
 
   }
@@ -8834,7 +8937,7 @@ else if(e ==='tuesday'){
       }
       else {
          this.bstart_url=true;
-          
+
       }
     }
     else if(v=='end'){
@@ -8844,15 +8947,15 @@ else if(e ==='tuesday'){
         }
         else {
            this.bend_url=true;
-            
+
         }
-     
-      
+
+
     }
 
     console.log(this.brunch_end,this.brunch_start)
   }
-  // For setting launch time 
+  // For setting launch time
    checkblaunch(e:any,v:any){
 
     if(v=='start'){
@@ -8860,13 +8963,13 @@ else if(e ==='tuesday'){
     }
     else if(v=='end'){
       this.brunch_end=e.target.value;
-      
+
     }
 
     console.log(this.brunch_end,this.brunch_start)
   }
-  // For setting dinner time 
-  checkdinnertime(e:any,v:any){ 
+  // For setting dinner time
+  checkdinnertime(e:any,v:any){
     if(v=='start'){
       if(e.target.value!=''){
         this.brunch_start=e.target.value;
@@ -8876,7 +8979,7 @@ else if(e ==='tuesday'){
       else {
         this.dstart_url=true;
       }
-     
+
     }
     else if(v=='end'){
       if(e.target.value!=''){
@@ -8887,14 +8990,14 @@ else if(e ==='tuesday'){
       else {
         this.dend_url=true;
       }
-      
+
     }
 
     console.log(this.brunch_end,this.brunch_start)
   }
  //For delete photo
  deletephoto(e:any){
-  
+
    if(e=='lunch_cover'){
      this.img_launch_cover='';
   this.Launch_cover_preview=true;
@@ -8905,9 +9008,9 @@ else if(e ==='tuesday'){
   //  this.common_remove_div.className='';
   this.lunch_Cover=true;
 
-  
+
    }
-  
+
   else if(e=='lunch_top'){
     this.Launch_top_preview=true;
     this.launchtopimage='';
@@ -8918,8 +9021,8 @@ else if(e ==='tuesday'){
 
     // this.common_remove_div=document.getElementById('Lunch_Top');
     // this.common_remove_div.className='';
- 
-   
+
+
   }
   else if(e=='breakfast_cover'){
     this.Breakfast_cover_preview=true;
@@ -8942,7 +9045,7 @@ else if(e ==='tuesday'){
 
   //  this.common_remove_div=document.getElementById('break_top');
   //  this.common_remove_div.className='';
-  
+
 
   }
   else if(e=='dinner_cover'){
@@ -8966,61 +9069,61 @@ else if(e ==='tuesday'){
 
     //  this.common_remove_div=document.getElementById('dinner_top');
     // this.common_remove_div.className='';
-     
+
    }
    else if(e=='brunch_cover'){
      this.Brunch_cover_preview=true;
      this.img_brunch_cover='';
      this.dinnercoverimage='';
-     
+
      this.Modal=document.getElementById('mybrunchcoverfile');
      this.Modal.value=null;
   this.brunch_Cover=true;
 
     //  this.common_remove_div=document.getElementById('brunch_cov');
     //  this.common_remove_div.className='';
-     
+
    }
    else if(e=='brunch_top'){
      this.img_brunch_top='';
      this.dinnertopimage='';
      this.Brunch_top_preview=true;
-     
+
      this.Modal=document.getElementById('mybrunchtopfile');
      this.Modal.value=null;
   this.brunch_Top=true;
 
     //  this.common_remove_div=document.getElementById('brunch_top');
     //  this.common_remove_div.className='';
-     
+
    }
  }
  deletemultiple(e:any,index:any,id:any){
   if(id > 0){
-  
+
 var x = confirm("Are you sure you want to delete permanently?");
   if (x){
     console.log(id);
     this.lagunaserve.delete_file(this.resid,id).subscribe(data=>{
       console.log(data);
     })
- 
+
   if(e=='lunch_menu'){
     this.img_launch_menu.splice(index,1);
     this.launchmenuimage.splice(index,1);
     if(this.launchmenuimage.length!=0){
       this.common_remove_div=document.getElementById('')
-    }  
+    }
     console.log(this.img_launch_menu.length)
    }
-  
+
    else if(e=='breakfast_menu'){
     this.img_menu_break.splice(index,1);
-     this.multipleImages.splice(index,1); 
+     this.multipleImages.splice(index,1);
     console.log(this.img_menu_break.length)
 
    }
-  
+
   else if(e=='dinner_menu'){
    this.img_dinner_menu.splice(index,1);
    this.branchmenuimage.splice(index,1);
@@ -9033,23 +9136,23 @@ var x = confirm("Are you sure you want to delete permanently?");
 }
 }
 else{
- 
+
   if(e=='lunch_menu'){
     this.img_launch_menu.splice(index,1);
     this.launchmenuimage.splice(index,1);
     if(this.launchmenuimage.length!=0){
       this.common_remove_div=document.getElementById('')
-    }  
+    }
     console.log(this.img_launch_menu.length)
    }
-  
+
    else if(e=='breakfast_menu'){
     this.img_menu_break.splice(index,1);
-     this.multipleImages.splice(index,1); 
+     this.multipleImages.splice(index,1);
     console.log(this.img_menu_break.length)
 
    }
-  
+
   else if(e=='dinner_menu'){
    this.img_dinner_menu.splice(index,1);
    this.branchmenuimage.splice(index,1);
@@ -9059,12 +9162,12 @@ else{
     this.img_brunch_menu.splice(index,1);
     this.dinnermenuimage.splice(index,1);
   }
-  
+
 }
 
 
 
-   
+
  }
  deletemultiplelunchsection(name:any,e:any,id:any){
   if(id > 0){
@@ -9074,7 +9177,7 @@ else{
     this.lagunaserve.delete_file_section(this.resid,id).subscribe(data=>{
       console.log(data);
     })
-   
+
    if(name=='lunch_section'){
     this.img_launch_section.splice(e,1);
    this.launchsectionimage.splice(e,1);
@@ -9087,7 +9190,7 @@ else{
    }
    else if(name=='breakfast_section'){
      this.img_section_break.splice(e,1);
-     this.breakfastsectionimage.splice(e,1); 
+     this.breakfastsectionimage.splice(e,1);
    }
    else if(name=='brunch_section'){
      this.img_brunch_section.splice(e,1);
@@ -9115,7 +9218,7 @@ else{
    }
    else if(name=='breakfast_section'){
      this.img_section_break.splice(e,1);
-     this.breakfastsectionimage.splice(e,1); 
+     this.breakfastsectionimage.splice(e,1);
    }
    else if(name=='brunch_section'){
      this.img_brunch_section.splice(e,1);
@@ -9125,13 +9228,13 @@ else{
     this.img_special.splice(e,1);
     this.special_img.splice(e,1);
   console.log("special");
-  
-  
+
+
    }
    }
    console.log(this.special_img);
-   
-   
+
+
 }
 
 
@@ -9181,36 +9284,25 @@ click_it(e:any){
   this.common_for_all.style.display='none';
     this.valu = true;
     // console.log('encoede::' +encodeURIComponent(this.croppedImage));
-    
-    if(e=='breakfast_cover'){
-      // console.log({crop_img: this.croppedImage});
-      // var dt = this.croppedImage.replace(/^data:image\/png;base64,/, "");
-      // dt += dt.replace('+', ' ');
-      // console.log({dt});
-      // var blob = new Blob([dt], {type: 'image/png'});
-      // var file = new File([blob], this.breakfast_cover_name);
-      // console.log({file});
 
-      const base64 = this.croppedImage;
+    if(e=='breakfast_cover'){
+    const base64 = this.croppedImage;
       const imageName = this.breakfast_cover_name;
       const imageBlob = this.dataURItoBlob(base64);
       const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
       console.log({imageFile, imageBlob});
-      
-      
-      
-    this.img_cover=imageFile;
+      this.img_cover=imageFile;
     const reader=new FileReader();
     reader.onload = () => {
       this.img_cover = reader.result as string;
- 
+
     }
     reader.readAsDataURL(this.img_cover)
     // this.img_cover=this.croppedImage;
     this.breakfastcoverimage=this.img_cover;
-   this.Breakfast_cover_preview=false; 
+   this.Breakfast_cover_preview=false;
    console.log(this.breakfastcoverimage);
-     
+
     }
     else if(e=='breakfast_top'){
 
@@ -9224,7 +9316,7 @@ click_it(e:any){
     const reader=new FileReader();
     reader.onload = () => {
       this.img_top = reader.result as string;
- 
+
     }
     reader.readAsDataURL(this.img_top)
       // this.img_top=this.croppedImage;
@@ -9242,15 +9334,15 @@ click_it(e:any){
       const reader=new FileReader();
       reader.onload = () => {
         this.img_launch_cover = reader.result as string;
-   
+
       }
       reader.readAsDataURL(this.img_launch_cover)
-      
+
       this.launchcoverimage=this.img_launch_cover;
       this.Launch_cover_preview=false;
     }
     else if(e=='lunch_top'){
-
+        console.log("Lunch_Top");
       const base64 = this.croppedImage;
       const imageName =this.lunch_top_name;
       const imageBlob = this.dataURItoBlob(base64);
@@ -9261,14 +9353,16 @@ click_it(e:any){
       const reader=new FileReader();
       reader.onload = () => {
         this.img_launch_top = reader.result as string;
-   
+
       }
       reader.readAsDataURL(this.img_launch_top)
-    
-      this.Launch_top_preview=false;
+
       // this.img_launch_top=this.croppedImage;
       this.launchtopimage= this.img_launch_top;
-     
+      this.Launch_top_preview=false;
+         console.log(this.Launch_top_preview);
+
+      console.log(this.img_launch_top)
     }
     else if(e=='dinner_cover'){
 
@@ -9282,10 +9376,10 @@ click_it(e:any){
       const reader=new FileReader();
       reader.onload = () => {
         this.img_dinner_cover = reader.result as string;
-   
+
       }
       reader.readAsDataURL( this.img_dinner_cover)
-      
+
     //  this.img_dinner_cover=this.croppedImage;
      this.branchcoverimage= this.img_dinner_cover;
      this.Dinner_cover_preview=false;
@@ -9301,7 +9395,7 @@ click_it(e:any){
       const reader=new FileReader();
       reader.onload = () => {
         this.img_dinner_top = reader.result as string;
-   
+
       }
       reader.readAsDataURL(this.img_dinner_top)
       // this.img_dinner_top=this.croppedImage;
@@ -9319,7 +9413,7 @@ click_it(e:any){
       const reader=new FileReader();
       reader.onload = () => {
         this.img_brunch_cover = reader.result as string;
-   
+
       }
       reader.readAsDataURL(this.img_brunch_cover)
       // this.img_brunch_cover=this.croppedImage;
@@ -9338,7 +9432,7 @@ click_it(e:any){
       const reader=new FileReader();
       reader.onload = () => {
         this.img_brunch_top = reader.result as string;
-   
+
       }
       reader.readAsDataURL(this.img_brunch_top)
       // this.img_brunch_top=this.croppedImage;
@@ -9432,11 +9526,11 @@ xx?.document.close();
 
   // After 3 seconds, remove the show class from DIV
   setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
-} 
+}
 //For checking null of special url
 check_special(){
  console.log(this.special_url);
- 
+
 }
 //For getting special image
 getstock_imege(event:any){
@@ -9452,12 +9546,12 @@ getstock_imege(event:any){
 
   }
  console.log(this.special_img,this.img_special);
- 
+
 }
 // For Selecting the image base on category id
 getStockimageonselectcategory(e:any){
   console.log(e);
-  
+
   //  For getting Image on load
   this.lagunaserve.getspecial_image(e).subscribe(data=>{
     console.log(data);
@@ -9494,7 +9588,7 @@ save_special(){
   formdata.append('regular_menu_flag',this.exclusive);
   formdata.append('day_flag',this.week);
   this.storevalue.push({
-    "reg_menu_id":[{"menu_id":this.break_Special},{"menu_id":this.lunch_special},{"menu_id":this.dinner_Special},{"menu_id":this.brunch_Special}] ,  
+    "reg_menu_id":[{"menu_id":this.break_Special},{"menu_id":this.lunch_special},{"menu_id":this.dinner_Special},{"menu_id":this.brunch_Special}] ,
     "month_day": [{"dt": this.mon_special},{"dt":this.tue_special},{"dt":this.wed_special},{"dt":this.thu_special},{"dt":this.fri_special},{"dt":this.sat_special},{"dt":this.sun_special}]
   })
 
@@ -9503,7 +9597,7 @@ save_special(){
   this.spinner.hide();
 
     })
-  
+
 }
 enable_exclusive_inaddition(event:any){
   if(event.target.check){
@@ -9512,14 +9606,14 @@ enable_exclusive_inaddition(event:any){
   }
   else{
     this.exclusive='';
-    
+
     this.enable_exclusive=true;
   }
-  
+
 }
 enable_everyweek(event:any,e:any){
   if(e=='every_week'){
-  
+
   if(event.target.checked){
     this.enable_days=false;
     this.week='E';
@@ -9528,7 +9622,7 @@ enable_everyweek(event:any,e:any){
     this.week='';
     this.enable_days=true;
   }
-    
+
 }
 else{
    if(event.target.checked){
@@ -9540,7 +9634,7 @@ else{
 
    }
 
-  
+
 }
 }
 // For checking checkbox below the specific date
@@ -9553,7 +9647,7 @@ checkregularid(event:any,e:any){
       this.break_Special=0;
 
     }
-    
+
   }
   else if(e=='lunch'){
     if(event.target.checked){
@@ -9605,7 +9699,7 @@ checkspecialday(event:any,e:any){
 
 }
 else if(e=='tuesday'){
-  
+
   console.log("this.mon");
   this.tue_check=document.getElementById('vehicle_s3');
   if(event.target.checked){
@@ -9651,7 +9745,7 @@ else if(e=='tuesday'){
   }
 }
 else if(e=='friday'){
- 
+
   console.log(".mon");
   this.fri_check=document.getElementById('vehicle_s6');
   if(event.target.checked){
@@ -9678,7 +9772,7 @@ else if(e=='friday'){
 
 }
 else if(e=='sun'){
-   
+
   console.log(".mon");
   this.sun_check=document.getElementById('vehicle_s8');
   if(event.target.checked){

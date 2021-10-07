@@ -6,7 +6,7 @@ import { url_set } from 'src/app/globalvar';
 })
 export class DataserviceService {
   url_reg = url_set.api_url + '/registration';
- 
+
   // url_reg='http://localhost:3000/reg';
   constructor(private http: HttpClient) { }
   //submitting registration data
@@ -49,7 +49,7 @@ export class DataserviceService {
   submit_log(v: any) {
     return this.http.post(url_set.api_url + '/login', v)
   }
-  
+
   submit_breakfast_menu_setup(dt:any) {
     return this.http.post(url_set.api_url + '/menu_setup', dt
     )
@@ -76,7 +76,7 @@ export class DataserviceService {
     formdata.append('logo_img',dt1);
     formdata.append('restaurant_id',dt2);
     formdata.append('restaurant_name',dt3);
-    formdata.append('file_name',dt3);
+    formdata.append('file_name',dt4);
 
 
     console.log(formdata.getAll)

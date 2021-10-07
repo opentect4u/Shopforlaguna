@@ -63,37 +63,37 @@ export class LogosetupComponent implements OnInit {
 
 
     console.log( this.value_logo_url);
-    
+
     this.lagunaserve.get_menu_urls(this.resid,null).subscribe(data=>{
       console.log(data);
        this.log=data;
        if(this.log.logo_dt.length!=0){
-     
+
        for(let i=0;i<this.log.logo_dt.length;i++){
           if(this.log.logo_dt[i].ogo_path!=''){
            this.logo_preview=false;
            this.img_logo=this.img_showing+'/'+this.log.logo_dt[i].logo_path;
            this.logo=this.img_showing+'/'+this.log.logo_dt[i].logo_path;
-           this.logo_design=document.getElementById('myfile');
-           this.logo_design.filename=this.log.logo_dt[i].logo_path;
-          
+          //  this.logo_design=document.getElementById('myfile');
+           this.logo_fileName=this.log.logo_dt[i].logo_path;
+
           this.currentInput='1 file';
           //  console.log(this.logo_design);
          }
          if(this.log.logo_dt[i].logo_url!=null){
-          
-         this.logo=this.url_reg + this.log.logo_dt[i].logo_path; 
-         this.log_url=this.log.logo_dt[i].logo_url;  
-        //  this.value_logo_url=false;  
-                 
+
+         this.logo=this.url_reg + this.log.logo_dt[i].logo_path;
+         this.log_url=this.log.logo_dt[i].logo_url;
+        //  this.value_logo_url=false;
+
          }
          else {
-        //  this.value_logo_url=true;  
+        //  this.value_logo_url=true;
          this.log_url='';
          }
        }
- 
-         
+
+
       }
 
 
@@ -103,10 +103,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   this.check=data;
   if(this.check.msg[0].approval_flag=='U'){
     this.show_toast=true;
-    
+
   }
   else{
-   
+
      this.show_toast=false;
     // this.toastr.warningToastr('Set up mode is on , you can not update or insert','Alert!!',{
     //   dismiss:'click',
@@ -116,7 +116,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
     this.break_button=true;
     this.value_logo_url=true;
-    
+
   }
 })
     })
@@ -126,7 +126,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   }
   goto_MenuDatapage(e:any){
     console.log(e,this.logo,this.resid,this.logo_fileName);
-    
+
    this.Logo.logosubmit(e,this.logo,this.resid,this.name,this.logo_fileName).subscribe((data:any)=>{
      console.log(data);
      if(data.suc==1){
@@ -138,7 +138,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           // this.myFunction();
      }
    })
-     
+
   }
   selectimage(event:any){
    if(event.target.files[0].size>2097152 ){
@@ -149,14 +149,14 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   //  this.value_logo_url=true;
    }
    else{
-    
+
    if(event.target.files.length!=0){
  this.logo_fileName=event.target.files[0].name;
     // this.logo=event.target.files[0];
     this.common_image=event;
     this.common=document.getElementById('id01');
  this.common.style.display='block';
- 
+
     // const reader = new FileReader();
     // reader.onload = () => {
     //   this.img_logo = reader.result as string;
@@ -166,9 +166,9 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
    }
    else{
     this.logo_preview=true;
-      
+
    }
- 
+
   }
 
  }
@@ -181,16 +181,16 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
   // After 3 seconds, remove the show class from DIV
   setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
-} 
+}
 checkvalidity(event:any){
   if(event.target.value!=''){
     // this.value_logo_url=false;
     this.log_url=event.target.value;
-    
+
   }
   else{
     // this.value_logo_url=true;
-    
+
   }
 }
 deletephoto(e:any){
@@ -209,7 +209,7 @@ myFunction_for_size() {
 
   // After 3 seconds, remove the show class from DIV
   setTimeout(()=>{  this.x.className =  this.x.className.replace("show", ""); }, 3000);
-} 
+}
 //Image Cropper
 
 zoomOut() {
@@ -259,7 +259,7 @@ click_it(e:any){
     this.logo=this.croppedImage;
     this.img_logo=this.croppedImage;
    console.log(this.logo);
-   
+
 }
 close_it(){
   this.valu=true;
@@ -270,7 +270,7 @@ close_it(){
     this.common_for_all.value=''
   this.common_for_all=document.getElementById('id01');
   this.common_for_all.style.display='none';
- 
+
 
 
 }
