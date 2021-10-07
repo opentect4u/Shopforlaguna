@@ -26,7 +26,7 @@ export class LogosetupComponent implements OnInit {
   clearvalue:any;
   log:any=[];
   log_url:any='';
-  value_logo_url=true;
+  value_logo_url=false;
   x:any;
   check:any=[];
   break_button:boolean=false;
@@ -84,11 +84,11 @@ export class LogosetupComponent implements OnInit {
           
          this.logo=this.url_reg + this.log.logo_dt[i].logo_path; 
          this.log_url=this.log.logo_dt[i].logo_url;  
-         this.value_logo_url=false;  
+        //  this.value_logo_url=false;  
                  
          }
          else {
-         this.value_logo_url=true;  
+        //  this.value_logo_url=true;  
          this.log_url='';
          }
        }
@@ -141,12 +141,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
      
   }
   selectimage(event:any){
-   if(event.target.files[0].size>2097152 ||event.target.files[0].type=='jpg' || event.target.files[0].type=='jpeg' || event.target.files[0].type=='png' ){
+   if(event.target.files[0].size>2097152 ){
    this.common_size_check=document.getElementById('myfile');
    this.common_size_check.value='';
    this.myFunction_for_size();
    console.log("asdad");
-   this.value_logo_url=true;
+  //  this.value_logo_url=true;
    }
    else{
     
@@ -184,12 +184,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 } 
 checkvalidity(event:any){
   if(event.target.value!=''){
-    this.value_logo_url=false;
+    // this.value_logo_url=false;
     this.log_url=event.target.value;
     
   }
   else{
-    this.value_logo_url=true;
+    // this.value_logo_url=true;
     
   }
 }

@@ -6942,9 +6942,7 @@ else{
   else{
  if(v6<v7){
    console.log("spinner");
-
-   
-  if(localStorage.getItem('brunch')==''){
+   if(localStorage.getItem('brunch')==''){
     // this.storevalue.length=0;
     const formData = new FormData();
     // formData.append('file', this.breakfastcoverimage);
@@ -7421,7 +7419,7 @@ this.storevalue.length=0;
    // Event of launch top image
 
   changelaunchtopimage(event: any) {
-    if(event.target.files[0].size>2097152 ||event.target.files[0].type=='jpg' || event.target.files[0].type=='jpeg' || event.target.files[0].type=='png' ){
+    if(event.target.files[0].size>2097152 ){
       this.myFunction_file_Size_error();
       console.log("asdasd");
       this.common_break_menu=document.getElementById('mylunchtopfile');
@@ -7696,7 +7694,7 @@ else{
   }
     // Event of brunch top image
   dinnerchangetopimage(event:any){
-    if(event.target.files[0].size>2097152 ||event.target.files[0].type=='jpg' || event.target.files[0].type=='jpeg' || event.target.files[0].type=='png' ){
+    if(event.target.files[0].size>2097152 ){
       this.myFunction_file_Size_error();
       console.log("asdasd");
       this.common_break_menu=document.getElementById('mybrunchtopfile');
@@ -9215,8 +9213,22 @@ click_it(e:any){
      
     }
     else if(e=='breakfast_top'){
-      this.img_top=this.croppedImage;
-      this.breakfasttopimage=this.croppedImage;
+
+      const base64 = this.croppedImage;
+      const imageName = this.breakfast_top_name;
+      const imageBlob = this.dataURItoBlob(base64);
+      const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+      console.log({imageFile, imageBlob});
+
+      this.img_top=imageFile;
+    const reader=new FileReader();
+    reader.onload = () => {
+      this.img_top = reader.result as string;
+ 
+    }
+    reader.readAsDataURL(this.img_top)
+      // this.img_top=this.croppedImage;
+      this.breakfasttopimage=this.img_top;
       this.Breakfast_top_preview=false;
     }
     else if(e=='lunch_cover'){
@@ -9238,9 +9250,24 @@ click_it(e:any){
       this.Launch_cover_preview=false;
     }
     else if(e=='lunch_top'){
+
+      const base64 = this.croppedImage;
+      const imageName =this.lunch_top_name;
+      const imageBlob = this.dataURItoBlob(base64);
+      const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+      console.log({imageFile, imageBlob});
+      this.img_launch_top=imageFile;
+
+      const reader=new FileReader();
+      reader.onload = () => {
+        this.img_launch_top = reader.result as string;
+   
+      }
+      reader.readAsDataURL(this.img_launch_top)
+    
       this.Launch_top_preview=false;
-      this.img_launch_top=this.croppedImage;
-      this.launchtopimage=this.croppedImage;
+      // this.img_launch_top=this.croppedImage;
+      this.launchtopimage= this.img_launch_top;
      
     }
     else if(e=='dinner_cover'){
@@ -9264,8 +9291,21 @@ click_it(e:any){
      this.Dinner_cover_preview=false;
     }
     else if(e=='dinner_top'){
-      this.img_dinner_top=this.croppedImage;
-     this.branchtopimage=this.croppedImage;
+      const base64 = this.croppedImage;
+      const imageName =this.dinner_top_name;
+      const imageBlob = this.dataURItoBlob(base64);
+      const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+      console.log({imageFile, imageBlob});
+      this.img_dinner_top=imageFile;
+
+      const reader=new FileReader();
+      reader.onload = () => {
+        this.img_dinner_top = reader.result as string;
+   
+      }
+      reader.readAsDataURL(this.img_dinner_top)
+      // this.img_dinner_top=this.croppedImage;
+     this.branchtopimage=this.img_dinner_top;
      this.Dinner_top_preview=false;
     }
     else if(e=='brunch_cover'){
@@ -9287,8 +9327,22 @@ click_it(e:any){
       this.Brunch_cover_preview=false;
     }
     else if(e=='brunch_top'){
-      this.img_brunch_top=this.croppedImage;
-      this.dinnertopimage=this.croppedImage;
+
+      const base64 = this.croppedImage;
+      const imageName =this.brunch_top_name;
+      const imageBlob = this.dataURItoBlob(base64);
+      const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
+      console.log({imageFile, imageBlob});
+      this.img_brunch_top=imageFile;
+
+      const reader=new FileReader();
+      reader.onload = () => {
+        this.img_brunch_top = reader.result as string;
+   
+      }
+      reader.readAsDataURL(this.img_brunch_top)
+      // this.img_brunch_top=this.croppedImage;
+      this.dinnertopimage= this.img_brunch_top;
       this.Brunch_top_preview=false;
 
     }
