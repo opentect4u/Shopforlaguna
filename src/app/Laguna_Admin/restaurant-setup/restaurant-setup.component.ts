@@ -264,7 +264,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.spinner.hide();
     this.dashboardData=this.dashboardData.msg;
     this.rest_nm=this.dashboardData[0].restaurant_name;
-    this.url_nm=this.rest_nm.replace(' ','_');
+    this.url_nm=this.rest_nm.replace(/ /g,'_');
     this.url1=this.url1+this.url_nm+'/'+btoa(this.r_id);
     console.log(this.url1)
     this.rest_contact=this.dashboardData[0].contact_name;

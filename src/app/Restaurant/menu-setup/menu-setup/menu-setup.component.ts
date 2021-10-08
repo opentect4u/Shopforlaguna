@@ -5,7 +5,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 import { DataserviceService } from '../../service/dataservice.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
-import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';//For Image Cropper
+import { Dimensions, ImageCroppedEvent, ImageTransform,base64ToFile  } from 'ngx-image-cropper';//For Image Cropper
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
@@ -353,13 +353,15 @@ enable_exclusive:boolean=true;
   lunch_special=0;
   dinner_Special=0;
   brunch_Special=0;
+  x1:any;
+  coordinates:any;
   date_time:any;
   constructor(public toastr: ToastrManager,private spinner: NgxSpinnerService,private _data: DataserviceService,private lagunaserve:LagunaserviceService,private http: HttpClient) {
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
 
   ngOnInit(): void {
-
+  this.coordinates={x1:0};
    console.log(this.v);
   //  For getting category Id
    this.lagunaserve.get_category_list().subscribe(data=>{
@@ -5407,9 +5409,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
        console.log(this.multipleImages)
        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-         (res) => console.log(res),
-         (err) => console.log(err)
-       );
+         (res) =>{ console.log(res),
+        //  (err) => console.log(err),
+        this.spinner.hide();
+        this.myFunction_update();
+    
+     });
          this.storevalue.length=0;
        this.storevalue.push({
 
@@ -5424,8 +5429,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
          this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
-        this.spinner.hide();
-        this.myFunction_update();
+    
 
       })
 
@@ -5459,9 +5463,11 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
        console.log(this.multipleImages)
        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-         (res) => console.log(res),
-         (err) => console.log(err)
-       );
+         (res) =>{ console.log(res);
+          this.spinner.hide();
+          this.myFunction_update();
+        //  (err) => console.log(err)
+        });
          this.storevalue.length=0;
        this.storevalue.push({
 
@@ -5476,8 +5482,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
          this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
-        this.spinner.hide();
-        this.myFunction_update();
+        // this.spinner.hide();
+        // this.myFunction_update();
 
       })
 
@@ -5485,10 +5491,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
    }
    else{
     if(v1<v2){
-
-
-
-       if(localStorage.getItem('breakfast')==''){
+   if(localStorage.getItem('breakfast')==''){
 
 
 
@@ -5520,9 +5523,11 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
         console.log(this.multipleImages)
         this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-          (res) => console.log(res),
-          (err) => console.log(err)
-        );
+          (res) =>{console.log(res);
+            this.spinner.hide();
+            this.myFunction_update();
+          // (err) => console.log(err)
+        });
         this.storevalue.length=0;
         this.storevalue.push({
 
@@ -5537,8 +5542,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
           this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
          console.log(data);
-         this.spinner.hide();
-         this.myFunction_update();
+        
 
        })
 
@@ -5581,9 +5585,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
           console.log(this.multipleImages)
           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-            (res) => console.log(res),
-            (err) => console.log(err)
-          );
+            (res) => {console.log(res);
+              this.spinner.hide();
+              this.myFunction();
+
+            // (err) => console.log(err)
+            });
 
 
           this.storevalue.length=0;
@@ -5600,8 +5607,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
             this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
            console.log(data);
-           this.spinner.hide();
-           this.myFunction();
+          //  this.spinner.hide();
+          //  this.myFunction();
 
          })
 
@@ -5650,9 +5657,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
           console.log(this.multipleImages)
           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-            (res) => console.log(res),
-            (err) => console.log(err)
-          );
+            (res) =>{ console.log(res);
+              this.spinner.hide();
+              this.myFunction();
+          });
 
           this.storevalue.length=0;
           this.storevalue.push({
@@ -5668,8 +5676,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
             this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
            console.log(data);
-           this.spinner.hide();
-           this.myFunction();
+       
 
          })
 
@@ -5706,9 +5713,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
           console.log(this.multipleImages)
           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-            (res) => console.log(res),
-            (err) => console.log(err)
-          );
+            (res) =>{ console.log(res),
+              this.spinner.hide();
+              this.myFunction();
+          });
 
           this.storevalue.length=0;
           this.storevalue.push({
@@ -5724,8 +5732,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
             this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
            console.log(data);
-           this.spinner.hide();
-           this.myFunction();
+           
 
          })
 
@@ -5776,9 +5783,12 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
           console.log(this.multipleImages)
           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-            (res) => console.log(res),
-            (err) => console.log(err)
-          );
+            (res) =>{
+              console.log(res);
+              this.spinner.hide();
+              this.myFunction();
+            // (err) => console.log(err)
+          } );
 
 
           this.storevalue.length=0;
@@ -5795,8 +5805,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
             this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
            console.log(data);
-           this.spinner.hide();
-           this.myFunction();
+         
 
          })
 
@@ -5809,6 +5818,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
      }
      else{
+    this.spinner.hide();
+
        this.myFunction_fortime()
      }
    }
@@ -5859,9 +5870,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       console.log(this.branchsectionimage);
       console.log(this.branchmenuimage)
       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-        (res) => console.log(res),
-        (err) => console.log(err)
-      );
+        (res) => {console.log(res),
+        this.spinner.hide();
+        this.myFunction_update();
+        });
 
       this.storevalue.length=0;
       this.storevalue.push({
@@ -5876,8 +5888,7 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
-        this.spinner.hide();
-        this.myFunction_update();
+        
 
       })
 
@@ -5913,9 +5924,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
       console.log(this.branchsectionimage);
       console.log(this.branchmenuimage)
       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-        (res) => console.log(res),
-        (err) => console.log(err)
-      );
+        (res) => {console.log(res),
+          this.spinner.hide();
+          this.myFunction_update();
+          });
 
       this.storevalue.length=0;
       this.storevalue.push({
@@ -5930,8 +5942,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
-        this.spinner.hide();
-        this.myFunction_update();
+        // this.spinner.hide();
+        // this.myFunction_update();
 
       })
 
@@ -5972,9 +5984,11 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         console.log(this.branchsectionimage);
         console.log(this.branchmenuimage)
         this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-          (res) => console.log(res),
-          (err) => console.log(err)
-        );
+          (res) =>{ console.log(res);
+            this.spinner.hide();
+          this.myFunction_update();
+  
+        });
         this.storevalue.length=0;
       this.storevalue.push({
 
@@ -5988,8 +6002,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
-        this.spinner.hide();
-        this.myFunction_update();
+        // this.spinner.hide();
+        // this.myFunction_update();
 
       })
 
@@ -6040,9 +6054,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
         console.log(this.multipleImages)
         this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-          (res) => console.log(res),
-          (err) => console.log(err)
-        );
+          (res) =>{ console.log(res);
+          this.spinner.hide();
+          this.myFunction();
+        });
         this.storevalue.length=0;
       this.storevalue.push({
 
@@ -6056,8 +6071,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
-        this.spinner.hide();
-        this.myFunction();
+        // this.spinner.hide();
+        // this.myFunction();
 
       })
 
@@ -6104,9 +6119,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
            console.log(this.multipleImages)
            this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-             (res) => console.log(res),
-             (err) => console.log(err)
-           );
+             (res) =>{ console.log(res);
+              this.spinner.hide();
+              this.myFunction();
+            });
            this.storevalue.length=0;
       this.storevalue.push({
 
@@ -6120,8 +6136,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
-        this.spinner.hide();
-        this.myFunction();
+        // this.spinner.hide();
+        // this.myFunction();
 
       })
 
@@ -6162,9 +6178,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
            console.log(this.multipleImages)
            this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-             (res) => console.log(res),
-             (err) => console.log(err)
-           );
+             (res) => { console.log(res);
+              this.spinner.hide();
+              this.myFunction();
+            });
 
            this.storevalue.length=0;
       this.storevalue.push({
@@ -6179,8 +6196,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
-        this.spinner.hide();
-        this.myFunction();
+        // this.spinner.hide();
+        // this.myFunction();
 
       })
 
@@ -6228,9 +6245,10 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
        console.log(this.multipleImages)
        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-         (res) => console.log(res),
-         (err) => console.log(err)
-       );
+         (res) => { console.log(res);
+          this.spinner.hide();
+          this.myFunction();
+        });
 
        this.storevalue.length=0;
       this.storevalue.push({
@@ -6245,8 +6263,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           });
       this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
         console.log(data);
-        this.spinner.hide();
-        this.myFunction();
+        // this.spinner.hide();
+        // this.myFunction();
 
       })
 console.log(this.storevalue);
@@ -6257,17 +6275,12 @@ console.log(this.storevalue);
 
      }
     else{
-      this.myFunction_fortime();
+    this.spinner.hide();
+     this.myFunction_fortime();
     }
   }
-
-
-    localStorage.setItem('value',this.v)
-
-
-
-
-  }
+  localStorage.setItem('value',this.v)
+}
 
   launchchaked(event:any){
        if(event.target.checked){
@@ -6814,6 +6827,7 @@ this.myFunction();
 
 }
 else{
+  this.spinner.hide();
   this.myFunction_fortime();
  }
 }
@@ -7304,6 +7318,7 @@ else{
 
   }
   else{
+    this.spinner.hide();
    this.myFunction_fortime();
   }
    }
@@ -7336,7 +7351,7 @@ else{
 
 
   // }
-
+//Breakfast cover image
   Breakfast(event: any) {
     console.log(event,event.target.files[0].name,event.target.files[0].type);
 
@@ -9269,6 +9284,9 @@ imageCropped(event: ImageCroppedEvent) {
   console.log("width:" + event.width);
   console.log("height:" + event.height)
   this.croppedImage = event.base64;
+
+  console.log({ file: base64ToFile(this.croppedImage), event});
+  
   console.log(this.croppedImage);
 }
 cropperReady(sourceImageDimensions: Dimensions) {
@@ -9286,18 +9304,22 @@ click_it(e:any){
     // console.log('encoede::' +encodeURIComponent(this.croppedImage));
 
     if(e=='breakfast_cover'){
+      // CONVERT BASE64 TO IMAGE FILE //
     const base64 = this.croppedImage;
       const imageName = this.breakfast_cover_name;
-      const imageBlob = this.dataURItoBlob(base64);
+      const imageBlob = this.dataURItoBlob( this.croppedImage);
       const imageFile = new File([imageBlob], imageName, { type: 'image/png' });
       console.log({imageFile, imageBlob});
       this.img_cover=imageFile;
+      // END //
+      // PREVIEW IMAGE //
     const reader=new FileReader();
     reader.onload = () => {
       this.img_cover = reader.result as string;
 
     }
     reader.readAsDataURL(this.img_cover)
+    // END //
     // this.img_cover=this.croppedImage;
     this.breakfastcoverimage=this.img_cover;
    this.Breakfast_cover_preview=false;
@@ -9447,14 +9469,20 @@ dataURItoBlob(dataURI:any) {
   var byteString = atob(dataURI.toString().split(',')[1]);
 
         //var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-        var ab = new ArrayBuffer(byteString.length);
-        var ia = new Uint8Array(ab);
+      const array=[];
+        // var ab = new ArrayBuffer(byteString.length);
+        // var ia = new Uint8Array(ab);
         for (var i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
+            // ia[i] = byteString.charCodeAt(i);
+            array.push(byteString.charCodeAt(i));
         }
-        var blob = new Blob([ab], { type: 'image/png' }); //or mimeString if you want
-        return blob;
+        // var blob = new Blob([array], { type: 'image/png' }); //or mimeString if you want
+        // return blob;
+        return new Blob([new Uint8Array(array)],
+        {
+          type:'image/png'
+        },
+        );
 }
 
 
