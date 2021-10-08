@@ -42,9 +42,9 @@ TestRouter.post('/testing', async (req, res) => {
         })
     }
 
-    var dt = await MenuImageSave(req.body, cov_file_name, top_img_name);
-    var upload_menu = await UploadMenu(req.files ? (req.files.menu_img ? req.files.menu_img : null) : null, req.body);
-    var upload_sec = await UploadSection(req.files ? (req.files.section_img ? req.files.section_img : null) : null, req.body);
+    // var dt = await MenuImageSave(req.body, cov_file_name, top_img_name);
+    // var upload_menu = await UploadMenu(req.files ? (req.files.menu_img ? req.files.menu_img : null) : null, req.body);
+    // var upload_sec = await UploadSection(req.files ? (req.files.section_img ? req.files.section_img : null) : null, req.body);
     res.send({ suc: 1, msg: 'Success' });
 })
 
