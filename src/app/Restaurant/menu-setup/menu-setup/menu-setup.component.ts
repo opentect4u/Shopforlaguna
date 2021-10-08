@@ -5415,6 +5415,23 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         this.myFunction_update();
     
      });
+
+     ///////////////////////////////////
+     this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+      (res) =>{console.log(res);
+        // this.spinner.hide();
+        // this.myFunction_update();
+      // (err) => console.log(err)
+    });
+    
+    // UPLOAD SECTION FILE //
+    this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+      (res) =>{console.log(res);
+        // this.spinner.hide();
+        // this.myFunction_update();
+      // (err) => console.log(err)
+    });
+     //////////////////////////////////
          this.storevalue.length=0;
        this.storevalue.push({
 
@@ -5468,6 +5485,27 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
           this.myFunction_update();
         //  (err) => console.log(err)
         });
+///////////////////////////////////////////////
+this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+  (res) =>{console.log(res);
+    // this.spinner.hide();
+    // this.myFunction_update();
+  // (err) => console.log(err)
+});
+
+// UPLOAD SECTION FILE //
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+  (res) =>{console.log(res);
+    // this.spinner.hide();
+    // this.myFunction_update();
+  // (err) => console.log(err)
+});
+/////////////////////////////////////
+
+
+
+
+
          this.storevalue.length=0;
        this.storevalue.push({
 
@@ -5638,7 +5676,22 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
             // (err) => console.log(err)
             });
 
-
+          // ///////////////////////////////
+          this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+            (res) =>{console.log(res);
+              // this.spinner.hide();
+              // this.myFunction_update();
+            // (err) => console.log(err)
+          });
+          
+          // UPLOAD SECTION FILE //
+          this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+            (res) =>{console.log(res);
+              // this.spinner.hide();
+              // this.myFunction_update();
+            // (err) => console.log(err)
+          });
+////////////////////////////////////////////////////////
           this.storevalue.length=0;
           this.storevalue.push({
 
@@ -5708,6 +5761,23 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
               this.myFunction();
           });
 
+          ///////////////////////////////
+          this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+            (res) =>{console.log(res);
+              // this.spinner.hide();
+              // this.myFunction_update();
+            // (err) => console.log(err)
+          });
+          
+          // UPLOAD SECTION FILE //
+          this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+            (res) =>{console.log(res);
+              // this.spinner.hide();
+              // this.myFunction_update();
+            // (err) => console.log(err)
+          });
+          /////////////////////////////////////
+
           this.storevalue.length=0;
           this.storevalue.push({
 
@@ -5763,6 +5833,24 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
               this.spinner.hide();
               this.myFunction();
           });
+
+
+          ////////////////////////////////////
+          this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+            (res) =>{console.log(res);
+              // this.spinner.hide();
+              // this.myFunction_update();
+            // (err) => console.log(err)
+          });
+          
+          // UPLOAD SECTION FILE //
+          this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+            (res) =>{console.log(res);
+              // this.spinner.hide();
+              // this.myFunction_update();
+            // (err) => console.log(err)
+          });
+          ///////////////////////////////////
 
           this.storevalue.length=0;
           this.storevalue.push({
@@ -5836,6 +5924,23 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
             // (err) => console.log(err)
           } );
 
+
+          //////////////////////////
+          this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+            (res) =>{console.log(res);
+              // this.spinner.hide();
+              // this.myFunction_update();
+            // (err) => console.log(err)
+          });
+          
+          // UPLOAD SECTION FILE //
+          this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+            (res) =>{console.log(res);
+              // this.spinner.hide();
+              // this.myFunction_update();
+            // (err) => console.log(err)
+          });
+          ////////////////////////////////
 
           this.storevalue.length=0;
           this.storevalue.push({

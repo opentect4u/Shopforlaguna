@@ -267,7 +267,21 @@ else{
       {this.emptymenu=true;
         this.overlap=false;
       this.topimage=this.menuImages.top_img? this.url1+'/'+this.menuImages.top_img : ''
-        this.cov=this.menuImages.cov_img? this.url1+'/'+this.menuImages.cov_img : ''}
+        this.cov=this.menuImages.cov_img? this.url1+'/'+this.menuImages.cov_img : undefined
+        this.admin_data.get_menu_urls(this.rid, this.menu_id).subscribe(data=>{console.log(data)
+          this.menuImages=data;
+          this.menuImages=this.menuImages.logo_dt;
+          console.log(this.menuImages)
+        
+              this.topimage=this.url1+'/'+this.menuImages[0].logo_path
+              console.log(this.topimage);
+              // this.cov=this.menuImages[i].cover_page_img? this.url1+'/'+this.menuImages[i].cover_page_img : ''
+              // console.log(this.cov)
+              // console.log(this.menuImages[i].cover_page_img)
+            
+          
+       })
+      }
     })
   }
 //     this.admin_data.get_menu_urls(this.rid).subscribe(data=>{console.log(data)
@@ -363,13 +377,13 @@ else{
   open_modal1(){
     this.modalopen1=document.getElementById('id02')
     this.modalopen1.style.display='block'
-    if(this.overlap==true)
-    this.overlap=true;
+    // if(this.overlap==true)
+    // this.overlap=true;
   }
   modalclose1(){
     this.modalopen1.style.display='none'
-    if(this.overlap=true)
-    this.overlap=true;
+    // if(this.overlap=true)
+    // this.overlap=true;
   }
   open_modal2(){
     // this.overlap=true;

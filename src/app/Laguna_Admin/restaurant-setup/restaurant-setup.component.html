@@ -282,7 +282,7 @@
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                     <th scope="col">Preview</th>
-                                    <th scope="col">Upload Logo <br><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label></th>
+                                    <th scope="col">Upload Logo <br><label class="uploadTxt"> <i> File Types:JPEG/JPG/PNG. Maximum Size: 2MB </i></label></th>
                                     <!-- <th scope="col">Action</th> -->
                                     <th scope="col"></th>
                                 </tr>
@@ -341,7 +341,7 @@
                                      <th scope="col"></th>
                                     <!-- <th scope="col">Download Link</th> -->
                                     <th scope="col">Preview </th>
-                                    <th scope="col"> Upload Image <br><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label></th>
+                                    <th scope="col"> Upload Image <br><label class="uploadTxt"> <i>  File Types:JPEG/JPG/PNG. Maximum Size: 2MB </i></label></th>
                                     <!-- <th scope="col">Action</th> -->
                                     <th scope="col"></th>
                                     
@@ -399,7 +399,7 @@
 
                                     <!-- <th scope="col">Download Link</th> -->
                                     <th scope="col">Preview </th>
-                                    <th scope="col"> Upload Image <br><label class="uploadTxt">File Types:JPEG/JPG/PNG. Maximum Size: 2MB</label></th>
+                                    <th scope="col"> Upload Image <br><label class="uploadTxt"> <i>File Types:JPEG/JPG/PNG. Maximum Size: 2MB </i> </label></th>
                                     <!-- <th scope="col">Action</th> -->
                                     <th scope="col"></th>
                                 </tr>
@@ -624,7 +624,7 @@
                 <label class="uploadTxt">Upload Section images JPG or PNG:</label>
             <input type="file" id="myfile" class="uploadField" name="myfile" multiple="">-->
 
-                                    <label>Upload Section Image <small class="text-muted">(File Types:JPEG/JPG/PNG. Maximum Size: 2MB)</small> </label>
+                                    <label>Upload Section Image <small class="text-muted"> <i>File Types:JPEG/JPG/PNG. Maximum Size: 2MB </i> </small> </label>
                                     <!--  -->
                                     <input id='files_section' (change)="section_img_upload($event)" type='file' multiple />
                                     <!-- <output id='result' /> -->
@@ -1009,7 +1009,7 @@
                           <form action="">
                               <div class="rowCustomFour">
                           <div class="fieldSecFull">
-                          <label for="headTitle">Header Title:  {{concatheaderlength}}/30</label>
+                          <label for="headTitle">Header Title: <b> ({{concatheaderlength}}/30 </b>)</label>
                           <input type="text" (change)="restrict_header($event)" (input)="restrict_header($event)" maxlength="30" value="{{sp_head}}" [(ngModel)]="sp_head" #head id="headTitle_special" name="headTitle" value="" class="formCss"></div>
                           </div>
                           </form>	
@@ -1044,7 +1044,7 @@
                           <form class="form-inline" action="">
                           <div class="rowCustomFour">
                           <div class="fieldSecFull">
-                          <label for="vehicle2"> Notice Content: ({{concatnoticelength}}/100)</label>
+                          <label for="vehicle2"> Notice Content: <b>({{concatnoticelength}}/100) </b></label>
                           <textarea #notice id="spclMore" maxlength="100" [(ngModel)]="sp_notice" (change)="restrict_notice($event)" (input)="restrict_notice($event)" value="{{sp_notice}}" name="spclMore" rows="5" cols="60" class="formCssTextArea"></textarea>	
                           </div>
                           </div>
@@ -1084,8 +1084,8 @@
 
                     <form class="form-inline" action="">
                         <div class="formBtn">
-                        <button type="submit" class="w3-button w3-green" (click)="send_about_us(about_write_txt.value)">SUBMIT</button>
-                        <button type="reset" class="w3-button w3-green reset" value="Reset" id="clickreset" (click)="about_write_txt.value='';concatdatalength2=0" class="w3-button w3-green reset">Clear</button>
+                        <button type="submit" class="w3-button w3-green" (click)="send_about_us(about_write_txt.value)">Submit</button>
+                        <button type="reset" class="w3-button w3-green reset" value="Reset" id="clickreset" (click)="about_write_txt.value='';concatdatalength2=0" class="w3-button w3-green reset">Reset</button>
                     </div>
                     </form>
                 </div>

@@ -1799,6 +1799,7 @@ reload_section(){
   this.rad.checked=false;
   this.pp=document.getElementById('secval');
   this.pp.value='';
+  this.preview_for_section=''
   this.filesection=document.getElementById('files_section');
   this.filesection.value=null;
 // this.openCity('tab4');  // this.ngOnInit();
@@ -1839,6 +1840,7 @@ imageCropped(event: ImageCroppedEvent) {
   console.log("width:" + event.width);
   console.log("height:" + event.height)
   this.croppedImage = event.base64;
+  if(this.show_tab=='tab4')
   this.preview_for_section=this.croppedImage
   console.log(this.croppedImage);
 }

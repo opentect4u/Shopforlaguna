@@ -334,7 +334,7 @@
             <div class="noMenuSecGroup" >
               <div class="noMenuImg"><img _ngcontent-chx-c163="" alt="" src="/assets/images/noMenu.png"></div>
               <div class="noMenuImgtitle">
-                <h2>No Menu Available</h2>
+                <h2>Oops! No Menu Available Right Now...</h2>
               </div>
               <div>
               
@@ -374,7 +374,7 @@
    
                      <tr *ngFor="let i of overlapData" class="menuAllListTr">
                        <td class="menuAllList">
-                         <h3>{{i.menu_description}} <span>{{i.start_time}} to {{i.end_time}} </span></h3>
+                         <h3>{{i.menu_description}} <span>{{i.start_time}} hrs to {{i.end_time}} hrs</span></h3>
                          <button (click)="open_menu(i.menu_id,i.start_time,i.end_time);modalclose2()">
                            View Menu
                          </button></td>
