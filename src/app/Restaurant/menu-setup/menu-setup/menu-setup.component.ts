@@ -15,6 +15,8 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 '../../../../assets/appcss.css']
 })
 export class MenuSetupComponent implements OnInit {
+  see_photo:boolean=true;
+  add_date:any='';
   Breakfast_check:boolean=false;
   Breakfast_cover_preview:boolean=true;
   Breakfast_top_preview:boolean=true;
@@ -304,6 +306,7 @@ dinner_cover_name:any;
 breakfast_top_name:any;
 breakfast_cover_name:any;
 enable_exclusive:boolean=true;
+enable_addition:boolean=true;
 
 //Image Cropper
  scale = 1;
@@ -356,6 +359,28 @@ enable_exclusive:boolean=true;
   x1:any;
   coordinates:any;
   date_time:any;
+  image_getelement:any;
+  previous_id:any;
+  enable_date_specific:boolean=true;
+
+  reg_menu_id:any;
+  month_day_special:any;
+  enable_days_addition:boolean=true;
+  enable_specific_date_addition:boolean=true;
+  mon_special_add:any;
+  tue_special_add:any;
+   sun_special_add:any;
+  wed_special_add:any;
+  thu_special_add:any;
+  fri_special_add:any;
+  sat_special_add:any;
+  break_Special_add=0;
+  lunch_special_add=0;
+   dinner_Special_add=0;
+    brunch_Special_add=0;
+ check_every_week_check:any;
+ check_specific_date_check:any;
+ common_for_special_menu:any;
   constructor(public toastr: ToastrManager,private spinner: NgxSpinnerService,private _data: DataserviceService,private lagunaserve:LagunaserviceService,private http: HttpClient) {
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
   }
@@ -9636,16 +9661,14 @@ click_it(e:any){
 dataURItoBlob(dataURI:any) {
   var byteString = atob(dataURI.toString().split(',')[1]);
 
-        //var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      
       const array=[];
-        // var ab = new ArrayBuffer(byteString.length);
-        // var ia = new Uint8Array(ab);
+   
         for (var i = 0; i < byteString.length; i++) {
-            // ia[i] = byteString.charCodeAt(i);
+      
             array.push(byteString.charCodeAt(i));
         }
-        // var blob = new Blob([array], { type: 'image/png' }); //or mimeString if you want
-        // return blob;
+        
         return new Blob([new Uint8Array(array)],
         {
           type:'image/png'
@@ -9769,10 +9792,31 @@ else {
 }
 //For submitting final data
 save_special(){
-  // this.storevalue.length=0;
-  console.log(this.resid,this.special);
-  this.spinner.show();
+  this.storevalue.length=0;
+
+ console.log(this.resid,this.special);
   console.log(this.special_url,this.special_img);
+   this.storevalue.push({
+    "menu_id": this.special,
+    "break_check":'Y',
+    "restaurant_id":this.resid,
+    "regular_menu_flag":this.exclusive,
+    "day_flag":this.week,
+    // "menu_date":this.week=='S'?this.date_time:'',
+    "menu_date":this.exclusive=='E'? (this.week=='S'? this.date_time:''): (this.week=='S' ? this.add_date:''),
+     
+    "reg_menu_id":this.exclusive=='E' ? [{"menu_id":this.break_Special},{"menu_id":this.lunch_special},{"menu_id":this.dinner_Special},{"menu_id":this.brunch_Special}] :  [{"menu_id":this.break_Special_add},{"menu_id":this.lunch_special_add},{"menu_id":this.dinner_Special_add},{"menu_id":this.brunch_Special_add}],
+    "month_day":this.exclusive=='E' ? [{"dt": this.mon_special},{"dt":this.tue_special},{"dt":this.wed_special},{"dt":this.thu_special},{"dt":this.fri_special},{"dt":this.sat_special},{"dt":this.sun_special}] : [{"dt": this.mon_special_add},{"dt":this.tue_special_add},{"dt":this.wed_special_add},{"dt":this.thu_special_add},{"dt":this.fri_special_add},{"dt":this.sat_special_add},{"dt":this.sun_special_add}] 
+  })
+
+ 
+  this.http.post<any>(this.url_reg+'/special_date_time', this.storevalue).subscribe(data=>{
+    console.log(data);
+   
+    })
+  
+
+  // For Common 
   const formdata=new FormData();
   formdata.append('special_url',this.special_url);
   for(let img of this.special_img){
@@ -9780,62 +9824,126 @@ save_special(){
   }
   formdata.append('restaurant_id',this.resid);
   formdata.append('menu_id',this.special);
-  formdata.append('break_check','Y');
-  formdata.append('regular_menu_flag',this.exclusive);
-  formdata.append('day_flag',this.week);
-  this.storevalue.push({
-    "reg_menu_id":[{"menu_id":this.break_Special},{"menu_id":this.lunch_special},{"menu_id":this.dinner_Special},{"menu_id":this.brunch_Special}] ,
-    "month_day": [{"dt": this.mon_special},{"dt":this.tue_special},{"dt":this.wed_special},{"dt":this.thu_special},{"dt":this.fri_special},{"dt":this.sat_special},{"dt":this.sun_special}]
-  })
-
-  this.http.post<any>(this.url_reg+'/special_save', formdata,this.storevalue).subscribe(data=>{
-  console.log(data);
-  this.spinner.hide();
-
+  this.http.post<any>(this.url_reg+'/special_save', formdata).subscribe(data=>{
+    console.log(data);
+    
     })
-
 }
-enable_exclusive_inaddition(event:any){
-  if(event.target.check){
-    this.enable_exclusive=false;
-    this.exclusive='E';
+// For checking which Pack is selected in Special mennu
+enable_exclusive_inaddition(event:any,menu_name:any){
+  if(menu_name=='addition'){
+    if(event.target.checked){
+      this.enable_addition=false;
+      this.enable_days=true;
+      this.enable_exclusive=true;
+      this.enable_date_specific=true;
+       this.exclusive='A';
+       this.check_every_week_check=document.getElementById('everyWeekAddi');
+       if(this.check_every_week_check.checked){
+         this.enable_days_addition=false;
+       }
+       this.check_specific_date_check=document.getElementById('specificWeekAddi');
+       if( this.check_specific_date_check.checked){
+         this.enable_specific_date_addition=false;
+       }
+    }
+    else{
+     this.enable_addition=true;
+    }
   }
   else{
-    this.exclusive='';
+    if(event.target.checked){
+      this.enable_exclusive=false;
+      this.enable_addition=true;
+      this.enable_days_addition=true;
+      this.enable_specific_date_addition=true;
 
-    this.enable_exclusive=true;
+      this.exclusive='E';
+      this.check_every_week_check=document.getElementById('everyWeek');
+        if(this.check_every_week_check.checked){
+          this.enable_days=false;
+        }
+        this.check_specific_date_check=document.getElementById('specificWeek');
+        if( this.check_specific_date_check.checked){
+          this.enable_date_specific=false;
+        }
+    }
+    else{
+      this.enable_exclusive=true;
+    }
   }
+  
 
 }
-enable_everyweek(event:any,e:any){
-  if(e=='every_week'){
 
+// For checking which Pack is selected in Special menu Exclusive or Addition
+
+enable_everyweek(event:any,e:any,pack:any){
+  if(pack=='exclusive'){
+ if(e=='every_week'){
   if(event.target.checked){
     this.enable_days=false;
+    this.enable_date_specific=true;
+
     this.week='E';
   }
   else{
-    this.week='';
+    // this.week='';
     this.enable_days=true;
   }
 
 }
 else{
    if(event.target.checked){
+    this.enable_date_specific=false;
     this.enable_days=true;
+     
     this.week='S';
    }
    else{
-    this.week='';
-
+    this.enable_date_specific=true;
+    //  this.week='';
    }
 
 
 }
 }
+else{
+  if(e=='every_week_addition'){
+    if(event.target.checked){
+      this.enable_days_addition=false;
+      this.enable_specific_date_addition=true;
+  
+      this.week='E';
+    }
+    else{
+      // this.week='';
+      this.enable_days_addition=true;
+    }
+  
+  }
+  else{
+     if(event.target.checked){
+      this.enable_specific_date_addition=false;
+     this.enable_days_addition=true;
+
+       
+      this.week='S';
+     }
+     else{
+      this.enable_specific_date_addition=true;
+      //  this.week='';
+     }
+  
+  
+  }
+}
+
+
+}
 // For checking checkbox below the specific date
 checkregularid(event:any,e:any){
-  if(e=='breakfast'){
+  if(e=='break'){
     if(event.target.checked){
       this.break_Special=1;
     }
@@ -9873,7 +9981,7 @@ checkregularid(event:any,e:any){
    }
 }
 
-//for checking day
+//for checking day for specialmenu everyday
 checkspecialday(event:any,e:any){
   if(e=='monday'){
     this.mon_check=document.getElementById('vehicle_s2');
@@ -9884,7 +9992,9 @@ checkspecialday(event:any,e:any){
   }
   else{
     this.mon_special=0;
-
+    this.every=document.getElementById('vehicle_se');
+   
+    this.every.checked=false;
   }
 
   // else{
@@ -9903,7 +10013,9 @@ else if(e=='tuesday'){
   }
   else{
     this.tue_special=0;
-
+    this.every=document.getElementById('vehicle_se');
+   
+    this.every.checked=false;
   }
 
   // else{
@@ -9921,7 +10033,9 @@ else if(e=='tuesday'){
   }
   else{
     this.wed_special=0;
-
+    this.every=document.getElementById('vehicle_se');
+   
+    this.every.checked=false;
     // this.wed=0;
     // this.every=document.getElementById('vehicle1');
     // this.every.checked=false;
@@ -9936,6 +10050,9 @@ else if(e=='tuesday'){
   }
   else{
     this.thu_special=0;
+    this.every=document.getElementById('vehicle_se');
+   
+    this.every.checked=false;
     // this.every=document.getElementById('vehicle1');
     // this.every.checked=false;
   }
@@ -9949,6 +10066,9 @@ else if(e=='friday'){
   }
   else{
     this.fri_special=0;
+    this.every=document.getElementById('vehicle_se');
+   
+    this.every.checked=false;
     // this.every=document.getElementById('vehicle1');
     // this.every.checked=false;
   }
@@ -9964,6 +10084,9 @@ else if(e=='friday'){
    this.sat_special=0;
   //  this.every=document.getElementById('vehicle1');
   //  this.every.checked=false;
+  this.every=document.getElementById('vehicle_se');
+   
+    this.every.checked=false;
  }
 
 }
@@ -9976,65 +10099,309 @@ else if(e=='sun'){
   }
   else{
     this.sun_special=0;
-    // this.every=document.getElementById('vehicle1');
-    // this.every.checked=false;
+    this.every=document.getElementById('vehicle_se');
+   
+    this.every.checked=false;
+
   }
 
 }
-// else if(e=='everyday'){
-//   this.every=document.getElementById('vehicle1');
-//   if(event.target.checked){
-//     console.log("asdsadad")
+else if(e=='everyday'){
+  this.every=document.getElementById('vehicle_se');
+  if(event.target.checked){
+    console.log("asdsadad")
 
-//   this.mon_check=document.getElementById('vehicle2');
-//   this.mon_check.checked=true;
-//   this.tue_check=document.getElementById('vehicle3');
-//   this.tue_check.checked=true;
-//   this.wed_check=document.getElementById('vehicle4');
-//   this.wed_check.checked=true;
-//   this.thu_check=document.getElementById('vehicle5');
-//   this.thu_check.checked=true;
-//   this.fri_check=document.getElementById('vehicle6');
-//   this.fri_check.checked=true;
-//   this.sat_check=document.getElementById('vehicle7');
-//   this.sat_check.checked=true;
-//   this.sun_check=document.getElementById('vehicle8');
-//   this.sun_check.checked=true;
-//   this.mon=2;
-//   this.tue=3;
-//   this.wed=4;
-//   this.thu=5;
-//   this.fri=6;
-//   this.sat=7;
-//   this.sun=8
-//   }
-//    else{
-//     console.log("asdsadadfailed")
-//     this.mon_check=document.getElementById('vehicle2');
-//     this.mon_check.checked=false;
-//     this.tue_check=document.getElementById('vehicle3');
-//     this.tue_check.checked=false;
-//     this.wed_check=document.getElementById('vehicle4');
-//     this.wed_check.checked=false;
-//     this.thu_check=document.getElementById('vehicle5');
-//     this.thu_check.checked=false;
-//     this.fri_check=document.getElementById('vehicle6');
-//     this.fri_check.checked=false;
-//     this.sat_check=document.getElementById('vehicle7');
-//     this.sat_check.checked=false;
-//     this.sun_check=document.getElementById('vehicle8');
-//     this.sun_check.checked=false;
-//     this.mon=0;
-//     this.tue=0;
-//     this.wed=0;
-//     this.thu=0;
-//     this.fri=0;
-//     this.sat=0;
-//     this.sun=0;
-//    }
+  this.mon_check=document.getElementById('vehicle_s2');
+  this.mon_check.checked=true;
+  this.tue_check=document.getElementById('vehicle_s3');
+  this.tue_check.checked=true;
+  this.wed_check=document.getElementById('vehicle_s4');
+  this.wed_check.checked=true;
+  this.thu_check=document.getElementById('vehicle_s5');
+  this.thu_check.checked=true;
+  this.fri_check=document.getElementById('vehicle_s6');
+  this.fri_check.checked=true;
+  this.sat_check=document.getElementById('vehicle_s7');
+  this.sat_check.checked=true;
+  this.sun_check=document.getElementById('vehicle_s8');
+  this.sun_check.checked=true;
+  this.mon_special=2;
+  this.tue_special=3;
+  this.wed_special=4;
+  this.thu_special=5;
+  this.fri_special=6;
+  this.sat_special=7;
+  this.sun_special=8
+  }
+   else{
+    console.log("asdsadadfailed")
+    this.mon_check=document.getElementById('vehicle_s2');
+    this.mon_check.checked=false;
+    this.tue_check=document.getElementById('vehicle_s3');
+    this.tue_check.checked=false;
+    this.wed_check=document.getElementById('vehicle_s4');
+    this.wed_check.checked=false;
+    this.thu_check=document.getElementById('vehicle_s5');
+    this.thu_check.checked=false;
+    this.fri_check=document.getElementById('vehicle_s6');
+    this.fri_check.checked=false;
+    this.sat_check=document.getElementById('vehicle_s7');
+    this.sat_check.checked=false;
+    this.sun_check=document.getElementById('vehicle_s8');
+    this.sun_check.checked=false;
+    this.mon_special=0;
+  this.tue_special=0;
+  this.wed_special=0;
+  this.thu_special=0;
+  this.fri_special=0;
+  this.sat_special=0;
+  this.sun_special=0;
+   }
 
-// }
+}
 console.log(this.mon_special,this.tue_special,this.wed_special,this.thu_special,this.fri_special,this.sat_special,this.sun_special)
+}
+//for checking day for specialmenu everyday in addition
+check_everyday_addition(event:any,e:any){
+  if(e=='mon'){
+    this.mon_check=document.getElementById('vehicle_sa1');
+
+  if(event.target.checked){
+    this.mon_special_add=2;
+    console.log(this.mon_special);
+  }
+  else{
+    this.mon_special_add=0;
+    this.every=document.getElementById('vehicle_sa');
+   
+    this.every.checked=false;
+  }
+
+  // else{
+  //   this.mon_special=0;
+  //   this.every=document.getElementById('vehicle_s2');
+  //   this.every.checked=false;
+  // }
+
+}
+else if(e=='tue'){
+
+  this.tue_check=document.getElementById('vehicle_sa2');
+  if(event.target.checked){
+    this.tue_special_add=3;
+  }
+  else{
+    this.tue_special_add=0;
+    this.every=document.getElementById('vehicle_sa');
+   
+    this.every.checked=false;
+  }
+
+  // else{
+  //   this.tue=0;
+  //   this.every=document.getElementById('vehicle_s3');
+  //   this.every.checked=false;
+  // }
+}
+ else if(e=='wed'){
+
+  this.wed_check=document.getElementById('vehicle_sa3');
+  if(event.target.checked){
+    this.wed_special_add=4;
+  }
+  else{
+    this.wed_special_add=0;
+    this.every=document.getElementById('vehicle_sa');
+   
+    this.every.checked=false;
+    // this.wed=0;
+    // this.every=document.getElementById('vehicle1');
+    // this.every.checked=false;
+  }
+}
+ else if(e=='thu'){
+
+
+  this.thu_check=document.getElementById('vehicle_sa4');
+  if(event.target.checked){
+    this.thu_special_add=5
+  }
+  else{
+    this.thu_special_add=0;
+    this.every=document.getElementById('vehicle_sa');
+   
+    this.every.checked=false;
+    // this.every=document.getElementById('vehicle1');
+    // this.every.checked=false;
+  }
+}
+else if(e=='fri'){
+
+  this.fri_check=document.getElementById('vehicle_sa5');
+  if(event.target.checked){
+    this.fri_special_add=6;
+  }
+  else{
+    this.fri_special_add=0;
+    this.every=document.getElementById('vehicle_sa');
+   
+    this.every.checked=false;
+    // this.every=document.getElementById('vehicle1');
+    // this.every.checked=false;
+  }
+}
+ else if(e=='sat'){
+
+
+ this.sat_check=document.getElementById('vehicle_sa6');
+ if(event.target.checked){
+  this.sat_special_add=7;
+ }
+ else{
+   this.sat_special_add=0;
+  //  this.every=document.getElementById('vehicle1');
+  //  this.every.checked=false;
+  this.every=document.getElementById('vehicle_sa');
+   
+    this.every.checked=false;
+ }
+
+}
+else if(e=='sun'){
+
+  this.sun_check=document.getElementById('vehicle_sa7');
+  if(event.target.checked){
+           this.sun_special_add=8;
+  }
+  else{
+    this.sun_special_add=0;
+    this.every=document.getElementById('vehicle_sa');
+   
+    this.every.checked=false;
+
+  }
+
+}
+else if(e=='everyday'){
+  this.every=document.getElementById('vehicle_sa');
+  if(event.target.checked){
+  this.mon_check=document.getElementById('vehicle_sa1');
+  this.mon_check.checked=true;
+  this.tue_check=document.getElementById('vehicle_sa2');
+  this.tue_check.checked=true;
+  this.wed_check=document.getElementById('vehicle_sa3');
+  this.wed_check.checked=true;
+  this.thu_check=document.getElementById('vehicle_sa4');
+  this.thu_check.checked=true;
+  this.fri_check=document.getElementById('vehicle_sa5');
+  this.fri_check.checked=true;
+  this.sat_check=document.getElementById('vehicle_sa6');
+  this.sat_check.checked=true;
+  this.sun_check=document.getElementById('vehicle_sa7');
+  this.sun_check.checked=true;
+  this.mon_special_add=2;
+  this.tue_special_add=3;
+  this.wed_special_add=4;
+  this.thu_special_add=5;
+  this.fri_special_add=6;
+  this.sat_special_add=7;
+  this.sun_special_add=8
+  }
+   else{
+    console.log("asdsadadfailed")
+    this.mon_check=document.getElementById('vehicle_sa1');
+    this.mon_check.checked=false;
+    this.tue_check=document.getElementById('vehicle_sa2');
+    this.tue_check.checked=false;
+    this.wed_check=document.getElementById('vehicle_sa3');
+    this.wed_check.checked=false;
+    this.thu_check=document.getElementById('vehicle_sa4');
+    this.thu_check.checked=false;
+    this.fri_check=document.getElementById('vehicle_sa5');
+    this.fri_check.checked=false;
+    this.sat_check=document.getElementById('vehicle_sa6');
+    this.sat_check.checked=false;
+    this.sun_check=document.getElementById('vehicle_sa7');
+    this.sun_check.checked=false;
+    this.mon_special_add=0;
+  this.tue_special_add=0;
+  this.wed_special_add=0;
+  this.thu_special_add=0;
+  this.fri_special_add=0;
+  this.sat_special_add=0;
+  this.sun_special_add=0;
+   }
+
+}
+}
+// For checking checkbox below the specific date in addition
+
+check_addition(event:any,e:any){
+  if(e=='break'){
+    if(event.target.checked){
+      this.break_Special_add=1;
+    }
+    else{
+      this.break_Special_add=0;
+
+    }
+
+  }
+  else if(e=='lunch'){
+    if(event.target.checked){
+    this.lunch_special_add=2
+    }
+    else{
+    this.lunch_special_add=0
+
+    }
+  }
+  else if(e=='dinner'){
+    if(event.target.checked){
+      this.dinner_Special_add=3;
+    }
+    else{
+      this.dinner_Special_add=0;
+
+    }
+  }
+  else if(e=='brunch'){
+    if(event.target.checked){
+        this.brunch_Special_add=4;
+    }
+    else{
+      this.brunch_Special_add=0;
+   }
+   }
+}
+
+//For making border on selecting image 
+selectedimage(e:any,image:any,id:any,length:any){
+  this.previous_id=id;
+  this.common_for_special_menu=this.url_reg+'/'+image;
+  for(let i=0;i<length;i++){
+    this.image_getelement=document.getElementById('image_'+i);
+    this.image_getelement.style.border='';
+  }
+  this.image_getelement=document.getElementById('image_'+e);
+ this.image_getelement.style.border='3px solid #00477e';
+  console.log("Index:",e+" " +"Image:" ,this.url_reg+'/'+image+" "+"ID:",id+" "+"length:",length)
+}
+// Afetr Selecting the image from stock
+save_it(e:any){
+  console.log(this.common_for_special_menu);
+  console.log(this.previous_id);
+  
+  
+  if(e=='close'){
+    this.see_photo=true;
+    this.common_for_special_menu='';
+    this.previous_id='';
+
+ }
+  else{
+    this.see_photo=false;
+  }
 }
 }
 

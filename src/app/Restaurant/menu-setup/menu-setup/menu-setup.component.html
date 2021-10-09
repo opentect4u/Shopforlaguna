@@ -48,7 +48,7 @@
                         <button class="tablinks" [disabled]="parisdefault" (click)="openCity('Paris','2')"  id="defaultOpen1">Lunch</button>
                         <button class="tablinks" [disabled]="tokyodefault" (click)="openCity('Tokyo','3')"  id="defaultOpen2">Dinner</button>
                         <button class="tablinks" [disabled]="lagunadefault" (click)="openCity('Laguna','4')"  id="defaultOpen3">Brunch</button>
-                        <button class="tablinks" (click)="openCity('Shrewsbury','5')" hidden  id="defaultOpen4">Specials</button>
+                        <button class="tablinks" (click)="openCity('Shrewsbury','5')"   id="defaultOpen4">Specials</button>
 
                      <strong></strong>
                     </div>
@@ -1740,7 +1740,14 @@
                               scheduled menu, a "pop-up" will display.)</p>
 
                               <button    data-bs-toggle="modal" data-bs-target="#myModal21" class="btn btn-primary" >Select Image</button>
-
+                              <div class="container1" id="break_cover">
+                                <div class="img-wrap rounded" [hidden]="see_photo" >
+                                  <span class="close" (click)="deletephoto('breakfast_cover')" [hidden]="!show_toast">&times;</span>
+    
+                               <img src="{{img_cover}}"  height="50px" width="50px" data-bs-toggle="modal" data-bs-target="#myModal11">
+    
+                              </div></div>
+                              
 
                       </div>
 
@@ -1766,9 +1773,10 @@
                           <strong>SPECIALS</strong> menu at a time, please complete one (and submit), then start
                           another. Always do one at a time.
                           </div>
-                          <div class="secDifer" >
+                          <!-- Exclusive Part -->
+                       <div class="secDifer" >
                             <label for="exclusively"  class="titleCustom">
-                              <input type="radio"  id="exclusively" name="inAddition" value="Exclusively" (change)="enable_exclusive_inaddition($event)"> EXCLUSIVELY</label>
+                              <input type="radio"  id="exclusively" name="inAddition" value="Exclusively" (change)="enable_exclusive_inaddition($event,'exclusive')"> EXCLUSIVELY</label>
 
                           If you would like your <strong>SPECIALS</strong> menu to display
                           <strong>EXCLUSIVELY</strong> (your "normally scheduled" menus <strong>will not</strong>
@@ -1776,14 +1784,14 @@
                           please select the display days/times:<br>
 
 
+                                                                    <!-- For Exclusive every week -->
 
-                          <!-- <label for="everyWeekId" class="fieldTitle"><input type="radio" id="everyWeekId" name="everyWeek" value="EVERY WEEK"> EVERY WEEK</label>     -->
-                          <label   for="everyWeek"  [disabled]="enable_exclusive"  class="fieldTitle"><input type="radio" id="everyWeek" name="everySpecificWeek" (change)="enable_everyweek($event,'every_week')" > EVERY WEEK</label>
+                          <label   for="everyWeek"   class="fieldTitle"><input type="radio" id="everyWeek"  [disabled]="enable_exclusive"   name="everySpecificWeek" (change)="enable_everyweek($event,'every_week','exclusive')" > EVERY WEEK</label>
 
                           <div class="row" >
                             <div class="col-5">
                              <form >
-                                 <input type="checkbox"  id="vehicle_se"  name="vehicle"  (change)="checkspecialday($event,'everyday')">
+                                 <input type="checkbox"  [disabled]="enable_days"   id="vehicle_se"  name="vehicle"  (change)="checkspecialday($event,'everyday')">
                                  <label for="vehicle1" class="m-2"> Every Day</label><br>
                              </form>
 
@@ -1823,31 +1831,32 @@
                             </div>
                             <div class="col-2"></div>
                          </div>
-             <!-- <label for="specificdateId" class="fieldTitle"><input type="radio" id="specificdateId" name="everyWeek" value="SPECIFIC DATE"> SPECIFIC DATE</label> -->
-             <label for="specificWeek" class="fieldTitle"  ><input type="radio" id="specificWeek" name="everySpecificWeek" value="SPECIFIC DATE" (change)="enable_everyweek($event,'specific_date')"> SPECIFIC DATE</label>
+             
+                                <!-- For Exclusive Specific Date -->
+             <label for="specificWeek" class="fieldTitle" ><input [disabled]="enable_exclusive"   type="radio" id="specificWeek" name="everySpecificWeek" value="SPECIFIC DATE" (change)="enable_everyweek($event,'specific_date','exclusive')"> SPECIFIC DATE</label>
                                Select the specific
                               date that you would like your <strong>SPECIALS</strong> menu to display<br>
 
-                              <input   type="date" id="special" name="special" >
+                              <input   type="date" id="special" [(ngModel)]="date_time" name="special"  [disabled]="enable_date_specific">
                           <br>
                           TIME: Select the normally scheduled menu that your SPECIALS menu will display with:
 
-                          <form class="form-inline" action="">
-                              <input type="checkbox" id="breakfast" (change)="checkregularid($event,'break')">
+                          <form class="form-inline" >
+                              <input type="checkbox" [disabled]="enable_exclusive"  id="breakfast" (change)="checkregularid($event,'break')">
                               <label for="vehicle2"> Breakfast</label><br>
-                              <input type="checkbox" id="lunch" (change)="checkregularid($event,'lunch')">
+                              <input type="checkbox" [disabled]="enable_exclusive" id="lunch" (change)="checkregularid($event,'lunch')">
                               <label for="vehicle3"> Lunch</label><br>
-                              <input type="checkbox" id="dinner"   (change)="checkregularid($event,'dinner')">
+                              <input type="checkbox" [disabled]="enable_exclusive" id="dinner"   (change)="checkregularid($event,'dinner')">
                               <label for="vehicle1"> Dinner</label><br>
-                              <input type="checkbox" id="brunch"  (change)="checkregularid($event,'brunch')">
+                              <input type="checkbox" [disabled]="enable_exclusive" id="brunch"  (change)="checkregularid($event,'brunch')">
                               <label for="vehicle2"> Brunch</label><br>
                           </form>
                       </div>
 
-
+                      <!-- Addition Part -->
                       <div class="secDifer" >
                           <label for="inAddition" class="titleCustom">
-                            <input type="radio" id="inAddition" name="inAddition" value="In Addition">
+                            <input type="radio" id="inAddition" name="inAddition" value="In Addition" (change)="enable_exclusive_inaddition($event,'addition')">
                               IN ADDITION</label>
                           If you would like your <strong>SPECIALS</strong> menu to display <strong>IN
                               ADDITION</strong> to your "normally scheduled" menus (your <strong>SPECIALS </strong>
@@ -1857,31 +1866,31 @@
                           pop-up, indicating there is a SPECIALS menu to view. <br><br>
 
 
-                          <label for="everyWeekAddi" class="fieldTitle"><input type="radio" id="everyWeekAddi" name="everySpecificWeekAddi" value="EVERY WEEK In Addition"> EVERY WEEK</label>
+                          <label for="everyWeekAddi" class="fieldTitle"><input type="radio" id="everyWeekAddi" [disabled]="enable_addition" name="everySpecificWeekAddi" value="EVERY WEEK In Addition"  (change)="enable_everyweek($event,'every_week_addition','addition')" > EVERY WEEK</label>
 
                           <div class="row">
                             <div class="col-5">
                              <form >
-                                 <input type="checkbox"   id="special_everyday"  name="vehicle"  >
+                                 <input type="checkbox"  [disabled]="enable_days_addition"    id="vehicle_sa"   (change)="check_everyday_addition($event,'everyday')">
                                  <label for="vehicle1" class="m-2"> Every Day</label><br>
                              </form>
 
                              <form class="form-inline" >
-                                 <input type="checkbox"    name="vehicle2" id="special_monday">
+                                 <input type="checkbox"  [disabled]="enable_days_addition"   id="vehicle_sa1" (change)="check_everyday_addition($event,'mon')">
                                  <label for="vehicle2"> Monday</label><br>
-                                 <input type="checkbox"     name="vehicle3" id="special_tue">
+                                 <input type="checkbox"   [disabled]="enable_days_addition"    id="vehicle_sa2" (change)="check_everyday_addition($event,'tue')">
                                  <label for="vehicle3"> Tuesday</label><br>
-                                 <input type="checkbox"   name="vehicle1" id="special_wednesday" >
+                                 <input type="checkbox"  [disabled]="enable_days_addition"    id="vehicle_sa3" (change)="check_everyday_addition($event,'wed')">
                                  <label for="vehicle1"> Wednesday</label><br>
                              </form>
                              <form class="form-inline" >
-                                 <input type="checkbox"   name="vehicle2" id="special_thursday" >
+                                 <input type="checkbox"  [disabled]="enable_days_addition"  id="vehicle_sa4" (change)="check_everyday_addition($event,'thu')">
                                  <label for="vehicle2"> Thursday</label><br>
-                                 <input type="checkbox"   name="vehicle3" id="special_thursday">
+                                 <input type="checkbox"  [disabled]="enable_days_addition"   id="vehicle_sa5" (change)="check_everyday_addition($event,'fri')">
                                  <label for="vehicle3"> Friday</label><br>
-                                 <input type="checkbox"    name="vehicle1" id="special_saturday" >
+                                 <input type="checkbox"   [disabled]="enable_days_addition"   id="vehicle_sa6" (change)="check_everyday_addition($event,'sat')">
                                  <label for="vehicle1"> Saturday</label><br>
-                                 <input type="checkbox"    name="vehicle2" id="special_sunday" >
+                                 <input type="checkbox"   [disabled]="enable_days_addition"   id="vehicle_sa7" (change)="check_everyday_addition($event,'sun')">
                                  <label for="vehicle2"> Sunday</label><br>
                              </form>
 
@@ -1905,24 +1914,24 @@
                          </div>
 
 
-                         <label for="specificWeekAddi"   class="fieldTitle"><input type="radio" id="specificWeekAddi" name="everySpecificWeekAddi" value="SPECIFIC DATE In Addition"> SPECIFIC DATE</label>
+                         <label for="specificWeekAddi"   class="fieldTitle"><input type="radio" [disabled]="enable_addition" id="specificWeekAddi" name="everySpecificWeekAddi" value="SPECIFIC DATE In Addition" (change)="enable_everyweek($event,'specific_addition','addition')" > SPECIFIC DATE</label>
                           <form >
                                Select the specific
                               date that you would like your <strong>SPECIALS</strong> menu to display
                               <br>Date for Specials Menu:<br>
-                              <input type="date" id="special" name="special" [(ngModel)]="date_time">
+                              <input type="date" id="special" [(ngModel)]="add_date" name="special" [disabled]="enable_specific_date_addition">
                           </form>
                           <strong>TIME:</strong> Select the normally scheduled menu that your SPECIALS menu will
                           display with:<br>
 
-                          <form class="form-inline" action="">
-                              <input type="checkbox"   id="specials_breakfast" name="vehicle2" value="Car">
+                          <form class="form-inline">
+                              <input type="checkbox" [disabled]="enable_addition" (change)="check_addition($event,'break')"  id="specials_breakfast" name="vehicle2" value="Car">
                               <label for="vehicle2"> Breakfast</label><br>
-                              <input type="checkbox"   id="specials_lunch" name="vehicle3" value="Boat">
+                              <input type="checkbox" [disabled]="enable_addition" (change)="check_addition($event,'lunch')"  id="specials_lunch" name="vehicle3" value="Boat">
                               <label for="vehicle3"> Lunch</label><br>
-                              <input type="checkbox"   id="specials_dinner" name="vehicle1" value="Bike">
+                              <input type="checkbox" [disabled]="enable_addition" (change)="check_addition($event,'dinner')"  id="specials_dinner" name="vehicle1" value="Bike">
                               <label for="vehicle1"> Dinner</label><br>
-                              <input type="checkbox"   id="specials_brunch"  name="vehicle2" value="Car">
+                              <input type="checkbox" [disabled]="enable_addition" (change)="check_addition($event,'brunch')"  id="specials_brunch"  name="vehicle2" value="Car">
                               <label for="vehicle2"> Brunch</label><br>
                           </form><br>
                       </div>
@@ -2581,18 +2590,14 @@
             <h2>Title</h2>
             <div id="myBtnContainer" class="dropDownImg">
             <select #cats (change)="getStockimageonselectcategory(cats.value)">
+              <option value="">Show all</option>
               <option *ngFor="let cat of category_name" value="{{cat.id}}">{{cat.name}}</option>
             <!-- <option onclick="filterSelection('all')"> Show all</option>
             <option onclick="filterSelection('nature')"> Nature</option>
             <option onclick="filterSelection('cars')"> Cars</option>
             <option onclick="filterSelection('people')"> People</option> -->
             </select>
-          <!--
-            <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-            <button class="btn" onclick="filterSelection('nature')"> Nature</button>
-            <button class="btn" onclick="filterSelection('cars')"> Cars</button>
-            <button class="btn" onclick="filterSelection('people')"> People</button>
-          -->
+         
           </div>
             </div>
 
@@ -2602,11 +2607,11 @@
           <!-- Portfolio Gallery Grid -->
           <div class="row_Brouse">
             <!-- class="column_Brouse nature" -->
-            <div  class="column_Brouse nature"   *ngFor="let stock of stock_img">
+            <div  class="column_Brouse nature"   *ngFor="let stock of stock_img;let i=index">
               <div class="content_Brouse" >
-
+            
                 <!-- <img src="/assets/images/mountains.jpg" alt="Mountains" style="width:100%"> -->
-                <img [src]="img_url + stock.img_path" alt="">
+               <img [src]="img_url + stock.img_path"   alt="" (click)="selectedimage(i,stock.img_path,stock.id,stock_img.length)" id="image_{{i}}">
               </div>
             </div>
             <!-- <div class="column_Brouse nature">
@@ -2661,7 +2666,9 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="save_it('close')">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="save_it('save')">Save Changes</button>
+
       </div>
        </div>
     </div>
