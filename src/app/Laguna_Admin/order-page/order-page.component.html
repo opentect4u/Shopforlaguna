@@ -42,7 +42,7 @@
         <th scope="col">Special Menu</th>
         <th scope="col">Set Up Fee</th>
         <th scope="col">Monthly Fee</th>
-        <th scope="col">Description </th>
+        <!-- <th scope="col">Description </th> -->
         <th scope="col">Action </th>
         </tr>
             
@@ -64,10 +64,10 @@
         </td>
         <td><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Amount" required="" name="setUpFee" #amm1 (keypress)="preventNonNumericalInput($event)" value="{{this.stndpackage_setupfee}}"></td>
         <td><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Amount" required="" name="monthlyFee" #amm2 (keypress)="preventNonNumericalInput($event)" value="{{this.stndpacakge__monthlyfee}}"></td>
-        <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #desc value={{this.stndpackage_desc}}></textarea></td>
+        <!-- <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" hidden #desc value={{this.stndpackage_desc}}></textarea></td> -->
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
-            <button type="submit" class="btn btn-default saveCustom" (click)="submit(opt.value,sl_no.value,amm1.value,amm2.value,desc.value)">Save</button></td>
+            <button type="submit" class="btn btn-default saveCustom" (click)="submit(opt.value,sl_no.value,amm1.value,amm2.value)">Save</button></td>
         </tr>
             
         <tr align="center">
@@ -87,10 +87,10 @@
         </td>
         <td><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Amount" required="" name="setUpFee"  #amm1stndplus (keypress)="preventNonNumericalInput($event)" value={{this.stndpluspacakge_setupfee}}></td>
         <td><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Amount" required="" name="monthlyFee"  #amm2stndplus (keypress)="preventNonNumericalInput($event)" value={{this.stndpluspackage_monthlyfee}}></td>
-        <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #descstndplus value={{this.stndpluspacakge_desc}}></textarea></td>
+        <!-- <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #descstndplus value={{this.stndpluspacakge_desc}}></textarea></td> -->
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
-          <button (click)="submitstndplus(optstndplus.value,sl_nostndplus.value,amm1stndplus.value,amm2stndplus.value,descstndplus.value)" type="submit" class="btn btn-default saveCustom">Save</button></td>
+          <button (click)="submitstndplus(optstndplus.value,sl_nostndplus.value,amm1stndplus.value,amm2stndplus.value)" type="submit" class="btn btn-default saveCustom">Save</button></td>
         </tr>
             
         <tr align="center">
@@ -110,10 +110,10 @@
         </td>
         <td><input class="w3-input w3-padding-16 w3-border" #amm1premium type="text" placeholder="Amount" required="" name="setUpFee" (keypress)="preventNonNumericalInput($event)" value={{this.premiumpacakge_setupfee}}></td>
         <td><input class="w3-input w3-padding-16 w3-border" #amm2premium type="text" placeholder="Amount" required="" name="monthlyFee" (keypress)="preventNonNumericalInput($event)" value={{this.premiumpacakge_monthlyfee}}></td>
-        <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #descpremium value={{this.premiumpacakge_des}}></textarea></td>
+        <!-- <td><textarea class="w3-input w3-padding-16 w3-border customTextarea" #descpremium value={{this.premiumpacakge_des}}></textarea></td> -->
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
-            <button type="submit" class="btn btn-default saveCustom" (click)="submitpremium(opspremium.value,slpremium.value,amm1premium.value,amm2premium.value,descpremium.value)">Save</button></td>
+            <button type="submit" class="btn btn-default saveCustom" (click)="submitpremium(opspremium.value,slpremium.value,amm1premium.value,amm2premium.value)">Save</button></td>
         </tr>
             
         </table> <br>
@@ -139,7 +139,7 @@
             <input type="radio" id="no_birth" name="specialMenuStd1" value="n" (change)="verify('n')"> <label for="No">No</label>
         </td>
         <td>
-            <input class="w3-input w3-padding-16 w3-border" type="text" value="{{this.promo_Birthdayprice}}" (keypress)="preventNonNumericalInput($event)" placeholder="Price" required="" name="price" #Price [readonly]="promo1">
+            <input class="w3-input w3-padding-16 w3-border" id="birthday" type="text" value="{{this.promo_Birthdayprice}}" (keypress)="preventNonNumericalInput($event)" placeholder="Price" required="" name="price" #Price [readonly]="promo1">
         </td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->
@@ -155,7 +155,7 @@
             <input type="radio" id="no_calend" name="specialMenu1" value="no" (change)="verifytre('no')"> <label for="No">No</label>
         </td>
         <td>
-            <input class="w3-input w3-padding-16 w3-border"  value="{{this.promo_EventCalendarprice}}" type="text" placeholder="Price" (keypress)="preventNonNumericalInput($event)" required="" name="price" #price [readonly]="promo2">
+            <input class="w3-input w3-padding-16 w3-border" id="eventcalnedar"  value="{{this.promo_EventCalendarprice}}" type="text" placeholder="Price" (keypress)="preventNonNumericalInput($event)" required="" name="price" #price [readonly]="promo2">
         </td>
         <td>
           <!-- <button type="submit" class="btn btn-default editeCustom">Edit</button>  -->

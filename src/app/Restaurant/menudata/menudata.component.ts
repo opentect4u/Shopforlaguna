@@ -19,10 +19,11 @@ export class MenudataComponent implements OnInit, AfterViewInit{
     not=true;
   position_id:any;
   header_title:any;
-  notice_content:any;
+  notice_content:any="";
   font_color:any;
   back_color:any;
   role:any=0;
+  role_notice_content:any=0;
   menu_id:any;
   val:any="";
   notic:any=[];
@@ -137,6 +138,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
          this.value_Headertitle=true;
        }
        this.notice_content=this.notic.msg[i].notice_content;
+       this.role_notice_content=this.notic.msg[i].notice_content.length;
        if(this.notice_content!=''){
          this.value_text=false;
        }
@@ -172,6 +174,7 @@ export class MenudataComponent implements OnInit, AfterViewInit{
        for(let i=0;i<this.abou.msg.length;i++){
          if(this.abou.msg[i].about_us!=""){
          this.val=this.abou.msg[i].about_us;
+         this.role=this.abou.msg[i].about_us.length;
          this.disabled_about=false;
           this.not=false;
           this.t1='notices';
@@ -500,7 +503,9 @@ pickup_place(event:any){
       this.color_Back=document.getElementById('colorPicker2');
      this.color_Back.value='';
      this.value_font=true;
-
+      this.color_Back=document.getElementById('pos');
+      this.color_Back.value='';
+     this.position='';
 
     }
   }}else{
@@ -529,16 +534,16 @@ pickup_place(event:any){
       this.color_Back=document.getElementById('colorPicker2');
      this.color_Back.value='';
      this.value_font=true;
-
+     this.color_Back=document.getElementById('pos');
+     this.color_Back.value='';
+    this.position='';
 
   }
  })
 }
  else{
   console.log("asdasd");
-
   this.value_menu=true;
-
  }
  console.log(this.menu)
 }
@@ -631,7 +636,7 @@ else {
 }
 checkvalidity(event:any){
   console.log(event);
-
+ 
   if(event.target.id=='headTitle'){
 
     if(event.target.value!=''){
@@ -652,6 +657,7 @@ checkvalidity(event:any){
       }
   }
   else if(event.target.id=='box2'){
+    
     if(event.target.value!=''){
       this.value_background=false;
       }
@@ -661,6 +667,7 @@ checkvalidity(event:any){
       }
   }
   else if(event.target.id=='spclMore'){
+    this.role_notice_content=event.target.value.length;
     if(event.target.value!=''){
       this.value_text=false;
       }

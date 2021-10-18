@@ -255,11 +255,11 @@
                                    <!-- <i type="button" [hidden]="Breakfast_section_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal3"></i> -->
                                   <p style="font-style: italic">(File format: .pdf maximum size: 2MB)</p>
 
-                                   <div class="container1">
-                                   <div class="img-wrap rounded" [hidden]="Breakfast_section_preview" *ngFor="let u of img_section_break;let i=index">
+                                   <div class="container1" >
+                                   <div class="img-wrap rounded"  [hidden]="Breakfast_section_preview" *ngFor="let u of img_section_break;let i=index">
                                     <span class="close" (click)="deletemultiplelunchsection('breakfast_section',i,u.id)" [hidden]="!show_toast">&times;</span>
 
-                                    <a  (click)="openpdf(u.img_path)"><i type="button" class="fa fa-file-pdf-o"></i></a>
+                                    <a (click)="openpdf(u.img_path)"><i type="button" class="fa fa-file-pdf-o" ></i></a>
                                 </div>
                               </div>
                             </div>
@@ -926,7 +926,7 @@
                                   #tooltip="matTooltip"
                                  matTooltip="You can either upload files or provide a url below"
                                   ></i></label>
-                                Or, please provide a web site address/url where we can collect your menu content:
+                                <!-- Or, please provide a web site address/url where we can collect your menu content: -->
                                  <form>
                                      <!-- <label for="url">Enter the url:</label>  -->
                                      <input type="text" id="url_menubrunch" name="url"
@@ -1232,9 +1232,9 @@
                                  <label for="menuImg" class="fieldTitle"> Your Web Site Address/URL:<i class="fa fa-info-circle tooltipCustom" aria-hidden="true"
                                   #tooltip="matTooltip"
                                  matTooltip="You can either upload files or provide a url below"
-                                  ></i></label><br>
-                                 Or, we can collect a photo found on your web site and add it to the top of your
-                                 Brunch menu:
+                                  ></i></label>
+                                 <!-- Or, we can collect a photo found on your web site and add it to the top of your
+                                 Brunch menu: -->
                                  <form>
                                      <!-- <label for="url">Enter the url:</label>  -->
                                      <input type="text" id="url_dinnertop" name="url"
@@ -1292,8 +1292,7 @@
                                 #tooltip="matTooltip"
                                matTooltip="You can either upload files or provide a url below"
                                 ></i>
-                            </label><br>
-                            Or, please provide a web site address/url where we can collect your menu content:
+                            </label>                            <!-- Or, please provide a web site address/url where we can collect your menu content: -->
                               <form>
                                   <!-- <label for="url">Enter the url:</label> -->
                                    <input type="text" id="url_dinnermenu" name="url"
@@ -1323,7 +1322,7 @@
                                     Please be sure to include your Kids, Desert and Beverage menus, if you have one.<br>
                                   </div>
                                   <div class="col-5">
-                                    <label for="menuImg" class="fieldTitle">Select files:</label><br>
+                                    <label for="menuImg" class="fieldTitle">Select files:</label>
                                     <input type="file" accept=".pdf" [disabled]="br_url" id="myfile" name="myfile[]" multiple
                                         (change)="changedinnersectionimage($event)">
                                      <!-- <i data-bs-toggle="modal" data-bs-target="#myModal15" type="button" [hidden]="Brunch_section_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
@@ -1345,10 +1344,10 @@
                                     <label for="menuImg" > <strong>Your Web Site Address/URL:<i class="fa fa-info-circle tooltipCustom" aria-hidden="true"
                                       #tooltip="matTooltip"
                                      matTooltip="You can either upload files or provide a url below"
-                                      ></i></strong></label><br>
+                                      ></i></strong></label>
                                     <!-- Or, please provide a web site address/url where we can collect your menu content: -->
                                     <form>
-                                        <label for="url">Enter the url:</label>
+                                        <!-- <label for="url">Enter the url:</label> -->
                                         <input type="text"
                                         [disabled]="br_url"
                                     (keyup)="checkvalidity($event,'brs_url')" (change)="checkvalidity($event,'brs_url')"
@@ -1471,229 +1470,15 @@
                         <!-- <button
                             class="w3-button w3-green m-1" [disabled]="br_url || brstart_url || brend_url || brc_url || brt_url || brm_url || brs_url" type="submit" (click)="opennextab3('laguna',dinnermenuurl.value,dinnertopurl.value,dinnercoverurl.value,SECTIONURlDINNER.value,dinner.value,start_break.value,end_break.value)">Save & Continue</button> -->
                     </div>
-
-                    <!-- <div id="Shrewsbury" class="tabcontent"  [hidden]="tab5">
-                        <label class="titleCustom" for="bkmenu">
-                            <input type="checkbox" id="bkmenu" name="bkmenu"
-                                value="bkMenu">
-                            <strong>Specials Menu</strong></label>
-                        After we set-up your platform the first time, you can then browse and change photos and edit
-                        your menu items and pricing, as needed. The Cover Image is non-editable.<br>
-                        <br>If you do not have a Specials menu that you would like to include onto your platform now,
-                        please skip this area. You can always add a Specials menu from your back office, 24/7.<br> <br>
-
-
-                        <div class="secDifer">
-                            <label class="titleCustom"><strong>MENU:</strong></label>
-                            Upload a PDF file of your Specials menu.<br>
-
-                            <input type="checkbox" id="menuImg" name="menuImg" value="menuImg">
-                            <label for="menuImg"> <strong>File</strong></label><br>
-                            <form>
-                                <label for="myfile">Select file/s:</label>
-                                <input type="file" id="myfile" name="myfile" multiple><br>
-                            </form><br>
-                            <form>
-                            <input type="checkbox" id="menuImg" name="menuImg" value="menuImg">
-                            <label for="menuImg"> <strong>Your Web Site Address/URL:</strong></label><br>
-                            </form>Or, please provide a web site address/url where we can collect your menu content:
-                            <form>
-                                <label for="url">Enter the url:</label> <input type="text" id="url" name="url" value=""
-                                    size="28">
-                            </form>
-                            <p style="font-style: italic">If we cannot collect the content from your web site, we will
-                                contact you</p>
-
-
-                            <p>Please select your SPECIALS menu image from our gallery.<br>
-                                When you select your SPECIALS menu image, it will include a color coordinated pop-up
-                                (per the below, if you would like your SPECIALS menu to display WITH your normally
-                                scheduled menu, a "pop-up" will display.)</p>
-                        </div>
-
-                        <div class="secDifer">
-                            <label class="titleCustom"><strong>DISPLAY DAY &amp; TIMES:</strong></label>
-                            When you select your <strong>SPECIALS</strong> menu's day/times, a new TAB will display at
-                            the top of your menu platform to alert your customers that a Specials menu is available.<br>
-
-                            <br><strong>NOTE:</strong> If you would like to schedule "more than one"
-                            <strong>SPECIALS</strong> menu at a time, please complete one (and submit), then start
-                            another. Always do one at a time.<br>
-                            <br>You have <strong>"TWO OPTIONS"</strong> for how your <strong>SPECIALS</strong> menu will
-                            be displayed:<br>
-
-                            <br><strong>EXCLUSIVELY:</strong> Your <strong>SPECIALS</strong> menu will display<strong>
-                                "by itself"</strong> on your selected day/time (replacing your normally scheduled
-                            menus.) <br>
-
-                            <br><strong>IN ADDITION:</strong> Your <strong>SPECIALS</strong> Menu will be displayed
-                            <strong>"with"</strong> your normally scheduled menu, on your selected day/time.<br>
-
-                            <br>Additionally, a <strong>SPECIALS</strong> TAB will appear on the navigation bar to alert
-                            your customers that a Specials menu is available. <br>
-
-                            <br><strong>NOTE:</strong> If you would like to schedule "more than one"
-                            <strong>SPECIALS</strong> menu at a time, please complete one (and submit), then start
-                            another. Always do one at a time.<br><br>
-
-                            <input type="checkbox" id="exc" name="exc" value="exc">
-                            <label for="exc"> <strong>EXCLUSIVELY</strong></label><br>
-                            If you would like your <strong>SPECIALS</strong> menu to display
-                            <strong>EXCLUSIVELY</strong> (your "normally scheduled" menus <strong>will not</strong>
-                            display, and will be <strong>REPLACED</strong> with your <strong>SPECIALS</strong> menu),
-                            please select the display days/times:<br>
-
-
-
-                            <form >
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> <strong>EVERY WEEK</strong></label><br> Select the day(s) to
-                                display your <strong>SPECIALS</strong> menu
-                            </form>
-                            <form class="form-inline" >
-                                <input type="checkbox" id="vehicle5" name="vehicle5" value="Plane">
-                                <label for="vehicle5"> Every Day</label><br>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Monday</label><br>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> Tuesday</label><br>
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> Wednesday</label><br>
-                            </form>
-                            <form class="form-inline">
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Thursday</label><br>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> Friday</label><br>
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> Saturday</label><br>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Sunday</label><br>
-                            </form>
-
-                            Select your normally scheduled menu to replace:<br>
-
-                            <form class="form-inline" >
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Breakfast</label><br>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> Lunch</label><br>
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> Dinner</label><br>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Brunch</label><br>
-                            </form><br>
-                            <form >
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> <strong>SPECIFIC DATE:</strong></label><br> Select the specific
-                                date that you would like your <strong>SPECIALS</strong> menu to display<br>
-
-                                <input type="date" id="special" name="special">
-                            </form> <br>
-                            TIME: Select the normally scheduled menu that your SPECIALS menu will display with:
-
-                            <form class="form-inline" action="">
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Breakfast</label><br>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> Lunch</label><br>
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> Dinner</label><br>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Brunch</label><br>
-                            </form>
-                        </div>
-
-
-                        <div class="secDifer">
-                            <label for="exc" class="titleCustom">
-                                <input type="checkbox" id="exc" name="exc" value="exc">
-                                <strong>IN ADDITION</strong></label>
-                            If you would like your <strong>SPECIALS</strong> menu to display <strong>IN
-                                ADDITION</strong> to your "normally scheduled" menus (your <strong>SPECIALS </strong>
-                            menu will be displayed <strong>WITH</strong> your Specials menu), please select the display
-                            days/times:<br>
-                            <br>NOTE: When your customer views your normally scheduled menu, they will ALSO see a
-                            pop-up, indicating there is a SPECIALS menu to view. <br><br>
-
-                        </div>
-
-                        <div class="secDifer">
-
-                            <form action="">
-                                <label for="vehicle1" class="titleCustom"><input type="checkbox" id="vehicle1"
-                                        name="vehicle1" value="Bike">
-                                    <strong>EVERY WEEK</strong></label>Select the day(s) to display your
-                                <strong>SPECIALS</strong> menu
-                            </form>
-                            <form class="form-inline" action="">
-                                <input type="checkbox" id="vehicle5" name="vehicle5" value="Plane">
-                                <label for="vehicle5"> Every Day</label><br>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Monday</label><br>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> Tuesday</label><br>
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> Wednesday</label><br>
-                            </form>
-                            <form class="form-inline" action="">
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Thursday</label><br>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> Friday</label><br>
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> Saturday</label><br>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Sunday</label><br>
-                            </form>
-
-                            <strong>TIME:</strong> Select the normally scheduled menu that your
-                            <strong>SPECIALS</strong> menu will display with:<br>
-
-                            <form class="form-inline">
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Breakfast</label><br>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> Lunch</label><br>
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> Dinner</label><br>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Brunch</label><br>
-                            </form><br>
-                            <form >
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> <strong>SPECIFIC DATE:</strong></label><br> Select the specific
-                                date that you would like your <strong>SPECIALS</strong> menu to display<br>
-                                <br>Date for Specials Menu:
-                                <input type="date" id="special" name="special">
-                            </form><br>
-                            <strong>TIME:</strong> Select the normally scheduled menu that your SPECIALS menu will
-                            display with:<br>
-
-                            <form class="form-inline" action="">
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Breakfast</label><br>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> Lunch</label><br>
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> Dinner</label><br>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> Brunch</label><br>
-                            </form><br>
-                        </div>
-                        <button class="w3-button w3-green" type="submit">Previous</button>
-                        <button
-                            class="w3-button w3-green m-1" type="submit"
-                            >Next & Continue</button>
-                    </div> -->
-
-
-
-                    <div id="Shrewsbury" class="tabcontent"  [hidden]="tab5">
+                 
+                     <div id="Shrewsbury" class="tabcontent"  [hidden]="tab5">
                       <label class="titleCustom" for="bkmenu">
-                          <input type="checkbox" id="special_bkmenu" name="special"
-                              value="Special" (changge)="enableordisablefields($event)">
+                          <input type="checkbox" 
+                          [disabled]="dinner_button"
+                          id="special_bkmenu" name="special"
+                               (change)="enableordisablefields($event)">
                               <input hidden [(ngModel)]="special">
+                              <!-- EXCLUSIVE:    {{exclusive}} -->
                           <strong>Specials Menu</strong></label>
                       After we set-up your platform the first time, you can then browse and change photos and edit
                       your menu items and pricing, as needed. The Cover Image is non-editable.<br>
@@ -1708,12 +1493,12 @@
                           <!-- <input type="checkbox" id="menuImg" name="menuImg" value="menuImg"> <label for="menuImg"> <strong>File</strong></label><br> -->
                           <form>
                               <label for="myfile" class="fieldTitle">Select files:</label>
-                              <input   type="file" id="myfile" name="myfile" accept=".pdf" multiple (change)="getstock_imege($event)">
+                              <input [disabled]="special_button"   type="file" id="myfile" name="myfile" accept=".pdf" multiple (change)="getstock_imege($event)">
                           </form>
 
                           <div class="container1">
                             <div class="img-wrap rounded" [hidden]="special_section_preview" *ngFor="let u of img_special;let i=index">
-                             <span class="close" (click)="deletemultiplelunchsection('special_section',i,u.id)" [hidden]="!show_toast">&times;</span>
+                             <span class="close" (click)="deletemultiplelunchsection('special_section',i,u.id)" [hidden]="special_button">&times;</span>
                              <!-- <span class="close">&times;</span> -->
 
                              <a  (click)="openpdf(u.img_path)"><i type="button" class="fa fa-file-pdf-o"></i></a>
@@ -1727,7 +1512,7 @@
                           </form> -->
                           Or, please provide a web site address/url where we can collect your menu content:
                           <form>
-                              <input   type="text" id="url" name="url" [(ngModel)]="special_url" (change)="check_special()"
+                              <input [disabled]="special_button"  type="text" id="url" name="url" [(ngModel)]="special_url" (change)="check_special()"
                                   size="28" placeholder="Enter the URL">
                           </form>
                           <p style="font-style: italic">If we cannot collect the content from your web site, we will
@@ -1738,13 +1523,13 @@
                               When you select your SPECIALS menu image, it will include a color coordinated pop-up
                               (per the below, if you would like your SPECIALS menu to display WITH your normally
                               scheduled menu, a "pop-up" will display.)</p>
-
-                              <button    data-bs-toggle="modal" data-bs-target="#myModal21" class="btn btn-primary" >Select Image</button>
+                             <!-- {{common_for_special_menu}} -->
+                              <button [disabled]="special_button"    data-bs-toggle="modal" data-bs-target="#myModal21" class="btn btn-primary" >Select Image</button>
                               <div class="container1" id="break_cover">
                                 <div class="img-wrap rounded" [hidden]="see_photo" >
-                                  <span class="close" (click)="deletephoto('breakfast_cover')" [hidden]="!show_toast">&times;</span>
+                                  <span class="close"  (click)="deletephoto('special')" [hidden]="special_button">&times;</span>
     
-                               <img src="{{img_cover}}"  height="50px" width="50px" data-bs-toggle="modal" data-bs-target="#myModal11">
+                               <img src="{{common_for_special_menu}}"  height="50px" width="50px" data-bs-toggle="modal" data-bs-target="#myModal15">
     
                               </div></div>
                               
@@ -1776,7 +1561,7 @@
                           <!-- Exclusive Part -->
                        <div class="secDifer" >
                             <label for="exclusively"  class="titleCustom">
-                              <input type="radio"  id="exclusively" name="inAddition" value="Exclusively" (change)="enable_exclusive_inaddition($event,'exclusive')"> EXCLUSIVELY</label>
+                              <input type="radio" [disabled]="special_button"  id="exclusively" name="inAddition" value="Exclusively" (change)="enable_exclusive_inaddition($event,'exclusive')"> EXCLUSIVELY</label>
 
                           If you would like your <strong>SPECIALS</strong> menu to display
                           <strong>EXCLUSIVELY</strong> (your "normally scheduled" menus <strong>will not</strong>
@@ -1816,17 +1601,20 @@
 
                             </div>
                             <div class="col-5">
-                             <form class="form-inline" action="">
+                             <form class="form-inline" >
                                  <label for="selfcling">Start Time:</label>
                                  <input type="time"
-
-
-                                 id="start" name="selfcling" size="4"  ><br><br>
+                                 readonly
+                                 
+                                 id="start_exclusive" name="selfcling" size="4"  ><br><br>
+                                 
                                  <label for="selfcling">End Time:</label>
                                  <input type="time"
+                                 readonly
+                                 
 
 
-                                 id="end" name="selfcling"  size="4"  >
+                                id="end_exclusive" name="selfcling"  size="4"  >
                              </form>
                             </div>
                             <div class="col-2"></div>
@@ -1837,18 +1625,18 @@
                                Select the specific
                               date that you would like your <strong>SPECIALS</strong> menu to display<br>
 
-                              <input   type="date" id="special" [(ngModel)]="date_time" name="special"  [disabled]="enable_date_specific">
+                              <input   type="date" id="special_exc"  value="{{date_time | date:'yyyy-MM-dd'}}" #date name="special"  [disabled]="enable_date_specific" (change)="changedate(date.value,'exclusive_specific_date')">
                           <br>
                           TIME: Select the normally scheduled menu that your SPECIALS menu will display with:
 
                           <form class="form-inline" >
-                              <input type="checkbox" [disabled]="enable_exclusive"  id="breakfast" (change)="checkregularid($event,'break')">
+                              <input type="checkbox" [disabled]="enable_exclusive"  id="break" (change)="checkregularid($event,'break',1)">
                               <label for="vehicle2"> Breakfast</label><br>
-                              <input type="checkbox" [disabled]="enable_exclusive" id="lunch" (change)="checkregularid($event,'lunch')">
+                              <input type="checkbox" [disabled]="enable_exclusive" id="lunch" (change)="checkregularid($event,'lunch',2)">
                               <label for="vehicle3"> Lunch</label><br>
-                              <input type="checkbox" [disabled]="enable_exclusive" id="dinner"   (change)="checkregularid($event,'dinner')">
+                              <input type="checkbox" [disabled]="enable_exclusive" id="dinner"   (change)="checkregularid($event,'dinner',3)">
                               <label for="vehicle1"> Dinner</label><br>
-                              <input type="checkbox" [disabled]="enable_exclusive" id="brunch"  (change)="checkregularid($event,'brunch')">
+                              <input type="checkbox" [disabled]="enable_exclusive" id="brunch"  (change)="checkregularid($event,'brunch',4)">
                               <label for="vehicle2"> Brunch</label><br>
                           </form>
                       </div>
@@ -1856,7 +1644,7 @@
                       <!-- Addition Part -->
                       <div class="secDifer" >
                           <label for="inAddition" class="titleCustom">
-                            <input type="radio" id="inAddition" name="inAddition" value="In Addition" (change)="enable_exclusive_inaddition($event,'addition')">
+                            <input type="radio" [disabled]="special_button"  id="inAddition" name="inAddition" value="In Addition" (change)="enable_exclusive_inaddition($event,'addition')">
                               IN ADDITION</label>
                           If you would like your <strong>SPECIALS</strong> menu to display <strong>IN
                               ADDITION</strong> to your "normally scheduled" menus (your <strong>SPECIALS </strong>
@@ -1867,7 +1655,7 @@
 
 
                           <label for="everyWeekAddi" class="fieldTitle"><input type="radio" id="everyWeekAddi" [disabled]="enable_addition" name="everySpecificWeekAddi" value="EVERY WEEK In Addition"  (change)="enable_everyweek($event,'every_week_addition','addition')" > EVERY WEEK</label>
-
+                 
                           <div class="row">
                             <div class="col-5">
                              <form >
@@ -1900,14 +1688,14 @@
                                  <label for="selfcling">Start Time:</label>
                                  <input type="time"
 
-                                  (change)="checkbreakend($event,'start')"
-                                 id="start" name="selfcling" size="4"  ><br><br>
+                                    readonly
+                                 id="start_addition" name="selfcling" size="4"  ><br><br>
                                  <label for="selfcling">End Time:</label>
                                  <input type="time"
 
-
-                                  (change)="checkbreakend($event,'end')"
-                                 id="end" name="selfcling"  size="4"  >
+                                 readonly
+                                 
+                                 id="end_addition" name="selfcling"  size="4"  >
                              </form>
                             </div>
                             <div class="col-2"></div>
@@ -1919,26 +1707,26 @@
                                Select the specific
                               date that you would like your <strong>SPECIALS</strong> menu to display
                               <br>Date for Specials Menu:<br>
-                              <input type="date" id="special" [(ngModel)]="add_date" name="special" [disabled]="enable_specific_date_addition">
+                              <input type="date" id="special" value="{{add_date | date:'yyyy-MM-dd'}}" #add name="special" [disabled]="enable_specific_date_addition" (change)="changedate(add.value,'addition_specific_date')">
                           </form>
                           <strong>TIME:</strong> Select the normally scheduled menu that your SPECIALS menu will
                           display with:<br>
 
                           <form class="form-inline">
-                              <input type="checkbox" [disabled]="enable_addition" (change)="check_addition($event,'break')"  id="specials_breakfast" name="vehicle2" value="Car">
+                              <input type="checkbox" [disabled]="enable_addition" (change)="check_addition($event,'break',1)"  id="specials_breakfast" >
                               <label for="vehicle2"> Breakfast</label><br>
-                              <input type="checkbox" [disabled]="enable_addition" (change)="check_addition($event,'lunch')"  id="specials_lunch" name="vehicle3" value="Boat">
+                              <input type="checkbox" [disabled]="enable_addition" (change)="check_addition($event,'lunch',2)"  id="specials_lunch">
                               <label for="vehicle3"> Lunch</label><br>
-                              <input type="checkbox" [disabled]="enable_addition" (change)="check_addition($event,'dinner')"  id="specials_dinner" name="vehicle1" value="Bike">
+                              <input type="checkbox" [disabled]="enable_addition" (change)="check_addition($event,'dinner',3)"  id="specials_dinner" >
                               <label for="vehicle1"> Dinner</label><br>
-                              <input type="checkbox" [disabled]="enable_addition" (change)="check_addition($event,'brunch')"  id="specials_brunch"  name="vehicle2" value="Car">
+                              <input type="checkbox" [disabled]="enable_addition" (change)="check_addition($event,'brunch',4)"  id="specials_brunch">
                               <label for="vehicle2"> Brunch</label><br>
                           </form><br>
                       </div>
                       <!-- <button class="w3-button w3-green" type="submit">Previous</button>  -->
                       <button
-                          class="w3-button w3-green m-1" type="submit" (click)="save_special()"
-                          >Save</button>
+                          class="w3-button w3-green m-1" type="submit" [disabled]="special_button" (click)="save_special()"
+                          >Save & Continue</button>
                   </div>
 
                     <br><br><br>
@@ -1987,6 +1775,10 @@
 <div id="snackbar1">{{error_msg}}</div>
 <div id="snackbar2">{{for_timing_problem}}</div>
 <div id="snackbar3">Successfully Updated</div>
+<div id="snackbar5">Successfully Submitted</div>
+<div id="snackbar6">{{this.suc_special}}</div>
+
+
 <div id="snackbar4"><i class="fa fa-warning p-1"></i><span>Please provide valid file format within given size</span></div>
 
 <!-- For Image Cropper -->
@@ -2471,24 +2263,24 @@
       </div>
 </div>
 
-<!-- For the image of brunch Section -->
+<!-- For the image of stock image after select from special Section -->
 <div class="modal fade in" id="myModal15">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
 
         <div class="modal-header">
-          <h4 class="modal-title">PDF</h4>
+          <h4 class="modal-title">Image</h4>
 
         </div>
 
 
-        <div class="modal-body">
+        <div class="modal-body text-center">
 
 
+          <img src="{{common_for_special_menu}}" class="img-fluid">
 
-
-          <iframe width='100%' height='100%' src='{{this.img_break_section}}'></iframe>
+          <!-- <iframe width='100%' height='100%' src='{{this.img_break_section}}'></iframe> -->
 
             <!-- <ngx-extended-pdf-viewer
 
@@ -2575,7 +2367,7 @@
 
   </div>
 </div>
-<!-- For the image of dinner Section -->
+<!-- For the image of special Section -->
 <div class="modal fade in" id="myModal21">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -2611,52 +2403,10 @@
               <div class="content_Brouse" >
             
                 <!-- <img src="/assets/images/mountains.jpg" alt="Mountains" style="width:100%"> -->
-               <img [src]="img_url + stock.img_path"   alt="" (click)="selectedimage(i,stock.img_path,stock.id,stock_img.length)" id="image_{{i}}">
+               <img [src]="img_url + stock.img_path"   alt="" (click)="selectedimage(i,stock.img_path,stock.img_catg,stock_img.length)" id="image_{{i}}">
               </div>
             </div>
-            <!-- <div class="column_Brouse nature">
-              <div class="content_Brouse">
-              <img src="/assets/images/lights.jpg" alt="Lights" style="width:100%">
-              </div>
-            </div>
-            <div class="column_Brouse nature">
-              <div class="content_Brouse">
-              <img src="/assets/images/nature.jpg" alt="Nature" style="width:100%">
-              </div>
-            </div>
-
-            <div class="column_Brouse cars">
-              <div class="content_Brouse">
-                <img src="/assets/images/cars1.jpg" alt="Car" style="width:100%">
-              </div>
-            </div>
-            <div class="column_Brouse cars">
-              <div class="content_Brouse">
-              <img src="/assets/images/cars2.jpg" alt="Car" style="width:100%">
-              </div>
-            </div>
-            <div class="column_Brouse cars">
-              <div class="content_Brouse">
-              <img src="/assets/images/cars3.jpg" alt="Car" style="width:100%">
-              </div>
-            </div>
-
-            <div class="column_Brouse people">
-              <div class="content_Brouse">
-                <img src="/assets/images/people1.jpg" alt="Car" style="width:100%">
-              </div>
-            </div>
-            <div class="column_Brouse people">
-              <div class="content_Brouse">
-              <img src="/assets/images/people2.jpg" alt="Car" style="width:100%">
-              </div>
-            </div>
-            <div class="column_Brouse people">
-              <div class="content_Brouse">
-              <img src="/assets/images/people3.jpg" alt="Car" style="width:100%">
-              </div>
-            </div> -->
-          <!-- END GRID -->
+        
           </div>
 
           <!-- END MAIN -->

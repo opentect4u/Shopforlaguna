@@ -11,7 +11,13 @@
         <img src="/assets/images/sll_logo.png" alt="Avatar" class="avatar" routerLink='/registration' routerLinkActive='true'>
       </div>
     
+     
       <div class="container">
+        <div class="alert alert-danger text-center fade show" role="alert" [hidden]="show_alert">
+  
+          <i class="fa fa-exclamation-triangle p-1" aria-hidden="true"></i> <strong>{{this.message}}</strong>
+         </div>
+
         <label for="uname"><b style="color: white">Username</b></label>
         <input type="text" placeholder="Enter Username" name="uname" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" required #uname="ngModel" ngModel>
         <div *ngIf="uname.errors?.required  && (uname.dirty || uname.touched)" class="text-danger"><div class="text-danger" [hidden]="!uname.errors?.required">

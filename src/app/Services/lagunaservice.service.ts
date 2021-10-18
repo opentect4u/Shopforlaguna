@@ -129,7 +129,7 @@ getrestaurant_check_menu_setup(v:any){
   return this.http.get(url_set.api_url+ '/check_menu_setup?id='+v);
 }
 get_admin_dashboard(){
-  return this.http.get(url_set.api_url+'/res_details?id=')
+  return this.http.get(url_set.api_url+'/res_dtls?id=')
 }
 get_specific_admin_dashboard(v:any){
   return this.http.get(url_set.api_url+'/res_details?id='+v)
@@ -284,11 +284,7 @@ downloadlogotopcover(restid:any){
   return this.http.get(url_set.api_url+'/download_cov?id='+restid,{responseType:'arraybuffer'})
 
 }
-//For Getting special Image
-getspecial_image(cat_id:any){
-  var id = cat_id ? cat_id : '';
-  return this.http.get(url_set.api_url+'/stock_img?cat_id=' +id);
-}
+
 //For getting Category Id
 get_category_list(){
   return this.http.get(url_set.api_url+'/category_list');
@@ -310,8 +306,51 @@ getStockImages(v: any) {
 }
 deleteStockImages(v: any) {
   return this.http.get(url_set.api_url + '/del_stock_img?id=' + v)
-
 }
 
- 
+submit_special_data(v:any){
+  return this.http.post(url_set.api_url+'/special_date_time',v);
+}
+//Check whether the package is exist or not
+check_package_exist(v:any,v2:any){
+  return this.http.get(url_set.api_url+'/check_menu_special?id='+v +'&menu_id='+v2);
+}
+//getting selected stock image 
+get_stock_iamge(v:any,v2:any){
+  return this.http.get(url_set.api_url+'/get_special_data?id='+v +'&menu_id='+v2);
+}
+// For gettimg time for checked package
+get_date_time(dt:any){
+ return  this.http.post(url_set.api_url+'/special_start_end',dt);
+}
+get_sp_desc(v1:any,v2:any){
+  return this.http.get(url_set.api_url+'/get_special_data?id='+v1+'&menu_id='+v2)
+}
+ post_sp_desc(v:any){
+  
+  return this.http.post(url_set.api_url+'/get_special_data',v)
+
+
+ } 
+
+ //getting selected stock image 
+// get_stock_iamge(v:any,v2:any){
+//   return this.http.get(url_set.api_url+'/get_special_data?id='+v +'&menu_id='+v2);
+// }
+
+
+//For Getting special Image
+// getspecial_image(cat_id:any){
+//   var id = cat_id ? cat_id : '';
+//   return this.http.get(url_set.api_url+'/stock_img?cat_id=' +id);
+// }
+//For Getting special Image
+getspecial_image(cat_id:any){
+  var id = cat_id ? cat_id : '';
+  return this.http.get(url_set.api_url+'/stock_img?cat_id=' +id);
+}
+//For checking payment is done or not
+checkpayment(res_id:any){
+  return this.http.get(url_set.api_url+'/pay_check?id='+res_id)
+}
 }

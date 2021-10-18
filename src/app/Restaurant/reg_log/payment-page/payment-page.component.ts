@@ -19,6 +19,11 @@ export class PaymentPageComponent implements OnInit {
   success:any;
   rest_nm:any;
   paymentData: any;
+  pay_Check:any=[];
+  openmodal:any;
+  PAY:boolean=false;
+  paycheck:any;
+  URL=url_set.Api_url;
   constructor(private activatedroute: ActivatedRoute,private lagunaserve:LagunaserviceService, private router: Router, private _data: DataserviceService) { }
 
   ngOnInit(): void {
@@ -26,6 +31,18 @@ export class PaymentPageComponent implements OnInit {
     localStorage.setItem('rest_id',this.id_rest);
     console.log(atob(this.id_rest).split('/')[0]);
    console.log(this.id_rest);
+   this.lagunaserve.checkpayment(atob(this.id_rest).split('/')[0]).subscribe(data=>{
+     console.log(data);
+     this.pay_Check=data;
+     if(this.pay_Check.msg[0].pay_flag==1){
+           this.PAY=true;
+           this.paycheck=document.getElementById('paycheck');
+           this.paycheck.click();
+     }
+     else{
+       this.PAY=false;
+     }
+   })
   }
   go_to_login() {
     this.lagunaserve.get_specific_admin_dashboard(atob(this.id_rest).split('/')[0]).subscribe(data=>{console.log(data);

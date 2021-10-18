@@ -58,7 +58,7 @@
                             <form>
                                 <div class="rowCustomFour">
                                     <div class="fieldSecFull">
-                                        <label for="spclMore">Write Bio here <strong>({{this.role}}/150):</strong></label>
+                                        <label>Write Bio here <strong>({{this.role}}/150):</strong></label>
                                         <textarea 
                                         [disabled]="break_button"
                                         [(ngModel)]="this.val"
@@ -174,9 +174,10 @@
                             <form class="form-inline">
                                 <div class="rowCustomFour">
                                     <div class="fieldSecFull">
-                                        <label for="vehicle2"> Notice Content</label>
+                                        <label for="vehicle2"> Notice Content<strong> ({{this.role_notice_content}}/100):</strong></label>
                                         <textarea id="spclMore" name="spclMore1" rows="5" cols="60"
-                                        value="{{notice_content}}"
+                                        [(ngModel)]="notice_content"
+                                        maxlength="100"
                                             class="formCssTextArea" #notice
                                             (keyup)="checkvalidity($event)" [disabled]="color_font" (change)="checkvalidity($event)"></textarea>
                                     </div>

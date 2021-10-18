@@ -63,6 +63,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { SidebarpaymentComponent } from './Restaurant/reg_log/common/sidebarpayment/sidebarpayment.component';
+import { AfterloginsidebarComponent } from './Restaurant/after_login/commonafterlogin/afterloginsidebar/afterloginsidebar.component';
+import { AfterloginheaderComponent } from './Restaurant/after_login/commonafterlogin/afterloginheader/afterloginheader.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +118,9 @@ import { SidebarpaymentComponent } from './Restaurant/reg_log/common/sidebarpaym
     ThankyoupageComponent,
     ConfirmationmailComponent,
     UserMenuComponent,
-    SidebarpaymentComponent
+    SidebarpaymentComponent,
+    AfterloginsidebarComponent,
+    AfterloginheaderComponent
 
   ],
 

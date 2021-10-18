@@ -45,6 +45,7 @@ export class UserMenuComponent implements OnInit {
   item_array1=[];
   menu_id:any;
   c=1;
+  modal4:any;
   emptymenu:any;
   arrayK:any=[];
   secData:any;
@@ -58,6 +59,13 @@ export class UserMenuComponent implements OnInit {
   overlapData:any;
   overlap:any;
   specialData:any=[];
+  spdescData:any;
+  spdesc_text_readonly=''
+  stockImg1:any;
+  cat_name:any;
+  spstockImg:any;
+  special_flag:any;
+  menu_show='A';
   ngOnInit(): void {
    
     this.rest_name=this.activatedRoute.snapshot.params['rname'];
@@ -74,8 +82,37 @@ export class UserMenuComponent implements OnInit {
     this.start=this.myArr[1];
     this.end=this.myArr[2];
     this.menu_id=this.myArr[3];
+    this.special_flag = this.menu_id != 5 ? 'N' : 'Y';
     this.greet=this.menu_id==1?'Good Morning':(this.menu_id==2?'Good Afternoon':'Good Evening')
     console.log(this.menu_id)
+    this.admin_data.get_sp_desc(this.rid,this.menu_id).subscribe(data=>{console.log(data)
+    
+      this.spdescData=data;
+      this.spdescData=this.spdescData.msg
+      this.spdesc_text_readonly=this.spdescData[0].menu_desc;
+      this.stockImg1=this.spdescData[0].img_path;
+      this.cat_name=this.spdescData[0].cat_name
+      this.spstockImg=url_set.api_url+'/stock/'+ this.spdescData[0].img_path;
+      // this.imgcat=this.spdescData[0].img_catg
+      console.log(this.spstockImg);
+      this.admin_data.get_menu_urls(this.rid, this.menu_id).subscribe(data=>{console.log(data)
+        this.menuImages=data;
+        this.menuImages=this.menuImages.logo_dt;
+        console.log(this.menuImages)
+      
+            this.topimage=this.url1+'/'+this.menuImages[0].logo_path
+            console.log(this.topimage);
+            // this.cov=this.menuImages[i].cover_page_img? this.url1+'/'+this.menuImages[i].cover_page_img : ''
+            // console.log(this.cov)
+            // console.log(this.menuImages[i].cover_page_img)
+          
+        
+     }
+     
+     )
+      })
+  
+
     this.admin_data.get_special(this.rid, this.menu_id).subscribe(data=>{console.log(data)
       this.specialData=data;
       this.specialData=this.specialData.msg;
@@ -98,7 +135,8 @@ if(this.start){
     this.overlapData=this.overlapData.msg
     console.log(this.overlapData.length)
     
-    if(this.overlapData.length==1)
+    if(this.menu_id != 5)
+    {if(this.overlapData.length==1)
     {
       this.overlap=false;
       this.admin_data.get_menu_urls(this.rid, this.menu_id).subscribe(data=>{console.log(data)
@@ -205,7 +243,10 @@ else{
   this.emptymenu=true;
   this.open_menu(this.menu_id,this.start,this.end)
 }
-    
+} else{
+  this.emptymenu=true;
+  this.overlap=false;
+} 
     })
   }
   else{
@@ -214,6 +255,14 @@ else{
       this.menuImages=data;
       this.greet=this.menuImages.greet;
       this.overlapData=this.menuImages.menu_check;
+      this.menu_show=this.menuImages.menu_active_flag== 'Y' ? (this.menuImages.reg_menu_flag=='A'?'A':'E') : 'A';
+      this.special_flag = this.menuImages.menu_active_flag== 'Y' ? 'Y' : 'N';
+      this.spdescData=this.menuImages.sp_menu;
+      // this.spdescData=this.spdescData.msg
+      this.spdesc_text_readonly=this.spdescData.menu_desc;
+      this.stockImg1=this.spdescData.img_path;
+      this.cat_name=this.spdescData.cat_name
+      this.spstockImg=url_set.api_url+'/stock/'+ this.spdescData.img_path;
       console.log(this.overlapData);
       
       if(this.overlapData.length == 1){
@@ -235,7 +284,11 @@ else{
         this.cov=this.menuImages.cov_img? this.url1+'/'+this.menuImages.cov_img : '';
         console.log(this.cov)
         if(this.menuImages.length < 1)
+         {
           this.emptymenu=true;
+         
+          console.log(this.topimage+" "+this.cov)
+         } 
         else
           this.emptymenu=false;
           for (const [key, value] of Object.entries(this.menuImages.res)) {
@@ -267,7 +320,8 @@ else{
       {this.emptymenu=true;
         this.overlap=false;
       this.topimage=this.menuImages.top_img? this.url1+'/'+this.menuImages.top_img : ''
-        this.cov=this.menuImages.cov_img? this.url1+'/'+this.menuImages.cov_img : undefined
+        this.cov=this.menuImages.cov_img? this.url1+'/'+this.menuImages.cov_img : undefined;
+        // this.topimage=this.url1+'/'+this.menuImages[0].logo_path
         this.admin_data.get_menu_urls(this.rid, this.menu_id).subscribe(data=>{console.log(data)
           this.menuImages=data;
           this.menuImages=this.menuImages.logo_dt;
@@ -281,6 +335,7 @@ else{
             
           
        })
+        // this.cov=undefined;
       }
     })
   }
@@ -510,5 +565,12 @@ var dt = new Array();
    })
 
   }
-
+openmodal4(){
+  this.modal4=document.getElementById('id04');
+  this.modal4.style.display='block'
+}
+closemodal4(){
+  this.modal4=document.getElementById('id04');
+  this.modal4.style.display='none'
+}
 }

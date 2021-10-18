@@ -16,21 +16,20 @@ export class LoginComponent implements OnInit {
   stor:any=[];
 com:any=[];
 comma:any;
-
+show_alert:boolean=true;
    constructor(private _data:DataserviceService,private router:Router,private lagunaserve:LagunaserviceService) { }
   logData:any;
   x:any;
   confirm_modal:any;
   ngOnInit(): void {
+    localStorage.clear();
+    localStorage.setItem('isloggedin','false');
     this.confirm_modal=document.getElementById('change_pass_modal');
     this.confirm_modal.style.display='none'
   }
   // function for sending the login credentials
   logSubmit(v:any){
-
-    console.log(v);
     this._data.submit_log(v).subscribe(data=>{
-      console.log(data);
       this.logData=data;
       if(this.logData.suc>0)
       {
@@ -230,7 +229,13 @@ comma:any;
         });
       }
       else {
-        this.router.navigate(['/changepass'])
+        this.show_alert=false;
+     this.message=this.logData.msg;    
+     setTimeout(() => {
+      this.show_alert=true;
+       
+     }, 12000);
+        // this.router.navigate(['/changepass'])
       }
 
     },error=>{

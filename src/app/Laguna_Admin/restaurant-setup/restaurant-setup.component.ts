@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { url_set } from 'src/app/globalvar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgxSpinnerService } from "ngx-spinner";
+import { DatePipe } from '@angular/common';
+
 // import { ImageTransform } from 'ngx-image-cropper';
 import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';//For Image Cropper
 
@@ -34,21 +36,22 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   dataSource2= new MatTableDataSource();
 
 
-  @ViewChild('MatPaginator2',{static:true}) MatPaginator2!: MatPaginator;
-  // @ViewChild(MatSort) matsort: MatSort;
-
   @ViewChild('MatPaginator1',{static:true}) MatPaginator1!: MatPaginator;
-  // @ViewChild(MatSort) matsort1: MatSort;
+  @ViewChild('datasort1',{static:true}) datasort1!: MatSort;
+
+  @ViewChild('MatPaginator2',{static:true}) MatPaginator2!: MatPaginator;
+  @ViewChild('datasort2',{static:true}) datasort2!: MatSort;
 
 
   @ViewChild('MatPaginator3',{static:true}) MatPaginator3!: MatPaginator;
-  // @ViewChild(MatSort) matsort2: MatSort;
+  @ViewChild('datasort3',{static:true}) datasort3!: MatSort;
   storevalue: any=[];
   specialData:any;
   crop_width:any;
   crop_height:any;
   menufordesc: any;
   back: any;
+  show_special_date=true;
   concatdatalength1=0
   top_file:any;
   idforcreatesection:any;
@@ -62,11 +65,28 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   concatheaderlength=0;
   concatnoticelength=0;
   el: any;
+  everyweekadi:any;
+  spdesc_text_readonly='';
   sectionname:any;
+  show_section=false;
   constructor(private spinner: NgxSpinnerService, private sanitizer: DomSanitizer,private admin_data:LagunaserviceService,private activatedRoute:ActivatedRoute) { }
  show_tab='tab1'
  pos_id:any;
+ menuid_special_breakfast=0;
+ menuid_special_lunch=0;
+ menuid_special_dinner=0;
+ menuid_special_brunch=0
  pos:any;
+ image_getelement:any;
+ veh_mon=0;
+ veh_tue=0;
+ veh_wed=0;
+ spdescData:any;
+ veh_thur=0;
+ veh_fri=0;
+ veh_sat=0;
+ veh_sun=0;
+ veh_all=0;
  hidesection=true;
  reloadval=false;
  get_section_for_item:any;
@@ -75,7 +95,9 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  logo_img:any;
  z1:any
  createsecval='';
+ day_array:any=[];
  idata:any;
+ special_month_day:any;
  logoname:any;
  topname:any;
  covername:any;
@@ -92,7 +114,9 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  dinner_cov:any;
  ide='';
  ipr='';
- ino=''
+ ino='';
+ exclusive_addition:any;
+ specialcontent:any;
  dinner_top:any;
  menuData:any;
  starttime:any;
@@ -114,8 +138,10 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  concatdatalength2=0;
  sec_post_data:any;
  m='';
+ menuData1:any;
  itemdesc:any;
  m_id:any;
+ st_img:any=[];
  menuid='';
  cover_file:any;
  aboutusData1:any;
@@ -125,17 +151,24 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  get_section_for_item1:any
  menu_item:any;
  sid:any;
+ week:any;
  secval1:any;
  sp_menuid:any;
+ openstockimages:any
  sp_posid:any;
  sp_back:any;
  sp_font:any;
  sp_head:any;
  sp_notice:any;
  r_id:any;
+ menuid_lunch_addition=0;
+ menuid_breakfast_addition=0;
+ menuid_dinner_addition=0;
+ menuid_brunch_addition=0
  pick:any;
  ht:any;
  secid:any;
+ imgcat:any;
  dashboardData:any;
  rest_nm:any;
  rest_contact:any;
@@ -174,6 +207,8 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  fri:any=0;
  sat:any=0;
  sun:any=0;
+ excl:any;
+ inad:any;
  veh2:any;
  veh3:any;
  veh4:any;
@@ -182,12 +217,17 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  veh6:any;
  veh7:any;
  veh8:any;
+ dayflag:any;
+ regularmenuflag:any
  show_button3=false;
+ exclusive_time:any=[]
  url1=url_set.Redirect_url;
  sendpathdata="assets/the_cliff_logo.png";
  getimagepath=url_set.api_url+'/';
  imgcheck:any;
+ exckusive_time:any=[];
  idfordesc:any;
+ common_for_special_menu:any;
  mail_data:any;
  imgel:any;
  show_spinner=false;
@@ -198,13 +238,20 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  coverspin=true;
  topspin=true;
  secspin=true;
+ excleveryweek:any;
+ exclspecific:any;
  //Image Cropper
  scale = 1;
+ previous_id:any;
+ see_photo:any;
  transform: ImageTransform = {};
  showCropper = false;
  hide=false;
  valu = true;
+ start_time:any;
+ end_time:any;
  Zoomout = true;
+ spstockImg:any;
  ZoomIn = true;
  modal = true;
  croppedImage:any ;
@@ -217,16 +264,22 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  desc_section_el:any;
  desc_item_el:any;
  desc_el:any;
+ stockImg1:any;
  desc_price:any;
  desc_notes:any;
+ specific_excl:any;
   modal_close_oncrop:any;
   bx:any;
   bx2:any;
+
+  kk:any
   create_a:any;
   download_section_zip:any;
   download_logo_top_cover_zip:any;
+  category_name:any=[];
   ngOnInit(): void {
     this.spinner.show();
+   
     // this.daycheck=document.getElementById('1');
     //   this.daycheck.checked=true;
     this.r_id=this.activatedRoute.snapshot.params['id'];
@@ -235,11 +288,40 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
     this.fetchdata();
     this.fetchdata1();
     this.fetchdata2();
-    
+  //  For getting category Id
+  this.admin_data.get_category_list().subscribe(data=>{
+    console.log(data);
+    this.category_name=data;
+    this.category_name=this.category_name.msg;
+  })
+
+    this.admin_data.getspecial_image(null).subscribe(data=>{
+      console.log(data);
+      this.st_img=data;
+
+      this.st_img=this.st_img.msg;
+      console.log(this.st_img);
+
+    })
+
+
+    // this.admin_data.get_stock_iamge(this.r_id,5).subscribe(data=>{
+    //   console.log(data);
+    // this.st_img=data;
+    // if(this.st_img.msg!=''){
+    // this.st_img=this.st_img.msg;
+    // this.common_for_special_menu=this.st_img[0].img_path;
+    // console.log(this.common_for_special_menu)
+    // this.previous_id=this.st_img[0].img_catg;
+    //   this.see_photo=false;
+    // }
+    // })
     this.admin_data.get_menu_on_choice(this.r_id).subscribe(data=>{console.log(data)
 
     this.menuchoiceData=data;
+   
     this.menuchoiceData=this.menuchoiceData.msg;
+   
     this.mncdata=this.menuchoiceData[0].menu_id;
     console.log(this.menuchoiceData)
     // console.log('bkmenu'+this.menuchoiceData[0].menu_id)
@@ -257,6 +339,16 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
       console.log("imgcheck="+this.imgcheck);
       this.menulength=this.menu_url_data.length;
       console.log("length="+this.menulength)
+    })
+    this.admin_data.get_sp_desc(this.r_id,5).subscribe(data=>{console.log(data)
+    
+    this.spdescData=data;
+    this.spdescData=this.spdescData.msg
+    this.spdesc_text_readonly=this.spdescData[0].menu_desc;
+    this.stockImg1=this.spdescData[0].img_path;
+    this.spstockImg=url_set.api_url+'/stock/'+ this.spdescData[0].img_path;
+    this.imgcat=this.spdescData[0].img_catg
+    console.log(this.spstockImg);
     })
     this.admin_data.get_specific_admin_dashboard(this.r_id).subscribe(data=>{console.log(data)
     this.dashboardData=data;
@@ -298,6 +390,11 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
       this.secData=data;
       this.secData=this.secData.msg;
       this.get_sec_img(this.mncdata);
+      
+    })
+    this.admin_data.get_menu_urls(this.r_id,this.mncdata).subscribe(data=>{console.log(data)
+    this.menuData1=data;
+    this.menuData1=this.menuData1.menu_dt;
     })
     this.tab_el=document.getElementById('defaultOpen');
     this.tab_el.style.background='#3F51B5'
@@ -369,22 +466,22 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   putdata(v:any){
     this.dataSource= new MatTableDataSource(v);
     this.dataSource.paginator=this.MatPaginator1;
-    // this.dataSource.sort=this.matsort;
+    this.dataSource.sort=this.datasort1;
   }
   putdata2(v:any){
     this.dataSource2= new MatTableDataSource(v);
     this.dataSource2.paginator=this.MatPaginator3;
-    // this.dataSource2.sort=this.matsort2;
+     this.dataSource2.sort=this.datasort2;
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.MatPaginator1;
-    // this.dataSource.sort = this.matsort;
+    this.dataSource.sort = this.datasort1;
 
     this.dataSource1.paginator = this.MatPaginator2
-    // this.dataSource1.sort = this.matsort1;
+    this.dataSource1.sort = this.datasort2;
 
     this.dataSource2.paginator = this.MatPaginator3;
-    // this.dataSource2.sort = this.matsort2;
+    this.dataSource2.sort = this.datasort3;
   }
   send_about_us(v:any){
     if(v!=''){
@@ -528,6 +625,7 @@ else{
   }
   store_menu(v:any){
     this.m_id=v;
+    // this.show_section=true;
     console.log(this.m_id)
     this.hidesection=false;
     // if(this.submit_show==false)
@@ -1014,56 +1112,247 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
   //retrieve date and time for set date and time tab
   menu_set_date_time(v:any){
     this.menuid=v;
+    if(v==5)
+    {
+      this.show_special_date=false;
+    }
+    else{
+      this.show_special_date=true;
+    }
     // alert(v);
     for(this.k=1;this.k<=8;this.k++)
     {
       this.daycheck=document.getElementById('vehicle'+this.k);
       this.daycheck.checked=false;
     }
-    this.admin_data.get_set_time(v,this.r_id).subscribe(data=>{console.log(data)
-    this.datetimeData=data;
-    this.starttime=this.datetimeData.msg[0].start_time;
-    this.endtime=this.datetimeData.msg[0].end_time;
-    this.datetimeData=this.datetimeData.msg;
-    if(this.datetimeData.length==7){
-    this.veh1=document.getElementById('vehicle1')
-     this.veh1.checked=true;
-     this.mon=2;
-     this.tue=3;
-     this.wed=4;
-     this.thur=5;
-     this.fri=6;
-     this.sat=7;
-     this.sun=8;
-    }
-    for(let i=0;i<this.datetimeData.length;i++)
-    {
-      this.daycheck=document.getElementById('vehicle'+this.datetimeData[i].month_day);
-      this.daycheck.checked=true;
-      this.veh1=document.getElementById('vehicle1')
-      this.veh2=document.getElementById('vehicle2')
-      this.veh3=document.getElementById('vehicle3')
-      this.veh4=document.getElementById('vehicle4')
-      this.veh5=document.getElementById('vehicle5')
-      this.veh6=document.getElementById('vehicle6')
-      this.veh7=document.getElementById('vehicle7')
-      this.veh8=document.getElementById('vehicle8')
-      if(this.veh2.checked)
-      this.mon=2
-      if(this.veh3.checked)
-      this.tue=3
-      if(this.veh4.checked)
-      this.wed=4
-      if(this.veh5.checked)
-      this.thur=5
-      if(this.veh6.checked)
-      this.fri=6
-      if(this.veh7.checked)
-      this.sat=7
-      if(this.veh8.checked)
-      this.sun=8
+    if(v!=5){
+      this.admin_data.get_set_time(v,this.r_id).subscribe(data=>{console.log(data)
+        this.datetimeData=data;
+        this.starttime=this.datetimeData.msg[0].start_time;
+        this.endtime=this.datetimeData.msg[0].end_time;
+        this.datetimeData=this.datetimeData.msg;
+        if(this.datetimeData.length==7){
+        this.veh1=document.getElementById('vehicle1')
+         this.veh1.checked=true;
+         this.mon=2;
+         this.tue=3;
+         this.wed=4;
+         this.thur=5;
+         this.fri=6;
+         this.sat=7;
+         this.sun=8;
+        }
+        for(let i=0;i<this.datetimeData.length;i++)
+        {
+          this.daycheck=document.getElementById('vehicle'+this.datetimeData[i].month_day);
+          this.daycheck.checked=true;
+          this.veh1=document.getElementById('vehicle1')
+          this.veh2=document.getElementById('vehicle2')
+          this.veh3=document.getElementById('vehicle3')
+          this.veh4=document.getElementById('vehicle4')
+          this.veh5=document.getElementById('vehicle5')
+          this.veh6=document.getElementById('vehicle6')
+          this.veh7=document.getElementById('vehicle7')
+          this.veh8=document.getElementById('vehicle8')
+          if(this.veh2.checked)
+          this.mon=2
+          if(this.veh3.checked)
+          this.tue=3
+          if(this.veh4.checked)
+          this.wed=4
+          if(this.veh5.checked)
+          this.thur=5
+          if(this.veh6.checked)
+          this.fri=6
+          if(this.veh7.checked)
+          this.sat=7
+          if(this.veh8.checked)
+          this.sun=8
+          
+        }
+        
+        })
       
     }
+   else{
+    this.admin_data.get_set_time(v,this.r_id).subscribe(data=>{console.log(data)
+      this.datetimeData=data;
+     
+      this.datetimeData=this.datetimeData.msg;
+      console.log(this.datetimeData)
+      this.regularmenuflag=this.datetimeData[0].regular_menu_flag;
+      this.dayflag=this.datetimeData[0].day_flag;
+      
+      this.excl=document.getElementById('exclusively');
+      this.inad=document.getElementById('inAddition')
+      if(this.regularmenuflag=='E')
+      {this.excl.checked=true;
+       this.exclusive_addition='E'
+       this.excleveryweek=document.getElementById('everyWeek');
+       this.exclspecific=document.getElementById('specificWeek');
+       if(this.dayflag=='E')
+       {this.excleveryweek.checked=true;
+        this.week='E';
+        for(let i=0;i<this.datetimeData.length;i++){
+          console.log(this.datetimeData[i].month_day)
+              
+       this.daycheck=document.getElementById('vehicle_s'+this.datetimeData[i].month_day);
+       this.daycheck.checked=true;
+       if(this.datetimeData[i].month_day==2)
+         this.mon=2
+        else if(this.datetimeData[i].month_day==3)
+         this.tue=3 
+        else if(this.datetimeData[i].month_day==4)
+         this.wed=4
+        else if(this.datetimeData[i].month_day==5)
+         this.thur=5
+        else if(this.datetimeData[i].month_day==6)
+         this.fri=6
+        else if(this.datetimeData[i].month_day==7)
+         this.sat=7
+        else if(this.datetimeData[i].month_day==8)
+         this.sun=8
+                 
+        }
+      
+      }
+       else
+       {this.exclspecific.checked=true;
+        this.week='S';
+        var datePipe = new DatePipe('en-US');
+         this.specific_excl=datePipe.transform(this.datetimeData[0].menu_date, 'yyyy-MM-dd');
+         console.log(this.specific_excl)
+      
+      }
+       for(let i=0;i<this.datetimeData.length;i++){
+
+        this.daycheck=document.getElementById('menu'+this.datetimeData[i].regular_menu_id);
+        this.daycheck.checked=true;
+        if(this.datetimeData[i].regular_menu_id==1)
+        this.menuid_special_breakfast=1;
+        else if(this.datetimeData[i].regular_menu_id==2)
+        this.menuid_special_lunch=2;
+        else if(this.datetimeData[i].regular_menu_id==3)
+        this.menuid_special_dinner=3;
+        else
+        this.menuid_special_brunch=4
+      }
+this.get_special_time(this.r_id,this.menuid_special_breakfast,this.menuid_special_lunch,this.menuid_special_dinner,this.menuid_special_brunch)       
+
+//taking day data
+
+// for(let i=0;i<this.datetimeData.length;i++){
+
+//   this.daycheck=document.getElementById('vehicle_s'+this.datetimeData[i].menu_date);
+//   this.daycheck.checked=true;
+// }
+      
+      }
+      else
+   {   this.inad.checked=true;
+      this.exclusive_addition='A'
+    this.excleveryweek=document.getElementById('everyWeekAddi');
+    this.exclspecific=document.getElementById('specificWeekAddi');
+    if(this.dayflag=='E')
+    {this.excleveryweek.checked=true;
+      this.week='E';
+     for(let i=0;i<this.datetimeData.length;i++){
+       console.log(this.datetimeData[i].month_day)
+           
+    this.daycheck=document.getElementById('inad'+this.datetimeData[i].month_day);
+    this.daycheck.checked=true;
+    if(this.datetimeData[i].month_day==2)
+    this.veh_mon=2
+   else if(this.datetimeData[i].month_day==3)
+    this.veh_tue=3 
+   else if(this.datetimeData[i].month_day==4)
+    this.veh_wed=4
+   else if(this.datetimeData[i].month_day==5)
+    this.veh_thur=5
+   else if(this.datetimeData[i].month_day==6)
+    this.veh_fri=6
+   else if(this.datetimeData[i].month_day==7)
+    this.veh_sat=7
+   else if(this.datetimeData[i].month_day==8)
+    this.veh_sun=8
+
+     }
+   
+   }
+   
+    else
+    {this.exclspecific.checked=true;
+      this.week='S';
+     var datePipe = new DatePipe('en-US');
+      this.specific_excl=datePipe.transform(this.datetimeData[0].menu_date, 'yyyy-MM-dd');
+      console.log(this.specific_excl)
+   
+   }
+  
+   for(let i=0;i<this.datetimeData.length;i++){
+
+    this.daycheck=document.getElementById('addimenu'+this.datetimeData[i].regular_menu_id);
+    this.daycheck.checked=true;
+    if(this.datetimeData[i].regular_menu_id==1)
+    this.menuid_breakfast_addition=1;
+    else if(this.datetimeData[i].regular_menu_id==2)
+    this.menuid_lunch_addition=2;
+    else if(this.datetimeData[i].regular_menu_id==3)
+    this.menuid_dinner_addition=3;
+    else
+    this.menuid_brunch_addition=4
+  }
+this.get_special_time(this.r_id,this.menuid_breakfast_addition,this.menuid_lunch_addition,this.menuid_dinner_addition,this.menuid_brunch_addition)       
+
+  
+  }
+    
+    })
+   }
+  }
+  get_special_time(res_id:any, v1:any, v2:any, v3:any, v4:any){
+    // this.spinner.show();
+   this.storevalue.length=0;
+    this.storevalue.push({
+      "restaurant_id":res_id,
+      "reg_menu_id": [{"menu_id":v1},{"menu_id":v2},{"menu_id":v3},{"menu_id":v4}]
+      })   
+
+      console.log(this.exclusive_addition)
+    this.admin_data.get_date_time(this.storevalue).subscribe(data=>{
+      console.log(data);
+      this.exclusive_time=data;
+      console.log(this.exclusive_time);
+      if(this.exclusive_addition=='E'){
+      this.Modal=document.getElementById('start_exclusive');
+      this.Modal.value=this.exclusive_time.msg[0].start_time;
+      this.start_time=this.exclusive_time.msg[0].start_time;
+      this.Modal=document.getElementById('end_exclusive');
+      this.Modal.value=this.exclusive_time.msg[0].end_time;
+      this.end_time=this.exclusive_time.msg[0].end_time;
+      // this.spinner.hide();
+     }
+     else{
+       
+      this.Modal=document.getElementById('start_addition');
+      this.Modal.value=this.exclusive_time.msg[0].start_time;
+      this.start_time=this.exclusive_time.msg[0].start_time;
+      this.Modal=document.getElementById('end_addition');
+      this.Modal.value=this.exclusive_time.msg[0].end_time;
+      this.end_time=this.exclusive_time.msg[0].end_time;
+      // this.spinner.hide();/
+     }
+    })
+    console.log(this.start_time,this.end_time);
+    
+  }
+
+  get_menu(v:any){
+    this.m_id=v;
+    this.radid=v;
+    this.admin_data.get_menu_urls(this.r_id, v).subscribe((data)=>{console.log(data)
+      this.menuData1=data;
+      this.menuData1=this.menuData1.menu_dt
     
     })
   }
@@ -1080,6 +1369,44 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
   }
   //opening respective tabs
   openCity(v:any){
+    if(v=='tab_sp'){
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='#3F51B5'
+      this.tab_el.style.color="white";
+      this.tab_el=document.getElementById('defaultOpen1');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen2');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen33');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen4');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen5');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen6');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen7');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen8');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen9');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpenmenu');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+    }
     if(v=='tab1'){
       this.tab_el=document.getElementById('defaultOpen');
       this.tab_el.style.background='#3F51B5'
@@ -1111,9 +1438,12 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      // this.tab_el=document.getElementById('defaultOpen10');
-      // this.tab_el.style.background='white'
-      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpenmenu');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       
 
     }
@@ -1121,6 +1451,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       this.tab_el=document.getElementById('defaultOpen1');
       this.tab_el.style.background='#3F51B5'
       this.tab_el.style.color="white";
@@ -1148,9 +1481,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      // this.tab_el=document.getElementById('defaultOpen10');
-      // this.tab_el.style.background='white'
-      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpenmenu');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       
 
     }
@@ -1158,6 +1491,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       this.tab_el=document.getElementById('defaultOpen1');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
@@ -1185,9 +1521,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      // this.tab_el=document.getElementById('defaultOpen10');
-      // this.tab_el.style.background='white'
-      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpenmenu');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       
 
     }
@@ -1195,6 +1531,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       this.tab_el=document.getElementById('defaultOpen1');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
@@ -1222,9 +1561,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      // this.tab_el=document.getElementById('defaultOpen10');
-      // this.tab_el.style.background='white'
-      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpenmenu');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       
 
     }
@@ -1235,6 +1574,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen1');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       this.tab_el=document.getElementById('defaultOpen2');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
@@ -1259,9 +1601,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      // this.tab_el=document.getElementById('defaultOpen10');
-      // this.tab_el.style.background='white'
-      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpenmenu');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       
 
     }
@@ -1275,6 +1617,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen2');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       this.tab_el=document.getElementById('defaultOpen33');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
@@ -1296,9 +1641,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      // this.tab_el=document.getElementById('defaultOpen10');
-      // this.tab_el.style.background='white'
-      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpenmenu');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       
 
     }
@@ -1312,6 +1657,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen2');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       this.tab_el=document.getElementById('defaultOpen33');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
@@ -1333,9 +1681,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      // this.tab_el=document.getElementById('defaultOpen10');
-      // this.tab_el.style.background='white'
-      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpenmenu');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       
 
     }
@@ -1350,6 +1698,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen2');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       this.tab_el=document.getElementById('defaultOpen33');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
@@ -1371,9 +1722,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      // this.tab_el=document.getElementById('defaultOpen10');
-      // this.tab_el.style.background='white'
-      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpenmenu');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       
 
     }
@@ -1390,6 +1741,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen33');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       this.tab_el=document.getElementById('defaultOpen4');
       this.tab_el.style.background=''
       this.tab_el.style.color="black";
@@ -1408,9 +1762,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
-      // this.tab_el=document.getElementById('defaultOpen10');
-      // this.tab_el.style.background='white'
-      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpenmenu');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       
 
     }
@@ -1430,6 +1784,9 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen4');
       this.tab_el.style.background=''
       this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       this.tab_el=document.getElementById('defaultOpen5');
       this.tab_el.style.background='white'
       this.tab_el.style.color="black";
@@ -1445,49 +1802,52 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       this.tab_el=document.getElementById('defaultOpen9');
       this.tab_el.style.background='#3F51B5'
       this.tab_el.style.color="white";
-      // this.tab_el=document.getElementById('defaultOpen10');
-      // this.tab_el.style.background='white'
-      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpenmenu');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
       
 
     }
-    // if(v=='tab10'){
-    //   this.tab_el=document.getElementById('defaultOpen');
-    //   this.tab_el.style.background='white'
-    //   this.tab_el.style.color="black";
-    //   this.tab_el=document.getElementById('defaultOpen1');
-    //   this.tab_el.style.background='white'
-    //   this.tab_el.style.color="black";
-    //   this.tab_el=document.getElementById('defaultOpen2');
-    //   this.tab_el.style.background='white'
-    //   this.tab_el.style.color="black";
-    //   this.tab_el=document.getElementById('defaultOpen33');
-    //   this.tab_el.style.background='white'
-    //   this.tab_el.style.color="black";
-    //   this.tab_el=document.getElementById('defaultOpen4');
-    //   this.tab_el.style.background=''
-    //   this.tab_el.style.color="black";
-    //   this.tab_el=document.getElementById('defaultOpen5');
-    //   this.tab_el.style.background='white'
-    //   this.tab_el.style.color="black";
-    //   this.tab_el=document.getElementById('defaultOpen6');
-    //   this.tab_el.style.background='white'
-    //   this.tab_el.style.color="black";
-    //   this.tab_el=document.getElementById('defaultOpen7');
-    //   this.tab_el.style.background='white'
-    //   this.tab_el.style.color="black";
-    //   this.tab_el=document.getElementById('defaultOpen8');
-    //   this.tab_el.style.background='white'
-    //   this.tab_el.style.color="black";
-    //   this.tab_el=document.getElementById('defaultOpen9');
-    //   this.tab_el.style.background='white'
-    //   this.tab_el.style.color="black";
-    //   this.tab_el=document.getElementById('defaultOpen10');
-    //   this.tab_el.style.background='#3F51B5'
-    //   this.tab_el.style.color="white";
+    if(v=='tab_menu'){
+      this.tab_el=document.getElementById('defaultOpen');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen1');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen2');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen33');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen4');
+      this.tab_el.style.background=''
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen5');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen6');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen7');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen8');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen9');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpenmenu');
+      this.tab_el.style.background='#3F51B5'
+      this.tab_el.style.color="white";
       
 
-    // }
+    }
    this.show_tab=v;
    
   }
@@ -1518,6 +1878,7 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       console.log(event.target.value);
  }
  applyFilter(event: Event) {
+   console.log(event)
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
   this.dataSource1.filter = filterValue.trim().toLowerCase();
@@ -1526,6 +1887,12 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
   if (this.dataSource.paginator) {
     this.dataSource.paginator.firstPage();
   }
+  // if (this.dataSource1.paginator) {
+  //   this.dataSource.paginator.firstPage();
+  // }
+  // if (this.dataSource2.paginator) {
+  //   this.dataSource.paginator.firstPage();
+  // }
 }
 send_mail()
 {
@@ -1927,6 +2294,452 @@ download_top_cover_logo(){
   a.click();
   
   })
+}
+
+check_every_day(e:any,v1:any,v2:any){
+  if(v1=='exclusive')
+{
+ if(v2=='every_week' && e.target.checked){
+
+     this.week='E';
+  }
+  else if(v2=='SPECIFIC_DATE' && e.target.checked){
+    this.week='S'
+  }
+}
+else{
+
+}
+}
+enable_exclusive_inaddition(e:any,v:any){
+  if(e=='exclusive'){
+           this.exclusive_addition='E';
+  }
+  else{
+     this.exclusive_addition='A';
+
+  }
+}
+checkspecialday(e:any,v:any,v1:any){
+if(v1=='exclusive') {
+  if(v=='everyday'){
+    if(e.target.checked){
+      this.veh1=document.getElementById('vehicle_se')
+      this.veh2=document.getElementById('vehicle_s2')
+      this.veh3=document.getElementById('vehicle_s3')
+      this.veh4=document.getElementById('vehicle_s4')
+      this.veh5=document.getElementById('vehicle_s5')
+      this.veh6=document.getElementById('vehicle_s6')
+      this.veh7=document.getElementById('vehicle_s7')
+      this.veh8=document.getElementById('vehicle_S8')
+      this.veh2.checked=true;
+      this.veh3.checked=true;
+      this.veh4.checked=true;
+      this.veh5.checked=true;
+      this.veh6.checked=true;
+      this.veh7.checked=true;
+      this.veh8.checked=true;
+      this.mon=2;
+      this.tue=3;
+      this.wed=4;
+      this.thur=5;
+      this.fri=6;
+      this.sat=7;
+      this.sun=8;
+    }
+    else
+    {
+      this.mon=0;
+      this.tue=0;
+      this.wed=0;
+      this.thur=0;
+      this.fri=0;
+      this.sat=0;
+      this.sun=0;
+    }
+     
+    //  this.veh1.checked=true;
+    }
+    else if(v=='monday'){
+      if(e.target.checked){
+        this.veh2=document.getElementById('vehicle_s2')
+        this.veh2.checked=true;
+        this.mon=2;
+      }
+      else
+      { this.mon=0;
+      this.veh1=document.getElementById('vehicle_se')
+       this.veh1.checked=false;}
+    }
+    else if(v=='tuesday'){
+      if(e.target.checked){
+        this.veh3=document.getElementById('vehicle_s3')
+        this.veh3.checked=true;
+        this.tue=3;
+      }
+      else
+      { this.tue=0;
+       this.veh1=document.getElementById('vehicle_Se')
+       this.veh1.checked=false;}
+    }
+    else if(v=='wednesday'){
+      if(e.target.checked){
+        this.veh4=document.getElementById('vehicle_s4')
+        this.veh4.checked=true;
+        this.wed=4;
+      }
+      else
+       {this.wed=0;
+       this.veh1=document.getElementById('vehicle_se')
+       this.veh1.checked=false;}
+    }
+    else if(v=='thursday'){
+      if(e.target.checked){
+        this.veh5=document.getElementById('vehicle_s5')
+        this.veh5.checked=true;
+        this.thur=5;
+      }
+      else
+       {this.thur=0;
+       this.veh1=document.getElementById('vehicle_se')
+       this.veh1.checked=false;}
+    }
+    else if(v=='friday'){
+      if(e.target.checked){
+        this.veh6=document.getElementById('vehicle_s6')
+        this.veh6.checked=true;
+        this.fri=6;
+      }
+      else
+       {this.fri=0;
+       this.veh1=document.getElementById('vehicle_se')
+       this.veh1.checked=false;}
+    }
+    else if(v=='saturday'){
+      if(e.target.checked){
+        this.veh7=document.getElementById('vehicle_s7')
+        this.veh7.checked=true;
+        this.sat=7;
+      }
+      else
+       {this.sat=0;
+       this.veh1=document.getElementById('vehicle_se')
+       this.veh1.checked=false;}
+    }
+    else if(v=='sunday'){
+      if(e.target.checked){
+        this.veh8=document.getElementById('vehicle_s8')
+        this.veh8.checked=true;
+        this.sun=8;
+      }
+      else
+      { this.sun=0;
+       this.veh1=document.getElementById('vehicle_se')
+       this.veh1.checked=false;}
+    }
+    else{}
+  }
+  else{
+
+    if(v=='everyday'){
+      if(e.target.checked){
+        this.veh1=document.getElementById('inad1')
+        this.veh2=document.getElementById('inad2')
+        this.veh3=document.getElementById('inad3')
+        this.veh4=document.getElementById('inad4')
+        this.veh5=document.getElementById('inad5')
+        this.veh6=document.getElementById('inad6')
+        this.veh7=document.getElementById('inad7')
+        this.veh8=document.getElementById('inad8')
+        this.veh2.checked=true;
+        this.veh3.checked=true;
+        this.veh4.checked=true;
+        this.veh5.checked=true;
+        this.veh6.checked=true;
+        this.veh7.checked=true;
+        this.veh8.checked=true;
+        this.veh_mon=2;
+        this.veh_tue=3;
+        this.veh_wed=4;
+        this.veh_thur=5;
+        this.veh_fri=6;
+        this.veh_sat=7;
+        this.veh_sun=8;
+      }
+      else
+      {
+        this.veh_mon=0;
+        this.veh_tue=0;
+        this.veh_wed=0;
+        this.veh_thur=0;
+        this.veh_fri=0;
+        this.veh_sat=0;
+        this.veh_sun=0;
+      }
+       
+      //  this.veh1.checked=true;
+      }
+      else if(v=='monday'){
+        if(e.target.checked){
+          this.veh2=document.getElementById('inad2')
+          this.veh2.checked=true;
+          this.veh_mon=2;
+        }
+        else
+        { this.veh_mon=0;
+        this.veh1=document.getElementById('inad1')
+         this.veh1.checked=false;}
+      }
+      else if(v=='tuesday'){
+        if(e.target.checked){
+          this.veh3=document.getElementById('inad3')
+          this.veh3.checked=true;
+          this.veh_tue=3;
+        }
+        else
+        { this.veh_tue=0;
+         this.veh1=document.getElementById('inad1')
+         this.veh1.checked=false;}
+      }
+      else if(v=='wednesday'){
+        if(e.target.checked){
+          this.veh4=document.getElementById('inad4')
+          this.veh4.checked=true;
+          this.veh_wed=4;
+        }
+        else
+         {this.wed=0;
+         this.veh1=document.getElementById('inad1')
+         this.veh1.checked=false;}
+      }
+      else if(v=='thursday'){
+        if(e.target.checked){
+          this.veh5=document.getElementById('inad5')
+          this.veh5.checked=true;
+          this.veh_thur=5;
+        }
+        else
+         {this.veh_thur=0;
+         this.veh1=document.getElementById('inad1')
+         this.veh1.checked=false;}
+      }
+      else if(v=='friday'){
+        if(e.target.checked){
+          this.veh6=document.getElementById('inad6')
+          this.veh6.checked=true;
+          this.veh_fri=6;
+        }
+        else
+         {this.fri=0;
+         this.veh1=document.getElementById('inad1')
+         this.veh1.checked=false;}
+      }
+      else if(v=='saturday'){
+        if(e.target.checked){
+          this.veh7=document.getElementById('inad7')
+          this.veh7.checked=true;
+          this.veh_sat=7;
+        }
+        else
+         {this.sat=0;
+         this.veh1=document.getElementById('inad1')
+         this.veh1.checked=false;}
+      }
+      else if(v=='sunday'){
+        if(e.target.checked){
+          this.veh8=document.getElementById('inad8')
+          this.veh8.checked=true;
+          this.veh_sun=8;
+        }
+        else
+        { this.sun=0;
+         this.veh1=document.getElementById('inad1')
+         this.veh1.checked=false;}
+      }
+      else{}
+    
+  }
+
+
+}
+check_addition(e:any,v1:any,v2:any){
+  if(v2=='exclusive'){
+    if(v1=='break'){
+      if(e.target.checked)
+    this.menuid_special_breakfast=1;
+     else
+     this.menuid_special_breakfast=0;
+    }
+    else if(v1=='lunch' && e.target.checked){
+      if(e.target.checked)
+      this.menuid_special_lunch=2;
+      else
+      this.menuid_special_lunch=0;
+    }
+    else if(v1=='dinner'){
+      
+      if(e.target.checked)
+      this.menuid_special_dinner=3
+     else
+     this.menuid_special_dinner=0
+    }
+    else if(v1=='brunch'){
+      
+       if(e.target.checked)
+      this.menuid_special_brunch=4
+      else
+      this.menuid_special_brunch=0;
+    }
+this.get_special_time(this.r_id,this.menuid_special_breakfast,this.menuid_special_lunch,this.menuid_special_dinner,this.menuid_special_brunch)       
+
+  }
+
+  if(v2=='addition'){
+    if(v1=='break' ){
+      if(e.target.checked){
+        this.menuid_breakfast_addition=1;
+
+      }
+      else{
+
+        this.menuid_breakfast_addition=0;
+
+      }
+
+    }
+
+    else if(v1=='lunch'){
+      if(e.target.checked)
+      this.menuid_lunch_addition=2;
+      else
+      this.menuid_lunch_addition=0;
+    }
+    else if(v1=='dinner'){
+      if(e.target.checked)
+      this.menuid_dinner_addition=3;
+      else
+      this.menuid_brunch_addition=0;
+    
+    }
+    else if(v1=='brunch'){
+      
+      if(e.target.checked)
+      this.menuid_brunch_addition=4;
+      else
+      this.menuid_brunch_addition=0;
+    }
+this.get_special_time(this.r_id,this.menuid_breakfast_addition,this.menuid_lunch_addition,this.menuid_dinner_addition,this.menuid_brunch_addition)       
+
+  }
+
+}
+
+submit_special_menu(){
+  this.day_array.length=0
+  this.day_array.push({
+    "menu_id": this.menuid ,
+    "break_check":'Y',
+    "restaurant_id":this.r_id,
+    "regular_menu_flag":this.exclusive_addition,
+    "day_flag":this.week,
+    // "menu_date":this.week=='S'?this.date_time:'',
+    "menu_date":this.exclusive_addition=='E'? (this.week=='S'? this.specific_excl:''): (this.week=='S' ? this.specific_excl:''),
+    "start_time": this.start_time,
+    "end_time" :this.end_time ,
+    "reg_menu_id":this.exclusive_addition=='E' ? [{"menu_id":this.menuid_special_breakfast},{"menu_id":this.menuid_special_lunch},{"menu_id":this.menuid_special_dinner},{"menu_id":this.menuid_special_brunch}] :  [{"menu_id":this.menuid_breakfast_addition},{"menu_id":this.menuid_lunch_addition},{"menu_id":this.menuid_dinner_addition},{"menu_id":this.menuid_brunch_addition}],
+    "month_day":this.exclusive_addition=='E' ? [{"dt": this.mon},{"dt":this.tue},{"dt":this.wed},{"dt":this.thur},{"dt":this.fri},{"dt":this.sat},{"dt":this.sun}] : [{"dt": this.veh_mon},{"dt":this.veh_tue},{"dt":this.veh_wed},{"dt":this.veh_thur},{"dt":this.veh_fri},{"dt":this.veh_sat},{"dt":this.veh_sun}] 
+  })
+  console.log(this.day_array,this.specific_excl);
+ this.admin_data.submit_special_data(this.day_array).subscribe(data=>{console.log(data)
+this.specialcontent=data;
+if(this.specialcontent.suc==1)
+{this.m="Updation successful!!";
+ this.myFunction()}
+else
+{
+  this.m="Failed to update!";
+  this.myFunction()
+}
+
+
+},error=>{
+  this.m="Failed to update!";
+  this.myFunction()
+})
+}
+get_date(e:any){
+  if(e.target.id=='special_exc'){
+     this.specific_excl=e.target.value;
+  }
+  else{
+    this.specific_excl=e.target.value;
+     
+  }
+}
+send_special_desc(v:any){
+  var dt={
+    "restaurant_id":this.r_id,
+    "menu_id":5,
+    "img_path":this.stockImg1,
+    "img_catg":this.imgcat,
+    "menu_desc":v,
+
+  }
+  this.admin_data.post_sp_desc(dt).subscribe(data=>{console.log(data)
+    this.admin_data.get_sp_desc(this.r_id,5).subscribe(data=>{console.log(data)
+    
+      this.spdescData=data;
+      this.spdescData=this.spdescData.msg
+      this.spdesc_text_readonly=this.spdescData[0].menu_desc;
+      this.stockImg1=this.spdescData[0].img_path;
+      this.spstockImg=url_set.api_url+'/stock/'+ this.spdescData[0].img_path;
+      this.imgcat=this.spdescData[0].img_catg
+      console.log(this.spstockImg);
+      })
+  
+  })
+}
+openstockmodal(){
+  this.openstockimages=document.getElementById('id02');
+  this.openstockimages.style.display='block'
+}
+
+getStockimageonselectcategory(cat_id:any){
+  //  For getting Image on load
+  this.admin_data.getspecial_image(cat_id).subscribe(data=>{
+    console.log(data);
+    this.st_img=data;
+    this.st_img=this.st_img.msg;
+  })
+}
+selectedimage(index:any,image_path:any,catg:any,length:any){
+
+  this.previous_id=catg;
+  this.imgcat=catg;
+  this.stockImg1=image_path;
+    this.spstockImg=url_set.api_url+'/stock/'+ image_path;
+  this.common_for_special_menu=image_path;
+  for(let i=0;i<length;i++){
+    this.image_getelement=document.getElementById('image_'+i);
+    this.image_getelement.style.border='';
+  }
+  this.image_getelement=document.getElementById('image_'+index);
+ this.image_getelement.style.border='3px solid #00477e';
+}
+save_it(e:any){
+  if(e=='close'){
+    this.see_photo=true;
+    this.common_for_special_menu='';
+    // this.previous_id='';
+    this.imgcat=''
+ }
+  else{
+    this.see_photo=false;
+    
+    this.common_for_special_menu=url_set.api_url+'stock/'+this.common_for_special_menu;
+  }
+  this.openstockimages=document.getElementById('id02');
+  this.openstockimages.style.display='none'
 }
 
 }

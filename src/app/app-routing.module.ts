@@ -76,10 +76,10 @@ const routes: Routes = [
     component:MenuSetupComponent
   },
   
-  {
-    path:'dashboard',
-    component:DashboardComponent
-  },
+  // {
+  //   path:'dashboard',
+  //   component:DashboardComponent
+  // },
   {
     path:'changepass',
     component:ChangepassComponent
@@ -103,6 +103,10 @@ const routes: Routes = [
   {
     path:'confirmation/:id',
     component:ConfirmationmailComponent
+  },
+  {
+    path:'restaurant/dashboard',
+    component:DashboardComponent
   }
 
 ];

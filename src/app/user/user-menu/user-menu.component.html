@@ -7,27 +7,29 @@
    
      <div class="topNav">
        <ul>
-         <li *ngIf="overlap==false && emptymenu==false">
+         <li *ngIf="overlap==false && emptymenu==false && menu_show=='A'">
            
    
              <a style="cursor: pointer;" (click)="open_modal()" >Menu</a>
    
          
          </li>
-         <li *ngIf="overlap==false && emptymenu==true">
+         <li *ngIf="overlap==false && emptymenu==true && menu_show=='A'">
    
             
              <a style="cursor: pointer;" (click)="open_modal1()">Menu</a>
          
          
          </li>
-         <li *ngIf="overlap==true">
+         <li *ngIf="overlap==true && menu_show=='A'">
    
             
           <a style="cursor: pointer;" (click)="open_modal2()">Menu</a>
       
       
       </li>
+      <li *ngIf="special_flag=='Y'" ><a style="cursor:pointer" (click)="openmodal4()">Special Menu</a></li>
+
          <li><a>Birthday/Anniversary</a></li>
        </ul>
      </div>
@@ -103,9 +105,9 @@
    
      <div class="navbarBotomNav">
        <ul>
-         <li><a href="#">Laguna Village Shops</a></li>
-         <li><a href="#">Entertainment</a></li>
-         <li><a href="#">Laguna Beach FUN Directory</a></li>
+         <li><a >Laguna Village Shops</a></li>
+         <li><a >Entertainment</a></li>
+         <li><a >Laguna Beach FUN Directory</a></li>
        </ul>
      </div>
    
@@ -125,8 +127,8 @@
 
      </center>
      <footer class="footerFront">
-       <p>Powered by <a href="#">Shop Local Laguna</a> and <a href="#">Info Quick</a><br>
-         Photo: <a href="#">Cindy Ferguson</a>
+       <p>Powered by <a >Shop Local Laguna</a> and <a >Info Quick</a><br>
+         Photo: <a >Cindy Ferguson</a>
        </p>
      </footer>
    </div>
@@ -137,27 +139,30 @@
  
    <div class="topNav">
      <ul>
-       <li *ngIf="overlap==false && emptymenu==false">
+       <li *ngIf="overlap==false && emptymenu==false && menu_show=='A'">
          
  
            <a style="cursor: pointer;" (click)="open_modal()" >Menu</a>
  
        
        </li>
-       <li *ngIf="overlap==false && emptymenu==true">
+       <li *ngIf="overlap==false && emptymenu==true && menu_show=='A'">
  
           
            <a style="cursor: pointer;" (click)="open_modal1()">Menu</a>
        
        
        </li>
-       <li *ngIf="overlap==true">
+       <li *ngIf="overlap==true && menu_show=='A'">
  
           
         <a style="cursor: pointer;" (click)="open_modal2()">Menu</a>
     
     
+
     </li>
+    <li *ngIf="special_flag=='Y'"><a style="cursor:pointer" (click)="openmodal4()">Special Menu</a></li>
+
        <li><a>Birthday/Anniversary</a></li>
      </ul>
    </div>
@@ -233,9 +238,9 @@
  
    <div class="navbarBotomNav">
      <ul>
-       <li><a href="#">Laguna Village Shops</a></li>
-       <li><a href="#">Entertainment</a></li>
-       <li><a href="#">Laguna Beach FUN Directory</a></li>
+       <li><a >Laguna Village Shops</a></li>
+       <li><a >Entertainment</a></li>
+       <li><a >Laguna Beach FUN Directory</a></li>
      </ul>
    </div>
  
@@ -253,8 +258,8 @@
     <p class="dayMsg">  {{greet}} </p> 
    </center>
    <footer class="footerFront">
-     <p>Powered by <a href="#">Shop Local Laguna</a> and <a href="#">Info Quick</a><br>
-       Photo: <a href="#">Cindy Ferguson</a>
+     <p>Powered by <a >Shop Local Laguna</a> and <a >Info Quick</a><br>
+       Photo: <a >Cindy Ferguson</a>
      </p>
    </footer>
  </div>
@@ -291,7 +296,7 @@
                    </table>
                    <p class="descroption">{{m1.item_desc}}</p>
                  <!-- </div> -->
-   
+  
    
    
                
@@ -374,7 +379,7 @@
    
                      <tr *ngFor="let i of overlapData" class="menuAllListTr">
                        <td class="menuAllList">
-                         <h3>{{i.menu_description}} <span>{{i.start_time}} hrs to {{i.end_time}} hrs</span></h3>
+                         <h3>{{i.menu_description}} <span>{{i.start_time}} to {{i.end_time}} </span></h3>
                          <button (click)="open_menu(i.menu_id,i.start_time,i.end_time);modalclose2()">
                            View Menu
                          </button></td>
@@ -401,5 +406,44 @@
    
      </div>
    </div>
+   <div id="id04" class="w3-modal modalCustom">
+    <div class="w3-modal-content modalDialogCustom modalDialogCustomSps">
+  
+      <div class="modal-dialog modalDialogCustom modalDialogCustomSps">
+  
+        <div class="modal-content">
+  
+          <button type="button" class="close closeCustom" (click)="closemodal4()">&times;</button>
+  
+  
+          <div class="modal-body">
+            <div class="spsMenuSecGroup" >
+              <div class="spsMenuImg">
+                <img _ngcontent-chx-c163="" alt="" [src]="spstockImg">
+                <div class="spsMenuImgtitle">
+                    <h2>{{cat_name}}</h2>
+                  </div>
+              </div>
+
+              <div class="spsMenuImgContent">
+<p>
+                {{spdesc_text_readonly}}
+              </div>
+              
+              <div>
+              
+  </div>
+            </div>
+  
+  
+          </div>
+          
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  </div>
    
    

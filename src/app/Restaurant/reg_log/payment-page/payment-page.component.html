@@ -43,7 +43,7 @@
               </div>
             </div>
           </div>
-
+         <button hidden id="paycheck"  data-bs-toggle="modal" data-bs-target="#checkpaymodal">Open Modal</button>
           <div class="col-50">
             <h3>Payment</h3>
             <label for="fname">Accepted Cards</label>
@@ -92,7 +92,7 @@
       <p>Total <span class="price" style="color:black"><b>$0</b></span></p>
 	 
 	<form action="menu-setup.php" target="_self">	
-		<button class="w3-button w3-green" type="submit" (click)="go_to_login()">PAY</button>
+		<button class="w3-button w3-green" type="submit" (click)="go_to_login()" [disabled]="PAY">PAY</button>
 		</form>	
     </div>
   </div>
@@ -139,4 +139,34 @@ function w3_close() {
 
 <div id="snackbar">Payment Succesful. An email will be sent to you.</div>
 
+  <!-- For the image of brunch top -->
+  <div class="modal fade in" id="checkpaymodal">
+    <div class="modal-dialog modal-dialog-sm">
+      <div class="modal-content">
 
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">ALERT!!</h4>
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body text-center">
+             <strong>You have already made the payment. <br>
+              Please login to complete the rest of the process. </strong>
+     </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <!-- <div class="row">
+         <div class="col-md-6"> -->
+          <a href="{{URL}}" type="button" class="btn1 btn-primary btn-sm text-decoration-none" >Login</a>
+          
+
+         <!-- </div>
+          </div> -->
+        </div>
+
+      </div>
+    </div>
+  </div>

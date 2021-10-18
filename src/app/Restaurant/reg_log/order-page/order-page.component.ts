@@ -63,7 +63,7 @@ export class OrderPageComponent implements OnInit {
   menus_first:any;
   menus_second:any;
   menus_third:any
-  constructor(private _data:DataserviceService,private activatedroute:ActivatedRoute,private router:Router,private lagunaserve:LagunaserviceService) { 
+  constructor(private route:ActivatedRoute,private _data:DataserviceService,private activatedroute:ActivatedRoute,private router:Router,private lagunaserve:LagunaserviceService) { 
     
   }
   x:any
@@ -90,7 +90,8 @@ export class OrderPageComponent implements OnInit {
   standardplus=false;
   premium=false;
   birthday:any;
-  RES_ID:any=localStorage.getItem('RES_id');
+  // RES_ID:any=localStorage.getItem('RES_id');
+  RES_ID:any;
   entertainment:any;
   catch_selected_order:any=[];
   Tabletop_Sign_Holder:any='';
@@ -98,6 +99,9 @@ export class OrderPageComponent implements OnInit {
   Wall_Mount_Sign_Holder2:any='';
   Window_Clings:any='';
   ngOnInit(): void {
+    var rest=this.route.snapshot.params['id'];
+    this.RES_ID=atob(rest).split('/')[0];
+    console.log(this.RES_ID);
     this.birthday_mode=document.getElementById('defaultOpen1');
     this.birthday_mode.style.background="white";
     this.birthday_mode.style.color='black'
@@ -109,9 +113,8 @@ export class OrderPageComponent implements OnInit {
     this.wall_mode.style.color='black'
     this.package_mode=document.getElementById('defaultOpen');
     this.package_mode.style.background='#00477E';
-    this.package_mode.style.color='white'
+    this.package_mode.style.color='white';
     this.id_rest=this.activatedroute.snapshot.params['id'];
-    // this.id_rest=atob(this.id_rest);
     console.log(this.id_rest);
     // retrieving the package data for order page
     this._data.getPackage().subscribe(data=>{
@@ -230,7 +233,6 @@ export class OrderPageComponent implements OnInit {
 
     
     })
-
      this.lagunaserve.get_selectedd_order(this.RES_ID).subscribe(data=>{
      console.log(data);
      this.catch_selected_order=data;
@@ -300,8 +302,6 @@ export class OrderPageComponent implements OnInit {
     this.self= this.Window_Clings;
      }
    })
-          
- 
   }
   enable_birthday(){
     this.value1=1;
@@ -379,7 +379,6 @@ export class OrderPageComponent implements OnInit {
     this.wall2=v3;
     this.self=v4;
     var dt = {
-      // "menu": menu,
       "res_id":this.id_rest,
       "package": this.pkg,
       "birthday": this.op1,

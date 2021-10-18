@@ -10,6 +10,7 @@ import { url_set } from 'src/app/globalvar';
   styleUrls: ['./order-page.component.css']
 })
 export class AdminOrderPageComponent implements OnInit {
+  windowcling_yes:any;
   pack:boolean=false;
   showWallData:any;
   promo:boolean=true;
@@ -172,24 +173,34 @@ export class AdminOrderPageComponent implements OnInit {
       for(let i=0;i<this.promocalendar.msg.length;i++){
         if(this.promocalendar.msg[i].id==4){
           this.promo_Birthdayprice=this.promocalendar.msg[i].price;
+
             if(this.promocalendar.msg[i].free_flag=='Y'){
           this.promo_Birthdaypriceyes=document.getElementById('yes_birth');
           this.promo_Birthdaypriceyes.checked=true;
+          this.promo1=true;
          }
         else{
           this.promo_Birthdaypriceno=document.getElementById('no_birth');
           this.promo_Birthdaypriceno.checked=true;
+          this.promo1=false;
+
         }
+       
+         
+       
         }
         else if(this.promocalendar.msg[i].id==5){
           this.promo_EventCalendarprice=this.promocalendar.msg[i].price;
           if(this.promocalendar.msg[i].free_flag=='Y'){
             this. promo_EventCalendarprice_yes=document.getElementById('yes_calend');
             this. promo_EventCalendarprice_yes.checked=true;
+            this.promo2=true;
           }
           else{
             this.promo_EventCalendarprice_no=document.getElementById('no_calend');
             this.promo_EventCalendarprice_no.checked=true;
+            this.promo2=false;;
+
           }
         }
         else{
@@ -208,6 +219,7 @@ export class AdminOrderPageComponent implements OnInit {
             for(let i=0;i<this.signholder.msg.length;i++){
               if(this.signholder.msg[i].id==6){
                  this.signholder_price1=this.signholder.msg[i].price;
+                
               }
               else if(this.signholder.msg[i].id==7){
                    this.signholder_price2=this.signholder.msg[i].price;
@@ -380,7 +392,7 @@ export class AdminOrderPageComponent implements OnInit {
     }
   }
   //Admin order set up page package tab first row
-  submit(v1:any,v2:any,v3:any,v4:any,v5:any){
+  submit(v1:any,v2:any,v3:any,v4:any){
     this.yes_stnd=document.getElementById('yes_stnd');
     this.no_stnd=document.getElementById('no_stnd');
     console.log(this.yes_stnd.checked,this.no_stnd.checked);
@@ -398,7 +410,7 @@ export class AdminOrderPageComponent implements OnInit {
        "Special_Menu":this.set_value,
        "SetUp_Fee":v3,
        "Monthly_Fee":v4,
-       "Description":v5
+      //  "Description":v5
     }
     // console.log(v1,v2,v3,v4,v5,this.set_value);
     console.log(dt);
@@ -419,7 +431,7 @@ export class AdminOrderPageComponent implements OnInit {
     });
   }
     //Admin order set up page package tab second row
-  submitstndplus(v1:any,v2:any,v3:any,v4:any,v5:any){
+  submitstndplus(v1:any,v2:any,v3:any,v4:any){
     this.yes_stnd=document.getElementById('yes');
     this.no_stnd=document.getElementById('no');
     console.log(this.yes_stnd.checked,this.no_stnd.checked);
@@ -437,7 +449,7 @@ export class AdminOrderPageComponent implements OnInit {
       "Special_Menu":this.set_value,
       "SetUp_Fee":v3,
       "Monthly_Fee":v4,
-      "Description":v5
+      // "Description":v5
    }
     // console.log(v1,v2,v3,v4,v5,this.set_value);
     console.log(dt);
@@ -458,7 +470,7 @@ export class AdminOrderPageComponent implements OnInit {
     });
   }
     //Admin order set up page package tab third row
-  submitpremium(v1:any,v2:any,v3:any,v4:any,v5:any){
+  submitpremium(v1:any,v2:any,v3:any,v4:any){
     this.yes_stnd=document.getElementById('yes_premium');
     this.no_stnd=document.getElementById('no_premium');
     console.log(this.yes_stnd.checked,this.no_stnd.checked);
@@ -476,7 +488,7 @@ export class AdminOrderPageComponent implements OnInit {
       "Special_Menu":this.set_value,
       "SetUp_Fee":v3,
       "Monthly_Fee":v4,
-      "Description":v5
+      // "Description":v5
    }
     // console.log(v1,v2,v3,v4,v5,this.set_value);
     console.log(dt);
@@ -676,6 +688,8 @@ export class AdminOrderPageComponent implements OnInit {
   verify(e:any){
     if(e=='y'){
       this.promo1=true;
+      this.windowcling_yes=document.getElementById('birthday');
+      this.windowcling_yes.value=0;
     }
     else{
       this.promo1=false;
@@ -684,6 +698,8 @@ export class AdminOrderPageComponent implements OnInit {
   verifytre(e:any){
     if(e=='yes'){
       this.promo2=true;
+      this.windowcling_yes=document.getElementById('eventcalnedar');
+      this.windowcling_yes.value=0;
     }
     else{
          this.promo2=false;
