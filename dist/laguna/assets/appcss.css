@@ -396,10 +396,12 @@ a.editLink i{color: #2d42b9; font-size: 21px;}
 
 
 .noMenuSecGroup{padding:20% 15px !important;}
-.noMenuImg{text-align: center; margin-bottom: 25px !important;}
+.noMenuImg{text-align: center; margin-bottom: 20px !important;}
 .noMenuImgtitle{text-align: center;}
-.noMenuImgtitle h2{font-family: 'Gloria Hallelujah', cursive !important; color: #cc2f05; font-size:21px; border-top: #cc2f05 solid 1px;
-    border-bottom: #cc2f05 solid 1px; padding: 8px 0;}
+.noMenuImgtitle h2{font-family: 'Gloria Hallelujah', cursive !important; color: #4d728e; font-size:19px !important; line-height: 28px !important;
+    /* border-top: #cc2f05 solid 1px;
+    border-bottom: #cc2f05 solid 1px;  */
+    padding: 8px 0;}
 
 .spsMenuSecGroup{padding:0 !important;}
 .spsMenuImg{text-align: center; margin-bottom: 3px !important; position: relative;}
@@ -432,6 +434,13 @@ color: #fff; border-radius: 3px; border: none;}
 .thumImgContainer .thumImgSm:last-child{margin-right: 0;}
 .thumImgContainer .thumImgSm img{border: #ccc solid 1px; border-radius: 5px;}
 
+
+
+.resturentLeftLogo{max-width: 120px; width: 100%; margin: 0 auto 50px auto; overflow: hidden; border-radius: 77px; background: #fff;}
+/* .resturentLeftLogo img{} */
+
+.resturentLeftFooter{text-align: center;}
+.resturentLeftFooter p{font-size: 13px; color: #fff;}
 
 .thumImgContainer .thumImgSm .close {
     position: absolute;
@@ -472,8 +481,29 @@ color: #fff; border-radius: 3px; border: none;}
 .specialMenuImg .buttonChangeImg .w3-button.w3-green{background:#11222B !important;}
 
 
+.customNotes{
+    background:#41697c;
+    border-radius: 3px;
+    padding: 3px 5px !important;
+    font-style: italic;
+    color: #fff;
+    margin-bottom: 7px !important;
+    font-weight: 600;}
+
+
+.popupCalender{padding: 25px 0 0 0 !important;}
+.popupCalender .fc .fc-header-toolbar .fc-toolbar-chunk .fc-button{padding: 3px 5px; font-size: 11px;}
+
+.popupCalender .fc .fc-header-toolbar .fc-toolbar-chunk h2.fc-toolbar-title{font-size:15px;}
+
+.popupCalender .fc .fc-col-header-cell-cushion{font-size:12px; text-decoration: none;}
 
 
 
-
-
+@media only screen and (max-width: 482px) {
+    .popupCalender .fc .fc-header-toolbar{display:initial;}
+    .popupCalender .fc .fc-header-toolbar .fc-toolbar-chunk{width: 100%; text-align: center;}
+    .popupCalender .fc .fc-header-toolbar .fc-toolbar-chunk .fc-button-group{width: 100%;}
+    .popupCalender .fc .fc-header-toolbar .fc-toolbar-chunk .fc-today-button{width: 100%; margin: 8px 0 0 0;}
+    
+}
