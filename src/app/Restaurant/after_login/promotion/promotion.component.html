@@ -131,7 +131,7 @@
                 
                 <!-- <label _ngcontent-vbf-c210="" class="titleCustom">About Us </label> -->
                 <div class="specialMenuImg">
-                       
+                       <!-- {{stockImg1}} -->
                     <div class="imgSectionSpecial"><img src="{{stockImg1}}" data-bs-toggle="modal" data-bs-target="#myModal15"/></div>
                     <div class="buttonChangeImg">
                             <button type="submit" class="w3-button w3-green" (click)="openstockmodal()">Change Image</button>
@@ -497,9 +497,12 @@
 </div>   
  </div>       
 </div>
+
+<div id="snackbar">Successfully Submited</div>
+
 </div>  
 
-<div id="snackbar1">Please provide valid date range</div>
+<div id="snackbar1">{{m}}</div>
 
 <div id="id02" class="w3-modal">
     <div class="w3-modal-content cropModulContent">
@@ -630,5 +633,4 @@
 </div>
 
 
-  <div id="snackbar">Successfully Submited</div>
   <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-pulse" [fullScreen] = "true"><p style="color: white" > Seraching... </p></ngx-spinner>

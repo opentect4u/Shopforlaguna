@@ -878,22 +878,34 @@
     
             </div>
             <div id="special" *ngIf="id==='special'" class="tabcontent">
-                <form  class="form-inline">
+                <!-- <form  class="form-inline"> -->
     
     
-                    <div class="aboutLeft">
-                        <label class="titleCustom">Description </label>
-                        <textarea name="introduction" maxlength="150" rows="6" cols="25" class="formCssTextArea splMenuDescrip"
-                           readonly>{{spdesc_text_readonly}}</textarea>
+                    <!-- <div class="aboutLeft"> -->
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="titleCustom">Description </label>
+                                <!-- <textarea name="introduction" maxlength="150" rows="6" cols="25" class="formCssTextArea splMenuDescrip"
+                                   readonly>{{spdesc_text_readonly}}</textarea> -->
+                                <angular-editor  [(ngModel)]="spdesc_text_readonly" [config]="config1"></angular-editor>
+        
+                            </div>
+                            <div class="col-6">
+                                <label class="titleCustom">Description (update) </label>
+                                <!-- <textarea id="ab_us" name="introduction"  rows="6" cols="25"
+                              class="formCssTextArea splMenuDescrip" #sp_write_txt></textarea> -->
+                              <angular-editor [(ngModel)]="htmlContent"  [config]="config"></angular-editor>
+
+                            </div>
+                        </div>
+                       
     
-                    </div>
-                    <div class="aboutLeft">
-                        <label class="titleCustom">Description (update) </label>
-                        <textarea id="ab_us" name="introduction"  rows="6" cols="25"
-                      class="formCssTextArea splMenuDescrip" #sp_write_txt></textarea>
+                    <!-- </div> -->
+                    <!-- <div class="aboutLeft">
+                       
     
-                    </div>
-                </form>
+                    </div> -->
+                <!-- </form> -->
                 <br>
                 
                 <!-- <label _ngcontent-vbf-c210="" class="titleCustom">About Us </label> -->
@@ -904,12 +916,12 @@
                             <button type="submit" class="w3-button w3-green" (click)="openstockmodal()">Change Image</button>
                     </div>
                 </div>
-                <form class="form-inline" action="">
+                <!-- <form class="form-inline" action=""> -->
                     <div class="formBtn">
-                    <button type="submit" class="w3-button w3-green" (click)="send_special_desc(sp_write_txt.value);sp_write_txt.value=''">Submit</button>
-                    <button type="reset" class="w3-button w3-green reset" value="Reset" id="clickreset" (click)="sp_write_txt.value='';" class="w3-button w3-green reset">Reset</button>
+                    <button type="submit" class="w3-button w3-green" (click)="send_special_desc()">Submit</button>
+                    <button type="reset" class="w3-button w3-green reset" value="Reset" id="clickreset" (click)="this.htmlContent='';" class="w3-button w3-green reset">Reset</button>
                 </div>
-                </form>
+                <!-- </form> -->
               
             </div>
     
@@ -1302,12 +1314,12 @@
     
     
     
-            <div id="snackbar">{{m}}</div>
     
     
     
         </div>
         </div>
+        <div id="snackbar">{{m}}</div>
     
     </div>
     

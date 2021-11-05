@@ -52,6 +52,7 @@ export class PromotionComponent implements OnInit,AfterViewInit  {
   stockImg1:any;
   apiurlset=url_set.api_url+'/';
   imgcat:any;
+  m:any;
   st_img:any=[];
   category_name:any=[];
   previous_id:any;
@@ -94,7 +95,10 @@ get_customer_details:any;
     
       this.spdescData=data;
       this.spdescData=this.spdescData.msg
+    
       this.stockImg1=this.apiurlset+'stock/'+this.spdescData[0].img_path;
+      console.log(this.stockImg1);
+      
       this.imgcat=this.spdescData[0].img_catg
       console.log(this.stockImg1);
       })
@@ -137,7 +141,7 @@ get_customer_details:any;
       this.stockImg1='';
     }
     else {
-    this.stockImg1=this.apiurlset+'/stock/'+this.get_promo_data.msg[0].image;
+    this.stockImg1=this.apiurlset+'stock/'+this.get_promo_data.msg[0].image;
     }
     this.Mailing_Email_current=this.get_promo_data.msg[0].mailing_email_body;
     this.Mailing_Email_update=this.get_promo_data.msg[0].mailing_email_body;
@@ -196,13 +200,15 @@ this.fetchdata();
    window.open(this.url1,'popup','width=400,height=500')
  }
  fetchdata(){
+
    this.admin_data.Get_promotion_dt(localStorage.getItem('Restaurant_id')).subscribe(data=>{
      console.log(data);
      this.get_customer_details=data;
     //  console.log(this.get_customer_details.msg)
     for(let i=0;i<this.get_customer_details.msg.length;i++){
-      this.get_customer_details.msg[i].birth_dt=this.get_customer_details.msg[i].birth_dt.split('T')[0];
-      this.get_customer_details.msg[i].anniversary_dt=this.get_customer_details.msg[i].anniversary_dt.split('T')[0]
+
+      this.get_customer_details.msg[i].birth_dt=this.get_customer_details.msg[i].birth_dt?this.get_customer_details.msg[i].birth_dt.split('T')[0]:"";
+      this.get_customer_details.msg[i].anniversary_dt=this.get_customer_details.msg[i].anniversary_dt?this.get_customer_details.msg[i].anniversary_dt.split('T')[0]:"";
 
     }
      this.putdata(this.get_customer_details.msg);
@@ -243,11 +249,12 @@ this.fetchdata();
       }
       this.admin_data.post_promo_intro(dt).subscribe(data=>{
         console.log(data);
-        
+      
       })
       console.log({information_current:this.intro_current,information_update:this.intro_update}); 
       this.intro_current=this.intro_update;
       this.intro_update='';
+      this.role=0;
     }
     else if(tabname=='confirm'){
       var dt1={
@@ -259,6 +266,7 @@ this.fetchdata();
    }
    this.admin_data.post_promo_conf(dt1).subscribe(data=>{
      console.log(data);
+
      
    })
       console.log({confirmation_current:this.confirm_mail_current,confirmation_current_update:this.confirm_mail_update}); 
@@ -275,7 +283,7 @@ this.fetchdata();
       }
       this.admin_data.post_promo_popup(dt2).subscribe(data=>{
         console.log(data);
-        
+   
       })
       this.Free_Offer_Title_current=this.Free_Offer_Title_update;
       // this.Free_Offer_Title_update='';
@@ -297,6 +305,7 @@ this.fetchdata();
      }
      this.admin_data.post_promo_qn(dt3).subscribe(data=>{
        console.log(data);
+   
        
      })
     this.Additional_Question_3_current=this.Additional_Question_3_update;
@@ -316,6 +325,7 @@ this.fetchdata();
      }
      this.admin_data.post_promo_email(dt4).subscribe(data=>{
        console.log(data);
+ 
        
      })
     this.Mailing_Email_current=this.Mailing_Email_update;
@@ -335,6 +345,7 @@ this.fetchdata();
        }
        this.admin_data.post_promo_status(dt6).subscribe(data=>{
          console.log(data);
+        
        })
     
 
@@ -350,11 +361,14 @@ this.fetchdata();
      }
      this.admin_data.post_promo_img(dt5).subscribe(data=>{
        console.log(data);
-       
+       console.log("image");
+  // this.myFunction();
+  // this.myFunction_date_check();
+ 
      })
-   }
-   this.myFunction();
-
+   } 
+   this.m="Submitted Successfully";
+   this.myFunction_date_check();   
   }
 
   //For Snackbar
@@ -433,6 +447,8 @@ this.fetchdata();
       
       // this.common_for_special_menu=
       this.stockImg1= url_set.api_url+'/stock/'+this.common_for_special_menu;
+      console.log(this.stockImg1);
+      
     }
     this.openstockimages=document.getElementById('id02');
     this.openstockimages.style.display='none'
@@ -495,6 +511,7 @@ this.fetchdata();
     this.spinner.show();
     if(date_from>date_to){
       this.spinner.hide();
+      this.m="Please provide valid date range"
        this.myFunction_date_check();   
     }
     else{
@@ -502,11 +519,11 @@ this.fetchdata();
         console.log(data);
         this.get_customer_details=data;
         for(let i=0;i<this.get_customer_details.msg.length;i++){
-          this.get_customer_details.msg[i].birth_dt=this.get_customer_details.msg[i].birth_dt.split('T')[0];
-          this.get_customer_details.msg[i].anniversary_dt=this.get_customer_details.msg[i].anniversary_dt.split('T')[0]
+          this.get_customer_details.msg[i].birth_dt=this.get_customer_details.msg[i].birth_dt?this.get_customer_details.msg[i].birth_dt.split('T')[0]:"";
+          this.get_customer_details.msg[i].anniversary_dt=this.get_customer_details.msg[i].anniversary_dt?this.get_customer_details.msg[i].anniversary_dt.split('T')[0]:"";
         }
-        this.putdata(this.get_customer_details.msg);
       this.spinner.hide();   
+      this.putdata(this.get_customer_details.msg);
       })
     }
   }

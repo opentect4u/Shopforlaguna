@@ -370,8 +370,8 @@ addevent(v2:any){
     "res_id":this.RES_ID,
     "user":"admin@gmail.com",
     "id": this.event_id,
-    "user_type":this.check_tab > 0  && (this.cal_flag == '' || this.cal_flag == null)? 'A' : 'U',
-    "approval_flag":this.cal_flag != '' ? this.cal_flag : 'Y'
+    "user_type":this.check_tab > 0 ? 'A' : 'U',
+    "approval_flag":this.cal_flag != '' && this.cal_flag != undefined && this.cal_flag != null ? this.cal_flag : 'Y'
     
   }
   console.log({cov: this.imageFile});

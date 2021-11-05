@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 
 // import { ImageTransform } from 'ngx-image-cropper';
 import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';//For Image Cropper
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +21,140 @@ import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, AfterViewInit  {
+
+
+  htmlContent = '';
+
+  // config: AngularEditorConfig = {
+  //   editable: true,
+  //   sanitize:false,
+  //   spellcheck: true,
+  //   height: '15rem',
+  //   minHeight: '5rem',
+  //   placeholder: 'Enter text here...',
+  //   translate: 'no',
+  //   defaultParagraphSeparator: 'p',
+  //   defaultFontName: 'Arial',
+  //   fonts: [
+  //     {class: 'arial', name: 'Arial'},
+  //     {class: 'times-new-roman', name: 'Times New Roman'},
+  //     {class: 'calibri', name: 'Calibri'},
+  //     {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+  //   ],
+  //   toolbarHiddenButtons: [
+  //     [],
+  //     ['link',
+  //       'unlink',
+  //       'insertImage',
+  //       'insertVideo',
+  //       'insertHorizontalRule', ]
+  //   ]
+  // };
+  
+  config: AngularEditorConfig = {
+    editable: true,
+    sanitize:false,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    fonts: [
+      {class: 'arial', name: 'Arial'},
+      {class: 'times-new-roman', name: 'Times New Roman'},
+      {class: 'calibri', name: 'Calibri'},
+      {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+    ],
+    toolbarHiddenButtons: [
+      [
+        // 'undo',
+        // 'redo',
+        // 'bold',
+        // 'italic',
+        // 'underline',
+        // 'strikeThrough',
+        // 'subscript',
+        // 'superscript',
+        // 'justifyLeft',
+        // 'justifyCenter',
+        // 'justifyRight',
+        // 'justifyFull',
+        // 'indent',
+        // 'outdent',
+        // 'insertUnorderedList',
+        // 'insertOrderedList',
+        // 'heading',
+        // 'fontName'
+      ],
+      [
+        // 'fontSize',
+        // 'textColor',
+        // 'backgroundColor',
+        // 'customClasses',
+        'link',
+        'unlink',
+        'insertImage',
+        'insertVideo',
+        'insertHorizontalRule',
+        // 'removeFormat',
+        // 'toggleEditorMode'
+      ]
+    ]
+  };
+  
+
+  config1: AngularEditorConfig = {
+    editable: false,
+    showToolbar:false,
+    sanitize:false,
+    spellcheck: true,
+    height: '19.73rem',
+    minHeight: '5rem',
+  
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      [
+        'undo',
+        'redo',
+        'bold',
+        'italic',
+        'underline',
+        'strikeThrough',
+        'subscript',
+        'superscript',
+        'justifyLeft',
+        'justifyCenter',
+        'justifyRight',
+        'justifyFull',
+        'indent',
+        'outdent',
+        'insertUnorderedList',
+        'insertOrderedList',
+        'heading',
+        'fontName'
+      ],
+      [
+        'fontSize',
+        'textColor',
+        'backgroundColor',
+        'customClasses',
+        'link',
+        'unlink',
+        'insertImage',
+        'insertVideo',
+        'insertHorizontalRule',
+        'removeFormat',
+        'toggleEditorMode'
+      ]
+    ],
+  
+  };
+
+
 
   displayedColumns: string[] = ['id','section_name','sec_img'];
   displayedColumns1: string[] = ['id','item_name'];
@@ -2760,14 +2895,16 @@ get_date(e:any){
      
   }
 }
-send_special_desc(v:any){
-
+send_special_desc(){
+  this.spdesc_text_readonly=this.htmlContent;
+  console.log(this.spdesc_text_readonly);
+  
   var dt={
     "restaurant_id":this.r_id,
     "menu_id":5,
     "img_path":this.stockImg1,
     "img_catg":this.imgcat,
-    "menu_desc":v,
+    "menu_desc":this.htmlContent,
 
   }
   console.log(dt);
@@ -2782,6 +2919,8 @@ send_special_desc(v:any){
       this.spstockImg=url_set.api_url+'/stock/'+ this.spdescData[0].img_path;
       this.imgcat=this.spdescData[0].img_catg
       console.log(this.spstockImg);
+      this.m="Successfully Submitted";
+      this.myFunction();
       })
   
   })

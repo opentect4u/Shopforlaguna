@@ -226,10 +226,10 @@ export class UserMenuComponent implements OnInit {
             aspectRatio: 3.25,
             initialView: 'dayGridMonth',
             displayEventTime:false,
-            dayMaxEventRows: true, // for all non-TimeGrid views
+            dayMaxEventRows: true, 
             views: {
             timeGrid: {
-            dayMaxEventRows: 1// adjust to 6 only for timeGridWeek/timeGridDay
+            dayMaxEventRows: 1
             }
             },
             
