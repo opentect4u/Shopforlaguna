@@ -1,5 +1,8 @@
-html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-
+/* html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif,'birthstone','arial','times-new-roman','calibri','comic-sans-ms'} */
+/* 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+} */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -37,7 +40,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
   }
 }
 
-body {font-family: "Raleway" sans-serif;}
+/* body {font-family: "Raleway" sans-serif;} */
 * {box-sizing: border-box;}
 
 .form-inline {  
@@ -80,8 +83,27 @@ body {font-family: "Raleway" sans-serif;}
     align-items: stretch;
   }
 }
+.quote {
+  color: #8cc540;
+  font-style: italic;
+}
 
-body {font-family: "Raleway" sans-serif;}
+.redText {
+  color: Red;
+  font-size: 12px;
+  font-family: Arial;
+}
+
+h1.titleText {
+  color: #69a8cf;
+  text-align: left;
+  margin-top: 40px;
+  font-weight: normal;
+}
+/* .quote{
+  font-family: 'Times New Roman';
+} */
+/* body {font-family: "Raleway" sans-serif;} */
 
 /* Style the tab */
 .tab {

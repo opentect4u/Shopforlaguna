@@ -406,7 +406,7 @@
                                 <label for="myfile" class="fieldTitle">Select file:</label>
                                 <input type="file"
                                 [disabled]="lcc_url"
-
+                                accept=".jpeg,.jpg,.png"
                                 id="mylunchcoverfile" name="myfile"  (change)="changelaunchcoverpage($event)">
                                 <!-- <i type="button" [hidden]="Launch_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"  data-bs-toggle="modal" data-bs-target="#myModal4"></i> -->
 
@@ -468,6 +468,7 @@
                                   <!-- <br> -->
                                   <input type="file"
                                   [disabled]="lcc_url"
+                                  accept=".jpeg,.jpg,.png"
                                   id="mylunchtopfile" name="myfile"  (change)="changelaunchtopimage($event)">
                                 </form>
                                   <!-- <i type="button" [hidden]="Launch_top_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal5"></i> -->
@@ -795,7 +796,9 @@
                             <div class="col-5">
                               <form>
                                 <label for="myfile" class="fieldTitle">Select file:</label>
-                                <input type="file" id="mydinnercoverfile" name="myfile" [disabled]="d_url"  (change)="brunchcoverimage($event)">
+                                <input type="file" id="mydinnercoverfile"
+                                accept=".jpeg,.jpg,.png"
+                                name="myfile" [disabled]="d_url"  (change)="brunchcoverimage($event)">
                               </form>  <!-- <i type="butoon" [hidden]="Dinner_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal8"></i> -->
                             <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
 
@@ -848,7 +851,9 @@
                               <label for="menuImg" class="fieldTitle">Select file:</label>
                               <form>
                                   <!-- <label for="myfile" ></label><br> -->
-                                  <input type="file" id="mydinnertopfile" name="myfile" [disabled]="d_url"  (change)="brunchtopimage($event)">
+                                  <input type="file"
+                                  accept=".jpeg,.jpg,.png"
+                                  id="mydinnertopfile" name="myfile" [disabled]="d_url"  (change)="brunchtopimage($event)">
                                </form>  <!-- <i type="button"
                                   data-bs-toggle="modal" data-bs-target="#myModal9" [hidden]="Dinner_top_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
                             <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
@@ -1159,7 +1164,9 @@
                             <div class="col-5">
                               <form>
                                 <label for="myfile" class="fieldTitle">Select file:</label>
-                                <input type="file" [disabled]="br_url" id="mybrunchcoverfile" name="myfile[]" (change)="dinnerchangecoverimage($event)">
+                                <input type="file"
+                                accept=".jpeg,.jpg,.png"
+                                [disabled]="br_url" id="mybrunchcoverfile" name="myfile[]" (change)="dinnerchangecoverimage($event)">
                                 <!-- <i data-bs-toggle="modal" data-bs-target="#myModal12" type="button" [hidden]="Brunch_cover_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
 
 
@@ -1215,7 +1222,9 @@
                             <label for="menuImg" class="fieldTitle"> <strong>Select file:</strong></label>
                             <form>
                                 <!-- <label for="myfile"></label><br> -->
-                                <input type="file" [disabled]="br_url" id="mybrunchtopfile" name="myfile[]" (change)="dinnerchangetopimage($event)">
+                                <input type="file"
+                                accept=".jpeg,.jpg,.png"
+                                [disabled]="br_url" id="mybrunchtopfile" name="myfile[]" (change)="dinnerchangetopimage($event)">
                               </form><!-- <i data-bs-toggle="modal" data-bs-target="#myModal13" type="button" [hidden]="Brunch_top_preview" class="fa fa-picture-o fa-2x" aria-hidden="true"></i> -->
                               <p style="font-style: italic">(File format: .jpeg, .jpg, .png maximum size: 2MB)</p>
 

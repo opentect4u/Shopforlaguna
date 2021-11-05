@@ -70,7 +70,7 @@ export class LogosetupComponent implements OnInit {
        if(this.log.logo_dt.length!=0){
 
        for(let i=0;i<this.log.logo_dt.length;i++){
-          if(this.log.logo_dt[i].ogo_path!=''){
+          if(this.log.logo_dt[i].logo_path!=''){
            this.logo_preview=false;
            this.img_logo=this.img_showing+'/'+this.log.logo_dt[i].logo_path;
            this.logo=this.img_showing+'/'+this.log.logo_dt[i].logo_path;

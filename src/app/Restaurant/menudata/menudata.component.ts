@@ -445,10 +445,13 @@ pickup_place(event:any){
         this.value_Headertitle=true;
       }
       this.notice_content=this.notic.msg[i].notice_content;
+       
       if(this.notice_content!=''){
         this.value_text=false;
         this.Notice_content=document.getElementById('spclMore');
         this.Notice_content.value=this.notice_content;
+        this.role_notice_content=this.notice_content.length
+  
       }
       else{
 
@@ -506,11 +509,12 @@ pickup_place(event:any){
       this.color_Back=document.getElementById('pos');
       this.color_Back.value='';
      this.position='';
-
+         this.role_notice_content=0;
     }
   }}else{
     console.log('Elaseeesss');
     console.log("haisdaids");
+    this.role_notice_content=0;
 
       this.notice_check=document.getElementById('noticechecked');
       this.notice_check.checked=true;

@@ -76,7 +76,7 @@ export class DataserviceService {
     formdata.append('logo_img',dt1);
     formdata.append('restaurant_id',dt2);
     formdata.append('restaurant_name',dt3);
-    formdata.append('file_name',dt4);
+    formdata.append('filename',dt4);
 
 
     console.log(formdata.getAll)
@@ -109,5 +109,6 @@ export class DataserviceService {
     return this.http.get(url_set.api_url+'/get_timezone');
   }
 
+  //POSTING PROMO DETAILS
 
 }

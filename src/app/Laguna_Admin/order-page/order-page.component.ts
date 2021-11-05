@@ -2,6 +2,7 @@ import {  Component, OnInit } from '@angular/core';
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';//For Image Cropper
 import { url_set } from 'src/app/globalvar';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 @Component({
@@ -92,7 +93,9 @@ export class AdminOrderPageComponent implements OnInit {
  imageData:any;
  previewImg:any;
  dispCross:any;
-  constructor(private laguna:LagunaserviceService) { }
+ select_div:any;
+ file_div:any
+  constructor(private spinner:NgxSpinnerService,private laguna:LagunaserviceService) { }
   selectStock:any;
   ngOnInit(): void {
     this.selectStock=document.getElementById('pickup_place_stock')
@@ -814,15 +817,17 @@ export class AdminOrderPageComponent implements OnInit {
     // console.log("lallalalallalaei poth jodi na shesh hoy")
   }
   submit_stock_image(v:any){
+    
     if(v&&this.img_cover){
+      this.spinner.show()
       console.log("Submitted"+" "+this.stockImageName);
       console.log(this.img_cover);
       this.laguna.uploadStockImage(v,this.img_cover,this.stockImageName).subscribe(data=>{console.log(data)
-      
+         this.spinner.hide();
         this.laguna.getStockImages('').subscribe(data=>{console.log(data)
           this.imageData=data;
           this.imageData=this.imageData.msg
-          
+          this.reset_stock();
           })
       
       })
@@ -831,6 +836,7 @@ export class AdminOrderPageComponent implements OnInit {
    
     }
     else{
+      
       this.m="Sorry! You can't keep an empty field"
       this.myFunction()
       // console.log("Empty Field")
@@ -873,5 +879,11 @@ export class AdminOrderPageComponent implements OnInit {
         
         })
     })
+  }
+  reset_stock(){
+    this.select_div=document.getElementById('pickup_place_stock_img');
+    this.file_div=document.getElementById('headTitle_stock');
+    this.select_div.value='';
+    this.file_div.value=null;
   }
 }

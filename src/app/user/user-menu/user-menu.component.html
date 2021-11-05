@@ -1,5 +1,6 @@
 <!-- <div class="bgimgBreakFast" [ngStyle]="{'background-image': 'url(' + cov + ')'}"> -->
   <!-- <div class="bgimgBreakFast" [ngStyle]="{'background-image': 'url(' + cov + ')'}"> -->
+   
     <div *ngIf="cov==undefined" class="bgimgBreakFast" >
   
       <!-- <div class="bgimgBreakFast"> -->
@@ -7,30 +8,39 @@
    
      <div class="topNav">
        <ul>
-         <li *ngIf="overlap==false && emptymenu==false && menu_show=='A'">
+         <li *ngIf="overlap==false && emptymenu==false && menu_show=='A' && sp_only==false">
            
    
              <a style="cursor: pointer;" (click)="open_modal()" >Menu</a>
    
          
          </li>
-         <li *ngIf="overlap==false && emptymenu==true && menu_show=='A'">
+         <li *ngIf="overlap==false && emptymenu==true && menu_show=='A'&& sp_only==false">
    
             
              <a style="cursor: pointer;" (click)="open_modal1()">Menu</a>
          
          
          </li>
-         <li *ngIf="overlap==true && menu_show=='A'">
+         <li *ngIf="overlap==true && menu_show=='A'&& sp_only==false">
    
             
           <a style="cursor: pointer;" (click)="open_modal2()">Menu</a>
       
       
       </li>
-      <li *ngIf="special_flag=='Y'" ><a style="cursor:pointer" (click)="openmodal4()">Special Menu</a></li>
+      <li *ngIf="sp_only && !overlap">
+ 
+          
+        <a style="cursor: pointer;" (click)="openmodal4()">Menu</a>
+    
+    
+  
+    </li>
+      <li *ngIf="special_flag=='Y' && menu_show=='A'" ><a style="cursor:pointer" (click)="openmodal4()">Special Menu</a></li>
+      <li *ngIf="special_flag=='Y' && menu_show=='E' && sp_only==true" ><a style="cursor:pointer" (click)="openmodal4()">Menu</a></li>
 
-         <li><a>Birthday/Anniversary</a></li>
+         <li *ngIf="promo_flag=='Y'"><a style="cursor:pointer" (click)="openmodal6()">Birthday/Anniversary</a></li>
        </ul>
      </div>
      <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
@@ -106,7 +116,7 @@
      <div class="navbarBotomNav">
        <ul>
          <li><a >Laguna Village Shops</a></li>
-         <li><a >Entertainment</a></li>
+         <li><a (click)="open_calendar()" style="cursor:pointer">Entertainment</a></li>
          <li><a >Laguna Beach FUN Directory</a></li>
        </ul>
      </div>
@@ -122,7 +132,12 @@
       </div>
      </div>
      <center>
-    <p class="dayMsg">  {{greet}} </p> 
+      <p class="dayMsg" *ngIf="greet == 2"> <img src="/assets/images/goodafternoon.png"/></p>
+      <p class="dayMsg" *ngIf="greet == 3"><img src="/assets/images/goodevening.png"/></p>
+     <p class="dayMsg" *ngIf="greet == 1"><img src="/assets/images/goodMorning.png"/> </p> 
+     <p class="dayMsg" *ngIf="greet == 5">
+      <img src="/assets/images/welcomeImg.png"/> 
+     </p> 
     
 
      </center>
@@ -139,21 +154,21 @@
  
    <div class="topNav">
      <ul>
-       <li *ngIf="overlap==false && emptymenu==false && menu_show=='A'">
+       <li *ngIf="overlap==false && emptymenu==false && menu_show=='A' && sp_only==false">
          
  
            <a style="cursor: pointer;" (click)="open_modal()" >Menu</a>
  
        
        </li>
-       <li *ngIf="overlap==false && emptymenu==true && menu_show=='A'">
+       <li *ngIf="overlap==false && emptymenu==true && menu_show=='A' &&sp_only==false">
  
           
            <a style="cursor: pointer;" (click)="open_modal1()">Menu</a>
        
        
        </li>
-       <li *ngIf="overlap==true && menu_show=='A'">
+       <li *ngIf="overlap==true && menu_show=='A' &&sp_only==false">
  
           
         <a style="cursor: pointer;" (click)="open_modal2()">Menu</a>
@@ -161,9 +176,19 @@
     
 
     </li>
-    <li *ngIf="special_flag=='Y'"><a style="cursor:pointer" (click)="openmodal4()">Special Menu</a></li>
+    <li *ngIf="sp_only && !overlap">
+ 
+          
+      <a style="cursor: pointer;" (click)="openmodal4()">Menu</a>
+  
+  
 
-       <li><a>Birthday/Anniversary</a></li>
+  </li>
+    <!-- <li *ngIf="special_flag=='Y'"><a style="cursor:pointer" (click)="openmodal4()">Special Menu</a></li> -->
+    <li *ngIf="special_flag=='Y' && menu_show=='A'" ><a style="cursor:pointer" (click)="openmodal4()">Special Menu</a></li>
+    <li *ngIf="special_flag=='Y' && menu_show=='E' && sp_only==true" ><a style="cursor:pointer" (click)="openmodal4()">Menu</a></li>
+
+       <li *ngIf="promo_flag=='Y'"><a style="cursor:pointer" (click)="openmodal6()">Birthday/Anniversary</a></li>
      </ul>
    </div>
    <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
@@ -230,16 +255,17 @@
  
            </div>
          </div>
- 
+         
        </div>
  
      </div>
+     
    </div>
  
    <div class="navbarBotomNav">
      <ul>
        <li><a >Laguna Village Shops</a></li>
-       <li><a >Entertainment</a></li>
+       <li><a (click)="open_calendar()" style="cursor:pointer">Entertainment</a></li>
        <li><a >Laguna Beach FUN Directory</a></li>
      </ul>
    </div>
@@ -255,7 +281,13 @@
     </div>
    </div>
    <center>
-    <p class="dayMsg">  {{greet}} </p> 
+    <p class="dayMsg" *ngIf="greet == 2"> <img src="/assets/images/goodafternoon.png" class="topSectionLogo"/></p>
+        <p class="dayMsg" *ngIf="greet == 3"><img src="/assets/images/goodevening.png" class="topSectionLogo"/></p>
+       <p class="dayMsg" *ngIf="greet == 1"><img src="/assets/images/goodMorning.png" class="topSectionLogo"/> </p> 
+       <p class="dayMsg" *ngIf="greet == 5">
+    
+         <img src="/assets/images/welcomeImg.png" class="topSectionLogo"/> 
+        </p> 
    </center>
    <footer class="footerFront">
      <p>Powered by <a >Shop Local Laguna</a> and <a >Info Quick</a><br>
@@ -263,11 +295,12 @@
      </p>
    </footer>
  </div>
-  
+ <ngx-spinner bdColor = "rgb(244,81,30)" size = "medium" color = "#fff" type = "ball-scale-ripple" [fullScreen] = "true"><p style="color: white" > Adding your date(s)... </p></ngx-spinner>
+ 
   
   
    <div id="id01" class="w3-modal">
-     <div class="w3-modal-content modulCustom">
+     <div class="w3-modal-content modulCustom w3-animate-zoom">
    
        <div class="modal-dialog modalDialogCustom">
    
@@ -294,7 +327,8 @@
                      </tr>
    
                    </table>
-                   <p class="descroption">{{m1.item_desc}}</p>
+                   <p class="descroption" *ngIf="m1.item_desc!=''">{{m1.item_desc}}</p>
+                   <div class="customNotes" *ngIf="m1.item_note!=''">*Notes: {{m1.item_note}}</div>
                  <!-- </div> -->
   
    
@@ -326,7 +360,7 @@
    </div>
    
    <div id="id02" class="w3-modal modalCustom">
-    <div class="w3-modal-content modalDialogCustom">
+    <div class="w3-modal-content modalDialogCustom w3-animate-zoom">
   
       <div class="modal-dialog modalDialogCustom">
   
@@ -357,7 +391,7 @@
     </div>
   </div>
    <div id="id03" class="w3-modal modalCustom">
-     <div class="w3-modal-content modalDialogCustom">
+     <div class="w3-modal-content modalDialogCustom w3-animate-zoom">
    
        <div class="modal-dialog modalDialogCustom">
    
@@ -380,9 +414,14 @@
                      <tr *ngFor="let i of overlapData" class="menuAllListTr">
                        <td class="menuAllList">
                          <h3>{{i.menu_description}} <span>{{i.start_time}} to {{i.end_time}} </span></h3>
-                         <button (click)="open_menu(i.menu_id,i.start_time,i.end_time);modalclose2()">
+                         <button *ngIf="i.menu_id!=5" (click)="open_menu(i.menu_id,i.start_time,i.end_time);modalclose2()">
                            View Menu
-                         </button></td>
+                         </button>
+                         <button *ngIf="i.menu_id==5" (click)="openmodal4();modalclose2()">
+                          View Menu
+                        </button>
+                        
+                        </td>
                        
                      </tr>
    
@@ -407,7 +446,7 @@
      </div>
    </div>
    <div id="id04" class="w3-modal modalCustom">
-    <div class="w3-modal-content modalDialogCustom modalDialogCustomSps">
+    <div class="w3-modal-content modalDialogCustom modalDialogCustomSps w3-animate-zoom">
   
       <div class="modal-dialog modalDialogCustom modalDialogCustomSps">
   
@@ -426,8 +465,9 @@
               </div>
 
               <div class="spsMenuImgContent">
-<p>
-                {{spdesc_text_readonly}}
+                <!-- <textarea name="introduction" maxlength="150" rows="6" cols="25" class="formCssTextArea splMenuDescrip"
+                               readonly>{{spdesc_text_readonly}}</textarea> -->
+                               <angular-editor [config]="config1" [(ngModel)]="spdesc_text_readonly"></angular-editor>
               </div>
               
               <div>
@@ -445,5 +485,888 @@
   
     </div>
   </div>
+  <div id="id05" class="w3-modal modalCustom">
+    <div class="w3-modal-content modalDialogCustom modalDialogCustomSps w3-animate-zoom">
+  
+      <div class="modal-dialog modalDialogCustom modalDialogCustomSps">
+  
+        <div class="modal-content">
+      <div class="row">
+        <div class="col-6">
+          <button type="w3-button w3-orange" (click)="openuserevent()" ><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+        </div>
+      
+          
+       
+        <div class="col-6">
+          <button type="button" class="close closeCustom" (click)="closemodal5()">&times;</button>
+
+        </div>
+      </div>
+  
+          
+          <div class="modal-body">
+            <div class="noMenuSecGroup popupCalender">
+               
+            <full-calendar  [options]="calendarOptions"></full-calendar>
+</div>
+
+          </div>
+          
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  </div>
+
+  
+
+
+  <button hidden type="button" id="modalbutton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    Open modal
+  </button>
+
+  <!-- The Modal -->
+<div class="modal modalCustom modalCustomEvent" id="myModal">
+  <div class="modal-dialog-lg modal-dialog calenderEvent">
+    <div class="modal-content calenderEventContent">
+
+      <!-- Modal Header -->
+      <!-- <div class="modal-header"> -->
+        <!-- <h4 class="modal-title">Events/Calendar</h4> -->
+        <!-- <button type="button" class="close" data-bs-dismiss="modal">&times;</button> -->
+       
+      <!-- </div> -->
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <a type="button" class="close closeEvent" data-bs-dismiss="modal"><i class="fa fa-close"></i></a> 
+        <div class="eventCalImg"><img id="imgeve" class="topSectionLogo" alt=""></div>
+      <h3 class="eventTitle"><span class="iconEvent"><i class="fa fa-square" aria-hidden="true"></i></span>{{event_name}}</h3>
+       <!-- <input type='text' id="event" class="form-control" readonly [(ngModel)]="event_name" /> -->
+
+       <div class="eventSubTitle"><span class="iconEvent"><i class="fa fa-align-left" aria-hidden="true"></i></span> <span>Title:</span>{{headliner}}</div>
+
+     <div class="dateTimeevent">
+      <div class="dateEvent"><span class="iconEvent"><i class="fa fa-calendar" aria-hidden="true"></i></span>{{this.start_date | date:'dd/MM/YYYY'}}</div>
+      <div class="timeEvent"><span class="iconEvent"><i class="fa fa-clock-o" aria-hidden="true"></i></span>{{time}}</div>
+     </div>
+     
+
+     <div class="eventUrl"><span class="iconEvent"><i class="fa fa-link" aria-hidden="true"></i></span><a href="{{Url}}"> {{Url}} </a></div>
+       
+     <div class="eventDescription"><span class="iconEvent"><i class="fa fa-comment-o" aria-hidden="true"></i></span>{{desc}}</div>
+       <!-- <input type="text" id="url" readonly class="form-control" [(ngModel)]="Url"> -->
+
+      
+       <!-- <textarea  id="description" readonly rows="4" cols="5"  class="form-control" [(ngModel)]="desc"></textarea> -->
+      </div>
+
+      <!-- Modal footer -->
+      <!-- <div class="modal-footer"> -->
+        <!-- <button type="button"class="btn1 btn-danger btn-sm text-decoration-none" data-bs-dismiss="modal" >Close</button> -->
+
+        <!-- <button type="button" class="btn1 btn-danger btn-sm text-decoration-none" data-bs-dismiss="modal">Close</button> -->
+      <!-- </div> -->
+
+    </div>
+  </div>
+</div>
+
+
+<div id="id07" class="w3-modal modalCustom">
+  <div class="w3-modal-content modalDialogCustom modalDialogCustomSps">
+
+    <div class="modal-dialog modalDialogCustom modalDialogCustomSps">
+
+      <div class="modal-content">
+
+        <button type="button" class="close closeCustom" (click)="closemodal6()">&times;</button>
+
+
+        <div class="modal-body">
+          <div class="spsMenuSecGroup" >
+            <div class="spsMenuImg">
+              <img _ngcontent-chx-c163="" alt="" [src]="spstockImg">
+              <div class="spsMenuImgtitle">
+                  <!-- <h2>{{cat_name}}</h2> -->
+                </div>
+            </div>
+
+            <div class="spsMenuImgContent">
+              <div class="menuSecGroup">
+                
+                <div class="menuSecGroupTitle">
+                  <h5>some data</h5>
+                  </div>
+                <div class="menuSecGroupList">
+                <div  class="menuSecGroupListGroup">
+                <!-- <div class="menuSecGroupList"> -->
+                  
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="menuTable">
+    
+                      <tr>
+                        <td class="menuName"></td>
+                        <td class="menuPrice"></td>
+                      </tr>
+    
+                    </table>
+                    <p class="descroption"></p>
+                    <!-- <div class="customNotes" >*Notes: {{m1.item_note}}</div> -->
+                  <!-- </div> -->
+   
+    
+    
+                
+    </div></div>
+   
+              </div>
+            </div>
+            
+    
+          </div>
+          <!-- callout -->
+          <div class="callout">
+            <div class="callout-header">Popup Offer</div>
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <div class="callout-container">
+              <p>Some text...</p>
+            </div>
+          </div>
+          <!-- callout ends -->
+
+        </div>
+        
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div id="id06" class="w3-modal">
+  <div class="w3-modal-content modulCustom w3-animate-zoom">
+
+    <div class="modal-dialog modalDialogCustom">
+
+      <div class="modal-content">
+
+        <button type="button" class="close closeCustomBirth" (click)="closemodal6()">&times;</button>
+
+
+        <div class="modal-body">
+          <div class="menuBirthday">
+            <div class="menuBirthdayTitle">
+              <h5>Birthday/Anniversary</h5>
+            </div>
+            <div class="menuBirthdayImg">
+              <!-- <img [src]="url1+'/'+m.img" alt=""> -->
+              <img _ngcontent-chx-c163="" alt="" [src]="promo_img">
+
+            </div>
+            <!-- celebration -->
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <div class="confetti" [hidden]="show_anim">
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+              <div class="confetti"></div>
+            </div>
+            <!-- celebration -->
+            <div class="menuBirthdayTxtArea">
+              <p>{{promo_intro}} </p>
+            </div>
+
+            <div class="formSec">
+              <ul>
+                <li class="halfForm">
+                  <!-- <label for="fn"> First Name</label> -->
+                  <input type="text" placeholder="First Name" #fname id="fn" class="formCss p-2"></li>
+                <li class="halfForm">
+                  <!-- <label for="ln"> Last Name</label> -->
+                  <input type="text" #lname placeholder="Last Name" id="ln" class="formCss p-2">
+               </li>
+                <li class="fullForm">
+                  <!-- <label for="em"> Email</label> -->
+                  <input type="email" #email id="em" placeholder="Email" class="formCss p-2">
+                </li>
+                <li class="halfForm">
+                  <label for="bdate"> Birthday:</label>
+                  <input type="date" #bd id="bdate" class="formCss p-2"></li>
+                <li class="halfForm">
+                  <label for="adate"> Anniversary:</label>
+                  <input type="date" #ad id="adate" class="formCss p-2">
+               </li>
+              <li  class="fullForm" *ngIf="promo_q1">
+                <!-- <label for="p_q1"> {{promo_q1}}</label> <br> -->
+                <input type="text" #pq1 id="p_q1" placeholder="{{promo_q1}}" class="formCss p-2">
+              </li>
+              <li  class="fullForm" *ngIf="promo_q2">
+                <!-- <label for="p_q2"> {{promo_q2}}</label> <br> -->
+                <input type="text" #pq2 id="p_q2" placeholder="{{promo_q2}}" class="formCss p-2">
+              </li>
+              <li class="fullForm" *ngIf="promo_q3">
+                <!-- <label for="p_q3"> {{promo_q3}}</label> <br> -->
+                <input type="text" #pq3 id="p_q3" placeholder="{{promo_q3}}" class="formCss p-2">
+              </li>
+               
+              </ul>
+              <div class="privaceTxt">
+              <h3>PRIVACY</h3>
+              <p>We require your mobile number and email in order to send you details of your Birthday/Anniversary Offer. 
+        We will only send you information relating to your Birthday/Anniversary and will NOT sell or 
+        even give away your personal details to any third parties.</p></div>
+            </div>
+            <div class="checkBox">
+            <input type="checkbox" (click)="auth_click()" id="auth" name="privacy" value="Agree" required="">
+            <label for="privacy"> I authorize you to use my mobile/email for Birthday/Anniversary Offers only</label>
+          </div>
+          <div class="formSec">
+          <ul>
+            <li class="fullForm">
+              <!-- <label for="mb"> Phone</label> -->
+              <input type="tel"  #mobile id="mb" placeholder="Phone No." class="formCss p-2"></li>
+            <li class="fullForm">
+               
+                <button class="button"  type="submit" (click)="submit_promo_data()">ADD MY DATES</button>
+             
+     </li>     </ul>
+          <!-- <button  class="w3-button w3-orange" type="submit" (click)="submit_promo_data()">Add My Dates </button> -->
+        </div>
+
+
+
+  <!-- callout -->
+  <div class="calloutCustom">
+    <div class="callout-header">{{promo_pop_title}}</div>
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <div class="callout-container">
+      <p>{{promo_pop_body}} </p>
+    </div>
+  </div>
+  <!-- callout ends -->
+
+            
+
+
+          </div>
+
+         
+
+
+        </div>
+        
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div id="usereventmodal" class="w3-modal">
+  <div class="w3-modal-content modulCustom w3-animate-zoom">
+
+    <div class="modal-dialog modalDialogCustom">
+
+      <div class="modal-content">
+
+        <button type="button" class="close closeCustomBirth" (click)="closemodal7()">&times;</button>
+
+
+        <div class="modal-body">
+          <div class="menuBirthday">
+            <div class="menuBirthdayTitle">
+              <h5>Add events</h5>
+            </div>
+            
+            <!-- celebration -->
+          
+        
+            
+            <!-- celebration -->
+          <div class="formSec">
+              <ul>
+                <li class="fullForm">
+                  <!-- <label for="fn"> First Name</label> -->
+                  <input type="text" placeholder="Event Name" #ename id="en" class="formCss p-2"></li>
+                <li class="halfForm">
+                  <label for="edt"> Date:</label>
+                  <input type="date" #edate id="edt" class="formCss p-2">
+               </li>
+                <li class="halfForm">
+                  <label for="etm"> Time:</label>
+                  <input type="time" #etime id="etm" class="formCss p-2">
+                </li>
+                <li class="fullForm">
+                  <!-- <label for="uem"> :</label> -->
+                  <input type="url" #uem placeholder="URL" id="uurl" class="formCss p-2"></li>
+               
+             
+             
+              
+               
+              </ul>
+              <ul>
+                <li class="fullForm">
+                  <!-- <label for="uem"> :</label> -->
+                  <input type="email" #uem placeholder="Email" id="uem" class="formCss p-2"></li>
+               
+             
+             
+              
+               
+              </ul>
+             
+              
+      
+      </div>
+            </div>
+            
+          <div class="formSec">
+          <ul>
+            
+            <li class="fullForm">
+               
+                <button class="w3-button w3-orange"  type="submit" (click)="submit_user_event()">Add my event</button>
+             
+     </li>     </ul>
+          <!-- <button  class="w3-button w3-orange" type="submit" (click)="submit_promo_data()">Add My Dates </button> -->
+        </div>
+
+
+
+  <!-- callout -->
+ 
+  <!-- callout ends -->
+
+            
+
+
+          </div>
+
+         
+
+
+        </div>
+        
+
+      </div>
+
+    </div>
+    <div id="snackbar">{{m}}</div>
+  </div>
+<!-- </div> -->
+<div id="snackbar">{{m}}</div>
+
+<!-- celebration -->
+  
+<!-- celebration -->
+
    
    

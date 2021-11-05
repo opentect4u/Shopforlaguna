@@ -28,7 +28,7 @@
                 <div class="tab">
                     <button class="tablinks" (click)="openCity('tab1')" id="defaultOpen">Restaurant</button>
                     <button class="tablinks" (click)="openCity('tab2')" id="defaultOpen1">Download & Upload Image</button>
-                    <button class="tablinks" (click)="openCity('tab3')" id="defaultOpen2">Download Section Image</button>
+                    <button class="tablinks" (click)="openCity('tab3')" id="defaultOpen2">Download Section</button>
                     <button class="tablinks" (click)="openCity('tab_menu')" id="defaultOpenmenu">Download Menu</button>
                     <button class="tablinks" (click)="openCity('tab33')" id="defaultOpen33">Set Date & Time</button>
                     <button class="tablinks" (click)="openCity('tab4')" id="defaultOpen4">Create Section</button>
@@ -465,8 +465,13 @@
                     </div> -->
                     <ul class="downloadRadio" >
                         <li *ngFor="let mnc of menuchoiceData; let i=index;">
+                 
+                            <!-- <label class="radioButtonName">
+                              
+                                <input type="radio" id="bkmenu{{mnc.menu_id}}"  name="bkmenu" value="Breakfast Menu" (click)="get_sec_img(mnc.menu_id)" > {{mnc.menu_name}}
+                            </label> -->
                             <label class="radioButtonName">
-                                <input type="radio" id="bkmenu{{mnc.menu_id}}" [checked]="i==0" name="bkmenu" value="Breakfast Menu" (click)="get_sec_img(mnc.menu_id)" > {{mnc.menu_name}}
+                                <input type="radio" id="bkmenu{{mnc.menu_id}}" [checked]="i==0" name="bkmenus" value="Breakfast Menu" (click)="get_sec_img(mnc.menu_id)"  > {{mnc.menu_name}}
                             </label>
                         </li>
                         
@@ -492,7 +497,13 @@
                                             class="formCss"> -->
                                         </td>
 
-                                    <td><a [href]="apiurlset+sec.sec_img" target="_blank"><img [src]="apiurlset+sec.sec_img" height="20" width="20"></a>
+                                    <td>
+                                        <!-- <a [href]="apiurlset+sec.sec_img" target="_blank"><img [src]="apiurlset+sec.sec_img" height="20" width="20"> -->
+                                            <a (click)="openpdf(apiurlset+sec.sec_img)">
+                                                <i type="button"  class="fa fa-file-pdf-o" >
+                                                    
+                                                </i></a>
+                                        <!-- </a> -->
                                     </td>
                                 </tr>
                               
@@ -546,9 +557,30 @@
                                     <td><a href="{{sec.menu_url}}" target="_blank">{{sec.menu_url}}</a>
                                         <!-- <input type="url" id="headTitle" name="headTitle" value="" placeholder="URL"
                                             class="formCss"> -->
+                                            <!-- {{apiurlset+sec.menu_img}} -->
                                         </td>
 
-                                    <td><a [href]="apiurlset+sec.menu_img" target="_blank"><img [src]="apiurlset+sec.sec_img" height="20" width="20"></a>
+
+                                    <td>
+                                     <!-- <a href="apiurlset+sec.menu_img" target="_blank">
+                                           <iframe src="apiurlset+sec.menu_img"></iframe>
+                                        </a>  -->
+
+                                       
+                                        <!-- <div class="img-wrap rounded"  > -->
+                                            <!-- <span class="close"  (click)="deletemultiple('dinner_menu',i)">&times;</span> -->
+          
+                                            <!-- <i type="button" class="fa fa-file-pdf-o" style="font-size:48px;color:red"></i> -->
+                                            <a (click)="openpdf(apiurlset+sec.menu_img)">
+                                                <i type="button"  class="fa fa-file-pdf-o" >
+
+                                                </i></a>
+          
+                                        <!-- </div> -->
+                                       
+                                            <!-- <img [src]="apiurlset+sec.sec_img" height="20" width="20"> -->
+                                            <!-- <i type="button"  class="fa fa-file-pdf-o" ></i> -->
+                                       
                                     </td>
                                 </tr>
                               
@@ -927,6 +959,21 @@
                         
                         </td>
                           </ng-container>
+
+                        <ng-container matColumnDef="delete">
+                            <th mat-header-cell  *matHeaderCellDef > Action </th>
+                            <td  mat-cell *matCellDef="let element" data-bs-toggle="modal" data-bs-target="#myModal_delete_section">
+                            
+                                <i (click)="del_sec(element.id,element.menu_id)" class="fa fa-trash-o" aria-hidden="true" style="color:#e44b4b; font-size:20px;"></i>
+                           
+                            
+                            
+                                
+                            
+                            
+                        
+                        </td>
+                          </ng-container>
                       
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="cursor: pointer;" (click)="get_sec_id1(row.menu_id,row.id,row.section_name,apiurlset+row.section_img)" ></tr>
@@ -1032,7 +1079,20 @@
                           <th class="d1" mat-header-cell *matHeaderCellDef> Item </th>
                           <td class="d1" mat-cell *matCellDef="let element">{{element.item_name}} </td>
                         </ng-container>
-                      
+                        <ng-container matColumnDef="delete">
+                            <th mat-header-cell  *matHeaderCellDef > Action </th>
+                            <td  mat-cell *matCellDef="let element" >
+                            
+                            <a data-bs-toggle="modal" data-bs-target="#myModal_delete_item">    <i (click)="del_item(element.id,element.menu_id,element.section_id)" class="fa fa-trash-o" aria-hidden="true" style="color:#e44b4b; font-size:20px;"></i></a>
+                           
+                            
+                            
+                                
+                            
+                            
+                        
+                        </td>
+                          </ng-container>
                      
                         <!-- <ng-container matColumnDef="edit">
                             <th mat-header-cell  *matHeaderCellDef > Edit </th>
@@ -1135,9 +1195,9 @@
                         <form class="form-inline" action="">
                             <div class="rowCustomFour">
                                 <div class="fieldSecFull">
-                                    <label for="vehicle2"> Additional Notes <b>  ({{concatdatalength1}}/150) </b></label>
+                                    <label for="vehicle2"> Additional Notes <b>  ({{concatdatalength1}}/50) </b></label>
                                     <textarea #additional id="spclMore" name="spclMore" rows="5" cols="60"
-                                    (input)="restrict1($event)" (change)="restrict1($event)" maxlength="150" [(ngModel)]="ino" class="formCssTextArea">{{ino}}</textarea>
+                                    (input)="restrict1($event)" (change)="restrict1($event)" maxlength="50" [(ngModel)]="ino" class="formCssTextArea">{{ino}}</textarea>
                                 </div>
                             </div>
                         </form>
@@ -1209,6 +1269,20 @@
                         
                         </td>
                           </ng-container> -->
+                          <ng-container matColumnDef="delete">
+                            <th mat-header-cell  *matHeaderCellDef > Action </th>
+                            <td  mat-cell *matCellDef="let element">
+                            
+                                <a data-bs-toggle="modal" data-bs-target="#myModal_delete_desc">      <i (click)="del_price(element.id,element.menu_id,element.section_id)" class="fa fa-trash-o" aria-hidden="true" style="color:#e44b4b; font-size:20px;"></i></a>
+                           
+                            
+                            
+                                
+                            
+                            
+                        
+                        </td>
+                          </ng-container>
                       
                         <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns2;" (click)="get_sec_id(row.menu_id,row.id,row.section_id,row.item_id,row.item_desc,row.item_price,row.item_note)" style="cursor: pointer;"></tr>
@@ -1217,36 +1291,39 @@
 
                 </div>
                 <div id="tab_sp" [hidden]="show_tab!='tab_sp'" class="tabcontent">
-                    <form action="" class="form-inline">
-
-
-                        <div class="aboutLeft">
-                            <label class="titleCustom">Description </label>
-                            <textarea name="introduction" maxlength="150" rows="6" cols="25" class="formCssTextArea splMenuDescrip"
-                               readonly>{{spdesc_text_readonly}}</textarea>
-
-                        </div>
-                        <div class="aboutLeft">
-                            <label class="titleCustom">Description (update) </label>
-                            <textarea id="ab_us" name="introduction"  rows="6" cols="25"
-                          class="formCssTextArea splMenuDescrip" #sp_write_txt></textarea>
-
-                        </div>
-                    </form>
+                   
                     <br>
+
+                    <div class="row">
+                    <div class="col-6">
+                        <label><strong>Preview</strong></label>
+                        <angular-editor  [(ngModel)]="spdesc_text_readonly" [config]="config1"></angular-editor>
+
+
+
+
+                    </div>
+                    <div class="col-6">
+                        <label><strong>Update</strong></label>
+                        <angular-editor [(ngModel)]="htmlContent"  [config]="config"></angular-editor>
+                   
+                    </div>
+                    </div><br>
+
+ 
                     
                     <!-- <label _ngcontent-vbf-c210="" class="titleCustom">About Us </label> -->
                     <div class="specialMenuImg">
                            
-                        <div class="imgSectionSpecial"><img src="{{spstockImg}}"/></div>
+                        <div class="imgSectionSpecial"><a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#myModal_preview" ><img  src="{{spstockImg}}"/></a></div>
                         <div class="buttonChangeImg">
                                 <button type="submit" class="w3-button w3-green" (click)="openstockmodal()">Change Image</button>
                         </div>
                     </div>
                     <form class="form-inline" action="">
                         <div class="formBtn">
-                        <button type="submit" class="w3-button w3-green" (click)="send_special_desc(sp_write_txt.value);sp_write_txt.value=''">Submit</button>
-                        <button type="reset" class="w3-button w3-green reset" value="Reset" id="clickreset" (click)="sp_write_txt.value='';" class="w3-button w3-green reset">Reset</button>
+                        <button type="submit" class="w3-button w3-green" (click)="send_special_desc()">Submit</button>
+                        <button type="reset" class="w3-button w3-green reset" value="Reset" id="clickreset" (click)="this.htmlContent='';" class="w3-button w3-green reset">Reset</button>
                     </div>
                     </form>
                   
@@ -1266,7 +1343,7 @@
                           <select id="pickup_place"  name="pickup_place" id="menuselect" class="formCss" #Menu
                           (change)="pickup_place(Menu.value)">
                           <option value="">Select One</option>
-                          <option *ngFor="let mnc of menuchoiceData" value="{{mnc.menu_id}}" [selected]="sp_menuid==mnc.menu_id">{{mnc.menu_name}}</option>
+                          <option *ngFor="let mnc of menuchoiceData" value="{{mnc.menu_id}}"  [hidden]="mnc.menu_id==5" [selected]="sp_menuid==mnc.menu_id">{{mnc.menu_name}}</option>
                           <!-- <option value="1" [selected]="sp_menuid=='1'">Breakfast</option>
                           <option value="2" [selected]="sp_menuid=='2'">Lunch</option>
                           <option value="3" [selected]="sp_menuid=='3'">Dinner</option>
@@ -1335,7 +1412,9 @@
                           </div>
                           </div>
                           </form>
-                          </div>
+                         
+                        
+                        </div>
                   
                     
                       <form action="thanks-order.php" target="_self">	
@@ -1444,7 +1523,7 @@
                     </div>
 
                     <br>
-                    <div class="formBtn"><button class="w3-button w3-green" type="submit" (click)="send_mail()">Send Mail </button></div>
+                    <div class="formBtn"><button class="w3-button w3-green" type="submit" (click)="send_mail()" >Send Mail </button></div>
                     
                     </div>
 
@@ -1453,6 +1532,7 @@
 
         </div>
 
+        <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Processing... </p></ngx-spinner>
 
 
         <!-- <?php echo file_get_contents("footer.html"); ?>	 -->
@@ -1649,4 +1729,92 @@
       
         </div>
       </div>
-    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Processing... </p></ngx-spinner>
+    </div>
+      <div id="myModal_preview" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <button type="button" class="close" data-bs-dismiss="modal">&times;</button> -->
+              <h4 class="modal-title"><b>Preview</b></h4>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="{{spstockImg}}"/>
+            </div>
+            <div class="modal-footer">
+             
+              <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="logout()" >Yes</button> -->
+            </div>
+          </div>
+      
+        </div>
+      </div>
+      <div id="myModal_delete_section" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <button type="button" class="close" data-bs-dismiss="modal">&times;</button> -->
+              <h4 class="modal-title">Alert!</h4>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Are you sure you want to delete?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >No</button>
+             
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="delete_section()" >Yes</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+      <div id="myModal_delete_item" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <button type="button" class="close" data-bs-dismiss="modal">&times;</button> -->
+              <h4 class="modal-title">Alert!</h4>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Are you sure you want to delete?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >No</button>
+             
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="delete_item()" >Yes</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+      <div id="myModal_delete_desc" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <button type="button" class="close" data-bs-dismiss="modal">&times;</button> -->
+              <h4 class="modal-title">Alert!</h4>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Are you sure you want to delete?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >No</button>
+             
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="delete_price()" >Yes</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+

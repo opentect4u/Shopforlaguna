@@ -13,6 +13,8 @@ export class AdminHeaderComponent implements OnInit {
   ngOnInit(): void {
   }
  logout(){
+  // alert("hello")
+ 
    this.logout_data.logout_service();
  }
  show_alert(){

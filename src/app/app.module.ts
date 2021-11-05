@@ -65,10 +65,38 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { SidebarpaymentComponent } from './Restaurant/reg_log/common/sidebarpayment/sidebarpayment.component';
 import { AfterloginsidebarComponent } from './Restaurant/after_login/commonafterlogin/afterloginsidebar/afterloginsidebar.component';
 import { AfterloginheaderComponent } from './Restaurant/after_login/commonafterlogin/afterloginheader/afterloginheader.component';
+import { EventCalendarComponent } from './Restaurant/after_login/event-calendar/event-calendar.component';
 
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import { EventsRestaurantlistComponent } from './Laguna_Admin/events-restaurantlist/events-restaurantlist.component';
+import { EventcalendarComponent } from './Laguna_Admin/event-calendar/event-calendar.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { PromotionComponent } from './Restaurant/after_login/promotion/promotion.component';
+import { AccountComponent } from './Restaurant/after_login/account/account.component';
+import { RestPromoComponent } from './Laguna_Admin/rest-promo/rest-promo.component';
+import { MatTableExporterModule } from 'mat-table-exporter';
+import { CreateMenusComponent } from './Restaurant/create-menus/create-menus.component';
+import { AdditionalproductComponent } from './Restaurant/after_login/additionalproduct/additionalproduct.component';
+import { PaysaveComponent } from './Restaurant/after_login/paysave/paysave.component';
+
+import { AngularEditorModule } from '@kolkov/angular-editor';
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  interactionPlugin,
+  timeGridPlugin,
+  listPlugin,
+
+
+]);
 @NgModule({
   declarations: [
     AppComponent,
+    EventsRestaurantlistComponent,
+    EventcalendarComponent,
     AdminOrderPageSetUpComponent,
     AdmindashboardComponent,
     HomeComponent,
@@ -120,7 +148,14 @@ import { AfterloginheaderComponent } from './Restaurant/after_login/commonafterl
     UserMenuComponent,
     SidebarpaymentComponent,
     AfterloginsidebarComponent,
-    AfterloginheaderComponent
+    AfterloginheaderComponent,
+    EventCalendarComponent,
+    PromotionComponent,
+    AccountComponent,
+    RestPromoComponent,
+    CreateMenusComponent,
+    AdditionalproductComponent,
+    PaysaveComponent
 
   ],
 
@@ -137,15 +172,19 @@ import { AfterloginheaderComponent } from './Restaurant/after_login/commonafterl
     MatFormFieldModule,
     MatPaginatorModule,
     MatSortModule,
+    AngularEditorModule,
     HttpClientModule,
     MatSlideToggleModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
+    MatMenuModule,
     MatTooltipModule,
     ImageCropperModule,
     PdfViewerModule,
     NgxExtendedPdfViewerModule ,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FullCalendarModule,
+    MatTableExporterModule
   ],
   exports:[CommonModule],
   providers: [{provide:LocationStrategy, useClass:HashLocationStrategy}],

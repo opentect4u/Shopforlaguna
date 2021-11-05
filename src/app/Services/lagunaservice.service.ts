@@ -24,7 +24,7 @@ export class LagunaserviceService {
   }
  logout_service(){
     localStorage.clear();
-    this.router.navigate(['/admin/login'])
+    this.router.navigate(['/admin'])
   }
   getpackagedata(){//For Package Api Get in Admin Order setup Page
     return this.http.get(this.Url);
@@ -93,6 +93,8 @@ post_date_time(dt:any){
 // }
 post_section_create(dt:any,file:any,filename:any){
   const formdata=new FormData();
+  console.log(dt.menu_id,file);
+  
   formdata.append('restaurant_id',dt.restaurant_id);
   formdata.append('menu_id',dt.menu_id);
   formdata.append('sec_name',dt.sec_name);
@@ -289,6 +291,11 @@ downloadlogotopcover(restid:any){
 get_category_list(){
   return this.http.get(url_set.api_url+'/category_list');
 }
+get_promo_category_list(){
+  return this.http.get(url_set.api_url+'/get_promo_cat_dtls');
+
+}
+
 // get_category_list() {
 //   return this.http.get(url_set.api_url + '/category_list')
 // }
@@ -326,11 +333,8 @@ get_date_time(dt:any){
 get_sp_desc(v1:any,v2:any){
   return this.http.get(url_set.api_url+'/get_special_data?id='+v1+'&menu_id='+v2)
 }
- post_sp_desc(v:any){
-  
+ post_sp_desc(v:any){ 
   return this.http.post(url_set.api_url+'/get_special_data',v)
-
-
  } 
 
  //getting selected stock image 
@@ -349,8 +353,160 @@ getspecial_image(cat_id:any){
   var id = cat_id ? cat_id : '';
   return this.http.get(url_set.api_url+'/stock_img?cat_id=' +id);
 }
+//For Getting promo Image
+getpromo_image(cat_id:any){
+  var id = cat_id ? cat_id : '';
+  return this.http.get(url_set.api_url+'/promo_stock_img?cat_id=' +id);
+}
 //For checking payment is done or not
 checkpayment(res_id:any){
   return this.http.get(url_set.api_url+'/pay_check?id='+res_id)
 }
+
+Check_active_status(res_id:any){
+  return this.http.get(url_set.api_url+'/check_active_status?id='+res_id)
+}
+get_overlap_with_special(v:any){
+  return this.http.get(url_set.api_url+'/check_special_overlap?id='+v)
+}
+
+//Check whether the restaurant select the event/Calendar or not
+check_calender(res_id:any){
+  return this.http.get(url_set.api_url+'/check_calender?id='+res_id);
+}
+//For getting the events in Calendar 
+calender_dtls(res_id:any, flag:any){
+  return this.http.get(url_set.api_url+'/calender_dtls?id='+res_id+'&flag='+flag);
+}
+//Posting events
+post_calender_dtls(dt:any,img:any){
+  const formdata=new FormData();
+  formdata.append('img',img)
+  formdata.append('event_name',dt.event_name);
+  formdata.append('event_date',dt.event_date);
+  formdata.append('event_time',dt.event_time);
+  formdata.append('event_title',dt.event_title);
+  formdata.append('tkt_url',dt.tkt_url);
+  formdata.append('description',dt.description);
+  formdata.append('res_id',dt.res_id);
+  formdata.append('user',dt.user);
+  formdata.append('id',dt.id);
+  formdata.append('approval_flag',dt.approval_flag);
+  formdata.append('user_type',dt.user_type)
+  return this.http.post(url_set.api_url+'/calender_dtls',formdata);
+}
+
+get_event_dashboard(){
+  return this.http.get(url_set.api_url + '/get_res_dtls?id=')
+}
+
+//Get data from admin promotions
+ get_admin_promotion(){
+   return this.http.get(url_set.api_url +'/adm_promo_dt');
+ }
+ //Get restaurant promotion data
+ get_restaurant_promotion(res_id:any){
+  return this.http.get(url_set.api_url +'/res_promo_dt?id=' +res_id);
+}
+//Posting promotion introduction
+post_promo_intro(dt:any){
+ return this.http.post(url_set.api_url +'/intro_save',dt);
+}
+//Posting promotion confirmation mail
+post_promo_conf(dt:any){
+  return this.http.post(url_set.api_url +'/conf_email_save',dt);
+ }
+//posting promotion popup
+ post_promo_popup(dt:any){
+  return this.http.post(url_set.api_url +'/pop_save',dt);
+ }
+//posting promotion questions
+ post_promo_qn(dt:any){
+   return this.http.post(url_set.api_url +'/qn_save',dt)
+ }
+ //posting promotion questions
+ post_promo_email(dt:any){
+  return this.http.post(url_set.api_url +'/mailing_email_save',dt)
+}
+post_promo_img(dt:any){
+  return this.http.post(url_set.api_url +'/img_save',dt)
+
+}
+post_promo_status(dt:any){
+  return this.http.post(url_set.api_url +'/status_save',dt)
+}
+//For Getting Customer database data
+Get_promotion_dt(res_id:any){
+  console.log(res_id);
+  
+  return this.http.get(url_set.api_url +'/get_promotion_dt?id='+res_id)
+}
+post_promo_dt(dt:any){
+  return this.http.post(url_set.api_url+'/promo_save',dt)
+}
+get_admin_promo(){
+  return this.http.get(url_set.api_url+'/adm_promo_dt')
+}
+post_promo_mail(dt:any){
+  return this.http.post(url_set.api_url+'/mailing_email_save',dt)
+}
+
+get_prormo_dt(res_id:any,frm_date:any,to_date:any){
+  return this.http.get(url_set.api_url+'/get_promo_dt?id='+res_id+'&frm_dt='+frm_date+'&to_dt='+to_date)
+}
+
+//Unlimited Menu
+post_createmenu(dt:any){
+  return this.http.post(url_set.api_url+'/add_menu',dt);
+}
+//Unlimited Menu
+get_createmenu(res_id:any){
+  return this.http.get(url_set.api_url+'/add_menu?res_id='+res_id);
+}
+delete_menu(id:any){
+  return this.http.get(url_set.api_url+'/delete_menu?id=' +id);
+}
+afterlogin_update_packege(dt:any){
+  return this.http.post(url_set.api_url+'/update_pack',dt);
+}
+afterlogin_update_window(dt:any){
+  return this.http.post(url_set.api_url+'/update_prod',dt);
+}
+additional_payment(res_id:any){
+  var dt={
+    "res_id":res_id}
+  return this.http.post(url_set.api_url+'/update_pay',dt)
+}
+//posting restaurant details
+post_res_details(dt:any){
+  return this.http.post(url_set.api_url+'/update_user',dt)
+}
+//posting password
+post_change_password(dt:any){
+  return this.http.post(url_set.api_url+'/update_password',dt)
+}
+//getting restaurant details
+get_res_details(res_id:any){
+  return this.http.get(url_set.api_url+'/res_details?res_id='+res_id)
+}
+//getting password
+get_password(res_id:any){
+  return this.http.get(url_set.api_url+'/get_pass?res_id=',res_id)
+}
+delete_section_serv(v:any){
+  return this.http.get(url_set.api_url+'/delete_sec?id='+v)
+}
+delete_item_serv(v:any){
+  return this.http.get(url_set.api_url+'/delete_item?id='+v)
+}
+delete_price_desc(v:any){
+  return this.http.get(url_set.api_url+'/delete_price_desc?id='+v)
+}
+
+approve_calendar(dt:any){
+  return this.http.post(url_set.api_url+'/approve_cal',dt)
+}
+
+
+
 }

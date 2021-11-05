@@ -870,8 +870,10 @@ end_time:any;
       })
       this.PACK = document.getElementById('defaultOpen');
     this.PACK.className = 'active';
-    this.PACK.style.background = '#00477e;';
+    this.PACK.style.background = '#00477e';
     this.PACK.style.color = 'white';
+    // this.design=document.getElementById('London');
+    //     this.design.className='tabcontent m-1'
      }
 
      if(localStorage.getItem('No_of_menu')=='O'){
@@ -967,7 +969,7 @@ end_time:any;
 
         this.coc=document.getElementById('defaultOpen');
         this.coc.className='active';
-        this.coc.style.background = '#00477e;';
+        this.coc.style.background = '#00477e';
         this.coc.style.color = 'white';
         this.design=document.getElementById('London');
         this.design.className='tabcontent m-1'
@@ -1061,10 +1063,10 @@ end_time:any;
     }
         })
         this.design=document.getElementById('paris');
-        this.design.className=' tabcontent m-1';
+        this.design.className='tabcontent m-1';
         this.coc=document.getElementById('defaultOpen1');
-        this.coc.className='active ';
-        this.coc.style.background = '#00477e;';
+        this.coc.className='active';
+        this.coc.style.background = '#00477e';
         this.coc.style.color = 'white';
         this.londondefault=true;
         this.lagunadefault=true;
@@ -1164,7 +1166,7 @@ end_time:any;
         this.design.className='tabcontent m-1';
         this.coc=document.getElementById('defaultOpen2');
         this.coc.className='active';
-        this.coc.style.background = '#00477e;';
+        this.coc.style.background = '#00477e';
         this.coc.style.color = 'white';
         this.londondefault=true;
         this.lagunadefault=true;
@@ -1258,11 +1260,10 @@ end_time:any;
     }
         })
         this.design=document.getElementById('laguna');
-
-        this.design.className=' tabcontent m-1';
+        this.design.className='tabcontent m-1';
         this.coc=document.getElementById('defaultOpen3');
         this.coc.className='active';
-        this.coc.style.background = '#00477e;';
+        this.coc.style.background = '#00477e';
         this.coc.style.color = 'white';
         this.londondefault=true;
         this.lagunadefault=false;
@@ -1368,8 +1369,7 @@ end_time:any;
         // this.parisdefault=true;
         this.coc=document.getElementById('defaultOpen');
         this.coc.className='active';
-
-        this.coc.style.background = '#00477e;';
+        this.coc.style.background = '#00477e';
         this.coc.style.color = 'white';
         this.design=document.getElementById('London');
         this.design.className='tabcontent m-1'
@@ -1468,7 +1468,7 @@ end_time:any;
         this.design.className='tabcontent m-1';
         this.coc=document.getElementById('defaultOpen1');
         this.coc.className='active';
-        this.coc.style.background = '#00477e;';
+        this.coc.style.background = '#00477e';
         this.coc.style.color = 'white';
         // this.londondefault=true;
         // this.lagunadefault=true;
@@ -1570,7 +1570,7 @@ end_time:any;
         this.design.className='tabcontent m-1';
         this.coc=document.getElementById('defaultOpen2');
         this.coc.className='active';
-        this.coc.style.background = '#00477e;';
+        this.coc.style.background = '#00477e';
         this.coc.style.color = 'white';
         // this.londondefault=true;
         // this.lagunadefault=true;
@@ -1669,7 +1669,7 @@ end_time:any;
         this.design.className='tabcontent m-1';
         this.coc=document.getElementById('defaultOpen3');
         this.coc.className='active';
-        this.coc.style.background = '#00477e;';
+        this.coc.style.background = '#00477e';
         this.coc.style.color = 'white';
         // this.londondefault=true;
         this.lagunadefault=false;
@@ -1689,7 +1689,7 @@ end_time:any;
 
     this.coc=document.getElementById('defaultOpen');
     this.coc.className='active';
-    this.coc.style.background = '#00477e;';
+    this.coc.style.background = '#00477e';
     this.coc.style.color = 'white';
     this.design=document.getElementById('London');
     this.design.className='tabcontent m-1'
@@ -1873,7 +1873,7 @@ end_time:any;
       })
       this.coc=document.getElementById('defaultOpen');
       this.coc.className='active';
-      this.coc.style.background = '#00477e;';
+      this.coc.style.background = '#00477e';
       this.coc.style.color = 'white';
       this.design=document.getElementById('London');
       this.design.className='tabcontent m-1'
@@ -1976,7 +1976,7 @@ end_time:any;
       })
       this.coc=document.getElementById('defaultOpen');
       this.coc.className='active';
-      this.coc.style.background = '#00477e;';
+      this.coc.style.background = '#00477e';
       this.coc.style.color = 'white';
       this.design=document.getElementById('London');
       this.design.className='tabcontent m-1'
@@ -2080,7 +2080,7 @@ end_time:any;
         this.design.className='tabcontent m-1';
       this.coc=document.getElementById('defaultOpen1');
       this.coc.className='active';
-      this.coc.style.background = '#00477e;';
+      this.coc.style.background = '#00477e';
       this.coc.style.color = 'white';
       this.londondefault=true;
       this.lagunadefault=false;
@@ -2102,7 +2102,7 @@ end_time:any;
       this.design.className='tabcontent m-1';
       this.coc=document.getElementById('defaultOpen1');
       this.coc.className='active';
-      this.coc.style.background = '#00477e;';
+      this.coc.style.background = '#00477e';
       this.coc.style.color = 'white';
       this.londondefault=true;
       this.lagunadefault=true;
@@ -2280,7 +2280,7 @@ end_time:any;
         this.tab2=true;
         this.coc=document.getElementById('defaultOpen2');
         this.coc.className='active';
-        this.coc.style.background = '#00477e;';
+        this.coc.style.background = '#00477e';
         this.coc.style.color = 'white';
         this.design=document.getElementById('tokyo');
         this.design.className='tabcontent m-1';
@@ -2298,10 +2298,11 @@ end_time:any;
    {
     this.coc=document.getElementById('defaultOpen');
     this.coc.className='active';
-    this.design=document.getElementById('London');
-        this.design.className='tabcontent m-1';
-    this.coc.style.background = '#00477e;';
+    this.coc.style.background = '#00477e';
     this.coc.style.color = 'white';
+    // this.design=document.getElementById('London');
+    //     this.design.className='tabcontent m-1';
+ 
     this.design=document.getElementById('London');
     this.design.className='tabcontent m-1'
       this.londondefault=false;
@@ -2608,7 +2609,10 @@ this.lagunaserve.get_stock_iamge(this.resid,'5').subscribe(data=>{
 this.STOCK_IMG=data;
 if(this.STOCK_IMG.msg!=''){
 this.STOCK_IMG=this.STOCK_IMG.msg;
+ 
 this.common_for_special_menu=this.STOCK_IMG[0].img_path;
+console.log(this.common_for_special_menu);
+
 this.previous_id=this.STOCK_IMG[0].img_catg;
   this.see_photo=false;
 }
@@ -2617,9 +2621,10 @@ this.previous_id=this.STOCK_IMG[0].img_catg;
 this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
   console.log(data);
   this.check=data;
+  console.log(this.check.msg[0].approval_flag);
+  
   if(this.check.msg[0].approval_flag=='U'){
     this.show_toast=true;
-
 
   }
   else{
@@ -5654,8 +5659,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
 
        formData.append('topurl', TOPIMAGEURL);
-       formData.append('MenuUrl', MENUURL);
-       formData.append('SectionUrl',SECTIONURL);
+      //  formData.append('MenuUrl', MENUURL);
+      //  formData.append('SectionUrl',SECTIONURL);
        formData.append('cov_img',this.breakfastcoverimage);
        formData.append('top_img', this.breakfasttopimage);
 
@@ -5665,24 +5670,49 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
 
         formData.append('restaurant_name',this.res_name);
 
-       for(let img1 of this.breakfastsectionimage){
-         formData.append('section_img', img1);
-       }
-       for (let img of this.multipleImages) {
-         formData.append('menu_img', img);
-       }
+      //  for(let img1 of this.breakfastsectionimage){
+      //    formData.append('section_img', img1);
+      //  }
+      //  for (let img of this.multipleImages) {
+      //    formData.append('menu_img', img);
+      //  }
 
        console.log(this.multipleImages)
        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-         (res) =>{ console.log(res),
+         (res) =>{ console.log(res);
         //  (err) => console.log(err),
-        this.spinner.hide();
-        this.myFunction_update();
+        // this.spinner.hide();
+        // this.myFunction_update();
     
      });
 
      ///////////////////////////////////
-     this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+     const frmDt_1 = new FormData();
+
+      //  frmDt_1.append('coverurl', COVERPAGEURL);
+      //  frmDt_1.append('cov_filename', this.breakfast_cover_name);
+      //  frmDt_1.append('top_filename', this.breakfast_top_name);
+
+
+      //  frmDt_1.append('topurl', TOPIMAGEURL);
+       frmDt_1.append('MenuUrl', MENUURL);
+      //  frmDt_1.append('SectionUrl',SECTIONURL);
+      //  frmDt_1.append('cov_img',this.breakfastcoverimage);
+      //  frmDt_1.append('top_img', this.breakfasttopimage);
+
+        frmDt_1.append('restaurant_id',this.resid);
+        frmDt_1.append('menu_id',hidevalue);
+        frmDt_1.append('break_check',this.break_check);
+
+        frmDt_1.append('restaurant_name',this.res_name);
+
+      //  for(let img1 of this.breakfastsectionimage){
+      //    frmDt_1.append('section_img', img1);
+      //  }
+       for (let img of this.multipleImages) {
+         frmDt_1.append('menu_img', img);
+       }
+     this.http.post<any>(this.url_reg+'/menu_file_testing', frmDt_1).subscribe(
       (res) =>{console.log(res);
         // this.spinner.hide();
         // this.myFunction_update();
@@ -5690,8 +5720,35 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
     });
     
     // UPLOAD SECTION FILE //
-    this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+    const frmDt_2 = new FormData();
+
+      //  frmDt_2.append('coverurl', COVERPAGEURL);
+      //  frmDt_2.append('cov_filename', this.breakfast_cover_name);
+      //  frmDt_2.append('top_filename', this.breakfast_top_name);
+
+
+      //  frmDt_2.append('topurl', TOPIMAGEURL);
+      //  frmDt_2.append('MenuUrl', MENUURL);
+       frmDt_2.append('SectionUrl',SECTIONURL);
+      //  frmDt_2.append('cov_img',this.breakfastcoverimage);
+      //  frmDt_2.append('top_img', this.breakfasttopimage);
+
+        frmDt_2.append('restaurant_id',this.resid);
+        frmDt_2.append('menu_id',hidevalue);
+        frmDt_2.append('break_check',this.break_check);
+
+        frmDt_2.append('restaurant_name',this.res_name);
+
+       for(let img1 of this.breakfastsectionimage){
+         frmDt_2.append('section_img', img1);
+       }
+      //  for (let img of this.multipleImages) {
+      //    frmDt_2.append('menu_img', img);
+      //  }
+    this.http.post<any>(this.url_reg+'/sec_file_testing', frmDt_2).subscribe(
       (res) =>{console.log(res);
+        this.spinner.hide();
+        this.myFunction_update();
         // this.spinner.hide();
         // this.myFunction_update();
       // (err) => console.log(err)
@@ -5726,8 +5783,8 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
        formData.append('topurl', TOPIMAGEURL);
        formData.append('cov_filename', this.breakfast_cover_name);
        formData.append('top_filename', this.breakfast_top_name);
-       formData.append('MenuUrl', MENUURL);
-       formData.append('SectionUrl',SECTIONURL);
+      //  formData.append('MenuUrl', MENUURL);
+      //  formData.append('SectionUrl',SECTIONURL);
        formData.append('cov_img',this.breakfastcoverimage);
        formData.append('top_img', this.breakfasttopimage);
 
@@ -5736,22 +5793,47 @@ this.lagunaserve.checkactivity(this.resid).subscribe(data=>{
         formData.append('break_check',this.break_check);
 
         formData.append('restaurant_name',this.res_name);
-       for(let img1 of this.breakfastsectionimage){
-         formData.append('section_img', img1);
-       }
-       for (let img of this.multipleImages) {
-         formData.append('menu_img', img);
-       }
+      //  for(let img1 of this.breakfastsectionimage){
+      //    formData.append('section_img', img1);
+      //  }
+      //  for (let img of this.multipleImages) {
+      //    formData.append('menu_img', img);
+      //  }
 
-       console.log(this.multipleImages)
+      //  console.log(this.multipleImages)
        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
          (res) =>{ console.log(res);
-          this.spinner.hide();
-          this.myFunction_update();
+       
+
         //  (err) => console.log(err)
         });
 ///////////////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+
+const formData2 = new FormData();
+
+// formData1.append('coverurl', COVERPAGEURL);
+// formData1.append('topurl', TOPIMAGEURL);
+// formData1.append('cov_filename', this.breakfast_cover_name);
+// formData1.append('top_filename', this.breakfast_top_name);
+ formData2.append('MenuUrl', MENUURL);
+//  formData2.append('SectionUrl',SECTIONURL);
+// formData2.append('cov_img',this.breakfastcoverimage);
+// formData2.append('top_img', this.breakfasttopimage);
+
+ formData2.append('restaurant_id',this.resid);
+ formData2.append('menu_id',hidevalue);
+ formData2.append('break_check',this.break_check);
+
+ formData2.append('restaurant_name',this.res_name);
+//  for(let img1 of this.breakfastsectionimage){
+//    formData2.append('section_img', img1);
+//  }
+ for (let img of this.multipleImages) {
+   formData2.append('menu_img', img);
+ }
+
+
+this.http.post<any>(this.url_reg+'/menu_file_testing', formData2).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
@@ -5759,10 +5841,37 @@ this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+
+
+const formData3 = new FormData();
+
+// formData3.append('coverurl', COVERPAGEURL);
+// formData3.append('topurl', TOPIMAGEURL);
+// formData3.append('cov_filename', this.breakfast_cover_name);
+// formData3.append('top_filename', this.breakfast_top_name);
+//  formData3.append('MenuUrl', MENUURL);
+ formData3.append('SectionUrl',SECTIONURL);
+// formData3.append('cov_img',this.breakfastcoverimage);
+// formData3.append('top_img', this.breakfasttopimage);
+
+ formData3.append('restaurant_id',this.resid);
+ formData3.append('menu_id',hidevalue);
+ formData3.append('break_check',this.break_check);
+
+ formData3.append('restaurant_name',this.res_name);
+ for(let img1 of this.breakfastsectionimage){
+   formData3.append('section_img', img1);
+ }
+//  for (let img of this.multipleImages) {
+//    formData3.append('menu_img', img);
+//  }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData3).subscribe(
   (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
+    this.spinner.hide();
+    this.myFunction();
+    this.spinner.hide();
+    this.myFunction_update();
   // (err) => console.log(err)
 });
 /////////////////////////////////////
@@ -5795,81 +5904,108 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
    else{
     if(v1<v2){
    if(localStorage.getItem('breakfast')==''){
-        const formData = new FormData();
-        formData.append('coverurl', COVERPAGEURL);
-        formData.append('topurl', TOPIMAGEURL);
-        formData.append('cov_filename', this.breakfast_cover_name);
-       formData.append('top_filename', this.breakfast_top_name);
-        formData.append('MenuUrl', MENUURL);
-        formData.append('SectionUrl',SECTIONURL);
-        formData.append('cov_img',this.breakfastcoverimage);
-        formData.append('top_img', this.breakfasttopimage);
+    const formData = new FormData();
 
-         formData.append('restaurant_id',this.resid);
-         formData.append('menu_id',hidevalue);
-         formData.append('break_check',this.break_check);
-
-         formData.append('restaurant_name',this.res_name);
-        // FOR PHP SUBMIT //
-        // for(let img of this.breakfastsectionimage){
-        //   formData.append('section_img[]', img);
-        // }
-        // for (let img of this.multipleImages) {
-        //   formData.append('menu_img[]', img);
-        // }
-        // END //
-
-        for(let img1 of this.breakfastsectionimage){
-          formData.append('section_img', img1);
-        }
-        for (let img of this.multipleImages) {
-          formData.append('menu_img', img);
-        }
+    formData.append('coverurl', COVERPAGEURL);
+    formData.append('cov_filename', this.breakfast_cover_name);
+    formData.append('top_filename', this.breakfast_top_name);
 
 
-        console.log(this.multipleImages)
-        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-          (res) =>{console.log(res);
-            this.spinner.hide();
-            this.myFunction_update();
-          // (err) => console.log(err)
-        });
-/////////////////////////////////////PHP PATH/////////////////////////////////////////////////////////////
-// console.log("APIHIT");
-// // UPLOAD MENU FILE //
-// this.http.post<any>('http://localhost/laguna_api_ci/index.php/api/upload_menu_image', formData).subscribe(
-//   (res) =>{console.log(res);
-//     // this.spinner.hide();
-//     // this.myFunction_update();
-//   // (err) => console.log(err)
-// });
+    formData.append('topurl', TOPIMAGEURL);
+   //  formData.append('MenuUrl', MENUURL);
+   //  formData.append('SectionUrl',SECTIONURL);
+    formData.append('cov_img',this.breakfastcoverimage);
+    formData.append('top_img', this.breakfasttopimage);
 
-// // UPLOAD SECTION FILE //
-// this.http.post<any>('http://localhost/laguna_api_ci/index.php/api/upload_sec_image', formData).subscribe(
-//   (res) =>{console.log(res);
-//     // this.spinner.hide();
-//     // this.myFunction_update();
-//   // (err) => console.log(err)
-// });
+     formData.append('restaurant_id',this.resid);
+     formData.append('menu_id',hidevalue);
+     formData.append('break_check',this.break_check);
 
-/////////////////////////////////////////////PHP FILE END/////////////////////////////////////////////////////
+     formData.append('restaurant_name',this.res_name);
 
-/////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-  (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
-});
+   //  for(let img1 of this.breakfastsectionimage){
+   //    formData.append('section_img', img1);
+   //  }
+   //  for (let img of this.multipleImages) {
+   //    formData.append('menu_img', img);
+   //  }
 
-// UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-  (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
-});
-////////////////////////////////////////////END ////////////////////////////////////
+    console.log(this.multipleImages)
+    this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+      (res) =>{ console.log(res)
+     //  (err) => console.log(err),
+  
+ 
+  });
+
+  ///////////////////////////////////
+  const frmDt_1 = new FormData();
+
+   //  frmDt_1.append('coverurl', COVERPAGEURL);
+   //  frmDt_1.append('cov_filename', this.breakfast_cover_name);
+   //  frmDt_1.append('top_filename', this.breakfast_top_name);
+
+
+   //  frmDt_1.append('topurl', TOPIMAGEURL);
+    frmDt_1.append('MenuUrl', MENUURL);
+   //  frmDt_1.append('SectionUrl',SECTIONURL);
+   //  frmDt_1.append('cov_img',this.breakfastcoverimage);
+   //  frmDt_1.append('top_img', this.breakfasttopimage);
+
+     frmDt_1.append('restaurant_id',this.resid);
+     frmDt_1.append('menu_id',hidevalue);
+     frmDt_1.append('break_check',this.break_check);
+
+     frmDt_1.append('restaurant_name',this.res_name);
+
+   //  for(let img1 of this.breakfastsectionimage){
+   //    frmDt_1.append('section_img', img1);
+   //  }
+    for (let img of this.multipleImages) {
+      frmDt_1.append('menu_img', img);
+    }
+  this.http.post<any>(this.url_reg+'/menu_file_testing', frmDt_1).subscribe(
+   (res) =>{console.log(res);
+     // this.spinner.hide();
+     // this.myFunction_update();
+   // (err) => console.log(err)
+ });
+ 
+ // UPLOAD SECTION FILE //
+ const frmDt_2 = new FormData();
+
+   //  frmDt_2.append('coverurl', COVERPAGEURL);
+   //  frmDt_2.append('cov_filename', this.breakfast_cover_name);
+   //  frmDt_2.append('top_filename', this.breakfast_top_name);
+
+
+   //  frmDt_2.append('topurl', TOPIMAGEURL);
+   //  frmDt_2.append('MenuUrl', MENUURL);
+    frmDt_2.append('SectionUrl',SECTIONURL);
+   //  frmDt_2.append('cov_img',this.breakfastcoverimage);
+   //  frmDt_2.append('top_img', this.breakfasttopimage);
+
+     frmDt_2.append('restaurant_id',this.resid);
+     frmDt_2.append('menu_id',hidevalue);
+     frmDt_2.append('break_check',this.break_check);
+
+     frmDt_2.append('restaurant_name',this.res_name);
+
+    for(let img1 of this.breakfastsectionimage){
+      frmDt_2.append('section_img', img1);
+    }
+   //  for (let img of this.multipleImages) {
+   //    frmDt_2.append('menu_img', img);
+   //  }
+ this.http.post<any>(this.url_reg+'/sec_file_testing', frmDt_2).subscribe(
+   (res) =>{console.log(res);
+     // this.spinner.hide();
+     // this.myFunction_update();
+   // (err) => console.log(err)
+   this.spinner.hide();
+   this.myFunction_update();
+ });
+  //////////////////////////////////
 
         this.storevalue.length=0;
         this.storevalue.push({
@@ -5905,8 +6041,8 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
           formData.append('topurl', TOPIMAGEURL);
           formData.append('cov_filename', this.breakfast_cover_name);
        formData.append('top_filename', this.breakfast_top_name);
-          formData.append('MenuUrl', MENUURL);
-          formData.append('SectionUrl',SECTIONURL);
+          // formData.append('MenuUrl', MENUURL);
+          // formData.append('SectionUrl',SECTIONURL);
           formData.append('cov_img',this.breakfastcoverimage);
           formData.append('top_img', this.breakfasttopimage);
 
@@ -5915,36 +6051,90 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
            formData.append('break_check',this.break_check);
 
            formData.append('restaurant_name',this.res_name);
-          for(let img1 of this.breakfastsectionimage){
-            formData.append('section_img', img1);
-          }
-          for (let img of this.multipleImages) {
-            formData.append('menu_img', img);
-          }
+          // for(let img1 of this.breakfastsectionimage){
+          //   formData.append('section_img', img1);
+          // }
+          // for (let img of this.multipleImages) {
+          //   formData.append('menu_img', img);
+          // }
 
-          console.log(this.multipleImages)
+          // console.log(this.multipleImages)
           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
             (res) => {console.log(res);
-              this.spinner.hide();
-              this.myFunction();
+             
 
             // (err) => console.log(err)
             });
 
+            const formData1 = new FormData();
+
+            // formData.append('coverurl', COVERPAGEURL);
+            // formData.append('topurl', TOPIMAGEURL);
+        //     formData.append('cov_filename', this.breakfast_cover_name);
+        //  formData.append('top_filename', this.breakfast_top_name);
+            formData1.append('MenuUrl', MENUURL);
+            // formData1.append('SectionUrl',SECTIONURL);
+            // formData1.append('cov_img',this.breakfastcoverimage);
+            // formData1.append('top_img', this.breakfasttopimage);
+  
+             formData1.append('restaurant_id',this.resid);
+             formData1.append('menu_id',hidevalue);
+             formData1.append('break_check',this.break_check);
+  
+             formData1.append('restaurant_name',this.res_name);
+            // for(let img1 of this.breakfastsectionimage){
+            //   formData1.append('section_img', img1);
+            // }
+            for (let img of this.multipleImages) {
+              formData1.append('menu_img', img);
+            }
+  
+            
+
           // ///////////////////////////////
-          this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+          this.http.post<any>(this.url_reg+'/menu_file_testing', formData1).subscribe(
             (res) =>{console.log(res);
               // this.spinner.hide();
               // this.myFunction_update();
             // (err) => console.log(err)
           });
           
+          const formData3 = new FormData();
+
+      //     formData.append('coverurl', COVERPAGEURL);
+      //     formData.append('topurl', TOPIMAGEURL);
+      //     formData.append('cov_filename', this.breakfast_cover_name);
+      //  formData.append('top_filename', this.breakfast_top_name);
+          // formData.append('MenuUrl', MENUURL);
+          formData3.append('SectionUrl',SECTIONURL);
+          // formData.append('cov_img',this.breakfastcoverimage);
+          // formData.append('top_img', this.breakfasttopimage);
+
+           formData3.append('restaurant_id',this.resid);
+           formData3.append('menu_id',hidevalue);
+           formData3.append('break_check',this.break_check);
+
+           formData3.append('restaurant_name',this.res_name);
+          for(let img1 of this.breakfastsectionimage){
+            formData3.append('section_img', img1);
+          }
+          // for (let img of this.multipleImages) {
+          //   formData.append('menu_img', img);
+          // }
+
+
+
+
+
+
           // UPLOAD SECTION FILE //
-          this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+          this.http.post<any>(this.url_reg+'/sec_file_testing', formData3).subscribe(
             (res) =>{console.log(res);
               // this.spinner.hide();
               // this.myFunction_update();
             // (err) => console.log(err)
+            this.spinner.hide();
+            this.myFunction();
           });
 ////////////////////////////////////////////////////////
           this.storevalue.length=0;
@@ -5985,53 +6175,106 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
           const formData = new FormData();
 
           formData.append('coverurl', COVERPAGEURL);
-          formData.append('topurl', TOPIMAGEURL);
           formData.append('cov_filename', this.breakfast_cover_name);
-       formData.append('top_filename', this.breakfast_top_name);
-          formData.append('MenuUrl', MENUURL);
-          formData.append('SectionUrl',SECTIONURL);
+          formData.append('top_filename', this.breakfast_top_name);
+   
+   
+          formData.append('topurl', TOPIMAGEURL);
+         //  formData.append('MenuUrl', MENUURL);
+         //  formData.append('SectionUrl',SECTIONURL);
           formData.append('cov_img',this.breakfastcoverimage);
           formData.append('top_img', this.breakfasttopimage);
-
+   
            formData.append('restaurant_id',this.resid);
            formData.append('menu_id',hidevalue);
            formData.append('break_check',this.break_check);
-
+   
            formData.append('restaurant_name',this.res_name);
-
-
-
-
-          for(let img1 of this.breakfastsectionimage){
-            formData.append('section_img', img1);
-          }
-          for (let img of this.multipleImages) {
-            formData.append('menu_img', img);
-          }
-
+   
+         //  for(let img1 of this.breakfastsectionimage){
+         //    formData.append('section_img', img1);
+         //  }
+         //  for (let img of this.multipleImages) {
+         //    formData.append('menu_img', img);
+         //  }
+   
           console.log(this.multipleImages)
           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-            (res) =>{ console.log(res);
-              this.spinner.hide();
-              this.myFunction();
-          });
-
-          ///////////////////////////////
-          this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-            (res) =>{console.log(res);
-              // this.spinner.hide();
-              // this.myFunction_update();
-            // (err) => console.log(err)
-          });
+            (res) =>{ console.log(res)
+           //  (err) => console.log(err),
+         
           
-          // UPLOAD SECTION FILE //
-          this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-            (res) =>{console.log(res);
-              // this.spinner.hide();
-              // this.myFunction_update();
-            // (err) => console.log(err)
-          });
-          /////////////////////////////////////
+       
+        });
+   
+        ///////////////////////////////////
+        const frmDt_1 = new FormData();
+   
+         //  frmDt_1.append('coverurl', COVERPAGEURL);
+         //  frmDt_1.append('cov_filename', this.breakfast_cover_name);
+         //  frmDt_1.append('top_filename', this.breakfast_top_name);
+   
+   
+         //  frmDt_1.append('topurl', TOPIMAGEURL);
+          frmDt_1.append('MenuUrl', MENUURL);
+         //  frmDt_1.append('SectionUrl',SECTIONURL);
+         //  frmDt_1.append('cov_img',this.breakfastcoverimage);
+         //  frmDt_1.append('top_img', this.breakfasttopimage);
+   
+           frmDt_1.append('restaurant_id',this.resid);
+           frmDt_1.append('menu_id',hidevalue);
+           frmDt_1.append('break_check',this.break_check);
+   
+           frmDt_1.append('restaurant_name',this.res_name);
+   
+         //  for(let img1 of this.breakfastsectionimage){
+         //    frmDt_1.append('section_img', img1);
+         //  }
+          for (let img of this.multipleImages) {
+            frmDt_1.append('menu_img', img);
+          }
+        this.http.post<any>(this.url_reg+'/menu_file_testing', frmDt_1).subscribe(
+         (res) =>{console.log(res);
+           // this.spinner.hide();
+           // this.myFunction_update();
+         // (err) => console.log(err)
+       });
+       
+       // UPLOAD SECTION FILE //
+       const frmDt_2 = new FormData();
+   
+         //  frmDt_2.append('coverurl', COVERPAGEURL);
+         //  frmDt_2.append('cov_filename', this.breakfast_cover_name);
+         //  frmDt_2.append('top_filename', this.breakfast_top_name);
+   
+   
+         //  frmDt_2.append('topurl', TOPIMAGEURL);
+         //  frmDt_2.append('MenuUrl', MENUURL);
+          frmDt_2.append('SectionUrl',SECTIONURL);
+         //  frmDt_2.append('cov_img',this.breakfastcoverimage);
+         //  frmDt_2.append('top_img', this.breakfasttopimage);
+   
+           frmDt_2.append('restaurant_id',this.resid);
+           frmDt_2.append('menu_id',hidevalue);
+           frmDt_2.append('break_check',this.break_check);
+   
+           frmDt_2.append('restaurant_name',this.res_name);
+   
+          for(let img1 of this.breakfastsectionimage){
+            frmDt_2.append('section_img', img1);
+          }
+         //  for (let img of this.multipleImages) {
+         //    frmDt_2.append('menu_img', img);
+         //  }
+       this.http.post<any>(this.url_reg+'/sec_file_testing', frmDt_2).subscribe(
+         (res) =>{console.log(res);
+           // this.spinner.hide();
+           // this.myFunction_update();
+         // (err) => console.log(err)
+         this.spinner.hide();
+         this.myFunction();
+       });
+        //////////////////////////////////
 
           this.storevalue.length=0;
           this.storevalue.push({
@@ -6058,51 +6301,106 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
           const formData = new FormData();
 
           formData.append('coverurl', COVERPAGEURL);
-          formData.append('topurl', TOPIMAGEURL);
           formData.append('cov_filename', this.breakfast_cover_name);
-       formData.append('top_filename', this.breakfast_top_name);
-          formData.append('MenuUrl', MENUURL);
-          formData.append('SectionUrl',SECTIONURL);
+          formData.append('top_filename', this.breakfast_top_name);
+   
+   
+          formData.append('topurl', TOPIMAGEURL);
+         //  formData.append('MenuUrl', MENUURL);
+         //  formData.append('SectionUrl',SECTIONURL);
           formData.append('cov_img',this.breakfastcoverimage);
           formData.append('top_img', this.breakfasttopimage);
-
+   
            formData.append('restaurant_id',this.resid);
            formData.append('menu_id',hidevalue);
            formData.append('break_check',this.break_check);
-
+   
            formData.append('restaurant_name',this.res_name);
-          for(let img1 of this.breakfastsectionimage){
-            formData.append('section_img', img1);
-          }
-          for (let img of this.multipleImages) {
-            formData.append('menu_img', img);
-          }
-
+   
+         //  for(let img1 of this.breakfastsectionimage){
+         //    formData.append('section_img', img1);
+         //  }
+         //  for (let img of this.multipleImages) {
+         //    formData.append('menu_img', img);
+         //  }
+   
           console.log(this.multipleImages)
           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-            (res) =>{ console.log(res),
-              this.spinner.hide();
-              this.myFunction();
-          });
-
-
-          ////////////////////////////////////
-          this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-            (res) =>{console.log(res);
-              // this.spinner.hide();
-              // this.myFunction_update();
-            // (err) => console.log(err)
-          });
+            (res) =>{ console.log(res)
+           //  (err) => console.log(err),
           
-          // UPLOAD SECTION FILE //
-          this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-            (res) =>{console.log(res);
-              // this.spinner.hide();
-              // this.myFunction_update();
-            // (err) => console.log(err)
-          });
-          ///////////////////////////////////
 
+       
+        });
+   
+        ///////////////////////////////////
+        const frmDt_1 = new FormData();
+   
+         //  frmDt_1.append('coverurl', COVERPAGEURL);
+         //  frmDt_1.append('cov_filename', this.breakfast_cover_name);
+         //  frmDt_1.append('top_filename', this.breakfast_top_name);
+   
+   
+         //  frmDt_1.append('topurl', TOPIMAGEURL);
+          frmDt_1.append('MenuUrl', MENUURL);
+         //  frmDt_1.append('SectionUrl',SECTIONURL);
+         //  frmDt_1.append('cov_img',this.breakfastcoverimage);
+         //  frmDt_1.append('top_img', this.breakfasttopimage);
+   
+           frmDt_1.append('restaurant_id',this.resid);
+           frmDt_1.append('menu_id',hidevalue);
+           frmDt_1.append('break_check',this.break_check);
+   
+           frmDt_1.append('restaurant_name',this.res_name);
+   
+         //  for(let img1 of this.breakfastsectionimage){
+         //    frmDt_1.append('section_img', img1);
+         //  }
+          for (let img of this.multipleImages) {
+            frmDt_1.append('menu_img', img);
+          }
+        this.http.post<any>(this.url_reg+'/menu_file_testing', frmDt_1).subscribe(
+         (res) =>{console.log(res);
+           // this.spinner.hide();
+           // this.myFunction_update();
+         // (err) => console.log(err)
+       });
+       
+       // UPLOAD SECTION FILE //
+       const frmDt_2 = new FormData();
+   
+         //  frmDt_2.append('coverurl', COVERPAGEURL);
+         //  frmDt_2.append('cov_filename', this.breakfast_cover_name);
+         //  frmDt_2.append('top_filename', this.breakfast_top_name);
+   
+   
+         //  frmDt_2.append('topurl', TOPIMAGEURL);
+         //  frmDt_2.append('MenuUrl', MENUURL);
+          frmDt_2.append('SectionUrl',SECTIONURL);
+         //  frmDt_2.append('cov_img',this.breakfastcoverimage);
+         //  frmDt_2.append('top_img', this.breakfasttopimage);
+   
+           frmDt_2.append('restaurant_id',this.resid);
+           frmDt_2.append('menu_id',hidevalue);
+           frmDt_2.append('break_check',this.break_check);
+   
+           frmDt_2.append('restaurant_name',this.res_name);
+   
+          for(let img1 of this.breakfastsectionimage){
+            frmDt_2.append('section_img', img1);
+          }
+         //  for (let img of this.multipleImages) {
+         //    frmDt_2.append('menu_img', img);
+         //  }
+       this.http.post<any>(this.url_reg+'/sec_file_testing', frmDt_2).subscribe(
+         (res) =>{console.log(res);
+           // this.spinner.hide();
+           // this.myFunction_update();
+         // (err) => console.log(err)
+         this.spinner.hide();
+         this.myFunction();
+       });
+        //////////////////////////////////
           this.storevalue.length=0;
           this.storevalue.push({
 
@@ -6135,54 +6433,108 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
         this.v=3
         this.storevalue.length=0;
         const formData = new FormData();
-          formData.append('coverurl', COVERPAGEURL);
-          formData.append('topurl', TOPIMAGEURL);
-          formData.append('cov_filename', this.breakfast_cover_name);
-       formData.append('top_filename', this.breakfast_top_name);
-          formData.append('MenuUrl', MENUURL);
-          formData.append('SectionUrl',SECTIONURL);
-          formData.append('cov_img',this.breakfastcoverimage);
-          formData.append('top_img', this.breakfasttopimage);
-          //  formData.append('month_day',this.break_dt);
-           formData.append('restaurant_id',this.resid);
-           formData.append('menu_id',hidevalue);
-           formData.append('break_check',this.break_check);
-          //  formData.append("start_time",this.brunch_start);
-          //  formData.append('end_time',this.brunch_end);
-           formData.append('restaurant_name',this.res_name);
-            for(let img1 of this.breakfastsectionimage){
-            formData.append('section_img', img1);
-          }
-          for (let img of this.multipleImages) {
-            formData.append('menu_img', img);
-          }
 
-          console.log(this.multipleImages)
-          this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-            (res) =>{
-              console.log(res);
-              this.spinner.hide();
-              this.myFunction();
-            // (err) => console.log(err)
-          } );
+        formData.append('coverurl', COVERPAGEURL);
+        formData.append('cov_filename', this.breakfast_cover_name);
+        formData.append('top_filename', this.breakfast_top_name);
+ 
+ 
+        formData.append('topurl', TOPIMAGEURL);
+       //  formData.append('MenuUrl', MENUURL);
+       //  formData.append('SectionUrl',SECTIONURL);
+        formData.append('cov_img',this.breakfastcoverimage);
+        formData.append('top_img', this.breakfasttopimage);
+ 
+         formData.append('restaurant_id',this.resid);
+         formData.append('menu_id',hidevalue);
+         formData.append('break_check',this.break_check);
+ 
+         formData.append('restaurant_name',this.res_name);
+ 
+       //  for(let img1 of this.breakfastsectionimage){
+       //    formData.append('section_img', img1);
+       //  }
+       //  for (let img of this.multipleImages) {
+       //    formData.append('menu_img', img);
+       //  }
+ 
+        console.log(this.multipleImages)
+        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+          (res) =>{ console.log(res)
+         //  (err) => console.log(err),
+        
 
-
-          //////////////////////////
-          this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-            (res) =>{console.log(res);
-              // this.spinner.hide();
-              // this.myFunction_update();
-            // (err) => console.log(err)
-          });
-          
-          // UPLOAD SECTION FILE //
-          this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-            (res) =>{console.log(res);
-              // this.spinner.hide();
-              // this.myFunction_update();
-            // (err) => console.log(err)
-          });
-          ////////////////////////////////
+     
+      });
+ 
+      ///////////////////////////////////
+      const frmDt_1 = new FormData();
+ 
+       //  frmDt_1.append('coverurl', COVERPAGEURL);
+       //  frmDt_1.append('cov_filename', this.breakfast_cover_name);
+       //  frmDt_1.append('top_filename', this.breakfast_top_name);
+ 
+ 
+       //  frmDt_1.append('topurl', TOPIMAGEURL);
+        frmDt_1.append('MenuUrl', MENUURL);
+       //  frmDt_1.append('SectionUrl',SECTIONURL);
+       //  frmDt_1.append('cov_img',this.breakfastcoverimage);
+       //  frmDt_1.append('top_img', this.breakfasttopimage);
+ 
+         frmDt_1.append('restaurant_id',this.resid);
+         frmDt_1.append('menu_id',hidevalue);
+         frmDt_1.append('break_check',this.break_check);
+ 
+         frmDt_1.append('restaurant_name',this.res_name);
+ 
+       //  for(let img1 of this.breakfastsectionimage){
+       //    frmDt_1.append('section_img', img1);
+       //  }
+        for (let img of this.multipleImages) {
+          frmDt_1.append('menu_img', img);
+        }
+      this.http.post<any>(this.url_reg+'/menu_file_testing', frmDt_1).subscribe(
+       (res) =>{console.log(res);
+         // this.spinner.hide();
+         // this.myFunction_update();
+       // (err) => console.log(err)
+     });
+     
+     // UPLOAD SECTION FILE //
+     const frmDt_2 = new FormData();
+ 
+       //  frmDt_2.append('coverurl', COVERPAGEURL);
+       //  frmDt_2.append('cov_filename', this.breakfast_cover_name);
+       //  frmDt_2.append('top_filename', this.breakfast_top_name);
+ 
+ 
+       //  frmDt_2.append('topurl', TOPIMAGEURL);
+       //  frmDt_2.append('MenuUrl', MENUURL);
+        frmDt_2.append('SectionUrl',SECTIONURL);
+       //  frmDt_2.append('cov_img',this.breakfastcoverimage);
+       //  frmDt_2.append('top_img', this.breakfasttopimage);
+ 
+         frmDt_2.append('restaurant_id',this.resid);
+         frmDt_2.append('menu_id',hidevalue);
+         frmDt_2.append('break_check',this.break_check);
+ 
+         frmDt_2.append('restaurant_name',this.res_name);
+ 
+        for(let img1 of this.breakfastsectionimage){
+          frmDt_2.append('section_img', img1);
+        }
+       //  for (let img of this.multipleImages) {
+       //    frmDt_2.append('menu_img', img);
+       //  }
+     this.http.post<any>(this.url_reg+'/sec_file_testing', frmDt_2).subscribe(
+       (res) =>{console.log(res);
+         // this.spinner.hide();
+         // this.myFunction_update();
+       // (err) => console.log(err)
+       this.spinner.hide();
+       this.myFunction();
+     });
+      //////////////////////////////////
 
           this.storevalue.length=0;
           this.storevalue.push({
@@ -6234,8 +6586,8 @@ localStorage.setItem('value',this.v)
       // formData.append('file', this.breakfastcoverimage);
       formData.append('coverurl', v4);
       formData.append('topurl',  v3);
-      formData.append('MenuUrl', v2);
-      formData.append('SectionUrl',v1);
+      // formData.append('MenuUrl', v2);
+      // formData.append('SectionUrl',v1);
       formData.append('cov_filename', this.dinner_cover_name);
     formData.append('top_filename', this.dinner_top_name);
       formData.append('cov_img',this.branchcoverimage);
@@ -6246,20 +6598,45 @@ localStorage.setItem('value',this.v)
        formData.append('break_check',this.brunch_check);
 
        formData.append('restaurant_name',this.res_name);
-      for(let img1 of this.branchsectionimage){
-        formData.append('section_img', img1);
-      }
-      for (let img of this.branchmenuimage) {
-        formData.append('menu_img', img);
-      }
+      // for(let img1 of this.branchsectionimage){
+      //   formData.append('section_img', img1);
+      // }
+      // for (let img of this.branchmenuimage) {
+      //   formData.append('menu_img', img);
+      // }
       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-        (res) => {console.log(res),
-        this.spinner.hide();
-        this.myFunction_update();
+        (res) => {console.log(res)
+     
         });
 
         /////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+
+        const formData1 = new FormData();
+        // formData.append('file', this.breakfastcoverimage);
+        // formData1.append('coverurl', v4);
+        // formData1.append('topurl',  v3);
+        formData1.append('MenuUrl', v2);
+        // formData1.append('SectionUrl',v1);
+      //   formData1.append('cov_filename', this.dinner_cover_name);
+      // formData1.append('top_filename', this.dinner_top_name);
+      //   formData1.append('cov_img',this.branchcoverimage);
+      //   formData1.append('top_img', this.branchtopimage);
+        //  formData1.append('month_day',this.break_dt);
+         formData1.append('restaurant_id',this.resid);
+         formData1.append('menu_id',v5);
+         formData1.append('break_check',this.brunch_check);
+  
+         formData1.append('restaurant_name',this.res_name);
+        // for(let img1 of this.branchsectionimage){
+        //   formData1.append('section_img', img1);
+        // }
+        for (let img of this.branchmenuimage) {
+          formData1.append('menu_img', img);
+        }
+
+
+
+this.http.post<any>(this.url_reg+'/menu_file_testing', formData1).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
@@ -6267,11 +6644,37 @@ this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+
+const formData2 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+// formData1.append('coverurl', v4);
+// formData1.append('topurl',  v3);
+// formData1.append('MenuUrl', v2);
+formData2.append('SectionUrl',v1);
+//   formData2.append('cov_filename', this.dinner_cover_name);
+// formData2.append('top_filename', this.dinner_top_name);
+//   formData2.append('cov_img',this.branchcoverimage);
+//   formData2.append('top_img', this.branchtopimage);
+//  formData2.append('month_day',this.break_dt);
+ formData2.append('restaurant_id',this.resid);
+ formData2.append('menu_id',v5);
+ formData2.append('break_check',this.brunch_check);
+
+ formData2.append('restaurant_name',this.res_name);
+for(let img1 of this.branchsectionimage){
+  formData2.append('section_img', img1);
+}
+// for (let img of this.branchmenuimage) {
+//   formData2.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData2).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
   // (err) => console.log(err)
+  this.spinner.hide();
+  this.myFunction_update();
 });
 ////////////////////////////////////////////END ////////////////////////////////////
 
@@ -6299,10 +6702,10 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
       // formData.append('file', this.breakfastcoverimage);
       formData.append('coverurl', v4);
       formData.append('topurl',  v3);
-      formData.append('MenuUrl', v2);
-      formData.append('SectionUrl',v1);
+      // formData.append('MenuUrl', v2);
+      // formData.append('SectionUrl',v1);
       formData.append('cov_filename', this.dinner_cover_name);
-      formData.append('top_filename', this.dinner_top_name);
+    formData.append('top_filename', this.dinner_top_name);
       formData.append('cov_img',this.branchcoverimage);
       formData.append('top_img', this.branchtopimage);
       //  formData.append('month_day',this.break_dt);
@@ -6311,33 +6714,86 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
        formData.append('break_check',this.brunch_check);
 
        formData.append('restaurant_name',this.res_name);
-      for(let img1 of this.branchsectionimage){
-        formData.append('section_img', img1);
-      }
-      for (let img of this.branchmenuimage) {
-        formData.append('menu_img', img);
-      }
+      // for(let img1 of this.branchsectionimage){
+      //   formData.append('section_img', img1);
+      // }
+      // for (let img of this.branchmenuimage) {
+      //   formData.append('menu_img', img);
+      // }
       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-        (res) => {console.log(res),
-          this.spinner.hide();
-          this.myFunction_update();
-          });
+        (res) => {console.log(res)
+   
+        });
+
         /////////////////////////////////////////// TEST ////////////////////////////////////
-        this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-          (res) =>{console.log(res);
-            // this.spinner.hide();
-            // this.myFunction_update();
-          // (err) => console.log(err)
-        });
-        
-        // UPLOAD SECTION FILE //
-        this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-          (res) =>{console.log(res);
-            // this.spinner.hide();
-            // this.myFunction_update();
-          // (err) => console.log(err)
-        });
-        ////////////////////////////////////////////END ////////////////////////////////////
+
+        const formData1 = new FormData();
+        // formData.append('file', this.breakfastcoverimage);
+        // formData1.append('coverurl', v4);
+        // formData1.append('topurl',  v3);
+        formData1.append('MenuUrl', v2);
+        // formData1.append('SectionUrl',v1);
+      //   formData1.append('cov_filename', this.dinner_cover_name);
+      // formData1.append('top_filename', this.dinner_top_name);
+      //   formData1.append('cov_img',this.branchcoverimage);
+      //   formData1.append('top_img', this.branchtopimage);
+        //  formData1.append('month_day',this.break_dt);
+         formData1.append('restaurant_id',this.resid);
+         formData1.append('menu_id',v5);
+         formData1.append('break_check',this.brunch_check);
+  
+         formData1.append('restaurant_name',this.res_name);
+        // for(let img1 of this.branchsectionimage){
+        //   formData1.append('section_img', img1);
+        // }
+        for (let img of this.branchmenuimage) {
+          formData1.append('menu_img', img);
+        }
+
+
+
+this.http.post<any>(this.url_reg+'/menu_file_testing', formData1).subscribe(
+  (res) =>{console.log(res);
+    // this.spinner.hide();
+    // this.myFunction_update();
+  // (err) => console.log(err)
+  
+});
+
+// UPLOAD SECTION FILE //
+
+const formData2 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+// formData1.append('coverurl', v4);
+// formData1.append('topurl',  v3);
+// formData1.append('MenuUrl', v2);
+formData2.append('SectionUrl',v1);
+//   formData2.append('cov_filename', this.dinner_cover_name);
+// formData2.append('top_filename', this.dinner_top_name);
+//   formData2.append('cov_img',this.branchcoverimage);
+//   formData2.append('top_img', this.branchtopimage);
+//  formData2.append('month_day',this.break_dt);
+ formData2.append('restaurant_id',this.resid);
+ formData2.append('menu_id',v5);
+ formData2.append('break_check',this.brunch_check);
+
+ formData2.append('restaurant_name',this.res_name);
+for(let img1 of this.branchsectionimage){
+  formData2.append('section_img', img1);
+}
+// for (let img of this.branchmenuimage) {
+//   formData2.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData2).subscribe(
+  (res) =>{console.log(res);
+    this.spinner.hide();
+    // this.myFunction_update();
+  // (err) => console.log(err)
+  this.myFunction_update();
+
+});
+////////////////////////////////////////////END ////////////////////////////////////
 
           
 
@@ -6366,49 +6822,99 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
      if( localStorage.getItem('dinner')==''){
       this.storevalue.length=0;
       const formData = new FormData();
-        // formData.append('file', this.breakfastcoverimage);
-        formData.append('coverurl', v4);
-        formData.append('topurl',  v3);
-        formData.append('MenuUrl', v2);
-        formData.append('SectionUrl',v1);
-        formData.append('cov_filename', this.dinner_cover_name);
-        formData.append('top_filename', this.dinner_top_name);
-        formData.append('cov_img',this.branchcoverimage);
-        formData.append('top_img', this.branchtopimage);
-        //  formData.append('month_day',this.break_dt);
-         formData.append('restaurant_id',this.resid);
-         formData.append('menu_id',v5);
-         formData.append('break_check',this.brunch_check);
+      // formData.append('file', this.breakfastcoverimage);
+      formData.append('coverurl', v4);
+      formData.append('topurl',  v3);
+      // formData.append('MenuUrl', v2);
+      // formData.append('SectionUrl',v1);
+      formData.append('cov_filename', this.dinner_cover_name);
+    formData.append('top_filename', this.dinner_top_name);
+      formData.append('cov_img',this.branchcoverimage);
+      formData.append('top_img', this.branchtopimage);
+      //  formData.append('month_day',this.break_dt);
+       formData.append('restaurant_id',this.resid);
+       formData.append('menu_id',v5);
+       formData.append('break_check',this.brunch_check);
 
-         formData.append('restaurant_name',this.res_name);
-        for(let img1 of this.branchsectionimage){
-          formData.append('section_img', img1);
-        }
-        for (let img of this.branchmenuimage) {
-          formData.append('menu_img', img);
-        }
-        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-          (res) =>{ console.log(res);
-            this.spinner.hide();
-          this.myFunction_update();
-  
+       formData.append('restaurant_name',this.res_name);
+      // for(let img1 of this.branchsectionimage){
+      //   formData.append('section_img', img1);
+      // }
+      // for (let img of this.branchmenuimage) {
+      //   formData.append('menu_img', img);
+      // }
+      this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+        (res) => {console.log(res)
         });
+
         /////////////////////////////////////////// TEST ////////////////////////////////////
-        this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-          (res) =>{console.log(res);
-            // this.spinner.hide();
-            // this.myFunction_update();
-          // (err) => console.log(err)
-        });
-        
-        // UPLOAD SECTION FILE //
-        this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-          (res) =>{console.log(res);
-            // this.spinner.hide();
-            // this.myFunction_update();
-          // (err) => console.log(err)
-        });
-        ////////////////////////////////////////////END ////////////////////////////////////
+
+        const formData1 = new FormData();
+        // formData.append('file', this.breakfastcoverimage);
+        // formData1.append('coverurl', v4);
+        // formData1.append('topurl',  v3);
+        formData1.append('MenuUrl', v2);
+        // formData1.append('SectionUrl',v1);
+      //   formData1.append('cov_filename', this.dinner_cover_name);
+      // formData1.append('top_filename', this.dinner_top_name);
+      //   formData1.append('cov_img',this.branchcoverimage);
+      //   formData1.append('top_img', this.branchtopimage);
+        //  formData1.append('month_day',this.break_dt);
+         formData1.append('restaurant_id',this.resid);
+         formData1.append('menu_id',v5);
+         formData1.append('break_check',this.brunch_check);
+  
+         formData1.append('restaurant_name',this.res_name);
+        // for(let img1 of this.branchsectionimage){
+        //   formData1.append('section_img', img1);
+        // }
+        for (let img of this.branchmenuimage) {
+          formData1.append('menu_img', img);
+        }
+
+
+
+this.http.post<any>(this.url_reg+'/menu_file_testing', formData1).subscribe(
+  (res) =>{console.log(res);
+    // this.spinner.hide();
+    // this.myFunction_update();
+  // (err) => console.log(err)
+});
+
+// UPLOAD SECTION FILE //
+
+const formData2 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+// formData1.append('coverurl', v4);
+// formData1.append('topurl',  v3);
+// formData1.append('MenuUrl', v2);
+formData2.append('SectionUrl',v1);
+//   formData2.append('cov_filename', this.dinner_cover_name);
+// formData2.append('top_filename', this.dinner_top_name);
+//   formData2.append('cov_img',this.branchcoverimage);
+//   formData2.append('top_img', this.branchtopimage);
+//  formData2.append('month_day',this.break_dt);
+ formData2.append('restaurant_id',this.resid);
+ formData2.append('menu_id',v5);
+ formData2.append('break_check',this.brunch_check);
+
+ formData2.append('restaurant_name',this.res_name);
+for(let img1 of this.branchsectionimage){
+  formData2.append('section_img', img1);
+}
+// for (let img of this.branchmenuimage) {
+//   formData2.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData2).subscribe(
+  (res) =>{console.log(res);
+    // this.spinner.hide();
+    // this.myFunction_update();
+  // (err) => console.log(err)
+        this.spinner.hide();
+        this.myFunction_update();
+});
+////////////////////////////////////////////END ////////////////////////////////////
         
         this.storevalue.length=0;
       this.storevalue.push({
@@ -6445,49 +6951,101 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
 
 
         const formData = new FormData();
-        // formData.append('file', this.breakfastcoverimage);
-        formData.append('coverurl', v4);
-        formData.append('topurl',  v3);
-        formData.append('MenuUrl', v2);
-        formData.append('cov_filename', this.dinner_cover_name);
-        formData.append('top_filename', this.dinner_top_name);
-        formData.append('SectionUrl',v1);
-        formData.append('cov_img',this.branchcoverimage);
-        formData.append('top_img', this.branchtopimage);
-        //  formData.append('month_day',this.break_dt);
-         formData.append('restaurant_id',this.resid);
-         formData.append('menu_id',v5);
-         formData.append('break_check',this.brunch_check);
-        //  formData.append("start_time",this.brunch_start);
-        //  formData.append('end_time',this.brunch_end);
-         formData.append('restaurant_name',this.res_name);
-         for(let img1 of this.branchsectionimage){
-          formData.append('section_img', img1);
-        }
-        for (let img of this.branchmenuimage) {
-          formData.append('menu_img', img);
-        }
-        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-          (res) =>{ console.log(res);
-          this.spinner.hide();
-          this.myFunction();
+      // formData.append('file', this.breakfastcoverimage);
+      formData.append('coverurl', v4);
+      formData.append('topurl',  v3);
+      // formData.append('MenuUrl', v2);
+      // formData.append('SectionUrl',v1);
+      formData.append('cov_filename', this.dinner_cover_name);
+    formData.append('top_filename', this.dinner_top_name);
+      formData.append('cov_img',this.branchcoverimage);
+      formData.append('top_img', this.branchtopimage);
+      //  formData.append('month_day',this.break_dt);
+       formData.append('restaurant_id',this.resid);
+       formData.append('menu_id',v5);
+       formData.append('break_check',this.brunch_check);
+
+       formData.append('restaurant_name',this.res_name);
+      // for(let img1 of this.branchsectionimage){
+      //   formData.append('section_img', img1);
+      // }
+      // for (let img of this.branchmenuimage) {
+      //   formData.append('menu_img', img);
+      // }
+      this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+        (res) => {console.log(res)
+       
+
         });
+
         /////////////////////////////////////////// TEST ////////////////////////////////////
-        this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-          (res) =>{console.log(res);
-            // this.spinner.hide();
-            // this.myFunction_update();
-          // (err) => console.log(err)
-        });
-        
-        // UPLOAD SECTION FILE //
-        this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-          (res) =>{console.log(res);
-            // this.spinner.hide();
-            // this.myFunction_update();
-          // (err) => console.log(err)
-        });
-        ////////////////////////////////////////////END ////////////////////////////////////
+
+        const formData1 = new FormData();
+        // formData.append('file', this.breakfastcoverimage);
+        // formData1.append('coverurl', v4);
+        // formData1.append('topurl',  v3);
+        formData1.append('MenuUrl', v2);
+        // formData1.append('SectionUrl',v1);
+      //   formData1.append('cov_filename', this.dinner_cover_name);
+      // formData1.append('top_filename', this.dinner_top_name);
+      //   formData1.append('cov_img',this.branchcoverimage);
+      //   formData1.append('top_img', this.branchtopimage);
+        //  formData1.append('month_day',this.break_dt);
+         formData1.append('restaurant_id',this.resid);
+         formData1.append('menu_id',v5);
+         formData1.append('break_check',this.brunch_check);
+  
+         formData1.append('restaurant_name',this.res_name);
+        // for(let img1 of this.branchsectionimage){
+        //   formData1.append('section_img', img1);
+        // }
+        for (let img of this.branchmenuimage) {
+          formData1.append('menu_img', img);
+        }
+
+
+
+this.http.post<any>(this.url_reg+'/menu_file_testing', formData1).subscribe(
+  (res) =>{console.log(res);
+    // this.spinner.hide();
+    // this.myFunction_update();
+  // (err) => console.log(err)
+});
+
+// UPLOAD SECTION FILE //
+
+const formData2 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+// formData1.append('coverurl', v4);
+// formData1.append('topurl',  v3);
+// formData1.append('MenuUrl', v2);
+formData2.append('SectionUrl',v1);
+//   formData2.append('cov_filename', this.dinner_cover_name);
+// formData2.append('top_filename', this.dinner_top_name);
+//   formData2.append('cov_img',this.branchcoverimage);
+//   formData2.append('top_img', this.branchtopimage);
+//  formData2.append('month_day',this.break_dt);
+ formData2.append('restaurant_id',this.resid);
+ formData2.append('menu_id',v5);
+ formData2.append('break_check',this.brunch_check);
+
+ formData2.append('restaurant_name',this.res_name);
+for(let img1 of this.branchsectionimage){
+  formData2.append('section_img', img1);
+}
+// for (let img of this.branchmenuimage) {
+//   formData2.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData2).subscribe(
+  (res) =>{console.log(res);
+    // this.spinner.hide();
+    // this.myFunction_update();
+  // (err) => console.log(err)
+  this.spinner.hide();
+  this.myFunction();
+});
+////////////////////////////////////////////END ////////////////////////////////////
 
 
         this.storevalue.length=0;
@@ -6523,51 +7081,102 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
            this.storevalue.length=0;
 
            const formData = new FormData();
-
+           // formData.append('file', this.breakfastcoverimage);
            formData.append('coverurl', v4);
            formData.append('topurl',  v3);
-           formData.append('MenuUrl', v2);
-           formData.append('SectionUrl',v1);
+           // formData.append('MenuUrl', v2);
+           // formData.append('SectionUrl',v1);
            formData.append('cov_filename', this.dinner_cover_name);
-           formData.append('top_filename', this.dinner_top_name);
+         formData.append('top_filename', this.dinner_top_name);
            formData.append('cov_img',this.branchcoverimage);
            formData.append('top_img', this.branchtopimage);
-
+           //  formData.append('month_day',this.break_dt);
             formData.append('restaurant_id',this.resid);
             formData.append('menu_id',v5);
             formData.append('break_check',this.brunch_check);
-
+     
             formData.append('restaurant_name',this.res_name);
-          for(let img1 of this.branchsectionimage){
-              formData.append('section_img', img1);
-            }
-            for (let img of this.branchmenuimage) {
-              formData.append('menu_img', img);
-            }
-
-           console.log(this.multipleImages)
+           // for(let img1 of this.branchsectionimage){
+           //   formData.append('section_img', img1);
+           // }
+           // for (let img of this.branchmenuimage) {
+           //   formData.append('menu_img', img);
+           // }
            this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-             (res) =>{ console.log(res);
-              this.spinner.hide();
-              this.myFunction();
-            });
+             (res) => {console.log(res)
+           
+             });
+     
+             /////////////////////////////////////////// TEST ////////////////////////////////////
+     
+             const formData1 = new FormData();
+             // formData.append('file', this.breakfastcoverimage);
+             // formData1.append('coverurl', v4);
+             // formData1.append('topurl',  v3);
+             formData1.append('MenuUrl', v2);
+             // formData1.append('SectionUrl',v1);
+           //   formData1.append('cov_filename', this.dinner_cover_name);
+           // formData1.append('top_filename', this.dinner_top_name);
+           //   formData1.append('cov_img',this.branchcoverimage);
+           //   formData1.append('top_img', this.branchtopimage);
+             //  formData1.append('month_day',this.break_dt);
+              formData1.append('restaurant_id',this.resid);
+              formData1.append('menu_id',v5);
+              formData1.append('break_check',this.brunch_check);
+       
+              formData1.append('restaurant_name',this.res_name);
+             // for(let img1 of this.branchsectionimage){
+             //   formData1.append('section_img', img1);
+             // }
+             for (let img of this.branchmenuimage) {
+               formData1.append('menu_img', img);
+             }
+     
+     
+     
+     this.http.post<any>(this.url_reg+'/menu_file_testing', formData1).subscribe(
+       (res) =>{console.log(res);
+         // this.spinner.hide();
+         // this.myFunction_update();
+       // (err) => console.log(err)
 
-        /////////////////////////////////////////// TEST ////////////////////////////////////
-        this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-          (res) =>{console.log(res);
-            // this.spinner.hide();
-            // this.myFunction_update();
-          // (err) => console.log(err)
-        });
-        
-        // UPLOAD SECTION FILE //
-        this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-          (res) =>{console.log(res);
-            // this.spinner.hide();
-            // this.myFunction_update();
-          // (err) => console.log(err)
-        });
-        ////////////////////////////////////////////END ////////////////////////////////////
+
+     });
+     
+     // UPLOAD SECTION FILE //
+     
+     const formData2 = new FormData();
+     // formData.append('file', this.breakfastcoverimage);
+     // formData1.append('coverurl', v4);
+     // formData1.append('topurl',  v3);
+     // formData1.append('MenuUrl', v2);
+     formData2.append('SectionUrl',v1);
+     //   formData2.append('cov_filename', this.dinner_cover_name);
+     // formData2.append('top_filename', this.dinner_top_name);
+     //   formData2.append('cov_img',this.branchcoverimage);
+     //   formData2.append('top_img', this.branchtopimage);
+     //  formData2.append('month_day',this.break_dt);
+      formData2.append('restaurant_id',this.resid);
+      formData2.append('menu_id',v5);
+      formData2.append('break_check',this.brunch_check);
+     
+      formData2.append('restaurant_name',this.res_name);
+     for(let img1 of this.branchsectionimage){
+       formData2.append('section_img', img1);
+     }
+     // for (let img of this.branchmenuimage) {
+     //   formData2.append('menu_img', img);
+     // }
+     
+     this.http.post<any>(this.url_reg+'/sec_file_testing', formData2).subscribe(
+       (res) =>{console.log(res);
+         // this.spinner.hide();
+         // this.myFunction_update();
+       // (err) => console.log(err)
+       this.spinner.hide();
+       this.myFunction();
+     });
+     ////////////////////////////////////////////END ////////////////////////////////////
 
            this.storevalue.length=0;
       this.storevalue.push({
@@ -6596,35 +7205,60 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
            this.storevalue.length=0;
 
            const formData = new FormData();
+      // formData.append('file', this.breakfastcoverimage);
+      formData.append('coverurl', v4);
+      formData.append('topurl',  v3);
+      // formData.append('MenuUrl', v2);
+      // formData.append('SectionUrl',v1);
+      formData.append('cov_filename', this.dinner_cover_name);
+    formData.append('top_filename', this.dinner_top_name);
+      formData.append('cov_img',this.branchcoverimage);
+      formData.append('top_img', this.branchtopimage);
+      //  formData.append('month_day',this.break_dt);
+       formData.append('restaurant_id',this.resid);
+       formData.append('menu_id',v5);
+       formData.append('break_check',this.brunch_check);
 
-           formData.append('coverurl', v4);
-           formData.append('topurl',  v3);
-           formData.append('MenuUrl', v2);
-           formData.append('SectionUrl',v1);
-           formData.append('cov_filename', this.dinner_cover_name);
-           formData.append('top_filename', this.dinner_top_name);
-           formData.append('cov_img',this.branchcoverimage);
-           formData.append('top_img', this.branchtopimage);
+       formData.append('restaurant_name',this.res_name);
+      // for(let img1 of this.branchsectionimage){
+      //   formData.append('section_img', img1);
+      // }
+      // for (let img of this.branchmenuimage) {
+      //   formData.append('menu_img', img);
+      // }
+      this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+        (res) => {console.log(res)
 
-            formData.append('restaurant_id',this.resid);
-            formData.append('menu_id',v5);
-            formData.append('break_check',this.brunch_check);
+        });
 
-            formData.append('restaurant_name',this.res_name);
-         for(let img1 of this.branchsectionimage){
-             formData.append('section_img', img1);
-           }
-           for (let img of this.branchmenuimage) {
-             formData.append('menu_img', img);
-           }
-           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-             (res) => { console.log(res);
-              this.spinner.hide();
-              this.myFunction();
-            });
+        /////////////////////////////////////////// TEST ////////////////////////////////////
 
-                    /////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+        const formData1 = new FormData();
+        // formData.append('file', this.breakfastcoverimage);
+        // formData1.append('coverurl', v4);
+        // formData1.append('topurl',  v3);
+        formData1.append('MenuUrl', v2);
+        // formData1.append('SectionUrl',v1);
+      //   formData1.append('cov_filename', this.dinner_cover_name);
+      // formData1.append('top_filename', this.dinner_top_name);
+      //   formData1.append('cov_img',this.branchcoverimage);
+      //   formData1.append('top_img', this.branchtopimage);
+        //  formData1.append('month_day',this.break_dt);
+         formData1.append('restaurant_id',this.resid);
+         formData1.append('menu_id',v5);
+         formData1.append('break_check',this.brunch_check);
+  
+         formData1.append('restaurant_name',this.res_name);
+        // for(let img1 of this.branchsectionimage){
+        //   formData1.append('section_img', img1);
+        // }
+        for (let img of this.branchmenuimage) {
+          formData1.append('menu_img', img);
+        }
+
+
+
+this.http.post<any>(this.url_reg+'/menu_file_testing', formData1).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
@@ -6632,11 +7266,37 @@ this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+
+const formData2 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+// formData1.append('coverurl', v4);
+// formData1.append('topurl',  v3);
+// formData1.append('MenuUrl', v2);
+formData2.append('SectionUrl',v1);
+//   formData2.append('cov_filename', this.dinner_cover_name);
+// formData2.append('top_filename', this.dinner_top_name);
+//   formData2.append('cov_img',this.branchcoverimage);
+//   formData2.append('top_img', this.branchtopimage);
+//  formData2.append('month_day',this.break_dt);
+ formData2.append('restaurant_id',this.resid);
+ formData2.append('menu_id',v5);
+ formData2.append('break_check',this.brunch_check);
+
+ formData2.append('restaurant_name',this.res_name);
+for(let img1 of this.branchsectionimage){
+  formData2.append('section_img', img1);
+}
+// for (let img of this.branchmenuimage) {
+//   formData2.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData2).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
   // (err) => console.log(err)
+  this.spinner.hide();
+  this.myFunction();
 });
 ////////////////////////////////////////////END ////////////////////////////////////
 
@@ -6674,34 +7334,60 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
        this.storevalue.length=0;
 
        const formData = new FormData();
+      // formData.append('file', this.breakfastcoverimage);
+      formData.append('coverurl', v4);
+      formData.append('topurl',  v3);
+      // formData.append('MenuUrl', v2);
+      // formData.append('SectionUrl',v1);
+      formData.append('cov_filename', this.dinner_cover_name);
+    formData.append('top_filename', this.dinner_top_name);
+      formData.append('cov_img',this.branchcoverimage);
+      formData.append('top_img', this.branchtopimage);
+      //  formData.append('month_day',this.break_dt);
+       formData.append('restaurant_id',this.resid);
+       formData.append('menu_id',v5);
+       formData.append('break_check',this.brunch_check);
 
-       formData.append('coverurl', v4);
-       formData.append('topurl',  v3);
-       formData.append('MenuUrl', v2);
-       formData.append('SectionUrl',v1);
-       formData.append('cov_filename', this.dinner_cover_name);
-       formData.append('top_filename', this.dinner_top_name);
-       formData.append('cov_img',this.branchcoverimage);
-       formData.append('top_img', this.branchtopimage);
+       formData.append('restaurant_name',this.res_name);
+      // for(let img1 of this.branchsectionimage){
+      //   formData.append('section_img', img1);
+      // }
+      // for (let img of this.branchmenuimage) {
+      //   formData.append('menu_img', img);
+      // }
+      this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+        (res) => {console.log(res)
 
-        formData.append('restaurant_id',this.resid);
-        formData.append('menu_id',v5);
-        formData.append('break_check',this.brunch_check);
-
-        formData.append('restaurant_name',this.res_name);
-         for(let img1 of this.branchsectionimage){
-          formData.append('section_img', img1);
-        }
-        for (let img of this.branchmenuimage) {
-          formData.append('menu_img', img);
-        }
-       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-         (res) => { console.log(res);
-          this.spinner.hide();
-          this.myFunction();
         });
-           /////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+
+        /////////////////////////////////////////// TEST ////////////////////////////////////
+
+        const formData1 = new FormData();
+        // formData.append('file', this.breakfastcoverimage);
+        // formData1.append('coverurl', v4);
+        // formData1.append('topurl',  v3);
+        formData1.append('MenuUrl', v2);
+        // formData1.append('SectionUrl',v1);
+      //   formData1.append('cov_filename', this.dinner_cover_name);
+      // formData1.append('top_filename', this.dinner_top_name);
+      //   formData1.append('cov_img',this.branchcoverimage);
+      //   formData1.append('top_img', this.branchtopimage);
+        //  formData1.append('month_day',this.break_dt);
+         formData1.append('restaurant_id',this.resid);
+         formData1.append('menu_id',v5);
+         formData1.append('break_check',this.brunch_check);
+  
+         formData1.append('restaurant_name',this.res_name);
+        // for(let img1 of this.branchsectionimage){
+        //   formData1.append('section_img', img1);
+        // }
+        for (let img of this.branchmenuimage) {
+          formData1.append('menu_img', img);
+        }
+
+
+
+this.http.post<any>(this.url_reg+'/menu_file_testing', formData1).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
@@ -6709,11 +7395,37 @@ this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+
+const formData2 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+// formData1.append('coverurl', v4);
+// formData1.append('topurl',  v3);
+// formData1.append('MenuUrl', v2);
+formData2.append('SectionUrl',v1);
+//   formData2.append('cov_filename', this.dinner_cover_name);
+// formData2.append('top_filename', this.dinner_top_name);
+//   formData2.append('cov_img',this.branchcoverimage);
+//   formData2.append('top_img', this.branchtopimage);
+//  formData2.append('month_day',this.break_dt);
+ formData2.append('restaurant_id',this.resid);
+ formData2.append('menu_id',v5);
+ formData2.append('break_check',this.brunch_check);
+
+ formData2.append('restaurant_name',this.res_name);
+for(let img1 of this.branchsectionimage){
+  formData2.append('section_img', img1);
+}
+// for (let img of this.branchmenuimage) {
+//   formData2.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData2).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
   // (err) => console.log(err)
+  this.spinner.hide();
+  this.myFunction();
 });
 ////////////////////////////////////////////END ////////////////////////////////////
 
@@ -6780,8 +7492,8 @@ console.log(this.storevalue);
       // formData.append('file', this.breakfastcoverimage);
       formData.append('coverurl', v1);
       formData.append('topurl',  v2);
-      formData.append('MenuUrl', v4);
-      formData.append('SectionUrl',v5);
+      // formData.append('MenuUrl', v4);
+      // formData.append('SectionUrl',v5);
       formData.append('cov_img',this.launchcoverimage);
       formData.append('top_img',this.launchtopimage);
       formData.append('cov_filename', this.lunch_cover_name);
@@ -6793,22 +7505,47 @@ console.log(this.storevalue);
       //  formData.append("start_time",this.brunch_start);
       //  formData.append('end_time',this.brunch_end);
        formData.append('restaurant_name',this.res_name);
-      for(let img1 of this.launchsectionimage){
-        formData.append('section_img', img1);
-      }
-      for (let img of this.launchmenuimage) {
-        formData.append('menu_img', img);
-      }
+      // for(let img1 of this.launchsectionimage){
+      //   formData.append('section_img', img1);
+      // }
+      // for (let img of this.launchmenuimage) {
+      //   formData.append('menu_img', img);
+      // }
 
       console.log(this.launchmenuimage)
       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
         (res) =>{console.log(res);
-        this.spinner.hide();
-          this.myFunction_update();
+    
         // (err) => console.log(err)
     });
  /////////////////////////////////////////// TEST ////////////////////////////////////
- this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+
+
+ const formData3 = new FormData();
+ // formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+ formData3.append('MenuUrl', v4);
+ // formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+ //  formData1.append('month_day',this.break_dt);
+  formData3.append('restaurant_id',this.resid);
+  formData3.append('menu_id',v6);
+  formData3.append('break_check',this.launch_check);
+ //  formData1.append("start_time",this.brunch_start);
+ //  formData1.append('end_time',this.brunch_end);
+  formData3.append('restaurant_name',this.res_name);
+ // for(let img1 of this.launchsectionimage){
+ //   formData1.append('section_img', img1);
+ // }
+ for (let img of this.launchmenuimage) {
+   formData3.append('menu_img', img);
+ }
+
+ this.http.post<any>(this.url_reg+'/menu_file_testing', formData3).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
@@ -6816,8 +7553,34 @@ console.log(this.storevalue);
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+const formData1 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+// formData1.append('MenuUrl', v4);
+formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+//  formData1.append('month_day',this.break_dt);
+ formData1.append('restaurant_id',this.resid);
+ formData1.append('menu_id',v6);
+ formData1.append('break_check',this.launch_check);
+//  formData1.append("start_time",this.brunch_start);
+//  formData1.append('end_time',this.brunch_end);
+ formData1.append('restaurant_name',this.res_name);
+for(let img1 of this.launchsectionimage){
+  formData1.append('section_img', img1);
+}
+// for (let img of this.launchmenuimage) {
+//   formData1.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData1).subscribe(
   (res) =>{console.log(res);
+    this.spinner.hide();
+    this.myFunction_update();
     // this.spinner.hide();
     // this.myFunction_update();
   // (err) => console.log(err)
@@ -6853,12 +7616,12 @@ console.log(data);
       // formData.append('file', this.breakfastcoverimage);
       formData.append('coverurl', v1);
       formData.append('topurl',  v2);
-      formData.append('MenuUrl', v4);
-      formData.append('SectionUrl',v5);
-      formData.append('cov_filename', this.lunch_cover_name);
-      formData.append('top_filename', this.lunch_top_name);
+      // formData.append('MenuUrl', v4);
+      // formData.append('SectionUrl',v5);
       formData.append('cov_img',this.launchcoverimage);
       formData.append('top_img',this.launchtopimage);
+      formData.append('cov_filename', this.lunch_cover_name);
+       formData.append('top_filename', this.lunch_top_name);
       //  formData.append('month_day',this.break_dt);
        formData.append('restaurant_id',this.resid);
        formData.append('menu_id',v6);
@@ -6866,24 +7629,87 @@ console.log(data);
       //  formData.append("start_time",this.brunch_start);
       //  formData.append('end_time',this.brunch_end);
        formData.append('restaurant_name',this.res_name);
-
-
-
-
-      for(let img1 of this.launchsectionimage){
-        formData.append('section_img', img1);
-      }
-      for (let img of this.launchmenuimage) {
-        formData.append('menu_img', img);
-      }
+      // for(let img1 of this.launchsectionimage){
+      //   formData.append('section_img', img1);
+      // }
+      // for (let img of this.launchmenuimage) {
+      //   formData.append('menu_img', img);
+      // }
 
       console.log(this.launchmenuimage)
       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-        (res) => {console.log(res);
-        this.spinner.hide();
-this.myFunction_update();
+        (res) =>{console.log(res);
+    
         // (err) => console.log(err)
     });
+ /////////////////////////////////////////// TEST ////////////////////////////////////
+
+
+ const formData3 = new FormData();
+ // formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+ formData3.append('MenuUrl', v4);
+ // formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+ //  formData1.append('month_day',this.break_dt);
+  formData3.append('restaurant_id',this.resid);
+  formData3.append('menu_id',v6);
+  formData3.append('break_check',this.launch_check);
+ //  formData1.append("start_time",this.brunch_start);
+ //  formData1.append('end_time',this.brunch_end);
+  formData3.append('restaurant_name',this.res_name);
+ // for(let img1 of this.launchsectionimage){
+ //   formData1.append('section_img', img1);
+ // }
+ for (let img of this.launchmenuimage) {
+   formData3.append('menu_img', img);
+ }
+
+ this.http.post<any>(this.url_reg+'/menu_file_testing', formData3).subscribe(
+  (res) =>{console.log(res);
+    // this.spinner.hide();
+    // this.myFunction_update();
+  // (err) => console.log(err)
+});
+
+// UPLOAD SECTION FILE //
+const formData1 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+// formData1.append('MenuUrl', v4);
+formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+//  formData1.append('month_day',this.break_dt);
+ formData1.append('restaurant_id',this.resid);
+ formData1.append('menu_id',v6);
+ formData1.append('break_check',this.launch_check);
+//  formData1.append("start_time",this.brunch_start);
+//  formData1.append('end_time',this.brunch_end);
+ formData1.append('restaurant_name',this.res_name);
+for(let img1 of this.launchsectionimage){
+  formData1.append('section_img', img1);
+}
+// for (let img of this.launchmenuimage) {
+//   formData1.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData1).subscribe(
+  (res) =>{console.log(res);
+    // this.spinner.hide();
+    // this.myFunction_update();
+  // (err) => console.log(err)
+  this.spinner.hide();
+  this.myFunction_update();
+});
+////////////////////////////////////////////END ////////////////////////////////////
       this.storevalue.length=0;
       this.storevalue.push({
 
@@ -6909,52 +7735,97 @@ console.log(data);
 
 if(v7<v8){
    if(localStorage.getItem('launch')==''){
-  const formData = new FormData();
-      // formData.append('file', this.breakfastcoverimage);
-      formData.append('coverurl', v1);
-      formData.append('topurl',  v2);
-      formData.append('MenuUrl', v4);
-      formData.append('SectionUrl',v5);
-      formData.append('cov_filename', this.lunch_cover_name);
-      formData.append('top_filename', this.lunch_top_name);
-      formData.append('cov_img',this.launchcoverimage);
-      formData.append('top_img',this.launchtopimage);
-      //  formData.append('month_day',this.break_dt);
-       formData.append('restaurant_id',this.resid);
-       formData.append('menu_id',v6);
-       formData.append('break_check',this.launch_check);
-      //  formData.append("start_time",this.brunch_start);
-      //  formData.append('end_time',this.brunch_end);
-       formData.append('restaurant_name',this.res_name);
-       for(let img1 of this.launchsectionimage){
-        formData.append('section_img', img1);
-      }
-      for (let img of this.launchmenuimage) {
-        formData.append('menu_img', img);
-      }
+    const formData = new FormData();
+    // formData.append('file', this.breakfastcoverimage);
+    formData.append('coverurl', v1);
+    formData.append('topurl',  v2);
+    // formData.append('MenuUrl', v4);
+    // formData.append('SectionUrl',v5);
+    formData.append('cov_img',this.launchcoverimage);
+    formData.append('top_img',this.launchtopimage);
+    formData.append('cov_filename', this.lunch_cover_name);
+     formData.append('top_filename', this.lunch_top_name);
+    //  formData.append('month_day',this.break_dt);
+     formData.append('restaurant_id',this.resid);
+     formData.append('menu_id',v6);
+     formData.append('break_check',this.launch_check);
+    //  formData.append("start_time",this.brunch_start);
+    //  formData.append('end_time',this.brunch_end);
+     formData.append('restaurant_name',this.res_name);
+    // for(let img1 of this.launchsectionimage){
+    //   formData.append('section_img', img1);
+    // }
+    // for (let img of this.launchmenuimage) {
+    //   formData.append('menu_img', img);
+    // }
 
-      console.log(this.launchmenuimage)
-      this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-        (res) => {console.log(res);
-        this.spinner.hide();
-       this.myFunction_update();
-        // (err) => console.log(err)
-        });
+    console.log(this.launchmenuimage)
+    this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+      (res) =>{console.log(res);
+  });
+/////////////////////////////////////////// TEST ////////////////////////////////////
 
-         /////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-  (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
+
+const formData3 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+formData3.append('MenuUrl', v4);
+// formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+//  formData1.append('month_day',this.break_dt);
+formData3.append('restaurant_id',this.resid);
+formData3.append('menu_id',v6);
+formData3.append('break_check',this.launch_check);
+//  formData1.append("start_time",this.brunch_start);
+//  formData1.append('end_time',this.brunch_end);
+formData3.append('restaurant_name',this.res_name);
+// for(let img1 of this.launchsectionimage){
+//   formData1.append('section_img', img1);
+// }
+for (let img of this.launchmenuimage) {
+ formData3.append('menu_img', img);
+}
+
+this.http.post<any>(this.url_reg+'/menu_file_testing', formData3).subscribe(
+(res) =>{console.log(res);
+  // this.spinner.hide();
+  // this.myFunction_update();
+// (err) => console.log(err)
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-  (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
+const formData1 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+// formData1.append('MenuUrl', v4);
+formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+//  formData1.append('month_day',this.break_dt);
+formData1.append('restaurant_id',this.resid);
+formData1.append('menu_id',v6);
+formData1.append('break_check',this.launch_check);
+//  formData1.append("start_time",this.brunch_start);
+//  formData1.append('end_time',this.brunch_end);
+formData1.append('restaurant_name',this.res_name);
+for(let img1 of this.launchsectionimage){
+formData1.append('section_img', img1);
+}
+// for (let img of this.launchmenuimage) {
+//   formData1.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData1).subscribe(
+(res) =>{console.log(res);
+  this.spinner.hide();
+  this.myFunction_update();
 });
 ////////////////////////////////////////////END ////////////////////////////////////
 
@@ -6993,53 +7864,92 @@ console.log(data);
            this.v=1
            this.storevalue.length=0;
            const formData = new FormData();
-           // formData.append('file', this.breakfastcoverimage);
-           formData.append('coverurl', v1);
-           formData.append('cov_filename', this.lunch_cover_name);
-           formData.append('top_filename', this.lunch_top_name);
-           formData.append('topurl',  v2);
-           formData.append('MenuUrl', v4);
-           formData.append('SectionUrl',v5);
-           formData.append('cov_img',this.launchcoverimage);
-           formData.append('top_img',this.launchtopimage);
-            // formData.append('month_day',this.break_dt);
-            formData.append('restaurant_id',this.resid);
-            formData.append('menu_id',v6);
-            formData.append('break_check',this.launch_check);
-            // formData.append("start_time",this.brunch_start);
-            // formData.append('end_time',this.brunch_end);
-            formData.append('restaurant_name',this.res_name);
+      // formData.append('file', this.breakfastcoverimage);
+      formData.append('coverurl', v1);
+      formData.append('topurl',  v2);
+      // formData.append('MenuUrl', v4);
+      // formData.append('SectionUrl',v5);
+      formData.append('cov_img',this.launchcoverimage);
+      formData.append('top_img',this.launchtopimage);
+      formData.append('cov_filename', this.lunch_cover_name);
+       formData.append('top_filename', this.lunch_top_name);
+      //  formData.append('month_day',this.break_dt);
+       formData.append('restaurant_id',this.resid);
+       formData.append('menu_id',v6);
+       formData.append('break_check',this.launch_check);
+      //  formData.append("start_time",this.brunch_start);
+      //  formData.append('end_time',this.brunch_end);
+       formData.append('restaurant_name',this.res_name);
+      // for(let img1 of this.launchsectionimage){
+      //   formData.append('section_img', img1);
+      // }
+      // for (let img of this.launchmenuimage) {
+      //   formData.append('menu_img', img);
+      // }
 
+      console.log(this.launchmenuimage)
+      this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+        (res) =>{console.log(res);
+    });
+ /////////////////////////////////////////// TEST ////////////////////////////////////
+ const formData3 = new FormData();
+ // formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+ formData3.append('MenuUrl', v4);
+ // formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+ //  formData1.append('month_day',this.break_dt);
+  formData3.append('restaurant_id',this.resid);
+  formData3.append('menu_id',v6);
+  formData3.append('break_check',this.launch_check);
+ //  formData1.append("start_time",this.brunch_start);
+ //  formData1.append('end_time',this.brunch_end);
+  formData3.append('restaurant_name',this.res_name);
+ // for(let img1 of this.launchsectionimage){
+ //   formData1.append('section_img', img1);
+ // }
+ for (let img of this.launchmenuimage) {
+   formData3.append('menu_img', img);
+ }
 
-
-
-           for(let img1 of this.launchsectionimage){
-             formData.append('section_img', img1);
-           }
-           for (let img of this.launchmenuimage) {
-             formData.append('menu_img', img);
-           }
-           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-             (res) =>{ console.log(res);
-              this.spinner.hide();
-               this.myFunction();
-
-            //  (err) => console.log(err)
-          });
-           /////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+ this.http.post<any>(this.url_reg+'/menu_file_testing', formData3).subscribe(
   (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
+
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+const formData1 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+// formData1.append('MenuUrl', v4);
+formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+//  formData1.append('month_day',this.break_dt);
+ formData1.append('restaurant_id',this.resid);
+ formData1.append('menu_id',v6);
+ formData1.append('break_check',this.launch_check);
+//  formData1.append("start_time",this.brunch_start);
+//  formData1.append('end_time',this.brunch_end);
+ formData1.append('restaurant_name',this.res_name);
+for(let img1 of this.launchsectionimage){
+  formData1.append('section_img', img1);
+}
+// for (let img of this.launchmenuimage) {
+//   formData1.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData1).subscribe(
   (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
+  this.spinner.hide();
+  this.myFunction();
 });
 ////////////////////////////////////////////END ////////////////////////////////////
            this.storevalue.length=0;
@@ -7096,38 +8006,61 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
            this.v=1
            this.storevalue.length=0;
            const formData = new FormData();
-           // formData.append('file', this.breakfastcoverimage);
-           formData.append('coverurl', v1);
-           formData.append('topurl',  v2);
-           formData.append('MenuUrl', v4);
-           formData.append('SectionUrl',v5);
-           formData.append('cov_filename', this.lunch_cover_name);
-           formData.append('top_filename', this.lunch_top_name);
-           formData.append('cov_img',this.launchcoverimage);
-           formData.append('top_img',this.launchtopimage);
-            // formData.append('month_day',this.break_dt);
-            formData.append('restaurant_id',this.resid);
-            formData.append('menu_id',v6);
-            formData.append('break_check',this.launch_check);
-            // formData.append("start_time",this.brunch_start);
-            // formData.append('end_time',this.brunch_end);
-            formData.append('restaurant_name',this.res_name);
-            for(let img1 of this.launchsectionimage){
-             formData.append('section_img', img1);
-           }
-           for (let img of this.launchmenuimage) {
-             formData.append('menu_img', img);
-           }
-           this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-             (res) => { console.log(res);
-              this.spinner.hide();
-               this.myFunction();
+      // formData.append('file', this.breakfastcoverimage);
+      formData.append('coverurl', v1);
+      formData.append('topurl',  v2);
+      // formData.append('MenuUrl', v4);
+      // formData.append('SectionUrl',v5);
+      formData.append('cov_img',this.launchcoverimage);
+      formData.append('top_img',this.launchtopimage);
+      formData.append('cov_filename', this.lunch_cover_name);
+       formData.append('top_filename', this.lunch_top_name);
+      //  formData.append('month_day',this.break_dt);
+       formData.append('restaurant_id',this.resid);
+       formData.append('menu_id',v6);
+       formData.append('break_check',this.launch_check);
+      //  formData.append("start_time",this.brunch_start);
+      //  formData.append('end_time',this.brunch_end);
+       formData.append('restaurant_name',this.res_name);
+      // for(let img1 of this.launchsectionimage){
+      //   formData.append('section_img', img1);
+      // }
+      // for (let img of this.launchmenuimage) {
+      //   formData.append('menu_img', img);
+      // }
 
-            //  (err) => console.log(err)
-          });
+      console.log(this.launchmenuimage)
+      this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+        (res) =>{console.log(res);
+    });
+ /////////////////////////////////////////// TEST ////////////////////////////////////
 
-           /////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+
+ const formData3 = new FormData();
+ // formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+ formData3.append('MenuUrl', v4);
+ // formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+ //  formData1.append('month_day',this.break_dt);
+  formData3.append('restaurant_id',this.resid);
+  formData3.append('menu_id',v6);
+  formData3.append('break_check',this.launch_check);
+ //  formData1.append("start_time",this.brunch_start);
+ //  formData1.append('end_time',this.brunch_end);
+  formData3.append('restaurant_name',this.res_name);
+ // for(let img1 of this.launchsectionimage){
+ //   formData1.append('section_img', img1);
+ // }
+ for (let img of this.launchmenuimage) {
+   formData3.append('menu_img', img);
+ }
+
+ this.http.post<any>(this.url_reg+'/menu_file_testing', formData3).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
@@ -7135,11 +8068,34 @@ this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+const formData1 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+// formData1.append('MenuUrl', v4);
+formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+//  formData1.append('month_day',this.break_dt);
+ formData1.append('restaurant_id',this.resid);
+ formData1.append('menu_id',v6);
+ formData1.append('break_check',this.launch_check);
+//  formData1.append("start_time",this.brunch_start);
+//  formData1.append('end_time',this.brunch_end);
+ formData1.append('restaurant_name',this.res_name);
+for(let img1 of this.launchsectionimage){
+  formData1.append('section_img', img1);
+}
+// for (let img of this.launchmenuimage) {
+//   formData1.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData1).subscribe(
   (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
+    this.spinner.hide();
+    this.myFunction();
 });
 ////////////////////////////////////////////END ////////////////////////////////////
            this.storevalue.length=0;
@@ -7189,37 +8145,61 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
              this.v=2;
              this.storevalue.length=0;
              const formData = new FormData();
-             // formData.append('file', this.breakfastcoverimage);
-             formData.append('coverurl', v1);
-             formData.append('topurl',  v2);
-             formData.append('MenuUrl', v4);
-             formData.append('SectionUrl',v5);
-             formData.append('cov_filename', this.lunch_cover_name);
-             formData.append('top_filename', this.lunch_top_name);
-             formData.append('cov_img',this.launchcoverimage);
-             formData.append('top_img',this.launchtopimage);
-              // formData.append('month_day',this.break_dt);
-              formData.append('restaurant_id',this.resid);
-              formData.append('menu_id',v6);
-              formData.append('break_check',this.launch_check);
-              // formData.append("start_time",this.brunch_start);
-              // formData.append('end_time',this.brunch_end);
-              formData.append('restaurant_name',this.res_name);
-                for(let img1 of this.launchsectionimage){
-               formData.append('section_img', img1);
-             }
-             for (let img of this.launchmenuimage) {
-               formData.append('menu_img', img);
-             }
-             this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-               (res) => { console.log(res);
-                this.spinner.hide();
-                 this.myFunction();
-  
-              //  (err) => console.log(err)
-            });
-             /////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+      // formData.append('file', this.breakfastcoverimage);
+      formData.append('coverurl', v1);
+      formData.append('topurl',  v2);
+      // formData.append('MenuUrl', v4);
+      // formData.append('SectionUrl',v5);
+      formData.append('cov_img',this.launchcoverimage);
+      formData.append('top_img',this.launchtopimage);
+      formData.append('cov_filename', this.lunch_cover_name);
+       formData.append('top_filename', this.lunch_top_name);
+      //  formData.append('month_day',this.break_dt);
+       formData.append('restaurant_id',this.resid);
+       formData.append('menu_id',v6);
+       formData.append('break_check',this.launch_check);
+      //  formData.append("start_time",this.brunch_start);
+      //  formData.append('end_time',this.brunch_end);
+       formData.append('restaurant_name',this.res_name);
+      // for(let img1 of this.launchsectionimage){
+      //   formData.append('section_img', img1);
+      // }
+      // for (let img of this.launchmenuimage) {
+      //   formData.append('menu_img', img);
+      // }
+
+      console.log(this.launchmenuimage)
+      this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+        (res) =>{console.log(res);
+    });
+ /////////////////////////////////////////// TEST ////////////////////////////////////
+
+
+ const formData3 = new FormData();
+ // formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+ formData3.append('MenuUrl', v4);
+ // formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+ //  formData1.append('month_day',this.break_dt);
+  formData3.append('restaurant_id',this.resid);
+  formData3.append('menu_id',v6);
+  formData3.append('break_check',this.launch_check);
+ //  formData1.append("start_time",this.brunch_start);
+ //  formData1.append('end_time',this.brunch_end);
+  formData3.append('restaurant_name',this.res_name);
+ // for(let img1 of this.launchsectionimage){
+ //   formData1.append('section_img', img1);
+ // }
+ for (let img of this.launchmenuimage) {
+   formData3.append('menu_img', img);
+ }
+
+ this.http.post<any>(this.url_reg+'/menu_file_testing', formData3).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
@@ -7227,11 +8207,34 @@ this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+const formData1 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+// formData1.append('MenuUrl', v4);
+formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+//  formData1.append('month_day',this.break_dt);
+ formData1.append('restaurant_id',this.resid);
+ formData1.append('menu_id',v6);
+ formData1.append('break_check',this.launch_check);
+//  formData1.append("start_time",this.brunch_start);
+//  formData1.append('end_time',this.brunch_end);
+ formData1.append('restaurant_name',this.res_name);
+for(let img1 of this.launchsectionimage){
+  formData1.append('section_img', img1);
+}
+// for (let img of this.launchmenuimage) {
+//   formData1.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData1).subscribe(
   (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
+    this.spinner.hide();
+    this.myFunction();
 });
 ////////////////////////////////////////////END ////////////////////////////////////
 
@@ -7291,12 +8294,12 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
       // formData.append('file', this.breakfastcoverimage);
       formData.append('coverurl', v1);
       formData.append('topurl',  v2);
-      formData.append('MenuUrl', v4);
-      formData.append('SectionUrl',v5);
-      formData.append('cov_filename', this.lunch_cover_name);
-      formData.append('top_filename', this.lunch_top_name);
+      // formData.append('MenuUrl', v4);
+      // formData.append('SectionUrl',v5);
       formData.append('cov_img',this.launchcoverimage);
       formData.append('top_img',this.launchtopimage);
+      formData.append('cov_filename', this.lunch_cover_name);
+       formData.append('top_filename', this.lunch_top_name);
       //  formData.append('month_day',this.break_dt);
        formData.append('restaurant_id',this.resid);
        formData.append('menu_id',v6);
@@ -7304,23 +8307,45 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
       //  formData.append("start_time",this.brunch_start);
       //  formData.append('end_time',this.brunch_end);
        formData.append('restaurant_name',this.res_name);
-      for(let img1 of this.launchsectionimage){
-        formData.append('section_img', img1);
-      }
-      for (let img of this.launchmenuimage) {
-        formData.append('menu_img', img);
-      }
+      // for(let img1 of this.launchsectionimage){
+      //   formData.append('section_img', img1);
+      // }
+      // for (let img of this.launchmenuimage) {
+      //   formData.append('menu_img', img);
+      // }
 
-      console.log(this.multipleImages)
+      console.log(this.launchmenuimage)
       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-        (res) => { console.log(res);
-          this.spinner.hide();
-           this.myFunction();
+        (res) =>{console.log(res);
+    });
+ /////////////////////////////////////////// TEST ////////////////////////////////////
 
-        //  (err) => console.log(err)
-      });
-       /////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+
+ const formData3 = new FormData();
+ // formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+ formData3.append('MenuUrl', v4);
+ // formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+ //  formData1.append('month_day',this.break_dt);
+  formData3.append('restaurant_id',this.resid);
+  formData3.append('menu_id',v6);
+  formData3.append('break_check',this.launch_check);
+ //  formData1.append("start_time",this.brunch_start);
+ //  formData1.append('end_time',this.brunch_end);
+  formData3.append('restaurant_name',this.res_name);
+ // for(let img1 of this.launchsectionimage){
+ //   formData1.append('section_img', img1);
+ // }
+ for (let img of this.launchmenuimage) {
+   formData3.append('menu_img', img);
+ }
+
+ this.http.post<any>(this.url_reg+'/menu_file_testing', formData3).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
@@ -7328,9 +8353,34 @@ this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+const formData1 = new FormData();
+// formData.append('file', this.breakfastcoverimage);
+//  formData1.append('coverurl', v1);
+//  formData1.append('topurl',  v2);
+// formData1.append('MenuUrl', v4);
+formData1.append('SectionUrl',v5);
+//  formData1.append('cov_img',this.launchcoverimage);
+//  formData1.append('top_img',this.launchtopimage);
+//  formData1.append('cov_filename', this.lunch_cover_name);
+//   formData1.append('top_filename', this.lunch_top_name);
+//  formData1.append('month_day',this.break_dt);
+ formData1.append('restaurant_id',this.resid);
+ formData1.append('menu_id',v6);
+ formData1.append('break_check',this.launch_check);
+//  formData1.append("start_time",this.brunch_start);
+//  formData1.append('end_time',this.brunch_end);
+ formData1.append('restaurant_name',this.res_name);
+for(let img1 of this.launchsectionimage){
+  formData1.append('section_img', img1);
+}
+// for (let img of this.launchmenuimage) {
+//   formData1.append('menu_img', img);
+// }
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData1).subscribe(
   (res) =>{console.log(res);
-    // this.spinner.hide();
+    this.spinner.hide();
+    this.myFunction();
     // this.myFunction_update();
   // (err) => console.log(err)
 });
@@ -7437,8 +8487,8 @@ else{
     // formData.append('file', this.breakfastcoverimage);
     formData.append('coverurl', v3);
     formData.append('topurl',  v2);
-    formData.append('MenuUrl', v1);
-    formData.append('SectionUrl',v4);
+    // formData.append('MenuUrl', v1);
+    // formData.append('SectionUrl',v4);
     formData.append('cov_filename', this.brunch_cover_name);
     formData.append('top_filename', this.brunch_top_name);
     formData.append('cov_img',this.dinnercoverimage);
@@ -7450,23 +8500,48 @@ else{
     //  formData.append("start_time",this.brunch_start);
     //  formData.append('end_time',this.brunch_end);
      formData.append('restaurant_name',this.res_name);
- for(let img1 of this.dinnersectionimage){
-      formData.append('section_img', img1);
-    }
-    for (let img of this.dinnermenuimage) {
-      formData.append('menu_img', img);
-    }
+//  for(let img1 of this.dinnersectionimage){
+//       formData.append('section_img', img1);
+//     }
+//     for (let img of this.dinnermenuimage) {
+//       formData.append('menu_img', img);
+//     }
 
-    console.log(this.multipleImages)
+    // console.log(this.multipleImages)
 
     this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => {console.log(res);
-      this.spinner.hide();
-      this.myFunction_update();
+
     });
 
      /////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+
+     const formData2 = new FormData();
+     // formData2.append('file', this.breakfastcoverimage);
+    //  formData2.append('coverurl', v3);
+    //  formData2.append('topurl',  v2);
+     formData2.append('MenuUrl', v1);
+     // formData2.append('SectionUrl',v4);
+    //  formData2.append('cov_filename', this.brunch_cover_name);
+    //  formData2.append('top_filename', this.brunch_top_name);
+    //  formData2.append('cov_img',this.dinnercoverimage);
+    //  formData2.append('top_img',this.dinnertopimage);
+     //  formData2.append('month_day',this.break_dt);
+      formData2.append('restaurant_id',this.resid);
+      formData2.append('menu_id',v5);
+      formData2.append('break_check',this.dinner_check);
+     //  formData2.append("start_time",this.brunch_start);
+     //  formData2.append('end_time',this.brunch_end);
+      formData2.append('restaurant_name',this.res_name);
+ //  for(let img1 of this.dinnersectionimage){
+ //       formData2.append('section_img', img1);
+ //     }
+     for (let img of this.dinnermenuimage) {
+       formData2.append('menu_img', img);
+     }
+ 
+     // console.log(this.multipleImages
+this.http.post<any>(this.url_reg+'/menu_file_testing', formData2).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
@@ -7474,11 +8549,39 @@ this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+
+
+
+const formData3 = new FormData();
+// formData3.append('file', this.breakfastcoverimage);
+formData3.append('coverurl', v3);
+formData3.append('topurl',  v2);
+// formData3.append('MenuUrl', v1);
+formData3.append('SectionUrl',v4);
+// formData3.append('cov_filename', this.brunch_cover_name);
+// formData3.append('top_filename', this.brunch_top_name);
+// formData3.append('cov_img',this.dinnercoverimage);
+// formData3.append('top_img',this.dinnertopimage);
+//  formData3.append('month_day',this.break_dt);
+ formData3.append('restaurant_id',this.resid);
+ formData3.append('menu_id',v5);
+ formData3.append('break_check',this.dinner_check);
+//  formData3.append("start_time",this.brunch_start);
+//  formData3.append('end_time',this.brunch_end);
+ formData3.append('restaurant_name',this.res_name);
+ for(let img1 of this.dinnersectionimage){
+      formData3.append('section_img', img1);
+    }
+//     for (let img of this.dinnermenuimage) {
+//       formData3.append('menu_img', img);
+//     }
+
+// console.log(this.multipleImages)
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData3).subscribe(
   (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
+    this.spinner.hide();
+    this.myFunction_update();
 });
 ////////////////////////////////////////////END ////////////////////////////////////
       this.storevalue.length=0;
@@ -7501,55 +8604,106 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
      else if(this.v==2){
        this.v=1;
        // this.storevalue.length=0;
-    const formData = new FormData();
-    // formData.append('file', this.breakfastcoverimage);
-    formData.append('coverurl', v3);
-    formData.append('topurl',  v2);
-    formData.append('MenuUrl', v1);
-    formData.append('cov_filename', this.brunch_cover_name);
-    formData.append('top_filename', this.brunch_top_name);
-    formData.append('SectionUrl',v4);
-    formData.append('cov_img',this.dinnercoverimage);
-    formData.append('top_img',this.dinnertopimage);
-    //  formData.append('month_day',this.break_dt);
-     formData.append('restaurant_id',this.resid);
-     formData.append('menu_id',v5);
-     formData.append('break_check',this.dinner_check);
-    //  formData.append("start_time",this.brunch_start);
-    //  formData.append('end_time',this.brunch_end);
-     formData.append('restaurant_name',this.res_name);
-
-
-
-
+       const formData = new FormData();
+       // formData.append('file', this.breakfastcoverimage);
+       formData.append('coverurl', v3);
+       formData.append('topurl',  v2);
+       // formData.append('MenuUrl', v1);
+       // formData.append('SectionUrl',v4);
+       formData.append('cov_filename', this.brunch_cover_name);
+       formData.append('top_filename', this.brunch_top_name);
+       formData.append('cov_img',this.dinnercoverimage);
+       formData.append('top_img',this.dinnertopimage);
+       //  formData.append('month_day',this.break_dt);
+        formData.append('restaurant_id',this.resid);
+        formData.append('menu_id',v5);
+        formData.append('break_check',this.dinner_check);
+       //  formData.append("start_time",this.brunch_start);
+       //  formData.append('end_time',this.brunch_end);
+        formData.append('restaurant_name',this.res_name);
+   //  for(let img1 of this.dinnersectionimage){
+   //       formData.append('section_img', img1);
+   //     }
+   //     for (let img of this.dinnermenuimage) {
+   //       formData.append('menu_img', img);
+   //     }
+   
+       // console.log(this.multipleImages)
+   
+       this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+         (res) => {console.log(res);
+       });
+   
+        /////////////////////////////////////////// TEST ////////////////////////////////////
+   
+        const formData2 = new FormData();
+        // formData2.append('file', this.breakfastcoverimage);
+       //  formData2.append('coverurl', v3);
+       //  formData2.append('topurl',  v2);
+        formData2.append('MenuUrl', v1);
+        // formData2.append('SectionUrl',v4);
+       //  formData2.append('cov_filename', this.brunch_cover_name);
+       //  formData2.append('top_filename', this.brunch_top_name);
+       //  formData2.append('cov_img',this.dinnercoverimage);
+       //  formData2.append('top_img',this.dinnertopimage);
+        //  formData2.append('month_day',this.break_dt);
+         formData2.append('restaurant_id',this.resid);
+         formData2.append('menu_id',v5);
+         formData2.append('break_check',this.dinner_check);
+        //  formData2.append("start_time",this.brunch_start);
+        //  formData2.append('end_time',this.brunch_end);
+         formData2.append('restaurant_name',this.res_name);
+    //  for(let img1 of this.dinnersectionimage){
+    //       formData2.append('section_img', img1);
+    //     }
+        for (let img of this.dinnermenuimage) {
+          formData2.append('menu_img', img);
+        }
+    
+        // console.log(this.multipleImages
+   this.http.post<any>(this.url_reg+'/menu_file_testing', formData2).subscribe(
+     (res) =>{console.log(res);
+       // this.spinner.hide();
+       // this.myFunction_update();
+     // (err) => console.log(err)
+   });
+   
+   // UPLOAD SECTION FILE //
+   
+   
+   
+   const formData3 = new FormData();
+   // formData3.append('file', this.breakfastcoverimage);
+   formData3.append('coverurl', v3);
+   formData3.append('topurl',  v2);
+   // formData3.append('MenuUrl', v1);
+   formData3.append('SectionUrl',v4);
+   // formData3.append('cov_filename', this.brunch_cover_name);
+   // formData3.append('top_filename', this.brunch_top_name);
+   // formData3.append('cov_img',this.dinnercoverimage);
+   // formData3.append('top_img',this.dinnertopimage);
+   //  formData3.append('month_day',this.break_dt);
+    formData3.append('restaurant_id',this.resid);
+    formData3.append('menu_id',v5);
+    formData3.append('break_check',this.dinner_check);
+   //  formData3.append("start_time",this.brunch_start);
+   //  formData3.append('end_time',this.brunch_end);
+    formData3.append('restaurant_name',this.res_name);
     for(let img1 of this.dinnersectionimage){
-      formData.append('section_img', img1);
-    }
-    for (let img of this.dinnermenuimage) {
-      formData.append('menu_img', img);
-    }
-    this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-      (res) => {console.log(res);
-        this.spinner.hide();
-        this.myFunction_update();
-      });
-
-       /////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-  (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
-});
-
-// UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-  (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
-});
-////////////////////////////////////////////END ////////////////////////////////////
+         formData3.append('section_img', img1);
+       }
+   //     for (let img of this.dinnermenuimage) {
+   //       formData3.append('menu_img', img);
+   //     }
+   
+   // console.log(this.multipleImages)
+   
+   this.http.post<any>(this.url_reg+'/sec_file_testing', formData3).subscribe(
+     (res) =>{console.log(res);
+      this.spinner.hide();
+      this.myFunction_update();
+   });
+   ////////////////////////////////////////////END ////////////////////////////////////
        this.storevalue.length=0;
      this.storevalue.push({
          "restaurant_id":this.resid,
@@ -7576,8 +8730,8 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
     // formData.append('file', this.breakfastcoverimage);
     formData.append('coverurl', v3);
     formData.append('topurl',  v2);
-    formData.append('MenuUrl', v1);
-    formData.append('SectionUrl',v4);
+    // formData.append('MenuUrl', v1);
+    // formData.append('SectionUrl',v4);
     formData.append('cov_filename', this.brunch_cover_name);
     formData.append('top_filename', this.brunch_top_name);
     formData.append('cov_img',this.dinnercoverimage);
@@ -7589,24 +8743,47 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
     //  formData.append("start_time",this.brunch_start);
     //  formData.append('end_time',this.brunch_end);
      formData.append('restaurant_name',this.res_name);
+//  for(let img1 of this.dinnersectionimage){
+//       formData.append('section_img', img1);
+//     }
+//     for (let img of this.dinnermenuimage) {
+//       formData.append('menu_img', img);
+//     }
 
+    // console.log(this.multipleImages)
 
-
-
-    for(let img1 of this.dinnersectionimage){
-      formData.append('section_img', img1);
-    }
-    for (let img of this.dinnermenuimage) {
-      formData.append('menu_img', img);
-    }
     this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => {console.log(res);
-        this.spinner.hide();
-        this.myFunction_update();
-      });
+    });
 
-       /////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+     /////////////////////////////////////////// TEST ////////////////////////////////////
+
+     const formData2 = new FormData();
+     // formData2.append('file', this.breakfastcoverimage);
+    //  formData2.append('coverurl', v3);
+    //  formData2.append('topurl',  v2);
+     formData2.append('MenuUrl', v1);
+     // formData2.append('SectionUrl',v4);
+    //  formData2.append('cov_filename', this.brunch_cover_name);
+    //  formData2.append('top_filename', this.brunch_top_name);
+    //  formData2.append('cov_img',this.dinnercoverimage);
+    //  formData2.append('top_img',this.dinnertopimage);
+     //  formData2.append('month_day',this.break_dt);
+      formData2.append('restaurant_id',this.resid);
+      formData2.append('menu_id',v5);
+      formData2.append('break_check',this.dinner_check);
+     //  formData2.append("start_time",this.brunch_start);
+     //  formData2.append('end_time',this.brunch_end);
+      formData2.append('restaurant_name',this.res_name);
+ //  for(let img1 of this.dinnersectionimage){
+ //       formData2.append('section_img', img1);
+ //     }
+     for (let img of this.dinnermenuimage) {
+       formData2.append('menu_img', img);
+     }
+ 
+     // console.log(this.multipleImages
+this.http.post<any>(this.url_reg+'/menu_file_testing', formData2).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
@@ -7614,11 +8791,39 @@ this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+
+
+
+const formData3 = new FormData();
+// formData3.append('file', this.breakfastcoverimage);
+formData3.append('coverurl', v3);
+formData3.append('topurl',  v2);
+// formData3.append('MenuUrl', v1);
+formData3.append('SectionUrl',v4);
+// formData3.append('cov_filename', this.brunch_cover_name);
+// formData3.append('top_filename', this.brunch_top_name);
+// formData3.append('cov_img',this.dinnercoverimage);
+// formData3.append('top_img',this.dinnertopimage);
+//  formData3.append('month_day',this.break_dt);
+ formData3.append('restaurant_id',this.resid);
+ formData3.append('menu_id',v5);
+ formData3.append('break_check',this.dinner_check);
+//  formData3.append("start_time",this.brunch_start);
+//  formData3.append('end_time',this.brunch_end);
+ formData3.append('restaurant_name',this.res_name);
+ for(let img1 of this.dinnersectionimage){
+      formData3.append('section_img', img1);
+    }
+//     for (let img of this.dinnermenuimage) {
+//       formData3.append('menu_img', img);
+//     }
+
+// console.log(this.multipleImages)
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData3).subscribe(
   (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
+    this.spinner.hide();
+    this.myFunction_update();
 });
 ////////////////////////////////////////////END ////////////////////////////////////
 
@@ -7648,14 +8853,14 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
        if(this.v==0){
          this.v=1;
         //  this.storevalue.length=0;
-         const formData = new FormData();
+        const formData = new FormData();
     // formData.append('file', this.breakfastcoverimage);
     formData.append('coverurl', v3);
     formData.append('topurl',  v2);
+    // formData.append('MenuUrl', v1);
+    // formData.append('SectionUrl',v4);
     formData.append('cov_filename', this.brunch_cover_name);
     formData.append('top_filename', this.brunch_top_name);
-    formData.append('MenuUrl', v1);
-    formData.append('SectionUrl',v4);
     formData.append('cov_img',this.dinnercoverimage);
     formData.append('top_img',this.dinnertopimage);
     //  formData.append('month_day',this.break_dt);
@@ -7665,22 +8870,49 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
     //  formData.append("start_time",this.brunch_start);
     //  formData.append('end_time',this.brunch_end);
      formData.append('restaurant_name',this.res_name);
-     for(let img1 of this.dinnersectionimage){
-      formData.append('section_img', img1);
-    }
-    for (let img of this.dinnermenuimage) {
-      formData.append('menu_img', img);
-    }
+//  for(let img1 of this.dinnersectionimage){
+//       formData.append('section_img', img1);
+//     }
+//     for (let img of this.dinnermenuimage) {
+//       formData.append('menu_img', img);
+//     }
 
-    console.log(this.multipleImages)
+    // console.log(this.multipleImages)
+
     this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
       (res) => {console.log(res);
-        this.spinner.hide();
-        this.myFunction();
-      });
 
-       /////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
+
+    });
+
+     /////////////////////////////////////////// TEST ////////////////////////////////////
+
+     const formData2 = new FormData();
+     // formData2.append('file', this.breakfastcoverimage);
+    //  formData2.append('coverurl', v3);
+    //  formData2.append('topurl',  v2);
+     formData2.append('MenuUrl', v1);
+     // formData2.append('SectionUrl',v4);
+    //  formData2.append('cov_filename', this.brunch_cover_name);
+    //  formData2.append('top_filename', this.brunch_top_name);
+    //  formData2.append('cov_img',this.dinnercoverimage);
+    //  formData2.append('top_img',this.dinnertopimage);
+     //  formData2.append('month_day',this.break_dt);
+      formData2.append('restaurant_id',this.resid);
+      formData2.append('menu_id',v5);
+      formData2.append('break_check',this.dinner_check);
+     //  formData2.append("start_time",this.brunch_start);
+     //  formData2.append('end_time',this.brunch_end);
+      formData2.append('restaurant_name',this.res_name);
+ //  for(let img1 of this.dinnersectionimage){
+ //       formData2.append('section_img', img1);
+ //     }
+     for (let img of this.dinnermenuimage) {
+       formData2.append('menu_img', img);
+     }
+ 
+     // console.log(this.multipleImages
+this.http.post<any>(this.url_reg+'/menu_file_testing', formData2).subscribe(
   (res) =>{console.log(res);
     // this.spinner.hide();
     // this.myFunction_update();
@@ -7688,11 +8920,39 @@ this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
 });
 
 // UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
+
+
+
+const formData3 = new FormData();
+// formData3.append('file', this.breakfastcoverimage);
+formData3.append('coverurl', v3);
+formData3.append('topurl',  v2);
+// formData3.append('MenuUrl', v1);
+formData3.append('SectionUrl',v4);
+// formData3.append('cov_filename', this.brunch_cover_name);
+// formData3.append('top_filename', this.brunch_top_name);
+// formData3.append('cov_img',this.dinnercoverimage);
+// formData3.append('top_img',this.dinnertopimage);
+//  formData3.append('month_day',this.break_dt);
+ formData3.append('restaurant_id',this.resid);
+ formData3.append('menu_id',v5);
+ formData3.append('break_check',this.dinner_check);
+//  formData3.append("start_time",this.brunch_start);
+//  formData3.append('end_time',this.brunch_end);
+ formData3.append('restaurant_name',this.res_name);
+ for(let img1 of this.dinnersectionimage){
+      formData3.append('section_img', img1);
+    }
+//     for (let img of this.dinnermenuimage) {
+//       formData3.append('menu_img', img);
+//     }
+
+// console.log(this.multipleImages)
+
+this.http.post<any>(this.url_reg+'/sec_file_testing', formData3).subscribe(
   (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
+    this.spinner.hide();
+    this.myFunction();
 });
 ////////////////////////////////////////////END ////////////////////////////////////
 
@@ -7747,56 +9007,107 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
         this.v=1;
         // this.storevalue.length=0;
         const formData = new FormData();
-    // formData.append('file', this.breakfastcoverimage);
-    formData.append('coverurl', v3);
-    formData.append('topurl',  v2);
-    formData.append('MenuUrl', v1);
-    formData.append('SectionUrl',v4);
-    formData.append('cov_filename', this.brunch_cover_name);
-    formData.append('top_filename', this.brunch_top_name);
-    formData.append('cov_img',this.dinnercoverimage);
-    formData.append('top_img',this.dinnertopimage);
-    //  formData.append('month_day',this.break_dt);
-     formData.append('restaurant_id',this.resid);
-     formData.append('menu_id',v5);
-     formData.append('break_check',this.dinner_check);
-    //  formData.append("start_time",this.brunch_start);
-    //  formData.append('end_time',this.brunch_end);
-     formData.append('restaurant_name',this.res_name);
-
-
-
-
-    for(let img1 of this.dinnersectionimage){
-      formData.append('section_img', img1);
-    }
-    for (let img of this.dinnermenuimage) {
-      formData.append('menu_img', img);
-    }
-
-    console.log(this.multipleImages)
-    this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-      (res) =>  {
-        console.log(res);
+        // formData.append('file', this.breakfastcoverimage);
+        formData.append('coverurl', v3);
+        formData.append('topurl',  v2);
+        // formData.append('MenuUrl', v1);
+        // formData.append('SectionUrl',v4);
+        formData.append('cov_filename', this.brunch_cover_name);
+        formData.append('top_filename', this.brunch_top_name);
+        formData.append('cov_img',this.dinnercoverimage);
+        formData.append('top_img',this.dinnertopimage);
+        //  formData.append('month_day',this.break_dt);
+         formData.append('restaurant_id',this.resid);
+         formData.append('menu_id',v5);
+         formData.append('break_check',this.dinner_check);
+        //  formData.append("start_time",this.brunch_start);
+        //  formData.append('end_time',this.brunch_end);
+         formData.append('restaurant_name',this.res_name);
+    //  for(let img1 of this.dinnersectionimage){
+    //       formData.append('section_img', img1);
+    //     }
+    //     for (let img of this.dinnermenuimage) {
+    //       formData.append('menu_img', img);
+    //     }
+    
+        // console.log(this.multipleImages)
+    
+        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+          (res) => {console.log(res);
+    
+        });
+    
+         /////////////////////////////////////////// TEST ////////////////////////////////////
+    
+         const formData2 = new FormData();
+         // formData2.append('file', this.breakfastcoverimage);
+        //  formData2.append('coverurl', v3);
+        //  formData2.append('topurl',  v2);
+         formData2.append('MenuUrl', v1);
+         // formData2.append('SectionUrl',v4);
+        //  formData2.append('cov_filename', this.brunch_cover_name);
+        //  formData2.append('top_filename', this.brunch_top_name);
+        //  formData2.append('cov_img',this.dinnercoverimage);
+        //  formData2.append('top_img',this.dinnertopimage);
+         //  formData2.append('month_day',this.break_dt);
+          formData2.append('restaurant_id',this.resid);
+          formData2.append('menu_id',v5);
+          formData2.append('break_check',this.dinner_check);
+         //  formData2.append("start_time",this.brunch_start);
+         //  formData2.append('end_time',this.brunch_end);
+          formData2.append('restaurant_name',this.res_name);
+     //  for(let img1 of this.dinnersectionimage){
+     //       formData2.append('section_img', img1);
+     //     }
+         for (let img of this.dinnermenuimage) {
+           formData2.append('menu_img', img);
+         }
+     
+         // console.log(this.multipleImages
+    this.http.post<any>(this.url_reg+'/menu_file_testing', formData2).subscribe(
+      (res) =>{console.log(res);
+        // this.spinner.hide();
+        // this.myFunction_update();
+      // (err) => console.log(err)
+    });
+    
+    // UPLOAD SECTION FILE //
+    
+    
+    
+    const formData3 = new FormData();
+    // formData3.append('file', this.breakfastcoverimage);
+    formData3.append('coverurl', v3);
+    formData3.append('topurl',  v2);
+    // formData3.append('MenuUrl', v1);
+    formData3.append('SectionUrl',v4);
+    // formData3.append('cov_filename', this.brunch_cover_name);
+    // formData3.append('top_filename', this.brunch_top_name);
+    // formData3.append('cov_img',this.dinnercoverimage);
+    // formData3.append('top_img',this.dinnertopimage);
+    //  formData3.append('month_day',this.break_dt);
+     formData3.append('restaurant_id',this.resid);
+     formData3.append('menu_id',v5);
+     formData3.append('break_check',this.dinner_check);
+    //  formData3.append("start_time",this.brunch_start);
+    //  formData3.append('end_time',this.brunch_end);
+     formData3.append('restaurant_name',this.res_name);
+     for(let img1 of this.dinnersectionimage){
+          formData3.append('section_img', img1);
+        }
+    //     for (let img of this.dinnermenuimage) {
+    //       formData3.append('menu_img', img);
+    //     }
+    
+    // console.log(this.multipleImages)
+    
+    this.http.post<any>(this.url_reg+'/sec_file_testing', formData3).subscribe(
+      (res) =>{console.log(res);
         this.spinner.hide();
         this.myFunction();
-     });
- /////////////////////////////////////////// TEST ////////////////////////////////////
- this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-  (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
-});
 
-// UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-  (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
-});
-////////////////////////////////////////////END ////////////////////////////////////
+    });
+    ////////////////////////////////////////////END ////////////////////////////////////
 
     this.storevalue.length=0;
     this.storevalue.push({
@@ -7819,57 +9130,106 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
         this.v=2;
         this.storevalue.length=0;
         const formData = new FormData();
-    // formData.append('file', this.breakfastcoverimage);
-    formData.append('coverurl', v3);
-    formData.append('topurl',  v2);
-    formData.append('MenuUrl', v1);
-    formData.append('SectionUrl',v4);
-    formData.append('cov_filename', this.brunch_cover_name);
-    formData.append('top_filename', this.brunch_top_name);
-    formData.append('cov_img',this.dinnercoverimage);
-    formData.append('top_img',this.dinnertopimage);
-    //  formData.append('month_day',this.break_dt);
-     formData.append('restaurant_id',this.resid);
-     formData.append('menu_id',v5);
-     formData.append('break_check',this.dinner_check);
-    //  formData.append("start_time",this.brunch_start);
-    //  formData.append('end_time',this.brunch_end);
-     formData.append('restaurant_name',this.res_name);
-
-
-
-
-    for(let img1 of this.dinnersectionimage){
-      formData.append('section_img', img1);
-    }
-    for (let img of this.dinnermenuimage) {
-      formData.append('menu_img', img);
-    }
-
-    console.log(this.multipleImages)
-    this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-      (res) => {
-        console.log(res);
+        // formData.append('file', this.breakfastcoverimage);
+        formData.append('coverurl', v3);
+        formData.append('topurl',  v2);
+        // formData.append('MenuUrl', v1);
+        // formData.append('SectionUrl',v4);
+        formData.append('cov_filename', this.brunch_cover_name);
+        formData.append('top_filename', this.brunch_top_name);
+        formData.append('cov_img',this.dinnercoverimage);
+        formData.append('top_img',this.dinnertopimage);
+        //  formData.append('month_day',this.break_dt);
+         formData.append('restaurant_id',this.resid);
+         formData.append('menu_id',v5);
+         formData.append('break_check',this.dinner_check);
+        //  formData.append("start_time",this.brunch_start);
+        //  formData.append('end_time',this.brunch_end);
+         formData.append('restaurant_name',this.res_name);
+    //  for(let img1 of this.dinnersectionimage){
+    //       formData.append('section_img', img1);
+    //     }
+    //     for (let img of this.dinnermenuimage) {
+    //       formData.append('menu_img', img);
+    //     }
+    
+        // console.log(this.multipleImages)
+    
+        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+          (res) => {console.log(res);
+        });
+    
+         /////////////////////////////////////////// TEST ////////////////////////////////////
+    
+         const formData2 = new FormData();
+         // formData2.append('file', this.breakfastcoverimage);
+        //  formData2.append('coverurl', v3);
+        //  formData2.append('topurl',  v2);
+         formData2.append('MenuUrl', v1);
+         // formData2.append('SectionUrl',v4);
+        //  formData2.append('cov_filename', this.brunch_cover_name);
+        //  formData2.append('top_filename', this.brunch_top_name);
+        //  formData2.append('cov_img',this.dinnercoverimage);
+        //  formData2.append('top_img',this.dinnertopimage);
+         //  formData2.append('month_day',this.break_dt);
+          formData2.append('restaurant_id',this.resid);
+          formData2.append('menu_id',v5);
+          formData2.append('break_check',this.dinner_check);
+         //  formData2.append("start_time",this.brunch_start);
+         //  formData2.append('end_time',this.brunch_end);
+          formData2.append('restaurant_name',this.res_name);
+     //  for(let img1 of this.dinnersectionimage){
+     //       formData2.append('section_img', img1);
+     //     }
+         for (let img of this.dinnermenuimage) {
+           formData2.append('menu_img', img);
+         }
+     
+         // console.log(this.multipleImages
+    this.http.post<any>(this.url_reg+'/menu_file_testing', formData2).subscribe(
+      (res) =>{console.log(res);
+        // this.spinner.hide();
+        // this.myFunction_update();
+      // (err) => console.log(err)
+    });
+    
+    // UPLOAD SECTION FILE //
+    
+    
+    
+    const formData3 = new FormData();
+    // formData3.append('file', this.breakfastcoverimage);
+    formData3.append('coverurl', v3);
+    formData3.append('topurl',  v2);
+    // formData3.append('MenuUrl', v1);
+    formData3.append('SectionUrl',v4);
+    // formData3.append('cov_filename', this.brunch_cover_name);
+    // formData3.append('top_filename', this.brunch_top_name);
+    // formData3.append('cov_img',this.dinnercoverimage);
+    // formData3.append('top_img',this.dinnertopimage);
+    //  formData3.append('month_day',this.break_dt);
+     formData3.append('restaurant_id',this.resid);
+     formData3.append('menu_id',v5);
+     formData3.append('break_check',this.dinner_check);
+    //  formData3.append("start_time",this.brunch_start);
+    //  formData3.append('end_time',this.brunch_end);
+     formData3.append('restaurant_name',this.res_name);
+     for(let img1 of this.dinnersectionimage){
+          formData3.append('section_img', img1);
+        }
+    //     for (let img of this.dinnermenuimage) {
+    //       formData3.append('menu_img', img);
+    //     }
+    
+    // console.log(this.multipleImages)
+    
+    this.http.post<any>(this.url_reg+'/sec_file_testing', formData3).subscribe(
+      (res) =>{console.log(res);
         this.spinner.hide();
         this.myFunction();
-     });
- /////////////////////////////////////////// TEST ////////////////////////////////////
- this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-  (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
-});
 
-// UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-  (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
-});
-////////////////////////////////////////////END ////////////////////////////////////
-
+    });
+    ////////////////////////////////////////////END ////////////////////////////////////
     this.storevalue.length=0;
     this.storevalue.push({
         "restaurant_id":this.resid,
@@ -7897,52 +9257,106 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
       this.v=3;
         // this.storevalue.length=0;
         const formData = new FormData();
-    // formData.append('file', this.breakfastcoverimage);
-    formData.append('coverurl', v3);
-    formData.append('topurl',  v2);
-    formData.append('MenuUrl', v1);
-    formData.append('SectionUrl',v4);
-    formData.append('cov_filename', this.brunch_cover_name);
-    formData.append('top_filename', this.brunch_top_name);
-    formData.append('cov_img',this.dinnercoverimage);
-    formData.append('top_img',this.dinnertopimage);
-    //  formData.append('month_day',this.break_dt);
-     formData.append('restaurant_id',this.resid);
-     formData.append('menu_id',v5);
-     formData.append('break_check',this.dinner_check);
-    //  formData.append("start_time",this.brunch_start);
-    //  formData.append('end_time',this.brunch_end);
-     formData.append('restaurant_name',this.res_name);
+        // formData.append('file', this.breakfastcoverimage);
+        formData.append('coverurl', v3);
+        formData.append('topurl',  v2);
+        // formData.append('MenuUrl', v1);
+        // formData.append('SectionUrl',v4);
+        formData.append('cov_filename', this.brunch_cover_name);
+        formData.append('top_filename', this.brunch_top_name);
+        formData.append('cov_img',this.dinnercoverimage);
+        formData.append('top_img',this.dinnertopimage);
+        //  formData.append('month_day',this.break_dt);
+         formData.append('restaurant_id',this.resid);
+         formData.append('menu_id',v5);
+         formData.append('break_check',this.dinner_check);
+        //  formData.append("start_time",this.brunch_start);
+        //  formData.append('end_time',this.brunch_end);
+         formData.append('restaurant_name',this.res_name);
+    //  for(let img1 of this.dinnersectionimage){
+    //       formData.append('section_img', img1);
+    //     }
+    //     for (let img of this.dinnermenuimage) {
+    //       formData.append('menu_img', img);
+    //     }
+    
+        // console.log(this.multipleImages)
+    
+        this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
+          (res) => {console.log(res);
+      
+        });
+    
+         /////////////////////////////////////////// TEST ////////////////////////////////////
+    
+         const formData2 = new FormData();
+         // formData2.append('file', this.breakfastcoverimage);
+        //  formData2.append('coverurl', v3);
+        //  formData2.append('topurl',  v2);
+         formData2.append('MenuUrl', v1);
+         // formData2.append('SectionUrl',v4);
+        //  formData2.append('cov_filename', this.brunch_cover_name);
+        //  formData2.append('top_filename', this.brunch_top_name);
+        //  formData2.append('cov_img',this.dinnercoverimage);
+        //  formData2.append('top_img',this.dinnertopimage);
+         //  formData2.append('month_day',this.break_dt);
+          formData2.append('restaurant_id',this.resid);
+          formData2.append('menu_id',v5);
+          formData2.append('break_check',this.dinner_check);
+         //  formData2.append("start_time",this.brunch_start);
+         //  formData2.append('end_time',this.brunch_end);
+          formData2.append('restaurant_name',this.res_name);
+     //  for(let img1 of this.dinnersectionimage){
+     //       formData2.append('section_img', img1);
+     //     }
+         for (let img of this.dinnermenuimage) {
+           formData2.append('menu_img', img);
+         }
+     
+         // console.log(this.multipleImages
+    this.http.post<any>(this.url_reg+'/menu_file_testing', formData2).subscribe(
+      (res) =>{console.log(res);
+        // this.spinner.hide();
+        // this.myFunction_update();
+      // (err) => console.log(err)
+    });
+    
+    // UPLOAD SECTION FILE //
+    
+    
+    
+    const formData3 = new FormData();
+    // formData3.append('file', this.breakfastcoverimage);
+    formData3.append('coverurl', v3);
+    formData3.append('topurl',  v2);
+    // formData3.append('MenuUrl', v1);
+    formData3.append('SectionUrl',v4);
+    // formData3.append('cov_filename', this.brunch_cover_name);
+    // formData3.append('top_filename', this.brunch_top_name);
+    // formData3.append('cov_img',this.dinnercoverimage);
+    // formData3.append('top_img',this.dinnertopimage);
+    //  formData3.append('month_day',this.break_dt);
+     formData3.append('restaurant_id',this.resid);
+     formData3.append('menu_id',v5);
+     formData3.append('break_check',this.dinner_check);
+    //  formData3.append("start_time",this.brunch_start);
+    //  formData3.append('end_time',this.brunch_end);
+     formData3.append('restaurant_name',this.res_name);
      for(let img1 of this.dinnersectionimage){
-      formData.append('section_img', img1);
-    }
-    for (let img of this.dinnermenuimage) {
-      formData.append('menu_img', img);
-    }
-
-    console.log(this.multipleImages)
-    this.http.post<any>(this.url_reg+'/testing', formData).subscribe(
-      (res) => {
-        console.log(res);
+          formData3.append('section_img', img1);
+        }
+    //     for (let img of this.dinnermenuimage) {
+    //       formData3.append('menu_img', img);
+    //     }
+    
+    // console.log(this.multipleImages)
+    
+    this.http.post<any>(this.url_reg+'/sec_file_testing', formData3).subscribe(
+      (res) =>{console.log(res);
         this.spinner.hide();
         this.myFunction();
-     });
-/////////////////////////////////////////// TEST ////////////////////////////////////
-this.http.post<any>(this.url_reg+'/menu_file_testing', formData).subscribe(
-  (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
-});
-
-// UPLOAD SECTION FILE //
-this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
-  (res) =>{console.log(res);
-    // this.spinner.hide();
-    // this.myFunction_update();
-  // (err) => console.log(err)
-});
-////////////////////////////////////////////END ////////////////////////////////////
+    });
+    ////////////////////////////////////////////END ////////////////////////////////////
     this.storevalue.length=0;
     this.storevalue.push({
         "restaurant_id":this.resid,
@@ -7955,30 +9369,10 @@ this.http.post<any>(this.url_reg+'/sec_file_testing', formData).subscribe(
 
     this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
      console.log(data);
-//  this.spinner.hide();
-//  this.myFunction();
-
    })
 
     }
   }
-// this.storevalue.length=0;
-//      this.storevalue.push({
-//          "restaurant_id":this.resid,
-//           "menu_id":v5,
-//           "break_check":this.dinner_check,
-//           "start_time":v6,
-//           "end_time":v7,
-//           "month_day": [{"dt": this.mon_brunch},{"dt":this.tue_brunch},{"dt":this.wed_brunch},{"dt":this.thu_brunch},{"dt":this.fri_brunch},{"dt":this.sat_brunch},{"dt":this.sun_brunch}]});
-//      console.log(this.storevalue);
-
-//      this.lagunaserve.post_date_time(this.storevalue).subscribe(data=>{
-//       console.log(data);
-//   this.spinner.hide();
-
-//     })
-
-
   }
   else{
     this.spinner.hide();
@@ -11021,6 +12415,8 @@ check_addition(event:any,e:any,v:any){
 selectedimage(e:any,image:any,id:any,length:any){
   this.previous_id=id;
   this.common_for_special_menu=image;
+  console.log(this.common_for_special_menu);
+  
   for(let i=0;i<length;i++){
     this.image_getelement=document.getElementById('image_'+i);
     this.image_getelement.style.border='';
@@ -11033,14 +12429,24 @@ save_it(e:any){
   console.log(this.common_for_special_menu);
   console.log(this.previous_id);
    if(e=='close'){
+    // this.see_photo=true;
+    // this.common_for_special_menu='';
+    // this.previous_id='';
+    if(this.common_for_special_menu!=''){
+    this.see_photo=false;
+    // this.common_for_special_menu=this.url_reg+'/stock/'+this.common_for_special_menu;
+    }
+    else{
     this.see_photo=true;
-    this.common_for_special_menu='';
-    this.previous_id='';
+
+    }
  }
   else{
     this.see_photo=false;
     this.common_for_special_menu=this.url_reg+'/stock/'+this.common_for_special_menu;
   }
+  console.log(this.common_for_special_menu);
+  
 }
 // For change the specific date
 changedate(e:any,pack:any){

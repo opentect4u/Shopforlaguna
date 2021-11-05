@@ -20,7 +20,9 @@ show_alert:boolean=true;
    constructor(private _data:DataserviceService,private router:Router,private lagunaserve:LagunaserviceService) { }
   logData:any;
   x:any;
+  check_activity:any=[];
   confirm_modal:any;
+  encrypted_res_id:any;
   ngOnInit(): void {
     localStorage.clear();
     localStorage.setItem('isloggedin','false');
@@ -30,13 +32,25 @@ show_alert:boolean=true;
   // function for sending the login credentials
   logSubmit(v:any){
     this._data.submit_log(v).subscribe(data=>{
+      console.log(data);
+      
       this.logData=data;
-      if(this.logData.suc>0)
-      {
-
-          localStorage.setItem('Restaurant_id',this.logData.msg.restaurant_id);
-           console.log(this.logData.msg.restaurant_id);
-
+      // console.log(this.logData.msg.restaurant_id);
+      if(this.logData.suc>0){
+      localStorage.setItem('Restaurant_id',this.logData.msg.restaurant_id);
+      localStorage.setItem('Email',this.logData.msg.email_id)
+      
+         this.lagunaserve.Check_active_status(this.logData.msg.restaurant_id).subscribe(data=>{
+           console.log(data);
+           this.check_activity=data;
+           if(this.check_activity.msg[0].approval_flag=='A'){  
+           this.router.navigate(['/restaurant/dashboard',btoa(this.logData.msg.restaurant_id)]);
+           }
+           else{
+          // localStorage.setItem('Restaurant_id',this.logData.msg.restaurant_id);
+          //  console.log(this.logData.msg.restaurant_id);
+        
+       
           localStorage.setItem('breakfast','active');
           localStorage.setItem('dinner','active');
 
@@ -47,10 +61,7 @@ show_alert:boolean=true;
           localStorage.setItem('isloggedin','true');
           this.lagunaserve.getrestaurant_check_menu_setup(this.logData.msg.restaurant_id).subscribe(data=>{
             console.log(data);
-
-
             this.stor=data;
-
               localStorage.setItem('Menu',this.stor.msg[0].menu);
               localStorage.setItem('Restaurant_name',this.stor.msg[0].restaurant_name);
               localStorage.setItem('No_of_menu',this.stor.msg[0].menu_name);
@@ -220,23 +231,21 @@ show_alert:boolean=true;
              }
              }
               }
-
-
-
           })
-        this.router.navigate(['/menu_setup']).then(()=>{
+          this.router.navigate(['/menu_setup']).then(()=>{
         location.reload();
+     
+
         });
-      }
-      else {
-        this.show_alert=false;
-     this.message=this.logData.msg;    
-     setTimeout(() => {
-      this.show_alert=true;
-       
-     }, 12000);
-        // this.router.navigate(['/changepass'])
-      }
+                  
+     
+              }
+            })
+        }
+        else{
+            this.myFunction_error();
+        }
+    
 
     },error=>{
       this.message="An error occurred"
@@ -255,5 +264,15 @@ show_alert:boolean=true;
   go_to_change()
   {
     this.router.navigate(['/changepass'])
+  }
+  myFunction_error(){
+     // Get the snackbar DIV
+     this.x = document.getElementById("snackbar1");
+
+     // Add the "show" class to DIV
+     this.x.className = "show";
+ 
+     // After 3 seconds, remove the show class from DIV
+     setTimeout(()=>{ this.x.className = this.x.className.replace("show", ""); }, 10000);
   }
 }

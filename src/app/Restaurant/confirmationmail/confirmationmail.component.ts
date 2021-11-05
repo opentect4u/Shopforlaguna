@@ -42,11 +42,15 @@ export class ConfirmationmailComponent implements OnInit {
    brunch:any;
    sos:any;
    x:any;
+   check_activity:boolean=false;
+   check:any=[];
   constructor(private lagunaserve:LagunaserviceService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
      
     this.resid=this.route.snapshot.params['id'];
+    // console.log();
+  
     this.lagunaserve.get_menu_url(this.resid).subscribe(data=>{
       console.log(data);
       this.get_url=data;
@@ -83,6 +87,20 @@ export class ConfirmationmailComponent implements OnInit {
         // }
     
      })
+
+
+     this.lagunaserve.Check_active_status(this.resid).subscribe(data=>{
+      this.check=data;
+      if(this.check.msg[0].approval_flag=='A'){
+            this.bind=true;
+            this.check_activity=true;
+      }
+      else{
+        // this.bind=false;
+        // this.check_activity=false;
+
+      }
+    })
   }
   enableonlyapprovefield(event:any){
     console.log(event.target.value);
@@ -252,14 +270,12 @@ export class ConfirmationmailComponent implements OnInit {
           
     }
   }
-
+//Final Submit
   getvalue(){
     this.unapprove.length=0
    this.radio1=document.getElementById('css');
     this.radio2=document.getElementById('html')
-  
-    
-    if(this.radio1.checked){
+  if(this.radio1.checked){
       
       console.log("Breakfast:"+this.check1);
     console.log("launch:"+this.check2);
@@ -276,7 +292,7 @@ export class ConfirmationmailComponent implements OnInit {
      this.lagunaserve.post_approve_menu(this.unapprove).subscribe(data=>{
        console.log(data);
      })
-
+     this.myFunction();
      console.log( this.unapprove);
     }
     else if(this.radio2.checked){
@@ -287,10 +303,8 @@ export class ConfirmationmailComponent implements OnInit {
       this.lagunaserve.post_approve_menu(this.unapprove).subscribe(data=>{
         console.log(data);
       })
+      this.myFunction();
     }
-   this.myFunction();
-
-
   }
 
 

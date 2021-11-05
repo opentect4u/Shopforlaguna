@@ -10,6 +10,7 @@ import { url_set } from 'src/app/globalvar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgxSpinnerService } from "ngx-spinner";
 import { DatePipe } from '@angular/common';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 // import { ImageTransform } from 'ngx-image-cropper';
 import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';//For Image Cropper
@@ -25,9 +26,111 @@ import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper
 ]
 })
 export class RestaurantSetupComponent implements OnInit,AfterViewInit {
-  displayedColumns: string[] = ['id','section_name','sec_img'];
-  displayedColumns1: string[] = ['id','item_name'];
-  displayedColumns2: string[] = ['id','item_name','item_price'];
+
+  htmlContent = '';
+
+  config: AngularEditorConfig = {
+    editable: true,
+    sanitize:false,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      [
+        // 'undo',
+        // 'redo',
+        // 'bold',
+        // 'italic',
+        // 'underline',
+        // 'strikeThrough',
+        // 'subscript',
+        // 'superscript',
+        // 'justifyLeft',
+        // 'justifyCenter',
+        // 'justifyRight',
+        // 'justifyFull',
+        // 'indent',
+        // 'outdent',
+        // 'insertUnorderedList',
+        // 'insertOrderedList',
+        // 'heading',
+        // 'fontName'
+      ],
+      [
+        // 'fontSize',
+        // 'textColor',
+        // 'backgroundColor',
+        // 'customClasses',
+        'link',
+        'unlink',
+        'insertImage',
+        'insertVideo',
+        'insertHorizontalRule',
+        // 'removeFormat',
+        // 'toggleEditorMode'
+      ]
+    ]
+  };
+  
+ 
+  config1: AngularEditorConfig = {
+    editable: false,
+    showToolbar:false,
+    sanitize:false,
+    spellcheck: true,
+    height: '19.73rem',
+    minHeight: '5rem',
+  
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      [
+        'undo',
+        'redo',
+        'bold',
+        'italic',
+        'underline',
+        'strikeThrough',
+        'subscript',
+        'superscript',
+        'justifyLeft',
+        'justifyCenter',
+        'justifyRight',
+        'justifyFull',
+        'indent',
+        'outdent',
+        'insertUnorderedList',
+        'insertOrderedList',
+        'heading',
+        'fontName'
+      ],
+      [
+        'fontSize',
+        'textColor',
+        'backgroundColor',
+        'customClasses',
+        'link',
+        'unlink',
+        'insertImage',
+        'insertVideo',
+        'insertHorizontalRule',
+        'removeFormat',
+        'toggleEditorMode'
+      ]
+    ],
+  
+  };
+  
+
+
+  displayedColumns: string[] = ['id','section_name','sec_img','delete'];
+  displayedColumns1: string[] = ['id','item_name','delete'];
+  displayedColumns2: string[] = ['id','item_name','item_price','delete'];
  
   // dataSource = ELEMENT_DATA;
   userData:any;
@@ -167,6 +270,9 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  menuid_brunch_addition=0
  pick:any;
  ht:any;
+ delsecData:any;
+ delitemData:any;
+ delpriceData:any;
  secid:any;
  imgcat:any;
  dashboardData:any;
@@ -241,6 +347,7 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
  excleveryweek:any;
  exclspecific:any;
  //Image Cropper
+ img_break_section:any;
  scale = 1;
  previous_id:any;
  see_photo:any;
@@ -277,8 +384,17 @@ export class RestaurantSetupComponent implements OnInit,AfterViewInit {
   download_section_zip:any;
   download_logo_top_cover_zip:any;
   category_name:any=[];
+  del_section_var:any;
+  del_item_var:any;
+  del_price_var:any
   ngOnInit(): void {
+  
     this.spinner.show();
+    // setTimeout(() => {
+    //   this.spinner.hide();
+      
+    // }, 40000);
+
    
     // this.daycheck=document.getElementById('1');
     //   this.daycheck.checked=true;
@@ -551,7 +667,7 @@ else{
     this.spinner.show();
     this.sec_value=v;
     // this.createsecval=''
-    for(let i=0;i<this.menuchoiceData.length;i++)
+    for(let i=0;i<this.menuchoiceData.length-1;i++)
     {
       this.q=document.getElementById('b'+(i+1))
       ;
@@ -576,6 +692,8 @@ else{
       // setTimeout(()=>{
       //   location.reload();
       // },3000)
+      this.reload_section();
+      this.createsecval=''
     this.submit_show=false;
 
     this.myFunction();
@@ -652,12 +770,15 @@ else{
     this.sec_post_data=data;
     if(this.sec_post_data.suc==1)
     {
+      this.reload_section();
+      this.createsecval=''
       this.m="Updation Successful";
     this.myFunction();
 
     // this.secspin=true;
     this.spinner.hide();
-    this.fetchdata()
+    this.fetchdata();
+    
     }
     else{
       this.spinner.hide()
@@ -713,6 +834,11 @@ else{
     this.admin_data.post_item_data(dt).subscribe(data=>{console.log(data)
     this.itemData=data;
     if(this.itemData.suc==1){
+      this.reset_add_item(); 
+      this.mid2='';
+      this.eid2='';
+      this.i_value='';
+      this.submit_show2=false;
       this.m="Updation Successful";
       this.myFunction();
       this.fetchdata1();
@@ -770,6 +896,11 @@ else{
     this.admin_data.post_item_data(dt).subscribe(data=>{console.log(data)
     this.itemData=data;
     if(this.itemData.suc==1){
+      this.reset_add_item(); 
+      this.mid2='';
+      this.eid2='';
+      this.i_value='';
+      this.submit_show2=false;
       this.m="Updation Successful";
       this.myFunction();
       this.fetchdata1()
@@ -831,6 +962,14 @@ else{
     this.admin_data.post_item_data_desc(dt).subscribe(data=>{console.log(data)
      this.itemdesc=data;
      if(this.itemdesc.suc==1){
+      this.reset_desc();
+      this.secid='';
+      this.item_i='';
+      this.mid1='';
+      this.ipr='';
+      this.ide='';
+      this.ino='';
+      this.show_button3=false;
      this.m="Updation Successful";
      this.myFunction();
      this.fetchdata2()
@@ -1214,7 +1353,10 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
          this.sun=8
                  
         }
-      
+        if( this.mon==2 && this.tue==3  && this.wed==4 &&  this.thur==5 && this.fri==6 && this.sat==7 && this.sun==8){
+          this.daycheck=document.getElementById('vehicle_se');
+          this.daycheck.checked=true;
+        }
       }
        else
        {this.exclspecific.checked=true;
@@ -1277,7 +1419,10 @@ this.get_special_time(this.r_id,this.menuid_special_breakfast,this.menuid_specia
     this.veh_sun=8
 
      }
-   
+     if( this.veh_mon==2 && this.veh_tue==3  && this.veh_wed==4 &&  this.veh_thur==5 && this.veh_fri==6 && this.veh_sat==7 && this.veh_sun==8){
+      this.daycheck=document.getElementById('inad1');
+      this.daycheck.checked=true;
+    }
    }
    
     else
@@ -1914,6 +2059,7 @@ this.myFunction()}
 )
 }
 update_logo(){
+  // alert("hello")
   this.spinner.show()
   console.log(this.rest_nm+" "+this.r_id+" "+this.logo_img+" "+this.img_cover);
   if(this.logo_file!=undefined)
@@ -1975,6 +2121,14 @@ update_price_desc(menid:any,sectionid:any,itemid:any,pr:any,de:any,ad:any){
   this.admin_data.post_item_data_desc(dt).subscribe(data=>{console.log(data)
     this.itemdesc=data;
     if(this.itemdesc.suc==1){
+      this.reset_desc();
+      this.secid='';
+      this.item_i='';
+      this.mid1='';
+      this.ipr='';
+      this.ide='';
+      this.ino='';
+      this.show_button3=false;
     this.m="Updation Successful";
     this.ide='';
     this.concatdatalength=0
@@ -2254,6 +2408,8 @@ reset_desc(){
   this.desc_section_el.value='';
   this.desc_item_el.value='';
   this.desc_price.value=''
+  this.concatdatalength1=0;
+  this.concatdatalength=0;
   
 }
 close_modal_on_crop(){
@@ -2312,7 +2468,7 @@ else{
 }
 }
 enable_exclusive_inaddition(e:any,v:any){
-  if(e=='exclusive'){
+  if(v=='exclusive'){
            this.exclusive_addition='E';
   }
   else{
@@ -2331,7 +2487,7 @@ if(v1=='exclusive') {
       this.veh5=document.getElementById('vehicle_s5')
       this.veh6=document.getElementById('vehicle_s6')
       this.veh7=document.getElementById('vehicle_s7')
-      this.veh8=document.getElementById('vehicle_S8')
+      this.veh8=document.getElementById('vehicle_s8')
       this.veh2.checked=true;
       this.veh3.checked=true;
       this.veh4.checked=true;
@@ -2508,7 +2664,7 @@ if(v1=='exclusive') {
           this.veh_wed=4;
         }
         else
-         {this.wed=0;
+         {this.veh_wed=0;
          this.veh1=document.getElementById('inad1')
          this.veh1.checked=false;}
       }
@@ -2530,7 +2686,7 @@ if(v1=='exclusive') {
           this.veh_fri=6;
         }
         else
-         {this.fri=0;
+         {this.veh_fri=0;
          this.veh1=document.getElementById('inad1')
          this.veh1.checked=false;}
       }
@@ -2541,7 +2697,7 @@ if(v1=='exclusive') {
           this.veh_sat=7;
         }
         else
-         {this.sat=0;
+         {this.veh_sat=0;
          this.veh1=document.getElementById('inad1')
          this.veh1.checked=false;}
       }
@@ -2552,7 +2708,7 @@ if(v1=='exclusive') {
           this.veh_sun=8;
         }
         else
-        { this.sun=0;
+        { this.veh_sun=0;
          this.veh1=document.getElementById('inad1')
          this.veh1.checked=false;}
       }
@@ -2676,13 +2832,18 @@ get_date(e:any){
      
   }
 }
-send_special_desc(v:any){
+send_special_desc(){
+  console.log(this.htmlContent);
+   this.spdesc_text_readonly=this.htmlContent;
+  this.spinner.show();
   var dt={
     "restaurant_id":this.r_id,
     "menu_id":5,
     "img_path":this.stockImg1,
     "img_catg":this.imgcat,
-    "menu_desc":v,
+    // "menu_desc":v,
+     "menu_desc":this.htmlContent,
+
 
   }
   this.admin_data.post_sp_desc(dt).subscribe(data=>{console.log(data)
@@ -2696,7 +2857,7 @@ send_special_desc(v:any){
       this.imgcat=this.spdescData[0].img_catg
       console.log(this.spstockImg);
       })
-  
+  this.spinner.hide();
   })
 }
 openstockmodal(){
@@ -2717,7 +2878,7 @@ selectedimage(index:any,image_path:any,catg:any,length:any){
   this.previous_id=catg;
   this.imgcat=catg;
   this.stockImg1=image_path;
-    this.spstockImg=url_set.api_url+'/stock/'+ image_path;
+    // this.spstockImg=url_set.api_url+'/stock/'+ image_path;
   this.common_for_special_menu=image_path;
   for(let i=0;i<length;i++){
     this.image_getelement=document.getElementById('image_'+i);
@@ -2736,10 +2897,99 @@ save_it(e:any){
   else{
     this.see_photo=false;
     
-    this.common_for_special_menu=url_set.api_url+'stock/'+this.common_for_special_menu;
+    this.common_for_special_menu=url_set.api_url+'/stock/'+this.common_for_special_menu;
+    this.spstockImg= this.common_for_special_menu;
+
   }
   this.openstockimages=document.getElementById('id02');
   this.openstockimages.style.display='none'
 }
 
+openpdf(e:any){
+console.log(e);
+this.img_break_section=e;
+// console.log(e);
+
+var iframe="<iframe width='100%' height='100%' src='" +this.img_break_section+"' ></iframe>";
+var xx=window.open(iframe,"_blank");
+xx?.document.open();
+xx?.document.write(iframe);
+xx?.document.close();
+}
+del_sec(sec_id:any,menu_id:any){
+  this.del_section_var=sec_id;
+  console.log(sec_id+" "+menu_id+" "+this.r_id)
+}
+del_item(item_id:any,menu_id:any,section_id:any){
+  this.del_item_var=item_id
+  console.log(item_id+" "+" "+menu_id+" "+section_id+" "+this.r_id)
+}
+del_price(item_id:any,menu_id:any,section_id:any){
+  this.del_price_var=item_id
+  console.log(item_id+" "+" "+menu_id+" "+section_id+" "+this.r_id)
+}
+delete_section(){
+ console.log(this.del_section_var);
+ this.admin_data.delete_section_serv(this.del_section_var).subscribe(data=>{console.log(data)
+   this.delsecData=data;
+   if(this.delsecData.suc==1){
+     this.fetchdata();
+     this.reload_section()
+     this.createsecval=''
+   }
+   else{
+     this.m="Error while deleting!"
+     this.myFunction();
+   }
+},error=>{
+  this.m="Error while deleting!"
+  this.myFunction();
+})
+}
+delete_item(){
+console.log(this.del_item_var);
+this.admin_data.delete_item_serv(this.del_item_var).subscribe(data=>{console.log(data)
+  this.delitemData=data;
+  if(this.delitemData.suc==1){
+    this.fetchdata1();
+    this.reset_add_item();
+    this.mid2='';
+    this.eid2='';
+    this.i_value='';
+    this.submit_show2=false;
+  }
+  else{
+    this.m="Error while deleting!"
+    this.myFunction();
+  }
+},error=>{
+ this.m="Error while deleting!"
+ this.myFunction();
+})
+ 
+}
+delete_price(){
+console.log(this.del_price_var);
+this.admin_data.delete_price_desc(this.del_price_var).subscribe(data=>{console.log(data)
+  this.delpriceData=data;
+  if(this.delpriceData.suc==1){
+    this.fetchdata2();
+    this.reset_desc();
+    this.secid='';
+    this.item_i='';
+    this.mid1='';
+    this.ipr='';
+    this.ide='';
+    this.ino='';
+    this.show_button3=false;
+  }
+  else{
+    this.m="Error while deleting!"
+    this.myFunction();
+  }
+},error=>{
+ this.m="Error while deleting!"
+ this.myFunction();
+})
+}
 }

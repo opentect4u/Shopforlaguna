@@ -7,7 +7,9 @@
 
 
 
-html,body,h1,h2,h3,h4,h5{font-family:"Raleway",sans-serif}
+/* html,body,h1,h2,h3,h4,h5{font-family:"Raleway",sans-serif} */
+html,h1,h2,h3,h4,h5{font-family:"Raleway",sans-serif}
+
 
 html {
     height: 100%;
@@ -15,7 +17,7 @@ html {
 
 body{
 
-    font-family: Arial, Helvetica, sans-serif;
+    /* font-family: Arial, Helvetica, sans-serif; */
 display: flex;
 min-height: 100%;
 flex-direction: column;
@@ -83,7 +85,7 @@ border: 1px solid #ced4da;
 border-radius: .25rem;
 transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; margin: 0 !important; height: 406px;}
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 
 
 
@@ -132,6 +134,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     padding-bottom: 0px !important;
    
 }
+.build-font{
+    font-size: 1.44rem !important;
+  }
+  .color-head{
+    background-color: indigo;
+      color: white;
+      font-size: larger;
+      padding: 2%;
+  }
+  .head-font{
+    font-size: large;
+  }
 
 /* .modal-backdrop {
     z-index: -1;

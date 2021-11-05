@@ -102,9 +102,9 @@
         
         <br>Please signify your approval or request an update of the Menu:<br>
           <form>
-              <input type="radio" id="html" name="fav_language" value="HTML"  (change)="enableonlyapprovefield($event)">
+              <input type="radio" [disabled]="" id="html" name="fav_language" value="HTML"  (change)="enableonlyapprovefield($event)">
               <label for="html">I have reviewed my MENU platform, and I APPROVE</label><br><br>
-              <input type="radio" id="css" name="fav_language" value="CSS" (change)="enableallfield($event)">
+              <input type="radio" [disabled]="" id="css" name="fav_language" value="CSS" (change)="enableallfield($event)">
               <label for="javascript">I have checked my MENU Platform, and would like to request an update:</label><br><br>
               
           </form>

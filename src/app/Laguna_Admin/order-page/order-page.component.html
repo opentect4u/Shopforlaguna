@@ -259,12 +259,12 @@
         </div>
         <div id="stock" class="tabcontent" [hidden]="stockimage">	
           <div style="overflow-x:auto;">
-          <strong>Upload a stock image for special menu</strong>
+          <strong>Upload a stock image for special menu and birthday/anniversary.</strong>
           <form>
             <div class="rowCustomFour">
                 <div class="fieldSecHalf">
                     <label>Category</label>
-                    <select id="pickup_place" #cat_name name="pickup_place" (change)="cat_select()" class="formCss">
+                    <select id="pickup_place_stock_img" #cat_name name="pickup_place" (change)="cat_select()" class="formCss">
                         <option value="" selected="selected">Select One</option>
                         <option *ngFor="let c of catData" value="{{c.id}}">{{c.name}}</option>
                         <!-- <option value="1">Breakfast</option>
@@ -284,11 +284,12 @@
               
         <button hidden  id="logo_crop" (click)="open_crop_modal()" ></button>
                   <div class="stockDiv">
-                    <input type="file"  #stock_name id="headTitle" id=stockval name="headTitle" (change)="stock_image_change($event)">
+                    <input type="file"  #stock_name id="headTitle_stock" name="headTitle" (change)="stock_image_change($event)">
 
                   </div>
                   <div class="stockDiv">
-                    <button type="submit" class="btn btn-default saveCustom" (click)="submit_stock_image(cat_name.value)">Submit</button>
+                    <button type="submit" class="btn btn-default saveCustom" (click)="submit_stock_image(cat_name.value)">Submit</button> &nbsp;
+                    <button type="submit" class="btn btn-danger" (click)="reset_stock()">Reset</button>
 
                   </div>
 
@@ -318,7 +319,8 @@
                     <div class="thumImgContainer" (mouseenter)="show_cross()" (mouseleave)="hide_cross()" *ngIf="imageData.length!=0">
                      
                         <div class="thumImgSm" *ngFor="let i of imageData" >
-                          <span class="close" (click)="deleteImg(i.id);openDeleteModal();">&times;</span>
+                          <!-- <span class="close" (click)="deleteImg(i.id);openDeleteModal();">&times;</span> -->
+                          <span class="close" (click)="deleteImg(i.id)"  data-bs-toggle="modal" data-bs-target="#myModal_delete" >&times;</span>
                         <img [src]="url1+i.img_path" class="stockimgPrev " height="100" width="100" alt="" (click)="open_preview_modal(url1+i.img_path)">
 
                         </div>
@@ -464,6 +466,7 @@
               
                 </div>
               </div> -->
+        <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Processing... </p></ngx-spinner>
              
               <div id="id01" class="w3-modal">
                 <div class="w3-modal-content cropModulContent">
@@ -596,3 +599,25 @@
               
                 </div>
               </div>
+              <div id="myModal_delete" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+              
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <!-- <button type="button" class="close" data-bs-dismiss="modal">&times;</button> -->
+                      <h4 class="modal-title">Alert!!</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you want to delete the image?</p>
+                    </div>
+                    <div class="modal-footer">
+                       <button type="submit" class="btn btn-default saveCustom"  data-bs-dismiss="modal">No</button>
+                      &nbsp; <button type="submit" class="btn btn-default saveCustom"  data-bs-dismiss="modal" (click)="delete_stock_image();">Yes</button>
+                    </div>
+                  </div>
+              
+                </div>
+              </div>
+
+

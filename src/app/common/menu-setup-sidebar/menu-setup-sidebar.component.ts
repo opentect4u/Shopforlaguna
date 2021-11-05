@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 export class MenuSetupSidebarComponent implements OnInit {
 
   constructor(private router:Router) { }
-
+   No_of_menu:any=localStorage.getItem('No_of_menu');
+   
   ngOnInit(): void {
   }
   go_t_logOut(){

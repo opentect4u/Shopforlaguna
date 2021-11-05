@@ -37,7 +37,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
   }
 }
 
-body {font-family: "Raleway" sans-serif;}
+/* body {font-family: "Raleway" sans-serif;} */
 * {box-sizing: border-box;}
 
 .form-inline {  
@@ -81,7 +81,7 @@ body {font-family: "Raleway" sans-serif;}
   }
 }
 
-body {font-family: "Raleway" sans-serif;}
+/* body {font-family: "Raleway" sans-serif;} */
 
 /* Style the tab */
 .tab {
@@ -201,3 +201,4 @@ text-overflow: ellipsis;}
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-adminlogin',
@@ -9,13 +10,14 @@ import { LagunaserviceService } from 'src/app/Services/lagunaservice.service';
 })
 export class AdminloginComponent implements OnInit {
 
-  constructor(private admin_data:LagunaserviceService,private router:Router) { }
+  constructor(private spinner: NgxSpinnerService,private admin_data:LagunaserviceService,private router:Router) { }
   logData:any;
   x:any;
   message=''
   ngOnInit(): void {
   }
   logSubmit(v:any){
+    this.spinner.show()
     // this.confirm_modal.style.display='block';
     console.log(v);
     this.admin_data.submit_log(v).subscribe(data=>{
@@ -23,6 +25,7 @@ export class AdminloginComponent implements OnInit {
       this.logData=data;
      
       if(this.logData.suc>0) {
+        this.spinner.hide();
         // alert('succesful,password has been changed.')
         localStorage.setItem('admin_rest_id',v.uname);
         this.router.navigate(['/adminhome'])

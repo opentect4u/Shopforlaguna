@@ -23,6 +23,15 @@ import { LogosetupComponent } from './Restaurant/logosetup/logosetup.component';
 import { ThankyoupageComponent } from './thankyoupage/thankyoupage.component';
 import { UserMenuComponent } from './user/user-menu/user-menu.component';
 import { ConfirmationmailComponent } from './Restaurant/confirmationmail/confirmationmail.component';
+import { EventCalendarComponent } from './Restaurant/after_login/event-calendar/event-calendar.component';
+import { EventsRestaurantlistComponent } from './Laguna_Admin/events-restaurantlist/events-restaurantlist.component';
+import { EventcalendarComponent } from './Laguna_Admin/event-calendar/event-calendar.component';
+import { PromotionComponent } from './Restaurant/after_login/promotion/promotion.component';
+import { AccountComponent } from './Restaurant/after_login/account/account.component';
+import { RestPromoComponent } from './Laguna_Admin/rest-promo/rest-promo.component';
+import { CreateMenusComponent } from './Restaurant/create-menus/create-menus.component';
+import { AdditionalproductComponent } from './Restaurant/after_login/additionalproduct/additionalproduct.component';
+import { PaysaveComponent } from './Restaurant/after_login/paysave/paysave.component';
 
 
 const routes: Routes = [
@@ -36,7 +45,7 @@ const routes: Routes = [
     component:RestaurentComponent
   },
   {
-     path:'admin/login',
+     path:'admin',
      component:AdminloginComponent
   },
   {
@@ -105,9 +114,46 @@ const routes: Routes = [
     component:ConfirmationmailComponent
   },
   {
-    path:'restaurant/dashboard',
+    path:'restaurant/dashboard/:id',
     component:DashboardComponent
-  }
+  },
+ {
+   path:'EventCalendar',
+   component:EventCalendarComponent
+ },
+ {
+  path:'restarauranteventlist',
+  component:EventsRestaurantlistComponent
+},
+{
+  path:'eventcalendar/:id',
+  component:EventcalendarComponent
+},
+{
+  path:'promotion',
+  component:PromotionComponent
+},
+{
+  path:'account',
+  component:AccountComponent
+},
+{
+  path:'rest_promo',
+  component:RestPromoComponent
+},
+{
+  path:'CreateMenus',
+  component:CreateMenusComponent
+},
+{
+  path:'additionalproduct',
+  component:AdditionalproductComponent
+},
+{
+  path:'additionalpayment',
+  component:PaysaveComponent
+}
+
 
 ];
 

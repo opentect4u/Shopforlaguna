@@ -19,7 +19,7 @@ import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit  {
 
   displayedColumns: string[] = ['id','section_name','sec_img'];
   displayedColumns1: string[] = ['id','item_name'];
@@ -28,19 +28,18 @@ export class DashboardComponent implements OnInit {
   // dataSource = ELEMENT_DATA;
   userData:any;
   dataSource= new MatTableDataSource();
+ 
+
+
+  @ViewChild('MatPaginator5',{ static:true}) MatPaginator5!:MatPaginator;
+  @ViewChild('datasort1') datasort1!: MatSort;
   dataSource1= new MatTableDataSource();
-  dataSource2= new MatTableDataSource();
-
-
-  @ViewChild('MatPaginator1',{static:true}) MatPaginator1!: MatPaginator;
-  @ViewChild('datasort1',{static:true}) datasort1!: MatSort;
-
-  @ViewChild('MatPaginator2',{static:true}) MatPaginator2!: MatPaginator;
+  @ViewChild('MatPaginator6',{static:true}) MatPaginator6!: MatPaginator;
   @ViewChild('datasort2',{static:true}) datasort2!: MatSort;
-
-
-  @ViewChild('MatPaginator3',{static:true}) MatPaginator3!: MatPaginator;
+  dataSource2= new MatTableDataSource();
+  @ViewChild('MatPaginator7',{static:true}) MatPaginator7!: MatPaginator;
   @ViewChild('datasort3',{static:true}) datasort3!: MatSort;
+  logo:any;
   storevalue: any=[];
   specialData:any;
   crop_width:any;
@@ -66,7 +65,7 @@ export class DashboardComponent implements OnInit {
   sectionname:any;
   show_section=false;
   constructor(private spinner: NgxSpinnerService, private sanitizer: DomSanitizer,private admin_data:LagunaserviceService,private activatedRoute:ActivatedRoute) { }
- show_tab='tab1'
+ show_tab='restaurant'
  pos_id:any;
  menuid_special_breakfast=0;
  menuid_special_lunch=0;
@@ -267,19 +266,22 @@ export class DashboardComponent implements OnInit {
   modal_close_oncrop:any;
   bx:any;
   bx2:any;
-
+  menu_id:any;
   kk:any
   create_a:any;
   download_section_zip:any;
   download_logo_top_cover_zip:any;
   category_name:any=[];
-   id:any='restaurant'
+   id:any='restaurant';
+   selcting:any;
    ngOnInit(): void {
     this.spinner.show();
+
    
     // this.daycheck=document.getElementById('1');
     //   this.daycheck.checked=true;
     this.r_id=this.activatedRoute.snapshot.params['id'];
+    localStorage.setItem('encode',this.r_id);
     this.r_id=atob(this.r_id);
     console.log(this.r_id);
     this.fetchdata();
@@ -343,7 +345,7 @@ export class DashboardComponent implements OnInit {
     this.spdescData=this.spdescData.msg
     this.spdesc_text_readonly=this.spdescData[0].menu_desc;
     this.stockImg1=this.spdescData[0].img_path;
-    this.spstockImg=url_set.api_url+'/stock/'+ this.spdescData[0].img_path;
+    this.spstockImg=url_set.api_url+'/stock/'+this.spdescData[0].img_path;
     this.imgcat=this.spdescData[0].img_catg
     console.log(this.spstockImg);
     })
@@ -413,6 +415,35 @@ export class DashboardComponent implements OnInit {
    console.log(this.logopath)
   this.menuData=this.menuData.oth_dt;
   })
+  if('tab' in localStorage){
+    if(localStorage.getItem('tab')=='change_image'){
+      this.openCity('change_image');
+    }
+    if(localStorage.getItem('tab')=='section'){
+      this.openCity('section');
+    }
+    if(localStorage.getItem('tab')=='restaurant'){
+      this.openCity('restaurant');
+    }
+    if(localStorage.getItem('tab')=='items'){
+      this.openCity('items');
+    }
+    if(localStorage.getItem('tab')=='dprice'){
+      this.openCity('dprice');
+    }
+    if(localStorage.getItem('tab')=='special'){
+      this.openCity('special');
+    }
+    if(localStorage.getItem('tab')=='date_time'){
+      this.openCity('date_time');
+    }
+    if(localStorage.getItem('tab')=='notes'){
+      this.openCity('notes');
+    }
+    if(localStorage.getItem('tab')=='about_us'){
+      this.openCity('about_us');
+    }
+  }
   }
   open_popup_window(i_menu:any){
     this.admin_data.get_set_time(i_menu,this.r_id).subscribe(data=>{
@@ -459,25 +490,33 @@ export class DashboardComponent implements OnInit {
       this.get_section_for_item=this.get_section_for_item.msg;
       this.putdata(this.get_section_for_item);
       })
+
+
   }
   putdata(v:any){
     this.dataSource= new MatTableDataSource(v);
-    this.dataSource.paginator=this.MatPaginator1;
+    this.dataSource.paginator=this.MatPaginator5;
     this.dataSource.sort=this.datasort1;
+
+
   }
   putdata2(v:any){
-    this.dataSource2= new MatTableDataSource(v);
-    this.dataSource2.paginator=this.MatPaginator3;
+    this.dataSource2=new MatTableDataSource(v);
+    this.dataSource2.paginator=this.MatPaginator7;
      this.dataSource2.sort=this.datasort2;
+
+
   }
   ngAfterViewInit() {
-    this.dataSource.paginator = this.MatPaginator1;
+ 
+    
+    this.dataSource.paginator = this.MatPaginator5;
     this.dataSource.sort = this.datasort1;
 
-    this.dataSource1.paginator = this.MatPaginator2
+    this.dataSource1.paginator = this.MatPaginator6
     this.dataSource1.sort = this.datasort2;
 
-    this.dataSource2.paginator = this.MatPaginator3;
+    this.dataSource2.paginator = this.MatPaginator7;
     this.dataSource2.sort = this.datasort3;
   }
   send_about_us(v:any){
@@ -525,9 +564,9 @@ else{
     this.mid1=mid;
     this.idfordesc=v;
     console.log(this.ide+" "+this.ino+" "+this.ipr)
-    this.z=document.getElementById('b'+mid)
-    this.z.checked=true;
-    console.log(this.z)
+    // this.z=document.getElementById('b'+mid)
+    // this.z.checked=true;
+    // console.log(this.z)
     this.submit_show=true;
     this.sec_value=v1;
     this.admin_data.get_section_data(this.r_id,this.mid1).subscribe(data=>{console.log(data)
@@ -545,15 +584,21 @@ else{
 
   }
   update_section(v:any){
+    console.log(this.img_cover,this.sectionname);
+    
     this.spinner.show();
     this.sec_value=v;
     // this.createsecval=''
+    console.log(this.menuchoiceData);
+    
     for(let i=0;i<this.menuchoiceData.length;i++)
     {
-      this.q=document.getElementById('b'+(i+1))
-      ;
-      if(this.q.checked==true)
-      this.m_id=this.q.value
+      if(this.menuchoiceData[i].menu_id!='5'){
+        this.q=document.getElementById('b'+(i+1));
+        if(this.q.checked==true)
+        this.m_id=this.q.value
+      }
+     
     }
     // console.log("menu_id="+this.mid1+" section_id="+this.secid+" section_name="+this.sec_value+" res_id="+this.r_id)
     console.log(this.m_id+" "+v);
@@ -564,6 +609,7 @@ else{
     "sec_name":this.sec_value,
     "id":this.idforcreatesection
     }
+    this.img_cover='';
     this.admin_data.post_section_create(dt,this.img_cover,this.sectionname).subscribe(data=>{console.log(data)
     this.sec_post_data=data;
     if(this.sec_post_data.suc==1)
@@ -610,6 +656,7 @@ else{
   }
   }
   update_add_item(m:any,e:any,s:any,k:any){
+     
     this.mid2=m;
     this.eid2=e;
     this.sid2=s;
@@ -715,7 +762,7 @@ else{
       this.fetchdata1();
       setTimeout(()=>{
         this.ngOnInit();
-        this.openCity('tab5')
+        this.openCity('items')
       
       },3000)
       
@@ -805,8 +852,8 @@ else{
   }
   putdata1(v:any){
     this.dataSource1= new MatTableDataSource(v);
-    this.dataSource1.paginator=this.MatPaginator2;
-    // this.dataSource1.sort=this.matsort1;
+    this.dataSource1.paginator=this.MatPaginator6;
+    this.dataSource1.sort=this.datasort2;
   }
   get_item_select1(v:any){
     this.i_data=v;
@@ -1086,8 +1133,8 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
       if(this.spData.suc==1){
         this.m="Updation successful"
         this.myFunction()
-        this.show_tab='tab8';
-        this.openCity('tab8')
+        this.show_tab='about_us';
+        this.openCity('about_us')
       }
       else{
         this.m="Failed to update"
@@ -1211,7 +1258,10 @@ submit_special(m:any,p:any,h:any,c1:any,c2:any,notice:any){
          this.sun=8
                  
         }
-      
+        if( this.mon==2 && this.tue==3  && this.wed==4 &&  this.thur==5 && this.fri==6 && this.sat==7 && this.sun==8){
+          this.daycheck=document.getElementById('vehicle_se');
+          this.daycheck.checked=true;
+        }
       }
        else
        {this.exclspecific.checked=true;
@@ -1275,6 +1325,10 @@ this.get_special_time(this.r_id,this.menuid_special_breakfast,this.menuid_specia
 
      }
    
+     if( this.veh_mon==2 && this.veh_tue==3  && this.veh_wed==4 &&  this.veh_thur==5 && this.veh_fri==6 && this.veh_sat==7 && this.veh_sun==8){
+      this.daycheck=document.getElementById('inad1');
+      this.daycheck.checked=true;
+    }
    }
    
     else
@@ -1356,6 +1410,8 @@ this.get_special_time(this.r_id,this.menuid_breakfast_addition,this.menuid_lunch
   //retrieve section image
   get_sec_img(v:any){
   //  alert(v);
+  console.log(v);
+  
   this.m_id=v;
   this.radid=v;
   this.admin_data.get_sec_url(v,this.r_id).subscribe(data=>{console.log(data)
@@ -1365,7 +1421,505 @@ this.get_special_time(this.r_id,this.menuid_breakfast_addition,this.menuid_lunch
   })
   }
 
-  openCity(tabname:any){this.id=tabname;}
+  // openCity(tabname:any){this.id=tabname;}
+
+
+
+  //opening respective tabs
+  openCity(v:any){
+    this.id=v;
+    localStorage.setItem('tab',v);
+    if(v=='special'){
+
+      this.tab_el=document.getElementById('defaultOpen1');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen2');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen33');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen4');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen5');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen6');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen7');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen8');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen9');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpenmenu');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='#3F51B5'
+      this.tab_el.style.color="white";
+    }
+    if(v=='restaurant'){
+      this.tab_el=document.getElementById('defaultOpen');
+      this.tab_el.style.background='#3F51B5'
+      this.tab_el.style.color="white";
+      this.tab_el=document.getElementById('defaultOpen1');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen2');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen33');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen4');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen5');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen6');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen7');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen8');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen9');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpenmenu');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      
+
+    }
+    if(v=='change_image'){
+      this.tab_el=document.getElementById('defaultOpen');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen2');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen33');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen4');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen5');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen6');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen7');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen8');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen9');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen1');
+      this.tab_el.style.background='#3F51B5'
+      this.tab_el.style.color="white";
+      
+
+    }
+  //   if(v=='tab3'){
+  //     this.tab_el=document.getElementById('defaultOpen');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen_sp');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen1');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen2');
+  //     this.tab_el.style.background='#3F51B5'
+  //     this.tab_el.style.color="white";
+  //     this.tab_el=document.getElementById('defaultOpen33');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen4');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen5');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen6');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen7');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen8');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen9');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpenmenu');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+      //   }
+    if(v=='date_time'){
+      this.tab_el=document.getElementById('defaultOpen');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen1');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen2');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen33');
+      this.tab_el.style.background='#3F51B5'
+      this.tab_el.style.color="white";
+      this.tab_el=document.getElementById('defaultOpen4');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen5');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen6');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen7');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen8');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen9');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpenmenu');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      
+
+    }
+    if(v=='section'){
+      this.tab_el=document.getElementById('defaultOpen');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen1');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen2');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen33');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+ 
+      this.tab_el=document.getElementById('defaultOpen5');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen6');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen7');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen8');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen9');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpenmenu');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen4');
+      this.tab_el.style.background='#3F51B5'
+      this.tab_el.style.color="white";
+
+    }
+    if(v=='items'){
+
+
+      this.tab_el=document.getElementById('defaultOpen');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen1');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen2');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen33');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen4');
+      this.tab_el.style.background=''
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen5');
+      this.tab_el.style.background='#3F51B5'
+      this.tab_el.style.color="white";
+      this.tab_el=document.getElementById('defaultOpen6');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen7');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen8');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen9');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpenmenu');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+
+    }
+    if(v=='dprice'){
+      this.tab_el=document.getElementById('defaultOpen');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen1');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen2');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen33');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen4');
+      this.tab_el.style.background=''
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen5');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen6');
+      this.tab_el.style.background='#3F51B5'
+      this.tab_el.style.color="white";
+      this.tab_el=document.getElementById('defaultOpen7');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen8');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen9');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpenmenu');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      
+
+    }
+    
+    if(v=='notes'){
+      this.tab_el=document.getElementById('defaultOpen');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen1');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen2');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen33');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen4');
+      this.tab_el.style.background=''
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen5');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen6');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen7');
+      this.tab_el.style.background='#3F51B5'
+      this.tab_el.style.color="white";
+      this.tab_el=document.getElementById('defaultOpen8');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen9');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpenmenu');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      
+
+    }
+    if(v=='about_us'){
+      this.tab_el=document.getElementById('defaultOpen');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen1');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpen2');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen33');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen_sp');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen4');
+      this.tab_el.style.background=''
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen5');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen6');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen7');
+      this.tab_el.style.background='white'
+      this.tab_el.style.color="black";
+      this.tab_el=document.getElementById('defaultOpen8');
+      this.tab_el.style.background='#3F51B5'
+      this.tab_el.style.color="white";
+      // this.tab_el=document.getElementById('defaultOpen9');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      // this.tab_el=document.getElementById('defaultOpenmenu');
+      // this.tab_el.style.background='white'
+      // this.tab_el.style.color="black";
+      
+
+    }
+  //   if(v=='tab9'){
+  //     this.tab_el=document.getElementById('defaultOpen');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen1');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen2');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen33');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen4');
+  //     this.tab_el.style.background=''
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen_sp');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen5');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen6');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen7');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen8');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen9');
+  //     this.tab_el.style.background='#3F51B5'
+  //     this.tab_el.style.color="white";
+  //     this.tab_el=document.getElementById('defaultOpenmenu');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+      
+
+  //   }
+  //   if(v=='tab_menu'){
+  //     this.tab_el=document.getElementById('defaultOpen');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen1');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen2');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen_sp');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen33');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen4');
+  //     this.tab_el.style.background=''
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen5');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen6');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen7');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen8');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpen9');
+  //     this.tab_el.style.background='white'
+  //     this.tab_el.style.color="black";
+  //     this.tab_el=document.getElementById('defaultOpenmenu');
+  //     this.tab_el.style.background='#3F51B5'
+  //     this.tab_el.style.color="white";
+      
+
+  //   }
+   this.show_tab=v;
+  // if(this.mid2!=undefined || this.mid2!=''){
+  //   for(let i=0;i<this.menuchoiceData.length;i++){
+  //     if(this.mid2==this.menuchoiceData[i].menu_id){
+  //         this.selcting=document.getElementById('pickup_place_menu');
+  //         this.selcting.value=this.menuchoiceData[i].menu_name;
+  //     }
+  //   }
+  // }
+   
+  }
+
+
+
+
   checkvalidity(event:any){
     console.log(event)
     if(event.target.id=='headTitle'){
@@ -1497,7 +2051,7 @@ update_price_desc(menid:any,sectionid:any,itemid:any,pr:any,de:any,ad:any){
 
     setTimeout(()=>{
       this.ngOnInit();
-      this.openCity('tab6')
+      this.openCity('dprice')
     },3000)
     this.myFunction();
     this.show_button3=false;
@@ -1519,17 +2073,44 @@ update_price_desc(menid:any,sectionid:any,itemid:any,pr:any,de:any,ad:any){
     this.myFunction();
   }
 }
-get_sec_id1(menid:any,id:any,val:any,k:any){
-  console.log(menid+" "+id+" "+val);
+get_sec_id1(menid:any,id:any,val:any,k:any,file_name:any){
+  console.log(menid+" "+id+" "+val + " " +'b'+menid+" "+k);
   this.hidesection=false;
-
+ this.sectionname=file_name;
   this.submit_show=true;
   this.idforcreatesection=id;
   this.preview_for_section=k;
-  this.z1=document.getElementById('b'+menid)
-  this.z1.checked=true;
+ this.img_cover=k
+  // console.log(this.logo_file1.checked)
   this.createsecval=val;
   console.log(this.createsecval)
+  if(menid==1){
+    this.z1=document.getElementById('b1');
+    this.z1.checked=true;
+    // this.menu_id=true;
+  }
+  else if(menid==2){
+    this.z1=document.getElementById('b2');
+    this.z1.checked=true;
+    // this.menu_id=true;
+
+  }
+  else if(menid==3){
+    this.z1=document.getElementById('b3');
+    this.z1.checked=true;
+    // this.menu_id=true;
+
+  }
+  else if(menid==4){
+    this.z1=document.getElementById('b4');
+    this.z1.checked=true;
+    // this.menu_id=true;
+
+  }
+
+  this.menu_id=menid;
+
+
   window.scrollTo(0, 0);
   
 }
@@ -1594,8 +2175,8 @@ upload_top(e:any){
   this.topname=e.target.files[0].name
   this.top_file=e;
   this.img_cover=this.top_file;
-  this.logo_file1=document.getElementById('logo_crop');
-  this.logo_file1.click();
+  this.logo=document.getElementById('logo_crop');
+  this.logo.click();
   
 }
 update_top(v:any,vmenu:any,v1:any){
@@ -1721,9 +2302,9 @@ imageCropped(event: ImageCroppedEvent) {
   console.log("width:" + event.width);
   console.log("height:" + event.height)
   this.croppedImage = event.base64;
-  if(this.show_tab=='tab4')
+  // if(this.show_tab=='section')
   this.preview_for_section=this.croppedImage
-  console.log(this.croppedImage);
+  // console.log(this.croppedImage);
 }
 cropperReady(sourceImageDimensions: Dimensions) {
  console.log('Cropper ready', sourceImageDimensions);
@@ -1772,7 +2353,11 @@ reset_desc(){
 }
 close_modal_on_crop(){
   this.modal_close_oncrop=document.getElementById('id01');
-  this.modal_close_oncrop.style.display='none'
+  this.modal_close_oncrop.style.display='none';
+  // this.img_cover='';
+  // this.modal_close_oncrop=document.getElementById('files_section');
+  // this.modal_close_oncrop.value='';
+  // this.preview_for_section='';
 }
 restrict_header(e:any){
   this.concatheaderlength=e.target.value.length;
@@ -1811,7 +2396,7 @@ else{
 }
 }
 enable_exclusive_inaddition(e:any,v:any){
-  if(e=='exclusive'){
+  if(v=='exclusive'){
            this.exclusive_addition='E';
   }
   else{
@@ -1830,7 +2415,7 @@ if(v1=='exclusive') {
       this.veh5=document.getElementById('vehicle_s5')
       this.veh6=document.getElementById('vehicle_s6')
       this.veh7=document.getElementById('vehicle_s7')
-      this.veh8=document.getElementById('vehicle_S8')
+      this.veh8=document.getElementById('vehicle_s8')
       this.veh2.checked=true;
       this.veh3.checked=true;
       this.veh4.checked=true;
@@ -2007,7 +2592,7 @@ if(v1=='exclusive') {
           this.veh_wed=4;
         }
         else
-         {this.wed=0;
+         {this.veh_wed=0;
          this.veh1=document.getElementById('inad1')
          this.veh1.checked=false;}
       }
@@ -2029,7 +2614,7 @@ if(v1=='exclusive') {
           this.veh_fri=6;
         }
         else
-         {this.fri=0;
+         {this.veh_fri=0;
          this.veh1=document.getElementById('inad1')
          this.veh1.checked=false;}
       }
@@ -2040,7 +2625,7 @@ if(v1=='exclusive') {
           this.veh_sat=7;
         }
         else
-         {this.sat=0;
+         {this.veh_sat=0;
          this.veh1=document.getElementById('inad1')
          this.veh1.checked=false;}
       }
@@ -2051,7 +2636,7 @@ if(v1=='exclusive') {
           this.veh_sun=8;
         }
         else
-        { this.sun=0;
+        { this.veh_sun=0;
          this.veh1=document.getElementById('inad1')
          this.veh1.checked=false;}
       }
@@ -2176,6 +2761,7 @@ get_date(e:any){
   }
 }
 send_special_desc(v:any){
+
   var dt={
     "restaurant_id":this.r_id,
     "menu_id":5,
@@ -2184,6 +2770,8 @@ send_special_desc(v:any){
     "menu_desc":v,
 
   }
+  console.log(dt);
+  
   this.admin_data.post_sp_desc(dt).subscribe(data=>{console.log(data)
     this.admin_data.get_sp_desc(this.r_id,5).subscribe(data=>{console.log(data)
     
@@ -2216,7 +2804,7 @@ selectedimage(index:any,image_path:any,catg:any,length:any){
   this.previous_id=catg;
   this.imgcat=catg;
   this.stockImg1=image_path;
-    this.spstockImg=url_set.api_url+'/stock/'+ image_path;
+    // this.spstockImg=url_set.api_url+'/stock/'+ image_path;
   this.common_for_special_menu=image_path;
   for(let i=0;i<length;i++){
     this.image_getelement=document.getElementById('image_'+i);
@@ -2235,12 +2823,33 @@ save_it(e:any){
   else{
     this.see_photo=false;
     
-    this.common_for_special_menu=url_set.api_url+'stock/'+this.common_for_special_menu;
+    this.common_for_special_menu=url_set.api_url+'/stock/'+this.common_for_special_menu;
+    this.spstockImg= this.common_for_special_menu;
   }
   this.openstockimages=document.getElementById('id02');
   this.openstockimages.style.display='none'
 }
-  //For changing tab
 
 
+
+  // syncPaginators(event:any,e:any){
+  //    if(e=='MatPaginator5'){
+  //     this.MatPaginator5.length  = event.length;
+  //     this.MatPaginator5.pageIndex = event.pageIndex;
+  //     this.MatPaginator5.pageSize = event.pageSize;
+  //    }
+  //    else if(e=='MatPaginator6'){
+  //     this.MatPaginator6.length  = event.length;
+  //     this.MatPaginator6.pageIndex = event.pageIndex;
+  //     this.MatPaginator6.pageSize = event.pageSize;
+  //    }
+  //    else{
+  //     this.MatPaginator7.length  = event.length;
+  //     this.MatPaginator7.pageIndex = event.pageIndex;
+  //     this.MatPaginator7.pageSize = event.pageSize;
+  //    }
+  // }
+
+
+  
 }
